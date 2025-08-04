@@ -1,0 +1,27 @@
+---
+title: "301_Coding"
+format: html
+editor: visual
+---
+
+## Step 1:
+
+-   Download your CV.tex file.
+
+-   Visit https://pandoc.org/installing.html and download Pandoc.
+
+## Step 2:
+
+-   Create a new project in RStudio. Call it "301_html_practice" or something like that.
+
+-   Go down to the "Terminal", at the bottom of your screen and click on that tab.
+
+-   Paste "pandoc --version" to verify that Pandoc is installed correctly.
+
+Step 3:
+
+-   Make sure that style.css and your cv.tex file are in the "301_html_practice" directory.
+
+-   Paste in "pandoc cv.tex -s -c style.css -o sample_cv.html" in the terminal to convert.
+
+pandoc amb_simple_cv.tex -s -c style.css -o amb_full_cv.html
