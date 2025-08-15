@@ -15,88 +15,236 @@ format:
 editor: visual
 ---
 
-# Review
+# Review Quiz
 
--   How does the class work?
+-   What did we talk about in Monday's class?
 
--   Thoughts on AI?
+# What's LaTeX?
 
-## Goals for Today
+![](2_latex_glove.jpeg){fig-alt="A latex glove." fig-align="center"}
 
--   Minimal document → fix a common error
--   Title / author / date
--   Sections & subsections
--   Labels & references
--   Table of contents
+## LaTeX
 
-## Minimal document (broken)
+\[lɑˈ.tʰɛk̚\] or \[lɑˈ.tʰɛx\] or \[ˈle͡ɪ.tʰɛk̚\]
 
-Use this to show a compile error and how to spot it.
+NOT
+
+![](2_latex_glove.jpeg){fig-align="center"}
+
+## LaTeX
+
+-   = a **markup** language:
+
+    -   adds special instructions to text to let a computer know how to display, structure or describe it
+
+        -   "make this a heading"
+
+        -   "make this italicized"
+
+        -   "put this into a list"
+
+-   In a couple weeks we'll be working with a second markup language, HTML.
+
+## LaTeX
+
+-   Completely free to use!
+
+-   Originally designed for mathematicians and computer scientists, but linguists have long recognized its usefulness.
+
+-   Great for:
+
+    -   Funny scripts – IPA, non-Roman alphabets, etc.
+
+    -   Difficult to construct charts and illustrations, esp. syntactic trees
+
+    -   Knowing *precisely* where your texts and images will go
+
+## Typesetting Linguistics using LaTeX
+
+![](2_syntax_tree.png){fig-alt="crazy syntax tree" fig-align="center"}
+
+## Typesetting Linguistics using LaTeX
+
+<ol style="font-size: 1.5em; line-height: 1.2;">
+
+æ̃nd͡ʒɹu bɹ̩d
+
+</ol>
+
+## Typesetting Linguistics using LaTeX
+
+![](2_syllable_tree.jpg){fig-alt="syllable tree" fig-align="center"}
+
+## Getting set up with LaTeX
+
+-   Visit <https://www.overleaf.com/>
+
+-   Create an account
+
+-   Press the button "New Project"
+
+-   Select "Example project"
+
+-   Call the document "example_project"
+
+# The Basics of LaTeX
+
+All documents need to be assigned a **class**. You also must "begin" and "end" that document.
 
 ``` latex
-\documentclass[a4paper,12pt]{article}
-\usepackage[utf8]{inputenc}
-\begin{document
-(Type your content here.)
-\end{document}
-```
+\documentclass[a4paper,12pt]{article} 
 
-**What’s wrong?** Missing `}` in `\begin{document}`.
-
-------------------------------------------------------------------------
-
-## Minimal document (fixed)
-
-``` latex
-\documentclass[a4paper,12pt]{article}
-\usepackage[utf8]{inputenc}
 \begin{document}
-(Type your content here.)
+
+BLAH BLAH BLAH
+
 \end{document}
 ```
 
-------------------------------------------------------------------------
+-   Google "LaTeX classes". How many are there? What is the documentclass you would use for a presentation?
 
-## Title block (today’s date)
+## How LaTeX works
 
-Place before your content, then `\maketitle`.
-
-``` latex
-\title{Phonology Paper}
-\author{My Name}
-\date{\today}
-\maketitle
-```
-
-------------------------------------------------------------------------
-
-## Fixed date (not today)
+Everything before "\\begin{document}" is called the **preamble**. This is where we load declare the document class, load **packages**, and input information like the title and author.
 
 ``` latex
-\date{December 6, 2017}
+\documentclass{article}
+
+% Language setting
+% Replace `english' with e.g. `spanish' to change the document language
+\usepackage[english]{babel}
+
+% Set page size and margins
+% Replace `letterpaper' with `a4paper' for UK/EU standard size
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+\title{Your Paper}
+\author{You}
 ```
 
-Use either `\today` or a fixed date—don’t do both.
+## How LaTeX works
 
-------------------------------------------------------------------------
-
-## Sections & subsections
+Notice the text preceded by "%". These are called **comments**. What do you think they do?
 
 ``` latex
-\section{Introduction}
-This is the introduction.
+\documentclass{article}
 
-\section{Methods}
-\subsection{Stage 1}
-First part of the methods.
+% Language setting
+% Replace `english' with e.g. `spanish' to change the document language
+\usepackage[english]{babel}
 
-\subsection{Stage 2}
-Second part of the methods.
+% Set page size and margins
+% Replace `letterpaper' with `a4paper' for UK/EU standard size
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+\title{Your Paper}
+\author{You}
 ```
 
-------------------------------------------------------------------------
+## Activity
 
-## Labels & references
+-   Return to "Home" in Overleaf.
+
+-   Create a new project, called "301-LaTeX-practice"
+
+-   Now edit the file main.tex.
+
+    -   `\documentclass{article}` ← sets document type
+    -   `\author{your name}`; `\date{\today}` ← author and date
+    -   Make sure `\begin{document}` and `\end{document}` are in your file.
+    -   Immediately after `\begin{document}`, add `\maketitle`
+    -   Add **Hello world!** between those sections
+
+## Activity, Part 2
+
+-   Within main.tex, edit the document as follows:
+
+    -   First, change `\documentclass{article}` to `\documentclass{article.` and then "Recompile". What happens?
+
+    -   Change `\date{\today}` to `\date{today}` and then "Recompile". What happens?
+
+    -   Get rid of `\end{document}` and then "Recompile". What happens?
+
+    -   Change **Hello world!** to **Hello world?** What happens?
+
+## Commands
+
+Things that begin with a "\\" are called **commands**.
+
+-   These can have no argument (they're *avalent*, if you will), like "\\today".
+
+-   Many require arguments (like *intransitives*, *transitives*, etc.), like:
+
+    ```         
+    \documentclass{}, \author{}, and \date{}
+    ```
+
+    -   One of the most common reason for code to break in LaTeX is if a bracket isn't closed, so always be on the lookout for that!
+
+## Commands
+
+-   Some commands even allow for optional arguments (options), which are place immediately before the command inside square brackets:
+
+    ```         
+    \documentclass[option1,option2]{article}
+    ```
+
+-   Visit [this site](https://texblog.org/2013/02/13/latex-documentclass-options-illustrated/) to see what types of options documentclasses can have. Modify your main.tex with these options to experiment.
+
+    -   ***Which do you think you'll use most often?***
+
+## Environments
+
+Environments, like "document", have a \begin and an \end.
+
+``` latex
+\begin{environment}
+stuff inside the environment
+\end{environment}
+```
+
+## What's wrong with this code?
+
+-   Create a new .tex file in your project, called "working_code". Copy and paste your working document's code into this file.
+
+-   Now copy and paste this code into your main.tex doc and select "recompile". What happens? How should you fix it?
+
+``` latex
+\documentclass[a4paper,12pt]{article} 
+\usepackage[utf8]{inputenc} 
+\begin{document (Type your content here.) 
+\end{document}
+```
+
+-   When you're finished, copy and paste your code from "working_code.tex" into main_tex. Press "save" / "recompile".
+
+## Additional Features
+
+Now return to to your "example_project". There are lots of features in this document. Scan the code, and identify how to do the following:
+
+1.  Title
+
+2.  Abstract
+
+3.  Links (url, labels)
+
+4.  Graphics (figures)
+
+5.  Sections & Subsections
+
+Identify their type: **commands** or **environments**?
+
+## Labels & URLs
 
 ``` latex
 \section{Methods}
@@ -107,46 +255,52 @@ Text here.
 \section{Results}
 Referring to section~\ref{sec1}
 on page~\pageref{sec1}.
+
+I found this by using \href{https://google.com}{Google}.
 ```
 
-------------------------------------------------------------------------
+## Graphics
+
+To include an image, use a **figure** environment.
+
+\begin{figure}
+\centering
+\includegraphics[width=1\textwidth]{IMAGE.jpg}
+\end{figure}
+
+-   Visit [this site](https://www1.cmc.edu/pages/faculty/aaksoy/latex/latexfive.html) to see what types of options figures can have.
+
+-   Download "atom.png" from [here](https://www1.cmc.edu/pages/faculty/aaksoy/latex/img/atom.png).
+
+-   Place "atom.png" in your "301-LaTeX-practice" project folder.
+
+-   Modify your main.tex to include "atom.png" as a figure. Add a caption and resize it.
+
+## Sections & Subsections
+
+To create a subsection of a section, you add "sub" to the name of that section: section –\> subsection; subsection –\> subsubsection. How many sections deep can we go?
+
+``` latex
+\section{Introduction} This is the introduction.   
+\section{Methods}  
+\subsection{Stage 1} First part of the methods.   
+\subsection{Stage 2} Second part of the methods.
+```
 
 ## Table of contents
 
-Place right after `\maketitle`.
+With sections, you can create a table of contents. Place this command right after `\maketitle`.
 
 ``` latex
-\pagenumbering{roman}
-\tableofcontents
-\newpage
-\pagenumbering{arabic}
+\maketitle 
+\tableofcontents 
 ```
 
-------------------------------------------------------------------------
+# Final Activity
 
-## Quick practice (7–10 min)
+Modify "main.tex" in "301-LaTeX-practice" to have the following:
 
-Create a **mini paper** with: - Title, author, date - Three sections (one with subsections) - A label + cross‑reference - A table of contents
-
-**Starter files you can use:** see the download below.
-
-------------------------------------------------------------------------
-
-## Download the Day 1 .tex exercises
-
--   Broken minimal document\
--   Fixed minimal document\
--   Title block (today/fixed date)\
--   Sections & subsections\
--   Labels & references\
--   Practice template with TOC
-
-[Download the Day 1 examples (zip)](sandbox:/mnt/data/latex_day1_examples.zip)
-
-------------------------------------------------------------------------
-
-### Presenting tips (for you)
-
--   Keep Overleaf open side‑by‑side and paste snippets live.\
--   When you demo a compile error, **read the log’s last few lines** with students and point to the offending line.\
--   Have them de‑comment one block at a time as they test.
+1.  A title, abstract.
+2.  Sections, subsections, and a table of contents.
+3.  A link to an outside website within a url.
+4.  An internal label to refer to another part of your document.

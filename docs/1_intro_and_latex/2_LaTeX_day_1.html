@@ -409,128 +409,275 @@ Dr.&nbsp;Andrew M. Byrd
 <nav role="doc-toc"> 
 <h2 id="toc-title">Plan for the Day</h2>
 <ul>
-<li><a href="#/review" id="/toc-review">Review</a></li>
+<li><a href="#/review-quiz" id="/toc-review-quiz">Review Quiz</a></li>
+<li><a href="#/whats-latex" id="/toc-whats-latex">What’s LaTeX?</a></li>
+<li><a href="#/the-basics-of-latex" id="/toc-the-basics-of-latex">The Basics of LaTeX</a></li>
+<li><a href="#/final-activity" id="/toc-final-activity">Final Activity</a></li>
 </ul>
 </nav>
 </section>
+<section id="review-quiz" class="title-slide slide level1 center">
+<h1>Review Quiz</h1>
+<ul>
+<li>What did we talk about in Monday’s class?</li>
+</ul>
+</section>
+
 <section>
-<section id="review" class="title-slide slide level1 center">
-<h1>Review</h1>
+<section id="whats-latex" class="title-slide slide level1 center">
+<h1>What’s LaTeX?</h1>
+
+<img data-src="2_latex_glove.jpeg" class="quarto-figure quarto-figure-center r-stretch" alt="A latex glove."></section>
+<section id="latex" class="slide level2 center">
+<h2>LaTeX</h2>
+<p>[lɑˈ.tʰɛk̚] or [lɑˈ.tʰɛx] or [ˈle͡ɪ.tʰɛk̚]</p>
+<p>NOT</p>
+
+<img data-src="2_latex_glove.jpeg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="latex-1" class="slide level2 center">
+<h2>LaTeX</h2>
 <ul>
-<li><p>How does the class work?</p></li>
-<li><p>Thoughts on AI?</p></li>
+<li><p>= a <strong>markup</strong> language:</p>
+<ul>
+<li><p>adds special instructions to text to let a computer know how to display, structure or describe it</p>
+<ul>
+<li><p>“make this a heading”</p></li>
+<li><p>“make this italicized”</p></li>
+<li><p>“put this into a list”</p></li>
+</ul></li>
+</ul></li>
+<li><p>In a couple weeks we’ll be working with a second markup language, HTML.</p></li>
 </ul>
 </section>
-<section id="goals-for-today" class="slide level2 center">
-<h2>Goals for Today</h2>
+<section id="latex-2" class="slide level2 center">
+<h2>LaTeX</h2>
 <ul>
-<li>Minimal document → fix a common error</li>
-<li>Title / author / date</li>
-<li>Sections &amp; subsections</li>
-<li>Labels &amp; references</li>
-<li>Table of contents</li>
+<li><p>Completely free to use!</p></li>
+<li><p>Originally designed for mathematicians and computer scientists, but linguists have long recognized its usefulness.</p></li>
+<li><p>Great for:</p>
+<ul>
+<li><p>Funny scripts – IPA, non-Roman alphabets, etc.</p></li>
+<li><p>Difficult to construct charts and illustrations, esp.&nbsp;syntactic trees</p></li>
+<li><p>Knowing <em>precisely</em> where your texts and images will go</p></li>
+</ul></li>
 </ul>
 </section>
-<section id="minimal-document-broken" class="slide level2 center">
-<h2>Minimal document (broken)</h2>
-<p>Use this to show a compile error and how to spot it.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb1-1"><a href=""></a><span class="bu">\documentclass</span>[a4paper,12pt]{<span class="ex">article</span>}</span>
-<span id="cb1-2"><a href=""></a><span class="bu">\usepackage</span>[utf8]{<span class="ex">inputenc</span>}</span>
-<span id="cb1-3"><a href=""></a><span class="kw">\begin</span>{<span class="ex">document</span></span>
-<span id="cb1-4"><a href=""></a><span class="er">(Type your content here.)</span></span>
-<span id="cb1-5"><a href=""></a><span class="er">\end{document</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><strong>What’s wrong?</strong> Missing <code>}</code> in <code>\begin{document}</code>.</p>
+<section id="typesetting-linguistics-using-latex" class="slide level2 center">
+<h2>Typesetting Linguistics using LaTeX</h2>
+
+<img data-src="2_syntax_tree.png" class="quarto-figure quarto-figure-center r-stretch" alt="crazy syntax tree"></section>
+<section id="typesetting-linguistics-using-latex-1" class="slide level2 center">
+<h2>Typesetting Linguistics using LaTeX</h2>
+<ol style="font-size: 1.5em; line-height: 1.2;">
+<p>æ̃nd͡ʒɹu bɹ̩d</p>
+</ol>
 </section>
-<section id="minimal-document-fixed" class="slide level2 center">
-<h2>Minimal document (fixed)</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb2-1"><a href=""></a><span class="bu">\documentclass</span>[a4paper,12pt]{<span class="ex">article</span>}</span>
-<span id="cb2-2"><a href=""></a><span class="bu">\usepackage</span>[utf8]{<span class="ex">inputenc</span>}</span>
-<span id="cb2-3"><a href=""></a><span class="kw">\begin</span>{<span class="ex">document</span>}</span>
-<span id="cb2-4"><a href=""></a>(Type your content here.)</span>
-<span id="cb2-5"><a href=""></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="typesetting-linguistics-using-latex-2" class="slide level2 center">
+<h2>Typesetting Linguistics using LaTeX</h2>
+
+<img data-src="2_syllable_tree.jpg" class="quarto-figure quarto-figure-center r-stretch" alt="syllable tree"></section>
+<section id="getting-set-up-with-latex" class="slide level2 center">
+<h2>Getting set up with LaTeX</h2>
+<ul>
+<li><p>Visit <a href="https://www.overleaf.com/" class="uri">https://www.overleaf.com/</a></p></li>
+<li><p>Create an account</p></li>
+<li><p>Press the button “New Project”</p></li>
+<li><p>Select “Example project”</p></li>
+<li><p>Call the document “example_project”</p></li>
+</ul>
+</section></section>
+<section>
+<section id="the-basics-of-latex" class="title-slide slide level1 center">
+<h1>The Basics of LaTeX</h1>
+<p>All documents need to be assigned a <strong>class</strong>. You also must “begin” and “end” that document.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb1-1"><a href=""></a><span class="bu">\documentclass</span>[a4paper,12pt]{<span class="ex">article</span>} </span>
+<span id="cb1-2"><a href=""></a></span>
+<span id="cb1-3"><a href=""></a><span class="kw">\begin</span>{<span class="ex">document</span>}</span>
+<span id="cb1-4"><a href=""></a></span>
+<span id="cb1-5"><a href=""></a>BLAH BLAH BLAH</span>
+<span id="cb1-6"><a href=""></a></span>
+<span id="cb1-7"><a href=""></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Google “LaTeX classes”. How many are there? What is the documentclass you would use for a presentation?</li>
+</ul>
 </section>
-<section id="title-block-todays-date" class="slide level2 center">
-<h2>Title block (today’s date)</h2>
-<p>Place before your content, then <code>\maketitle</code>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb3-1"><a href=""></a><span class="fu">\title</span>{Phonology Paper}</span>
-<span id="cb3-2"><a href=""></a><span class="fu">\author</span>{My Name}</span>
-<span id="cb3-3"><a href=""></a><span class="fu">\date</span>{<span class="fu">\today</span>}</span>
-<span id="cb3-4"><a href=""></a><span class="fu">\maketitle</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="how-latex-works" class="slide level2 center">
+<h2>How LaTeX works</h2>
+<p>Everything before “\begin{document}” is called the <strong>preamble</strong>. This is where we load declare the document class, load <strong>packages</strong>, and input information like the title and author.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb2-1"><a href=""></a><span class="bu">\documentclass</span>{<span class="ex">article</span>}</span>
+<span id="cb2-2"><a href=""></a></span>
+<span id="cb2-3"><a href=""></a><span class="co">% Language setting</span></span>
+<span id="cb2-4"><a href=""></a><span class="co">% Replace `english' with e.g. `spanish' to change the document language</span></span>
+<span id="cb2-5"><a href=""></a><span class="bu">\usepackage</span>[english]{<span class="ex">babel</span>}</span>
+<span id="cb2-6"><a href=""></a></span>
+<span id="cb2-7"><a href=""></a><span class="co">% Set page size and margins</span></span>
+<span id="cb2-8"><a href=""></a><span class="co">% Replace `letterpaper' with `a4paper' for UK/EU standard size</span></span>
+<span id="cb2-9"><a href=""></a><span class="bu">\usepackage</span>[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{<span class="ex">geometry</span>}</span>
+<span id="cb2-10"><a href=""></a></span>
+<span id="cb2-11"><a href=""></a><span class="co">% Useful packages</span></span>
+<span id="cb2-12"><a href=""></a><span class="bu">\usepackage</span>{<span class="ex">amsmath</span>}</span>
+<span id="cb2-13"><a href=""></a><span class="bu">\usepackage</span>{<span class="ex">graphicx</span>}</span>
+<span id="cb2-14"><a href=""></a><span class="bu">\usepackage</span>[colorlinks=true, allcolors=blue]{<span class="ex">hyperref</span>}</span>
+<span id="cb2-15"><a href=""></a></span>
+<span id="cb2-16"><a href=""></a><span class="fu">\title</span>{Your Paper}</span>
+<span id="cb2-17"><a href=""></a><span class="fu">\author</span>{You}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="fixed-date-not-today" class="slide level2 center">
-<h2>Fixed date (not today)</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb4-1"><a href=""></a><span class="fu">\date</span>{December 6, 2017}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Use either <code>\today</code> or a fixed date—don’t do both.</p>
+<section id="how-latex-works-1" class="slide level2 center">
+<h2>How LaTeX works</h2>
+<p>Notice the text preceded by “%”. These are called <strong>comments</strong>. What do you think they do?</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb3-1"><a href=""></a><span class="bu">\documentclass</span>{<span class="ex">article</span>}</span>
+<span id="cb3-2"><a href=""></a></span>
+<span id="cb3-3"><a href=""></a><span class="co">% Language setting</span></span>
+<span id="cb3-4"><a href=""></a><span class="co">% Replace `english' with e.g. `spanish' to change the document language</span></span>
+<span id="cb3-5"><a href=""></a><span class="bu">\usepackage</span>[english]{<span class="ex">babel</span>}</span>
+<span id="cb3-6"><a href=""></a></span>
+<span id="cb3-7"><a href=""></a><span class="co">% Set page size and margins</span></span>
+<span id="cb3-8"><a href=""></a><span class="co">% Replace `letterpaper' with `a4paper' for UK/EU standard size</span></span>
+<span id="cb3-9"><a href=""></a><span class="bu">\usepackage</span>[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{<span class="ex">geometry</span>}</span>
+<span id="cb3-10"><a href=""></a></span>
+<span id="cb3-11"><a href=""></a><span class="co">% Useful packages</span></span>
+<span id="cb3-12"><a href=""></a><span class="bu">\usepackage</span>{<span class="ex">amsmath</span>}</span>
+<span id="cb3-13"><a href=""></a><span class="bu">\usepackage</span>{<span class="ex">graphicx</span>}</span>
+<span id="cb3-14"><a href=""></a><span class="bu">\usepackage</span>[colorlinks=true, allcolors=blue]{<span class="ex">hyperref</span>}</span>
+<span id="cb3-15"><a href=""></a></span>
+<span id="cb3-16"><a href=""></a><span class="fu">\title</span>{Your Paper}</span>
+<span id="cb3-17"><a href=""></a><span class="fu">\author</span>{You}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="activity" class="slide level2 center">
+<h2>Activity</h2>
+<ul>
+<li><p>Return to “Home” in Overleaf.</p></li>
+<li><p>Create a new project, called “301-LaTeX-practice”</p></li>
+<li><p>Now edit the file main.tex.</p>
+<ul>
+<li><code>\documentclass{article}</code> ← sets document type</li>
+<li><code>\author{your name}</code>; <code>\date{\today}</code> ← author and date</li>
+<li>Make sure <code>\begin{document}</code> and <code>\end{document}</code> are in your file.</li>
+<li>Immediately after <code>\begin{document}</code>, add <code>\maketitle</code></li>
+<li>Add <strong>Hello world!</strong> between those sections</li>
+</ul></li>
+</ul>
+</section>
+<section id="activity-part-2" class="slide level2 center">
+<h2>Activity, Part 2</h2>
+<ul>
+<li><p>Within main.tex, edit the document as follows:</p>
+<ul>
+<li><p>First, change <code>\documentclass{article}</code> to <code>\documentclass{article.</code> and then “Recompile”. What happens?</p></li>
+<li><p>Change <code>\date{\today}</code> to <code>\date{today}</code> and then “Recompile”. What happens?</p></li>
+<li><p>Get rid of <code>\end{document}</code> and then “Recompile”. What happens?</p></li>
+<li><p>Change <strong>Hello world!</strong> to <strong>Hello world?</strong> What happens?</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="commands" class="slide level2 center">
+<h2>Commands</h2>
+<p>Things that begin with a “\” are called <strong>commands</strong>.</p>
+<ul>
+<li><p>These can have no argument (they’re <em>avalent</em>, if you will), like “\today”.</p></li>
+<li><p>Many require arguments (like <em>intransitives</em>, <em>transitives</em>, etc.), like:</p>
+<pre><code>\documentclass{}, \author{}, and \date{}</code></pre>
+<ul>
+<li>One of the most common reason for code to break in LaTeX is if a bracket isn’t closed, so always be on the lookout for that!</li>
+</ul></li>
+</ul>
+</section>
+<section id="commands-1" class="slide level2 center">
+<h2>Commands</h2>
+<ul>
+<li><p>Some commands even allow for optional arguments (options), which are place immediately before the command inside square brackets:</p>
+<pre><code>\documentclass[option1,option2]{article}</code></pre></li>
+<li><p>Visit <a href="https://texblog.org/2013/02/13/latex-documentclass-options-illustrated/">this site</a> to see what types of options documentclasses can have. Modify your main.tex with these options to experiment.</p>
+<ul>
+<li><strong><em>Which do you think you’ll use most often?</em></strong></li>
+</ul></li>
+</ul>
+</section>
+<section id="environments" class="slide level2 center">
+<h2>Environments</h2>
+<p>Environments, like “document”, have a \begin and an \end.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb6-1"><a href=""></a><span class="kw">\begin</span>{<span class="ex">environment</span>}</span>
+<span id="cb6-2"><a href=""></a>stuff inside the environment</span>
+<span id="cb6-3"><a href=""></a><span class="kw">\end</span>{<span class="ex">environment</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="whats-wrong-with-this-code" class="slide level2 center">
+<h2>What’s wrong with this code?</h2>
+<ul>
+<li><p>Create a new .tex file in your project, called “working_code”. Copy and paste your working document’s code into this file.</p></li>
+<li><p>Now copy and paste this code into your main.tex doc and select “recompile”. What happens? How should you fix it?</p></li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb7-1"><a href=""></a><span class="bu">\documentclass</span>[a4paper,12pt]{<span class="ex">article</span>} </span>
+<span id="cb7-2"><a href=""></a><span class="bu">\usepackage</span>[utf8]{<span class="ex">inputenc</span>} </span>
+<span id="cb7-3"><a href=""></a><span class="kw">\begin</span>{<span class="ex">document</span><span class="er"> (Type your content here.) </span></span>
+<span id="cb7-4"><a href=""></a><span class="er">\end{document</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>When you’re finished, copy and paste your code from “working_code.tex” into main_tex. Press “save” / “recompile”.</li>
+</ul>
+</section>
+<section id="additional-features" class="slide level2 center">
+<h2>Additional Features</h2>
+<p>Now return to to your “example_project”. There are lots of features in this document. Scan the code, and identify how to do the following:</p>
+<ol type="1">
+<li><p>Title</p></li>
+<li><p>Abstract</p></li>
+<li><p>Links (url, labels)</p></li>
+<li><p>Graphics (figures)</p></li>
+<li><p>Sections &amp; Subsections</p></li>
+</ol>
+<p>Identify their type: <strong>commands</strong> or <strong>environments</strong>?</p>
+</section>
+<section id="labels-urls" class="slide level2 center">
+<h2>Labels &amp; URLs</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb8-1"><a href=""></a><span class="kw">\section</span>{Methods}</span>
+<span id="cb8-2"><a href=""></a><span class="kw">\subsection</span>{Stage 1}</span>
+<span id="cb8-3"><a href=""></a><span class="kw">\label</span>{<span class="ex">sec1</span>}</span>
+<span id="cb8-4"><a href=""></a>Text here.</span>
+<span id="cb8-5"><a href=""></a></span>
+<span id="cb8-6"><a href=""></a><span class="kw">\section</span>{Results}</span>
+<span id="cb8-7"><a href=""></a>Referring to section~<span class="kw">\ref</span>{<span class="ex">sec1</span>}</span>
+<span id="cb8-8"><a href=""></a>on page~<span class="kw">\pageref</span>{<span class="ex">sec1</span>}.</span>
+<span id="cb8-9"><a href=""></a></span>
+<span id="cb8-10"><a href=""></a>I found this by using <span class="fu">\href</span>{https://google.com}{Google}.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="graphics" class="slide level2 center">
+<h2>Graphics</h2>
+<p>To include an image, use a <strong>figure</strong> environment.</p>
+<ul>
+<li><p>Visit <a href="https://www1.cmc.edu/pages/faculty/aaksoy/latex/latexfive.html">this site</a> to see what types of options figures can have.</p></li>
+<li><p>Download “atom.png” from <a href="https://www1.cmc.edu/pages/faculty/aaksoy/latex/img/atom.png">here</a>.</p></li>
+<li><p>Place “atom.png” in your “301-LaTeX-practice” project folder.</p></li>
+<li><p>Modify your main.tex to include “atom.png” as a figure. Add a caption and resize it.</p></li>
+</ul>
 </section>
 <section id="sections-subsections" class="slide level2 center">
-<h2>Sections &amp; subsections</h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb5-1"><a href=""></a><span class="kw">\section</span>{Introduction}</span>
-<span id="cb5-2"><a href=""></a>This is the introduction.</span>
-<span id="cb5-3"><a href=""></a></span>
-<span id="cb5-4"><a href=""></a><span class="kw">\section</span>{Methods}</span>
-<span id="cb5-5"><a href=""></a><span class="kw">\subsection</span>{Stage 1}</span>
-<span id="cb5-6"><a href=""></a>First part of the methods.</span>
-<span id="cb5-7"><a href=""></a></span>
-<span id="cb5-8"><a href=""></a><span class="kw">\subsection</span>{Stage 2}</span>
-<span id="cb5-9"><a href=""></a>Second part of the methods.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="labels-references" class="slide level2 center">
-<h2>Labels &amp; references</h2>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb6-1"><a href=""></a><span class="kw">\section</span>{Methods}</span>
-<span id="cb6-2"><a href=""></a><span class="kw">\subsection</span>{Stage 1}</span>
-<span id="cb6-3"><a href=""></a><span class="kw">\label</span>{<span class="ex">sec1</span>}</span>
-<span id="cb6-4"><a href=""></a>Text here.</span>
-<span id="cb6-5"><a href=""></a></span>
-<span id="cb6-6"><a href=""></a><span class="kw">\section</span>{Results}</span>
-<span id="cb6-7"><a href=""></a>Referring to section~<span class="kw">\ref</span>{<span class="ex">sec1</span>}</span>
-<span id="cb6-8"><a href=""></a>on page~<span class="kw">\pageref</span>{<span class="ex">sec1</span>}.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<h2>Sections &amp; Subsections</h2>
+<p>To create a subsection of a section, you add “sub” to the name of that section: section –&gt; subsection; subsection –&gt; subsubsection. How many sections deep can we go?</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb9-1"><a href=""></a><span class="kw">\section</span>{Introduction} This is the introduction.   </span>
+<span id="cb9-2"><a href=""></a><span class="kw">\section</span>{Methods}  </span>
+<span id="cb9-3"><a href=""></a><span class="kw">\subsection</span>{Stage 1} First part of the methods.   </span>
+<span id="cb9-4"><a href=""></a><span class="kw">\subsection</span>{Stage 2} Second part of the methods.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="table-of-contents" class="slide level2 center">
 <h2>Table of contents</h2>
-<p>Place right after <code>\maketitle</code>.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb7-1"><a href=""></a><span class="fu">\pagenumbering</span>{roman}</span>
-<span id="cb7-2"><a href=""></a><span class="fu">\tableofcontents</span></span>
-<span id="cb7-3"><a href=""></a><span class="fu">\newpage</span></span>
-<span id="cb7-4"><a href=""></a><span class="fu">\pagenumbering</span>{arabic}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="quick-practice-710-min" class="slide level2 center">
-<h2>Quick practice (7–10 min)</h2>
-<p>Create a <strong>mini paper</strong> with: - Title, author, date - Three sections (one with subsections) - A label + cross‑reference - A table of contents</p>
-<p><strong>Starter files you can use:</strong> see the download below.</p>
-</section>
-<section id="download-the-day-1-.tex-exercises" class="slide level2 center">
-<h2>Download the Day 1 .tex exercises</h2>
-<ul>
-<li>Broken minimal document<br>
-</li>
-<li>Fixed minimal document<br>
-</li>
-<li>Title block (today/fixed date)<br>
-</li>
-<li>Sections &amp; subsections<br>
-</li>
-<li>Labels &amp; references<br>
-</li>
-<li>Practice template with TOC</li>
-</ul>
-<p><a href="sandbox:/mnt/data/latex_day1_examples.zip">Download the Day 1 examples (zip)</a></p>
-</section>
-<section class="slide level2 center">
-
-<h3 id="presenting-tips-for-you">Presenting tips (for you)</h3>
-<ul>
-<li>Keep Overleaf open side‑by‑side and paste snippets live.<br>
-</li>
-<li>When you demo a compile error, <strong>read the log’s last few lines</strong> with students and point to the offending line.<br>
-</li>
-<li>Have them de‑comment one block at a time as they test.</li>
-</ul>
+<p>With sections, you can create a table of contents. Place this command right after <code>\maketitle</code>.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb10-1"><a href=""></a><span class="fu">\maketitle</span> </span>
+<span id="cb10-2"><a href=""></a><span class="fu">\tableofcontents</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section></section>
+<section id="final-activity" class="title-slide slide level1 center">
+<h1>Final Activity</h1>
+<p>Modify “main.tex” in “301-LaTeX-practice” to have the following:</p>
+<ol type="1">
+<li>A title, abstract.</li>
+<li>Sections, subsections, and a table of contents.</li>
+<li>A link to an outside website within a url.</li>
+<li>An internal label to refer to another part of your document.</li>
+</ol>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
