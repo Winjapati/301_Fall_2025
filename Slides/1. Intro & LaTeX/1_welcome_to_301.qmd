@@ -25,20 +25,19 @@ editor: visual
 
 -   This will help me better understand how to structure the class.
 
-
 # What is this course?
 
 ![](1_comp_ling_battle.png){fig-align="center" width="60%"}
 
 ## In this class, I'm assuming that you ...
 
--   Know how to use a computer and access the internet;
+-   Know how to use a computer and can access the internet;
+
+-   Know what generative AI is and have used it before.
 
 -   Aren't terribly familiar with the command prompt, and perhaps don't even know what it is;
 
 -   Have never programmed before;
-
--   Know what generative AI is and have used it before.
 
 ## My Background: I am ...
 
@@ -46,15 +45,19 @@ editor: visual
 
 -   Specialist in:
 
-    -   Proto-Indo-European
-
-    -   Ancient IE Languages
+    -   Proto-Indo-European & Ancient IE Languages
 
     -   Historical Phonology
 
     -   Constructed Languages
 
     -   Thinking about old problems in new ways
+
+        -   Syllable structure in PIE
+
+        -   Aspirates & Implosives
+
+        -   Immersive PIE
 
 ## My Background: I am NOT ...
 
@@ -64,7 +67,7 @@ editor: visual
 
 -   A formally trained computational linguist
 
-## Wait, then why is *this guy* teaching me Computation for Linguists?
+## Wait, then why is [*this guy*]{.underline} teaching me Computation for Linguists?
 
 -   Despite my lack of formal training in programming
 
@@ -82,33 +85,31 @@ editor: visual
 
     -   Funding pulled with the DOGE-pocalypse in April 2025
 
-    -   What to do? Build the damn thing myself.
+    -   What to do? Build the damn thing myself, with the help of Gen AI for high-level coding.
 
-## What does that mean in practice?
+## What does that mean for y'all?
 
--   Given that I recently learned how to program, this means that I perhaps better understand the issues that a beginner might have;
+-   With me as your teacher:
 
--   There may be questions you have that I cannot initially answer, but I will try my best to get you those answers.
+    -   Given that I recently learned how to program, this means that I perhaps better understand the issues that a beginner might have;
 
-## In this class, I'm assuming that you ...
+    -   There may be questions you have that I cannot initially answer, but I will find you those answers.
 
--   Know how to use a computer and access the internet;
+## What does that mean for y'all?
 
--   Aren't terribly familiar with the command prompt, and perhaps don't even know what it is;
+-   For you as my student:
 
--   Have never programmed before;
+    -   My goal is that you, too, will be able to code with the help of Gen AI.
 
--   Know what generative AI is and have used it before.
+    -   Broadly speaking, you should be able to *understand* the advanced code that you use, though not necessarily have come up with it yourself.
 
 ## Why do you need this course?
 
--   Programming and computing large amounts of data is considering more important these days
+1.  In Linguistics (academia and the private sector, like Google), working with large amounts of data is standard
 
-    -   Both in linguistics (cf. job market)
+    -   Programming provides us with tools to process that data!
 
-    -   And in the regular world!
-
--   There are quite a few annoying parts of Linguistics that require special tools, think:
+2.  There are quite a few annoying parts of Linguistics that require special tools, think:
 
     -   IPA symbols
 
@@ -116,7 +117,7 @@ editor: visual
 
     -   Leipzig Glossing Rules
 
--   Understanding how to use Gen AI as a tool, not as a crutch
+3.  Understanding how to use Gen AI as a tool, not as a crutch
 
 ## What will you learn in this class?
 
@@ -132,7 +133,7 @@ editor: visual
 
     -   Python and a little R
 
-    -   How do linguists use computers to work?
+    -   How do linguists use computers to conduct research?
 
 # What specific computational skills will you acquire?
 
@@ -192,8 +193,6 @@ editor: visual
 
     -   POS tagging
 
-    -   concordance/KWIC
-
     -   word frequency analysis
 
 ## **PYTHON SKILLS**
@@ -212,7 +211,7 @@ editor: visual
 
     -   reading CSV/Excel
 
-    -   cleaning and transforming data with dplyr
+    -   cleaning and transforming data
 
     -   summarizing data by groups.
 
@@ -236,11 +235,11 @@ editor: visual
 
     -   network diagrams
 
-## **R SKILLS**
+## **RStudio SKILLS**
 
--   Reproducible reporting in RStudio:
+-   Reproducible reporting in **RStudio**:
 
-    -   writing code and commentary in Quarto;
+    -   writing code and commentary in **Quarto** documents;
 
     -   generating HTML/PDF slides and reports;
 
@@ -266,7 +265,13 @@ editor: visual
 
     -   IDE = "Integrated Development Enivornment", required tool for software development
 
-    -   There are cloud-based environments for Python, R, and HTML. Possible sites include: <https://trinket.io/> and <https://github.com/codespaces>.
+    -   After we install it, run RStudio on your laptop each and every class
+
+    -   There are cloud-based environments for Python, R, and HTML. Possible sites include:
+
+        -   <https://trinket.io/>
+
+        -   <https://github.com/codespaces>.
 
 ## What you'll need for this course
 
@@ -282,9 +287,45 @@ editor: visual
 
     -   You'll also create a webpage to promote yourself and your work.
 
+# Grades
+
+**In-Class Quizzes:** 30%
+
+**Homework:** 40% (8 total - 10% each)
+
+<ol style="font-size: 0.6em; line-height: 1.2;">
+
+<li>LaTeX</li>
+
+<li>GitHub Homepage</li>
+
+<li>Beginning Python</li>
+
+<li>Loops & Conditionals</li>
+
+<li>Pandas-monium</li>
+
+<li>String Operations</li>
+
+<li>Tokens, Frequencies, & Visualization</li>
+
+<li>Functions & Libraries</li>
+
+</ol>
+
+**Final Project:** 30% (4 Components)
+
+<ol style="font-size: 0.6em; line-height: 1.2;">
+
+-   Select a dataset (corpus) in a language or languages of your choice and perform a linguistic analysis using the skills we build in class.
+
+</ol>
+
 # Questions?
 
 # Final Activity: Learning How to Think Like a Computer
+
+## Learning How to Think Like a Computer
 
 -   Consider the meaning of the following sentences:
 
@@ -306,12 +347,6 @@ editor: visual
 
 ## Learning How to Think Like a Computer
 
--   How would *you* interpret these in context?
-
--   How would a *computer* interpret them without context?
-
-## Learning How to Think Like a Computer
-
 -   How would a computer interpret these sentences?
 
 1.  It's noisy in here. (Statement directed towards friend when going inside a crowded room.)
@@ -326,7 +361,7 @@ editor: visual
 
 1.  Form groups of three.
 
-2.  Your task: write step-by-step instructions for making a peanut butter & jelly sandwich.
+2.  Your task: write step-by-step instructions for making a peanut butter & jelly sandwich for Dr. Byrd.
 
 3.  Be **explicit** — if a step isn’t written, it doesn’t happen.
 

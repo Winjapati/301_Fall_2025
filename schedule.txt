@@ -1,0 +1,42 @@
+Assignment 8/25 - Overview of Course	 
+Assignment 8/27 - Learning Markup Languages (LaTeX)	 
+Assignment 8/29 - Learning Markup Languages (LaTeX)	
+Assignment 9/3 - Learning Markup Languages (LaTeX)	 
+Assignment 9/5 - Learning Markup Languages (LaTeX)	 
+Assignment 9/8 - Setting up RStudio & GitHub	  
+Assignment 9/10 - Learning Markup Languages (HTML) 
+Assignment 9/12 - Learning Markup Languages (CSS)	 
+Assignment 9/15 - Learning Markup Languages (JS, day 1)	 
+Assignment 9/17 - Learning Markup Languages (JS, day 2)	 
+Assignment 9/19 - Learning Markup Languages (JS, day 3)	 
+Assignment 9/22 - Learning the Command Line	 
+Assignment 9/24 - Learning the Command Line	 
+Assignment 9/26 - Learning the Command Line	 
+Assignment 9/29 - Beginning Python (Variables & Types)	 
+Assignment 10/1 - Beginning Python (Variables & Types)	 
+Assignment 10/3 - Beginning Python (Variables & Types)	 
+Assignment 10/6 - Loops & Conditionals	 
+Assignment 10/8 - Loops & Conditionals	 
+Assignment 10/10 - Loops & Conditionals	 
+Assignment 10/13 - Pandas-monium	 
+Assignment 10/15 - Pandas-monium	 
+Assignment 10/17 - Pandas-monium	 
+Assignment 10/20 - String Operations & Regex	 
+Assignment 10/22 - String Operations & Regex	 
+Assignment 10/24 - String Operations & Regex	 
+Assignment 10/29 - Tokenization & Frequencies	 
+Assignment 10/31 - Tokenization & Frequencies	 
+Assignment 11/10 - Functions	 
+Assignment 11/12 - Functions	 
+Assignment 11/14 - Functions	 
+Assignment 11/17 - Libraries	 
+Assignment 11/19 - Libraries	 
+Assignment 11/21 - Libraries	 
+Assignment 11/3 - Visualization (using R)	 
+Assignment 11/5 - Visualization (using R)	 
+Assignment 11/7 - Visualization (using R)	 
+Assignment 12/1 - Project Workshop	 
+Assignment 12/3 - Project Workshop	 
+Assignment 12/5 - Project Workshop	 
+Assignment 12/8 - Presentation?
+Assignment 12/10 - Presentation?	 

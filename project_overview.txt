@@ -1,0 +1,102 @@
+Computation for Linguists – Final Project
+
+Final Project: Text Analysis & Visualization
+--------------------------------------------
+In this project, you will select a dataset (corpus) in a language or languages of your choice
+and perform a linguistic analysis using the skills we build in class. Your dataset might be
+literary works, song lyrics, transcripts, political speeches, recipes, or any other text source.
+The key is that it must be available in a plain text or easily convertible format.
+
+You will:
+1. Load and clean your text data using Python.
+2. Tokenize the text and extract relevant patterns.
+3. Count and summarize those patterns.
+4. Visualize your results in R.
+5. Present your findings clearly in a short report.
+
+Possible Types of Analysis
+--------------------------
+You may choose one or more of these approaches for your project:
+- **Word frequency & collocations**: Find and chart the most common words, bigrams, and trigrams.
+- **Stylistic comparison**: Compare vocabulary richness between two authors, genres, or time periods.
+- **Morphological patterns**: Identify and visualize common affixes, endings, or stems.
+- **POS-based analysis**: Compare frequency of nouns, verbs, adjectives, etc. (if using tagged text).
+- **Lexical diversity measures**: Calculate and compare type-token ratios or similar metrics.
+
+Skills Used
+-----------
+- **Python**: file handling, data cleaning, tokenization, regex, counting with Pandas.
+- **R**: creating bar charts, word clouds, timelines, and other visualizations.
+
+Project Timeline
+----------------
+**Week 3:** Choose your dataset and type of analysis.
+**Week 9:** Dataset loaded and cleaned; basic pattern extraction and counts completed.
+**Week 12:** Visualizations created in R; functions added to automate your analysis.
+**Week 15:** Final report and code polished and ready for presentation.
+
+Deliverables
+------------
+1. A short report (3–5 pages) describing:
+   - Your dataset
+   - Your analysis steps
+   - Your findings (with at least 2–3 visualizations)
+   - Any challenges and how you overcame them
+2. Your cleaned dataset (or a sample, if large)
+3. Your Python and R code, clearly commented
+
+You have freedom to choose:
+- The language(s) you analyze
+- The genre or domain of the texts
+- The specific patterns you focus on
+
+Everything else – the technical steps – will follow the sequence we learn in class.
+
+
+Computation for Linguists – Final Project Milestone Checklist
+=============================================================
+
+Final Project: Text Analysis & Visualization
+
+You will select a dataset in the language(s) of your choice and perform a linguistic analysis 
+using the tools and methods we learn in class. Use this checklist to stay on track.
+
+------------------------------------------------------------
+WEEK 3 – PROJECT LAUNCH
+[ ] Dataset chosen (plain text or convertible to plain text)
+[ ] Type of analysis selected (word frequency, morphological patterns, stylistic comparison, etc.)
+[ ] Dataset source documented (link, description, or file location)
+
+------------------------------------------------------------
+WEEK 9 – CORE ANALYSIS MILESTONE
+[ ] Dataset loaded into Python
+[ ] Text cleaned (remove punctuation, normalize case, handle special characters)
+[ ] Tokenized text stored in a Python data structure
+[ ] Pattern extraction complete (regex or other methods)
+[ ] Basic counts generated (e.g., word frequency list, affix counts, collocations)
+[ ] Preliminary results saved as a CSV for later visualization
+
+------------------------------------------------------------
+WEEK 12 – VISUALIZATION MILESTONE
+[ ] Visualizations created in R (bar charts, word clouds, timelines, etc.)
+[ ] Functions written in Python to automate analysis steps
+[ ] Results and visualizations checked for accuracy
+[ ] Code is clearly commented and organized
+
+------------------------------------------------------------
+WEEK 15 – FINAL DELIVERABLE
+[ ] Short report (3–5 pages) written, including:
+      - Description of dataset
+      - Analysis steps
+      - Findings (with 2–3 visualizations)
+      - Challenges and solutions
+[ ] Cleaned dataset (or sample) ready for submission
+[ ] Final Python and R code saved and organized
+[ ] Project submitted on time
+
+------------------------------------------------------------
+NOTES:
+- You can only change your dataset/analysis type before Week 6.
+- Save your work regularly and push to GitHub after each milestone.
+- Ask questions early – debugging is part of the process!
+

@@ -1,0 +1,19 @@
+
+
+Grade Overview
+
+
+In-Class Quizzes: 30%
+
+Homework: 40%
+
+1. LaTeX
+2. GitHub Homepage
+3. Beginning Python
+4. Loops & Conditionals
+5. Pandas-monium
+6. String Operations
+7. Tokens, Frequencies, & Visualization
+8. Functions & Libraries
+
+Final Project:  30%

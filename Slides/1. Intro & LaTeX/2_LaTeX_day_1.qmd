@@ -1,0 +1,152 @@
+---
+title: "Computation for Linguists"
+subtitle: "LaTeX, Day 1 — Structure, Sections, Labels, TOC"
+date: "August 27, 2025"
+author: "Dr. Andrew M. Byrd"
+format:
+  revealjs:
+    css: header_shrink.css
+    theme: beige
+    slide-number: true
+    center: true
+    toc: true
+    toc-title: "Plan for the Day"
+    toc-depth: 1
+editor: visual
+---
+
+# Review
+
+-   How does the class work?
+
+-   Thoughts on AI?
+
+## Goals for Today
+
+-   Minimal document → fix a common error
+-   Title / author / date
+-   Sections & subsections
+-   Labels & references
+-   Table of contents
+
+## Minimal document (broken)
+
+Use this to show a compile error and how to spot it.
+
+``` latex
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\begin{document
+(Type your content here.)
+\end{document}
+```
+
+**What’s wrong?** Missing `}` in `\begin{document}`.
+
+------------------------------------------------------------------------
+
+## Minimal document (fixed)
+
+``` latex
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\begin{document}
+(Type your content here.)
+\end{document}
+```
+
+------------------------------------------------------------------------
+
+## Title block (today’s date)
+
+Place before your content, then `\maketitle`.
+
+``` latex
+\title{Phonology Paper}
+\author{My Name}
+\date{\today}
+\maketitle
+```
+
+------------------------------------------------------------------------
+
+## Fixed date (not today)
+
+``` latex
+\date{December 6, 2017}
+```
+
+Use either `\today` or a fixed date—don’t do both.
+
+------------------------------------------------------------------------
+
+## Sections & subsections
+
+``` latex
+\section{Introduction}
+This is the introduction.
+
+\section{Methods}
+\subsection{Stage 1}
+First part of the methods.
+
+\subsection{Stage 2}
+Second part of the methods.
+```
+
+------------------------------------------------------------------------
+
+## Labels & references
+
+``` latex
+\section{Methods}
+\subsection{Stage 1}
+\label{sec1}
+Text here.
+
+\section{Results}
+Referring to section~\ref{sec1}
+on page~\pageref{sec1}.
+```
+
+------------------------------------------------------------------------
+
+## Table of contents
+
+Place right after `\maketitle`.
+
+``` latex
+\pagenumbering{roman}
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+```
+
+------------------------------------------------------------------------
+
+## Quick practice (7–10 min)
+
+Create a **mini paper** with: - Title, author, date - Three sections (one with subsections) - A label + cross‑reference - A table of contents
+
+**Starter files you can use:** see the download below.
+
+------------------------------------------------------------------------
+
+## Download the Day 1 .tex exercises
+
+-   Broken minimal document\
+-   Fixed minimal document\
+-   Title block (today/fixed date)\
+-   Sections & subsections\
+-   Labels & references\
+-   Practice template with TOC
+
+[Download the Day 1 examples (zip)](sandbox:/mnt/data/latex_day1_examples.zip)
+
+------------------------------------------------------------------------
+
+### Presenting tips (for you)
+
+-   Keep Overleaf open side‑by‑side and paste snippets live.\
+-   When you demo a compile error, **read the log’s last few lines** with students and point to the offending line.\
+-   Have them de‑comment one block at a time as they test.
