@@ -15,7 +15,7 @@ format:
 editor: visual
 ---
 
-# Review Quiz
+# Review
 
 -   What did we talk about in Wednesday's class?
 
@@ -91,7 +91,8 @@ L(n, j) ∨ C(j)
 $L(n, j)\lor C(j)$ 
 ```
 
--   The symbol "V" = disjunction (vs. conjunction)
+-   The symbol \< ∨ \> = disjunction (vs. conjunction)
+-   "Either L is true of n and j, or C is true of j, or both."
 
 ## Additional Features: Greek Letters
 
@@ -104,6 +105,8 @@ $\alpha$, $\beta$, $\gamma$
 -   We'll learn in a bit how to input Greek letters outside of mathmode.
 
 -   These are all lowercase – how do you think we can make them uppercase?
+
+    -   Test your ideas in your tex file.
 
 ## Activity: Math Mode
 
@@ -146,7 +149,7 @@ or
 
 -   You can also use \\\\ to signal a linebreak, but it sometimes messes with spacing / document structure.
 
-## Additional Features: Other Types of Break
+## Additional Features: Other Types of Breaks
 
 ```{latex}
 \pagebreak
@@ -155,7 +158,8 @@ or
 
 \clearpage
 ```
--   
+
+-   Try these out in your "example_project". What do they do?
 
 ## Additional Features: Font Effects as Environments
 
@@ -170,6 +174,7 @@ blah blah blah
 blah blah blah
 \end{em}
 ```
+
 -   If you have large sections of text, it may make sense to do these within an environment instead.
 
 ## Additional Features: Font Sizes
@@ -194,8 +199,8 @@ blah blah blah
 {\huge huge words} huge words
 
 ```
-## Additional Features: Inputting Manual spacing
 
+## Additional Features: Inputting Manual spacing
 
 ```{latex}
 \vspace{12pt}
@@ -224,6 +229,7 @@ Strawberries & Red \\
 Oranges & Orange \\
 \end{tabular}
 ```
+
 ## Additional Features: Tables
 
 ```{latex}
@@ -256,16 +262,56 @@ Oranges & Orange \\
 
 ## Activity: Tables
 
-# LaTeX Packages
+\%
 
--   Allows you to use LaTeX in ways beyond its base features
+\documentclass[a4paper,12pt]{article}
+% \usepackage[utf8]{inputenc}
 
--   "Declared" in the preamble with the command **\\usepackage{packagename}**
+% \begin{document}
+% \vspace{30mm}
 
--   Packages often conflict with each other!
+% \noindent @article\{ \\
+% Birdetal2001,\\
+% Author = \{Bird, R. B. and Smith, E. A. and Bird, D. W.\},\\
+% Title = \{The hunting handicap: costly signaling in human\\
+% foraging strategies\},\\
+% Journal = \{Behavioral Ecology and Sociobiology\},\\
+% Volume = \{50\},\\
+% Pages = \{9-19\},\\
+% Year = \{2001\} \}\\
 
--   For this reason, the order in which you install the packages actually does matter.
+% \end{document}
 
-    -   I really dunno why sometimes.
+%%%%%%%%%%%%%%
+% (5.0) References - Inserting
+%%%%%%%%%%%%%%
 
-## Activity: Packages
+
+% \documentclass[a4paper,12pt]{article}
+% \usepackage[utf8]{inputenc}
+% \begin{document}
+% \title{My First Document}
+% \author{My Name}
+% \date{December 6, 2017}
+% \maketitle
+% %%%
+% \section{Introduction}
+% This is the introduction.\cite{millernicely1955}
+% \section{Methods}
+% \subsection{Stage 1}
+% The first part of the methods.\nocite{traill1994}
+% \subsection{Stage 2}
+% The second part of the methods.\cite[p. 215]{jucquois1966}
+% \section{Results}
+% Here are my results.\cite{jucquois1966,millernicely1955}
+
+% \bibliographystyle{plain}
+% \bibliography{LaTeXintro}
+
+% \end{document}
+
+## Activity: Mathmode Solution
+
+$\forall w^{'} (wRw^{'} \rightarrow \exists e^{'} \land  Ag(e^{'}, x)))_{nuclearscope}$
+
+$\forall w^{'} (wRw^{'} \rightarrow \exists e^{'} \land  Ag(e^{'}, x)))_{nuclearscope}$

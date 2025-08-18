@@ -17,13 +17,7 @@ editor: visual
 
 # Review
 
--   What is your background in computing?
-
--   What would you like to get out of the course?
-
--   This is anonymous, so please answer truthfully!
-
--   This will help me better understand how to structure the class.
+-   What did we talk about in Friday's class?
 
 # Beginning LaTeX
 
@@ -34,3 +28,123 @@ editor: visual
 -   This is anonymous, so please answer truthfully!
 
 -   This will help me better understand how to structure the class.
+
+# LaTeX Packages
+
+-   Allows you to use LaTeX in ways beyond its base features
+
+-   "Declared" in the preamble with the command **\\usepackage{packagename}**
+
+-   Packages often conflict with each other!
+
+-   For this reason, the order in which you install the packages actually does matter.
+
+    -   I really dunno why sometimes.
+
+## Activity: Packages
+
+\section{Review}
+\begin{frame}
+\begin{enumerate}
+\item Document classes
+\item Sections \& Labels
+\item Tables
+\item Bibliography
+\item Thesis
+\end{enumerate}
+\end{frame}
+
+%%%%%%%%%%%%%% % Leipzig %%%%%%%%%%%%%%
+
+\section{Leipzig Glossing Rules}
+\begin{frame}
+\centering
+
+\begin{exe}
+    \ex \begin{xlist}
+        \ex This is a sub-example.
+        \ex This is a second sub-example.
+        \ex \begin{xlist}
+            \ex This is a sub-sub-example.
+            \ex This is a second sub-sub-example.
+        \end{xlist}
+    \end{xlist}
+\end{exe}
+\end{frame}
+
+%%%%%%%%%%%%%% % Leipzig 2 %%%%%%%%%%%%%%
+
+\begin{frame}
+\begin{exe}
+\ex 
+\gll kot est smetanu\\
+cat.NOM eat.3SG.PRS {sour cream}.ACC\\
+\trans `The cat eats sour cream'
+\end{exe}
+\end{frame}
+
+%%%%%%%%%%%%%% % Leipzig 3 %%%%%%%%%%%%%%
+
+\begin{frame}
+\begin{exe}
+\ex[*]{
+\gll Stolz ist er auf seine Kinder gewesen.\\
+proud is he of his children been\\
+\trans{`He was proud of his children.'}}
+\end{exe}
+\end{frame}
+
+\% %%%%%%%%%%%%%% % % IPA % %%%%%%%%%%%%%%
+
+\section{Sounds}
+
+\begin{frame}
+\frametitle{IPA}
+
+\begin{itemize}
+\item Package needed: TIPA
+\item Two ways to summon IPA in \LaTeX
+  \begin{enumerate}
+  \item using \textbackslash begin\{IPA\} ... \textbackslash end\{IPA\}
+  \item or \textbackslash textipa\{...\}
+  \end{enumerate}
+\item Example: [\textprimstress\textipa{hE.\textltilde\t{oU}}] `hello' = [\textbackslash textprimstress\textbackslash textipa\textbackslash\{hE\textbackslash textltilde\textbackslash t\textbackslash \{oU\textbackslash\}\textbackslash\} ]
+\item Download ``TIPA manual'' at http://www.l.u-tokyo.ac.jp/\textasciitilde fkr/tipa/tipaman.pdf
+\end{itemize}
+
+\end{frame}
+
+\% %%%%%%%%%%%%%% % % Phonological Rules % %%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Phonological Rules}
+\begin{exe}
+\ex \phonb{s}{z}{V}{V} (\textbackslash phonb)
+\ex \phonl{k}{c}{i} (\textbackslash phonl)
+\ex \phonr{t}{ts}{u} (\textbackslash phonr)
+\ex \phon{\textturnw}{w} (\textbackslash phon)
+\ex \phonb{\phonfeat{+stop \\ +consonant \\ +alveolar}}{[\textfishhookr]}{
+\phonfeat{+vowel \\ +stressed}}{\phonfeat{+vowel \\ +stressed}}
+\end{exe}
+\end{frame}
+
+\% %%%%%%%%%%%%%% % % OT Tableaux : website % %%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{OT Tableaux}
+\centering
+{\huge http://meluhha.com/tableau/}
+\end{frame}
+
+\% %%%%%%%%%%%%%% % % OT Tableaux % %%%%%%%%%%%%%%
+
+\begin{frame} 
+\centering
+\begin{center} \renewcommand*\arraystretch{1.2}
+\vspace{1.0cm} \scalebox{1}[1]{\begin{tabular}[t]{|rrl||c|c|c|} \cline{1-3} 
+\multicolumn{3}{|c||}{\textipa{/tup/}} & \hspace*{0.1cm} \begin{rotate}{45} NoCoda \end{rotate} \hspace*{0.2cm} & \hspace*{0.1cm} \begin{rotate}{45} Dep-V \end{rotate} \hspace*{0.2cm} & \hspace*{0.1cm} \begin{rotate}{45} Max-C \end{rotate} \hspace*{0.2cm} \\[0.5ex]
+\hline \hline a. & & \textipa{tup} & $\ast$! & \cellcolor{lightgray} & \cellcolor{lightgray} \\
+\hline b. & \ding{43} & \textipa{tu} & & & \cellcolor{lightgray}$\ast$ \\
+\hline c. & & \textipa{tupi} & & $\ast$! & \cellcolor{lightgray} \\
+\hline \end{tabular}} \renewcommand*\arraystretch{1} \end{center}
+\end{frame}
