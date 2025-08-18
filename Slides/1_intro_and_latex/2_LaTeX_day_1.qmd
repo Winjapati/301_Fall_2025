@@ -205,7 +205,7 @@ Things that begin with a "\\" are called **commands**.
 
 ## Environments
 
-Environments, like "document", have a \begin and an \end.
+Environments, like "document", have a \\begin and an \\end.
 
 ``` latex
 \begin{environment}

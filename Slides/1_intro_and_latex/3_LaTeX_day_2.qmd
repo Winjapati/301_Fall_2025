@@ -15,22 +15,257 @@ format:
 editor: visual
 ---
 
-# Review
+# Review Quiz
 
--   What is your background in computing?
+-   What did we talk about in Wednesday's class?
 
--   What would you like to get out of the course?
+## Review of Concepts
 
--   This is anonymous, so please answer truthfully!
+-   Documentclass
 
--   This will help me better understand how to structure the class.
+-   Preamble
 
-# Beginning LaTeX
+-   Packages
 
--   What is your background in computing?
+-   Comments
 
--   What would you like to get out of the course?
+-   Commands
 
--   This is anonymous, so please answer truthfully!
+-   Environments
 
--   This will help me better understand how to structure the class.
+# Moving along with LaTeX
+
+## Additional Features
+
+Load up your "example_project". There are lots of features in this document. Scan the code, and identify how to do the following:
+
+1.  "Math Mode"
+
+2.  Changing the margins & paper size
+
+3.  Changing the document language
+
+4.  Spell check settings
+
+5.  Adding citations & references
+
+Identify their type: **commands** or **environments** or **something else**?
+
+## Additional Features: Math Mode
+
+When would you use math mode in Linguistics?
+
+1.  Easy Superscripts & Subscripts
+
+2.  Semantic Formulae
+
+3.  Greek Letters
+
+4.  Primes for intermediate projections / traces in Syntax
+
+## Additional Features: Superscripts & Subscripts in Mathmode
+
+```{latex}
+Text$_{subscript}$  
+
+Text$^{superscript}$
+```
+
+-   Notice anything special about the mathmode text?
+
+## Additional Features:Superscripts & Subscripts in Textmode
+
+```{latex}
+Text\textsubscript{subscript}
+
+Text\textsuperscript{subscript}
+```
+
+-   Textmode allows you to maintain the same style
+
+## Additional Features: Semantic Formulae
+
+L(n, j) ∨ C(j)
+
+```{latex}
+$L(n, j)\lor C(j)$ 
+```
+
+-   The symbol "V" = disjunction (vs. conjunction)
+
+## Additional Features: Greek Letters
+
+Remember "alpha notation" from phonology? We need a way to use these symbols.
+
+```{latex}
+$\alpha$, $\beta$, $\gamma$
+```
+
+-   We'll learn in a bit how to input Greek letters outside of mathmode.
+
+-   These are all lowercase – how do you think we can make them uppercase?
+
+## Activity: Math Mode
+
+Return to your "301-LaTeX-practice" project. Create the following semantic notation formula in LaTeX using math mode. Refer to page 31 of [Anke Himmelreich's pdf](https://www.ankehimmelreich.de/downloads/skript_latex.pdf) for the commands.
+
+![](3_mathmode.jpg){fig-align="center"}
+
+## Additional Features: Font Effects as Commands
+
+```{latex}
+\textit{words in italics} 
+\textsl{words slanted} 
+\textsc{words in smallcaps}
+\textbf{words in bold}
+\texttt{words in teletype}
+\textsf{sans serif words}
+\textrm{roman words}
+\underline{underlined words}
+\uuline{doubly underlined text}
+\uwave{wavy underlined text}
+\sout{crossed out text}
+\xout{x'd out text}
+```
+
+-   You'll notice that while there are line breaks in the code, there aren't in the document. How might you add a line break between each of these lines?
+
+## Additional Features: Line Breaks
+
+```{latex}
+\textit{words in italics}
+
+\par \textsl{words slanted}
+
+or
+
+\textit{words in italics}
+
+\textsl{words slanted}
+```
+
+-   You can also use \\\\ to signal a linebreak, but it sometimes messes with spacing / document structure.
+
+## Additional Features: Other Types of Break
+
+```{latex}
+\pagebreak
+
+\newpage
+
+\clearpage
+```
+-   
+
+## Additional Features: Font Effects as Environments
+
+```{latex}
+\begin{bfseries}
+blah blah blah 
+\end{bfseries}
+\begin{itshape}
+blah blah blah
+\end{itshape}
+\begin{em}
+blah blah blah
+\end{em}
+```
+-   If you have large sections of text, it may make sense to do these within an environment instead.
+
+## Additional Features: Font Sizes
+
+```{latex}
+{\tiny tiny words} tiny words
+
+{\scriptsize scriptsize words} scriptsize words
+
+{\footnotesize footnotesize words} footnotesize words
+
+{\small small words} small words
+
+{\normalsize normalsize words} normalsize words
+
+{\large large words} large words
+
+{\Large Large words} Large words
+
+{\LARGE LARGE words} LARGE words
+
+{\huge huge words} huge words
+
+```
+## Additional Features: Inputting Manual spacing
+
+
+```{latex}
+\vspace{12pt}
+
+Blah blah
+
+\vspace{40mm}
+
+Blah blah
+
+\vspace{12pt}
+
+\hspace{36 mm}
+
+test
+```
+
+## Additional Features: Citations
+
+## Additional Features: Tables
+
+```{latex}
+\begin{tabular}{|l|l|}
+Apples & Green \\
+Strawberries & Red \\
+Oranges & Orange \\
+\end{tabular}
+```
+## Additional Features: Tables
+
+```{latex}
+\centering 
+\begin{tabular}{rc} \\
+Apples & Green \\ 
+\hline 
+Strawberries & Red \\ 
+\cline{1-1} 
+Oranges & Orange \\
+\\end{tabular}
+```
+
+## Additional Features: Tables
+
+```{latex}
+\% \centering 
+\
+\begin{tabular}{\|r\|l\|} % 
+\hline 
+8 & here's \\ 
+\cline{2-2} 
+86 & stuff \\ 
+\hline \hline 
+2008 & now \\ 
+\hline 
+\
+\end{tabular}
+```
+
+## Activity: Tables
+
+# LaTeX Packages
+
+-   Allows you to use LaTeX in ways beyond its base features
+
+-   "Declared" in the preamble with the command **\\usepackage{packagename}**
+
+-   Packages often conflict with each other!
+
+-   For this reason, the order in which you install the packages actually does matter.
+
+    -   I really dunno why sometimes.
+
+## Activity: Packages
