@@ -289,7 +289,7 @@ editor: visual
 
 # Grades
 
-**In-Class Quizzes:** 30%
+**In-Class Brain Dumps:** 30%
 
 **Homework:** 40% (8 total - 10% each)
 
