@@ -33,7 +33,7 @@ editor: visual
 
 -   Environments
 
-# Moving along with LaTeX
+# Finding Additional Features
 
 ## Additional Features
 
@@ -50,6 +50,8 @@ Load up your "example_project". There are lots of features in this document. Sca
 5.  Adding citations & references
 
 Identify their type: **commands** or **environments** or **something else**?
+
+# Math Mode
 
 ## Additional Features: Math Mode
 
@@ -113,6 +115,8 @@ $\alpha$, $\beta$, $\gamma$
 Return to your "301-LaTeX-practice" project. Create the following semantic notation formula in LaTeX using math mode. Refer to page 31 of [Anke Himmelreich's pdf](https://www.ankehimmelreich.de/downloads/skript_latex.pdf) for the commands.
 
 ![](3_mathmode.jpg){fig-align="center"}
+
+# Font Effects
 
 ## Additional Features: Font Effects as Commands
 
@@ -218,7 +222,7 @@ Blah blah
 test
 ```
 
-## Additional Features: Citations
+# Tables
 
 ## Additional Features: Tables
 
@@ -229,6 +233,10 @@ Strawberries & Red \\
 Oranges & Orange \\
 \end{tabular}
 ```
+
+-   Let's plug this code into your tex file.
+-   How do tables (tabular) work? What do you notice about the code's structure?
+-   What do you think "l" means? Replace it with "c", and "r". What happens?
 
 ## Additional Features: Tables
 
@@ -246,7 +254,7 @@ Oranges & Orange \\
 ## Additional Features: Tables
 
 ```{latex}
-\% \centering 
+\centering 
 \
 \begin{tabular}{\|r\|l\|} % 
 \hline 
@@ -262,56 +270,136 @@ Oranges & Orange \\
 
 ## Activity: Tables
 
-\%
+![](3_tabular_1.jpg){fig-alt="Tabular Activity" fig-align="center"}
 
-\documentclass[a4paper,12pt]{article}
-% \usepackage[utf8]{inputenc}
+-   Create the above table in LaTeX.
 
-% \begin{document}
-% \vspace{30mm}
+# Citations
 
-% \noindent @article\{ \\
-% Birdetal2001,\\
-% Author = \{Bird, R. B. and Smith, E. A. and Bird, D. W.\},\\
-% Title = \{The hunting handicap: costly signaling in human\\
-% foraging strategies\},\\
-% Journal = \{Behavioral Ecology and Sociobiology\},\\
-% Volume = \{50\},\\
-% Pages = \{9-19\},\\
-% Year = \{2001\} \}\\
+## Additional Features: Citations
 
-% \end{document}
+-   Citations in LaTeX will refer to a .bib file
 
-%%%%%%%%%%%%%%
-% (5.0) References - Inserting
-%%%%%%%%%%%%%%
+-   Let's create one in our "301-LaTeX-practice" project folder
 
+-   Call this .bib file "refs.bib"
 
-% \documentclass[a4paper,12pt]{article}
-% \usepackage[utf8]{inputenc}
-% \begin{document}
-% \title{My First Document}
-% \author{My Name}
-% \date{December 6, 2017}
-% \maketitle
-% %%%
-% \section{Introduction}
-% This is the introduction.\cite{millernicely1955}
-% \section{Methods}
-% \subsection{Stage 1}
-% The first part of the methods.\nocite{traill1994}
-% \subsection{Stage 2}
-% The second part of the methods.\cite[p. 215]{jucquois1966}
-% \section{Results}
-% Here are my results.\cite{jucquois1966,millernicely1955}
+## Additional Features: Your First .bib
 
-% \bibliographystyle{plain}
-% \bibliography{LaTeXintro}
+```{latex}
+@article{smith2017,
+    author = {Smith, John},
+    title = {Some paper},
+    year = {2017},
+    journal = {Journal of Research},
+    volume = {2},
+    number = {1},
+    pages = {1--69}
+}
 
-% \end{document}
+@book{knuth1986,
+  author    = "Donald E. Knuth",
+  title     = "The {TeX} Book",
+  year      = "1986",
+  publisher = "Addison-Wesley Professional",
+  address   = "Massachusetts"
+}
+```
+
+## Additional Features: Citations
+
+-   With these two references now in the system, let's practice citing them.
+
+-   Edit your preamble with the following text, after the **documentclass** command.
+
+```         
+\documentclass{article}
+\usepackage{natbib}
+\bibliographystyle{apalike}
+\begin{document}
+```
+
+## Additional Features: Citations
+
+-   End your document as follows:
+
+```         
+\bibliography{refs} 
+\end{document}
+```
+
+## Additional Features: Citations
+
+```{latex}
+\documentclass{article}
+\usepackage{natbib}
+\bibliographystyle{apalike}
+
+\begin{document}
+\title{My First Document}
+\author{My Name}
+\date{December 6, 2017}
+\maketitle
+
+\section{Introduction}
+ This is the introduction.\cite{smith2017}
+\section{Methods}
+\subsection{Stage 1}
+The first part of the methods.\nocite{knuth1986}
+ \subsection{Stage 2}
+The second part of the methods.\cite[p. 215]{smith2017}
+ \section{Results}
+ Here are my results.\cite{knuth1986,smith2017}
+ 
+\bibliography{refs} 
+\end{document}
+```
+
+-   Copy the above code and run it in your project tex file.
+
+## Activity: Zotero
+
+-   A *much* more user-friendly reference platform is Zotero.
+
+-   Click here to sign up for the platform or log into your account.
+
+-   Add at least one reference if you do not have one already.
+
+-   Select all of the references to export
+
+-   Click the "upwards arrow" icon
+
+-   You now have a .bib file!
+
+# Activity Solutions
+
+## Activity: Tables Solution
+
+```{latex}
+\begin{center}
+\begin{tabular}{||r||l|l||}
+\hline\hline
+ID & Item & Note \\
+\hline
+11   & pears    & firm     \\
+\hline
+101  & bananas  & ripe     \\
+\hline\hline
+42   & apples   & crisp    \\
+\cline{1-1}
+73   & oranges  & tart     \\
+\cline{3-3}
+\hline
+2025 & grapes   & seedless \\
+\hline\hline
+\end{tabular}
+\end{center}
+```
 
 ## Activity: Mathmode Solution
 
 $\forall w^{'} (wRw^{'} \rightarrow \exists e^{'} \land  Ag(e^{'}, x)))_{nuclearscope}$
 
+```{latex}
 $\forall w^{'} (wRw^{'} \rightarrow \exists e^{'} \land  Ag(e^{'}, x)))_{nuclearscope}$
+```
