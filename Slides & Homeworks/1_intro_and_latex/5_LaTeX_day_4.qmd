@@ -37,7 +37,7 @@ editor: visual
 
 \% %%%%%%%%%%%%%% % % Syntax Trees % %%%%%%%%%%%%%%
 
-\section{Syntax} \begin{frame} \centering \Tree [.CP [.S [.NP LaTeX ] [.VP [.V is ] [.NP fun ] ] ] ] \end{frame}
+\centering \Tree [.CP [.C$'$ [.NP [.N$'$ [.N LaTeX ] ] ] [.VP [.V$'$ [.V is ] [.AP [.A$'$ [.A fun ] ] ] ] ] ] ]
 
 \% %%%%%%%%%%%%%% % % Syntax Tree - More Complex % %%%%%%%%%%%%%%
 
