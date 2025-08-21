@@ -102,7 +102,7 @@ Use \texttt{qtree}. You may assume a simple X$'$-style phrase structure with the
 
 ## gb4e Examples (1), (2).
 
-![](1_HW_Leipzig.jpg)
+![](1_HW_Leipzig.png)
 
 ------------------------------------------------------------------------
 
