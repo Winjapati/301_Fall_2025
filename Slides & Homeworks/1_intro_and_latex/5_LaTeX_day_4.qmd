@@ -1,6 +1,6 @@
 ---
 title: "Computation for Linguists"
-subtitle: "LaTeX, Day 1"
+subtitle: "LaTeX, Day 4"
 date: "September 5, 2025"
 author: "Dr. Andrew M. Byrd"
 format:
@@ -24,6 +24,58 @@ editor: visual
 -   This is anonymous, so please answer truthfully!
 
 -   This will help me better understand how to structure the class.
+
+
+# Glossing (Leipzig-Style)
+
+-   What is your background in computing?
+
+-   What would you like to get out of the course?
+
+-   This is anonymous, so please answer truthfully!
+
+-   This will help me better understand how to structure the class.
+
+%%%%%%%%%%%%%% % Leipzig %%%%%%%%%%%%%%
+
+\section{Leipzig Glossing Rules}
+\begin{frame}
+\centering
+
+\begin{exe}
+    \ex \begin{xlist}
+        \ex This is a sub-example.
+        \ex This is a second sub-example.
+        \ex \begin{xlist}
+            \ex This is a sub-sub-example.
+            \ex This is a second sub-sub-example.
+        \end{xlist}
+    \end{xlist}
+\end{exe}
+\end{frame}
+
+%%%%%%%%%%%%%% % Leipzig 2 %%%%%%%%%%%%%%
+
+\begin{frame}
+\begin{exe}
+\ex 
+\gll kot est smetanu\\
+cat.NOM eat.3SG.PRS {sour cream}.ACC\\
+\trans `The cat eats sour cream'
+\end{exe}
+\end{frame}
+
+%%%%%%%%%%%%%% % Leipzig 3 %%%%%%%%%%%%%%
+
+\begin{frame}
+\begin{exe}
+\ex[*]{
+\gll Stolz ist er auf seine Kinder gewesen.\\
+proud is he of his children been\\
+\trans{`He was proud of his children.'}}
+\end{exe}
+\end{frame}
+
 
 # Beginning LaTeX
 
