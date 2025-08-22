@@ -17,31 +17,35 @@ editor: visual
 
 # Review
 
--   What is your background in computing?
+-   What did you learn on Wednesday?
 
--   What would you like to get out of the course?
+# Glossing (LGRs)
 
--   This is anonymous, so please answer truthfully!
+![](5_leipzig.png){fig-alt="Leipzig, Germany" fig-align="center"}
 
--   This will help me better understand how to structure the class.
+## What is `gb4e`?
 
+-   A LaTeX package for linguistic examples, sub-examples, glosses, and Leipzig abbreviations
+-   You’ll write in LaTeX and compile in Overleaf
+    -   Helpers: `gb4e` (core)
+    -   `cgloss4e` (glossing)
+    -   `tipa` (IPA if needed)
 
-# Glossing (Leipzig-Style)
+``` latex
+\documentclass[12pt]{article}
+\usepackage{gb4e}
+\usepackage{cgloss4e}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\begin{document}
+\section*{gb4e Starter}
+\end{document}
+``
+```
 
--   What is your background in computing?
+## Nested sub-examples
 
--   What would you like to get out of the course?
-
--   This is anonymous, so please answer truthfully!
-
--   This will help me better understand how to structure the class.
-
-%%%%%%%%%%%%%% % Leipzig %%%%%%%%%%%%%%
-
-\section{Leipzig Glossing Rules}
-\begin{frame}
-\centering
-
+``` latex
 \begin{exe}
     \ex \begin{xlist}
         \ex This is a sub-example.
@@ -52,66 +56,267 @@ editor: visual
         \end{xlist}
     \end{xlist}
 \end{exe}
-\end{frame}
+```
 
-%%%%%%%%%%%%%% % Leipzig 2 %%%%%%%%%%%%%%
+## Interlinear glossing
 
-\begin{frame}
+``` latex
 \begin{exe}
 \ex 
 \gll kot est smetanu\\
 cat.NOM eat.3SG.PRS {sour cream}.ACC\\
 \trans `The cat eats sour cream'
 \end{exe}
-\end{frame}
+```
 
-%%%%%%%%%%%%%% % Leipzig 3 %%%%%%%%%%%%%%
+## Ungrammatical examples
 
-\begin{frame}
+``` latex
 \begin{exe}
 \ex[*]{
 \gll Stolz ist er auf seine Kinder gewesen.\\
 proud is he of his children been\\
 \trans{`He was proud of his children.'}}
 \end{exe}
-\end{frame}
+```
 
+## `gb4e` Activity
 
-# Beginning LaTeX
+![](5_gb4e_activity.png){fig-alt="gb4e examples" fig-align="center"}
 
--   What is your background in computing?
+# Trees
 
--   What would you like to get out of the course?
+-   Often in Linguistics we need to draw tree structures.
 
--   This is anonymous, so please answer truthfully!
+-   Sometimes in Phonology:
 
--   This will help me better understand how to structure the class.
+![](2_syllable_tree.jpg){fig-alt="syllable tree" fig-align="center"}
 
-\% %%%%%%%%%%%%%% % % Syntax Trees % %%%%%%%%%%%%%%
+## Trees
 
-\centering \Tree [.CP [.C$'$ [.NP [.N$'$ [.N LaTeX ] ] ] [.VP [.V$'$ [.V is ] [.AP [.A$'$ [.A fun ] ] ] ] ] ] ]
+![](5_IE_tree.png){fig-alt="Indo-European tree"}
 
-\% %%%%%%%%%%%%%% % % Syntax Tree - More Complex % %%%%%%%%%%%%%%
+## Trees
 
-\begin{frame} \centering {\small \Tree [.TP [.DP [.KP \qroof{The queen}.DP [.K’ [.K ’s ] ] ] [.D’ [.D $\emptyset_{+poss}$ ] \qroof{consort}.NP ] ] [.T’ [.T -ed ] [.VP \phantom{DP} [.V’ [.V notice ] \qroof{me}.DP ] ] ] ] } \end{frame}
+![](2_syntax_tree.png){fig-alt="syntax tree" fig-align="center"}
 
-\% %%%%%%%%%%%%%% % % Dependency Tree #1 % %%%%%%%%%%%%%%
+## Drawing Trees with the `forest` package
 
-\begin{frame} \centering \begin{tikzpicture}     \node (is-root) {is}         [sibling distance=3cm]         child { node {this} }         child {             node {tree}                 [sibling distance=1.5cm]                 child { node {an} }                 child { node {example} }                 child { node {.} }                 child[missing]         };     \path (is-root) +(0,-2.5\tikzleveldistance)         node {\textit{This is an example tree.}}; \end{tikzpicture} \end{frame}
+-   A TikZ-based LaTeX package for drawing trees (phrase structure, stammbaum, AVMs, more).
 
-\% %%%%%%%%%%%%%% % % Dependency Tree #2 % %%%%%%%%%%%%%%
+``` latex
+\documentclass[12pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{forest}     % trees
 
-\begin{frame} \centering \xytext{   \xybarnode{Peter} &~~~&   \xybarnode{and}     \xybarconnect(UL,U){-2}"_{\small conj}"     \xybarconnect(UR,U){2}"^{\small conj}"     &~~~&   \xybarnode{Mary} &~~~&   \xybarnode{bought}     \xybarconnect[8](UL,U){-4}"_{\small subj}"     \xybarconnect[13]{6}"^{\small punct}"     \xybarconnect[8](UR,U){4}"^{\small obj}"     &~~~&   \xybarnode{a} &~~~&   \xybarnode{car}     \xybarconnect(UL,U){-2}"_{\small det}"     &~~~&   \xybarnode{.} } \end{frame}
+% A clean, reusable style for our trees:
+\forestset{
+  mytree/.style={
+    for tree={
+      align=center,
+      parent anchor=south,
+      child anchor=north,
+      edge={-Latex},     % arrowed edges; swap to draw,-> etc.
+      s sep=8mm,         % sibling sep
+      l sep=8mm,         % level sep
+      inner sep=2pt,
+      rounded corners
+    }
+  }
+}
 
-\% %%%%%%%%%%%%%% % % Dependency Tree #3 % %%%%%%%%%%%%%%
-
-\begin{frame} \centering \begin{dependency}[theme = simple]    \begin{deptext}[column sep=1em]       A \& hearing \& is \& scheduled \& on \& the \& issue \& today \& . \\    \end{deptext}    \deproot{3}{ROOT}    \depedge{2}{1}{ATT}    \depedge[edge start x offset=-6pt]{2}{5}{ATT}    \depedge{3}{2}{SBJ}    \depedge{3}{9}{PU}    \depedge{3}{4}{VC}    \depedge{4}{8}{TMP}    \depedge{5}{7}{PC}    \depedge[arc angle=50]{7}{6}{ATT} \end{dependency} \end{frame}
-
-\% %%%%%%%%%%%%%% % % Morphology % %%%%%%%%%%%%%%
-
-\section{Morphology} \begin{frame}     \frametitle{Earlier Implosive System (Weiss 2009, K\"{u}mmel 2012)}         \begin{tabular}{|l||c|c|l||l|}             \hline             Manner &  Stop Type & & Manner & Stop Type\\             \hline             voiceless        & */t/         & $\rightarrow$     & voiceless &   */t/ \\             voiced implosive & */\texthtd/  & $\rightarrow$     & voiced  & */d/ \\             voiced           & */d/         & $\rightarrow$     & breathy & */d\super h/\\             \hline         \end{tabular} \end{frame}
-
-%%%%%%%%%%%%%% % AVMs %%%%%%%%%%%%%%
-
-\begin{frame} \frametitle{AVM.sty: Don't use \textbackslash\textbackslash, use \textbackslash cr (?)} \begin{avm} \[qstore & \{ \[det & \rm the \cr restpar & \[para & \@1 \cr restr & \{ \[reln & \rm poss \cr possessor & \@3 \cr possessed & \@1\]\}\ \bf union \q\{\@2\q\} \] \] \} \] \end{avm}  \end{frame}
+\begin{document}
+text
 \end{document}
+```
+
+## Let's paste this into our document.
+
+-   How does tree structure work in `forest`?
+
+``` latex
+\begin{forest}
+  mytree
+  [TP
+    [DP
+      [D [The] ]
+      [NP [student] ]
+    ]
+    [T$'$
+      [T [will] ]
+      [VP
+        [V$'$
+          [V [read] ]
+          [DP
+            [D [the] ]
+            [NP [book] ]
+          ]
+        ]
+      ]
+    ]
+  ]
+\end{forest}
+```
+
+## Syntax Tree activity
+
+-   Using `forest`, draw a tree of the sentence, "That cow can jump over the moon."
+-   Remember: PP --\> P NP
+
+## Movement
+
+<!-- %%%%%%%%%%%%%% % AVMs %%%%%%%%%%%%%% -->
+
+<!-- \begin{frame} \frametitle{AVM.sty: Don't use \textbackslash\textbackslash, use \textbackslash cr (?)} \begin{avm} \[qstore & \{ \[det & \rm the \cr restpar & \[para & \@1 \cr restr & \{ \[reln & \rm poss \cr possessor & \@3 \cr possessed & \@1\]\}\ \bf union \q\{\@2\q\} \] \] \} \] \end{avm}  \end{frame} -->
+
+<!-- \end{document} -->
+
+# Answers to Activities
+
+## `gb4e` Activity
+
+``` latex
+\documentclass{article}
+\usepackage{gb4e}
+\begin{document}
+
+\begin{exe}
+\ex
+\gll Ali kitab-ı oku-du.\\
+Ali.NOM book-ACC read-PST.3SG\\
+\trans `Ali read the book.'
+\end{exe}
+
+\begin{exe}
+\ex[*]{
+\gll Weil er hat das Buch gelesen.\\
+because he has the book read.PTCP\\
+\trans `Because he has read the book.'}
+\end{exe}
+
+\begin{exe}
+\ex
+\gll Maria wasi-ta riku-sha-n.\\
+Maria house-ACC see-PROG-3\\
+\trans `Maria is looking at the house.'
+\end{exe}
+
+\end{document}
+```
+
+## Syntax Tree activity
+
+``` latex
+\documentclass[12pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{forest}     % trees
+
+% A clean, reusable style for our trees:
+\forestset{
+  mytree/.style={
+    for tree={
+      align=center,
+      parent anchor=south,
+      child anchor=north,
+      edge={-Latex},     % arrowed edges; swap to draw,-> etc.
+      s sep=8mm,         % sibling sep
+      l sep=8mm,         % level sep
+      inner sep=2pt,
+      rounded corners
+    }
+  }
+}
+
+\begin{document}
+% Requires: \usepackage{forest}
+\begin{forest}
+  for tree={
+    align=center,
+    parent anchor=south,
+    child anchor=north,
+    edge={-Latex},
+    s sep=8mm,
+    l sep=8mm,
+    inner sep=2pt,
+  }
+  [TP
+    [DP
+      [D [That] ]
+      [NP [cow] ]
+    ]
+    [T$'$
+      [T [can] ]
+      [VP
+        [V$'$
+          [V [jump] ]
+          [PP
+            [P [over] ]
+            [DP
+              [D [the] ]
+              [NP [moon] ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+\end{forest}
+\end{document}
+```
+
+## Indo-European Stammbaum Code
+
+``` latex
+\documentclass[12pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{forest} % -> TikZ-based tree drawing
+
+% A clean, readable forest style
+\forestset{
+  ie tree/.style={
+    for tree={
+      align=center,
+      parent anchor=south,
+      child anchor=north,
+      edge={-Latex},
+      s sep=8mm,      % sibling separation
+      l sep=8mm,      % level separation
+      inner sep=2pt,
+    }
+  }
+}
+
+\begin{document}
+\thispagestyle{empty}
+
+% ---- Indo‑European Stammbaum with a "Core IE (layout)" node ----
+\begin{center}
+\scalebox{0.8}{ % shrink to 80%
+\begin{forest}
+  ie tree
+  [Proto-Indo-European\\(PIE)
+    [Anatolian]
+    [Tocharian]
+    [Core IE\\(layout)
+      [Indo-Iranian]
+      [Greek]
+      [Armenian]
+      [Albanian]
+      [Germanic]
+      [Italic]
+      [Celtic]
+      [Balto-Slavic]
+    ]
+  ]
+\end{forest}}
+\end{center}
+
+% (Presentation note: “Core IE (layout)” is just a layout convenience,
+% not a phylogenetic claim.)
+
+\end{document}
+```
