@@ -37,7 +37,6 @@ format:
 ## Starter file (copy/paste into `hw01_yourlastname.tex`)
 
 ``` latex
-%====================== HW01 Starter ======================
 \documentclass[12pt]{article}
 \usepackage[margin=1in]{geometry}
 \usepackage[T1]{fontenc}
@@ -48,7 +47,7 @@ format:
 \usepackage{tipa}    % IPA
 \usepackage{gb4e}    % Leipzig-style examples (loads cgloss4e)
 \noautomath           % avoid math-mode surprises inside gb4e
-\usepackage{qtree}   % syntax trees
+\usepackage{forest}   % syntax trees
 \usepackage{graphicx}
 \usepackage{hyperref}
 
@@ -74,9 +73,9 @@ format:
 Use \verb+\textipa{...}+ from the \texttt{tipa} package. Transcribe the following into broad IPA (American English or your native variety—be consistent). Include a brief note (1–2 lines) about any interesting segment.
 
 \begin{enumerate}
-  \item (5) \textbf{``computational''}
-  \item (5) \textbf{``syntax''}
-  \item (5) \textbf{``Indo-European''}
+  \item (5) \textbf{computational}
+  \item (5) \textbf{syntax}
+  \item (5) \textbf{Indo-European}
   \item (5) A minimal pair of your choice; give both forms in IPA and say what contrast they illustrate.
 \end{enumerate}
 
@@ -87,7 +86,7 @@ Use the Leipzig Glossing Rules with \texttt{gb4e}. Provide a free translation on
 \noindent Then create \textbf{one} original Leipzig‑style example from any language you know or from a textbook (cite the source if not your own). (10)
 
 \section*{Part D — Syntax Trees (30 pts)}
-Use \texttt{qtree}. You may assume a simple X$'$-style phrase structure with the following category labels at minimum: S/TP, VP, NP/DP, PP, AP, AdvP, P, D, N, V, A, Adv, C, CP. Draw trees for the three sentences below (10 pts each).
+Use \texttt{forest}. You may assume a simple X$'$-style phrase structure with the following category labels at minimum: S/TP, VP, NP/DP, PP, AP, AdvP, P, D, N, V, A, Adv, C, CP. Draw trees for the three sentences below (10 pts each).
 
 \subsection*{Sentences}
 (a) The student quickly read the paper.\\
@@ -95,9 +94,37 @@ Use \texttt{qtree}. You may assume a simple X$'$-style phrase structure with the
 (c) Andrew thinks that students code.
 
 \subsection*{Example of the style expected}
-\centering \Tree [.CP [.C$'$ [.NP [.N$'$ [.N LaTeX ] ] ] [.VP [.V$'$ [.V is ] [.AP [.A$'$ [.A fun ] ] ] ] ] ] ]
+
+\forestset{
+  default preamble={
+    for tree={
+      edge=semithick,
+      align=center,
+      s sep=6pt, l sep=10pt,
+      inner sep=2pt
+    }
+  }
+}
+
+\begin{center}
+\begin{forest}
+[CP
+  [C$'$ 
+    [NP
+      [N$'$ [N\\LaTeX] ]
+    ]
+    [VP
+      [V$'$
+        [V\\is]
+        [AP [A$'$ [A\\fun] ] ]
+      ]
+    ]
+  ]
+]
+\end{forest}
+\end{center}
+
 \end{document}
-%==================== End HW01 Starter ====================
 ```
 
 ## gb4e Examples (1), (2).
