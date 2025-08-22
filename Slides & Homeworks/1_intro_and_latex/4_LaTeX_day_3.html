@@ -413,7 +413,6 @@ Dr.&nbsp;Andrew M. Byrd
 <li><a href="#/latex-packages" id="/toc-latex-packages">LaTeX Packages</a></li>
 <li><a href="#/funny-symbols-non-english-scripts" id="/toc-funny-symbols-non-english-scripts">Funny Symbols: Non-English Scripts</a></li>
 <li><a href="#/phonological-rules" id="/toc-phonological-rules">Phonological Rules</a></li>
-<li><a href="#/activity-answers" id="/toc-activity-answers">Activity Answers</a></li>
 </ul>
 </nav>
 </section>
@@ -712,49 +711,109 @@ Dr.&nbsp;Andrew M. Byrd
 <ul>
 <li>Wait a minute… does this mean that we can use XeLaTeX with IPA symbols? See for yourself…</li>
 </ul>
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb13-1"><a href=""></a></span>
-<span id="cb13-2"><a href=""></a><span class="bu">\documentclass</span>{<span class="ex">article</span>}</span>
-<span id="cb13-3"><a href=""></a><span class="bu">\usepackage</span>{<span class="ex">fontspec</span>}</span>
-<span id="cb13-4"><a href=""></a></span>
-<span id="cb13-5"><a href=""></a><span class="fu">\setmainfont</span>{Doulos SIL} <span class="co">% a font with good IPA coverage</span></span>
-<span id="cb13-6"><a href=""></a></span>
-<span id="cb13-7"><a href=""></a><span class="kw">\begin</span>{<span class="ex">document</span>}</span>
-<span id="cb13-8"><a href=""></a></span>
-<span id="cb13-9"><a href=""></a>ˈkʰæn ju ˈkɑpi ən ˈpeɪst ðɪs ˈsɛntəns ˈɪntu ˈoʊvɚˌlif</span>
-<span id="cb13-10"><a href=""></a></span>
-<span id="cb13-11"><a href=""></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb13-1"><a href=""></a><span class="bu">\documentclass</span>{<span class="ex">article</span>}</span>
+<span id="cb13-2"><a href=""></a><span class="bu">\usepackage</span>{<span class="ex">fontspec</span>}</span>
+<span id="cb13-3"><a href=""></a></span>
+<span id="cb13-4"><a href=""></a><span class="fu">\setmainfont</span>{Doulos SIL} <span class="co">% a font with good IPA coverage</span></span>
+<span id="cb13-5"><a href=""></a></span>
+<span id="cb13-6"><a href=""></a><span class="kw">\begin</span>{<span class="ex">document</span>}</span>
+<span id="cb13-7"><a href=""></a></span>
+<span id="cb13-8"><a href=""></a>ˈkʰæn ju ˈkɑpi ən ˈpeɪst ðɪs ˈsɛntəns ˈɪntu ˈoʊvɚˌlif</span>
+<span id="cb13-9"><a href=""></a></span>
+<span id="cb13-10"><a href=""></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section></section>
 <section>
 <section id="phonological-rules" class="title-slide slide level1 center">
 <h1>Phonological Rules</h1>
-<p>% %%%%%%%%%%%%%% % % Phonological Rules % %%%%%%%%%%%%%%</p>
+<ul>
+<li>In Linguistics, we invoke sounds in talking about how they are used in language</li>
+<li>And frequently, this means talking about phonological rules, which looks like:</li>
+</ul>
+
+<img data-src="4_phon_rules.png" class="quarto-figure quarto-figure-center r-stretch" alt="5 phonological rules" width="1200"></section>
+<section id="phonological-rules-in-latex" class="slide level2 center">
+<h2>Phonological Rules in LaTeX</h2>
+<ul>
+<li>To create phonological rules we’ll be using the <code>phonrule</code> package</li>
+</ul>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb14-1"><a href=""></a><span class="bu">\documentclass</span>{<span class="ex">article</span>}</span>
+<span id="cb14-2"><a href=""></a><span class="bu">\usepackage</span>{<span class="ex">phonrule</span>} #phonological rule package</span>
+<span id="cb14-3"><a href=""></a><span class="bu">\usepackage</span>{<span class="ex">tipa</span>}</span>
+<span id="cb14-4"><a href=""></a></span>
+<span id="cb14-5"><a href=""></a><span class="kw">\begin</span>{<span class="ex">document</span>}</span>
+<span id="cb14-6"><a href=""></a><span class="kw">\begin</span>{<span class="ex">enumerate</span>} </span>
+<span id="cb14-7"><a href=""></a><span class="fu">\item</span> <span class="fu">\phonb</span>{s}{z}{V}{V} (<span class="fu">\textbackslash</span> phonb) </span>
+<span id="cb14-8"><a href=""></a><span class="fu">\item</span> <span class="fu">\phonl</span>{k}{c}{i} (<span class="fu">\textbackslash</span> phonl) </span>
+<span id="cb14-9"><a href=""></a><span class="fu">\item</span> <span class="fu">\phonr</span>{t}{ts}{u} (<span class="fu">\textbackslash</span> phonr) </span>
+<span id="cb14-10"><a href=""></a><span class="fu">\item</span> <span class="fu">\phon</span>{<span class="fu">\textturnw</span>}{w} (<span class="fu">\textbackslash</span> phon) </span>
+<span id="cb14-11"><a href=""></a><span class="fu">\item</span> <span class="fu">\phonb</span>{<span class="fu">\phonfeat</span>{+stop <span class="fu">\\</span> +consonant <span class="fu">\\</span> +alveolar}}{[<span class="fu">\textfishhookr</span>]}{ <span class="fu">\phonfeat</span>{+vowel <span class="fu">\\</span> +stressed}}{<span class="fu">\phonfeat</span>{+vowel <span class="fu">\\</span> +stressed}} </span>
+<span id="cb14-12"><a href=""></a><span class="kw">\end</span>{<span class="ex">enumerate</span>}</span>
+<span id="cb14-13"><a href=""></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="phonology-activity" class="slide level2 center">
 <h2>Phonology Activity</h2>
-<p>% %%%%%%%%%%%%%% % % Phonological Rules % %%%%%%%%%%%%%%</p>
+<ul>
+<li>Now it’s your turn! Analyze this small sample of invented data, and then render a phonological rule in LaTeX that describes the alternation.</li>
+</ul>
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>1<span class="smallcaps">sg</span></th>
+<th>2<span class="smallcaps">sg</span></th>
+<th>3<span class="smallcaps">sg</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>pagis</td>
+<td>pagat</td>
+<td>pak</td>
+</tr>
+<tr class="even">
+<td>tabis</td>
+<td>tabat</td>
+<td>tap</td>
+</tr>
+<tr class="odd">
+<td>zobis</td>
+<td>zobat</td>
+<td>zop</td>
+</tr>
+<tr class="even">
+<td>bagis</td>
+<td>bagat</td>
+<td>bag</td>
+</tr>
+<tr class="odd">
+<td>zudis</td>
+<td>zudat</td>
+<td>zud</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="an-aside-ot-tableaux" class="slide level2 center">
+<h2>An Aside: OT Tableaux</h2>
 </section>
 <section id="ot-tableaux" class="slide level2 center">
 <h2>OT Tableaux</h2>
-<p>% %%%%%%%%%%%%%% % % OT Tableaux : website % %%%%%%%%%%%%%%</p>
+<p>http://meluhha.com/tableau/</p>
 </section>
 <section id="ot-tableaux-1" class="slide level2 center">
 <h2>OT Tableaux</h2>
 <p>% %%%%%%%%%%%%%% % % OT Tableaux % %%%%%%%%%%%%%%</p>
-</section></section>
-<section id="activity-answers" class="title-slide slide level1 center">
-<h1>Activity Answers</h1>
-<ul>
-<li><p>What is your background in computing?</p></li>
-<li><p>What would you like to get out of the course?</p></li>
-<li><p>This is anonymous, so please answer truthfully!</p></li>
-<li><p>This will help me better understand how to structure the class.</p></li>
-</ul>
+<!-- # Activity Answers -->
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
