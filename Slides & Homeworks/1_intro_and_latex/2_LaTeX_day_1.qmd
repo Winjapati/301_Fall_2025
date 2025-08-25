@@ -25,9 +25,9 @@ editor: visual
 
 ## LaTeX
 
-\[lɑˈ.tʰɛk̚\] or \[lɑˈ.tʰɛx\] or \[ˈle͡ɪ.tʰɛk̚\]
+\[ˈle͡ɪ.tʰɛk̚\] (most common); also \[ˈlɑ.tʰɛk̚\], \[lɑ.ˈtʰɛk̚\], \[lɑ.ˈtʰɛx\]
 
-NOT
+but **NOT**
 
 ![](2_latex_glove.jpeg){fig-align="center"}
 
@@ -105,7 +105,7 @@ BLAH BLAH BLAH
 
 ## How LaTeX works
 
-Everything before "\\begin{document}" is called the **preamble**. This is where we load declare the document class, load **packages**, and input information like the title and author.
+Everything before "\\begin{document}" is called the **preamble**. This is where we declare the document class, load **packages**, and input information like the title and author.
 
 ``` latex
 \documentclass{article}
@@ -160,10 +160,10 @@ Notice the text preceded by "%". These are called **comments**. What do you thin
 -   Now edit the file main.tex.
 
     -   `\documentclass{article}` ← sets document type
-    -   `\author{your name}`; `\date{\today}` ← author and date
-    -   Make sure `\begin{document}` and `\end{document}` are in your file.
-    -   Immediately after `\begin{document}`, add `\maketitle`
+    -   `\author{your name}`; `\date{\today}`
+    -   Make sure `\begin{document}` and `\end{document}` are in your file. Immediately after `\begin{document}`, add `\maketitle.`
     -   Add **Hello world!** between those sections
+    -   Press "Recompile". What happens?
 
 ## Activity, Part 2
 
@@ -199,7 +199,7 @@ Things that begin with a "\\" are called **commands**.
     \documentclass[option1,option2]{article}
     ```
 
--   Visit [this site](https://texblog.org/2013/02/13/latex-documentclass-options-illustrated/) to see what types of options documentclasses can have. Modify your main.tex with these options to experiment.
+-   Visit [this site](https://latexref.xyz/Document-class-options.html "https://latexref.xyz/Document-class-options.html") to see what types of options documentclasses can have. Modify your main.tex with these options to experiment.
 
     -   ***Which do you think you'll use most often?***
 

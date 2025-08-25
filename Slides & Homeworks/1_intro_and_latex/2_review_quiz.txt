@@ -4,7 +4,7 @@ Part A – Multiple Choice
 
 Choose the best answer for each question.
 
-Which of the following is not assumed about you when starting this course?
+Which of the following is *not* assumed about you when starting this course?
 a) You know how to use a computer and can access the internet
 b) You have used generative AI before
 c) You have experience programming in Python
@@ -12,7 +12,7 @@ d) You may not be familiar with the command prompt
 
 What is the primary goal for students by the end of the course?
 a) To memorize all Python syntax
-b) To be able to code with the help of Gen AI and understand the code they use
+b) To have a basic understanding of how computer programming works, and to not be scared of computers.
 c) To become professional computational linguists
 d) To avoid using any AI tools
 

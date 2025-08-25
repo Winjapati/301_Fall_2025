@@ -430,8 +430,8 @@ Dr.&nbsp;Andrew M. Byrd
 <img data-src="2_latex_glove.jpeg" class="quarto-figure quarto-figure-center r-stretch" alt="A latex glove."></section>
 <section id="latex" class="slide level2 center">
 <h2>LaTeX</h2>
-<p>[lɑˈ.tʰɛk̚] or [lɑˈ.tʰɛx] or [ˈle͡ɪ.tʰɛk̚]</p>
-<p>NOT</p>
+<p>[ˈle͡ɪ.tʰɛk̚] (most common); also [ˈlɑ.tʰɛk̚], [lɑ.ˈtʰɛk̚], [lɑ.ˈtʰɛx]</p>
+<p>but <strong>NOT</strong></p>
 
 <img data-src="2_latex_glove.jpeg" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="latex-1" class="slide level2 center">
@@ -503,7 +503,7 @@ Dr.&nbsp;Andrew M. Byrd
 </section>
 <section id="how-latex-works" class="slide level2 center">
 <h2>How LaTeX works</h2>
-<p>Everything before “\begin{document}” is called the <strong>preamble</strong>. This is where we load declare the document class, load <strong>packages</strong>, and input information like the title and author.</p>
+<p>Everything before “\begin{document}” is called the <strong>preamble</strong>. This is where we declare the document class, load <strong>packages</strong>, and input information like the title and author.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb2-1"><a href=""></a><span class="bu">\documentclass</span>{<span class="ex">article</span>}</span>
 <span id="cb2-2"><a href=""></a></span>
 <span id="cb2-3"><a href=""></a><span class="co">% Language setting</span></span>
@@ -551,10 +551,10 @@ Dr.&nbsp;Andrew M. Byrd
 <li><p>Now edit the file main.tex.</p>
 <ul>
 <li><code>\documentclass{article}</code> ← sets document type</li>
-<li><code>\author{your name}</code>; <code>\date{\today}</code> ← author and date</li>
-<li>Make sure <code>\begin{document}</code> and <code>\end{document}</code> are in your file.</li>
-<li>Immediately after <code>\begin{document}</code>, add <code>\maketitle</code></li>
+<li><code>\author{your name}</code>; <code>\date{\today}</code></li>
+<li>Make sure <code>\begin{document}</code> and <code>\end{document}</code> are in your file. Immediately after <code>\begin{document}</code>, add <code>\maketitle.</code></li>
 <li>Add <strong>Hello world!</strong> between those sections</li>
+<li>Press “Recompile”. What happens?</li>
 </ul></li>
 </ul>
 </section>
@@ -587,7 +587,7 @@ Dr.&nbsp;Andrew M. Byrd
 <ul>
 <li><p>Some commands even allow for optional arguments (options), which are place immediately before the command inside square brackets:</p>
 <pre><code>\documentclass[option1,option2]{article}</code></pre></li>
-<li><p>Visit <a href="https://texblog.org/2013/02/13/latex-documentclass-options-illustrated/">this site</a> to see what types of options documentclasses can have. Modify your main.tex with these options to experiment.</p>
+<li><p>Visit <a href="https://latexref.xyz/Document-class-options.html" title="https://latexref.xyz/Document-class-options.html">this site</a> to see what types of options documentclasses can have. Modify your main.tex with these options to experiment.</p>
 <ul>
 <li><strong><em>Which do you think you’ll use most often?</em></strong></li>
 </ul></li>

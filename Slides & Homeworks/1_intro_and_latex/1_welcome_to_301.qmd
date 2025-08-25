@@ -384,3 +384,5 @@ editor: visual
 -   The group with the fewest steps *that still results in a correct sandwich* wins.
 
 -   If your instructions are too short and leave gaps, the “computer” (i.e., Dr. Byrd) will execute them in unexpected ways!
+
+<!--# To change for next time:  pare down the list of skills learned in the class (some overlap, but also just too much for first day); activity was fantastic, one group combined the PB & J into a single squeeze packet, another just opened an uncrustable. This led to discussion about importing packages to save work/steps. -->
