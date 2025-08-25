@@ -21,7 +21,7 @@ editor: visual
 
 -   What would you like to get out of the course?
 
--   This is anonymous, so please answer truthfully!
+-   While this isn't anonymous, please answer truthfully!
 
 -   This will help me better understand how to structure the class.
 
@@ -75,6 +75,8 @@ editor: visual
 
     -   Have studied with specialists (like Dr. Fruehwald!) to learn how computational tools can be used in linguistic work
 
+    -   Have managed multiple groups of programmers on a variety of projects
+
 -   All of this to pursue long-held dream to build a vast database, called "DERBi PIE": a Database of Etymological Roots Beginning in Proto-Indo-European
 
 ## DERBi PIE
@@ -99,9 +101,17 @@ editor: visual
 
 -   For you as my student:
 
-    -   My goal is that you, too, will be able to code with the help of Gen AI.
+    -   You will gain a solid foundation is the fundamentals of programmings and computational tools used by linguists
+
+    -   It's unlikely that you'll be able to code at a high level; but... you should be able to code at a higher level with the help of Gen AI.
 
     -   Broadly speaking, you should be able to *understand* the advanced code that you use, though not necessarily have come up with it yourself.
+
+## Does this mean you *have* to use AI?
+
+-   No. You can do all of the assignments and coursework without AI.
+
+-   The class and assignments are just structured assuming that some of you will.
 
 ## Why do you need this course?
 
@@ -323,7 +333,7 @@ editor: visual
 
 # Questions?
 
-# Final Activity: Learning How to Think Like a Computer
+# Activity: Learning How to Think Like a Computer
 
 ## Learning How to Think Like a Computer
 
@@ -337,7 +347,7 @@ editor: visual
 
 ## Learning How to Think Like a Computer
 
--   Now consider how meaning of these sentences changes in different contexts:
+-   Now, with your neighbors, consider how meaning of these sentences changes in different contexts:
 
 1.  *It's noisy in here.* (Statement directed towards friend when going inside a crowded room.)
 
@@ -373,4 +383,4 @@ editor: visual
 
 -   The group with the fewest steps *that still results in a correct sandwich* wins.
 
--   If your instructions are too short and leave gaps, the “computer” (your instructor) will execute them in unexpected ways!
+-   If your instructions are too short and leave gaps, the “computer” (i.e., Dr. Byrd) will execute them in unexpected ways!
