@@ -21,33 +21,31 @@ editor: visual
 
 # How LaTeX Works
 
-## HTML vs. LaTeX
+-   Let's review how LaTeX works.
 
+# LaTeX → HTML
 
-
-# Welcome
+## Moving from LaTeX to HTML
 
 Today we’ll analyze HTML **by analogy with LaTeX**:
 
--   `\documentclass` / preamble ↔ `<!DOCTYPE html>` + `<head>`
--   `\begin{document}...\end{document}` ↔ `<body>...</body>`
--   commands like `\textbf{}` ↔ inline tags like `<strong>`
--   environments like `itemize` ↔ container tags like `<ul>`
+-   `\documentclass` / preamble --\> `<!DOCTYPE html>` + `<head>`
+-   `\begin{document}...\end{document}` --\> `<body>...</body>`
+-   commands like `\textbf{}` --\> inline tags like `<strong>`
+-   environments like `itemize` --\> container tags like `<ul>`
 
 ------------------------------------------------------------------------
 
-# Learning Objectives
+## Learning Objectives
 
 By the end of class, you will be able to:
 
--   map LaTeX preamble/document/environments to HTML structure\
--   identify **elements**, **attributes**, and **nesting** in HTML\
--   explain how **block vs. inline** in HTML parallels LaTeX environments vs. commands\
+-   map LaTeX preamble/document/environments to HTML structure
+-   identify **elements**, **attributes**, and **nesting** in HTML
+-   explain how **block vs. inline** in HTML parallels LaTeX environments vs. commands
 -   publish a minimal page to **GitHub Pages**
 
 ------------------------------------------------------------------------
-
-# **LaTeX → HTML**
 
 ## The Big Picture
 
@@ -62,38 +60,74 @@ By the end of class, you will be able to:
 
 ------------------------------------------------------------------------
 
-## Preamble vs. Head
+## Let's create an HTML file
 
-:::: columns
-::: column
-**LaTeX (preamble)**
+-   Find the folder in RStudio that you'd like to create an html file.
+-   Click on "New File", then "R HTML"
+-   Delete the "r" in the file extension (.rhtml).
+-   Create a file called "test.html".
+
+## Preamble (LaTeX)
 
 ``` latex
 \documentclass{article}
 \usepackage{graphicx}
 \title{My Page}
-\author{Student}
+\date{2025-09-10}
+\author{Andrew M. Byrd}
+```
 
-HTML (doctype + head)
+## HTML (doctype + head)
 
+```{html}
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
     <title>My Page</title>
+    <meta name="author" content="Andrew M. Byrd">
+    <meta name="date" content="2025-09-10">
+    <meta name="description" content="Personal homepage for Andrew Byrd">
   </head>
+```
 
-## Document Body
+-   Copy and paste this code into your "test.html" file.
+    -   How similar is the HTML head to the LaTeX preamble?
+-   Click on "test.html" in your RStudio folder, select "View in Web Browser".
+    -   What happens?
+
+## Document Body (LaTeX)
+
+``` latex
+\begin{document}
+\maketitle
+Hello world!
+\end{document}
+```
+
+## Document Body (LaTeX)
+
+```{html}
+<body>
+  <h1>Hello World!</h1>
+  <p>This is my first webpage.</p>
+</body>
+</html>
+```
 
 ## Headings & Paragraphs
 
-```latex
+-   In LaTeX:
+
+``` latex
 \section{About Me}
 I study linguistics.
 
 \subsection{Interests}
 Historical linguistics, NLP.
 ```
+
+-   In HTML:
 
 ``` html
 <h1>About Me</h1>
@@ -103,22 +137,36 @@ Historical linguistics, NLP.
 <p>Historical linguistics, NLP.</p>
 ```
 
-##Inline Emphasis (Commands ↔ Inline Tags)
+-   Copy and paste the HTML code into your test.html file. Try running the code without `<p>...</p>`. What does this "environment" do?
 
-``` latex
-\textbf{Important} and \emph{interesting}.
-```
+## LaTeX vs. HTML Terminology
 
-``` html
-<p><strong>Important</strong> and <em>interesting</em>.</p>
-```
-
-``` latex
-\textbf{Important} and \emph{interesting}.
-```
-
-``` html
-<p><strong>Important</strong> and <em>interesting</em>.</p>
-```
+::: smaller
+| **LaTeX**                          | **HTML**                     |
+|------------------------------------|------------------------------|
+| Preamble (`\documentclass`)        | **Doctype** + **Head**       |
+| Document body (`\begin{document}`) | **Body**                     |
+| Command (`\emph{}`)                | **Inline tag** (`<em>`)      |
+| Environment (`\begin{itemize}`)    | **Element** (`<ul>...</ul>`) |
+| Comment: `% ...`                   | Comment: `<!-- ... -->`      |
 :::
-::::
+
+## Inline Emphasis (Commands ↔ Inline Tags)
+
+``` latex
+\textbf{Important} and \emph{interesting}.
+```
+
+``` html
+<p><strong>Important</strong> and <em>interesting</em>.</p>
+```
+
+``` latex
+\textbf{Important} and \emph{interesting}.
+```
+
+``` html
+<p><strong>Important</strong> and <em>interesting</em>.</p>
+```
+
+::: ::::

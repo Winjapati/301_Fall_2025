@@ -411,9 +411,7 @@ Dr.&nbsp;Andrew M. Byrd
 <ul>
 <li><a href="#/review" id="/toc-review">Review</a></li>
 <li><a href="#/how-latex-works" id="/toc-how-latex-works">How LaTeX Works</a></li>
-<li><a href="#/welcome" id="/toc-welcome">Welcome</a></li>
-<li><a href="#/learning-objectives" id="/toc-learning-objectives">Learning Objectives</a></li>
-<li><a href="#/latex-html" id="/toc-latex-html"><strong>LaTeX → HTML</strong></a></li>
+<li><a href="#/latex-html" id="/toc-latex-html">LaTeX → HTML</a></li>
 </ul>
 </nav>
 </section>
@@ -424,49 +422,37 @@ Dr.&nbsp;Andrew M. Byrd
 </ul>
 </section>
 
-<section>
 <section id="how-latex-works" class="title-slide slide level1 center">
 <h1>How LaTeX Works</h1>
-
-</section>
-<section id="html-vs.-latex" class="slide level2 center">
-<h2>HTML vs.&nbsp;LaTeX</h2>
-</section></section>
-<section>
-<section id="welcome" class="title-slide slide level1 center">
-<h1>Welcome</h1>
-<p>Today we’ll analyze HTML <strong>by analogy with LaTeX</strong>:</p>
 <ul>
-<li><code>\documentclass</code> / preamble ↔︎ <code>&lt;!DOCTYPE html&gt;</code> + <code>&lt;head&gt;</code></li>
-<li><code>\begin{document}...\end{document}</code> ↔︎ <code>&lt;body&gt;...&lt;/body&gt;</code></li>
-<li>commands like <code>\textbf{}</code> ↔︎ inline tags like <code>&lt;strong&gt;</code></li>
-<li>environments like <code>itemize</code> ↔︎ container tags like <code>&lt;ul&gt;</code></li>
+<li>Let’s review how LaTeX works.</li>
 </ul>
 </section>
-<section class="slide level2 center">
 
-</section></section>
-<section>
-<section id="learning-objectives" class="title-slide slide level1 center">
-<h1>Learning Objectives</h1>
-<p>By the end of class, you will be able to:</p>
-<ul>
-<li>map LaTeX preamble/document/environments to HTML structure<br>
-</li>
-<li>identify <strong>elements</strong>, <strong>attributes</strong>, and <strong>nesting</strong> in HTML<br>
-</li>
-<li>explain how <strong>block vs.&nbsp;inline</strong> in HTML parallels LaTeX environments vs.&nbsp;commands<br>
-</li>
-<li>publish a minimal page to <strong>GitHub Pages</strong></li>
-</ul>
-</section>
-<section class="slide level2 center">
-
-</section></section>
 <section>
 <section id="latex-html" class="title-slide slide level1 center">
-<h1><strong>LaTeX → HTML</strong></h1>
+<h1>LaTeX → HTML</h1>
 
+</section>
+<section id="moving-from-latex-to-html" class="slide level2 center">
+<h2>Moving from LaTeX to HTML</h2>
+<p>Today we’ll analyze HTML <strong>by analogy with LaTeX</strong>:</p>
+<ul>
+<li><code>\documentclass</code> / preamble –&gt; <code>&lt;!DOCTYPE html&gt;</code> + <code>&lt;head&gt;</code></li>
+<li><code>\begin{document}...\end{document}</code> –&gt; <code>&lt;body&gt;...&lt;/body&gt;</code></li>
+<li>commands like <code>\textbf{}</code> –&gt; inline tags like <code>&lt;strong&gt;</code></li>
+<li>environments like <code>itemize</code> –&gt; container tags like <code>&lt;ul&gt;</code></li>
+</ul>
+</section>
+<section id="learning-objectives" class="slide level2 center">
+<h2>Learning Objectives</h2>
+<p>By the end of class, you will be able to:</p>
+<ul>
+<li>map LaTeX preamble/document/environments to HTML structure</li>
+<li>identify <strong>elements</strong>, <strong>attributes</strong>, and <strong>nesting</strong> in HTML</li>
+<li>explain how <strong>block vs.&nbsp;inline</strong> in HTML parallels LaTeX environments vs.&nbsp;commands</li>
+<li>publish a minimal page to <strong>GitHub Pages</strong></li>
+</ul>
 </section>
 <section id="the-big-picture" class="slide level2 center">
 <h2>The Big Picture</h2>
@@ -481,49 +467,128 @@ Dr.&nbsp;Andrew M. Byrd
 ↔︎ <strong>inline tags</strong> (<code>&lt;strong&gt;</code>, <code>&lt;em&gt;</code>)</li>
 </ul>
 </section>
-<section id="preamble-vs.-head" class="slide level2 center">
-<h2>Preamble vs.&nbsp;Head</h2>
-<div class="columns">
-<div class="column">
-<p><strong>LaTeX (preamble)</strong></p>
+<section id="lets-create-an-html-file" class="slide level2 center">
+<h2>Let’s create an HTML file</h2>
+<ul>
+<li>Find the folder in RStudio that you’d like to create an html file.</li>
+<li>Click on “New File”, then “R HTML”</li>
+<li>Delete the “r” in the file extension (.rhtml).</li>
+<li>Create a file called “test.html”.</li>
+</ul>
+</section>
+<section id="preamble-latex" class="slide level2 center">
+<h2>Preamble (LaTeX)</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb1-1"><a href=""></a><span class="bu">\documentclass</span>{<span class="ex">article</span>}</span>
 <span id="cb1-2"><a href=""></a><span class="bu">\usepackage</span>{<span class="ex">graphicx</span>}</span>
 <span id="cb1-3"><a href=""></a><span class="fu">\title</span>{My Page}</span>
-<span id="cb1-4"><a href=""></a><span class="fu">\author</span>{Student}</span>
-<span id="cb1-5"><a href=""></a></span>
-<span id="cb1-6"><a href=""></a>HTML (doctype + head)</span>
-<span id="cb1-7"><a href=""></a></span>
-<span id="cb1-8"><a href=""></a>&lt;!DOCTYPE html&gt;</span>
-<span id="cb1-9"><a href=""></a>&lt;html&gt;</span>
-<span id="cb1-10"><a href=""></a>  &lt;head&gt;</span>
-<span id="cb1-11"><a href=""></a>    &lt;meta charset="utf-8"&gt;</span>
-<span id="cb1-12"><a href=""></a>    &lt;title&gt;My Page&lt;/title&gt;</span>
-<span id="cb1-13"><a href=""></a>  &lt;/head&gt;</span>
-<span id="cb1-14"><a href=""></a></span>
-<span id="cb1-15"><a href=""></a>## Document Body</span>
-<span id="cb1-16"><a href=""></a></span>
-<span id="cb1-17"><a href=""></a>## Headings &amp; Paragraphs</span>
-<span id="cb1-18"><a href=""></a></span>
-<span id="cb1-19"><a href=""></a>```latex</span>
-<span id="cb1-20"><a href=""></a><span class="kw">\section</span>{About Me}</span>
-<span id="cb1-21"><a href=""></a>I study linguistics.</span>
-<span id="cb1-22"><a href=""></a></span>
-<span id="cb1-23"><a href=""></a><span class="kw">\subsection</span>{Interests}</span>
-<span id="cb1-24"><a href=""></a>Historical linguistics, NLP.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb2-1"><a href=""></a><span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>About Me<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
-<span id="cb2-2"><a href=""></a><span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>I study linguistics.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb2-3"><a href=""></a></span>
-<span id="cb2-4"><a href=""></a><span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Interests<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
-<span id="cb2-5"><a href=""></a><span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Historical linguistics, NLP.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>##Inline Emphasis (Commands ↔︎ Inline Tags)</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb3-1"><a href=""></a><span class="fu">\textbf</span>{Important} and <span class="fu">\emph</span>{interesting}.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb4-1"><a href=""></a><span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;&lt;</span><span class="kw">strong</span><span class="dt">&gt;</span>Important<span class="dt">&lt;/</span><span class="kw">strong</span><span class="dt">&gt;</span> and <span class="dt">&lt;</span><span class="kw">em</span><span class="dt">&gt;</span>interesting<span class="dt">&lt;/</span><span class="kw">em</span><span class="dt">&gt;</span>.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb5-1"><a href=""></a><span class="fu">\textbf</span>{Important} and <span class="fu">\emph</span>{interesting}.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb6-1"><a href=""></a><span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;&lt;</span><span class="kw">strong</span><span class="dt">&gt;</span>Important<span class="dt">&lt;/</span><span class="kw">strong</span><span class="dt">&gt;</span> and <span class="dt">&lt;</span><span class="kw">em</span><span class="dt">&gt;</span>interesting<span class="dt">&lt;/</span><span class="kw">em</span><span class="dt">&gt;</span>.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div></div>
+<span id="cb1-4"><a href=""></a><span class="fu">\date</span>{2025-09-10}</span>
+<span id="cb1-5"><a href=""></a><span class="fu">\author</span>{Andrew M. Byrd}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="html-doctype-head" class="slide level2 center">
+<h2>HTML (doctype + head)</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource {html} number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"><a href=""></a>&lt;!DOCTYPE html&gt;</span>
+<span id="cb2-2"><a href=""></a>&lt;html&gt;</span>
+<span id="cb2-3"><a href=""></a>  &lt;head&gt;</span>
+<span id="cb2-4"><a href=""></a>    &lt;meta charset="utf-8"&gt;</span>
+<span id="cb2-5"><a href=""></a>    &lt;title&gt;My Page&lt;/title&gt;</span>
+<span id="cb2-6"><a href=""></a>    &lt;meta name="author" content="Andrew M. Byrd"&gt;</span>
+<span id="cb2-7"><a href=""></a>    &lt;meta name="date" content="2025-09-10"&gt;</span>
+<span id="cb2-8"><a href=""></a>    &lt;meta name="description" content="Personal homepage for Andrew Byrd"&gt;</span>
+<span id="cb2-9"><a href=""></a>  &lt;/head&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Copy and paste this code into your “test.html” file.
+<ul>
+<li>How similar is the HTML head to the LaTeX preamble?</li>
+</ul></li>
+<li>Click on “test.html” in your RStudio folder, select “View in Web Browser”.
+<ul>
+<li>What happens?</li>
+</ul></li>
+</ul>
+</section>
+<section id="document-body-latex" class="slide level2 center">
+<h2>Document Body (LaTeX)</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb3-1"><a href=""></a><span class="kw">\begin</span>{<span class="ex">document</span>}</span>
+<span id="cb3-2"><a href=""></a><span class="fu">\maketitle</span></span>
+<span id="cb3-3"><a href=""></a>Hello world!</span>
+<span id="cb3-4"><a href=""></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="document-body-latex-1" class="slide level2 center">
+<h2>Document Body (LaTeX)</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource {html} number-lines code-with-copy"><code class="sourceCode"><span id="cb4-1"><a href=""></a>&lt;body&gt;</span>
+<span id="cb4-2"><a href=""></a>  &lt;h1&gt;Hello World!&lt;/h1&gt;</span>
+<span id="cb4-3"><a href=""></a>  &lt;p&gt;This is my first webpage.&lt;/p&gt;</span>
+<span id="cb4-4"><a href=""></a>&lt;/body&gt;</span>
+<span id="cb4-5"><a href=""></a>&lt;/html&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="headings-paragraphs" class="slide level2 center">
+<h2>Headings &amp; Paragraphs</h2>
+<ul>
+<li>In LaTeX:</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb5-1"><a href=""></a><span class="kw">\section</span>{About Me}</span>
+<span id="cb5-2"><a href=""></a>I study linguistics.</span>
+<span id="cb5-3"><a href=""></a></span>
+<span id="cb5-4"><a href=""></a><span class="kw">\subsection</span>{Interests}</span>
+<span id="cb5-5"><a href=""></a>Historical linguistics, NLP.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>In HTML:</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb6-1"><a href=""></a><span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>About Me<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
+<span id="cb6-2"><a href=""></a><span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>I study linguistics.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb6-3"><a href=""></a></span>
+<span id="cb6-4"><a href=""></a><span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Interests<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
+<span id="cb6-5"><a href=""></a><span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Historical linguistics, NLP.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Copy and paste the HTML code into your test.html file. Try running the code without <code>&lt;p&gt;...&lt;/p&gt;</code>. What does this “environment” do?</li>
+</ul>
+</section>
+<section id="latex-vs.-html-terminology" class="slide level2 center">
+<h2>LaTeX vs.&nbsp;HTML Terminology</h2>
+<div class="smaller">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th><strong>LaTeX</strong></th>
+<th><strong>HTML</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Preamble (<code>\documentclass</code>)</td>
+<td><strong>Doctype</strong> + <strong>Head</strong></td>
+</tr>
+<tr class="even">
+<td>Document body (<code>\begin{document}</code>)</td>
+<td><strong>Body</strong></td>
+</tr>
+<tr class="odd">
+<td>Command (<code>\emph{}</code>)</td>
+<td><strong>Inline tag</strong> (<code>&lt;em&gt;</code>)</td>
+</tr>
+<tr class="even">
+<td>Environment (<code>\begin{itemize}</code>)</td>
+<td><strong>Element</strong> (<code>&lt;ul&gt;...&lt;/ul&gt;</code>)</td>
+</tr>
+<tr class="odd">
+<td>Comment: <code>% ...</code></td>
+<td>Comment: <code>&lt;!-- ... --&gt;</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="inline-emphasis-commands-inline-tags" class="slide level2 center">
+<h2>Inline Emphasis (Commands ↔︎ Inline Tags)</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb7-1"><a href=""></a><span class="fu">\textbf</span>{Important} and <span class="fu">\emph</span>{interesting}.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb8-1"><a href=""></a><span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;&lt;</span><span class="kw">strong</span><span class="dt">&gt;</span>Important<span class="dt">&lt;/</span><span class="kw">strong</span><span class="dt">&gt;</span> and <span class="dt">&lt;</span><span class="kw">em</span><span class="dt">&gt;</span>interesting<span class="dt">&lt;/</span><span class="kw">em</span><span class="dt">&gt;</span>.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb9-1"><a href=""></a><span class="fu">\textbf</span>{Important} and <span class="fu">\emph</span>{interesting}.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb10-1"><a href=""></a><span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;&lt;</span><span class="kw">strong</span><span class="dt">&gt;</span>Important<span class="dt">&lt;/</span><span class="kw">strong</span><span class="dt">&gt;</span> and <span class="dt">&lt;</span><span class="kw">em</span><span class="dt">&gt;</span>interesting<span class="dt">&lt;/</span><span class="kw">em</span><span class="dt">&gt;</span>.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="::::">
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
+</div>
 </div>
 </div>
 </section></section>
