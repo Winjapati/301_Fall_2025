@@ -304,3 +304,5 @@ Modify "main.tex" in "301-LaTeX-practice" to have the following:
 2.  Sections, subsections, and a table of contents.
 3.  A link to an outside website within a url.
 4.  An internal label to refer to another part of your document.
+
+<!--# Need to install packages for ref and figures; didn't get to the end, perhaps combine some slides/activities? -->
