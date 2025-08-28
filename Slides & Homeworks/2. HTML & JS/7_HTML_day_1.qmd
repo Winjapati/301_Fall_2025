@@ -34,38 +34,72 @@ By and large, things in HTML function much more so like LaTeX **environments**. 
 -   Describe what that content *is* (a paragraph, a list, a section) rather than how it looks.
     -   In HTML, indicating how something looks is done using **style sheets** (CSS), which we'll talk about in a few days
 
-------------------------------------------------------------------------
+<!-- ## Moving from LaTeX to HTML -->
 
-## Moving from LaTeX to HTML
+<!-- -   LaTeX: `\documentclass` / preamble -->
 
--   LaTeX: `\documentclass` / preamble
-    -   HTML: `<!DOCTYPE html>` + `<head>`
--   LaTeX:`\begin{document}...\end{document}`
-    -   HTML: `<body>...</body>`
--   LaTeX: **commands** like `\textbf{}`
-    -   HTML: **Tags** like `<strong>`
--   LaTeX: **environments** like `\itemize`
-    -   HTML: **container tags** like `<ul>`
+<!--     -   HTML: `<!DOCTYPE html>` + `<head>` -->
 
-## Tags vs. Elements
+<!-- -   LaTeX:`\begin{document}...\end{document}` -->
 
-- Tags:
-    - Usually comes in pairs: <p> ... </p>, <emph> ... </emph>, etc.
-    - Can be self-contained: <img src="cat.jpg" alt="Cat">
+<!--     -   HTML: `<body>...</body>` -->
 
-- Elements:
+<!-- -   LaTeX: **commands** like `\textbf{}` -->
+
+<!--     -   HTML: **Tags** like `<strong>` -->
+
+<!-- -   LaTeX: **environments** like `\itemize` -->
+
+<!--     -   HTML: **container tags** like `<ul>` -->
+
+## LaTeX vs. HTML Terminology
+
+```{=html}
+<style>
+  .smaller { font-size: 80%; }
+</style>
+```
+
+::: smaller
+| **LaTeX**                          | **HTML**                          |
+|------------------------------------|-----------------------------------|
+| Preamble (`\documentclass`)        | **Doctype** + **Head** (`<head>`) |
+| Document body (`\begin{document}`) | **Body** (`<body>`)               |
+| Command (`\emph{}`)                | **Inline tag** (`<em>`)           |
+| Environment (`\begin{itemize}`)    | **Element** (`<ul>...</ul>`)      |
+| Comment: `% ...`                   | Comment: `<!-- ... -->`           |
+:::
+
+-   To "comment" (`<!--# ... -->`) within RStudio, press "Ctrl + Shift + C" or "⌘ + Shift + C"
+
+## Tags vs. Elements?
+
+-   Tags:
+    -   These are things marked in `< >`
+    -   Usually comes in pairs: `<p> ... </p>`, `<emph> ... </emph>`, etc.
+    -   Can be self-contained: `<img src="cat.jpg" alt="Cat">`
+-   Elements:
+    -   The tags *plus* everything within.
+        -   `<p> Hello World! </p>`
 
 <!-- ------------------------------------------------------------------------ -->
 
 <!-- ## The Big Picture -->
 
 <!-- -   **Preamble** (`\documentclass`, packages, title info)\ -->
+
 <!--     ↔ **`<!DOCTYPE html>`, `<head>`** -->
+
 <!-- -   **Document body** (`\begin{document}...\end{document}`)\ -->
+
 <!--     ↔ **`<body>...</body>`** -->
+
 <!-- -   **Environments** (`\begin{itemize}`, `\begin{figure}`)\ -->
+
 <!--     ↔ **block containers** (`<ul>`, `<figure>`, `<section>`) -->
+
 <!-- -   **Commands** (`\textbf{}`, `\emph{}`)\ -->
+
 <!--     ↔ **inline tags** (`<strong>`, `<em>`) -->
 
 ------------------------------------------------------------------------
@@ -159,53 +193,51 @@ Historical linguistics, NLP.
     -   Screen readers won't know where your paragraphs begin and end.
     -   Also, once we load in style sheets (CSS), we may have specific instructions for paragraphs, like setting margins
 
-## LaTeX vs. HTML Terminology
-
-<style>
-  .smaller { font-size: 80%; }
-</style>
-
-
-::: smaller
-| **LaTeX**                          | **HTML**                     |
-|------------------------------------|------------------------------|
-| Preamble (`\documentclass`)        | **Doctype** + **Head**       |
-| Document body (`\begin{document}`) | **Body**                     |
-| Command (`\emph{}`)                | **Inline tag** (`<em>`)      |
-| Environment (`\begin{itemize}`)    | **Element** (`<ul>...</ul>`) |
-| Comment: `% ...`                   | Comment: `<!-- ... -->`      |
-:::
-
--   To "comment" in HTML ( <!--# ... -->) within RStudio, press "Ctrl + Shift + C" or "⌘ + Shift + C"
-
 <!-- ## Inline Emphasis (Commands ↔ Inline Tags) -->
 
 <!-- ``` latex -->
+
 <!-- \textbf{Important} and \emph{interesting}. -->
+
 <!-- ``` -->
 
 <!-- ``` html -->
+
 <!-- <p><strong>Important</strong> and <em>interesting</em>.</p> -->
+
 <!-- ``` -->
 
 <!-- ``` latex -->
+
 <!-- \textbf{Important} and \emph{interesting}. -->
+
 <!-- ``` -->
 
 <!-- ``` html -->
+
 <!-- <p><strong>Important</strong> and <em>interesting</em>.</p> -->
+
 <!-- ``` -->
 
 <!-- ::: :::: -->
+
 <!-- ::: -->
 
 # Activity: Build Your Own Website!
 
-## Activity
--   Download <a href="7_mock_site.html" download>this `html` file</a>
- and analyze its code.
--   Create `firstname_lastname.html`. Add to it:
-<span style="font-size:80%;">
+## Activity, Step One:  Analyze
+
+-   Download <a href="7_mock_site.html" download>this `html` file</a> and analyze its code.
+-   Identify how to:
+    -   emphasize a word
+    -   make a word 'strong'
+    -   add an html link to a word or string of words
+    -   add an image
+    -   add an unordered list
+
+## Activity, Step Two:  Build
+
+-   Create `firstname_lastname.html`. Add to it: <span style="font-size:80%;">
     1.  A head and body.
     2.  Two `<p>` elements talking about yourself (or whatever you want). Use `<h1>` and `<h2>`.
     3.  Emphasize one word and make another word strong.
@@ -213,5 +245,4 @@ Historical linguistics, NLP.
     5.  Add an image of yourself (or whatever you want).
     6.  Add a simple unordered list (`<ul>`).
     7.  Save and view the file by, "Open with Browser."
-    8.  Sync with your GitHub.
-</span>
+    8.  Sync with your GitHub. </span>

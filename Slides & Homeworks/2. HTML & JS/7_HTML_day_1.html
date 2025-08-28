@@ -446,41 +446,77 @@ Dr.&nbsp;Andrew M. Byrd
 <li>In HTML, indicating how something looks is done using <strong>style sheets</strong> (CSS), which we’ll talk about in a few days</li>
 </ul></li>
 </ul>
+<!-- ## Moving from LaTeX to HTML -->
+<!-- -   LaTeX: `\documentclass` / preamble -->
+<!--     -   HTML: `<!DOCTYPE html>` + `<head>` -->
+<!-- -   LaTeX:`\begin{document}...\end{document}` -->
+<!--     -   HTML: `<body>...</body>` -->
+<!-- -   LaTeX: **commands** like `\textbf{}` -->
+<!--     -   HTML: **Tags** like `<strong>` -->
+<!-- -   LaTeX: **environments** like `\itemize` -->
+<!--     -   HTML: **container tags** like `<ul>` -->
 </section>
-<section id="moving-from-latex-to-html-1" class="slide level2 center">
-<h2>Moving from LaTeX to HTML</h2>
+<section id="latex-vs.-html-terminology" class="slide level2 center">
+<h2>LaTeX vs.&nbsp;HTML Terminology</h2>
+<style>
+  .smaller { font-size: 80%; }
+</style>
+<div class="smaller">
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 49%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>LaTeX</strong></th>
+<th><strong>HTML</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Preamble (<code>\documentclass</code>)</td>
+<td><strong>Doctype</strong> + <strong>Head</strong> (<code>&lt;head&gt;</code>)</td>
+</tr>
+<tr class="even">
+<td>Document body (<code>\begin{document}</code>)</td>
+<td><strong>Body</strong> (<code>&lt;body&gt;</code>)</td>
+</tr>
+<tr class="odd">
+<td>Command (<code>\emph{}</code>)</td>
+<td><strong>Inline tag</strong> (<code>&lt;em&gt;</code>)</td>
+</tr>
+<tr class="even">
+<td>Environment (<code>\begin{itemize}</code>)</td>
+<td><strong>Element</strong> (<code>&lt;ul&gt;...&lt;/ul&gt;</code>)</td>
+</tr>
+<tr class="odd">
+<td>Comment: <code>% ...</code></td>
+<td>Comment: <code>&lt;!-- ... --&gt;</code></td>
+</tr>
+</tbody>
+</table>
+</div>
 <ul>
-<li>LaTeX: <code>\documentclass</code> / preamble
-<ul>
-<li>HTML: <code>&lt;!DOCTYPE html&gt;</code> + <code>&lt;head&gt;</code></li>
-</ul></li>
-<li>LaTeX:<code>\begin{document}...\end{document}</code>
-<ul>
-<li>HTML: <code>&lt;body&gt;...&lt;/body&gt;</code></li>
-</ul></li>
-<li>LaTeX: <strong>commands</strong> like <code>\textbf{}</code>
-<ul>
-<li>HTML: <strong>Tags</strong> like <code>&lt;strong&gt;</code></li>
-</ul></li>
-<li>LaTeX: <strong>environments</strong> like <code>\itemize</code>
-<ul>
-<li>HTML: <strong>container tags</strong> like <code>&lt;ul&gt;</code></li>
-</ul></li>
+<li>To “comment” (<code>&lt;!--# ... --&gt;</code>) within RStudio, press “Ctrl + Shift + C” or “⌘ + Shift + C”</li>
 </ul>
 </section>
 <section id="tags-vs.-elements" class="slide level2 center">
-<h2>Tags vs.&nbsp;Elements</h2>
+<h2>Tags vs.&nbsp;Elements?</h2>
 <ul>
 <li>Tags:
 <ul>
-<li>Usually comes in pairs:
-<p>
-…
-</p>
-, <emph> … </emph>, etc.</li>
-<li>Can be self-contained: <img src="cat.jpg" alt="Cat"></li>
+<li>These are things marked in <code>&lt; &gt;</code></li>
+<li>Usually comes in pairs: <code>&lt;p&gt; ... &lt;/p&gt;</code>, <code>&lt;emph&gt; ... &lt;/emph&gt;</code>, etc.</li>
+<li>Can be self-contained: <code>&lt;img src="cat.jpg" alt="Cat"&gt;</code></li>
 </ul></li>
-<li>Elements:</li>
+<li>Elements:
+<ul>
+<li>The tags <em>plus</em> everything within.
+<ul>
+<li><code>&lt;p&gt; Hello World! &lt;/p&gt;</code></li>
+</ul></li>
+</ul></li>
 </ul>
 <!-- ------------------------------------------------------------------------ -->
 <!-- ## The Big Picture -->
@@ -583,47 +619,6 @@ Dr.&nbsp;Andrew M. Byrd
 <li>Also, once we load in style sheets (CSS), we may have specific instructions for paragraphs, like setting margins</li>
 </ul></li>
 </ul>
-</section>
-<section id="latex-vs.-html-terminology" class="slide level2 center">
-<h2>LaTeX vs.&nbsp;HTML Terminology</h2>
-<style>
-  .smaller { font-size: 80%; }
-</style>
-<div class="smaller">
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th><strong>LaTeX</strong></th>
-<th><strong>HTML</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Preamble (<code>\documentclass</code>)</td>
-<td><strong>Doctype</strong> + <strong>Head</strong></td>
-</tr>
-<tr class="even">
-<td>Document body (<code>\begin{document}</code>)</td>
-<td><strong>Body</strong></td>
-</tr>
-<tr class="odd">
-<td>Command (<code>\emph{}</code>)</td>
-<td><strong>Inline tag</strong> (<code>&lt;em&gt;</code>)</td>
-</tr>
-<tr class="even">
-<td>Environment (<code>\begin{itemize}</code>)</td>
-<td><strong>Element</strong> (<code>&lt;ul&gt;...&lt;/ul&gt;</code>)</td>
-</tr>
-<tr class="odd">
-<td>Comment: <code>% ...</code></td>
-<td>Comment: <code>&lt;!-- ... --&gt;</code></td>
-</tr>
-</tbody>
-</table>
-</div>
-<ul>
-<li>To “comment” in HTML ( <!--# ... -->) within RStudio, press “Ctrl + Shift + C” or “⌘ + Shift + C”</li>
-</ul>
 <!-- ## Inline Emphasis (Commands ↔ Inline Tags) -->
 <!-- ``` latex -->
 <!-- \textbf{Important} and \emph{interesting}. -->
@@ -645,10 +640,23 @@ Dr.&nbsp;Andrew M. Byrd
 <h1>Activity: Build Your Own Website!</h1>
 
 </section>
-<section id="activity" class="slide level2 center">
-<h2>Activity</h2>
+<section id="activity-step-one-analyze" class="slide level2 center">
+<h2>Activity, Step One: Analyze</h2>
 <ul>
 <li>Download <a href="7_mock_site.html" download="">this <code>html</code> file</a> and analyze its code.</li>
+<li>Identify how to:
+<ul>
+<li>emphasize a word</li>
+<li>make a word ‘strong’</li>
+<li>add an html link to a word or string of words</li>
+<li>add an image</li>
+<li>add an unordered list</li>
+</ul></li>
+</ul>
+</section>
+<section id="activity-step-two-build" class="slide level2 center">
+<h2>Activity, Step Two: Build</h2>
+<ul>
 <li>Create <code>firstname_lastname.html</code>. Add to it: <span style="font-size:80%;">
 <ol type="1">
 <li>A head and body.</li>
