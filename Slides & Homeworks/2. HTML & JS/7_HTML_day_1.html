@@ -412,13 +412,14 @@ Dr.&nbsp;Andrew M. Byrd
 <li><a href="#/review" id="/toc-review">Review</a></li>
 <li><a href="#/how-latex-works" id="/toc-how-latex-works">How LaTeX Works</a></li>
 <li><a href="#/latex-html" id="/toc-latex-html">LaTeX → HTML</a></li>
+<li><a href="#/activity-build-your-own-website" id="/toc-activity-build-your-own-website">Activity: Build Your Own Website!</a></li>
 </ul>
 </nav>
 </section>
 <section id="review" class="title-slide slide level1 center">
 <h1>Review</h1>
 <ul>
-<li>What did you learn on Wednesday?</li>
+<li>What did you learn last time?</li>
 </ul>
 </section>
 
@@ -436,36 +437,97 @@ Dr.&nbsp;Andrew M. Byrd
 </section>
 <section id="moving-from-latex-to-html" class="slide level2 center">
 <h2>Moving from LaTeX to HTML</h2>
-<p>Today we’ll analyze HTML <strong>by analogy with LaTeX</strong>:</p>
+<p>By and large, things in HTML function much more so like LaTeX <strong>environments</strong>. In HTML, these are called <strong>tags</strong>. Both environments &amp; tags:</p>
 <ul>
-<li><code>\documentclass</code> / preamble –&gt; <code>&lt;!DOCTYPE html&gt;</code> + <code>&lt;head&gt;</code></li>
-<li><code>\begin{document}...\end{document}</code> –&gt; <code>&lt;body&gt;...&lt;/body&gt;</code></li>
-<li>commands like <code>\textbf{}</code> –&gt; inline tags like <code>&lt;strong&gt;</code></li>
-<li>environments like <code>itemize</code> –&gt; container tags like <code>&lt;ul&gt;</code></li>
+<li>Have opening and closing markers</li>
+<li>Wrap content</li>
+<li>Describe what that content <em>is</em> (a paragraph, a list, a section) rather than how it looks.
+<ul>
+<li>In HTML, indicating how something looks is done using <strong>style sheets</strong> (CSS), which we’ll talk about in a few days</li>
+</ul></li>
+</ul>
+<!-- ## Moving from LaTeX to HTML -->
+<!-- -   LaTeX: `\documentclass` / preamble -->
+<!--     -   HTML: `<!DOCTYPE html>` + `<head>` -->
+<!-- -   LaTeX:`\begin{document}...\end{document}` -->
+<!--     -   HTML: `<body>...</body>` -->
+<!-- -   LaTeX: **commands** like `\textbf{}` -->
+<!--     -   HTML: **Tags** like `<strong>` -->
+<!-- -   LaTeX: **environments** like `\itemize` -->
+<!--     -   HTML: **container tags** like `<ul>` -->
+</section>
+<section id="latex-vs.-html-terminology" class="slide level2 center">
+<h2>LaTeX vs.&nbsp;HTML Terminology</h2>
+<style>
+  .smaller { font-size: 80%; }
+</style>
+<div class="smaller">
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 49%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>LaTeX</strong></th>
+<th><strong>HTML</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Preamble (<code>\documentclass</code>)</td>
+<td><strong>Doctype</strong> + <strong>Head</strong> (<code>&lt;head&gt;</code>)</td>
+</tr>
+<tr class="even">
+<td>Document body (<code>\begin{document}</code>)</td>
+<td><strong>Body</strong> (<code>&lt;body&gt;</code>)</td>
+</tr>
+<tr class="odd">
+<td>Command (<code>\emph{}</code>)</td>
+<td><strong>Inline tag</strong> (<code>&lt;em&gt;</code>)</td>
+</tr>
+<tr class="even">
+<td>Environment (<code>\begin{itemize}</code>)</td>
+<td><strong>Element</strong> (<code>&lt;ul&gt;...&lt;/ul&gt;</code>)</td>
+</tr>
+<tr class="odd">
+<td>Comment: <code>% ...</code></td>
+<td>Comment: <code>&lt;!-- ... --&gt;</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>To “comment” (<code>&lt;!--# ... --&gt;</code>) within RStudio, press “Ctrl + Shift + C” or “⌘ + Shift + C”</li>
 </ul>
 </section>
-<section id="learning-objectives" class="slide level2 center">
-<h2>Learning Objectives</h2>
-<p>By the end of class, you will be able to:</p>
+<section id="tags-vs.-elements" class="slide level2 center">
+<h2>Tags vs.&nbsp;Elements?</h2>
 <ul>
-<li>map LaTeX preamble/document/environments to HTML structure</li>
-<li>identify <strong>elements</strong>, <strong>attributes</strong>, and <strong>nesting</strong> in HTML</li>
-<li>explain how <strong>block vs.&nbsp;inline</strong> in HTML parallels LaTeX environments vs.&nbsp;commands</li>
-<li>publish a minimal page to <strong>GitHub Pages</strong></li>
-</ul>
-</section>
-<section id="the-big-picture" class="slide level2 center">
-<h2>The Big Picture</h2>
+<li>Tags:
 <ul>
-<li><strong>Preamble</strong> (<code>\documentclass</code>, packages, title info)<br>
-↔︎ <strong><code>&lt;!DOCTYPE html&gt;</code>, <code>&lt;head&gt;</code></strong></li>
-<li><strong>Document body</strong> (<code>\begin{document}...\end{document}</code>)<br>
-↔︎ <strong><code>&lt;body&gt;...&lt;/body&gt;</code></strong></li>
-<li><strong>Environments</strong> (<code>\begin{itemize}</code>, <code>\begin{figure}</code>)<br>
-↔︎ <strong>block containers</strong> (<code>&lt;ul&gt;</code>, <code>&lt;figure&gt;</code>, <code>&lt;section&gt;</code>)</li>
-<li><strong>Commands</strong> (<code>\textbf{}</code>, <code>\emph{}</code>)<br>
-↔︎ <strong>inline tags</strong> (<code>&lt;strong&gt;</code>, <code>&lt;em&gt;</code>)</li>
+<li>These are things marked in <code>&lt; &gt;</code></li>
+<li>Usually comes in pairs: <code>&lt;p&gt; ... &lt;/p&gt;</code>, <code>&lt;emph&gt; ... &lt;/emph&gt;</code>, etc.</li>
+<li>Can be self-contained: <code>&lt;img src="cat.jpg" alt="Cat"&gt;</code></li>
+</ul></li>
+<li>Elements:
+<ul>
+<li>The tags <em>plus</em> everything within.
+<ul>
+<li><code>&lt;p&gt; Hello World! &lt;/p&gt;</code></li>
+</ul></li>
+</ul></li>
 </ul>
+<!-- ------------------------------------------------------------------------ -->
+<!-- ## The Big Picture -->
+<!-- -   **Preamble** (`\documentclass`, packages, title info)\ -->
+<!--     ↔ **`<!DOCTYPE html>`, `<head>`** -->
+<!-- -   **Document body** (`\begin{document}...\end{document}`)\ -->
+<!--     ↔ **`<body>...</body>`** -->
+<!-- -   **Environments** (`\begin{itemize}`, `\begin{figure}`)\ -->
+<!--     ↔ **block containers** (`<ul>`, `<figure>`, `<section>`) -->
+<!-- -   **Commands** (`\textbf{}`, `\emph{}`)\ -->
+<!--     ↔ **inline tags** (`<strong>`, `<em>`) -->
 </section>
 <section id="lets-create-an-html-file" class="slide level2 center">
 <h2>Let’s create an HTML file</h2>
@@ -513,18 +575,21 @@ Dr.&nbsp;Andrew M. Byrd
 <span id="cb3-3"><a href=""></a>Hello world!</span>
 <span id="cb3-4"><a href=""></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="document-body-latex-1" class="slide level2 center">
-<h2>Document Body (LaTeX)</h2>
+<section id="document-body-html" class="slide level2 center">
+<h2>Document Body (HTML)</h2>
 <div class="sourceCode" id="cb4"><pre class="sourceCode numberSource {html} number-lines code-with-copy"><code class="sourceCode"><span id="cb4-1"><a href=""></a>&lt;body&gt;</span>
 <span id="cb4-2"><a href=""></a>  &lt;h1&gt;Hello World!&lt;/h1&gt;</span>
 <span id="cb4-3"><a href=""></a>  &lt;p&gt;This is my first webpage.&lt;/p&gt;</span>
 <span id="cb4-4"><a href=""></a>&lt;/body&gt;</span>
 <span id="cb4-5"><a href=""></a>&lt;/html&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Copy &amp; paste this code into test.html.</li>
+</ul>
 </section>
 <section id="headings-paragraphs" class="slide level2 center">
 <h2>Headings &amp; Paragraphs</h2>
 <ul>
-<li>In LaTeX:</li>
+<li>In LaTeX (three deep):</li>
 </ul>
 <div class="sourceCode" id="cb5"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb5-1"><a href=""></a><span class="kw">\section</span>{About Me}</span>
 <span id="cb5-2"><a href=""></a>I study linguistics.</span>
@@ -532,63 +597,81 @@ Dr.&nbsp;Andrew M. Byrd
 <span id="cb5-4"><a href=""></a><span class="kw">\subsection</span>{Interests}</span>
 <span id="cb5-5"><a href=""></a>Historical linguistics, NLP.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>In HTML:</li>
+<li>In HTML (six deep: <code>&lt;h1&gt;</code>-<code>&lt;h6&gt;</code>):</li>
 </ul>
 <div class="sourceCode" id="cb6"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb6-1"><a href=""></a><span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>About Me<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
 <span id="cb6-2"><a href=""></a><span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>I study linguistics.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
 <span id="cb6-3"><a href=""></a></span>
 <span id="cb6-4"><a href=""></a><span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Interests<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
-<span id="cb6-5"><a href=""></a><span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Historical linguistics, NLP.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-5"><a href=""></a><span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Historical linguistics is awesome.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb6-6"><a href=""></a><span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>NLP is cool, too.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>Copy and paste the HTML code into your test.html file. Try running the code without <code>&lt;p&gt;...&lt;/p&gt;</code>. What does this “environment” do?</li>
+<li>Copy and paste the HTML code into your test.html file. Try running the code without <code>&lt;p&gt;...&lt;/p&gt;</code>. What does this <strong>tag</strong> do?</li>
 </ul>
 </section>
-<section id="latex-vs.-html-terminology" class="slide level2 center">
-<h2>LaTeX vs.&nbsp;HTML Terminology</h2>
-<div class="smaller">
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th><strong>LaTeX</strong></th>
-<th><strong>HTML</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Preamble (<code>\documentclass</code>)</td>
-<td><strong>Doctype</strong> + <strong>Head</strong></td>
-</tr>
-<tr class="even">
-<td>Document body (<code>\begin{document}</code>)</td>
-<td><strong>Body</strong></td>
-</tr>
-<tr class="odd">
-<td>Command (<code>\emph{}</code>)</td>
-<td><strong>Inline tag</strong> (<code>&lt;em&gt;</code>)</td>
-</tr>
-<tr class="even">
-<td>Environment (<code>\begin{itemize}</code>)</td>
-<td><strong>Element</strong> (<code>&lt;ul&gt;...&lt;/ul&gt;</code>)</td>
-</tr>
-<tr class="odd">
-<td>Comment: <code>% ...</code></td>
-<td>Comment: <code>&lt;!-- ... --&gt;</code></td>
-</tr>
-</tbody>
-</table>
-</div>
+<section id="paragraphs" class="slide level2 center">
+<h2>Paragraphs</h2>
+<ul>
+<li>Browsers will automatically treat plain text as if it were wrapped in a paragraph</li>
+<li>But…
+<ul>
+<li>Screen readers won’t know where your paragraphs begin and end.</li>
+<li>Also, once we load in style sheets (CSS), we may have specific instructions for paragraphs, like setting margins</li>
+</ul></li>
+</ul>
+<!-- ## Inline Emphasis (Commands ↔ Inline Tags) -->
+<!-- ``` latex -->
+<!-- \textbf{Important} and \emph{interesting}. -->
+<!-- ``` -->
+<!-- ``` html -->
+<!-- <p><strong>Important</strong> and <em>interesting</em>.</p> -->
+<!-- ``` -->
+<!-- ``` latex -->
+<!-- \textbf{Important} and \emph{interesting}. -->
+<!-- ``` -->
+<!-- ``` html -->
+<!-- <p><strong>Important</strong> and <em>interesting</em>.</p> -->
+<!-- ``` -->
+<!-- ::: :::: -->
+<!-- ::: -->
+</section></section>
+<section>
+<section id="activity-build-your-own-website" class="title-slide slide level1 center">
+<h1>Activity: Build Your Own Website!</h1>
+
 </section>
-<section id="inline-emphasis-commands-inline-tags" class="slide level2 center">
-<h2>Inline Emphasis (Commands ↔︎ Inline Tags)</h2>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb7-1"><a href=""></a><span class="fu">\textbf</span>{Important} and <span class="fu">\emph</span>{interesting}.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb8-1"><a href=""></a><span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;&lt;</span><span class="kw">strong</span><span class="dt">&gt;</span>Important<span class="dt">&lt;/</span><span class="kw">strong</span><span class="dt">&gt;</span> and <span class="dt">&lt;</span><span class="kw">em</span><span class="dt">&gt;</span>interesting<span class="dt">&lt;/</span><span class="kw">em</span><span class="dt">&gt;</span>.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb9-1"><a href=""></a><span class="fu">\textbf</span>{Important} and <span class="fu">\emph</span>{interesting}.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb10-1"><a href=""></a><span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;&lt;</span><span class="kw">strong</span><span class="dt">&gt;</span>Important<span class="dt">&lt;/</span><span class="kw">strong</span><span class="dt">&gt;</span> and <span class="dt">&lt;</span><span class="kw">em</span><span class="dt">&gt;</span>interesting<span class="dt">&lt;/</span><span class="kw">em</span><span class="dt">&gt;</span>.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="::::">
+<section id="activity-step-one-analyze" class="slide level2 center">
+<h2>Activity, Step One: Analyze</h2>
+<ul>
+<li>Download <a href="7_mock_site.html" download="">this <code>html</code> file</a> and analyze its code.</li>
+<li>Identify how to:
+<ul>
+<li>emphasize a word</li>
+<li>make a word ‘strong’</li>
+<li>add an html link to a word or string of words</li>
+<li>add an image</li>
+<li>add an unordered list</li>
+</ul></li>
+</ul>
+</section>
+<section id="activity-step-two-build" class="slide level2 center">
+<h2>Activity, Step Two: Build</h2>
+<ul>
+<li>Create <code>firstname_lastname.html</code>. Add to it: <span style="font-size:80%;">
+<ol type="1">
+<li>A head and body.</li>
+<li>Two <code>&lt;p&gt;</code> elements talking about yourself (or whatever you want). Use <code>&lt;h1&gt;</code> and <code>&lt;h2&gt;</code>.</li>
+<li>Emphasize one word and make another word strong.</li>
+<li>Add a link that points to your GitHub profile.</li>
+<li>Add an image of yourself (or whatever you want).</li>
+<li>Add a simple unordered list (<code>&lt;ul&gt;</code>).</li>
+<li>Save and view the file by, “Open with Browser.”</li>
+<li>Sync with your GitHub. </li>
+</ol></span></li>
+</ul>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
-</div>
 </div>
 </div>
 </section></section>

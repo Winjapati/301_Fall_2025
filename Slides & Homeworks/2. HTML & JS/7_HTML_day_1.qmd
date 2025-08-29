@@ -17,7 +17,7 @@ editor: visual
 
 # Review
 
--   What did you learn on Wednesday?
+-   What did you learn last time?
 
 # How LaTeX Works
 
@@ -27,36 +27,80 @@ editor: visual
 
 ## Moving from LaTeX to HTML
 
-Today we’ll analyze HTML **by analogy with LaTeX**:
+By and large, things in HTML function much more so like LaTeX **environments**. In HTML, these are called **tags**. Both environments & tags:
 
--   `\documentclass` / preamble --\> `<!DOCTYPE html>` + `<head>`
--   `\begin{document}...\end{document}` --\> `<body>...</body>`
--   commands like `\textbf{}` --\> inline tags like `<strong>`
--   environments like `itemize` --\> container tags like `<ul>`
+-   Have opening and closing markers
+-   Wrap content
+-   Describe what that content *is* (a paragraph, a list, a section) rather than how it looks.
+    -   In HTML, indicating how something looks is done using **style sheets** (CSS), which we'll talk about in a few days
 
-------------------------------------------------------------------------
+<!-- ## Moving from LaTeX to HTML -->
 
-## Learning Objectives
+<!-- -   LaTeX: `\documentclass` / preamble -->
 
-By the end of class, you will be able to:
+<!--     -   HTML: `<!DOCTYPE html>` + `<head>` -->
 
--   map LaTeX preamble/document/environments to HTML structure
--   identify **elements**, **attributes**, and **nesting** in HTML
--   explain how **block vs. inline** in HTML parallels LaTeX environments vs. commands
--   publish a minimal page to **GitHub Pages**
+<!-- -   LaTeX:`\begin{document}...\end{document}` -->
 
-------------------------------------------------------------------------
+<!--     -   HTML: `<body>...</body>` -->
 
-## The Big Picture
+<!-- -   LaTeX: **commands** like `\textbf{}` -->
 
--   **Preamble** (`\documentclass`, packages, title info)\
-    ↔ **`<!DOCTYPE html>`, `<head>`**
--   **Document body** (`\begin{document}...\end{document}`)\
-    ↔ **`<body>...</body>`**
--   **Environments** (`\begin{itemize}`, `\begin{figure}`)\
-    ↔ **block containers** (`<ul>`, `<figure>`, `<section>`)
--   **Commands** (`\textbf{}`, `\emph{}`)\
-    ↔ **inline tags** (`<strong>`, `<em>`)
+<!--     -   HTML: **Tags** like `<strong>` -->
+
+<!-- -   LaTeX: **environments** like `\itemize` -->
+
+<!--     -   HTML: **container tags** like `<ul>` -->
+
+## LaTeX vs. HTML Terminology
+
+```{=html}
+<style>
+  .smaller { font-size: 80%; }
+</style>
+```
+
+::: smaller
+| **LaTeX**                          | **HTML**                          |
+|------------------------------------|-----------------------------------|
+| Preamble (`\documentclass`)        | **Doctype** + **Head** (`<head>`) |
+| Document body (`\begin{document}`) | **Body** (`<body>`)               |
+| Command (`\emph{}`)                | **Inline tag** (`<em>`)           |
+| Environment (`\begin{itemize}`)    | **Element** (`<ul>...</ul>`)      |
+| Comment: `% ...`                   | Comment: `<!-- ... -->`           |
+:::
+
+-   To "comment" (`<!--# ... -->`) within RStudio, press "Ctrl + Shift + C" or "⌘ + Shift + C"
+
+## Tags vs. Elements?
+
+-   Tags:
+    -   These are things marked in `< >`
+    -   Usually comes in pairs: `<p> ... </p>`, `<emph> ... </emph>`, etc.
+    -   Can be self-contained: `<img src="cat.jpg" alt="Cat">`
+-   Elements:
+    -   The tags *plus* everything within.
+        -   `<p> Hello World! </p>`
+
+<!-- ------------------------------------------------------------------------ -->
+
+<!-- ## The Big Picture -->
+
+<!-- -   **Preamble** (`\documentclass`, packages, title info)\ -->
+
+<!--     ↔ **`<!DOCTYPE html>`, `<head>`** -->
+
+<!-- -   **Document body** (`\begin{document}...\end{document}`)\ -->
+
+<!--     ↔ **`<body>...</body>`** -->
+
+<!-- -   **Environments** (`\begin{itemize}`, `\begin{figure}`)\ -->
+
+<!--     ↔ **block containers** (`<ul>`, `<figure>`, `<section>`) -->
+
+<!-- -   **Commands** (`\textbf{}`, `\emph{}`)\ -->
+
+<!--     ↔ **inline tags** (`<strong>`, `<em>`) -->
 
 ------------------------------------------------------------------------
 
@@ -105,7 +149,7 @@ Hello world!
 \end{document}
 ```
 
-## Document Body (LaTeX)
+## Document Body (HTML)
 
 ```{html}
 <body>
@@ -115,9 +159,11 @@ Hello world!
 </html>
 ```
 
+-   Copy & paste this code into test.html.
+
 ## Headings & Paragraphs
 
--   In LaTeX:
+-   In LaTeX (three deep):
 
 ``` latex
 \section{About Me}
@@ -127,47 +173,76 @@ I study linguistics.
 Historical linguistics, NLP.
 ```
 
--   In HTML:
+-   In HTML (six deep: `<h1>`-`<h6>`):
 
 ``` html
 <h1>About Me</h1>
 <p>I study linguistics.</p>
 
 <h2>Interests</h2>
-<p>Historical linguistics, NLP.</p>
+<p>Historical linguistics is awesome.</p>
+<p>NLP is cool, too.</p>
 ```
 
--   Copy and paste the HTML code into your test.html file. Try running the code without `<p>...</p>`. What does this "environment" do?
+-   Copy and paste the HTML code into your test.html file. Try running the code without `<p>...</p>`. What does this **tag** do?
 
-## LaTeX vs. HTML Terminology
+## Paragraphs
 
-::: smaller
-| **LaTeX**                          | **HTML**                     |
-|------------------------------------|------------------------------|
-| Preamble (`\documentclass`)        | **Doctype** + **Head**       |
-| Document body (`\begin{document}`) | **Body**                     |
-| Command (`\emph{}`)                | **Inline tag** (`<em>`)      |
-| Environment (`\begin{itemize}`)    | **Element** (`<ul>...</ul>`) |
-| Comment: `% ...`                   | Comment: `<!-- ... -->`      |
-:::
+-   Browsers will automatically treat plain text as if it were wrapped in a paragraph
+-   But...
+    -   Screen readers won't know where your paragraphs begin and end.
+    -   Also, once we load in style sheets (CSS), we may have specific instructions for paragraphs, like setting margins
 
-## Inline Emphasis (Commands ↔ Inline Tags)
+<!-- ## Inline Emphasis (Commands ↔ Inline Tags) -->
 
-``` latex
-\textbf{Important} and \emph{interesting}.
-```
+<!-- ``` latex -->
 
-``` html
-<p><strong>Important</strong> and <em>interesting</em>.</p>
-```
+<!-- \textbf{Important} and \emph{interesting}. -->
 
-``` latex
-\textbf{Important} and \emph{interesting}.
-```
+<!-- ``` -->
 
-``` html
-<p><strong>Important</strong> and <em>interesting</em>.</p>
-```
+<!-- ``` html -->
 
-::: ::::
-:::
+<!-- <p><strong>Important</strong> and <em>interesting</em>.</p> -->
+
+<!-- ``` -->
+
+<!-- ``` latex -->
+
+<!-- \textbf{Important} and \emph{interesting}. -->
+
+<!-- ``` -->
+
+<!-- ``` html -->
+
+<!-- <p><strong>Important</strong> and <em>interesting</em>.</p> -->
+
+<!-- ``` -->
+
+<!-- ::: :::: -->
+
+<!-- ::: -->
+
+# Activity: Build Your Own Website!
+
+## Activity, Step One:  Analyze
+
+-   Download <a href="7_mock_site.html" download>this `html` file</a> and analyze its code.
+-   Identify how to:
+    -   emphasize a word
+    -   make a word 'strong'
+    -   add an html link to a word or string of words
+    -   add an image
+    -   add an unordered list
+
+## Activity, Step Two:  Build
+
+-   Create `firstname_lastname.html`. Add to it: <span style="font-size:80%;">
+    1.  A head and body.
+    2.  Two `<p>` elements talking about yourself (or whatever you want). Use `<h1>` and `<h2>`.
+    3.  Emphasize one word and make another word strong.
+    4.  Add a link that points to your GitHub profile.
+    5.  Add an image of yourself (or whatever you want).
+    6.  Add a simple unordered list (`<ul>`).
+    7.  Save and view the file by, "Open with Browser."
+    8.  Sync with your GitHub. </span>
