@@ -165,6 +165,8 @@ or
 
 -   Try these out in your "example_project". What do they do?
 
+<!--# These are great for article format, some are dependant on pages having multiple columns, etc. Perhaps just use \pagebreak -->
+
 ## Additional Features: Font Effects as Environments
 
 ```{latex}
@@ -283,6 +285,8 @@ Oranges & Orange \\
 -   Let's create one in our "301-LaTeX-practice" project folder
 
 -   Call this .bib file "refs.bib"
+
+<!--# We didn't get through citations all the way, weren't able to test it. -->
 
 ## Additional Features: Your First .bib
 
