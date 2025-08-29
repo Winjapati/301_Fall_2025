@@ -21,6 +21,10 @@ editor: visual
 
 # Structure in HTML
 
+## Why Structure Matters
+
+-   Compare this site with this site
+
 # Activity: Build Your Own Website!
 
 ## Activity, Step One: Analyze
