@@ -255,8 +255,8 @@ Oranges & Orange \\
 
 ```{latex}
 \centering 
-\
-\begin{tabular}{\|r\|l\|} % 
+
+\begin{tabular}{|r|l|} % 
 \hline 
 8 & here's \\ 
 \cline{2-2} 
@@ -264,7 +264,7 @@ Oranges & Orange \\
 \hline \hline 
 2008 & now \\ 
 \hline 
-\
+
 \end{tabular}
 ```
 
