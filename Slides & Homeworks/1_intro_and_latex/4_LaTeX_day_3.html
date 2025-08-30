@@ -410,6 +410,7 @@ Dr.&nbsp;Andrew M. Byrd
 <h2 id="toc-title">Plan for the Day</h2>
 <ul>
 <li><a href="#/review" id="/toc-review">Review</a></li>
+<li><a href="#/finishing-up-citations" id="/toc-finishing-up-citations">Finishing up Citations</a></li>
 <li><a href="#/latex-packages" id="/toc-latex-packages">LaTeX Packages</a></li>
 <li><a href="#/funny-symbols" id="/toc-funny-symbols">Funny Symbols</a></li>
 <li><a href="#/phonological-rules" id="/toc-phonological-rules">Phonological Rules</a></li>
@@ -423,6 +424,97 @@ Dr.&nbsp;Andrew M. Byrd
 </ul>
 </section>
 
+<section>
+<section id="finishing-up-citations" class="title-slide slide level1 center">
+<h1>Finishing up Citations</h1>
+
+</section>
+<section id="additional-features-citations" class="slide level2 center">
+<h2>Additional Features: Citations</h2>
+<ul>
+<li><p>Citations in LaTeX will refer to a .bib file</p></li>
+<li><p>Let’s create one in our “301-LaTeX-practice” project folder</p></li>
+<li><p>Call this .bib file “refs.bib”</p></li>
+</ul>
+</section>
+<section id="additional-features-your-first-.bib" class="slide level2 center">
+<h2>Additional Features: Your First .bib</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource {latex} number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a href=""></a>@article{smith2017,</span>
+<span id="cb1-2"><a href=""></a>    author = {Smith, John},</span>
+<span id="cb1-3"><a href=""></a>    title = {Some paper},</span>
+<span id="cb1-4"><a href=""></a>    year = {2017},</span>
+<span id="cb1-5"><a href=""></a>    journal = {Journal of Research},</span>
+<span id="cb1-6"><a href=""></a>    volume = {2},</span>
+<span id="cb1-7"><a href=""></a>    number = {1},</span>
+<span id="cb1-8"><a href=""></a>    pages = {1--69}</span>
+<span id="cb1-9"><a href=""></a>}</span>
+<span id="cb1-10"><a href=""></a></span>
+<span id="cb1-11"><a href=""></a>@book{knuth1986,</span>
+<span id="cb1-12"><a href=""></a>  author    = "Donald E. Knuth",</span>
+<span id="cb1-13"><a href=""></a>  title     = "The {TeX} Book",</span>
+<span id="cb1-14"><a href=""></a>  year      = "1986",</span>
+<span id="cb1-15"><a href=""></a>  publisher = "Addison-Wesley Professional",</span>
+<span id="cb1-16"><a href=""></a>  address   = "Massachusetts"</span>
+<span id="cb1-17"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="additional-features-citations-1" class="slide level2 center">
+<h2>Additional Features: Citations</h2>
+<ul>
+<li><p>With these two references now in the system, let’s practice citing them.</p></li>
+<li><p>Edit your preamble with the following text, after the <strong>documentclass</strong> command.</p></li>
+</ul>
+<pre><code>\documentclass{article} 
+\usepackage{natbib} 
+\bibliographystyle{apalike} 
+\begin{document}</code></pre>
+</section>
+<section id="additional-features-citations-2" class="slide level2 center">
+<h2>Additional Features: Citations</h2>
+<ul>
+<li>End your document as follows:</li>
+</ul>
+<pre><code>\bibliography{refs}  
+\end{document}</code></pre>
+</section>
+<section id="additional-features-citations-3" class="slide level2 center">
+<h2>Additional Features: Citations</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource {latex} number-lines code-with-copy"><code class="sourceCode"><span id="cb4-1"><a href=""></a>\documentclass{article}</span>
+<span id="cb4-2"><a href=""></a>\usepackage{natbib}</span>
+<span id="cb4-3"><a href=""></a>\bibliographystyle{apalike}</span>
+<span id="cb4-4"><a href=""></a></span>
+<span id="cb4-5"><a href=""></a>\begin{document}</span>
+<span id="cb4-6"><a href=""></a>\title{My First Document}</span>
+<span id="cb4-7"><a href=""></a>\author{My Name}</span>
+<span id="cb4-8"><a href=""></a>\date{December 6, 2017}</span>
+<span id="cb4-9"><a href=""></a>\maketitle</span>
+<span id="cb4-10"><a href=""></a></span>
+<span id="cb4-11"><a href=""></a>\section{Introduction}</span>
+<span id="cb4-12"><a href=""></a> This is the introduction.\cite{smith2017}</span>
+<span id="cb4-13"><a href=""></a>\section{Methods}</span>
+<span id="cb4-14"><a href=""></a>\subsection{Stage 1}</span>
+<span id="cb4-15"><a href=""></a>The first part of the methods.\nocite{knuth1986}</span>
+<span id="cb4-16"><a href=""></a> \subsection{Stage 2}</span>
+<span id="cb4-17"><a href=""></a>The second part of the methods.\cite[p. 215]{smith2017}</span>
+<span id="cb4-18"><a href=""></a> \section{Results}</span>
+<span id="cb4-19"><a href=""></a> Here are my results.\cite{knuth1986,smith2017}</span>
+<span id="cb4-20"><a href=""></a> </span>
+<span id="cb4-21"><a href=""></a>\bibliography{refs} </span>
+<span id="cb4-22"><a href=""></a>\end{document}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Copy the above code and run it in your project tex file.</li>
+</ul>
+</section>
+<section id="to-do-at-home-zotero" class="slide level2 center">
+<h2>To Do at Home: Zotero</h2>
+<ul>
+<li><p>A <em>much</em> more user-friendly reference platform is Zotero.</p></li>
+<li><p>Click here to sign up for the platform or log into your account.</p></li>
+<li><p>Add at least one reference if you do not have one already.</p></li>
+<li><p>Select all of the references to export</p></li>
+<li><p>Click the “upwards arrow” icon</p></li>
+<li><p>You now have a .bib file!</p></li>
+</ul>
+</section></section>
 <section>
 <section id="latex-packages" class="title-slide slide level1 center">
 <h1>LaTeX Packages</h1>
@@ -444,34 +536,34 @@ Dr.&nbsp;Andrew M. Byrd
 <li>Copy and paste the following in your “301-LaTeX-practice” project tex file.</li>
 <li>The <code>lipsum</code> package generates placeholder text.</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb1-1"><a href=""></a><span class="bu">\usepackage</span>{<span class="ex">lipsum</span>}</span>
-<span id="cb1-2"><a href=""></a><span class="kw">\begin</span>{<span class="ex">document</span>}</span>
-<span id="cb1-3"><a href=""></a></span>
-<span id="cb1-4"><a href=""></a>The <span class="fu">\texttt</span>{lipsum} package generates placeholder text.</span>
-<span id="cb1-5"><a href=""></a></span>
-<span id="cb1-6"><a href=""></a>One paragraph of filler:</span>
-<span id="cb1-7"><a href=""></a></span>
-<span id="cb1-8"><a href=""></a><span class="fu">\lipsum</span>[1]</span>
-<span id="cb1-9"><a href=""></a></span>
-<span id="cb1-10"><a href=""></a>Two paragraphs of filler:</span>
-<span id="cb1-11"><a href=""></a></span>
-<span id="cb1-12"><a href=""></a><span class="fu">\lipsum</span>[1-2]</span>
-<span id="cb1-13"><a href=""></a></span>
-<span id="cb1-14"><a href=""></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb5-1"><a href=""></a><span class="bu">\usepackage</span>{<span class="ex">lipsum</span>}</span>
+<span id="cb5-2"><a href=""></a><span class="kw">\begin</span>{<span class="ex">document</span>}</span>
+<span id="cb5-3"><a href=""></a></span>
+<span id="cb5-4"><a href=""></a>The <span class="fu">\texttt</span>{lipsum} package generates placeholder text.</span>
+<span id="cb5-5"><a href=""></a></span>
+<span id="cb5-6"><a href=""></a>One paragraph of filler:</span>
+<span id="cb5-7"><a href=""></a></span>
+<span id="cb5-8"><a href=""></a><span class="fu">\lipsum</span>[1]</span>
+<span id="cb5-9"><a href=""></a></span>
+<span id="cb5-10"><a href=""></a>Two paragraphs of filler:</span>
+<span id="cb5-11"><a href=""></a></span>
+<span id="cb5-12"><a href=""></a><span class="fu">\lipsum</span>[1-2]</span>
+<span id="cb5-13"><a href=""></a></span>
+<span id="cb5-14"><a href=""></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="loading-a-package-thats-not-in-overleaf" class="slide level2 center">
 <h2>Loading a Package that’s not in Overleaf</h2>
 <ul>
 <li>Let’s try a different style for our “ipsum lorem” text. What happens when you load the following code?</li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb2-1"><a href=""></a><span class="bu">\documentclass</span>{<span class="ex">article</span>}</span>
-<span id="cb2-2"><a href=""></a><span class="bu">\usepackage</span>{<span class="ex">duckuments</span>}</span>
-<span id="cb2-3"><a href=""></a></span>
-<span id="cb2-4"><a href=""></a><span class="kw">\begin</span>{<span class="ex">document</span>}</span>
-<span id="cb2-5"><a href=""></a><span class="co">% Duck-themed filler (like blindtext):</span></span>
-<span id="cb2-6"><a href=""></a><span class="fu">\blindduck</span>[1]     <span class="co">% 1 paragraph</span></span>
-<span id="cb2-7"><a href=""></a><span class="fu">\blindduck</span>[1-2]   <span class="co">% paragraphs 1–2</span></span>
-<span id="cb2-8"><a href=""></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb6-1"><a href=""></a><span class="bu">\documentclass</span>{<span class="ex">article</span>}</span>
+<span id="cb6-2"><a href=""></a><span class="bu">\usepackage</span>{<span class="ex">duckuments</span>}</span>
+<span id="cb6-3"><a href=""></a></span>
+<span id="cb6-4"><a href=""></a><span class="kw">\begin</span>{<span class="ex">document</span>}</span>
+<span id="cb6-5"><a href=""></a><span class="co">% Duck-themed filler (like blindtext):</span></span>
+<span id="cb6-6"><a href=""></a><span class="fu">\blindduck</span>[1]     <span class="co">% 1 paragraph</span></span>
+<span id="cb6-7"><a href=""></a><span class="fu">\blindduck</span>[1-2]   <span class="co">% paragraphs 1–2</span></span>
+<span id="cb6-8"><a href=""></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="loading-a-package-thats-not-in-overleaf-1" class="slide level2 center">
 <h2>Loading a Package that’s not in Overleaf</h2>
@@ -502,26 +594,26 @@ Dr.&nbsp;Andrew M. Byrd
 <h2>Packages: Options &amp; Optional Arguments</h2>
 <ul>
 <li>Let’s load up <code>enumitem</code> to see how it works</li>
-<li>Check out the customizations - can you modify the code to turn (c) into (d)?</li>
+<li>Check out the customizations - can you modify the code so that the list starts with (d)?</li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb3-1"><a href=""></a><span class="bu">\documentclass</span>{<span class="ex">article</span>}</span>
-<span id="cb3-2"><a href=""></a><span class="bu">\usepackage</span>{<span class="ex">enumitem</span>} <span class="co">% no options</span></span>
-<span id="cb3-3"><a href=""></a></span>
-<span id="cb3-4"><a href=""></a><span class="kw">\begin</span>{<span class="ex">document</span>}</span>
-<span id="cb3-5"><a href=""></a></span>
-<span id="cb3-6"><a href=""></a><span class="co">% Default enumerate</span></span>
-<span id="cb3-7"><a href=""></a><span class="kw">\begin</span>{<span class="ex">enumerate</span>}</span>
-<span id="cb3-8"><a href=""></a>  <span class="fu">\item</span> Alpha</span>
-<span id="cb3-9"><a href=""></a>  <span class="fu">\item</span> Beta</span>
-<span id="cb3-10"><a href=""></a><span class="kw">\end</span>{<span class="ex">enumerate</span>}</span>
-<span id="cb3-11"><a href=""></a></span>
-<span id="cb3-12"><a href=""></a><span class="co">% Customized enumerate (full label syntax)</span></span>
-<span id="cb3-13"><a href=""></a><span class="kw">\begin</span>{<span class="ex">enumerate</span>}[label=(<span class="fu">\alph*</span>), start=3, nosep, leftmargin=*]</span>
-<span id="cb3-14"><a href=""></a>  <span class="fu">\item</span> starts at (c)</span>
-<span id="cb3-15"><a href=""></a>  <span class="fu">\item</span> then (d)</span>
-<span id="cb3-16"><a href=""></a><span class="kw">\end</span>{<span class="ex">enumerate</span>}</span>
-<span id="cb3-17"><a href=""></a></span>
-<span id="cb3-18"><a href=""></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb7-1"><a href=""></a><span class="bu">\documentclass</span>{<span class="ex">article</span>}</span>
+<span id="cb7-2"><a href=""></a><span class="bu">\usepackage</span>{<span class="ex">enumitem</span>} <span class="co">% no options</span></span>
+<span id="cb7-3"><a href=""></a></span>
+<span id="cb7-4"><a href=""></a><span class="kw">\begin</span>{<span class="ex">document</span>}</span>
+<span id="cb7-5"><a href=""></a></span>
+<span id="cb7-6"><a href=""></a><span class="co">% Default enumerate</span></span>
+<span id="cb7-7"><a href=""></a><span class="kw">\begin</span>{<span class="ex">enumerate</span>}</span>
+<span id="cb7-8"><a href=""></a>  <span class="fu">\item</span> Alpha</span>
+<span id="cb7-9"><a href=""></a>  <span class="fu">\item</span> Beta</span>
+<span id="cb7-10"><a href=""></a><span class="kw">\end</span>{<span class="ex">enumerate</span>}</span>
+<span id="cb7-11"><a href=""></a></span>
+<span id="cb7-12"><a href=""></a><span class="co">% Customized enumerate (full label syntax)</span></span>
+<span id="cb7-13"><a href=""></a><span class="kw">\begin</span>{<span class="ex">enumerate</span>}[label=(<span class="fu">\alph*</span>), start=3, nosep, leftmargin=*]</span>
+<span id="cb7-14"><a href=""></a>  <span class="fu">\item</span> starts at (c)</span>
+<span id="cb7-15"><a href=""></a>  <span class="fu">\item</span> then (d)</span>
+<span id="cb7-16"><a href=""></a><span class="kw">\end</span>{<span class="ex">enumerate</span>}</span>
+<span id="cb7-17"><a href=""></a></span>
+<span id="cb7-18"><a href=""></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="packages-options-optional-arguments-2" class="slide level2 center">
 <h2>Packages: Options &amp; Optional Arguments</h2>
@@ -539,89 +631,74 @@ Dr.&nbsp;Andrew M. Byrd
 <ul>
 <li>Let’s add the option <code>shortlabels</code> to the package.</li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb4-1"><a href=""></a><span class="bu">\documentclass</span>{<span class="ex">article</span>}</span>
-<span id="cb4-2"><a href=""></a><span class="bu">\usepackage</span>[shortlabels]{<span class="ex">enumitem</span>}</span>
-<span id="cb4-3"><a href=""></a></span>
-<span id="cb4-4"><a href=""></a><span class="kw">\begin</span>{<span class="ex">document</span>}</span>
-<span id="cb4-5"><a href=""></a></span>
-<span id="cb4-6"><a href=""></a><span class="co">% Same effect, shorter to type:</span></span>
-<span id="cb4-7"><a href=""></a><span class="kw">\begin</span>{<span class="ex">enumerate</span>}[(a)] <span class="co">% shorthand for label=(\alph*)</span></span>
-<span id="cb4-8"><a href=""></a>  <span class="fu">\item</span> alpha</span>
-<span id="cb4-9"><a href=""></a>  <span class="fu">\item</span> beta</span>
-<span id="cb4-10"><a href=""></a><span class="kw">\end</span>{<span class="ex">enumerate</span>}</span>
-<span id="cb4-11"><a href=""></a></span>
-<span id="cb4-12"><a href=""></a><span class="co">% Start at (c) with shorthand:</span></span>
-<span id="cb4-13"><a href=""></a><span class="kw">\begin</span>{<span class="ex">enumerate</span>}[(a), start=3, nosep, leftmargin=*]</span>
-<span id="cb4-14"><a href=""></a>  <span class="fu">\item</span> starts at (c)</span>
-<span id="cb4-15"><a href=""></a>  <span class="fu">\item</span> then (d)</span>
-<span id="cb4-16"><a href=""></a><span class="kw">\end</span>{<span class="ex">enumerate</span>}</span>
-<span id="cb4-17"><a href=""></a></span>
-<span id="cb4-18"><a href=""></a><span class="co">% Other shorthands:</span></span>
-<span id="cb4-19"><a href=""></a><span class="kw">\begin</span>{<span class="ex">enumerate</span>}[A.]   <span class="co">% -&gt; A., B., C.</span></span>
-<span id="cb4-20"><a href=""></a>  <span class="fu">\item</span> First</span>
-<span id="cb4-21"><a href=""></a>  <span class="fu">\item</span> Second</span>
-<span id="cb4-22"><a href=""></a><span class="kw">\end</span>{<span class="ex">enumerate</span>}</span>
-<span id="cb4-23"><a href=""></a></span>
-<span id="cb4-24"><a href=""></a><span class="kw">\begin</span>{<span class="ex">enumerate</span>}[i.]   <span class="co">% -&gt; i., ii., iii.</span></span>
-<span id="cb4-25"><a href=""></a>  <span class="fu">\item</span> One</span>
-<span id="cb4-26"><a href=""></a>  <span class="fu">\item</span> Two</span>
-<span id="cb4-27"><a href=""></a><span class="kw">\end</span>{<span class="ex">enumerate</span>}</span>
-<span id="cb4-28"><a href=""></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="activity-packages" class="slide level2 center">
-<h2>Activity: Packages</h2>
-<ul>
-<li>Copy and paste this code into your “301-LaTeX-practice” project tex file.
-<ul>
-<li><strong>Your task</strong>: study the code, and identify precisely what the optional arguments and commands are doing.</li>
-<li>Feel free to discuss with neighbors!</li>
-</ul></li>
-</ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb5-1"><a href=""></a><span class="bu">\documentclass</span>[12pt]{<span class="ex">article</span>}</span>
-<span id="cb5-2"><a href=""></a></span>
-<span id="cb5-3"><a href=""></a><span class="co">% enumitem with two options declared</span></span>
-<span id="cb5-4"><a href=""></a><span class="bu">\usepackage</span>[shortlabels,inline]{<span class="ex">enumitem</span>}</span>
-<span id="cb5-5"><a href=""></a></span>
-<span id="cb5-6"><a href=""></a><span class="co">% Setting defaults</span></span>
-<span id="cb5-7"><a href=""></a><span class="fu">\setlist</span>[enumerate,1]{label=(<span class="fu">\arabic*</span>)}          <span class="co">% level 1: (1), (2), ...</span></span>
-<span id="cb5-8"><a href=""></a><span class="fu">\setlist</span>[enumerate,2]{label=(<span class="fu">\alph*</span>)}            <span class="co">% level 2: (a), (b), ...</span></span>
-<span id="cb5-9"><a href=""></a><span class="fu">\setlist</span>[itemize]{label=--}                      <span class="co">% itemize bullets are dashes</span></span>
-<span id="cb5-10"><a href=""></a></span>
-<span id="cb5-11"><a href=""></a><span class="kw">\begin</span>{<span class="ex">document</span>}</span>
-<span id="cb5-12"><a href=""></a></span>
-<span id="cb5-13"><a href=""></a><span class="kw">\begin</span>{<span class="ex">itemize</span>}</span>
-<span id="cb5-14"><a href=""></a>  <span class="fu">\item</span> Data: 100 speakers across 5 regions.</span>
-<span id="cb5-15"><a href=""></a>  <span class="fu">\item</span> Methods: Forced alignment <span class="fu">\&amp;</span> manual checks.</span>
-<span id="cb5-16"><a href=""></a>  <span class="fu">\item</span>[<span class="fu">\textbf</span>{Note:}] Region 3 recordings have higher noise levels.</span>
-<span id="cb5-17"><a href=""></a>  <span class="fu">\item</span> Deliverable: 2–3 pages with plots.</span>
-<span id="cb5-18"><a href=""></a><span class="kw">\end</span>{<span class="ex">itemize</span>}</span>
-<span id="cb5-19"><a href=""></a></span>
-<span id="cb5-20"><a href=""></a></span>
-<span id="cb5-21"><a href=""></a><span class="kw">\begin</span>{<span class="ex">enumerate</span>}[start=3]             <span class="co">% (3), (4), ...</span></span>
-<span id="cb5-22"><a href=""></a>  <span class="fu">\item</span> Prepare audio</span>
-<span id="cb5-23"><a href=""></a>    <span class="kw">\begin</span>{<span class="ex">enumerate</span>}</span>
-<span id="cb5-24"><a href=""></a>      <span class="fu">\item</span> normalize</span>
-<span id="cb5-25"><a href=""></a>      <span class="fu">\item</span> trim silences</span>
-<span id="cb5-26"><a href=""></a>    <span class="kw">\end</span>{<span class="ex">enumerate</span>}</span>
-<span id="cb5-27"><a href=""></a>  <span class="fu">\item</span> Extract features</span>
-<span id="cb5-28"><a href=""></a><span class="kw">\end</span>{<span class="ex">enumerate</span>}</span>
-<span id="cb5-29"><a href=""></a></span>
-<span id="cb5-30"><a href=""></a><span class="co">% ... some text ...</span></span>
-<span id="cb5-31"><a href=""></a></span>
-<span id="cb5-32"><a href=""></a><span class="kw">\begin</span>{<span class="ex">enumerate</span>}[resume]              <span class="co">% continues with (5)</span></span>
-<span id="cb5-33"><a href=""></a>  <span class="fu">\item</span> Train model</span>
-<span id="cb5-34"><a href=""></a><span class="kw">\end</span>{<span class="ex">enumerate</span>}</span>
-<span id="cb5-35"><a href=""></a></span>
-<span id="cb5-36"><a href=""></a></span>
-<span id="cb5-37"><a href=""></a>In this study we (briefly) confirm </span>
-<span id="cb5-38"><a href=""></a><span class="kw">\begin</span>{<span class="ex">enumerate*</span>}[label=a., itemjoin={{; }}, itemjoin*={{; and }}]</span>
-<span id="cb5-39"><a href=""></a>  <span class="fu">\item</span> speaker balance</span>
-<span id="cb5-40"><a href=""></a>  <span class="fu">\item</span> region stratification</span>
-<span id="cb5-41"><a href=""></a>  <span class="fu">\item</span> license compliance</span>
-<span id="cb5-42"><a href=""></a><span class="kw">\end</span>{<span class="ex">enumerate*</span>}</span>
-<span id="cb5-43"><a href=""></a>before proceeding.</span>
-<span id="cb5-44"><a href=""></a></span>
-<span id="cb5-45"><a href=""></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb8-1"><a href=""></a><span class="bu">\documentclass</span>{<span class="ex">article</span>}</span>
+<span id="cb8-2"><a href=""></a><span class="bu">\usepackage</span>[shortlabels]{<span class="ex">enumitem</span>}</span>
+<span id="cb8-3"><a href=""></a></span>
+<span id="cb8-4"><a href=""></a><span class="kw">\begin</span>{<span class="ex">document</span>}</span>
+<span id="cb8-5"><a href=""></a></span>
+<span id="cb8-6"><a href=""></a><span class="co">% Same effect, shorter to type:</span></span>
+<span id="cb8-7"><a href=""></a><span class="kw">\begin</span>{<span class="ex">enumerate</span>}[(a)] <span class="co">% shorthand for label=(\alph*)</span></span>
+<span id="cb8-8"><a href=""></a>  <span class="fu">\item</span> alpha</span>
+<span id="cb8-9"><a href=""></a>  <span class="fu">\item</span> beta</span>
+<span id="cb8-10"><a href=""></a><span class="kw">\end</span>{<span class="ex">enumerate</span>}</span>
+<span id="cb8-11"><a href=""></a></span>
+<span id="cb8-12"><a href=""></a><span class="co">% Start at (c) with shorthand:</span></span>
+<span id="cb8-13"><a href=""></a><span class="kw">\begin</span>{<span class="ex">enumerate</span>}[(a), start=3, nosep, leftmargin=*]</span>
+<span id="cb8-14"><a href=""></a>  <span class="fu">\item</span> starts at (c)</span>
+<span id="cb8-15"><a href=""></a>  <span class="fu">\item</span> then (d)</span>
+<span id="cb8-16"><a href=""></a><span class="kw">\end</span>{<span class="ex">enumerate</span>}</span>
+<span id="cb8-17"><a href=""></a></span>
+<span id="cb8-18"><a href=""></a><span class="co">% Other shorthands:</span></span>
+<span id="cb8-19"><a href=""></a><span class="kw">\begin</span>{<span class="ex">enumerate</span>}[A.]   <span class="co">% -&gt; A., B., C.</span></span>
+<span id="cb8-20"><a href=""></a>  <span class="fu">\item</span> First</span>
+<span id="cb8-21"><a href=""></a>  <span class="fu">\item</span> Second</span>
+<span id="cb8-22"><a href=""></a><span class="kw">\end</span>{<span class="ex">enumerate</span>}</span>
+<span id="cb8-23"><a href=""></a></span>
+<span id="cb8-24"><a href=""></a><span class="kw">\begin</span>{<span class="ex">enumerate</span>}[i.]   <span class="co">% -&gt; i., ii., iii.</span></span>
+<span id="cb8-25"><a href=""></a>  <span class="fu">\item</span> One</span>
+<span id="cb8-26"><a href=""></a>  <span class="fu">\item</span> Two</span>
+<span id="cb8-27"><a href=""></a><span class="kw">\end</span>{<span class="ex">enumerate</span>}</span>
+<span id="cb8-28"><a href=""></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<!-- ## Activity: Packages -->
+<!-- -   Copy and paste this code into your "301-LaTeX-practice" project tex file. -->
+<!--     -   **Your task**: study the code, and identify precisely what the optional arguments and commands are doing. -->
+<!--     -   Feel free to discuss with neighbors! -->
+<!-- ``` latex -->
+<!-- \documentclass[12pt]{article} -->
+<!-- % enumitem with two options declared -->
+<!-- \usepackage[shortlabels,inline]{enumitem} -->
+<!-- % Setting defaults -->
+<!-- \setlist[enumerate,1]{label=(\arabic*)}          % level 1: (1), (2), ... -->
+<!-- \setlist[enumerate,2]{label=(\alph*)}            % level 2: (a), (b), ... -->
+<!-- \setlist[itemize]{label=--}                      % itemize bullets are dashes -->
+<!-- \begin{document} -->
+<!-- \begin{itemize} -->
+<!--   \item Data: 100 speakers across 5 regions. -->
+<!--   \item Methods: Forced alignment \& manual checks. -->
+<!--   \item[\textbf{Note:}] Region 3 recordings have higher noise levels. -->
+<!--   \item Deliverable: 2–3 pages with plots. -->
+<!-- \end{itemize} -->
+<!-- \begin{enumerate}[start=3]             % (3), (4), ... -->
+<!--   \item Prepare audio -->
+<!--     \begin{enumerate} -->
+<!--       \item normalize -->
+<!--       \item trim silences -->
+<!--     \end{enumerate} -->
+<!--   \item Extract features -->
+<!-- \end{enumerate} -->
+<!-- % ... some text ... -->
+<!-- \begin{enumerate}[resume]              % continues with (5) -->
+<!--   \item Train model -->
+<!-- \end{enumerate} -->
+<!-- In this study we (briefly) confirm  -->
+<!-- \begin{enumerate*}[label=a., itemjoin={{; }}, itemjoin*={{; and }}] -->
+<!--   \item speaker balance -->
+<!--   \item region stratification -->
+<!--   \item license compliance -->
+<!-- \end{enumerate*} -->
+<!-- before proceeding. -->
+<!-- \end{document} -->
+<!-- ``` -->
 </section></section>
 <section>
 <section id="funny-symbols" class="title-slide slide level1 center">
@@ -630,22 +707,28 @@ Dr.&nbsp;Andrew M. Byrd
 <li>We’re linguists, so of course we work with lots of languages and funny scripts.</li>
 <li>For instance, what do we do if we’re citing French data?</li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb6-1"><a href=""></a><span class="fu">\'</span>{a}, <span class="fu">\`</span>{a}, <span class="fu">\^</span>{a}, ç --&gt; á, à, â, ç </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb9-1"><a href=""></a><span class="fu">\'</span>{a}, <span class="fu">\`</span>{a}, <span class="fu">\^</span>{a}, <span class="fu">\c</span>{c} --&gt; á, à, â, ç </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>Or German?</li>
 </ul>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb7-1"><a href=""></a><span class="fu">\"</span>{a}, <span class="fu">\ss</span> --&gt; ä, ß </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb10-1"><a href=""></a><span class="fu">\"</span>{a}, <span class="fu">\ss</span> --&gt; ä, ß </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><strong>Note</strong>: modifying diacritics work for any symbol:</li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb11-1"><a href=""></a><span class="fu">\'</span>{h}, <span class="fu">\"</span>{p}, <span class="fu">\^</span>{g}, <span class="fu">\c</span>{<span class="fu">\%</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="funny-symbols-ipa" class="slide level2 center">
 <h2>Funny Symbols: IPA</h2>
 <ul>
 <li>We’re going to use this idea with IPA</li>
-<li>But we’ve of course got to load a package for this: <code>tipa</code></li>
-<li>Download the <a href="http://www.l.u-tokyo.ac.jp/~fkr/tipa/tipaman.pdf">TIPA manual</a></li>
+<li>But we’ve of course got to load a package for this: <code>tipa</code>
+<ul>
+<li>To see full instructions, download the <a href="http://www.l.u-tokyo.ac.jp/~fkr/tipa/tipaman.pdf">TIPA manual</a></li>
+</ul></li>
 <li>Let’s load it up.</li>
 </ul>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb8-1"><a href=""></a><span class="bu">\documentclass</span>{<span class="ex">article</span>}</span>
-<span id="cb8-2"><a href=""></a><span class="bu">\usepackage</span>{<span class="ex">tipa</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb12-1"><a href=""></a><span class="bu">\documentclass</span>{<span class="ex">article</span>}</span>
+<span id="cb12-2"><a href=""></a><span class="bu">\usepackage</span>{<span class="ex">tipa</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="funny-symbols-ipa-1" class="slide level2 center">
 <h2>Funny Symbols: IPA</h2>
@@ -654,24 +737,21 @@ Dr.&nbsp;Andrew M. Byrd
 <ol type="1">
 <li>With individual characters:</li>
 </ol>
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb9-1"><a href=""></a><span class="fu">\textprimstress</span> h<span class="fu">\textepsilon</span>.<span class="fu">\textltilde\t</span>{o<span class="fu">\textupsilon</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb13-1"><a href=""></a><span class="fu">\textprimstress</span> h<span class="fu">\textepsilon</span>.<span class="fu">\textltilde\t</span>{o<span class="fu">\textupsilon</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol start="2" type="1">
 <li>Within a <code>\textipa</code> environment</li>
 </ol>
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb10-1"><a href=""></a><span class="fu">\textprimstress\textipa</span>{hE.<span class="fu">\textltilde\t</span>{oU}}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb14-1"><a href=""></a><span class="fu">\textprimstress\textipa</span>{hE.<span class="fu">\textltilde\t</span>{oU}}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p>To find the symbols, check out the <a href="http://www.l.u-tokyo.ac.jp/~fkr/tipa/tipaman.pdf">TIPA manual</a></p></li>
 </ul>
 </section>
 <section id="ipa-activity" class="slide level2 center">
 <h2>IPA Activity</h2>
 <ul>
-<li>In LaTeX, type out the following words using the TIPA package:</li>
+<li>In LaTeX, type out “your first name” using the TIPA package.</li>
 </ul>
-<ol type="1">
-<li><p>computer</p></li>
-<li><p>sleepy</p></li>
-<li><p>“your first name”</p></li>
-</ol>
+<!-- 1.  computer -->
+<!-- 2.  sleepy   -->
 </section>
 <section id="funny-symbols-ipa-other-scripts" class="slide level2 center">
 <h2>Funny Symbols: IPA &amp; Other Scripts</h2>
@@ -679,48 +759,48 @@ Dr.&nbsp;Andrew M. Byrd
 <li>But what about Japanese? It’s easier than you think…</li>
 <li>What happens when you run this code?</li>
 </ul>
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb11-1"><a href=""></a><span class="bu">\documentclass</span>{<span class="ex">article</span>}</span>
-<span id="cb11-2"><a href=""></a><span class="bu">\usepackage</span>{<span class="ex">fontspec</span>} <span class="co">% lets you pick system fonts</span></span>
-<span id="cb11-3"><a href=""></a></span>
-<span id="cb11-4"><a href=""></a><span class="fu">\setmainfont</span>{Noto Serif CJK JP} <span class="co">% or another Japanese-capable font</span></span>
-<span id="cb11-5"><a href=""></a></span>
-<span id="cb11-6"><a href=""></a><span class="kw">\begin</span>{<span class="ex">document</span>}</span>
-<span id="cb11-7"><a href=""></a></span>
-<span id="cb11-8"><a href=""></a>日本語の文を書いています。  <span class="co">% “I am writing a sentence in Japanese.”</span></span>
-<span id="cb11-9"><a href=""></a></span>
-<span id="cb11-10"><a href=""></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb15-1"><a href=""></a><span class="bu">\documentclass</span>{<span class="ex">article</span>}</span>
+<span id="cb15-2"><a href=""></a><span class="bu">\usepackage</span>{<span class="ex">fontspec</span>} <span class="co">% lets you pick system fonts</span></span>
+<span id="cb15-3"><a href=""></a></span>
+<span id="cb15-4"><a href=""></a><span class="fu">\setmainfont</span>{Noto Serif CJK JP} <span class="co">% or another Japanese-capable font</span></span>
+<span id="cb15-5"><a href=""></a></span>
+<span id="cb15-6"><a href=""></a><span class="kw">\begin</span>{<span class="ex">document</span>}</span>
+<span id="cb15-7"><a href=""></a></span>
+<span id="cb15-8"><a href=""></a>日本語の文を書いています。  <span class="co">% “I am writing a sentence in Japanese.”</span></span>
+<span id="cb15-9"><a href=""></a></span>
+<span id="cb15-10"><a href=""></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="funny-symbols-xelatex" class="slide level2 center">
 <h2>Funny Symbols: XeLaTeX</h2>
 <ul>
 <li>Click “Menu” –&gt; “Compiler” –&gt; “XeLaTeX”</li>
 </ul>
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb12-1"><a href=""></a><span class="bu">\documentclass</span>{<span class="ex">article</span>}</span>
-<span id="cb12-2"><a href=""></a><span class="bu">\usepackage</span>{<span class="ex">fontspec</span>} <span class="co">% lets you pick system fonts</span></span>
-<span id="cb12-3"><a href=""></a></span>
-<span id="cb12-4"><a href=""></a><span class="fu">\setmainfont</span>{Noto Serif CJK JP} <span class="co">% or another Japanese-capable font</span></span>
-<span id="cb12-5"><a href=""></a></span>
-<span id="cb12-6"><a href=""></a><span class="kw">\begin</span>{<span class="ex">document</span>}</span>
-<span id="cb12-7"><a href=""></a></span>
-<span id="cb12-8"><a href=""></a>日本語の文を書いています。  <span class="co">% “I am writing a sentence in Japanese.”</span></span>
-<span id="cb12-9"><a href=""></a></span>
-<span id="cb12-10"><a href=""></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb16-1"><a href=""></a><span class="bu">\documentclass</span>{<span class="ex">article</span>}</span>
+<span id="cb16-2"><a href=""></a><span class="bu">\usepackage</span>{<span class="ex">fontspec</span>} <span class="co">% lets you pick system fonts</span></span>
+<span id="cb16-3"><a href=""></a></span>
+<span id="cb16-4"><a href=""></a><span class="fu">\setmainfont</span>{Noto Serif CJK JP} <span class="co">% or another Japanese-capable font</span></span>
+<span id="cb16-5"><a href=""></a></span>
+<span id="cb16-6"><a href=""></a><span class="kw">\begin</span>{<span class="ex">document</span>}</span>
+<span id="cb16-7"><a href=""></a></span>
+<span id="cb16-8"><a href=""></a>日本語の文を書いています。  <span class="co">% “I am writing a sentence in Japanese.”</span></span>
+<span id="cb16-9"><a href=""></a></span>
+<span id="cb16-10"><a href=""></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="funny-symbols-xelatex-and-ipa" class="slide level2 center">
 <h2>Funny Symbols: XeLaTeX and IPA</h2>
 <ul>
 <li>Wait a minute… does this mean that we can use XeLaTeX with IPA symbols? See for yourself…</li>
 </ul>
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb13-1"><a href=""></a><span class="bu">\documentclass</span>{<span class="ex">article</span>}</span>
-<span id="cb13-2"><a href=""></a><span class="bu">\usepackage</span>{<span class="ex">fontspec</span>}</span>
-<span id="cb13-3"><a href=""></a></span>
-<span id="cb13-4"><a href=""></a><span class="fu">\setmainfont</span>{Doulos SIL} <span class="co">% a font with good IPA coverage</span></span>
-<span id="cb13-5"><a href=""></a></span>
-<span id="cb13-6"><a href=""></a><span class="kw">\begin</span>{<span class="ex">document</span>}</span>
-<span id="cb13-7"><a href=""></a></span>
-<span id="cb13-8"><a href=""></a>ˈkʰæn ju ˈkɑpi ən ˈpeɪst ðɪs ˈsɛntəns ˈɪntu ˈoʊvɚˌlif</span>
-<span id="cb13-9"><a href=""></a></span>
-<span id="cb13-10"><a href=""></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb17-1"><a href=""></a><span class="bu">\documentclass</span>{<span class="ex">article</span>}</span>
+<span id="cb17-2"><a href=""></a><span class="bu">\usepackage</span>{<span class="ex">fontspec</span>}</span>
+<span id="cb17-3"><a href=""></a></span>
+<span id="cb17-4"><a href=""></a><span class="fu">\setmainfont</span>{Doulos SIL} <span class="co">% a font with good IPA coverage</span></span>
+<span id="cb17-5"><a href=""></a></span>
+<span id="cb17-6"><a href=""></a><span class="kw">\begin</span>{<span class="ex">document</span>}</span>
+<span id="cb17-7"><a href=""></a></span>
+<span id="cb17-8"><a href=""></a>ˈkʰæn ju ˈkɑpi ən ˈpeɪst ðɪs ˈsɛntəns ˈɪntu ˈoʊvɚˌlif</span>
+<span id="cb17-9"><a href=""></a></span>
+<span id="cb17-10"><a href=""></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section></section>
 <section>
 <section id="phonological-rules" class="title-slide slide level1 center">
@@ -736,24 +816,24 @@ Dr.&nbsp;Andrew M. Byrd
 <ul>
 <li>To create phonological rules we’ll be using the <code>phonrule</code> package</li>
 </ul>
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb14-1"><a href=""></a><span class="bu">\documentclass</span>{<span class="ex">article</span>}</span>
-<span id="cb14-2"><a href=""></a><span class="bu">\usepackage</span>{<span class="ex">phonrule</span>} #phonological rule package</span>
-<span id="cb14-3"><a href=""></a><span class="bu">\usepackage</span>{<span class="ex">tipa</span>}</span>
-<span id="cb14-4"><a href=""></a></span>
-<span id="cb14-5"><a href=""></a><span class="kw">\begin</span>{<span class="ex">document</span>}</span>
-<span id="cb14-6"><a href=""></a><span class="kw">\begin</span>{<span class="ex">enumerate</span>} </span>
-<span id="cb14-7"><a href=""></a><span class="fu">\item</span> <span class="fu">\phonb</span>{s}{z}{V}{V} (<span class="fu">\textbackslash</span> phonb) </span>
-<span id="cb14-8"><a href=""></a><span class="fu">\item</span> <span class="fu">\phonl</span>{k}{c}{i} (<span class="fu">\textbackslash</span> phonl) </span>
-<span id="cb14-9"><a href=""></a><span class="fu">\item</span> <span class="fu">\phonr</span>{t}{ts}{u} (<span class="fu">\textbackslash</span> phonr) </span>
-<span id="cb14-10"><a href=""></a><span class="fu">\item</span> <span class="fu">\phon</span>{<span class="fu">\textturnw</span>}{w} (<span class="fu">\textbackslash</span> phon) </span>
-<span id="cb14-11"><a href=""></a><span class="fu">\item</span> <span class="fu">\phonb</span>{<span class="fu">\phonfeat</span>{+stop <span class="fu">\\</span> +consonant <span class="fu">\\</span> +alveolar}}{[<span class="fu">\textfishhookr</span>]}{ <span class="fu">\phonfeat</span>{+vowel <span class="fu">\\</span> +stressed}}{<span class="fu">\phonfeat</span>{+vowel <span class="fu">\\</span> +stressed}} </span>
-<span id="cb14-12"><a href=""></a><span class="kw">\end</span>{<span class="ex">enumerate</span>}</span>
-<span id="cb14-13"><a href=""></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb18-1"><a href=""></a><span class="bu">\documentclass</span>{<span class="ex">article</span>}</span>
+<span id="cb18-2"><a href=""></a><span class="bu">\usepackage</span>{<span class="ex">phonrule</span>} #phonological rule package</span>
+<span id="cb18-3"><a href=""></a><span class="bu">\usepackage</span>{<span class="ex">tipa</span>}</span>
+<span id="cb18-4"><a href=""></a></span>
+<span id="cb18-5"><a href=""></a><span class="kw">\begin</span>{<span class="ex">document</span>}</span>
+<span id="cb18-6"><a href=""></a><span class="kw">\begin</span>{<span class="ex">enumerate</span>} </span>
+<span id="cb18-7"><a href=""></a><span class="fu">\item</span> <span class="fu">\phonb</span>{s}{z}{V}{V} (<span class="fu">\textbackslash</span> phonb) </span>
+<span id="cb18-8"><a href=""></a><span class="fu">\item</span> <span class="fu">\phonl</span>{k}{c}{i} (<span class="fu">\textbackslash</span> phonl) </span>
+<span id="cb18-9"><a href=""></a><span class="fu">\item</span> <span class="fu">\phonr</span>{t}{ts}{u} (<span class="fu">\textbackslash</span> phonr) </span>
+<span id="cb18-10"><a href=""></a><span class="fu">\item</span> <span class="fu">\phon</span>{<span class="fu">\textturnw</span>}{w} (<span class="fu">\textbackslash</span> phon) </span>
+<span id="cb18-11"><a href=""></a><span class="fu">\item</span> <span class="fu">\phonb</span>{<span class="fu">\phonfeat</span>{+stop <span class="fu">\\</span> +consonant <span class="fu">\\</span> +alveolar}}{[<span class="fu">\textfishhookr</span>]}{ <span class="fu">\phonfeat</span>{+vowel <span class="fu">\\</span> +stressed}}{<span class="fu">\phonfeat</span>{+vowel <span class="fu">\\</span> +stressed}} </span>
+<span id="cb18-12"><a href=""></a><span class="kw">\end</span>{<span class="ex">enumerate</span>}</span>
+<span id="cb18-13"><a href=""></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="phonology-activity" class="slide level2 center">
 <h2>Phonology Activity</h2>
 <ul>
-<li>Now it’s your turn! Analyze this small sample of invented data, and then render a phonological rule in LaTeX that describes the alternation.</li>
+<li>Now it’s your turn! Let’s analyze this small sample of invented data together, and then render a phonological rule in LaTeX that describes the alternation.</li>
 </ul>
 <table class="caption-top">
 <thead>
@@ -802,39 +882,39 @@ Dr.&nbsp;Andrew M. Byrd
 </section>
 <section id="ot-tableaux-1" class="slide level2 center">
 <h2>OT Tableaux</h2>
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb15-1"><a href=""></a><span class="bu">\documentclass</span>{<span class="ex">article</span>}</span>
-<span id="cb15-2"><a href=""></a><span class="bu">\usepackage</span>{<span class="ex">tipa</span>}    <span class="co">%for ipa</span></span>
-<span id="cb15-3"><a href=""></a><span class="bu">\usepackage</span>[table]{<span class="ex">xcolor</span>}    <span class="co">%for shading*</span></span>
-<span id="cb15-4"><a href=""></a><span class="bu">\usepackage</span>{<span class="ex">pifont</span>}    <span class="co">%for pointing hand</span></span>
-<span id="cb15-5"><a href=""></a><span class="bu">\usepackage</span>{<span class="ex">arydshln</span>}    <span class="co">%for dashed lines</span></span>
-<span id="cb15-6"><a href=""></a><span class="bu">\usepackage</span>{<span class="ex">rotating</span>}    <span class="co">%for angled text</span></span>
-<span id="cb15-7"><a href=""></a></span>
-<span id="cb15-8"><a href=""></a><span class="kw">\begin</span>{<span class="ex">document</span>}</span>
-<span id="cb15-9"><a href=""></a></span>
-<span id="cb15-10"><a href=""></a><span class="kw">\begin</span>{<span class="ex">table</span>}[h]</span>
-<span id="cb15-11"><a href=""></a>  <span class="fu">\centering</span></span>
-<span id="cb15-12"><a href=""></a>  <span class="fu">\renewcommand</span>{<span class="ex">\arraystretch</span>}{1.2}</span>
-<span id="cb15-13"><a href=""></a>  <span class="fu">\setlength</span>{<span class="fu">\tabcolsep</span>}{6pt}</span>
-<span id="cb15-14"><a href=""></a></span>
-<span id="cb15-15"><a href=""></a>  <span class="kw">\begin</span>{<span class="ex">tabular</span>}{|rrl||*{3}{c|}}</span>
-<span id="cb15-16"><a href=""></a>    <span class="fu">\hline</span></span>
-<span id="cb15-17"><a href=""></a>    <span class="fu">\multicolumn</span>{3}{|c||}{<span class="fu">\textipa</span>{/tup/}} <span class="op">&amp;</span></span>
-<span id="cb15-18"><a href=""></a>      <span class="fu">\rotatebox</span>{45}{NoCoda} <span class="op">&amp;</span></span>
-<span id="cb15-19"><a href=""></a>      <span class="fu">\rotatebox</span>{45}{Dep-V}  <span class="op">&amp;</span></span>
-<span id="cb15-20"><a href=""></a>      <span class="fu">\rotatebox</span>{45}{Max-C}  <span class="fu">\\</span></span>
-<span id="cb15-21"><a href=""></a>    <span class="fu">\hline\hline</span></span>
-<span id="cb15-22"><a href=""></a>    a. <span class="op">&amp;</span>        <span class="op">&amp;</span> <span class="fu">\textipa</span>{tup}  <span class="op">&amp;</span> <span class="ss">$</span><span class="sc">\ast</span><span class="ss">$</span>! <span class="op">&amp;</span> <span class="fu">\cellcolor</span>{lightgray} <span class="op">&amp;</span> <span class="fu">\cellcolor</span>{lightgray} <span class="fu">\\</span></span>
-<span id="cb15-23"><a href=""></a>    <span class="fu">\hline</span></span>
-<span id="cb15-24"><a href=""></a>    b. <span class="op">&amp;</span> <span class="fu">\ding</span>{43} <span class="op">&amp;</span> <span class="fu">\textipa</span>{tu}   <span class="op">&amp;</span>         <span class="op">&amp;</span>                       <span class="op">&amp;</span> <span class="fu">\cellcolor</span>{lightgray}<span class="ss">$</span><span class="sc">\ast</span><span class="ss">$</span> <span class="fu">\\</span></span>
-<span id="cb15-25"><a href=""></a>    <span class="fu">\hline</span></span>
-<span id="cb15-26"><a href=""></a>    c. <span class="op">&amp;</span>        <span class="op">&amp;</span> <span class="fu">\textipa</span>{tupi} <span class="op">&amp;</span>         <span class="op">&amp;</span> <span class="ss">$</span><span class="sc">\ast</span><span class="ss">$</span>!               <span class="op">&amp;</span> <span class="fu">\cellcolor</span>{lightgray} <span class="fu">\\</span></span>
-<span id="cb15-27"><a href=""></a>    <span class="fu">\hline</span></span>
-<span id="cb15-28"><a href=""></a>  <span class="kw">\end</span>{<span class="ex">tabular</span>}</span>
-<span id="cb15-29"><a href=""></a></span>
-<span id="cb15-30"><a href=""></a>  <span class="fu">\renewcommand</span>{<span class="ex">\arraystretch</span>}{1}</span>
-<span id="cb15-31"><a href=""></a><span class="kw">\end</span>{<span class="ex">table</span>}</span>
-<span id="cb15-32"><a href=""></a></span>
-<span id="cb15-33"><a href=""></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb19-1"><a href=""></a><span class="bu">\documentclass</span>{<span class="ex">article</span>}</span>
+<span id="cb19-2"><a href=""></a><span class="bu">\usepackage</span>{<span class="ex">tipa</span>}    <span class="co">%for ipa</span></span>
+<span id="cb19-3"><a href=""></a><span class="bu">\usepackage</span>[table]{<span class="ex">xcolor</span>}    <span class="co">%for shading*</span></span>
+<span id="cb19-4"><a href=""></a><span class="bu">\usepackage</span>{<span class="ex">pifont</span>}    <span class="co">%for pointing hand</span></span>
+<span id="cb19-5"><a href=""></a><span class="bu">\usepackage</span>{<span class="ex">arydshln</span>}    <span class="co">%for dashed lines</span></span>
+<span id="cb19-6"><a href=""></a><span class="bu">\usepackage</span>{<span class="ex">rotating</span>}    <span class="co">%for angled text</span></span>
+<span id="cb19-7"><a href=""></a></span>
+<span id="cb19-8"><a href=""></a><span class="kw">\begin</span>{<span class="ex">document</span>}</span>
+<span id="cb19-9"><a href=""></a></span>
+<span id="cb19-10"><a href=""></a><span class="kw">\begin</span>{<span class="ex">table</span>}[h]</span>
+<span id="cb19-11"><a href=""></a>  <span class="fu">\centering</span></span>
+<span id="cb19-12"><a href=""></a>  <span class="fu">\renewcommand</span>{<span class="ex">\arraystretch</span>}{1.2}</span>
+<span id="cb19-13"><a href=""></a>  <span class="fu">\setlength</span>{<span class="fu">\tabcolsep</span>}{6pt}</span>
+<span id="cb19-14"><a href=""></a></span>
+<span id="cb19-15"><a href=""></a>  <span class="kw">\begin</span>{<span class="ex">tabular</span>}{|rrl||*{3}{c|}}</span>
+<span id="cb19-16"><a href=""></a>    <span class="fu">\hline</span></span>
+<span id="cb19-17"><a href=""></a>    <span class="fu">\multicolumn</span>{3}{|c||}{<span class="fu">\textipa</span>{/tup/}} <span class="op">&amp;</span></span>
+<span id="cb19-18"><a href=""></a>      <span class="fu">\rotatebox</span>{45}{NoCoda} <span class="op">&amp;</span></span>
+<span id="cb19-19"><a href=""></a>      <span class="fu">\rotatebox</span>{45}{Dep-V}  <span class="op">&amp;</span></span>
+<span id="cb19-20"><a href=""></a>      <span class="fu">\rotatebox</span>{45}{Max-C}  <span class="fu">\\</span></span>
+<span id="cb19-21"><a href=""></a>    <span class="fu">\hline\hline</span></span>
+<span id="cb19-22"><a href=""></a>    a. <span class="op">&amp;</span>        <span class="op">&amp;</span> <span class="fu">\textipa</span>{tup}  <span class="op">&amp;</span> <span class="ss">$</span><span class="sc">\ast</span><span class="ss">$</span>! <span class="op">&amp;</span> <span class="fu">\cellcolor</span>{lightgray} <span class="op">&amp;</span> <span class="fu">\cellcolor</span>{lightgray} <span class="fu">\\</span></span>
+<span id="cb19-23"><a href=""></a>    <span class="fu">\hline</span></span>
+<span id="cb19-24"><a href=""></a>    b. <span class="op">&amp;</span> <span class="fu">\ding</span>{43} <span class="op">&amp;</span> <span class="fu">\textipa</span>{tu}   <span class="op">&amp;</span>         <span class="op">&amp;</span>                       <span class="op">&amp;</span> <span class="fu">\cellcolor</span>{lightgray}<span class="ss">$</span><span class="sc">\ast</span><span class="ss">$</span> <span class="fu">\\</span></span>
+<span id="cb19-25"><a href=""></a>    <span class="fu">\hline</span></span>
+<span id="cb19-26"><a href=""></a>    c. <span class="op">&amp;</span>        <span class="op">&amp;</span> <span class="fu">\textipa</span>{tupi} <span class="op">&amp;</span>         <span class="op">&amp;</span> <span class="ss">$</span><span class="sc">\ast</span><span class="ss">$</span>!               <span class="op">&amp;</span> <span class="fu">\cellcolor</span>{lightgray} <span class="fu">\\</span></span>
+<span id="cb19-27"><a href=""></a>    <span class="fu">\hline</span></span>
+<span id="cb19-28"><a href=""></a>  <span class="kw">\end</span>{<span class="ex">tabular</span>}</span>
+<span id="cb19-29"><a href=""></a></span>
+<span id="cb19-30"><a href=""></a>  <span class="fu">\renewcommand</span>{<span class="ex">\arraystretch</span>}{1}</span>
+<span id="cb19-31"><a href=""></a><span class="kw">\end</span>{<span class="ex">table</span>}</span>
+<span id="cb19-32"><a href=""></a></span>
+<span id="cb19-33"><a href=""></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <!-- # Activity Answers -->
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">

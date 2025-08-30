@@ -19,6 +19,103 @@ editor: visual
 
 -   What did we talk about in Friday's class?
 
+# Finishing up Citations
+
+## Additional Features: Citations
+
+-   Citations in LaTeX will refer to a .bib file
+
+-   Let's create one in our "301-LaTeX-practice" project folder
+
+-   Call this .bib file "refs.bib"
+
+## Additional Features: Your First .bib
+
+```{latex}
+@article{smith2017,
+    author = {Smith, John},
+    title = {Some paper},
+    year = {2017},
+    journal = {Journal of Research},
+    volume = {2},
+    number = {1},
+    pages = {1--69}
+}
+
+@book{knuth1986,
+  author    = "Donald E. Knuth",
+  title     = "The {TeX} Book",
+  year      = "1986",
+  publisher = "Addison-Wesley Professional",
+  address   = "Massachusetts"
+}
+```
+
+## Additional Features: Citations
+
+-   With these two references now in the system, let's practice citing them.
+
+-   Edit your preamble with the following text, after the **documentclass** command.
+
+```         
+\documentclass{article} 
+\usepackage{natbib} 
+\bibliographystyle{apalike} 
+\begin{document}
+```
+
+## Additional Features: Citations
+
+-   End your document as follows:
+
+```         
+\bibliography{refs}  
+\end{document}
+```
+
+## Additional Features: Citations
+
+```{latex}
+\documentclass{article}
+\usepackage{natbib}
+\bibliographystyle{apalike}
+
+\begin{document}
+\title{My First Document}
+\author{My Name}
+\date{December 6, 2017}
+\maketitle
+
+\section{Introduction}
+ This is the introduction.\cite{smith2017}
+\section{Methods}
+\subsection{Stage 1}
+The first part of the methods.\nocite{knuth1986}
+ \subsection{Stage 2}
+The second part of the methods.\cite[p. 215]{smith2017}
+ \section{Results}
+ Here are my results.\cite{knuth1986,smith2017}
+ 
+\bibliography{refs} 
+\end{document}
+```
+
+-   Copy the above code and run it in your project tex file.
+
+## To Do at Home: Zotero
+
+-   A *much* more user-friendly reference platform is Zotero.
+
+-   Click here to sign up for the platform or log into your account.
+
+-   Add at least one reference if you do not have one already.
+
+-   Select all of the references to export
+
+-   Click the "upwards arrow" icon
+
+-   You now have a .bib file!
+
 # LaTeX Packages
 
 -   Allow you to use LaTeX in ways beyond its base features
@@ -88,7 +185,7 @@ Two paragraphs of filler:
 ## Packages: Options & Optional Arguments
 
 -   Let's load up `enumitem` to see how it works
--   Check out the customizations - can you modify the code to turn (c) into (d)?
+-   Check out the customizations - can you modify the code so that the list starts with (d)?
 
 ``` latex
 \documentclass{article}
@@ -153,59 +250,59 @@ Two paragraphs of filler:
 \end{document}
 ```
 
-## Activity: Packages
+<!-- ## Activity: Packages -->
 
--   Copy and paste this code into your "301-LaTeX-practice" project tex file.
-    -   **Your task**: study the code, and identify precisely what the optional arguments and commands are doing.
-    -   Feel free to discuss with neighbors!
+<!-- -   Copy and paste this code into your "301-LaTeX-practice" project tex file. -->
+<!--     -   **Your task**: study the code, and identify precisely what the optional arguments and commands are doing. -->
+<!--     -   Feel free to discuss with neighbors! -->
 
-``` latex
-\documentclass[12pt]{article}
+<!-- ``` latex -->
+<!-- \documentclass[12pt]{article} -->
 
-% enumitem with two options declared
-\usepackage[shortlabels,inline]{enumitem}
+<!-- % enumitem with two options declared -->
+<!-- \usepackage[shortlabels,inline]{enumitem} -->
 
-% Setting defaults
-\setlist[enumerate,1]{label=(\arabic*)}          % level 1: (1), (2), ...
-\setlist[enumerate,2]{label=(\alph*)}            % level 2: (a), (b), ...
-\setlist[itemize]{label=--}                      % itemize bullets are dashes
+<!-- % Setting defaults -->
+<!-- \setlist[enumerate,1]{label=(\arabic*)}          % level 1: (1), (2), ... -->
+<!-- \setlist[enumerate,2]{label=(\alph*)}            % level 2: (a), (b), ... -->
+<!-- \setlist[itemize]{label=--}                      % itemize bullets are dashes -->
 
-\begin{document}
+<!-- \begin{document} -->
 
-\begin{itemize}
-  \item Data: 100 speakers across 5 regions.
-  \item Methods: Forced alignment \& manual checks.
-  \item[\textbf{Note:}] Region 3 recordings have higher noise levels.
-  \item Deliverable: 2–3 pages with plots.
-\end{itemize}
-
-
-\begin{enumerate}[start=3]             % (3), (4), ...
-  \item Prepare audio
-    \begin{enumerate}
-      \item normalize
-      \item trim silences
-    \end{enumerate}
-  \item Extract features
-\end{enumerate}
-
-% ... some text ...
-
-\begin{enumerate}[resume]              % continues with (5)
-  \item Train model
-\end{enumerate}
+<!-- \begin{itemize} -->
+<!--   \item Data: 100 speakers across 5 regions. -->
+<!--   \item Methods: Forced alignment \& manual checks. -->
+<!--   \item[\textbf{Note:}] Region 3 recordings have higher noise levels. -->
+<!--   \item Deliverable: 2–3 pages with plots. -->
+<!-- \end{itemize} -->
 
 
-In this study we (briefly) confirm 
-\begin{enumerate*}[label=a., itemjoin={{; }}, itemjoin*={{; and }}]
-  \item speaker balance
-  \item region stratification
-  \item license compliance
-\end{enumerate*}
-before proceeding.
+<!-- \begin{enumerate}[start=3]             % (3), (4), ... -->
+<!--   \item Prepare audio -->
+<!--     \begin{enumerate} -->
+<!--       \item normalize -->
+<!--       \item trim silences -->
+<!--     \end{enumerate} -->
+<!--   \item Extract features -->
+<!-- \end{enumerate} -->
 
-\end{document}
-```
+<!-- % ... some text ... -->
+
+<!-- \begin{enumerate}[resume]              % continues with (5) -->
+<!--   \item Train model -->
+<!-- \end{enumerate} -->
+
+
+<!-- In this study we (briefly) confirm  -->
+<!-- \begin{enumerate*}[label=a., itemjoin={{; }}, itemjoin*={{; and }}] -->
+<!--   \item speaker balance -->
+<!--   \item region stratification -->
+<!--   \item license compliance -->
+<!-- \end{enumerate*} -->
+<!-- before proceeding. -->
+
+<!-- \end{document} -->
+<!-- ``` -->
 
 # Funny Symbols
 
@@ -213,7 +310,7 @@ before proceeding.
 -   For instance, what do we do if we're citing French data?
 
 ``` latex
-\'{a}, \`{a}, \^{a}, ç --> á, à, â, ç 
+\'{a}, \`{a}, \^{a}, \c{c} --> á, à, â, ç 
 ```
 
 -   Or German?
@@ -222,11 +319,16 @@ before proceeding.
 \"{a}, \ss --> ä, ß 
 ```
 
+- **Note**: modifying diacritics work for any symbol:
+```latex
+\'{h}, \"{p}, \^{g}, \c{\%}
+```
+
 ## Funny Symbols: IPA
 
 -   We're going to use this idea with IPA
 -   But we've of course got to load a package for this: `tipa`
--   Download the [TIPA manual](http://www.l.u-tokyo.ac.jp/~fkr/tipa/tipaman.pdf)
+    -   To see full instructions, download the [TIPA manual](http://www.l.u-tokyo.ac.jp/~fkr/tipa/tipaman.pdf)
 -   Let's load it up.
 
 ``` latex
@@ -254,13 +356,10 @@ before proceeding.
 
 ## IPA Activity
 
--   In LaTeX, type out the following words using the TIPA package:
+-   In LaTeX, type out "your first name" using the TIPA package.
 
-1.  computer
-
-2.  sleepy
-
-3.  "your first name"
+<!-- 1.  computer -->
+<!-- 2.  sleepy   -->
 
 ## Funny Symbols: IPA & Other Scripts
 
@@ -343,7 +442,7 @@ before proceeding.
 
 ## Phonology Activity
 
--   Now it's your turn! Analyze this small sample of invented data, and then render a phonological rule in LaTeX that describes the alternation.
+-   Now it's your turn! Let's analyze this small sample of invented data together, and then render a phonological rule in LaTeX that describes the alternation.
 
 | 1[sg]{.smallcaps} | 2[sg]{.smallcaps} | 3[sg]{.smallcaps} |
 |-------------------|-------------------|-------------------|
