@@ -15,7 +15,6 @@ format:
 editor: visual
 ---
 
-
 # Review
 
 -   What did you learn last time?
@@ -30,8 +29,9 @@ editor: visual
 
 -   Create a personal homepage at GitHub Pages, that is a simplified version of [this](https://winjapati.github.io/ "link to Dr. Byrd's webpage")
 
-::: {.callout-important}
+::: callout-important
 ## Our Goal
+
 Create a webpage that showcases *you*, which you can use to promote yourself for internships and future jobs
 :::
 
