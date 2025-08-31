@@ -19,6 +19,16 @@ editor: visual
 
 -   What did you learn last time?
 
+# Our Goal
+
+## For the next two weeks:
+
+-   Learn the basics of HTML and CSS
+
+-   Do a *teeny bit* of programming with JavaScript
+
+-   Create a personal homepage at GitHub Pages, that is a simplified version of [this](https://winjapati.github.io/ "link to Dr. Byrd's webpage")
+
 # How LaTeX Works
 
 -   Let's review how LaTeX works.
@@ -229,8 +239,8 @@ Historical linguistics, NLP.
 
 -   Download <a href="7_mock_site.html" download>this `html` file</a> and analyze its code.
 -   Identify how to:
-    -   emphasize a word
-    -   make a word 'strong'
+    -   <em> emphasize </em> a word
+    -   make a word <strong> strong </strong>
     -   add an html link to a word or string of words
     -   add an image
     -   add an unordered list
@@ -241,7 +251,7 @@ Historical linguistics, NLP.
     1.  A head and body.
     2.  Two `<p>` elements talking about yourself (or whatever you want). Use `<h1>` and `<h2>`.
     3.  Emphasize one word and make another word strong.
-    4.  Add a link that points to your GitHub profile.
+    4.  Add a link that points to your GitHub profile (mine is <https://github.com/Winjapati>).
     5.  Add an image of yourself (or whatever you want).
     6.  Add a simple unordered list (`<ul>`).
     7.  Save and view the file by, "Open with Browser."

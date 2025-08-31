@@ -1,7 +1,7 @@
 ---
 title: "Computation for Linguists"
-subtitle: "HTML and Javascript, Day 1"
-date: "September 10, 2025"
+subtitle: "HTML and Javascript, Day 2"
+date: "September 12, 2025"
 author: "Dr. Andrew M. Byrd"
 format:
   revealjs:
@@ -19,11 +19,52 @@ editor: visual
 
 -   What did you learn last time about HTML?
 
+
+## Review from Day 1
+- We learned **basic tags**: `<h1>`, `<p>`, `<em>`, `<strong>`, `<a>`, `<img>`, `<ul>/<li>`
+- We practiced **attributes** like `href` and `alt`
+- We built a simple page with our name, a paragraph, a link, an image, and a list
+
 # Structure in HTML
 
 ## Why Structure Matters
 
 -   Compare this site with this site
+
+## Today’s Focus
+- Add **structure** with semantic tags
+- Learn the page skeleton:
+  - `<header>` — title + navigation
+  - `<nav>` — menu of links
+  - `<main>` — main content
+  - `<section>` — thematic grouping
+  - `<footer>` — closing info
+- Add **internal navigation** with `id` and `href="#..."`
+
+## Why Structure Matters
+Without structure:
+```html
+<h1>My Mini Site</h1>
+<p>Hello world! ...</p>
+<h2>Links</h2>
+<p>Visit <a href="https://example.com">Example</a>.</p>
+<h2>Image</h2>
+<p><img src="pic.jpg" alt="..."></p>
+```
+
+## Why Structure Matters
+With structure:
+```html
+<header>
+  <h1>My Mini Site</h1>
+  <nav> ... </nav>
+</header>
+<main>
+  <section id="about"> ... </section>
+  <section id="links"> ... </section>
+</main>
+<footer> ... </footer>
+```
 
 # Activity: Build Your Own Website!
 
