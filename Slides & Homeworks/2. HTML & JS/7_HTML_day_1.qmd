@@ -225,7 +225,7 @@ Historical linguistics, NLP.
 
 # Activity: Build Your Own Website!
 
-## Activity, Step One:  Analyze
+## Activity, Step One: Analyze
 
 -   Download <a href="7_mock_site.html" download>this `html` file</a> and analyze its code.
 -   Identify how to:
@@ -235,7 +235,7 @@ Historical linguistics, NLP.
     -   add an image
     -   add an unordered list
 
-## Activity, Step Two:  Build
+## Activity, Step Two: Build
 
 -   Create `firstname_lastname.html`. Add to it: <span style="font-size:80%;">
     1.  A head and body.
