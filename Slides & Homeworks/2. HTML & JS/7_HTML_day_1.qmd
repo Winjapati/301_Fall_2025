@@ -15,6 +15,7 @@ format:
 editor: visual
 ---
 
+
 # Review
 
 -   What did you learn last time?
@@ -28,6 +29,11 @@ editor: visual
 -   Do a *teeny bit* of programming with JavaScript
 
 -   Create a personal homepage at GitHub Pages, that is a simplified version of [this](https://winjapati.github.io/ "link to Dr. Byrd's webpage")
+
+::: {.callout-important}
+## Our Goal
+Create a webpage that showcases *you*, which you can use to promote yourself for internships and future jobs
+:::
 
 # How LaTeX Works
 
@@ -241,7 +247,7 @@ Historical linguistics, NLP.
 -   Identify how to:
     -   <em> emphasize </em> a word
     -   make a word <strong> strong </strong>
-    -   add an html link to a word or string of words
+    -   add an html link anchor to a word or string of words
     -   add an image
     -   add an unordered list
 

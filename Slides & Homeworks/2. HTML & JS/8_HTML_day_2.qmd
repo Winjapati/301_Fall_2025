@@ -19,31 +19,30 @@ editor: visual
 
 -   What did you learn last time about HTML?
 
-
 ## Review from Day 1
-- We learned **basic tags**: `<h1>`, `<p>`, `<em>`, `<strong>`, `<a>`, `<img>`, `<ul>/<li>`
-- We practiced **attributes** like `href` and `alt`
-- We built a simple page with our name, a paragraph, a link, an image, and a list
+
+-   We learned **basic tags**: `<h1>`, `<p>`, `<em>`, `<strong>`, `<a>`, `<img>`, `<ul>`, `<li>`
+-   We practiced **attributes** like `href` and `alt`
+-   We built a simple page with our name, a paragraph, a link, an image, and a list
 
 # Structure in HTML
 
-## Why Structure Matters
-
--   Compare this site with this site
-
 ## Today’s Focus
-- Add **structure** with semantic tags
-- Learn the page skeleton:
-  - `<header>` — title + navigation
-  - `<nav>` — menu of links
-  - `<main>` — main content
-  - `<section>` — thematic grouping
-  - `<footer>` — closing info
-- Add **internal navigation** with `id` and `href="#..."`
+
+-   Add **structure** with semantic tags
+-   Learn the page skeleton:
+    -   `<header>` — title + navigation
+    -   `<nav>` — menu of links
+    -   `<main>` — main content
+    -   `<section>` — thematic grouping
+    -   `<footer>` — closing info
+-   Add **internal navigation** with `id` and `href="#..."`
 
 ## Why Structure Matters
+
 Without structure:
-```html
+
+``` html
 <h1>My Mini Site</h1>
 <p>Hello world! ...</p>
 <h2>Links</h2>
@@ -53,25 +52,224 @@ Without structure:
 ```
 
 ## Why Structure Matters
+
 With structure:
-```html
-<header>
+
+``` html
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>My Mini Site</title>
+</head>
+<body>
   <h1>My Mini Site</h1>
-  <nav> ... </nav>
-</header>
-<main>
-  <section id="about"> ... </section>
-  <section id="links"> ... </section>
-</main>
-<footer> ... </footer>
+
+  <p>Hi, I'm Student Name. This site will become my simple portfolio.</p>
+
+  <h2>Education</h2>
+  <p>University of Somewhere — B.A. (2025)</p>
+
+  <h2>Projects</h2>
+  <p>Project One: a short description goes here.</p>
+
+  <h2>Contact</h2>
+  <p>Email me at <a href="mailto:student@example.edu">student@example.edu</a>.</p>
+
+  <p><img src="https://picsum.photos/300/180" alt="A random placeholder image"></p>
+</body>
+</html>
 ```
 
-# Activity: Build Your Own Website!
+# Learning HTML Structure
 
-## Activity, Step One: Analyze
+## Create a New `html` File
 
--   Download <a href="7_mock_site.html" download>this `html` file</a> and analyze its code.
--   Identify how to:
+-   Create a new .html file, call it `structure.html`.
+-   Here is the starting code:
+
+``` html
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Stinky's Cheesemonger</title>
+</head>
+<body>
+  <h1>Stinky's Cheesemonger</h1>
+
+  <p>Welcome to Stinky's — your neighborhood shop for gloriously pungent cheeses.</p>
+
+  <h2>Cheeses</h2>
+  <p>Try our favorites: Époisses, Limburger, Blue Stilton.</p>
+
+  <h2>Shop Info</h2>
+  <p>123 Rind Lane, Fromage City, FC</p>
+
+  <h2>Contact</h2>
+  <p>Email us at <a href="mailto:hello@stinkys.cheese">hello@stinkys.cheese</a></p>
+
+  <p><img src="https://picsum.photos/320/200" alt="A plate of assorted cheeses"></p>
+</body>
+</html>
+```
+
+## The `<header>`
+
+**Purpose:** Introduces the page (or a big section). Commonly holds the site name/logo and navigation.
+
+**Rules of thumb** - You can have a top-level `<header>` for the page.\
+- You can also have headers *inside* sections (advanced; we’ll stick to one for now).
+
+## Add a `<header>`
+
+``` html
+<body>
+ <header>
+    <h1>Stinky's Cheesemonger</h1>
+ </header>
+
+...
+</body>
+```
+
+## `<nav>` with links
+
+**Purpose:** A container for site links (menus, table of contents, etc).
+
+**Rules of thumb**
+
+-   Put it **inside** your page `<header>`.
+-   Links can be internal (jump to a section) or external.
+
+## Add a `<nav>` with links
+
+``` html
+<body>
+  <header>
+    <h1>Stinky's Cheesemonger</h1>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#cheeses">Cheeses</a>
+      <a href="#shop">Shop Info</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+...
+</body>
+```
+
+## `<main>`
+
+## Add `<main>`
+
+-   Wrap your page's primary content in a `<main>...</main>` element.
+
+``` html
+<body>
+
+...
+
+  <main>
+    <p>Welcome to Stinky's — your neighborhood shop for gloriously pungent cheeses.</p>
+
+    <h2>Cheeses</h2>
+    <p>Try our favorites: Époisses, Limburger, Blue Stilton.</p>
+
+    <h2>Shop Info</h2>
+    <p>123 Rind Lane, Fromage City, FC</p>
+
+    <h2>Contact</h2>
+    <p>Email us at <a href="mailto:hello@stinkys.cheese">hello@stinkys.cheese</a></p>
+
+    <p><img src="https://picsum.photos/320/200" alt="A plate of assorted cheeses"></p>
+  </main>
+</body>
+```
+
+## `<section>`s and `id`s
+
+## Add `<section>`s and `id`s
+
+``` html
+<body>
+  <header>
+    <h1>Stinky's Cheesemonger</h1>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#cheeses">Cheeses</a>
+      <a href="#shop">Shop Info</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="about">
+      <h2>About</h2>
+      <p>Welcome to Stinky's — your neighborhood shop for gloriously pungent cheeses.</p>
+      <p><img src="https://picsum.photos/320/200" alt="A plate of assorted cheeses"></p>
+    </section>
+
+    <section id="cheeses">
+      <h2>Cheeses</h2>
+      <p>Try our favorites:</p>
+      <ul>
+        <li>Époisses — washed-rind, famously aromatic</li>
+        <li>Limburger — creamy, assertive, legendary funk</li>
+        <li>Blue Stilton — crumbly, sharp, deeply savory</li>
+      </ul>
+    </section>
+
+    <section id="shop">
+      <h2>Shop Info</h2>
+      <p>123 Rind Lane, Fromage City, FC</p>
+      <p>Open Tue–Sat, 11am–6pm</p>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>Email us at <a href="mailto:hello@stinkys.cheese">hello@stinkys.cheese</a></p>
+    </section>
+  </main>
+</body>
+```
+
+## The `<footer>`
+
+## Back to top
+
+-   You can add an anchor that takes the user back to the top, which goes right after `<body>`:
+
+``` html
+<body>
+  <a id="top"></a> <!-- optional back-to-top anchor -->
+```
+
+## Add a `<footer>`
+
+-   At the end of your site, after `</main>` but before `</body>', you can add your`
+
+    <footer>...</footer>
+
+    \` element
+
+``` html
+  </main>
+
+  <footer>
+    © 2025 Stinky's Cheesemonger · <a href="#top">Back to top</a>
+  </footer>
+</body>
+```
+
+# Activity: Add Structure to Your Own Website!
+
+## Activity, Step One: Instructions
+
+-   Today we'll be adding these features to the website you built last time
+    -   Feel free to download <a href="8_mock_site.html" download>this `html` file</a> for a reference to new code features.
+-   Add to your
     -   emphasize a word
     -   make a word 'strong'
     -   add an html link to a word or string of words
@@ -89,3 +287,72 @@ With structure:
     6.  Add a simple unordered list (`<ul>`).
     7.  Save and view the file by, "Open with Browser."
     8.  Sync with your GitHub. </span>
+    
+    
+##    
+<section id="header-discussion" class="slide level2 center">
+  <h2>The <code>&lt;header&gt;</code></h2>
+  <p><strong>Purpose:</strong> Introduces the page (site name/logo + nav).</p>
+  <p><strong>Rules:</strong> One page-level header. Can also be used inside sections (advanced).</p>
+  <pre><code class="language-html">&lt;header&gt;
+  &lt;h1&gt;Stinky's Cheesemonger&lt;/h1&gt;
+&lt;/header&gt;</code></pre>
+</section>
+
+<section id="nav-discussion" class="slide level2 center">
+  <h2>The <code>&lt;nav&gt;</code></h2>
+  <p><strong>Purpose:</strong> Holds navigation links.</p>
+  <p><strong>Rules:</strong> Goes inside the header. Links can be internal or external.</p>
+  <pre><code class="language-html">&lt;nav&gt;
+  &lt;a href="#about"&gt;About&lt;/a&gt;
+  &lt;a href="#cheeses"&gt;Cheeses&lt;/a&gt;
+  &lt;a href="#shop"&gt;Shop Info&lt;/a&gt;
+  &lt;a href="#contact"&gt;Contact&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+</section>
+
+<section id="main-discussion" class="slide level2 center">
+  <h2>The <code>&lt;main&gt;</code></h2>
+  <p><strong>Purpose:</strong> Contains the primary page content.</p>
+  <p><strong>Rules:</strong> One per page. Improves accessibility.</p>
+  <pre><code class="language-html">&lt;main&gt;
+  &lt;!-- Sections go here --&gt;
+&lt;/main&gt;</code></pre>
+</section>
+
+<section id="section-discussion" class="slide level2 center">
+  <h2>The <code>&lt;section&gt;</code></h2>
+  <p><strong>Purpose:</strong> Groups related content with a heading.</p>
+  <p><strong>Rules:</strong> Each section begins with an <code>&lt;h2&gt;</code>. Give each an <code>id</code>.</p>
+  <pre><code class="language-html">&lt;section id="cheeses"&gt;
+  &lt;h2&gt;Cheeses&lt;/h2&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Époisses&lt;/li&gt;
+    &lt;li&gt;Limburger&lt;/li&gt;
+    &lt;li&gt;Blue Stilton&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/section&gt;</code></pre>
+</section>
+
+<section id="footer-discussion" class="slide level2 center">
+  <h2>The <code>&lt;footer&gt;</code></h2>
+  <p><strong>Purpose:</strong> Ends the page. Great for © YEAR, contact info, or “Back to top.”</p>
+  <pre><code class="language-html">&lt;footer&gt;
+  © 2025 Stinky's Cheesemonger · &lt;a href="#top"&gt;Back to top&lt;/a&gt;
+&lt;/footer&gt;</code></pre>
+</section>
+
+<section id="activity-instructions" class="slide level2 center">
+  <h2>Activity — Modify Your Site</h2>
+  <ol>
+    <li>Add a <code>&lt;header&gt;</code> with your site title in an <code>&lt;h1&gt;</code>.</li>
+    <li>Inside the header, add a <code>&lt;nav&gt;</code> with links:
+      <ul><li><code>#about</code></li><li><code>#education</code></li><li><code>#projects</code></li><li><code>#contact</code></li></ul>
+    </li>
+    <li>Wrap your main content in <code>&lt;main&gt;</code>.</li>
+    <li>Split content into <code>&lt;section&gt;</code>s, each with an <code>&lt;h2&gt;</code> and a unique <code>id</code>.</li>
+    <li>Add a <code>&lt;footer&gt;</code> with your name and a “Back to top” link.</li>
+    <li><strong>Test:</strong> Do all nav links jump to the right spot?</li>
+  </ol>
+</section>
+
