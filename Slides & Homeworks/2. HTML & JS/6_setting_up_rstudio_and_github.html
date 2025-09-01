@@ -30,6 +30,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="6_setting_up_rstudio_and_github_files/libs/revealjs/dist/theme/quarto.css">
   <link href="6_setting_up_rstudio_and_github_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -346,6 +411,7 @@ Dr.&nbsp;Andrew M. Byrd
 <li><a href="#/review" id="/toc-review">Review</a></li>
 <li><a href="#/install-rstudio" id="/toc-install-rstudio">Install RStudio</a></li>
 <li><a href="#/install-git" id="/toc-install-git">Install Git</a></li>
+<li><a href="#/configuring-git" id="/toc-configuring-git">Configuring Git</a></li>
 <li><a href="#/linking-rstudio-github" id="/toc-linking-rstudio-github">Linking RStudio &amp; GitHub</a></li>
 <li><a href="#/testing-the-two" id="/toc-testing-the-two">Testing the Two</a></li>
 </ul>
@@ -361,8 +427,17 @@ Dr.&nbsp;Andrew M. Byrd
 <h1>Install RStudio</h1>
 
 </section>
-<section id="rstudio" class="slide level2">
-<h2>RStudio</h2>
+<section id="installing-rstudio" class="slide level2">
+<h2>Installing RStudio</h2>
+<ul>
+<li><p>Go <a href="https://posit.co/download/rstudio-desktop/"> here </a></p></li>
+<li><p>Download RStudio Desktop (Open Source Edition)</p></li>
+<li><p>Install like any normal app:</p>
+<ul>
+<li><p>Mac → <code>.dmg</code> file → drag into Applications</p></li>
+<li><p>Windows → <code>.exe</code> file → run installer</p></li>
+</ul></li>
+</ul>
 </section></section>
 <section>
 <section id="install-git" class="title-slide slide level1 center">
@@ -371,12 +446,180 @@ Dr.&nbsp;Andrew M. Byrd
 </section>
 <section id="installing-git-windows" class="slide level2">
 <h2>Installing Git (Windows)</h2>
+<ul>
+<li>Go <a href="https://git-scm.com/downloads/win">here</a></li>
+<li>Download the latest version</li>
+<li>Run installer:
+<ul>
+<li>Accept defaults, except:
+<ul>
+<li>Use “Git from the command line and also from 3rd-party software”</li>
+<li>Use “Use Windows’ default console”</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="installing-git-windows-1" class="slide level2">
+<h2>Installing Git (Windows)</h2>
+<ul>
+<li>Verify installation:
+<ul>
+<li>Open Git Bash</li>
+<li>Run: <code>git --version</code></li>
+<li>It should tell you the version number of the Git you downloaded</li>
+</ul></li>
+</ul>
 </section>
 <section id="installing-git-mac" class="slide level2">
 <h2>Installing Git (Mac)</h2>
+<ul>
+<li>Open <strong>Terminal</strong>, located in <code>Applications/Utilities</code></li>
+<li>Install Xcode Command Line Tools: <code>xcode-select --install</code></li>
+<li>Verify Git Installation with <code>git --version</code></li>
+</ul>
 </section>
-<section id="step-2" class="slide level2">
-<h2>Step 2:</h2>
+<section id="set-up-github-account" class="slide level2">
+<h2>Set Up GitHub Account</h2>
+<ul>
+<li>Go to <a href="https://github.com/">github.com</a></li>
+<li>Click <strong>Sign up</strong></li>
+<li>Use your personal email if possible (since you may want to use this account after you leave UK)</li>
+<li>Choose a short, professional username (it doesn’t have to be completely vanilla, mine is <code>Winjapati</code>)</li>
+</ul>
+</section></section>
+<section>
+<section id="configuring-git" class="title-slide slide level1 center">
+<h1>Configuring Git</h1>
+
+</section>
+<section id="step-1-open-the-terminal-git-bash" class="slide level2">
+<h2>Step 1: open the Terminal / Git Bash</h2>
+<ul>
+<li><p>You must set <em>must</em> your info in a command prompt</p>
+<ul>
+<li><p>Windows: Open the program called “Git Bash” (installed with Git)</p></li>
+<li><p>Mac: Open the program called “Terminal” (in Applications → Utilities)</p></li>
+<li><p>It looks like a scary black window. Don’t worry — you only need to type a few lines.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="step-2-tell-git-your-name" class="slide level2">
+<h2>Step 2: Tell Git Your Name</h2>
+<ul>
+<li>Type this (replacing Your Name with your real name):</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href=""></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"Your Name"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Press <strong>Enter</strong></li>
+<li>Nothing will happen, which is normal.</li>
+</ul>
+</section>
+<section id="step-3-tell-git-your-email" class="slide level2">
+<h2>Step 3: Tell Git Your Email</h2>
+<ul>
+<li>Type this (use the email you signed up for GitHub with):
+<ul>
+<li>Replace your_email@example.com with your actual e-mail.</li>
+<li>You must use the e-mail address you used to sign up on GitHub.</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href=""></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"your_email@example.com"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Press <strong>Enter</strong></li>
+<li>Nothing will happen, which is normal.</li>
+</ul>
+</section>
+<section id="step-4-make-sure-it-worked" class="slide level2">
+<h2>Step 4: Make Sure it Worked</h2>
+<ul>
+<li>Type:</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href=""></a><span class="fu">git</span> config <span class="at">--list</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>You should see something like:</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href=""></a><span class="ex">user.name=Jane</span> Doe</span>
+<span id="cb4-2"><a href=""></a><span class="ex">user.email=janedoe@email.com</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="step-5-create-an-ssh-key" class="slide level2">
+<h2>Step 5: Create an SSH Key</h2>
+<ul>
+<li><p>An SSH key is a pair of files:</p>
+<ul>
+<li>Private key (stays on your computer)</li>
+<li>Public key (you upload to GitHub)</li>
+</ul></li>
+<li><p>After setup, you won’t need to type passwords for pushes.</p></li>
+</ul>
+</section>
+<section id="step-5-create-an-ssh-key-1" class="slide level2">
+<h2>Step 5: Create an SSH Key</h2>
+<ul>
+<li>Open Git Bash (Windows) or Terminal (Mac)</li>
+<li>Run the following code, using your actual e-mail address:</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href=""></a><span class="fu">ssh-keygen</span> <span class="at">-t</span> ed25519 <span class="at">-C</span> <span class="st">"your_github_email@example.com"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>When asked “Enter a file in which to save the key,” press Enter (accept default ~/.ssh/id_ed25519).</li>
+</ul>
+</section>
+<section id="step-5-create-an-ssh-key-2" class="slide level2">
+<h2>Step 5: Create an SSH Key</h2>
+<ul>
+<li><p>When asked for a passphrase, you can:</p>
+<ul>
+<li>Press Enter for none (simplest; this is what I do), or</li>
+<li>Type a passphrase (more secure; you’ll unlock it once per session).</li>
+</ul></li>
+<li><p>You should see messages about creating id_ed25519 and id_ed25519.pub.</p></li>
+</ul>
+</section>
+<section id="step-5-create-an-ssh-key-3" class="slide level2">
+<h2>Step 5: Create an SSH Key</h2>
+<ul>
+<li>We now need to add this SSH key to our systems</li>
+<li>Run this code on Windows (Git Bash):</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href=""></a><span class="bu">eval</span> <span class="st">"</span><span class="va">$(</span><span class="fu">ssh-agent</span> <span class="at">-s</span><span class="va">)</span><span class="st">"</span></span>
+<span id="cb6-2"><a href=""></a><span class="fu">ssh-add</span> ~/.ssh/id_ed25519</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>On Mac (Terminal):</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href=""></a><span class="bu">eval</span> <span class="st">"</span><span class="va">$(</span><span class="fu">ssh-agent</span> <span class="at">-s</span><span class="va">)</span><span class="st">"</span></span>
+<span id="cb7-2"><a href=""></a><span class="fu">ssh-add</span> <span class="at">--apple-use-keychain</span> ~/.ssh/id_ed25519</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="step-5-create-an-ssh-key-4" class="slide level2">
+<h2>Step 5: Create an SSH Key</h2>
+<ul>
+<li><p>Copy the public key to clipboard</p></li>
+<li><p>Windows (Git Bash):</p></li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href=""></a><span class="ex">clip</span> <span class="op">&lt;</span> ~/.ssh/id_ed25519.pub</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Mac (Terminal)</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href=""></a><span class="ex">pbcopy</span> <span class="op">&lt;</span> ~/.ssh/id_ed25519.pub</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="step-6-add-the-key-to-github" class="slide level2">
+<h2>Step 6: Add the key to GitHub</h2>
+<ul>
+<li>Go to GitHub → Settings → SSH and GPG keys → New SSH key</li>
+<li>Title: “Laptop” (or something you’ll recognize)</li>
+<li>Key type: Authentication</li>
+<li>Key: paste the clipboard contents</li>
+<li>Save.</li>
+</ul>
+</section>
+<section id="step-7-test-the-connection" class="slide level2">
+<h2>Step 7: Test the Connection</h2>
+<ul>
+<li>Back in the Git Bash / Terminal:</li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href=""></a><span class="fu">ssh</span> <span class="at">-T</span> git@github.com</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>The first time, you’ll be asked to trust GitHub — type yes.</li>
+<li>Success looks like: “Hi your-username! You’ve successfully authenticated…”</li>
+</ul>
 </section></section>
 <section id="linking-rstudio-github" class="title-slide slide level1 center">
 <h1>Linking RStudio &amp; GitHub</h1>

@@ -17,18 +17,179 @@ editor: visual
 
 What did we learn last time?
 
-
 # Install RStudio
 
-## RStudio
+## Installing RStudio
+
+-   Go <a href=https://posit.co/download/rstudio-desktop/> here </a>
+
+-   Download RStudio Desktop (Open Source Edition)
+
+-   Install like any normal app:
+
+    -   Mac → `.dmg` file → drag into Applications
+
+    -   Windows → `.exe` file → run installer
 
 # Install Git
 
 ## Installing Git (Windows)
 
+- Go [here](https://git-scm.com/downloads/win)
+- Download the latest version
+- Run installer:
+    - Accept defaults, except:
+        - Use “Git from the command line and also from 3rd-party software”
+        - Use “Use Windows’ default console”
+
+## Installing Git (Windows)
+
+- Verify installation:
+    - Open Git Bash
+    - Run: `git --version`
+    - It should tell you the version number of the Git you downloaded
+
 ## Installing Git (Mac)
 
-## Step 2:
+- Open **Terminal**, located in `Applications/Utilities`
+- Install Xcode Command Line Tools: `xcode-select --install`
+- Verify Git Installation with `git --version`
+
+## Set Up GitHub Account
+
+- Go to [github.com](https://github.com/)
+- Click **Sign up**
+- Use your personal email if possible (since you may want to use this account after you leave UK)
+- Choose a short, professional username (it doesn't have to be completely vanilla, mine is `Winjapati`)
+
+# Configuring Git
+
+## Step 1: open the Terminal / Git Bash
+
+- You must set *must* your info in a command prompt
+
+    - Windows: Open the program called “Git Bash” (installed with Git)
+
+    - Mac: Open the program called “Terminal” (in Applications → Utilities)
+
+    - It looks like a scary black window. Don’t worry — you only need to type a few lines.
+
+## Step 2: Tell Git Your Name
+
+- Type this (replacing Your Name with your real name):
+
+``` bash
+git config --global user.name "Your Name"
+```
+
+- Press **Enter**
+- Nothing will happen, which is normal.
+
+## Step 3: Tell Git Your Email
+
+- Type this (use the email you signed up for GitHub with):
+    - Replace your_email@example.com with your actual e-mail.
+    - You must use the e-mail address you used to sign up on GitHub.
+
+``` bash
+git config --global user.email "your_email@example.com"
+```
+- Press **Enter**
+- Nothing will happen, which is normal.
+
+## Step 4: Make Sure it Worked
+
+- Type:
+
+```bash
+git config --list
+```
+
+- You should see something like:
+
+```bash
+user.name=Jane Doe
+user.email=janedoe@email.com
+```
+
+## Step 5: Create an SSH Key
+
+- An SSH key is a pair of files:
+
+    - Private key (stays on your computer)
+    - Public key (you upload to GitHub)
+
+- After setup, you won’t need to type passwords for pushes.
+
+## Step 5: Create an SSH Key
+
+- Open Git Bash (Windows) or Terminal (Mac)
+- Run the following code, using your actual e-mail address:
+
+```bash
+ssh-keygen -t ed25519 -C "your_github_email@example.com"
+```
+
+- When asked “Enter a file in which to save the key,” press Enter (accept default ~/.ssh/id_ed25519).
+
+## Step 5: Create an SSH Key
+
+- When asked for a passphrase, you can:
+
+    - Press Enter for none (simplest; this is what I do), or
+    - Type a passphrase (more secure; you’ll unlock it once per session).
+
+- You should see messages about creating id_ed25519 and id_ed25519.pub.
+
+## Step 5: Create an SSH Key
+
+
+- We now need to add this SSH key to our systems
+- Run this code on Windows (Git Bash):
+
+```bash
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519
+```
+
+- On Mac (Terminal):
+
+```bash
+eval "$(ssh-agent -s)"
+ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+```
+
+## Step 5: Create an SSH Key
+
+- Copy the public key to clipboard
+
+- Windows (Git Bash):
+```bash
+clip < ~/.ssh/id_ed25519.pub
+```
+- Mac (Terminal)
+```bash
+pbcopy < ~/.ssh/id_ed25519.pub
+```
+
+## Step 6: Add the key to GitHub
+
+- Go to GitHub → Settings → SSH and GPG keys → New SSH key
+- Title: “Laptop” (or something you’ll recognize)
+- Key type: Authentication
+- Key: paste the clipboard contents
+- Save.
+
+## Step 7: Test the Connection
+
+- Back in the Git Bash / Terminal:
+
+```bash
+ssh -T git@github.com
+```
+
+- The first time, you’ll be asked to trust GitHub — type yes.
+- Success looks like: “Hi your-username! You’ve successfully authenticated…”
 
 # Linking RStudio & GitHub
 
