@@ -414,14 +414,26 @@ Dr.&nbsp;Andrew M. Byrd
 <li><a href="#/configuring-git" id="/toc-configuring-git">Configuring Git</a></li>
 <li><a href="#/linking-rstudio-github" id="/toc-linking-rstudio-github">Linking RStudio &amp; GitHub</a></li>
 <li><a href="#/testing-the-two" id="/toc-testing-the-two">Testing the Two</a></li>
+<li><a href="#/in-case-of-emergency-make-pat" id="/toc-in-case-of-emergency-make-pat">In Case of Emergency, Make PAT</a></li>
 </ul>
 </nav>
 </section>
+<section>
 <section id="review" class="title-slide slide level1 center">
 <h1>Review</h1>
 <p>What did we learn last time?</p>
 </section>
-
+<section id="overview-of-tech-today" class="slide level2">
+<h2>Overview of Tech Today</h2>
+<ul>
+<li>RStudio = our IDE for the course</li>
+<li>GitHub = how we will backup our files
+<ul>
+<li>also how we will publish our website (and other projects)</li>
+</ul></li>
+<li>What does my setup look like?</li>
+</ul>
+</section></section>
 <section>
 <section id="install-rstudio" class="title-slide slide level1 center">
 <h1>Install RStudio</h1>
@@ -453,8 +465,14 @@ Dr.&nbsp;Andrew M. Byrd
 <ul>
 <li>Accept defaults, except:
 <ul>
-<li>Use “Git from the command line and also from 3rd-party software”</li>
-<li>Use “Use Windows’ default console”</li>
+<li>Use “Git from the command line and also from 3rd-party software”
+<ul>
+<li>Makes Git visible to RStudio (and other apps)</li>
+</ul></li>
+<li>Use “Use Windows’ default console”
+<ul>
+<li>Makes sure Git behaves normally when using RStudio</li>
+</ul></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -483,7 +501,10 @@ Dr.&nbsp;Andrew M. Byrd
 <ul>
 <li>Go to <a href="https://github.com/">github.com</a></li>
 <li>Click <strong>Sign up</strong></li>
-<li>Use your personal email if possible (since you may want to use this account after you leave UK)</li>
+<li>Use your personal email if possible (since you may want to use this account after you leave UK)
+<ul>
+<li>Whatever you choose, you’ll need to use the same e-mail address for all Git steps</li>
+</ul></li>
 <li>Choose a short, professional username (it doesn’t have to be completely vanilla, mine is <code>Winjapati</code>)</li>
 </ul>
 </section></section>
@@ -495,7 +516,7 @@ Dr.&nbsp;Andrew M. Byrd
 <section id="step-1-open-the-terminal-git-bash" class="slide level2">
 <h2>Step 1: open the Terminal / Git Bash</h2>
 <ul>
-<li><p>You must set <em>must</em> your info in a command prompt</p>
+<li><p>You <em>must</em> set your info in a command prompt</p>
 <ul>
 <li><p>Windows: Open the program called “Git Bash” (installed with Git)</p></li>
 <li><p>Mac: Open the program called “Terminal” (in Applications → Utilities)</p></li>
@@ -538,7 +559,7 @@ Dr.&nbsp;Andrew M. Byrd
 <ul>
 <li>You should see something like:</li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href=""></a><span class="ex">user.name=Jane</span> Doe</span>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href=""></a><span class="ex">user.name=</span><span class="st">"Jane Doe"</span></span>
 <span id="cb4-2"><a href=""></a><span class="ex">user.email=janedoe@email.com</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="step-5-create-an-ssh-key" class="slide level2">
@@ -560,7 +581,10 @@ Dr.&nbsp;Andrew M. Byrd
 </ul>
 <div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href=""></a><span class="fu">ssh-keygen</span> <span class="at">-t</span> ed25519 <span class="at">-C</span> <span class="st">"your_github_email@example.com"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>When asked “Enter a file in which to save the key,” press Enter (accept default ~/.ssh/id_ed25519).</li>
+<li>When asked “Enter a file in which to save the key,” press Enter (accept default ~/.ssh/id_ed25519).
+<ul>
+<li>“This creates two files in a hidden folder called .ssh inside your home directory.”</li>
+</ul></li>
 </ul>
 </section>
 <section id="step-5-create-an-ssh-key-2" class="slide level2">
@@ -587,6 +611,9 @@ Dr.&nbsp;Andrew M. Byrd
 </ul>
 <div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href=""></a><span class="bu">eval</span> <span class="st">"</span><span class="va">$(</span><span class="fu">ssh-agent</span> <span class="at">-s</span><span class="va">)</span><span class="st">"</span></span>
 <span id="cb7-2"><a href=""></a><span class="fu">ssh-add</span> <span class="at">--apple-use-keychain</span> ~/.ssh/id_ed25519</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>If you get a permissions error, raise your hand — we’ll fix it together.</li>
+</ul>
 </section>
 <section id="step-5-create-an-ssh-key-4" class="slide level2">
 <h2>Step 5: Create an SSH Key</h2>
@@ -621,19 +648,102 @@ Dr.&nbsp;Andrew M. Byrd
 <li>Success looks like: “Hi your-username! You’ve successfully authenticated…”</li>
 </ul>
 </section></section>
+<section>
 <section id="linking-rstudio-github" class="title-slide slide level1 center">
 <h1>Linking RStudio &amp; GitHub</h1>
 
 </section>
-
+<section id="creating-a-repository" class="slide level2">
+<h2>Creating a Repository</h2>
+<ul>
+<li>On GitHub:
+<ul>
+<li>New repository → call it LIN_301</li>
+<li>Choose “Public”</li>
+<li>Add a <code>README.md</code> file</li>
+</ul></li>
+</ul>
+</section>
+<section id="linking-that-repository-with-rstudio" class="slide level2">
+<h2>Linking that Repository with RStudio</h2>
+<ul>
+<li>File → New Project → Version Control → Git</li>
+<li>Paste repo URL</li>
+<li>Clone it</li>
+</ul>
+</section></section>
 <section id="testing-the-two" class="title-slide slide level1 center">
 <h1>Testing the Two</h1>
+<ul>
+<li>In RStudio, click on “README.md” and edit the file.</li>
+<li>At the top right of your RStudio window, select Git → Commit</li>
+<li>Make sure the <code>staged</code> box has a check mark</li>
+<li>Write a commit message, then press <code>commit</code>. A box will pop up, close it.</li>
+</ul>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>This is Crucial!</strong></p>
+</div>
+<div class="callout-content">
+<p>You must select <strong><em>push</em></strong> to send your changes to the GitHub server.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section>
+<section id="in-case-of-emergency-make-pat" class="title-slide slide level1 center">
+<h1>In Case of Emergency, Make PAT</h1>
+
+</section>
+<section id="create-a-pat" class="slide level2">
+<h2>Create a PAT</h2>
+<ul>
+<li>Go to:
+<ul>
+<li><strong>GitHub</strong> → <strong>Settings</strong> → <strong>Developer settings</strong> → <strong>Personal access tokens</strong> → <strong>Tokens (classic)</strong></li>
+</ul></li>
+<li>Click <strong>Generate new token</strong>
+<ul>
+<li>Give it a name: <code>laptop-rstudio</code></li>
+<li>Expiration: pick something reasonable (e.g.&nbsp;90 days)</li>
+<li>Scopes: check <strong>repo</strong> (read &amp; write)</li>
+</ul></li>
+<li>Click <strong>Generate</strong>
+<ul>
+<li>Copy the token immediately — you won’t see it again.</li>
+<li>It looks like: ghp_abCDefGhijKlmnOPqRstUvWxYz1234567890</li>
+</ul></li>
+</ul>
+</section>
+<section id="link-with-rstudio" class="slide level2">
+<h2>Link with RStudio</h2>
+<ul>
+<li>Go to your GitHub repo page (LIN_305)
+<ul>
+<li>Click the green <code>Code</code> button, choose HTTPS, copy URL</li>
+<li>In RStudio: New Project → Version Control → Git → paste URL.</li>
+</ul></li>
+<li>Push for the first time
+<ul>
+<li>Username = GitHub username</li>
+<li>Password = your PAT</li>
+</ul></li>
+<li>Save credtionals
+<ul>
+<li>If you set a credential helper (<code>git config --global credential.helper manager</code> on Windows, or osxkeychain on Mac), you’ll only paste the token once.</li>
+</ul></li>
+</ul>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
