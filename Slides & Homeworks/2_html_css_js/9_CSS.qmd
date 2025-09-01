@@ -1,7 +1,7 @@
 ---
 title: "Computation for Linguists"
-subtitle: "HTML and Javascript, Day 2"
-date: "September 12, 2025"
+subtitle: "HTML and Javascript, Day 3"
+date: "September 15, 2025"
 author: "Dr. Andrew M. Byrd"
 format:
   revealjs:
@@ -19,7 +19,7 @@ editor: visual
 
 -   What did you learn last time about HTML?
 
-## Review from Day 1
+## Review from Days 1 & 2
 
 -   We learned **basic tags**: `<h1>`, `<p>`, `<em>`, `<strong>`, `<a>`, `<img>`, `<ul>`, `<li>`
 -   We practiced **attributes** like `href` and `alt`
