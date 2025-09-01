@@ -1,0 +1,35 @@
+---
+title: "Computation for Linguists"
+subtitle: "Getting Set Up: RStudio + GitHub"
+author: "Dr. Andrew M. Byrd"
+date: "September 8, 2025"
+format:
+  revealjs:
+    theme: beige
+    slide-number: true
+    toc: true
+    toc-title: "Plan for the Day"
+    toc-depth: 1
+editor: visual
+---
+
+# Review
+
+What did we learn last time?
+
+
+# Install RStudio
+
+## RStudio
+
+# Install Git
+
+## Installing Git (Windows)
+
+## Installing Git (Mac)
+
+## Step 2:
+
+# Linking RStudio & GitHub
+
+# Testing the Two

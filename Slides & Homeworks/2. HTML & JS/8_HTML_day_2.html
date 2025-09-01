@@ -436,30 +436,21 @@ Dr.&nbsp;Andrew M. Byrd
 <h1>Structure in HTML</h1>
 
 </section>
-<section id="todays-focus" class="slide level2 center">
-<h2>Today’s Focus</h2>
-<ul>
-<li>Add <strong>structure</strong> with semantic tags</li>
-<li>Learn the page skeleton:
-<ul>
-<li><code>&lt;header&gt;</code> — title + navigation</li>
-<li><code>&lt;nav&gt;</code> — menu of links</li>
-<li><code>&lt;main&gt;</code> — main content</li>
-<li><code>&lt;section&gt;</code> — thematic grouping</li>
-<li><code>&lt;footer&gt;</code> — closing info</li>
-</ul></li>
-<li>Add <strong>internal navigation</strong> with <code>id</code> and <code>href="#..."</code></li>
-</ul>
-</section>
 <section id="why-structure-matters" class="slide level2 center">
 <h2>Why Structure Matters</h2>
 <p>Without structure:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb1-1"><a href=""></a><span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>My Mini Site<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
-<span id="cb1-2"><a href=""></a><span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Hello world! ...<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb1-3"><a href=""></a><span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Links<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
-<span id="cb1-4"><a href=""></a><span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Visit <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"https://example.com"</span><span class="dt">&gt;</span>Example<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span>.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb1-5"><a href=""></a><span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Image<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
-<span id="cb1-6"><a href=""></a><span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"pic.jpg"</span><span class="ot"> alt</span><span class="op">=</span><span class="st">"..."</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb1-1"><a href=""></a><span class="dt">&lt;!doctype</span> html<span class="dt">&gt;</span></span>
+<span id="cb1-2"><a href=""></a><span class="dt">&lt;</span><span class="kw">html</span><span class="ot"> lang</span><span class="op">=</span><span class="st">"en"</span><span class="dt">&gt;</span></span>
+<span id="cb1-3"><a href=""></a><span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>My Mini Site<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
+<span id="cb1-4"><a href=""></a><span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Hello world! ...<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb1-5"><a href=""></a><span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Links<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
+<span id="cb1-6"><a href=""></a><span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Visit <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"https://example.com"</span><span class="dt">&gt;</span>Example<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span>.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb1-7"><a href=""></a><span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Image<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
+<span id="cb1-8"><a href=""></a><span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"pic.jpg"</span><span class="ot"> alt</span><span class="op">=</span><span class="st">"..."</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb1-9"><a href=""></a><span class="dt">&lt;/</span><span class="kw">html</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>We get a site, but this is bad HTML with no semantic outline.</li>
+</ul>
 </section>
 <section id="why-structure-matters-1" class="slide level2 center">
 <h2>Why Structure Matters</h2>
@@ -487,6 +478,21 @@ Dr.&nbsp;Andrew M. Byrd
 <span id="cb2-21"><a href=""></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://picsum.photos/300/180"</span><span class="ot"> alt</span><span class="op">=</span><span class="st">"A random placeholder image"</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
 <span id="cb2-22"><a href=""></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span>
 <span id="cb2-23"><a href=""></a><span class="dt">&lt;/</span><span class="kw">html</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="todays-focus" class="slide level2 center">
+<h2>Today’s Focus</h2>
+<ul>
+<li>Add <strong>structure</strong> with semantic tags</li>
+<li>Learn the page skeleton:
+<ul>
+<li><code>&lt;header&gt;</code> — title + navigation</li>
+<li><code>&lt;nav&gt;</code> — menu of links</li>
+<li><code>&lt;main&gt;</code> — main content</li>
+<li><code>&lt;section&gt;</code> — thematic grouping</li>
+<li><code>&lt;footer&gt;</code> — closing info</li>
+</ul></li>
+<li>Add <strong>internal navigation</strong> with <code>id</code> and <code>href="#..."</code></li>
+</ul>
 </section></section>
 <section>
 <section id="learning-html-structure" class="title-slide slide level1 center">
@@ -496,25 +502,25 @@ Dr.&nbsp;Andrew M. Byrd
 <section id="create-a-new-html-file" class="slide level2 center">
 <h2>Create a New <code>html</code> File</h2>
 <ul>
-<li>Create a new .html file, call it <code>structure.html</code>.</li>
-<li>Here is the starting code:</li>
+<li>Create a new .html file, call it <code>stinkys.html</code>.</li>
+<li>Here is the starting code. You can see that right now it’s completely <em>flat</em> – there’s no inherent structure at the moment.</li>
 </ul>
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb3-1"><a href=""></a><span class="dt">&lt;!doctype</span> html<span class="dt">&gt;</span></span>
 <span id="cb3-2"><a href=""></a><span class="dt">&lt;</span><span class="kw">html</span><span class="ot"> lang</span><span class="op">=</span><span class="st">"en"</span><span class="dt">&gt;</span></span>
 <span id="cb3-3"><a href=""></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
 <span id="cb3-4"><a href=""></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> charset</span><span class="op">=</span><span class="st">"utf-8"</span><span class="ot"> </span><span class="dt">/&gt;</span></span>
-<span id="cb3-5"><a href=""></a>  <span class="dt">&lt;</span><span class="kw">title</span><span class="dt">&gt;</span>Stinky's Cheesemonger<span class="dt">&lt;/</span><span class="kw">title</span><span class="dt">&gt;</span></span>
+<span id="cb3-5"><a href=""></a>  <span class="dt">&lt;</span><span class="kw">title</span><span class="dt">&gt;</span>The Stinky Cheesemonger<span class="dt">&lt;/</span><span class="kw">title</span><span class="dt">&gt;</span></span>
 <span id="cb3-6"><a href=""></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span>
 <span id="cb3-7"><a href=""></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
-<span id="cb3-8"><a href=""></a>  <span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>Stinky's Cheesemonger<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
+<span id="cb3-8"><a href=""></a>  <span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>The Stinky Cheesemonger<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
 <span id="cb3-9"><a href=""></a></span>
-<span id="cb3-10"><a href=""></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Welcome to Stinky's — your neighborhood shop for gloriously pungent cheeses.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb3-10"><a href=""></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Welcome to The Stinky Cheesemonger — your neighborhood shop for gloriously pungent cheeses.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
 <span id="cb3-11"><a href=""></a></span>
 <span id="cb3-12"><a href=""></a>  <span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Cheeses<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
 <span id="cb3-13"><a href=""></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Try our favorites: Époisses, Limburger, Blue Stilton.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
 <span id="cb3-14"><a href=""></a></span>
 <span id="cb3-15"><a href=""></a>  <span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Shop Info<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
-<span id="cb3-16"><a href=""></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>123 Rind Lane, Fromage City, FC<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb3-16"><a href=""></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>123 Rind Lane, Fromage City, Idaho<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
 <span id="cb3-17"><a href=""></a></span>
 <span id="cb3-18"><a href=""></a>  <span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Contact<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
 <span id="cb3-19"><a href=""></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Email us at <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"mailto:hello@stinkys.cheese"</span><span class="dt">&gt;</span>hello@stinkys.cheese<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
@@ -523,17 +529,17 @@ Dr.&nbsp;Andrew M. Byrd
 <span id="cb3-22"><a href=""></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span>
 <span id="cb3-23"><a href=""></a><span class="dt">&lt;/</span><span class="kw">html</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="the-header" class="slide level2 center">
-<h2>The <code>&lt;header&gt;</code></h2>
+<section id="header" class="slide level2 center">
+<h2><code>&lt;header&gt;</code></h2>
 <p><strong>Purpose:</strong> Introduces the page (or a big section). Commonly holds the site name/logo and navigation.</p>
-<p><strong>Rules of thumb</strong> - You can have a top-level <code>&lt;header&gt;</code> for the page.<br>
-- You can also have headers <em>inside</em> sections (advanced; we’ll stick to one for now).</p>
+<p><strong>How it Works:</strong> You can have a top-level <code>&lt;header&gt;</code> for the page.<br>
+- You can also have headers <em>inside</em> sections, but this is advanced – we’ll stick to one for now.</p>
 </section>
 <section id="add-a-header" class="slide level2 center">
 <h2>Add a <code>&lt;header&gt;</code></h2>
 <div class="sourceCode" id="cb4"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb4-1"><a href=""></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
 <span id="cb4-2"><a href=""></a> <span class="dt">&lt;</span><span class="kw">header</span><span class="dt">&gt;</span></span>
-<span id="cb4-3"><a href=""></a>    <span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>Stinky's Cheesemonger<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
+<span id="cb4-3"><a href=""></a>    <span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>The Stinky Cheesemonger<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
 <span id="cb4-4"><a href=""></a> <span class="dt">&lt;/</span><span class="kw">header</span><span class="dt">&gt;</span></span>
 <span id="cb4-5"><a href=""></a></span>
 <span id="cb4-6"><a href=""></a>...</span>
@@ -542,7 +548,7 @@ Dr.&nbsp;Andrew M. Byrd
 <section id="nav-with-links" class="slide level2 center">
 <h2><code>&lt;nav&gt;</code> with links</h2>
 <p><strong>Purpose:</strong> A container for site links (menus, table of contents, etc).</p>
-<p><strong>Rules of thumb</strong></p>
+<p><strong>How it Works</strong>:</p>
 <ul>
 <li>Put it <strong>inside</strong> your page <code>&lt;header&gt;</code>.</li>
 <li>Links can be internal (jump to a section) or external.</li>
@@ -552,7 +558,7 @@ Dr.&nbsp;Andrew M. Byrd
 <h2>Add a <code>&lt;nav&gt;</code> with links</h2>
 <div class="sourceCode" id="cb5"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb5-1"><a href=""></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
 <span id="cb5-2"><a href=""></a>  <span class="dt">&lt;</span><span class="kw">header</span><span class="dt">&gt;</span></span>
-<span id="cb5-3"><a href=""></a>    <span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>Stinky's Cheesemonger<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
+<span id="cb5-3"><a href=""></a>    <span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>The Stinky Cheesemonger<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
 <span id="cb5-4"><a href=""></a>    <span class="dt">&lt;</span><span class="kw">nav</span><span class="dt">&gt;</span></span>
 <span id="cb5-5"><a href=""></a>      <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"#about"</span><span class="dt">&gt;</span>About<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span></span>
 <span id="cb5-6"><a href=""></a>      <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"#cheeses"</span><span class="dt">&gt;</span>Cheeses<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span></span>
@@ -566,24 +572,28 @@ Dr.&nbsp;Andrew M. Byrd
 </section>
 <section id="main" class="slide level2 center">
 <h2><code>&lt;main&gt;</code></h2>
+<p><strong>Purpose:</strong> Contains the primary page content.<br>
+</p>
+<p><strong>How it Works</strong>:</p>
+<ul>
+<li><p>One per page. Improves accessibility.</p></li>
+<li><p>Wrap your page’s primary content in a <code>&lt;main&gt;...&lt;/main&gt;</code> element.</p></li>
+</ul>
 </section>
 <section id="add-main" class="slide level2 center">
 <h2>Add <code>&lt;main&gt;</code></h2>
-<ul>
-<li>Wrap your page’s primary content in a <code>&lt;main&gt;...&lt;/main&gt;</code> element.</li>
-</ul>
 <div class="sourceCode" id="cb6"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb6-1"><a href=""></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
 <span id="cb6-2"><a href=""></a></span>
 <span id="cb6-3"><a href=""></a>...</span>
 <span id="cb6-4"><a href=""></a></span>
 <span id="cb6-5"><a href=""></a>  <span class="dt">&lt;</span><span class="kw">main</span><span class="dt">&gt;</span></span>
-<span id="cb6-6"><a href=""></a>    <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Welcome to Stinky's — your neighborhood shop for gloriously pungent cheeses.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb6-6"><a href=""></a>    <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Welcome to The Stinky Cheesemonger — your neighborhood shop for gloriously pungent cheeses.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
 <span id="cb6-7"><a href=""></a></span>
 <span id="cb6-8"><a href=""></a>    <span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Cheeses<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
 <span id="cb6-9"><a href=""></a>    <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Try our favorites: Époisses, Limburger, Blue Stilton.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
 <span id="cb6-10"><a href=""></a></span>
 <span id="cb6-11"><a href=""></a>    <span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Shop Info<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
-<span id="cb6-12"><a href=""></a>    <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>123 Rind Lane, Fromage City, FC<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb6-12"><a href=""></a>    <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>123 Rind Lane, Fromage City, Idaho<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
 <span id="cb6-13"><a href=""></a></span>
 <span id="cb6-14"><a href=""></a>    <span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Contact<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
 <span id="cb6-15"><a href=""></a>    <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Email us at <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"mailto:hello@stinkys.cheese"</span><span class="dt">&gt;</span>hello@stinkys.cheese<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
@@ -592,225 +602,109 @@ Dr.&nbsp;Andrew M. Byrd
 <span id="cb6-18"><a href=""></a>  <span class="dt">&lt;/</span><span class="kw">main</span><span class="dt">&gt;</span></span>
 <span id="cb6-19"><a href=""></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="sections-and-ids" class="slide level2 center">
-<h2><code>&lt;section&gt;</code>s and <code>id</code>s</h2>
+<section id="section" class="slide level2 center">
+<h2><code>&lt;section&gt;</code></h2>
+<p><strong>Purpose:</strong> Groups related content with a heading.<br>
+</p>
+<p><strong>How it Works</strong>:</p>
+<ul>
+<li><p>Each section begins with an <code>&lt;h2&gt;</code>.</p></li>
+<li><p>Give each an <code>id</code>.</p></li>
+</ul>
 </section>
 <section id="add-sections-and-ids" class="slide level2 center">
 <h2>Add <code>&lt;section&gt;</code>s and <code>id</code>s</h2>
 <div class="sourceCode" id="cb7"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb7-1"><a href=""></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
-<span id="cb7-2"><a href=""></a>  <span class="dt">&lt;</span><span class="kw">header</span><span class="dt">&gt;</span></span>
-<span id="cb7-3"><a href=""></a>    <span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>Stinky's Cheesemonger<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
-<span id="cb7-4"><a href=""></a>    <span class="dt">&lt;</span><span class="kw">nav</span><span class="dt">&gt;</span></span>
-<span id="cb7-5"><a href=""></a>      <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"#about"</span><span class="dt">&gt;</span>About<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span></span>
-<span id="cb7-6"><a href=""></a>      <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"#cheeses"</span><span class="dt">&gt;</span>Cheeses<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span></span>
-<span id="cb7-7"><a href=""></a>      <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"#shop"</span><span class="dt">&gt;</span>Shop Info<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span></span>
-<span id="cb7-8"><a href=""></a>      <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"#contact"</span><span class="dt">&gt;</span>Contact<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span></span>
-<span id="cb7-9"><a href=""></a>    <span class="dt">&lt;/</span><span class="kw">nav</span><span class="dt">&gt;</span></span>
-<span id="cb7-10"><a href=""></a>  <span class="dt">&lt;/</span><span class="kw">header</span><span class="dt">&gt;</span></span>
-<span id="cb7-11"><a href=""></a></span>
-<span id="cb7-12"><a href=""></a>  <span class="dt">&lt;</span><span class="kw">main</span><span class="dt">&gt;</span></span>
-<span id="cb7-13"><a href=""></a>    <span class="dt">&lt;</span><span class="kw">section</span><span class="ot"> id</span><span class="op">=</span><span class="st">"about"</span><span class="dt">&gt;</span></span>
-<span id="cb7-14"><a href=""></a>      <span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>About<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
-<span id="cb7-15"><a href=""></a>      <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Welcome to Stinky's — your neighborhood shop for gloriously pungent cheeses.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb7-16"><a href=""></a>      <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://picsum.photos/320/200"</span><span class="ot"> alt</span><span class="op">=</span><span class="st">"A plate of assorted cheeses"</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb7-17"><a href=""></a>    <span class="dt">&lt;/</span><span class="kw">section</span><span class="dt">&gt;</span></span>
-<span id="cb7-18"><a href=""></a></span>
-<span id="cb7-19"><a href=""></a>    <span class="dt">&lt;</span><span class="kw">section</span><span class="ot"> id</span><span class="op">=</span><span class="st">"cheeses"</span><span class="dt">&gt;</span></span>
-<span id="cb7-20"><a href=""></a>      <span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Cheeses<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
-<span id="cb7-21"><a href=""></a>      <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Try our favorites:<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb7-22"><a href=""></a>      <span class="dt">&lt;</span><span class="kw">ul</span><span class="dt">&gt;</span></span>
-<span id="cb7-23"><a href=""></a>        <span class="dt">&lt;</span><span class="kw">li</span><span class="dt">&gt;</span>Époisses — washed-rind, famously aromatic<span class="dt">&lt;/</span><span class="kw">li</span><span class="dt">&gt;</span></span>
-<span id="cb7-24"><a href=""></a>        <span class="dt">&lt;</span><span class="kw">li</span><span class="dt">&gt;</span>Limburger — creamy, assertive, legendary funk<span class="dt">&lt;/</span><span class="kw">li</span><span class="dt">&gt;</span></span>
-<span id="cb7-25"><a href=""></a>        <span class="dt">&lt;</span><span class="kw">li</span><span class="dt">&gt;</span>Blue Stilton — crumbly, sharp, deeply savory<span class="dt">&lt;/</span><span class="kw">li</span><span class="dt">&gt;</span></span>
-<span id="cb7-26"><a href=""></a>      <span class="dt">&lt;/</span><span class="kw">ul</span><span class="dt">&gt;</span></span>
-<span id="cb7-27"><a href=""></a>    <span class="dt">&lt;/</span><span class="kw">section</span><span class="dt">&gt;</span></span>
-<span id="cb7-28"><a href=""></a></span>
-<span id="cb7-29"><a href=""></a>    <span class="dt">&lt;</span><span class="kw">section</span><span class="ot"> id</span><span class="op">=</span><span class="st">"shop"</span><span class="dt">&gt;</span></span>
-<span id="cb7-30"><a href=""></a>      <span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Shop Info<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
-<span id="cb7-31"><a href=""></a>      <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>123 Rind Lane, Fromage City, FC<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb7-32"><a href=""></a>      <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Open Tue–Sat, 11am–6pm<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb7-33"><a href=""></a>    <span class="dt">&lt;/</span><span class="kw">section</span><span class="dt">&gt;</span></span>
-<span id="cb7-34"><a href=""></a></span>
-<span id="cb7-35"><a href=""></a>    <span class="dt">&lt;</span><span class="kw">section</span><span class="ot"> id</span><span class="op">=</span><span class="st">"contact"</span><span class="dt">&gt;</span></span>
-<span id="cb7-36"><a href=""></a>      <span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Contact<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
-<span id="cb7-37"><a href=""></a>      <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Email us at <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"mailto:hello@stinkys.cheese"</span><span class="dt">&gt;</span>hello@stinkys.cheese<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb7-38"><a href=""></a>    <span class="dt">&lt;/</span><span class="kw">section</span><span class="dt">&gt;</span></span>
-<span id="cb7-39"><a href=""></a>  <span class="dt">&lt;/</span><span class="kw">main</span><span class="dt">&gt;</span></span>
-<span id="cb7-40"><a href=""></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-2"><a href=""></a>  ...</span>
+<span id="cb7-3"><a href=""></a></span>
+<span id="cb7-4"><a href=""></a>  <span class="dt">&lt;</span><span class="kw">main</span><span class="dt">&gt;</span></span>
+<span id="cb7-5"><a href=""></a>    <span class="dt">&lt;</span><span class="kw">section</span><span class="ot"> id</span><span class="op">=</span><span class="st">"about"</span><span class="dt">&gt;</span></span>
+<span id="cb7-6"><a href=""></a>      <span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>About<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
+<span id="cb7-7"><a href=""></a>      <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Welcome to The Stinky Cheesemonger — your neighborhood shop for gloriously pungent cheeses.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb7-8"><a href=""></a>      <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://picsum.photos/320/200"</span><span class="ot"> alt</span><span class="op">=</span><span class="st">"A plate of assorted cheeses"</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb7-9"><a href=""></a>    <span class="dt">&lt;/</span><span class="kw">section</span><span class="dt">&gt;</span></span>
+<span id="cb7-10"><a href=""></a></span>
+<span id="cb7-11"><a href=""></a>    <span class="dt">&lt;</span><span class="kw">section</span><span class="ot"> id</span><span class="op">=</span><span class="st">"cheeses"</span><span class="dt">&gt;</span></span>
+<span id="cb7-12"><a href=""></a>      <span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Cheeses<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
+<span id="cb7-13"><a href=""></a>      <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Try our favorites:<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb7-14"><a href=""></a>      <span class="dt">&lt;</span><span class="kw">ul</span><span class="dt">&gt;</span></span>
+<span id="cb7-15"><a href=""></a>        <span class="dt">&lt;</span><span class="kw">li</span><span class="dt">&gt;</span>Époisses — washed-rind, famously aromatic<span class="dt">&lt;/</span><span class="kw">li</span><span class="dt">&gt;</span></span>
+<span id="cb7-16"><a href=""></a>        <span class="dt">&lt;</span><span class="kw">li</span><span class="dt">&gt;</span>Limburger — creamy, assertive, legendary funk<span class="dt">&lt;/</span><span class="kw">li</span><span class="dt">&gt;</span></span>
+<span id="cb7-17"><a href=""></a>        <span class="dt">&lt;</span><span class="kw">li</span><span class="dt">&gt;</span>Blue Stilton — crumbly, sharp, deeply savory<span class="dt">&lt;/</span><span class="kw">li</span><span class="dt">&gt;</span></span>
+<span id="cb7-18"><a href=""></a>      <span class="dt">&lt;/</span><span class="kw">ul</span><span class="dt">&gt;</span></span>
+<span id="cb7-19"><a href=""></a>    <span class="dt">&lt;/</span><span class="kw">section</span><span class="dt">&gt;</span></span>
+<span id="cb7-20"><a href=""></a></span>
+<span id="cb7-21"><a href=""></a>    <span class="dt">&lt;</span><span class="kw">section</span><span class="ot"> id</span><span class="op">=</span><span class="st">"shop"</span><span class="dt">&gt;</span></span>
+<span id="cb7-22"><a href=""></a>      <span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Shop Info<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
+<span id="cb7-23"><a href=""></a>      <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>123 Rind Lane, Fromage City, Idaho<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb7-24"><a href=""></a>      <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Open Tue–Sat, 11am–6pm<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb7-25"><a href=""></a>    <span class="dt">&lt;/</span><span class="kw">section</span><span class="dt">&gt;</span></span>
+<span id="cb7-26"><a href=""></a></span>
+<span id="cb7-27"><a href=""></a>    <span class="dt">&lt;</span><span class="kw">section</span><span class="ot"> id</span><span class="op">=</span><span class="st">"contact"</span><span class="dt">&gt;</span></span>
+<span id="cb7-28"><a href=""></a>      <span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Contact<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
+<span id="cb7-29"><a href=""></a>      <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Email us at <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"mailto:hello@stinkys.cheese"</span><span class="dt">&gt;</span>hello@stinkys.cheese<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb7-30"><a href=""></a>    <span class="dt">&lt;/</span><span class="kw">section</span><span class="dt">&gt;</span></span>
+<span id="cb7-31"><a href=""></a>  <span class="dt">&lt;/</span><span class="kw">main</span><span class="dt">&gt;</span></span>
+<span id="cb7-32"><a href=""></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="the-footer" class="slide level2 center">
-<h2>The <code>&lt;footer&gt;</code></h2>
-</section>
-<section id="back-to-top" class="slide level2 center">
-<h2>Back to top</h2>
+<section id="the-nav-links-dont-seem-to-be-working" class="slide level2 center">
+<h2>The <code>&lt;nav&gt;</code> links don’t seem to be working…</h2>
 <ul>
-<li>You can add an anchor that takes the user back to the top, which goes right after <code>&lt;body&gt;</code>:</li>
+<li>Let’s use <em>lorem ipsum</em></li>
+<li>Copy the below code and paste it a bunch of times in your <code>stinkys_html</code> file</li>
 </ul>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb8-1"><a href=""></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
-<span id="cb8-2"><a href=""></a>  <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> id</span><span class="op">=</span><span class="st">"top"</span><span class="dt">&gt;&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span> <span class="co">&lt;!-- optional back-to-top anchor --&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb8-1"><a href=""></a><span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="footer" class="slide level2 center">
+<h2><code>&lt;footer&gt;</code></h2>
+<p><strong>Purpose:</strong></p>
+<ul>
+<li><p>Ends the page. Great for © YEAR, contact info, or “Back to top.”</p></li>
+<li><p>You can add an anchor that takes the user back to the top, which goes right after <code>&lt;body&gt;</code>.</p>
+<ul>
+<li>Go ahead and do that now.</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb9-1"><a href=""></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb9-2"><a href=""></a>  <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> id</span><span class="op">=</span><span class="st">"top"</span><span class="dt">&gt;&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span> <span class="co">&lt;!-- back-to-top anchor --&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="add-a-footer" class="slide level2 center">
 <h2>Add a <code>&lt;footer&gt;</code></h2>
 <ul>
-<li><p>At the end of your site, after <code>&lt;/main&gt;</code> but before <code>&lt;/body&gt;', you can add your</code></p>
-<footer>
-<p>…</p>
-</footer>
-<p>` element</p></li>
+<li>At the end of your site, after <code>&lt;/main&gt;</code> but before <code>&lt;/body&gt;</code>, you can add your<code>&lt;footer&gt;...&lt;/footer&gt;</code> element</li>
 </ul>
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb9-1"><a href=""></a>  <span class="dt">&lt;/</span><span class="kw">main</span><span class="dt">&gt;</span></span>
-<span id="cb9-2"><a href=""></a></span>
-<span id="cb9-3"><a href=""></a>  <span class="dt">&lt;</span><span class="kw">footer</span><span class="dt">&gt;</span></span>
-<span id="cb9-4"><a href=""></a>    © 2025 Stinky's Cheesemonger · <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"#top"</span><span class="dt">&gt;</span>Back to top<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span></span>
-<span id="cb9-5"><a href=""></a>  <span class="dt">&lt;/</span><span class="kw">footer</span><span class="dt">&gt;</span></span>
-<span id="cb9-6"><a href=""></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb10-1"><a href=""></a>  <span class="dt">&lt;/</span><span class="kw">main</span><span class="dt">&gt;</span></span>
+<span id="cb10-2"><a href=""></a></span>
+<span id="cb10-3"><a href=""></a>  <span class="dt">&lt;</span><span class="kw">footer</span><span class="dt">&gt;</span></span>
+<span id="cb10-4"><a href=""></a>    © 2025 The Stinky Cheesemonger · <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"#top"</span><span class="dt">&gt;</span>Back to top<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span></span>
+<span id="cb10-5"><a href=""></a>  <span class="dt">&lt;/</span><span class="kw">footer</span><span class="dt">&gt;</span></span>
+<span id="cb10-6"><a href=""></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section></section>
 <section>
 <section id="activity-add-structure-to-your-own-website" class="title-slide slide level1 center">
 <h1>Activity: Add Structure to Your Own Website!</h1>
 
 </section>
-<section id="activity-step-one-instructions" class="slide level2 center">
-<h2>Activity, Step One: Instructions</h2>
+<section id="activity-add-structure-to-your-own-website-1" class="slide level2 center">
+<h2>Activity: Add Structure to Your Own Website!</h2>
 <ul>
-<li>Today we’ll be adding these features to the website you built last time
-<ul>
-<li>Feel free to download <a href="8_mock_site.html" download="">this <code>html</code> file</a> for a reference to new code features.</li>
-</ul></li>
-<li>Add to your
-<ul>
-<li>emphasize a word</li>
-<li>make a word ‘strong’</li>
-<li>add an html link to a word or string of words</li>
-<li>add an image</li>
-<li>add an unordered list</li>
-</ul></li>
-</ul>
-</section>
-<section id="activity-step-two-build" class="slide level2 center">
-<h2>Activity, Step Two: Build</h2>
-<ul>
-<li>Create <code>firstname_lastname.html</code>. Add to it: <span style="font-size:80%;">
-<ol type="1">
-<li>A head and body.</li>
-<li>Two <code>&lt;p&gt;</code> elements talking about yourself (or whatever you want). Use <code>&lt;h1&gt;</code> and <code>&lt;h2&gt;</code>.</li>
-<li>Emphasize one word and make another word strong.</li>
-<li>Add a link that points to your GitHub profile.</li>
-<li>Add an image of yourself (or whatever you want).</li>
-<li>Add a simple unordered list (<code>&lt;ul&gt;</code>).</li>
-<li>Save and view the file by, “Open with Browser.”</li>
-<li>Sync with your GitHub. </li>
-</ol></span></li>
-</ul>
-</section>
-<section id="section" class="slide level2 center">
-<h2></h2>
-<section id="header-discussion" class="slide level2 center">
-<h2>
-The <code>&lt;header&gt;</code>
-</h2>
-<p>
-<strong>Purpose:</strong> Introduces the page (site name/logo + nav).
-</p>
-<p>
-<strong>Rules:</strong> One page-level header. Can also be used inside sections (advanced).
-</p>
-<pre><code class="language-html">&lt;header&gt;
-  &lt;h1&gt;Stinky's Cheesemonger&lt;/h1&gt;
-&lt;/header&gt;</code></pre>
-</section>
-<section id="nav-discussion" class="slide level2 center">
-<h2>
-The <code>&lt;nav&gt;</code>
-</h2>
-<p>
-<strong>Purpose:</strong> Holds navigation links.
-</p>
-<p>
-<strong>Rules:</strong> Goes inside the header. Links can be internal or external.
-</p>
-<pre><code class="language-html">&lt;nav&gt;
-  &lt;a href="#about"&gt;About&lt;/a&gt;
-  &lt;a href="#cheeses"&gt;Cheeses&lt;/a&gt;
-  &lt;a href="#shop"&gt;Shop Info&lt;/a&gt;
-  &lt;a href="#contact"&gt;Contact&lt;/a&gt;
-&lt;/nav&gt;</code></pre>
-</section>
-<section id="main-discussion" class="slide level2 center">
-<h2>
-The <code>&lt;main&gt;</code>
-</h2>
-<p>
-<strong>Purpose:</strong> Contains the primary page content.
-</p>
-<p>
-<strong>Rules:</strong> One per page. Improves accessibility.
-</p>
-<pre><code class="language-html">&lt;main&gt;
-  &lt;!-- Sections go here --&gt;
-&lt;/main&gt;</code></pre>
-</section>
-<section id="section-discussion" class="slide level2 center">
-<h2>
-The <code>&lt;section&gt;</code>
-</h2>
-<p>
-<strong>Purpose:</strong> Groups related content with a heading.
-</p>
-<p>
-<strong>Rules:</strong> Each section begins with an <code>&lt;h2&gt;</code>. Give each an <code>id</code>.
-</p>
-<pre><code class="language-html">&lt;section id="cheeses"&gt;
-  &lt;h2&gt;Cheeses&lt;/h2&gt;
-  &lt;ul&gt;
-    &lt;li&gt;Époisses&lt;/li&gt;
-    &lt;li&gt;Limburger&lt;/li&gt;
-    &lt;li&gt;Blue Stilton&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/section&gt;</code></pre>
-</section>
-<section id="footer-discussion" class="slide level2 center">
-<h2>
-The <code>&lt;footer&gt;</code>
-</h2>
-<p>
-<strong>Purpose:</strong> Ends the page. Great for © YEAR, contact info, or “Back to top.”
-</p>
-<pre><code class="language-html">&lt;footer&gt;
-  © 2025 Stinky's Cheesemonger · &lt;a href="#top"&gt;Back to top&lt;/a&gt;
-&lt;/footer&gt;</code></pre>
-</section>
-<section id="activity-instructions" class="slide level2 center">
-<h2>
-Activity — Modify Your Site
-</h2>
-<ol>
-<li>
-Add a <code>&lt;header&gt;</code> with your site title in an <code>&lt;h1&gt;</code>.
+<li>Open the HTML file you made yesterday.<br>
 </li>
-<li>
-Inside the header, add a <code>&lt;nav&gt;</code> with links:
-<ul>
-<li>
-<code>#about</code>
-</li>
-<li>
-<code>#education</code>
-</li>
-<li>
-<code>#projects</code>
-</li>
-<li>
-<code>#contact</code>
+<li>At the top of your <code>&lt;body&gt;</code>, wrap title in a <code>&lt;header&gt;</code>.<br>
 </li>
 </ul>
-<pre><code>&lt;/li&gt;
-&lt;li&gt;Wrap your main content in &lt;code&gt;&amp;lt;main&amp;gt;&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Split content into &lt;code&gt;&amp;lt;section&amp;gt;&lt;/code&gt;s, each with an &lt;code&gt;&amp;lt;h2&amp;gt;&lt;/code&gt; and a unique &lt;code&gt;id&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Add a &lt;code&gt;&amp;lt;footer&amp;gt;&lt;/code&gt; with your name and a “Back to top” link.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Test:&lt;/strong&gt; Do all nav links jump to the right spot?&lt;/li&gt;</code></pre>
-</li></ol>
-</section>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb11-1"><a href=""></a>  <span class="dt">&lt;</span><span class="kw">nav</span><span class="dt">&gt;</span></span>
+<span id="cb11-2"><a href=""></a>     <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"#about"</span><span class="dt">&gt;</span>About<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span></span>
+<span id="cb11-3"><a href=""></a>     <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"#education"</span><span class="dt">&gt;</span>Education<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span></span>
+<span id="cb11-4"><a href=""></a>     <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"#projects"</span><span class="dt">&gt;</span>Projects<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span></span>
+<span id="cb11-5"><a href=""></a>     <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"#contact"</span><span class="dt">&gt;</span>Contact<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span></span>
+<span id="cb11-6"><a href=""></a>  <span class="dt">&lt;/</span><span class="kw">nav</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Wrap content in <code>&lt;main&gt;</code>.</li>
+<li>Split into <code>&lt;section&gt;</code>s.</li>
+<li>Add a <code>&lt;footer&gt;</code>. Be sure to add a <strong>page anchor</strong> at the top.</li>
+<li>If you have time, add a fifth section on “Hobbies”, with links.</li>
+</ul>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
