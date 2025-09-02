@@ -1,0 +1,42 @@
+---
+title: "Day 4: Brain Dump (LaTeX)"
+format: pdf
+---
+
+**Name**: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+**Date**: 9/3/2025
+
+1.  What is the difference between the following outputs (if any)?
+
+``` latex
+Text$_{subscript}$  
+Text\textsubscript{subscript}  
+```
+
+2.  What is the difference between the following outputs (if any)?
+
+``` latex
+\textit{words in italics}
+%%%%%%%%%%%% here's a comment break for legibility %%%%%%%%%%%%
+\begin{it}
+words in italics
+\end{it}
+```
+
+3.  Below I've pasted some LaTeX code to create a basic table.
+
+<strong> Edit the code to: </strong>
+
+(a) Have the first column be center-aligned, and the second be right-aligned.
+(b) Add horizontal lines between each row in the table.
+
+``` latex
+\begin{tabular}{|l|l|}
+Apples & Green \\
+Strawberries & Red \\
+Oranges & Orange \\
+\end{tabular}
+```
+
+4.  **True** or **False**: in LaTeX, your bibliography is added at the end of the `main.tex` file, just after `\end{document}`

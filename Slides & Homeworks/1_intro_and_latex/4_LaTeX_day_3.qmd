@@ -94,7 +94,7 @@ The first part of the methods.\nocite{knuth1986}
  \subsection{Stage 2}
 The second part of the methods.\cite[p. 215]{smith2017}
  \section{Results}
- Here are my results.\cite{knuth1986,smith2017}
+ Here are my results \citep{knuth1986,smith2017}.
  
 \bibliography{refs} 
 \end{document}
@@ -253,55 +253,81 @@ Two paragraphs of filler:
 <!-- ## Activity: Packages -->
 
 <!-- -   Copy and paste this code into your "301-LaTeX-practice" project tex file. -->
+
 <!--     -   **Your task**: study the code, and identify precisely what the optional arguments and commands are doing. -->
+
 <!--     -   Feel free to discuss with neighbors! -->
 
 <!-- ``` latex -->
+
 <!-- \documentclass[12pt]{article} -->
 
 <!-- % enumitem with two options declared -->
+
 <!-- \usepackage[shortlabels,inline]{enumitem} -->
 
 <!-- % Setting defaults -->
+
 <!-- \setlist[enumerate,1]{label=(\arabic*)}          % level 1: (1), (2), ... -->
+
 <!-- \setlist[enumerate,2]{label=(\alph*)}            % level 2: (a), (b), ... -->
+
 <!-- \setlist[itemize]{label=--}                      % itemize bullets are dashes -->
 
 <!-- \begin{document} -->
 
 <!-- \begin{itemize} -->
+
 <!--   \item Data: 100 speakers across 5 regions. -->
+
 <!--   \item Methods: Forced alignment \& manual checks. -->
+
 <!--   \item[\textbf{Note:}] Region 3 recordings have higher noise levels. -->
+
 <!--   \item Deliverable: 2–3 pages with plots. -->
+
 <!-- \end{itemize} -->
 
-
 <!-- \begin{enumerate}[start=3]             % (3), (4), ... -->
+
 <!--   \item Prepare audio -->
+
 <!--     \begin{enumerate} -->
+
 <!--       \item normalize -->
+
 <!--       \item trim silences -->
+
 <!--     \end{enumerate} -->
+
 <!--   \item Extract features -->
+
 <!-- \end{enumerate} -->
 
 <!-- % ... some text ... -->
 
 <!-- \begin{enumerate}[resume]              % continues with (5) -->
+
 <!--   \item Train model -->
+
 <!-- \end{enumerate} -->
 
-
 <!-- In this study we (briefly) confirm  -->
+
 <!-- \begin{enumerate*}[label=a., itemjoin={{; }}, itemjoin*={{; and }}] -->
+
 <!--   \item speaker balance -->
+
 <!--   \item region stratification -->
+
 <!--   \item license compliance -->
+
 <!-- \end{enumerate*} -->
+
 <!-- before proceeding. -->
 
 <!-- \end{document} -->
+
 <!-- ``` -->
 
 # Funny Symbols
@@ -319,8 +345,9 @@ Two paragraphs of filler:
 \"{a}, \ss --> ä, ß 
 ```
 
-- **Note**: modifying diacritics work for any symbol:
-```latex
+-   **Note**: modifying diacritics work for any symbol:
+
+``` latex
 \'{h}, \"{p}, \^{g}, \c{\%}
 ```
 
@@ -359,6 +386,7 @@ Two paragraphs of filler:
 -   In LaTeX, type out "your first name" using the TIPA package.
 
 <!-- 1.  computer -->
+
 <!-- 2.  sleepy   -->
 
 ## Funny Symbols: IPA & Other Scripts
