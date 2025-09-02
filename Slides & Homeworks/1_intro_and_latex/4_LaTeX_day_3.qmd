@@ -152,7 +152,7 @@ Two paragraphs of filler:
 
 ## Loading a Package that's not in Overleaf
 
--   Let's try a different style for our "ipsum lorem" text. What happens when you load the following code?
+-   Let's try a different style for our "lorem ipsum" text. What happens when you load the following code?
 
 ``` latex
 \documentclass{article}
