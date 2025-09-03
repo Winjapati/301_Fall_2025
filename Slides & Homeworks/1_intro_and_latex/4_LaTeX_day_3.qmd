@@ -75,6 +75,8 @@ Two paragraphs of filler:
 -   Now run the same code as before.
     -   What happens? What does this tell you about installing packages not automatically built into Overleaf?
 
+<!-- Make sure duckuments works!! -->
+
 ## Packages: Options & Optional Arguments
 
 -   We'll be loading up a useful list package: `enumitem`
