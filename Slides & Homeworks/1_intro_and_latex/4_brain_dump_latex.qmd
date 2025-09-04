@@ -40,3 +40,5 @@ Oranges & Orange \\
 ```
 
 4.  **True** or **False**: in LaTeX, your bibliography is added at the end of the `main.tex` file, just after `\end{document}`
+
+<!-- Rewrite this question, it confused the students -->

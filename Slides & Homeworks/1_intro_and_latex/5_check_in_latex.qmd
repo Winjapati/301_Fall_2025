@@ -1,0 +1,35 @@
+---
+title: "Day 5: Check-in"
+author: "Name: ______________________"
+date: "9/5/2025"
+format: pdf
+---
+
+1.  If a package is not automatically installed in Overleaf and you have the \`.sty\` file, what steps do you follow to load that package?
+
+\vspace{3em}
+
+2.  **True** / **False**: in LaTeX, you can only add diacritics to characters that normally are marked by diacritics. For instance, you can add a grave accent to vowels (e.g., à), but not to consonants or other symbols.
+
+3.  What does compiling a LaTeX document in `XeLaTeX` allow linguists to do? And why might you choose to stick to `pdfLaTeX` for compiling?
+
+\vspace{3em}
+
+4.  Below is some code to generate phonological rules in LaTeX.
+
+    ``` latex
+    \documentclass{article}
+    \usepackage{phonrule} #phonological rule package
+    \usepackage{tipa}
+    
+    \begin{document}
+    \begin{enumerate} 
+    \item \phonb{s}{z}{V}{V} (\textbackslash phonb) 
+    \item \phonl{k}{c}{i} (\textbackslash phonl) 
+    \item \phonr{t}{ts}{u} (\textbackslash phonr) 
+    \item \phon{\textturnw}{w} (\textbackslash phon) 
+    \end{enumerate}
+    \end{document}
+    ```
+    
+    What do the letters `b`, `l`, and `r` refer to in the `\phon` command?
