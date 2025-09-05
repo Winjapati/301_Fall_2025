@@ -1,0 +1,39 @@
+---
+title: "Computation for Linguists"
+subtitle: "HTML and Javascript, Day 3"
+date: "September 15, 2025"
+author: "Dr. Andrew M. Byrd"
+format:
+  revealjs:
+    css: header_shrink.css
+    theme: beige
+    slide-number: true
+    center: true
+    toc: true
+    toc-title: "Plan for the Day"
+    toc-depth: 1
+editor: visual
+---
+
+# Review
+
+-   What did you learn last time about HTML?
+
+## Review from Days 1 & 2
+
+-   Day 1:
+
+    -   We learned **basic tags**: `<h1>`, `<p>`, `<em>`, `<strong>`, `<a>`, `<img>`, `<ul>`, `<li>`
+    -   We practiced **attributes** like `href` and `alt`
+
+-   Day 2:
+
+    -   Structure!
+
+-   We built a simple page with our name, a paragraph, a link, an image, and a list, and then structured it.
+
+# Let's Make Things Pretty
+
+# Beautifying Stinky's
+
+# Activity: Beautifying Your Site
