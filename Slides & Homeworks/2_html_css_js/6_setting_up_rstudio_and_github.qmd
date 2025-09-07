@@ -235,6 +235,20 @@ ssh -T git@github.com
 You must select ***push*** to send your changes to the GitHub server.
 :::
 
+## Troubleshooting
+
+-   If your RStudio is asking you to supply a username and PAT, even if you've followed all of the steps correctly above, use this code:
+
+```bash
+git remote -v   # you’ll likely see https://github.com/...
+# replace with SSH:
+git remote set-url origin git@github.com:<YourUser>/<YourRepo>.git
+
+# double check:
+git remote -v   # now it should show git@github.com:...
+```
+-   After following these steps, try to push your file to the Git server.
+
 # In Case of Emergency, Make PAT
 
 ## Create a PAT
@@ -252,10 +266,10 @@ You must select ***push*** to send your changes to the GitHub server.
 ## Link with RStudio
 
 -   Go to your GitHub repo page (LIN_305)
-    - Click the green `Code` button, choose HTTPS, copy URL
-    - In RStudio: New Project → Version Control → Git → paste URL.
-- Push for the first time
-    - Username = GitHub username
-    - Password = your PAT
-- Save credtionals 
-    - If you set a credential helper (`git config --global credential.helper manager` on Windows, or osxkeychain on Mac), you’ll only paste the token once.
+    -   Click the green `Code` button, choose HTTPS, copy URL
+    -   In RStudio: New Project → Version Control → Git → paste URL.
+-   Push for the first time
+    -   Username = GitHub username
+    -   Password = your PAT
+-   Save credtionals
+    -   If you set a credential helper (`git config --global credential.helper manager` on Windows, or osxkeychain on Mac), you’ll only paste the token once.
