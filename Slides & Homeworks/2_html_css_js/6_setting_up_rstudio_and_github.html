@@ -672,6 +672,7 @@ Dr.&nbsp;Andrew M. Byrd
 <li>Clone it</li>
 </ul>
 </section></section>
+<section>
 <section id="testing-the-two" class="title-slide slide level1 center">
 <h1>Testing the Two</h1>
 <ul>
@@ -694,7 +695,21 @@ Dr.&nbsp;Andrew M. Byrd
 </div>
 </div>
 </section>
-
+<section id="troubleshooting" class="slide level2">
+<h2>Troubleshooting</h2>
+<ul>
+<li>If your RStudio is asking you to supply a username and PAT, even if you’ve followed all of the steps correctly above, use this code:</li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href=""></a><span class="fu">git</span> remote <span class="at">-v</span>   <span class="co"># you’ll likely see https://github.com/...</span></span>
+<span id="cb11-2"><a href=""></a><span class="co"># replace with SSH:</span></span>
+<span id="cb11-3"><a href=""></a><span class="fu">git</span> remote set-url origin git@github.com:<span class="op">&lt;</span>YourUser<span class="op">&gt;</span>/<span class="op">&lt;</span>YourRepo<span class="op">&gt;</span>.git</span>
+<span id="cb11-4"><a href=""></a></span>
+<span id="cb11-5"><a href=""></a><span class="co"># double check:</span></span>
+<span id="cb11-6"><a href=""></a><span class="fu">git</span> remote <span class="at">-v</span>   <span class="co"># now it should show git@github.com:...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>After following these steps, try to push your file to the Git server.</li>
+</ul>
+</section></section>
 <section>
 <section id="in-case-of-emergency-make-pat" class="title-slide slide level1 center">
 <h1>In Case of Emergency, Make PAT</h1>
