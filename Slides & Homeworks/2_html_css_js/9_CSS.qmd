@@ -34,6 +34,24 @@ editor: visual
 
 # Let's Make Things Pretty
 
+## What is CSS?
+
+## CSS syntax basics
+
+- Open up ```firstname_lastname.html```
+- Right after ```<html>```, paste:
+
+```html
+<head>
+<style>
+p {
+  text-align: center;
+  color: red;
+} 
+</style>
+</head>
+```
+
 # Beautifying Stinky's
 
 # Activity: Beautifying Your Site

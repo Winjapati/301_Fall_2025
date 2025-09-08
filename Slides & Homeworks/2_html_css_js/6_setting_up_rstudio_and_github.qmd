@@ -13,7 +13,7 @@ format:
 editor: visual
 ---
 
-<!-- NOTE TO SELF:  HAVE MAC USERS INSTALL RSTUDIO AND GIT BEFOREHAND!!!!! -->
+<!-- NOTE TO SELF:  HAVE USERS INSTALL RSTUDIO AND GIT BEFOREHAND!!!!! Make this an in-class workshop day for those who can't get things to work. -->
 
 # Review
 
