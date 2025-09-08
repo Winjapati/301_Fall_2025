@@ -13,6 +13,8 @@ format:
 editor: visual
 ---
 
+<!-- NOTE TO SELF:  HAVE MAC USERS INSTALL RSTUDIO AND GIT BEFOREHAND!!!!! -->
+
 # Review
 
 What did we learn last time?
@@ -252,10 +254,10 @@ You must select ***push*** to send your changes to the GitHub server.
 ## Link with RStudio
 
 -   Go to your GitHub repo page (LIN_305)
-    - Click the green `Code` button, choose HTTPS, copy URL
-    - In RStudio: New Project → Version Control → Git → paste URL.
-- Push for the first time
-    - Username = GitHub username
-    - Password = your PAT
-- Save credtionals 
-    - If you set a credential helper (`git config --global credential.helper manager` on Windows, or osxkeychain on Mac), you’ll only paste the token once.
+    -   Click the green `Code` button, choose HTTPS, copy URL
+    -   In RStudio: New Project → Version Control → Git → paste URL.
+-   Push for the first time
+    -   Username = GitHub username
+    -   Password = your PAT
+-   Save credtionals
+    -   If you set a credential helper (`git config --global credential.helper manager` on Windows, or osxkeychain on Mac), you’ll only paste the token once.
