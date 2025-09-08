@@ -36,21 +36,49 @@ editor: visual
 
 ## What is CSS?
 
+-   There is a default way that text is displayed on a website: size of H1, organization of lists, etc.
+-   Cascading Style Sheets (CSS) allow us to make websites more interesting
+    -   Change the color and size of text, such as headings and links
+    -   Create layouts to organize content, create multi-column texts or organizing your site in a specific way
+    -   Create animations
+-   The following exercises are taken from [here](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/)
+
 ## CSS syntax basics
+-   Open up `firstname_lastname.html`
+-   Right after `<html>`, paste:
 
-- Open up ```firstname_lastname.html```
-- Right after ```<html>```, paste:
-
-```html
+``` html
 <head>
 <style>
+body {
+  background-color: lightblue;
+}
+</style>
+</head>
+```
+
+## Let's add this to the `<style>` section.
+
+``` html
 p {
   text-align: center;
   color: red;
 } 
-</style>
-</head>
 ```
+
+## Let's add this to the `<style>` section.
+
+``` html
+p {
+  color: aqua;
+  padding: 5px;
+  background: midnightblue;
+}
+```
+
+## Creating a `.css` file
+
+-   Let's now create a new files, called \`\``styles.css`\`\``.  Paste both styles we established above`
 
 # Beautifying Stinky's
 
