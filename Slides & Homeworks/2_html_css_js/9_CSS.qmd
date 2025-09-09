@@ -44,6 +44,7 @@ editor: visual
 -   The following exercises are taken from [here](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/)
 
 ## CSS syntax basics
+
 -   Open up `firstname_lastname.html`
 -   Right after `<html>`, paste:
 
