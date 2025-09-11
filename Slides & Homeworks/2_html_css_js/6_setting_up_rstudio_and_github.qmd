@@ -15,6 +15,30 @@ editor: visual
 
 <!-- NOTE TO SELF:  HAVE USERS INSTALL RSTUDIO AND GIT BEFOREHAND!!!!! Make this an in-class workshop day for those who can't get things to work. -->
 
+<!-- ADD THIS TO SLIDES NEXT TIME, make sure they select the "SSH" link, not  -->
+
+<!-- If GitHub is asking for a "Personal Access Token", even if you have set up the SSH protocol properly, here's what you need to do.  (This is currently to my knowledge only affecting Mac users) -->
+
+<!-- 1\) Delete the project in your RStudio.  We're going to set up the repo in RStudio again. -->
+
+<!-- 2\) Go to your GitHub repo page. -->
+
+<!-- 3\) Click the green "\<\> Code" button in the home page of the repo. -->
+
+<!-- 4\) Select "Local" -->
+
+<!-- 5\) Select "SSH" -->
+
+<!-- 6\) Copy the SSH address.  It should look something like "git\@github.com:Winjapati/301_Fall_2025.git" -->
+
+<!-- 7\) Use that link to set up your repo on RStudio as you did before.  That link is being used for the Git URL in RStudio. -->
+
+<!-- 8\) Test to make sure that you can push to GitHub by editing (and saving) your README.md file. -->
+
+<!-- Let me know if you CANNOT get this to work.  It's crucial that we're all on the same page as we venture into HTML. -->
+
+<!--#  -->
+
 # Review
 
 What did we learn last time?
@@ -241,7 +265,7 @@ You must select ***push*** to send your changes to the GitHub server.
 
 -   If your RStudio is asking you to supply a username and PAT, even if you've followed all of the steps correctly above, use this code:
 
-```bash
+``` bash
 git remote -v   # you’ll likely see https://github.com/...
 # replace with SSH:
 git remote set-url origin git@github.com:<YourUser>/<YourRepo>.git
@@ -249,6 +273,7 @@ git remote set-url origin git@github.com:<YourUser>/<YourRepo>.git
 # double check:
 git remote -v   # now it should show git@github.com:...
 ```
+
 -   After following these steps, try to push your file to the Git server.
 
 # In Case of Emergency, Make PAT
@@ -267,7 +292,7 @@ git remote -v   # now it should show git@github.com:...
 
 ## Link with RStudio
 
--   Go to your GitHub repo page (LIN_305)
+-   Go to your GitHub repo page (LIN_301)
     -   Click the green `Code` button, choose HTTPS, copy URL
     -   In RStudio: New Project → Version Control → Git → paste URL.
 -   Push for the first time
