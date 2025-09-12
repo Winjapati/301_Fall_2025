@@ -394,7 +394,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Computation for Linguists</h1>
-  <p class="subtitle">HTML and Javascript, Day 3</p>
+  <p class="subtitle">HTML and Javascript, Day 3: CSS</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -488,14 +488,202 @@ Dr.&nbsp;Andrew M. Byrd
 <section id="creating-a-.css-file" class="slide level2 center">
 <h2>Creating a <code>.css</code> file</h2>
 <ul>
-<li>Let’s now create a new files, called ``<code>styles.css</code>``<code>.  Paste both styles we established above</code></li>
+<li>We don’t <em>have</em> to put the <code>&lt;style</code> code in the <code>&lt;head&gt;</code>, though</li>
+<li>We can put it in a <code>.css</code> file.
+<ul>
+<li>Why would we want to do that?</li>
+</ul></li>
+<li>Let’s now create a new file, called <code>styles.css</code>.</li>
 </ul>
+</section>
+<section id="creating-a-.css-file-1" class="slide level2 center">
+<h2>Creating a <code>.css</code> file</h2>
+<ul>
+<li>Let’s paste this code into the <code>.css</code> file.</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb4-1"><a href=""></a>body {</span>
+<span id="cb4-2"><a href=""></a>  background-color: lightblue;</span>
+<span id="cb4-3"><a href=""></a>}</span>
+<span id="cb4-4"><a href=""></a>p {</span>
+<span id="cb4-5"><a href=""></a>  text-align: center;</span>
+<span id="cb4-6"><a href=""></a>  color: red;</span>
+<span id="cb4-7"><a href=""></a>  padding: 5px;</span>
+<span id="cb4-8"><a href=""></a>  background: midnightblue;</span>
+<span id="cb4-9"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section></section>
+<section>
 <section id="beautifying-stinkys" class="title-slide slide level1 center">
 <h1>Beautifying Stinky’s</h1>
 
 </section>
-
+<section id="remember-stinkys" class="slide level2 center">
+<h2>Remember Stinky’s?</h2>
+<ul>
+<li>Last time you built a website for The Stinky Cheesemonger.</li>
+<li>It was fairly basic, but we were able to add some structural features to it.</li>
+<li>If you’ll recall, it looked something like <a href="8_stinkys.html">this</a></li>
+</ul>
+</section>
+<section id="stinkys-beautified" class="slide level2 center">
+<h2>Stinky’s, Beautified</h2>
+<ul>
+<li>Let’s look at our website, beautified.</li>
+<li>It’s change in look is dictated by a <code>.css</code> file</li>
+<li>How can we see this on websites?
+<ul>
+<li>Dev tools!</li>
+</ul></li>
+</ul>
+</section>
+<section id="dev-tools" class="slide level2 center">
+<h2>Dev Tools</h2>
+<ul>
+<li><code>F12</code></li>
+<li><code>Ctrl/Command</code> + <code>Shift</code> + <code>i</code></li>
+</ul>
+</section>
+<section id="activity-deciphering-css-code" class="slide level2 center">
+<h2>Activity: Deciphering CSS code</h2>
+<ul>
+<li>Inspect the style file, <code>9_stinky_style.css</code></li>
+<li>How do you:
+<ul>
+<li>Make a comment in CSS?</li>
+<li></li>
+</ul></li>
+</ul>
+</section>
+<section id="todays-goal" class="slide level2 center">
+<h2>Today’s Goal</h2>
+<ul>
+<li>Learn to read a real CSS file (Stinky’s Cheesemonger stylesheet)<br>
+</li>
+<li>Understand new terms like <em>selector</em>, <em>variable</em>, <em>pseudo-class</em><br>
+</li>
+<li>See how properties and values work together<br>
+</li>
+<li>Practice changing variables and properties to see effects</li>
+</ul>
+</section>
+<section id="unfamiliar-terminology" class="slide level2 center">
+<h2>Unfamiliar Terminology</h2>
+<ul>
+<li><strong>Selector</strong> → which part of the page you want to style (<code>body</code>, <code>p</code>, <code>#about</code>)<br>
+</li>
+<li><strong>Declaration block</strong> → the <code>{ … }</code> after a selector<br>
+</li>
+<li><strong>Property</strong> → what you want to change (<code>color</code>, <code>margin</code>)<br>
+</li>
+<li><strong>Value</strong> → how you want it to look (<code>black</code>, <code>1rem</code>)<br>
+</li>
+<li><strong>Variable (custom property)</strong> → a nickname for a value, written as <code>--name: value;</code><br>
+</li>
+<li><strong>Pseudo-class</strong> → special states, like <code>a:hover</code> (when mouse is over a link)</li>
+</ul>
+</section>
+<section id="more-unfamiliar-terms" class="slide level2 center">
+<h2>More Unfamiliar Terms</h2>
+<ul>
+<li><strong>Units</strong>
+<ul>
+<li><code>rem</code> = relative to root font size (scales with user settings)<br>
+</li>
+<li><code>ch</code> = width of one character (good for readable line length)<br>
+</li>
+</ul></li>
+<li><strong>Sticky header</strong>
+<ul>
+<li><code>position: sticky; top: 0;</code> keeps header visible while scrolling<br>
+</li>
+</ul></li>
+<li><strong>Flexbox</strong>
+<ul>
+<li><code>display: flex; gap: …; justify-content: center;</code> arranges items in a row</li>
+</ul></li>
+</ul>
+</section>
+<section id="more-unfamiliar-terms-1" class="slide level2 center">
+<h2>More Unfamiliar Terms</h2>
+<ul>
+<li><strong>:last-child</strong>
+<ul>
+<li>Styles only the last element in a group<br>
+</li>
+</ul></li>
+<li><strong>rgba()</strong>
+<ul>
+<li>Colors with transparency, e.g., <code>rgba(0,0,0,0.15)</code><br>
+</li>
+</ul></li>
+<li><strong>calc()</strong>
+<ul>
+<li>Lets you do math with CSS values</li>
+</ul></li>
+</ul>
+</section>
+<section id="css-variables" class="slide level2 center">
+<h2>CSS Variables</h2>
+<ul>
+<li>Defined in :root so they apply everywhere</li>
+<li>Reusable nicknames for colors, spacing, sizes</li>
+<li>Change it once → updates everywhere</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource css number-lines code-with-copy"><code class="sourceCode css"><span id="cb5-1"><a href=""></a><span class="in">:root</span> {</span>
+<span id="cb5-2"><a href=""></a>  <span class="va">--ink</span><span class="ch">:</span> <span class="cn">black</span><span class="op">;</span>        <span class="co">/* variable definition */</span></span>
+<span id="cb5-3"><a href=""></a>  <span class="va">--paper</span><span class="ch">:</span> <span class="cn">oldlace</span><span class="op">;</span></span>
+<span id="cb5-4"><a href=""></a>}</span>
+<span id="cb5-5"><a href=""></a></span>
+<span id="cb5-6"><a href=""></a>body {</span>
+<span id="cb5-7"><a href=""></a>  <span class="kw">color</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--ink</span><span class="fu">)</span><span class="op">;</span>   <span class="co">/* using the variable */</span></span>
+<span id="cb5-8"><a href=""></a>  <span class="kw">background</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--paper</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb5-9"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="why-variables" class="slide level2 center">
+<h2>Why Variables?</h2>
+<ul>
+<li>Without variables:</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource css number-lines code-with-copy"><code class="sourceCode css"><span id="cb6-1"><a href=""></a>body   { <span class="kw">color</span><span class="ch">:</span> <span class="cn">black</span><span class="op">;</span> }</span>
+<span id="cb6-2"><a href=""></a>h1     { <span class="kw">color</span><span class="ch">:</span> <span class="cn">black</span><span class="op">;</span> }</span>
+<span id="cb6-3"><a href=""></a>footer { <span class="kw">color</span><span class="ch">:</span> <span class="cn">black</span><span class="op">;</span> }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>With variables:</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource css number-lines code-with-copy"><code class="sourceCode css"><span id="cb7-1"><a href=""></a><span class="in">:root</span> { <span class="va">--ink</span><span class="ch">:</span> <span class="cn">black</span><span class="op">;</span> }</span>
+<span id="cb7-2"><a href=""></a></span>
+<span id="cb7-3"><a href=""></a>body   { <span class="kw">color</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--ink</span><span class="fu">)</span><span class="op">;</span> }</span>
+<span id="cb7-4"><a href=""></a>h1     { <span class="kw">color</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--ink</span><span class="fu">)</span><span class="op">;</span> }</span>
+<span id="cb7-5"><a href=""></a>footer { <span class="kw">color</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--ink</span><span class="fu">)</span><span class="op">;</span> }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Easier to update: change <code>--ink</code> once and the whole site updates</li>
+</ul>
+</section>
+<section id="selectors" class="slide level2 center">
+<h2>Selectors</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource css number-lines code-with-copy"><code class="sourceCode css"><span id="cb8-1"><a href=""></a>p {</span>
+<span id="cb8-2"><a href=""></a>  <span class="kw">color</span><span class="ch">:</span> <span class="cn">red</span><span class="op">;</span></span>
+<span id="cb8-3"><a href=""></a>  <span class="kw">font-size</span><span class="ch">:</span> <span class="dv">1.2</span><span class="dt">rem</span><span class="op">;</span></span>
+<span id="cb8-4"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>p = selector (targets all <code>&lt;p&gt;</code> elements)
+<ul>
+<li>Inside { … } are <strong>declarations</strong>:</li>
+<li>color = <strong>property</strong></li>
+<li>red = <strong>value</strong></li>
+</ul></li>
+<li>Grammar:</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource css number-lines code-with-copy"><code class="sourceCode css"><span id="cb9-1"><a href=""></a>selector { property<span class="ch">:</span> <span class="dv">value</span><span class="op">;</span> property<span class="ch">:</span> <span class="dv">value</span><span class="op">;</span> }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="different-kinds-of-selectors" class="slide level2 center">
+<h2>Different Kinds of Selectors</h2>
+<ul>
+<li>Element selector: p { … } → all paragraphs</li>
+<li>Class selector: .highlight { … } → anything with class=“highlight”</li>
+<li>ID selector: #cheeses { … } → the element with id=“cheeses”</li>
+<li>Pseudo-class: a:hover { … } → links when hovered</li>
+</ul>
+</section></section>
 <section id="activity-beautifying-your-site" class="title-slide slide level1 center">
 <h1>Activity: Beautifying Your Site</h1>
 <div class="quarto-auto-generated-content">

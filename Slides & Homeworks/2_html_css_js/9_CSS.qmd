@@ -1,6 +1,6 @@
 ---
 title: "Computation for Linguists"
-subtitle: "HTML and Javascript, Day 3"
+subtitle: "HTML and Javascript, Day 3: CSS"
 date: "September 15, 2025"
 author: "Dr. Andrew M. Byrd"
 format:
@@ -79,8 +79,159 @@ p {
 
 ## Creating a `.css` file
 
--   Let's now create a new files, called \`\``styles.css`\`\``.  Paste both styles we established above`
+-   We don't *have* to put the `<style` code in the `<head>`, though
+-   We can put it in a `.css` file.
+    -   Why would we want to do that?
+-   Let's now create a new file, called `styles.css`.
+
+## Creating a `.css` file
+
+-   Let's paste this code into the `.css` file.
+
+``` html
+body {
+  background-color: lightblue;
+}
+p {
+  text-align: center;
+  color: red;
+  padding: 5px;
+  background: midnightblue;
+}
+```
 
 # Beautifying Stinky's
+
+## Remember Stinky's?
+
+-   Last time you built a website for The Stinky Cheesemonger.
+-   It was fairly basic, but we were able to add some structural features to it.
+-   If you'll recall, it looked something like <a href="8_stinkys.html">this</a>
+
+## Stinky's, Beautified
+
+-   Let's look at our website, beautified.
+-   It's change in look is dictated by a `.css` file
+-   How can we see this on websites?
+    -   Dev tools!
+
+## Dev Tools
+
+-   `F12`
+-   `Ctrl/Command` + `Shift` + `i`
+
+## Activity: Deciphering CSS code
+
+-   Inspect the style file, `9_stinky_style.css`
+-   How do you:
+    -   Make a comment in CSS?
+    -   
+
+## Today’s Goal
+
+-   Learn to read a real CSS file (Stinky’s Cheesemonger stylesheet)\
+-   Understand new terms like *selector*, *variable*, *pseudo-class*\
+-   See how properties and values work together\
+-   Practice changing variables and properties to see effects
+
+------------------------------------------------------------------------
+
+## Unfamiliar Terminology
+
+-   **Selector** → which part of the page you want to style (`body`, `p`, `#about`)\
+-   **Declaration block** → the `{ … }` after a selector\
+-   **Property** → what you want to change (`color`, `margin`)\
+-   **Value** → how you want it to look (`black`, `1rem`)\
+-   **Variable (custom property)** → a nickname for a value, written as `--name: value;`\
+-   **Pseudo-class** → special states, like `a:hover` (when mouse is over a link)
+
+------------------------------------------------------------------------
+
+## More Unfamiliar Terms
+
+-   **Units**
+    -   `rem` = relative to root font size (scales with user settings)\
+    -   `ch` = width of one character (good for readable line length)\
+-   **Sticky header**
+    -   `position: sticky; top: 0;` keeps header visible while scrolling\
+-   **Flexbox**
+    -   `display: flex; gap: …; justify-content: center;` arranges items in a row
+
+## More Unfamiliar Terms
+
+-   **:last-child**
+    -   Styles only the last element in a group\
+-   **rgba()**
+    -   Colors with transparency, e.g., `rgba(0,0,0,0.15)`\
+-   **calc()**
+    -   Lets you do math with CSS values
+
+------------------------------------------------------------------------
+
+## CSS Variables
+
+-   Defined in :root so they apply everywhere
+-   Reusable nicknames for colors, spacing, sizes
+-   Change it once → updates everywhere
+
+``` css
+:root {
+  --ink: black;        /* variable definition */
+  --paper: oldlace;
+}
+
+body {
+  color: var(--ink);   /* using the variable */
+  background: var(--paper);
+}
+```
+
+## Why Variables?
+
+-   Without variables:
+
+``` css
+body   { color: black; }
+h1     { color: black; }
+footer { color: black; }
+```
+
+-   With variables:
+
+``` css
+:root { --ink: black; }
+
+body   { color: var(--ink); }
+h1     { color: var(--ink); }
+footer { color: var(--ink); }
+```
+
+-   Easier to update: change `--ink` once and the whole site updates
+
+## Selectors
+
+``` css
+p {
+  color: red;
+  font-size: 1.2rem;
+}
+```
+
+-   p = selector (targets all `<p>` elements)
+    -   Inside { … } are **declarations**:
+    -   color = **property**
+    -   red = **value**
+-   Grammar:
+
+``` css
+selector { property: value; property: value; }
+```
+
+## Different Kinds of Selectors
+
+-   Element selector: p { … } → all paragraphs
+-   Class selector: .highlight { … } → anything with class="highlight"
+-   ID selector: #cheeses { … } → the element with id="cheeses"
+-   Pseudo-class: a:hover { … } → links when hovered
 
 # Activity: Beautifying Your Site

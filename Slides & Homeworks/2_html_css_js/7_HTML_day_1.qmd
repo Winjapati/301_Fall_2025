@@ -243,7 +243,7 @@ Historical linguistics, NLP.
 
 ## Activity, Step One: Analyze
 
--   Download <a href="7_mock_site.html" download>this `html` file</a> and analyze its code.
+-   Download <href="7_mock_sita e.html" download>this `html` file</a> and analyze its code.
 -   Identify how to:
     -   <em> emphasize </em> a word
     -   make a word <strong> strong </strong>
