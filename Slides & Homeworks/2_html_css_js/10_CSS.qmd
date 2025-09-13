@@ -1,0 +1,113 @@
+---
+title: "Computation for Linguists"
+subtitle: "HTML and Javascript, Day 3: CSS"
+date: "September 17, 2025"
+author: "Dr. Andrew M. Byrd"
+format:
+  revealjs:
+    css: header_shrink.css
+    theme: beige
+    slide-number: true
+    center: true
+    toc: true
+    toc-title: "Plan for the Day"
+    toc-depth: 1
+editor: visual
+---
+
+# Review
+
+-   What did you learn last time about HTML?
+
+## Review from Days 1, 2, & 3
+
+-   Day 1:
+
+    -   We learned **basic tags**: `<h1>`, `<p>`, `<em>`, `<strong>`, `<a>`, `<img>`, `<ul>`, `<li>`
+    -   We practiced **attributes** like `href` and `alt`
+
+-   Day 2:
+
+    -   Structure: `<head>`, `<nav>`, `<main>`, `<section>`, `<footer>`
+
+-   Day 3:
+
+    -   CSS
+
+# Stinky's
+
+## CSS syntax basics
+
+-   Open up `firstname_lastname.html`
+-   Right after `<html>`, paste:
+
+## More Unfamiliar Terms
+
+-   **Units**
+    -   `rem` = relative to root font size (scales with user settings)
+    -   `ch` = width of one character (good for readable line length)
+-   **Sticky header**
+    -   `position: sticky; top: 0;` keeps header visible while scrolling
+-   **Flexbox**
+    -   `display: flex; gap: …; justify-content: center;` arranges items in a row
+
+## More Unfamiliar Terms
+
+-   **:last-child**
+    -   Styles only the last element in a group
+-   **rgba()**
+    -   Colors with transparency, e.g., `rgba(0,0,0,0.15)`
+-   **calc()**
+    -   Lets you do math with CSS values
+
+------------------------------------------------------------------------
+
+# Activity: Beautifying Your Site
+
+
+
+
+If you are working on the CSS for a personal website, you can use various activities to improve and expand your skills. You can build on the foundational elements of your site by practicing responsive design, exploring advanced layout techniques, and adding dynamic features like animations and hover effects. 
+Beginner to intermediate activities
+Create a responsive design
+Ensure your website displays correctly on different screen sizes, from mobile phones to large desktop monitors. This is a fundamental skill for any web developer. 
+Use CSS media queries: Apply different styles based on the viewport width. You can define breakpoints for mobile (@media (max-width: 768px)), tablet, and desktop.
+Adopt a "mobile-first" strategy: This approach involves designing for smaller screens first and then scaling up. This can lead to cleaner, more efficient CSS.
+Test with developer tools: Use your browser's developer tools to simulate different screen sizes and make adjustments as you go. 
+Master Flexbox and CSS Grid
+Modern CSS layouts primarily rely on Flexbox and Grid. Using these layout modules is a core skill for building sophisticated page structures. 
+Flexbox for components: Practice using Flexbox to arrange elements within a single dimension (a row or a column). This is perfect for navigation menus, card layouts, and aligning items.
+CSS Grid for page structure: Use CSS Grid for two-dimensional layouts, defining the overall structure of your website with rows and columns.
+Challenge: Try building a complex component like a pricing table or a photo gallery that uses both Flexbox and Grid. 
+Animate elements with transitions
+Add polished, subtle animations to your site to enhance the user experience and make it more interactive.
+Create hover effects: Make buttons, links, or cards change appearance when a user hovers their mouse over them. Use the transition property to ensure the changes are smooth.
+Slide-in animations: Make elements like a welcome message or project cards slide into view as the user scrolls down the page. 
+Improve typography and contrast
+Good typography and a clear visual hierarchy are key to a professional-looking site.
+Choose a font pairing: Select a font for your headings and another for your body text. Use Google Fonts or another service and make sure the pairing has a legible contrast.
+Define a spacing scale: Create a consistent scale for your margins and padding. For example, use a consistent 8px or 16px unit for all spacing to create a clean, organized look.
+Ensure accessibility: Use a tool like a contrast checker to ensure your font and background colors are accessible for users with visual impairments. 
+Organize your CSS
+As your personal website grows, it's important to keep your stylesheets organized.
+Use a preprocessor: Start learning a CSS preprocessor like Sass to make your code more maintainable.
+Adopt a methodology: Implement a naming convention like BEM (Block, Element, Modifier) to make your CSS class names more predictable and understandable.
+Use CSS variables: Define reusable variables for your color palette, fonts, and spacing. This makes your CSS easier to update and more consistent. 
+Advanced activities
+Build a theme switcher
+Give users the ability to toggle between a light and dark theme on your website. This is a great exercise for practicing CSS variables and JavaScript.
+Define colors with variables: Set your theme colors in CSS variables. Create a :root selector for the default theme and another selector (e.g., body.dark-theme) to override the colors for the dark theme.
+Use JavaScript: Use a small JavaScript function to toggle the class on the <body> element when the user clicks a button. 
+Create a dynamic random design
+Challenge yourself to build a unique website experience by having the color scheme, layout, or animations change dynamically.
+Randomize elements with CSS and JavaScript: You can write a script that randomly selects a new stylesheet or modifies CSS variables to create a new color combination each time the page is loaded. 
+Incorporate CSS Shapes and Clip-Path
+Go beyond basic rectangular layouts by creating interesting and unique shapes.
+Create custom shapes: Use the clip-path property to create non-rectangular elements, such as a diamond-shaped image or a circular banner.
+Wrap text around a shape: Experiment with the shape-outside property to have text flow around a customized image or element. 
+Optimize for performance
+Ensure your website loads quickly and runs efficiently on all devices.
+Simplify selectors: Avoid overly complex and specific selectors, which can slow down page rendering. Simple, efficient selectors are faster for the browser to parse.
+Minify and compress your CSS: Remove unnecessary whitespace and comments from your final stylesheet to reduce the file size and improve load times.
+Eliminate unused CSS: Audit your code to remove any CSS rules that are no longer being used. 
+

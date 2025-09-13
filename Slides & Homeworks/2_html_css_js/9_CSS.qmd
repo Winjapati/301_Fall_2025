@@ -226,9 +226,9 @@ h1 { color: brand-brown }
 ```css
 --name: value
 ```
-## CSS Variables
+## Variables in CSS
 
--   Defined in :root so they apply everywhere
+-   Defined in ```:root``` so they apply everywhere
 -   Reusable nicknames for colors, spacing, sizes
 -   Change it once → updates everywhere
 
@@ -265,8 +265,6 @@ footer { color: var(--ink); }
 ```
 
 -   Easier to update: change `--ink` once and the whole site updates
-
-<!-- -   **Pseudo-class** → special states, like `a:hover` (when mouse is over a link) -->
 
 # Activity : Let's 
 
