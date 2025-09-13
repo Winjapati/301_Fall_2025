@@ -28,7 +28,7 @@ editor: visual
 
 -   Day 2:
 
-    -   Structure: ```<head>```, ```<nav>```, ```<main>```, ```<section>```, ```<footer>```
+    -   Structure: `<head>`, `<nav>`, `<main>`, `<section>`, `<footer>`
 
 -   We built a simple page with our name, a paragraph, a link, an image, and a list, and then structured it.
 
@@ -79,7 +79,7 @@ p {
 
 ## Creating a `.css` file
 
--   We don't *have* to put the `<style` code in the `<head>`, though
+-   We don't *have* to put the `<style>` code in the `<head>`, though
 -   We can put it in a `.css` file.
     -   Why would we want to do that?
 -   Let's now create a new file, called `styles.css`.
@@ -98,6 +98,15 @@ p {
   padding: 5px;
   background: midnightblue;
 }
+```
+
+## Loading a `.css` file
+
+-   You can now delete all of that style code in your `firstname_lastname.html`
+-   Then paste the following code in your `<head>`
+
+``` html
+    <link rel="stylesheet" href="styles.css">
 ```
 
 # Beautifying Stinky's
@@ -124,25 +133,143 @@ p {
 
 -   Open up **Dev Tools**
     -   Inspect the style file, `9_stinky_style.css`
--   How do you:
-    -   Make a comment in CSS?
-    -   X
-    -   Y
-    -   Z
-    -   A
+-   How do you make a comment in CSS?
+-   Find as many familiar tags (like ```<h1>```) as you can. How do we edit their style?
+-   Now look for unfamiliar tags. Any guesses as to what they mean?
+-   You'll see values marked as ```px```, ```rem```, and ```ch```. Ponder what they mean, then double check your guess using Google.
 
 ------------------------------------------------------------------------
 
-## Unfamiliar Terminology
+## Let's Look Under the Hood
 
--   **Selector** → which part of the page you want to style (`body`, `p`, `#about`)\
--   **Declaration block** → the `{ … }` after a selector\
--   **Property** → what you want to change (`color`, `margin`)\
--   **Value** → how you want it to look (`black`, `1rem`)\
--   **Variable (custom property)** → a nickname for a value, written as `--name: value;`\
--   **Pseudo-class** → special states, like `a:hover` (when mouse is over a link)
+```css
+h1 { font-size: 2rem; margin: var(--space-1) 0 0; color: var(--brand-brown); text-align: center; }
+```
 
-------------------------------------------------------------------------
+- ```h1``` = the **Selector**
+    - indicates the part of the page you want to style
+
+``` css
+p {
+  color: red;
+  font-size: 1.2rem;
+}
+```
+
+## Selectors & Friends
+
+- **Declaration block** → the `{ … }` after a selector: ```{ font-size:...}```
+- **Property** → what you want to change (`color`, `margin`)
+- **Value** → how you want it to look (`black`, `1rem`)
+
+``` css
+selector { property: value; property: value; }
+```
+
+## Different Kinds of Selectors
+
+-   Element selector: ```p { … }```
+    - applies to all paragraphs
+-   Class selector: ```.highlight { … }```
+    - applies to anything where class="highlight"
+-   ID selector: ```#cheeses { … }```
+    - applies to anything with the element with id="cheeses"
+-   Pseudo-class: ```a:hover { … }```
+    - applies to links when hovered
+
+
+## ```var(--???)```
+
+- In this and other ```css``` code, we find some properties marked as follows: 
+
+```css
+h1 { color: var(--brand-brown) }
+```
+- Why not just:
+
+```css
+h1 { color: brand-brown }
+```
+
+## ```var(--???)```
+
+- The answer lies here, in the ```:root{}```
+
+```css
+:root {
+  /* Palette (named colors for now) */
+  --brand-brown: brown;
+  --brand-gold: goldenrod;
+  --paper: oldlace;      /* warm page background */
+  --ink: black;          /* default text color */
+
+  /* Layout & rhythm */
+  --page-width: 60ch;    /* ~60 characters per line for readability */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+
+  /* Rounding */
+  --radius: 12px;
+}
+```
+
+## ```var(--???)```
+
+- All of these things are **variables**
+    - We define variables in the ```css``` head
+    - Their value remains constant through the file
+- Think of it as a nickname for a value
+- Basic Syntax for a **variable**:
+
+```css
+--name: value
+```
+## CSS Variables
+
+-   Defined in :root so they apply everywhere
+-   Reusable nicknames for colors, spacing, sizes
+-   Change it once → updates everywhere
+
+``` css
+:root {
+  --ink: black;        /* variable definition */
+  --paper: oldlace;
+}
+
+body {
+  color: var(--ink);   /* using the variable */
+  background: var(--paper);
+}
+```
+
+## Why Use Variables?
+
+-   Without variables:
+
+``` css
+body   { color: black; }
+h1     { color: black; }
+footer { color: black; }
+```
+
+-   With variables:
+
+``` css
+:root { --ink: black; }
+
+body   { color: var(--ink); }
+h1     { color: var(--ink); }
+footer { color: var(--ink); }
+```
+
+-   Easier to update: change `--ink` once and the whole site updates
+
+<!-- -   **Pseudo-class** → special states, like `a:hover` (when mouse is over a link) -->
+
+# Activity : Let's 
+
 
 ## More Unfamiliar Terms
 
@@ -165,70 +292,8 @@ p {
 
 ------------------------------------------------------------------------
 
-## CSS Variables
-
--   Defined in :root so they apply everywhere
--   Reusable nicknames for colors, spacing, sizes
--   Change it once → updates everywhere
-
-``` css
-:root {
-  --ink: black;        /* variable definition */
-  --paper: oldlace;
-}
-
-body {
-  color: var(--ink);   /* using the variable */
-  background: var(--paper);
-}
-```
-
-## Why Variables?
-
--   Without variables:
-
-``` css
-body   { color: black; }
-h1     { color: black; }
-footer { color: black; }
-```
-
--   With variables:
-
-``` css
-:root { --ink: black; }
-
-body   { color: var(--ink); }
-h1     { color: var(--ink); }
-footer { color: var(--ink); }
-```
-
--   Easier to update: change `--ink` once and the whole site updates
-
-## Selectors
-
-``` css
-p {
-  color: red;
-  font-size: 1.2rem;
-}
-```
-
--   p = selector (targets all `<p>` elements)
-    -   Inside { … } are **declarations**:
-    -   color = **property**
-    -   red = **value**
--   Grammar:
-
-``` css
-selector { property: value; property: value; }
-```
-
-## Different Kinds of Selectors
-
--   Element selector: p { … } → all paragraphs
--   Class selector: .highlight { … } → anything with class="highlight"
--   ID selector: #cheeses { … } → the element with id="cheeses"
--   Pseudo-class: a:hover { … } → links when hovered
-
 # Activity: Beautifying Your Site
+
+
+
+
