@@ -28,7 +28,7 @@ editor: visual
 
 -   Day 2:
 
-    -   Structure!
+    -   Structure: ```<head>```, ```<nav>```, ```<main>```, ```<section>```, ```<footer>```
 
 -   We built a simple page with our name, a paragraph, a link, an image, and a list, and then structured it.
 
@@ -37,11 +37,11 @@ editor: visual
 ## What is CSS?
 
 -   There is a default way that text is displayed on a website: size of H1, organization of lists, etc.
--   Cascading Style Sheets (CSS) allow us to make websites more interesting
+-   **Cascading Style Sheets** (CSS) allow us to make websites more interesting
     -   Change the color and size of text, such as headings and links
     -   Create layouts to organize content, create multi-column texts or organizing your site in a specific way
     -   Create animations
--   The following exercises are taken from [here](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/)
+-   Note: exercises are taken from [here](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/); check it out for more details!
 
 ## CSS syntax basics
 
@@ -110,8 +110,8 @@ p {
 
 ## Stinky's, Beautified
 
--   Let's look at our website, beautified.
--   It's change in look is dictated by a `.css` file
+-   Let's look at our website, <a href="9_stinkys_beautified.html">beautified</a>
+-   Its change in look is dictated by a `.css` file
 -   How can we see this on websites?
     -   Dev tools!
 
@@ -122,17 +122,14 @@ p {
 
 ## Activity: Deciphering CSS code
 
--   Inspect the style file, `9_stinky_style.css`
+-   Open up **Dev Tools**
+    -   Inspect the style file, `9_stinky_style.css`
 -   How do you:
     -   Make a comment in CSS?
-    -   
-
-## Today’s Goal
-
--   Learn to read a real CSS file (Stinky’s Cheesemonger stylesheet)\
--   Understand new terms like *selector*, *variable*, *pseudo-class*\
--   See how properties and values work together\
--   Practice changing variables and properties to see effects
+    -   X
+    -   Y
+    -   Z
+    -   A
 
 ------------------------------------------------------------------------
 
