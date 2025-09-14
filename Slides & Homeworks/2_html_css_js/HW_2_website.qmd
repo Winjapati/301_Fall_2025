@@ -1,0 +1,73 @@
+---
+title: "Final Website Assignment"
+subtitle: "LIN 301 — Personal Website"
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    code-fold: false
+    smooth-scroll: true
+    theme: cosmo
+---
+
+## Overview
+
+You’ll publish a polished personal website using everything we practiced across **HTML → CSS → Baby JavaScript → GitHub Pages**.\
+If you’ve been keeping up, this shouldn't take you too long: focus on **styling and clarity**, not adding new features or complicated code.
+
+**Deliverable:** a public URL to your site (hosted via GitHub Pages).\
+**Due:** September 22, 2025
+
+------------------------------------------------------------------------
+
+## Required Elements (building on what you've already done)
+
+### HTML structure
+
+-   Semantic layout: `<header>`, `<nav>`, `<main>`, `<section>`, `<footer>`.
+-   Internal anchors: a working **Back to top** link (e.g., `<a href="#top">…</a>` with `<a id="top"></a>` at top).
+-   At least **4 sections** (e.g., About, Education, Projects, Contact).\
+-   One image with descriptive `alt` text.
+-   A link to your **GitHub profile**.
+
+### CSS
+
+-   Use a separate **`style.css`**, linked in `<head>`.
+-   **Custom properties (CSS variables)** in `:root` for color and spacing (e.g., `--ink`, `--paper`, `--accent`, `--space-2`).
+-   **Class selectors** you created during class (e.g., `.tagline`, `.card`, `.btn`) and reuse at least one class in 2+ places.
+-   **Flexbox** for the nav bar (`display: flex;` + `gap` + `justify-content`).
+-   **Sticky header** (`position: sticky; top: 0;`) so the nav stays visible.
+-   At least **two** subtle polish touches, such as:
+    -   `rgba()` for soft hover/background tints,
+    -   `calc()` for spacing math,
+    -   improved list readability (spacing or markers).
+
+### Pseudo-classes (light interaction)
+
+-   At least **two** (choose from): `:hover`, `:focus-visible`, `:visited`, `:first-child`, `:last-child`, `:nth-child(...)`.
+    -   Examples: (a) when hovering over nav links, make a visible change to the link; (b) when navigating with a keyboard and navigate sections/links with tab, make sure it is visibly highlighted in some way.
+
+### Tiny JavaScript (pick one)
+
+-   **Auto year** in footer;
+-   **Dark Mode** toggle;
+-   There are quite a few JS scripts posted online; you can surprise me!
+
+### Keeping Things Accessible
+
+- Color contrast is readable (no light gray on white, etc.).
+- Images have informative alt text.
+- One `<h1>` per page; section headings use `<h2>`.
+- Links are descriptive (avoid “click here”).
+
+------------------------------------------------------------------------
+
+## Posting Your Site Online
+
+1.  Finalize your HTML/CSS/JS locally.
+2.  Place files in `docs` (remember that your homepage should be `index.html`!).
+3.  Stage → Commit → Push your changes from RStudio.
+4.  Your repo name must be: `yourusername.github.io` 
+5.  Confirm Pages is enabled: GitHub → **Settings → Pages** → Branch: **main**, Folder: **/docs** → **Save**.
+5.  Wait \~1 minute; test your public link.
+6.  Submit your URL to Canvas / class form

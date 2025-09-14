@@ -1,6 +1,6 @@
 ---
 title: "Computation for Linguists"
-subtitle: "HTML and Javascript, Day 4: CSS & GitHub Pages"
+subtitle: "HTML and JavaScript, Day 5: Baby JavaScript"
 date: "September 17, 2025"
 author: "Dr. Andrew M. Byrd"
 format:
@@ -45,11 +45,11 @@ editor: visual
 </body>
 ```
 
-- So... we have to update our website every year with the correct year?
+-   So... we have to update our website every year with the correct year?
 
 ## Date Automated
 
-```html
+``` html
 <footer>
   <p>&copy; <span id="year"></span> Your Name</p>
 </footer>
@@ -62,134 +62,146 @@ editor: visual
 
 ## Let's Look at this More Closely
 
-```html
+``` html
 <footer>
   <p>&copy; <span id="year"></span> Your Name</p>
 </footer>
 ```
 
-- This is the `<footer>` code. Before we typed "2025".
-- <span id="year"></span> is the code that is giving us the correct value
-- id="year" is a **variable** defined in the JavaScript code
+-   This is the `<footer>` code. Before we typed "2025".
+-   `<span id="year"></span>` is the code that is giving us the correct value
+-   id="year" is a **variable** defined in the JavaScript code
 
 ## What is JavaScript?
 
-- **JavaScript** (JS) is a very popular programming language;
-- Adds interactivity and dynamic behavior to your site;
-- Runs in the browser, so no installation needed;
-- We’ll use it for small, useful effects on our personal website.
+-   **JavaScript** (JS) is a very popular programming language;
+-   Adds interactivity and dynamic behavior to your site;
+-   Runs in the browser, so no installation needed;
+-   We’ll use it for small, useful effects on our personal website.
 
 ## The `<script>`
 
-```html
+``` html
 <script>
   const yearSpan = document.getElementById("year");
   yearSpan.textContent = new Date().getFullYear();
 </script>
 ```
 
-- Embedded in your html file is a **script**
-- Scripts are instructions that we give to programming languages
+-   Embedded in your html file is a **script**
+-   Scripts are instructions that we give to programming languages
 
 ## The `<script>`
 
-```html
+``` html
 <script>
   const yearSpan = document.getElementById("year");
   yearSpan.textContent = new Date().getFullYear();
 </script>
 ```
 
-- `const` is one way that JS defines a **variable**
-- The variable here is **constant** (hence `const`)
-- `year` is that name that **we** give to the variable; `Span` is required in calling up that variable in our script
-    - we could call it `cookie`, `nananananana`, whatever!
-    - so why not call it `nananananana`?
-    
+-   `const` is one way that JS defines a **variable**
+-   The variable here is **constant** (hence `const`)
+-   `year` is that name that *we* give to the variable; `Span` is required in calling up that variable in our script
+    -   we could call it `cookie`, `nananananana`, whatever!
+    -   so why not call it `nananananana`?
+
 ## The `<script>`
 
-```html
+``` html
 <script>
   const yearSpan = document.getElementById("year");
   yearSpan.textContent = new Date().getFullYear();
 </script>
 ```
 
-- `document.getElementById("year")`
+-   `document.getElementById("year")`
 
-  - Looks through the HTML and finds the element with id="year".
-  - That’s the <span> inside the footer.
-  - The result is stored in a constant named yearSpan.
+    -   Looks through the HTML and finds the element with id="year".
+    -   That’s the `<span>` inside the footer.
+    -   The result is stored in a constant named `yearSpan`.
 
 ## The `<script>`
 
-```html
+``` html
 <script>
   const yearSpan = document.getElementById("year");
   yearSpan.textContent = new Date().getFullYear();
 </script>
 ```
 
-- `new Date()`
+-   `new Date()`
 
-  - Creates a JavaScript Date object representing “right now.”
+    -   Creates a JavaScript Date object representing “right now.”
 
-- `.getFullYear()`
+-   `.getFullYear()`
 
-  - pulls just the 4-digit year (e.g., 2025) from that Date.
+    -   pulls just the 4-digit year (e.g., 2025) from that Date.
 
-- `yearSpan.textContent = new Date().getFullYear();`
+-   `yearSpan.textContent = new Date().getFullYear();`
 
-  - Inserts that year as text into the `<span>`.
+    -   Inserts that year as text into the `<span>`.
 
 ## Activity: Let's Modify Your Website!
 
-- In your LIN_301 "staging" folder, modify your `firstname_lastname.html` doc
-- Modify your `<footer>`
-- Add the `<script>`
-  - Place at the bottom of `<body>`, right before `</body>`
-- Save, stage, commit, push!
-- Test it. Does it work?
-
+-   In your LIN_301 "staging" folder, modify your `firstname_lastname.html` doc
+-   Modify your `<footer>`
+-   Add the `<script>`
+    -   Place at the bottom of `<body>`, right before `</body>`
+-   Save, stage, commit, push!
+-   Test it. Does it work?
 
 # Another JS Script: Dark Mode
 
 ## Dark Mode
 
+-   Let's add a "Dark Mode" button toggle to our website
+-   Here is a link to some code for a standalone site:
 
-✅ Each student will see the count go up every time they reload their page.
-
-Activity 3: Something Fun & Useful
-
-A “dark mode toggle” is great for personal sites:
-
-<button id="darkModeBtn">Toggle Dark Mode</button>
-
-<script>
-  const btn = document.getElementById("darkModeBtn");
-  btn.onclick = () => {
-    document.body.classList.toggle("dark");
-  };
-</script>
-
-
-In your CSS:
-
-.dark {
-  background-color: #222;
-  color: #eee;
+``` html
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  padding: 25px;
+  background-color: white;
+  color: black;
+  font-size: 25px;
 }
 
+.dark-mode {
+  background-color: black;
+  color: white;
+}
+</style>
+</head>
+<body>
 
-✅ Students can switch their site between light/dark with one click.
+<h2>Toggle Dark/Light Mode</h2>
+<p>Click the button to toggle between dark and light mode for this page.</p>
 
-## Activity: Add Dark Mode
+<button onclick="myFunction()">Toggle dark mode</button>
+
+<script>
+function myFunction() {
+   var element = document.body;
+   element.classList.toggle("dark-mode");
+}
+</script>
+
+</body>
+</html>
+```
+
+## Activity: Dark Mode
+
+-   Add Dark Mode to your Own Website
+-   Test: is it possible to use different colors?
+-   Look carefully at the code. With your neighbors, try to figure out exactly what each word (like `function`) is doing.
+-   After discussing this, google each term. Do they mean what you thought they did?
 
 # The Final Product
 
-## Instructions for HW 2
-
--
--
--
--
+-   Click here for instructions on your website
