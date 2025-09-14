@@ -1,0 +1,71 @@
+---
+title: "Day 9: Check-In"
+format: pdf
+editor: visual
+---
+
+## Find the following properties in the below html: 
+- a hyperlink anchor
+- bullet points
+- italics
+- the two bits of code that brings the user back to the top
+- a comment
+
+
+```html
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Mini Site — Structured</title>
+</head>
+<body>
+  <a id="top"></a>
+
+  <header>
+    <h1>My Mini Site</h1>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#links">Links</a>
+      <a href="#image">Image</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="about">
+      <h2>About</h2>
+      <p>Hello! This is a <em>paragraph</em>.</p>
+    </section>
+
+    <section id="links">
+      <h2>Links</h2>
+      <p>
+        Visit <a href="https://example.com">Example</a>.
+        (Try adding <code>target="_blank"</code> yourself to open in a new tab.)
+      </p>
+    </section>
+
+    <section id="image">
+      <h2>Image</h2>
+      <p>
+        <img src="https://picsum.photos/200/120" alt="A random placeholder image">
+      </p>
+    </section>
+
+    <section id="todo">
+      <h2>My To-Do List</h2>
+      <ul>
+        <li>Write a paragraph</li>
+        <li>Add one link</li>
+        <li>Insert an image with a good <code>alt</code> description</li>
+      </ul>
+    </section>
+  </main>
+
+<!-- wut? -->
+  <footer>
+    © 2025 Your Name · <a href="#top">Back to top</a>
+  </footer>
+</body>
+</html>
+```
