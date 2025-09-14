@@ -242,56 +242,54 @@ nav a:hover{ background: rgba(xxxx,xxxx,xxxx,xxxx); } /* input your values! */
 
 ## Step 2: Add Repo to RStudio
 
-- New Project > 
+- New Project > Version Control > Git
 
-## Step 3: Create a `docs` folder in `yourusername.github.io`
+## Step 3: Create a `docs` folder
 
-- In your local repo, make a folder named **docs**.
+- In `yourusername.github.io`, you need to make a folder named **docs**.
 - In RStudio: 
     - right-click in Files pane
     - create new folder
     - call it **docs**
     
-## Step 2: Add Files to `docs`
+## Step 4: Add Files to `docs`
 
-- Copy your finished `.html` and `.css` files into `docs`  
-- Note: your homepage **must be named `index.html`*
+- From LIN_301, copy your finished `.html` and `.css` files into `docs`  
+- Note: your homepage **must be named `index.html`**, so rename it if it's not called that
   
-## Step 3: Save, Stage, Commit, Push!
+## Step 5: Save, Stage, Commit, Push!
 
-## Step 4: GitHub Settings
+## Step 6: GitHub Settings
 
-- Go to your LIN_301 repo
+- Go to your `yourusername.github.io` repo
 - Visit Settings → Pages  
 - Under “Branch,” choose **main** and folder **/docs**
 - Save
 
-## Step 5: Loading Your Page
+## Step 7: Loading Your Page
 
 - **Wait a minute**  
 - GitHub builds your site automatically.  
-- You’ll see a green check + a URL like:  `https://yourusername.github.io/your-repo-name`
+- You’ll see a green check + a URL like:  `https://yourusername.github.io/`
 
----
+## Troubleshooting GitHub Pages
 
-## Tips & Gotchas
+- **My site won’t load**  
+  - Did you name the repo **yourusername.github.io** exactly?  
+  - Did you rename your homepage file to **index.html**?
 
-- Your homepage must be called **index.html** (GitHub looks for this by default).  
-- If you want multiple pages, just add links between your `.html` files.  
-- Updates?  
-  - Edit locally → commit → push → GitHub Pages rebuilds automatically.  
-- If something’s not working, double-check:  
-  - Branch = `main`  
-  - Directory = `/root` (or `/docs`)  
-  - File names have **no spaces**.
+- **404 error**  
+  - Make sure your files are inside the **docs/** folder.  
+  - Check that Pages is set to **Branch: main** and **Folder: /docs**.
 
----
+## Troubleshooting GitHub Pages
 
-## Activity: Go Live 🎉
+- **Changes not showing up**  
+  - Did you **Stage → Commit → Push** after editing?  
+  - Sometimes you need to refresh or wait ~1–2 minutes.
 
-- Rename your main page `index.html` (if not already).  
-- Push your repo.  
-- Turn on **GitHub Pages** in Settings.  
-- Copy your site link into the shared class doc!
+- **Still stuck?**  
+  - Open **Settings → Pages** and see if GitHub shows a red ❌ error.  
+  - Double-check file names (no spaces, all lowercase is safest).
 
 
