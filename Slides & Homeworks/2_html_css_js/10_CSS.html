@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="9_CSS_files/libs/clipboard/clipboard.min.js"></script>
-<script src="9_CSS_files/libs/quarto-html/tabby.min.js"></script>
-<script src="9_CSS_files/libs/quarto-html/popper.min.js"></script>
-<script src="9_CSS_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="9_CSS_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="9_CSS_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="9_CSS_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="9_CSS_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="10_CSS_files/libs/clipboard/clipboard.min.js"></script>
+<script src="10_CSS_files/libs/quarto-html/tabby.min.js"></script>
+<script src="10_CSS_files/libs/quarto-html/popper.min.js"></script>
+<script src="10_CSS_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="10_CSS_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="10_CSS_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="10_CSS_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="10_CSS_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Dr.&nbsp;Andrew M. Byrd">
-  <meta name="dcterms.date" content="2025-09-15">
+  <meta name="dcterms.date" content="2025-09-17">
   <title>Computation for Linguists</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="9_CSS_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="9_CSS_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="10_CSS_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="10_CSS_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -96,12 +96,12 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="9_CSS_files/libs/revealjs/dist/theme/quarto.css">
+  <link rel="stylesheet" href="10_CSS_files/libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="header_shrink.css">
-  <link href="9_CSS_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="9_CSS_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="9_CSS_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="9_CSS_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link href="10_CSS_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="10_CSS_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="10_CSS_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="10_CSS_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -394,7 +394,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Computation for Linguists</h1>
-  <p class="subtitle">HTML and Javascript, Day 3: CSS</p>
+  <p class="subtitle">HTML and Javascript, Day 4: CSS &amp; GitHub Pages</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -404,15 +404,15 @@ Dr.&nbsp;Andrew M. Byrd
 </div>
 </div>
 
-  <p class="date">2025-09-15</p>
+  <p class="date">2025-09-17</p>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Plan for the Day</h2>
 <ul>
 <li><a href="#/review" id="/toc-review">Review</a></li>
-<li><a href="#/lets-make-things-pretty" id="/toc-lets-make-things-pretty">Let’s Make Things Pretty</a></li>
-<li><a href="#/beautifying-stinkys" id="/toc-beautifying-stinkys">Beautifying Stinky’s</a></li>
-<li><a href="#/activity-lets-start-building-your-css" id="/toc-activity-lets-start-building-your-css">Activity : Let’s Start Building Your CSS</a></li>
+<li><a href="#/one-more-look-at-stinkys" id="/toc-one-more-look-at-stinkys">One More Look at Stinky’s</a></li>
+<li><a href="#/activity-beautifying-your-site-part-2" id="/toc-activity-beautifying-your-site-part-2">Activity: Beautifying Your Site, Part 2</a></li>
+<li><a href="#/github-pages" id="/toc-github-pages">GitHub Pages</a></li>
 </ul>
 </nav>
 </section>
@@ -423,8 +423,8 @@ Dr.&nbsp;Andrew M. Byrd
 <li>What did you learn last time about HTML?</li>
 </ul>
 </section>
-<section id="review-from-days-1-2" class="slide level2 center">
-<h2>Review from Days 1 &amp; 2</h2>
+<section id="review-from-days-1-2-3" class="slide level2 center">
+<h2>Review from Days 1, 2, &amp; 3</h2>
 <ul>
 <li><p>Day 1:</p>
 <ul>
@@ -435,338 +435,300 @@ Dr.&nbsp;Andrew M. Byrd
 <ul>
 <li>Structure: <code>&lt;head&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;footer&gt;</code></li>
 </ul></li>
-<li><p>We built a simple page with our name, a paragraph, a link, an image, and a list, and then structured it.</p></li>
-</ul>
-</section></section>
-<section>
-<section id="lets-make-things-pretty" class="title-slide slide level1 center">
-<h1>Let’s Make Things Pretty</h1>
-
-</section>
-<section id="what-is-css" class="slide level2 center">
-<h2>What is CSS?</h2>
+<li><p>Day 3:</p>
 <ul>
-<li>There is a default way that text is displayed on a website: size of H1, organization of lists, etc.</li>
-<li><strong>Cascading Style Sheets</strong> (CSS) allow us to make websites more interesting
-<ul>
-<li>Change the color and size of text, such as headings and links</li>
-<li>Create layouts to organize content, create multi-column texts or organizing your site in a specific way</li>
-<li>Create animations</li>
-</ul></li>
-<li>Note: exercises are taken from <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/">here</a>; check it out for more details!</li>
-</ul>
-</section>
-<section id="css-syntax-basics" class="slide level2 center">
-<h2>CSS syntax basics</h2>
-<ul>
-<li>Open up <code>firstname_lastname.html</code></li>
-<li>Within the <code>&lt;head&gt;</code>, paste:</li>
-</ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb1-1"><a href=""></a><span class="dt">&lt;</span><span class="kw">style</span><span class="dt">&gt;</span></span>
-<span id="cb1-2"><a href=""></a>body {</span>
-<span id="cb1-3"><a href=""></a>  <span class="kw">background-color</span><span class="ch">:</span> <span class="cn">lightblue</span><span class="op">;</span></span>
-<span id="cb1-4"><a href=""></a>}</span>
-<span id="cb1-5"><a href=""></a><span class="dt">&lt;/</span><span class="kw">style</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="lets-add-this-to-the-style-section." class="slide level2 center">
-<h2>Let’s add this to the <code>&lt;style&gt;</code> section.</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb2-1"><a href=""></a>p {</span>
-<span id="cb2-2"><a href=""></a>  text-align: center;</span>
-<span id="cb2-3"><a href=""></a>  color: red;</span>
-<span id="cb2-4"><a href=""></a>} </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="lets-add-this-to-the-style-section.-1" class="slide level2 center">
-<h2>Let’s add this to the <code>&lt;style&gt;</code> section.</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb3-1"><a href=""></a>p {</span>
-<span id="cb3-2"><a href=""></a>  color: aqua;</span>
-<span id="cb3-3"><a href=""></a>  padding: 5px;</span>
-<span id="cb3-4"><a href=""></a>  background: midnightblue;</span>
-<span id="cb3-5"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li>What color is the text? Why?</li>
-</ul>
-</section>
-<section id="creating-a-.css-file" class="slide level2 center">
-<h2>Creating a <code>.css</code> file</h2>
-<ul>
-<li>We don’t <em>have</em> to put the <code>&lt;style&gt;</code> code in the <code>&lt;head&gt;</code>, though</li>
-<li>We can put it in a <code>.css</code> file.
-<ul>
-<li>Why would we want to do that?</li>
-</ul></li>
-<li>Let’s now create a new file, called <code>styles.css</code>.</li>
-</ul>
-</section>
-<section id="creating-a-.css-file-1" class="slide level2 center">
-<h2>Creating a <code>.css</code> file</h2>
-<ul>
-<li>Let’s paste this code into the <code>.css</code> file.</li>
-</ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb4-1"><a href=""></a>body {</span>
-<span id="cb4-2"><a href=""></a>  background-color: lightblue;</span>
-<span id="cb4-3"><a href=""></a>}</span>
-<span id="cb4-4"><a href=""></a>p {</span>
-<span id="cb4-5"><a href=""></a>  text-align: center;</span>
-<span id="cb4-6"><a href=""></a>  color: red;</span>
-<span id="cb4-7"><a href=""></a>  padding: 5px;</span>
-<span id="cb4-8"><a href=""></a>  background: midnightblue;</span>
-<span id="cb4-9"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="loading-a-.css-file" class="slide level2 center">
-<h2>Loading a <code>.css</code> file</h2>
-<ul>
-<li>You can now delete all of that style code in your <code>firstname_lastname.html</code></li>
-<li>Then paste the following code in your <code>&lt;head&gt;</code></li>
-</ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb5-1"><a href=""></a>    <span class="dt">&lt;</span><span class="kw">link</span><span class="ot"> rel</span><span class="op">=</span><span class="st">"stylesheet"</span><span class="ot"> href</span><span class="op">=</span><span class="st">"styles.css"</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section></section>
-<section>
-<section id="beautifying-stinkys" class="title-slide slide level1 center">
-<h1>Beautifying Stinky’s</h1>
-
-</section>
-<section id="remember-stinkys" class="slide level2 center">
-<h2>Remember Stinky’s?</h2>
-<ul>
-<li>Last time you built a website for The Stinky Cheesemonger.</li>
-<li>It was fairly basic, but we were able to add some structural features to it.</li>
-<li>If you’ll recall, it looked something like <a href="8_stinkys.html">this</a></li>
-</ul>
-</section>
-<section id="stinkys-beautified" class="slide level2 center">
-<h2>Stinky’s, Beautified</h2>
-<ul>
-<li>Let’s look at our website, <a href="9_stinkys_beautified.html">beautified</a></li>
-<li>Its change in look is dictated by a <code>.css</code> file</li>
-<li>How can we see this on websites?
-<ul>
-<li>Dev tools!</li>
+<li>Beginning CSS!</li>
 </ul></li>
 </ul>
 </section>
-<section id="dev-tools" class="slide level2 center">
-<h2>Dev Tools</h2>
-<ul>
-<li><code>F12</code></li>
-<li><code>Ctrl/Command</code> + <code>Shift</code> + <code>i</code></li>
-</ul>
-</section>
-<section id="activity-deciphering-css-code" class="slide level2 center">
-<h2>Activity: Deciphering CSS code</h2>
-<ul>
-<li>Open up <strong>Dev Tools</strong>
-<ul>
-<li>Inspect the style file, <code>9_stinky_style.css</code></li>
-</ul></li>
-<li>How do you make a comment in CSS?</li>
-<li>Find as many familiar tags (like <code>&lt;h1&gt;</code>) as you can. How do we edit their style?</li>
-<li>Now look for unfamiliar tags. Any guesses as to what they mean?</li>
-<li>You’ll see values marked as <code>px</code>, <code>rem</code>, and <code>ch</code>. Ponder what they mean, then double check your guess using Google.</li>
-</ul>
-</section>
-<section id="lets-look-under-the-hood" class="slide level2 center">
-<h2>Let’s Look Under the Hood</h2>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource css number-lines code-with-copy"><code class="sourceCode css"><span id="cb6-1"><a href=""></a>h1 { <span class="kw">font-size</span><span class="ch">:</span> <span class="dv">2</span><span class="dt">rem</span><span class="op">;</span> <span class="kw">margin</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--space-1</span><span class="fu">)</span> <span class="dv">0</span> <span class="dv">0</span><span class="op">;</span> <span class="kw">color</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--brand-brown</span><span class="fu">)</span><span class="op">;</span> <span class="kw">text-align</span><span class="ch">:</span> <span class="dv">center</span><span class="op">;</span> }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li><code>h1</code> = the <strong>Selector</strong>
-<ul>
-<li>indicates the part of the page you want to style</li>
-</ul></li>
-</ul>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource css number-lines code-with-copy"><code class="sourceCode css"><span id="cb7-1"><a href=""></a>p {</span>
-<span id="cb7-2"><a href=""></a>  <span class="kw">color</span><span class="ch">:</span> <span class="cn">red</span><span class="op">;</span></span>
-<span id="cb7-3"><a href=""></a>  <span class="kw">font-size</span><span class="ch">:</span> <span class="dv">1.2</span><span class="dt">rem</span><span class="op">;</span></span>
-<span id="cb7-4"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="selectors-friends" class="slide level2 center">
-<h2>Selectors &amp; Friends</h2>
-<ul>
-<li><strong>Declaration block</strong> → the <code>{ … }</code> after a selector: <code>{ font-size:...}</code></li>
-<li><strong>Property</strong> → what you want to change (<code>color</code>, <code>margin</code>)</li>
-<li><strong>Value</strong> → how you want it to look (<code>black</code>, <code>1rem</code>)</li>
-</ul>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource css number-lines code-with-copy"><code class="sourceCode css"><span id="cb8-1"><a href=""></a>selector { property<span class="ch">:</span> <span class="dv">value</span><span class="op">;</span> property<span class="ch">:</span> <span class="dv">value</span><span class="op">;</span> }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="different-kinds-of-selectors" class="slide level2 center">
-<h2>Different Kinds of Selectors</h2>
-<ul>
-<li>Element selector: <code>p { … }</code>
-<ul>
-<li>applies to all paragraphs</li>
-</ul></li>
-<li>Class selector: <code>.highlight { … }</code>
-<ul>
-<li>applies to anything where class=“highlight”</li>
-</ul></li>
-<li>ID selector: <code>#cheeses { … }</code>
-<ul>
-<li>applies to anything with the element with id=“cheeses”</li>
-</ul></li>
-<li>Pseudo-class: <code>a:hover { … }</code>
-<ul>
-<li>applies to links when hovered</li>
-</ul></li>
-</ul>
-</section>
-<section id="class-selectors" class="slide level2 center">
-<h2>Class Selectors</h2>
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb9-1"><a href=""></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> class</span><span class="op">=</span><span class="st">"highlight"</span><span class="dt">&gt;</span>This text is highlighted.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb9-2"><a href=""></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> class</span><span class="op">=</span><span class="st">"highlight"</span><span class="dt">&gt;</span>This one is too!<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb9-3"><a href=""></a><span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>This one is not.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="recall-class-selectors" class="slide level2 center">
+<h2>Recall: Class Selectors</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb1-1"><a href=""></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> class</span><span class="op">=</span><span class="st">"highlight"</span><span class="dt">&gt;</span>This text is highlighted.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb1-2"><a href=""></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> class</span><span class="op">=</span><span class="st">"highlight"</span><span class="dt">&gt;</span>This one is too!<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb1-3"><a href=""></a><span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>This one is not.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>Only <code>&lt;p&gt;</code> marked as <code>class="highlight"</code> will be treated specially.</li>
 </ul>
 </section>
-<section id="pseudo-classes" class="slide level2 center">
-<h2>Pseudo-Classes</h2>
+<section id="recall-pseudo-classes" class="slide level2 center">
+<h2>Recall: Pseudo-Classes</h2>
 <ul>
 <li>Special state of an element</li>
 <li>Not added in the HTML code, rather in CSS with a <code>:</code></li>
 <li>Describe something that’s a condition, not a permanent class</li>
 </ul>
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb10-1"><a href=""></a>a:hover {</span>
-<span id="cb10-2"><a href=""></a>  color: red;   /* when mouse hovers */</span>
-<span id="cb10-3"><a href=""></a>}</span>
-<span id="cb10-4"><a href=""></a></span>
-<span id="cb10-5"><a href=""></a>a:visited {</span>
-<span id="cb10-6"><a href=""></a>  color: purple;  /* after you’ve clicked the link */</span>
-<span id="cb10-7"><a href=""></a>}</span>
-<span id="cb10-8"><a href=""></a></span>
-<span id="cb10-9"><a href=""></a>input:focus {</span>
-<span id="cb10-10"><a href=""></a>  border: 2px solid blue; /* when user clicks inside a text field */</span>
-<span id="cb10-11"><a href=""></a>}</span>
-<span id="cb10-12"><a href=""></a></span>
-<span id="cb10-13"><a href=""></a>li:first-child {</span>
-<span id="cb10-14"><a href=""></a>  font-weight: bold; /* only the first <span class="dt">&lt;</span><span class="kw">li</span><span class="dt">&gt;</span> inside its parent */</span>
-<span id="cb10-15"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb2-1"><a href=""></a>a:hover {</span>
+<span id="cb2-2"><a href=""></a>  color: red;   /* when mouse hovers */</span>
+<span id="cb2-3"><a href=""></a>}</span>
+<span id="cb2-4"><a href=""></a></span>
+<span id="cb2-5"><a href=""></a>a:visited {</span>
+<span id="cb2-6"><a href=""></a>  color: purple;  /* after you’ve clicked the link */</span>
+<span id="cb2-7"><a href=""></a>}</span>
+<span id="cb2-8"><a href=""></a></span>
+<span id="cb2-9"><a href=""></a>input:focus {</span>
+<span id="cb2-10"><a href=""></a>  border: 2px solid blue; /* when user clicks inside a text field */</span>
+<span id="cb2-11"><a href=""></a>}</span>
+<span id="cb2-12"><a href=""></a></span>
+<span id="cb2-13"><a href=""></a>li:first-child {</span>
+<span id="cb2-14"><a href=""></a>  font-weight: bold; /* only the first <span class="dt">&lt;</span><span class="kw">li</span><span class="dt">&gt;</span> inside its parent */</span>
+<span id="cb2-15"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="var--" class="slide level2 center">
-<h2><code>var(--???)</code></h2>
+<section id="recall-variables" class="slide level2 center">
+<h2>Recall: Variables</h2>
 <ul>
-<li>In this and other <code>css</code> code, we find some properties marked as follows:</li>
+<li>How do they work?</li>
 </ul>
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource css number-lines code-with-copy"><code class="sourceCode css"><span id="cb11-1"><a href=""></a>h1 { <span class="kw">color</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--brand-brown</span><span class="fu">)</span> }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li>Why not just:</li>
-</ul>
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource css number-lines code-with-copy"><code class="sourceCode css"><span id="cb12-1"><a href=""></a>h1 { <span class="kw">color</span><span class="ch">:</span> <span class="dv">brand-brown </span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="var---1" class="slide level2 center">
-<h2><code>var(--???)</code></h2>
-<ul>
-<li>The answer lies here, in the <code>:root{}</code></li>
-</ul>
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource css number-lines code-with-copy"><code class="sourceCode css"><span id="cb13-1"><a href=""></a><span class="in">:root</span> {</span>
-<span id="cb13-2"><a href=""></a>  <span class="co">/* Palette (named colors for now) */</span></span>
-<span id="cb13-3"><a href=""></a>  <span class="va">--brand-brown</span><span class="ch">:</span> <span class="cn">brown</span><span class="op">;</span></span>
-<span id="cb13-4"><a href=""></a>  <span class="va">--brand-gold</span><span class="ch">:</span> <span class="cn">goldenrod</span><span class="op">;</span></span>
-<span id="cb13-5"><a href=""></a>  <span class="va">--paper</span><span class="ch">:</span> <span class="cn">oldlace</span><span class="op">;</span>      <span class="co">/* warm page background */</span></span>
-<span id="cb13-6"><a href=""></a>  <span class="va">--ink</span><span class="ch">:</span> <span class="cn">black</span><span class="op">;</span>          <span class="co">/* default text color */</span></span>
-<span id="cb13-7"><a href=""></a></span>
-<span id="cb13-8"><a href=""></a>  <span class="co">/* Layout &amp; rhythm */</span></span>
-<span id="cb13-9"><a href=""></a>  <span class="va">--page-width</span><span class="ch">:</span> <span class="dv">60</span><span class="dt">ch</span><span class="op">;</span>    <span class="co">/* ~60 characters per line for readability */</span></span>
-<span id="cb13-10"><a href=""></a>  <span class="va">--space-1</span><span class="ch">:</span> <span class="dv">0.5</span><span class="dt">rem</span><span class="op">;</span></span>
-<span id="cb13-11"><a href=""></a>  <span class="va">--space-2</span><span class="ch">:</span> <span class="dv">1</span><span class="dt">rem</span><span class="op">;</span></span>
-<span id="cb13-12"><a href=""></a>  <span class="va">--space-3</span><span class="ch">:</span> <span class="dv">1.5</span><span class="dt">rem</span><span class="op">;</span></span>
-<span id="cb13-13"><a href=""></a>  <span class="va">--space-4</span><span class="ch">:</span> <span class="dv">2</span><span class="dt">rem</span><span class="op">;</span></span>
-<span id="cb13-14"><a href=""></a></span>
-<span id="cb13-15"><a href=""></a>  <span class="co">/* Rounding */</span></span>
-<span id="cb13-16"><a href=""></a>  <span class="va">--radius</span><span class="ch">:</span> <span class="dv">12</span><span class="dt">px</span><span class="op">;</span></span>
-<span id="cb13-17"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="var---2" class="slide level2 center">
-<h2><code>var(--???)</code></h2>
-<ul>
-<li>All of these things are <strong>variables</strong>
-<ul>
-<li>We define variables in the <code>css</code> head</li>
-<li>Their value remains constant through the file</li>
-</ul></li>
-<li>Nickname for a value</li>
-<li>Basic Syntax for a <strong>variable</strong>:</li>
-</ul>
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource css number-lines code-with-copy"><code class="sourceCode css"><span id="cb14-1"><a href=""></a>--name<span class="in">:</span> value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="variables-in-css" class="slide level2 center">
-<h2>Variables in CSS</h2>
-<ul>
-<li>Defined in <code>:root</code> so they apply everywhere</li>
-<li>Reusable nicknames for colors, spacing, sizes</li>
-<li>Change it once; this updates all instances of that variable throughout the code</li>
-</ul>
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource css number-lines code-with-copy"><code class="sourceCode css"><span id="cb15-1"><a href=""></a><span class="in">:root</span> {</span>
-<span id="cb15-2"><a href=""></a>  <span class="va">--ink</span><span class="ch">:</span> <span class="cn">black</span><span class="op">;</span>        <span class="co">/* variable definition */</span></span>
-<span id="cb15-3"><a href=""></a>  <span class="va">--paper</span><span class="ch">:</span> <span class="cn">oldlace</span><span class="op">;</span></span>
-<span id="cb15-4"><a href=""></a>}</span>
-<span id="cb15-5"><a href=""></a></span>
-<span id="cb15-6"><a href=""></a>body {</span>
-<span id="cb15-7"><a href=""></a>  <span class="kw">color</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--ink</span><span class="fu">)</span><span class="op">;</span>   <span class="co">/* using the variable */</span></span>
-<span id="cb15-8"><a href=""></a>  <span class="kw">background</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--paper</span><span class="fu">)</span><span class="op">;</span></span>
-<span id="cb15-9"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="why-use-variables" class="slide level2 center">
-<h2>Why Use Variables?</h2>
-<ul>
-<li>Without variables:</li>
-</ul>
-<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource css number-lines code-with-copy"><code class="sourceCode css"><span id="cb16-1"><a href=""></a>body   { <span class="kw">color</span><span class="ch">:</span> <span class="cn">black</span><span class="op">;</span> }</span>
-<span id="cb16-2"><a href=""></a>h1     { <span class="kw">color</span><span class="ch">:</span> <span class="cn">black</span><span class="op">;</span> }</span>
-<span id="cb16-3"><a href=""></a>footer { <span class="kw">color</span><span class="ch">:</span> <span class="cn">black</span><span class="op">;</span> }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li>With variables:</li>
-</ul>
-<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource css number-lines code-with-copy"><code class="sourceCode css"><span id="cb17-1"><a href=""></a><span class="in">:root</span> { <span class="va">--ink</span><span class="ch">:</span> <span class="cn">black</span><span class="op">;</span> }</span>
-<span id="cb17-2"><a href=""></a></span>
-<span id="cb17-3"><a href=""></a>body   { <span class="kw">color</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--ink</span><span class="fu">)</span><span class="op">;</span> }</span>
-<span id="cb17-4"><a href=""></a>h1     { <span class="kw">color</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--ink</span><span class="fu">)</span><span class="op">;</span> }</span>
-<span id="cb17-5"><a href=""></a>footer { <span class="kw">color</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--ink</span><span class="fu">)</span><span class="op">;</span> }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li>Why use variables at all?</li>
-</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource css number-lines code-with-copy"><code class="sourceCode css"><span id="cb3-1"><a href=""></a><span class="in">:root</span> {</span>
+<span id="cb3-2"><a href=""></a>  <span class="va">--ink</span><span class="ch">:</span> <span class="cn">black</span><span class="op">;</span>        <span class="co">/* variable definition */</span></span>
+<span id="cb3-3"><a href=""></a>  <span class="va">--paper</span><span class="ch">:</span> <span class="cn">oldlace</span><span class="op">;</span></span>
+<span id="cb3-4"><a href=""></a>}</span>
+<span id="cb3-5"><a href=""></a></span>
+<span id="cb3-6"><a href=""></a>body {</span>
+<span id="cb3-7"><a href=""></a>  <span class="kw">color</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--ink</span><span class="fu">)</span><span class="op">;</span>   <span class="co">/* using the variable */</span></span>
+<span id="cb3-8"><a href=""></a>  <span class="kw">background</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--paper</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb3-9"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section></section>
 <section>
-<section id="activity-lets-start-building-your-css" class="title-slide slide level1 center">
-<h1>Activity : Let’s Start Building Your CSS</h1>
+<section id="one-more-look-at-stinkys" class="title-slide slide level1 center">
+<h1>One More Look at Stinky’s</h1>
+
+</section>
+<section id="activity-stinkys-revisted" class="slide level2 center">
+<h2>Activity: Stinky’s Revisted</h2>
 <ul>
-<li>We’re going to begin working on your <code>.css</code> file for your website</li>
+<li>Let’s take another look at our Stinky’s website, <a href="9_stinkys_beautified.html">beautified</a></li>
+<li>Open up <strong>Dev Tools</strong> to inspect the style file, <code>9_stinky_style.css</code></li>
 </ul>
-<p><strong>Step 1</strong>: Create a new style sheet, called <code>lastname_style.css</code></p>
-<p><strong>Step 2</strong>: Link your stylesheet in the <code>&lt;head&gt;</code></p>
+</section>
+<section id="additional-css-terminology" class="slide level2 center">
+<h2>Additional CSS Terminology</h2>
+<ul>
+<li><strong>Units</strong>
+<ul>
+<li><code>rem</code> = relative to root font size (scales with user settings)</li>
+<li><code>ch</code> = width of one character (good for readable line length)</li>
+<li><code>px</code> = pixel; 1px = 1/96th of 1in; note relative to viewing device!</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource css number-lines code-with-copy"><code class="sourceCode css"><span id="cb4-1"><a href=""></a>nav a { <span class="kw">padding</span><span class="ch">:</span> <span class="dv">0.25</span><span class="dt">rem</span> <span class="dv">0.5</span><span class="dt">rem</span><span class="op">;</span> <span class="kw">border-radius</span><span class="ch">:</span> <span class="dv">6</span><span class="dt">px</span><span class="op">;</span> <span class="kw">color</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--brand-gold</span><span class="fu">)</span><span class="op">;</span> <span class="kw">text-decoration</span><span class="ch">:</span> <span class="dv">none</span><span class="op">;</span> }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="additional-css-terminology-1" class="slide level2 center">
+<h2>Additional CSS Terminology</h2>
+<ul>
+<li><strong>Sticky header</strong>
+<ul>
+<li>keeps header visible while scrolling</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource css number-lines code-with-copy"><code class="sourceCode css"><span id="cb5-1"><a href=""></a>header { <span class="kw">position</span><span class="ch">:</span> <span class="dv">sticky</span><span class="op">;</span> <span class="kw">top</span><span class="ch">:</span> <span class="dv">0</span><span class="op">;</span> <span class="kw">background</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--paper</span><span class="fu">)</span><span class="op">;</span> <span class="kw">border-bottom</span><span class="ch">:</span> <span class="dv">1</span><span class="dt">px</span> <span class="dv">solid</span> <span class="fu">rgba(</span><span class="dv">0</span><span class="op">,</span><span class="dv">0</span><span class="op">,</span><span class="dv">0</span><span class="op">,</span><span class="dv">0.12</span><span class="fu">)</span><span class="op">;</span> }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="additional-css-terminology-2" class="slide level2 center">
+<h2>Additional CSS Terminology</h2>
+<ul>
+<li><strong>Flexbox</strong>
+<ul>
+<li>arranges items in a horizontal row</li>
+<li>default (<code>display: block</code>) stacks vertically!</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource css number-lines code-with-copy"><code class="sourceCode css"><span id="cb6-1"><a href=""></a>nav { <span class="kw">display</span><span class="ch">:</span> <span class="dv">flex</span><span class="op">;</span> <span class="kw">gap</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--space-2</span><span class="fu">)</span><span class="op">;</span> <span class="kw">justify-content</span><span class="ch">:</span> <span class="dv">center</span><span class="op">;</span> <span class="kw">padding</span><span class="ch">:</span> <span class="fu">calc(var(</span><span class="va">--space-2</span><span class="fu">)</span> <span class="op">*</span> <span class="dv">0.75</span><span class="fu">)</span> <span class="dv">0</span><span class="op">;</span> }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="additional-css-terminology-3" class="slide level2 center">
+<h2>Additional CSS Terminology</h2>
+<ul>
+<li><strong>:last-child</strong>
+<ul>
+<li>Styles only the last element in a group</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource css number-lines code-with-copy"><code class="sourceCode css"><span id="cb7-1"><a href=""></a><span class="pp">#cheeses</span> li<span class="in">:last-child</span> { <span class="kw">border-bottom</span><span class="ch">:</span> <span class="dv">0</span><span class="op">;</span> }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>What do you think the code is for the first element?</li>
+</ul>
+</section>
+<section id="additional-css-terminology-4" class="slide level2 center">
+<h2>Additional CSS Terminology</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource css number-lines code-with-copy"><code class="sourceCode css"><span id="cb8-1"><a href=""></a>nav a<span class="in">:hover</span> { <span class="kw">background</span><span class="ch">:</span> <span class="fu">rgba(</span><span class="dv">218</span><span class="op">,</span><span class="dv">165</span><span class="op">,</span><span class="dv">32</span><span class="op">,</span><span class="dv">0.15</span><span class="fu">)</span><span class="op">;</span> <span class="co">/* goldenrod tint */</span> }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><strong>rgba()</strong>
+<ul>
+<li>red, green, blue, alpha</li>
+<li>alpha controls for transparency</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource css number-lines code-with-copy"><code class="sourceCode css"><span id="cb9-1"><a href=""></a><span class="co">/* Solid red */</span></span>
+<span id="cb9-2"><a href=""></a>color<span class="in">:</span> rgba<span class="in">(</span>255<span class="op">,</span> 0<span class="op">,</span> 0<span class="op">,</span> 1<span class="in">)</span>;</span>
+<span id="cb9-3"><a href=""></a></span>
+<span id="cb9-4"><a href=""></a><span class="co">/* Half-transparent red */</span></span>
+<span id="cb9-5"><a href=""></a>color<span class="in">:</span> rgba<span class="in">(</span>255<span class="op">,</span> 0<span class="op">,</span> 0<span class="op">,</span> 0<span class="fu">.5</span><span class="in">)</span>;</span>
+<span id="cb9-6"><a href=""></a></span>
+<span id="cb9-7"><a href=""></a><span class="co">/* Mostly see-through black (good for shadows/overlays) */</span></span>
+<span id="cb9-8"><a href=""></a>background-color<span class="in">:</span> rgba<span class="in">(</span>0<span class="op">,</span> 0<span class="op">,</span> 0<span class="op">,</span> 0<span class="fu">.2</span><span class="in">)</span>;</span>
+<span id="cb9-9"><a href=""></a></span>
+<span id="cb9-10"><a href=""></a><span class="co">/* Invisible (but still takes up space in layout) */</span></span>
+<span id="cb9-11"><a href=""></a>background-color<span class="in">:</span> rgba<span class="in">(</span>0<span class="op">,</span> 0<span class="op">,</span> 0<span class="op">,</span> 0<span class="in">)</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="finding-rgb-values-easily" class="slide level2 center">
+<h2>Finding RGB values easily</h2>
+<p><a href="https://www.w3schools.com/colors/colors_picker.asp" class="uri">https://www.w3schools.com/colors/colors_picker.asp</a></p>
+</section>
+<section id="additional-css-terminology-5" class="slide level2 center">
+<h2>Additional CSS Terminology</h2>
+<ul>
+<li><strong>calc()</strong>
+<ul>
+<li>Lets you do math with CSS values</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource css number-lines code-with-copy"><code class="sourceCode css"><span id="cb10-1"><a href=""></a>nav { <span class="kw">display</span><span class="ch">:</span> <span class="dv">flex</span><span class="op">;</span> <span class="kw">gap</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--space-2</span><span class="fu">)</span><span class="op">;</span> <span class="kw">justify-content</span><span class="ch">:</span> <span class="dv">center</span><span class="op">;</span> <span class="kw">padding</span><span class="ch">:</span> <span class="fu">calc(var(</span><span class="va">--space-2</span><span class="fu">)</span> <span class="op">*</span> <span class="dv">0.75</span><span class="fu">)</span> <span class="dv">0</span><span class="op">;</span> }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section></section>
+<section>
+<section id="activity-beautifying-your-site-part-2" class="title-slide slide level1 center">
+<h1>Activity: Beautifying Your Site, Part 2</h1>
+
 </section>
 <section id="activity" class="slide level2 center">
 <h2>Activity</h2>
-<p><strong>Step 3</strong>: Add Rules like These, Filling in Values:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource css number-lines code-with-copy"><code class="sourceCode css"><span id="cb18-1"><a href=""></a><span class="co">/* Headings */</span></span>
-<span id="cb18-2"><a href=""></a>h1 {</span>
-<span id="cb18-3"><a href=""></a>  <span class="kw">color</span><span class="ch">:</span> <span class="dv">xxxx</span><span class="op">;</span></span>
-<span id="cb18-4"><a href=""></a>  <span class="kw">text-align</span><span class="ch">:</span> <span class="dv">xxxx</span><span class="op">;</span></span>
-<span id="cb18-5"><a href=""></a>}</span>
-<span id="cb18-6"><a href=""></a></span>
-<span id="cb18-7"><a href=""></a>h2 {</span>
-<span id="cb18-8"><a href=""></a>  <span class="kw">color</span><span class="ch">:</span> <span class="dv">xxxx</span><span class="op">;</span></span>
-<span id="cb18-9"><a href=""></a>  <span class="kw">margin-top</span><span class="ch">:</span> <span class="dv">xxxx</span><span class="op">;</span></span>
-<span id="cb18-10"><a href=""></a>}</span>
-<span id="cb18-11"><a href=""></a></span>
-<span id="cb18-12"><a href=""></a><span class="co">/* Paragraphs */</span></span>
-<span id="cb18-13"><a href=""></a>p {</span>
-<span id="cb18-14"><a href=""></a>  <span class="kw">line-height</span><span class="ch">:</span> <span class="dv">xxxx</span><span class="op">;</span></span>
-<span id="cb18-15"><a href=""></a>  <span class="kw">font-size</span><span class="ch">:</span> <span class="dv">xxxx</span><span class="op">;</span></span>
-<span id="cb18-16"><a href=""></a>}</span>
-<span id="cb18-17"><a href=""></a></span>
-<span id="cb18-18"><a href=""></a><span class="co">/* Lists */</span></span>
-<span id="cb18-19"><a href=""></a>ul {</span>
-<span id="cb18-20"><a href=""></a>  <span class="kw">list-style-type</span><span class="ch">:</span> <span class="dv">xxxx</span><span class="op">;</span></span>
-<span id="cb18-21"><a href=""></a>  <span class="kw">padding-left</span><span class="ch">:</span> <span class="dv">xxxx</span><span class="op">;</span></span>
-<span id="cb18-22"><a href=""></a>}</span>
-<span id="cb18-23"><a href=""></a></span>
-<span id="cb18-24"><a href=""></a><span class="co">/* Footer */</span></span>
-<span id="cb18-25"><a href=""></a>footer {</span>
-<span id="cb18-26"><a href=""></a>  <span class="kw">text-align</span><span class="ch">:</span> <span class="dv">xxxx</span><span class="op">;</span></span>
-<span id="cb18-27"><a href=""></a>  <span class="kw">margin-top</span><span class="ch">:</span> <span class="dv">xxxx</span><span class="op">;</span></span>
-<span id="cb18-28"><a href=""></a>  <span class="kw">font-size</span><span class="ch">:</span> <span class="dv">xxxx</span><span class="op">;</span></span>
-<span id="cb18-29"><a href=""></a>  <span class="kw">color</span><span class="ch">:</span> <span class="dv">xxxx</span><span class="op">;</span></span>
-<span id="cb18-30"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><strong>Step 4</strong>: Save, Stage, Commit, Push!</p>
+<p><strong>Step 1</strong>: Return to your <code>firstname_lastname.html</code> file, and make sure your style sheet is loaded properly.</p>
+<p><strong>Step 2</strong>: Define a minimal design system, using variables (tokens):</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource css number-lines code-with-copy"><code class="sourceCode css"><span id="cb11-1"><a href=""></a><span class="in">:root</span>{</span>
+<span id="cb11-2"><a href=""></a>  <span class="va">--ink</span><span class="ch">:</span> <span class="dv">xxxx</span><span class="op">;</span>                <span class="co">/* text color */</span></span>
+<span id="cb11-3"><a href=""></a>  <span class="va">--paper</span><span class="ch">:</span> <span class="dv">xxxx</span><span class="op">;</span>              <span class="co">/* page background */</span></span>
+<span id="cb11-4"><a href=""></a>  <span class="va">--brand-gold</span><span class="ch">:</span> <span class="dv">xxxx</span><span class="op">;</span>         <span class="co">/* accent */</span></span>
+<span id="cb11-5"><a href=""></a>  <span class="va">--space-2</span><span class="ch">:</span> <span class="dv">XXxxrem</span><span class="op">;</span>         <span class="co">/* spacing scale */</span></span>
+<span id="cb11-6"><a href=""></a>}</span>
+<span id="cb11-7"><a href=""></a>body{ <span class="kw">color</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--ink</span><span class="fu">)</span><span class="op">;</span> <span class="kw">background</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--paper</span><span class="fu">)</span><span class="op">;</span> }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="activity-1" class="slide level2 center">
+<h2>Activity</h2>
+<p><strong>Step 3</strong>: Make the header stick and center your nav links in a row.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource css number-lines code-with-copy"><code class="sourceCode css"><span id="cb12-1"><a href=""></a>header{</span>
+<span id="cb12-2"><a href=""></a>  <span class="kw">position</span><span class="ch">:</span> <span class="dv">sticky</span><span class="op">;</span> <span class="kw">top</span><span class="ch">:</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb12-3"><a href=""></a>  <span class="kw">background</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--paper</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb12-4"><a href=""></a>  <span class="kw">border-bottom</span><span class="ch">:</span> <span class="dv">1</span><span class="dt">px</span> <span class="dv">solid</span> <span class="fu">rgba(</span><span class="dv">0</span><span class="op">,</span><span class="dv">0</span><span class="op">,</span><span class="dv">0</span><span class="op">,</span><span class="dv">0.12</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb12-5"><a href=""></a>}</span>
+<span id="cb12-6"><a href=""></a>nav{</span>
+<span id="cb12-7"><a href=""></a>  <span class="kw">display</span><span class="ch">:</span> <span class="dv">flex</span><span class="op">;</span></span>
+<span id="cb12-8"><a href=""></a>  <span class="kw">gap</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--space-2</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb12-9"><a href=""></a>  <span class="kw">justify-content</span><span class="ch">:</span> <span class="dv">center</span><span class="op">;</span></span>
+<span id="cb12-10"><a href=""></a>  <span class="kw">padding</span><span class="ch">:</span> <span class="fu">calc(var(</span><span class="va">--space-2</span><span class="fu">)</span> <span class="op">*</span> <span class="dv">0.75</span><span class="fu">)</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb12-11"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="activity-2" class="slide level2 center">
+<h2>Activity</h2>
+<p><strong>Step 4</strong>:</p>
+<ul>
+<li>Create a class selector and give it a name with values. For instance:</li>
+</ul>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource css number-lines code-with-copy"><code class="sourceCode css"><span id="cb13-1"><a href=""></a><span class="fu">.tagline</span>{ <span class="kw">opacity</span><span class="ch">:</span> <span class="dv">.9</span><span class="op">;</span> <span class="kw">font-style</span><span class="ch">:</span> <span class="dv">italic</span><span class="op">;</span> }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Use it in your HTML, such as:</li>
+</ul>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb14-1"><a href=""></a><span class="dt">&lt;</span><span class="kw">h2</span><span class="ot"> class</span><span class="op">=</span><span class="st">"tagline"</span><span class="dt">&gt;</span>Student • Researcher<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="activity-3" class="slide level2 center">
+<h2>Activity</h2>
+<p><strong>Step 5</strong>:</p>
+<ul>
+<li>Add rgba values to an <code>&lt;a:hover{}&gt;</code></li>
+</ul>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource css number-lines code-with-copy"><code class="sourceCode css"><span id="cb15-1"><a href=""></a>nav a<span class="in">:hover</span>{ <span class="kw">background</span><span class="ch">:</span> <span class="fu">rgba(</span><span class="dv">xxxx</span><span class="op">,</span><span class="dv">xxxx</span><span class="op">,</span><span class="dv">xxxx</span><span class="op">,</span><span class="dv">xxxx</span><span class="fu">)</span><span class="op">;</span> } <span class="co">/* input your values! */</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Step 6</strong>: Save, Stage, Commit, Push!</p>
+</section></section>
+<section>
+<section id="github-pages" class="title-slide slide level1 center">
+<h1>GitHub Pages</h1>
+
+</section>
+<section id="step-1-create-a-new-repo" class="slide level2 center">
+<h2>Step 1: Create a New Repo</h2>
+<ul>
+<li>In GitHub, create a new repo</li>
+<li>It must be named <code>yourusername.github.io</code></li>
+</ul>
+</section>
+<section id="step-2-add-repo-to-rstudio" class="slide level2 center">
+<h2>Step 2: Add Repo to RStudio</h2>
+<ul>
+<li>New Project &gt;</li>
+</ul>
+</section>
+<section id="step-3-create-a-docs-folder-in-yourusername.github.io" class="slide level2 center">
+<h2>Step 3: Create a <code>docs</code> folder in <code>yourusername.github.io</code></h2>
+<ul>
+<li>In your local repo, make a folder named <strong>docs</strong>.</li>
+<li>In RStudio:
+<ul>
+<li>right-click in Files pane</li>
+<li>create new folder</li>
+<li>call it <strong>docs</strong></li>
+</ul></li>
+</ul>
+</section>
+<section id="step-2-add-files-to-docs" class="slide level2 center">
+<h2>Step 2: Add Files to <code>docs</code></h2>
+<ul>
+<li>Copy your finished <code>.html</code> and <code>.css</code> files into <code>docs</code><br>
+</li>
+<li>Note: your homepage **must be named <code>index.html</code>*</li>
+</ul>
+</section>
+<section id="step-3-save-stage-commit-push" class="slide level2 center">
+<h2>Step 3: Save, Stage, Commit, Push!</h2>
+</section>
+<section id="step-4-github-settings" class="slide level2 center">
+<h2>Step 4: GitHub Settings</h2>
+<ul>
+<li>Go to your LIN_301 repo</li>
+<li>Visit Settings → Pages<br>
+</li>
+<li>Under “Branch,” choose <strong>main</strong> and folder <strong>/docs</strong></li>
+<li>Save</li>
+</ul>
+</section>
+<section id="step-5-loading-your-page" class="slide level2 center">
+<h2>Step 5: Loading Your Page</h2>
+<ul>
+<li><strong>Wait a minute</strong><br>
+</li>
+<li>GitHub builds your site automatically.<br>
+</li>
+<li>You’ll see a green check + a URL like: <code>https://yourusername.github.io/your-repo-name</code></li>
+</ul>
+</section>
+<section id="tips-gotchas" class="slide level2 center">
+<h2>Tips &amp; Gotchas</h2>
+<ul>
+<li>Your homepage must be called <strong>index.html</strong> (GitHub looks for this by default).<br>
+</li>
+<li>If you want multiple pages, just add links between your <code>.html</code> files.<br>
+</li>
+<li>Updates?
+<ul>
+<li>Edit locally → commit → push → GitHub Pages rebuilds automatically.<br>
+</li>
+</ul></li>
+<li>If something’s not working, double-check:
+<ul>
+<li>Branch = <code>main</code><br>
+</li>
+<li>Directory = <code>/root</code> (or <code>/docs</code>)<br>
+</li>
+<li>File names have <strong>no spaces</strong>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="activity-go-live" class="slide level2 center">
+<h2>Activity: Go Live 🎉</h2>
+<ul>
+<li>Rename your main page <code>index.html</code> (if not already).<br>
+</li>
+<li>Push your repo.<br>
+</li>
+<li>Turn on <strong>GitHub Pages</strong> in Settings.<br>
+</li>
+<li>Copy your site link into the shared class doc!</li>
+</ul>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
@@ -777,19 +739,19 @@ Dr.&nbsp;Andrew M. Byrd
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="9_CSS_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="10_CSS_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="9_CSS_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="9_CSS_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="9_CSS_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="9_CSS_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="9_CSS_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="10_CSS_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="10_CSS_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="10_CSS_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="10_CSS_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="10_CSS_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="9_CSS_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="9_CSS_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="9_CSS_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="9_CSS_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="10_CSS_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="10_CSS_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="10_CSS_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="10_CSS_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>

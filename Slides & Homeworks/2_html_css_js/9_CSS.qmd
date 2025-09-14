@@ -348,6 +348,3 @@ footer {
 **Step 4**: Save, Stage, Commit, Push!
 
 
-## Activity, Continued
-
-
