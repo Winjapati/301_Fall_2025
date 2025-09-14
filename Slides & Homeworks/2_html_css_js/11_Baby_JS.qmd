@@ -204,4 +204,4 @@ function myFunction() {
 
 # The Final Product
 
--   Click here for instructions on your website
+-   Click [here](https://winjapati.github.io/301_Fall_2025/2_html_css_js/HW_2_website.html#/ "link to HW 2") for instructions on your website
