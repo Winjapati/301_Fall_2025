@@ -46,16 +46,14 @@ editor: visual
 ## CSS syntax basics
 
 -   Open up `firstname_lastname.html`
--   Right after `<html>`, paste:
+-   Within the `<head>`, paste:
 
 ``` html
-<head>
 <style>
 body {
   background-color: lightblue;
 }
 </style>
-</head>
 ```
 
 ## Let's add this to the `<style>` section.
@@ -76,6 +74,8 @@ p {
   background: midnightblue;
 }
 ```
+
+-   What color is the text? Why?
 
 ## Creating a `.css` file
 
@@ -177,6 +177,40 @@ selector { property: value; property: value; }
 -   Pseudo-class: `a:hover { … }`
     -   applies to links when hovered
 
+## Class Selectors
+
+```html
+<p class="highlight">This text is highlighted.</p>
+<p class="highlight">This one is too!</p>
+<p>This one is not.</p>
+```
+
+- Only ```<p>``` marked as ```class="highlight"``` will be treated specially.
+
+## Pseudo-Classes
+
+- Special state of an element
+- Not added in the HTML code, rather in CSS with a ```:```
+- Describe something that's a condition, not a permanent class
+
+```html
+a:hover {
+  color: red;   /* when mouse hovers */
+}
+
+a:visited {
+  color: purple;  /* after you’ve clicked the link */
+}
+
+input:focus {
+  border: 2px solid blue; /* when user clicks inside a text field */
+}
+
+li:first-child {
+  font-weight: bold; /* only the first <li> inside its parent */
+}
+```
+
 ## `var(--???)`
 
 -   In this and other `css` code, we find some properties marked as follows:
@@ -220,7 +254,7 @@ h1 { color: brand-brown }
 -   All of these things are **variables**
     -   We define variables in the `css` head
     -   Their value remains constant through the file
--   Think of it as a nickname for a value
+-   Nickname for a value
 -   Basic Syntax for a **variable**:
 
 ``` css
@@ -231,7 +265,7 @@ h1 { color: brand-brown }
 
 -   Defined in `:root` so they apply everywhere
 -   Reusable nicknames for colors, spacing, sizes
--   Change it once → updates everywhere
+-   Change it once; this updates all instances of that variable throughout the code
 
 ``` css
 :root {
@@ -265,29 +299,55 @@ h1     { color: var(--ink); }
 footer { color: var(--ink); }
 ```
 
--   Easier to update: change `--ink` once and the whole site updates
+-   Why use variables at all?
 
-# Activity : Let's
+# Activity : Let's Start Building Your CSS
 
-## More Unfamiliar Terms
+- We're going to begin working on your ```.css``` file for your website
 
--   **Units**
-    -   `rem` = relative to root font size (scales with user settings)\
-    -   `ch` = width of one character (good for readable line length)\
--   **Sticky header**
-    -   `position: sticky; top: 0;` keeps header visible while scrolling\
--   **Flexbox**
-    -   `display: flex; gap: …; justify-content: center;` arranges items in a row
+**Step 1**: Create a new style sheet, called ```lastname_style.css```
 
-## More Unfamiliar Terms
+**Step 2**: Link your stylesheet in the ```<head>```
 
--   **:last-child**
-    -   Styles only the last element in a group\
--   **rgba()**
-    -   Colors with transparency, e.g., `rgba(0,0,0,0.15)`\
--   **calc()**
-    -   Lets you do math with CSS values
+## Activity
 
-------------------------------------------------------------------------
+**Step 3**: Add Rules like These, Filling in Values:
+```css
+/* Headings */
+h1 {
+  color: xxxx;
+  text-align: xxxx;
+}
 
-# Activity: Beautifying Your Site
+h2 {
+  color: xxxx;
+  margin-top: xxxx;
+}
+
+/* Paragraphs */
+p {
+  line-height: xxxx;
+  font-size: xxxx;
+}
+
+/* Lists */
+ul {
+  list-style-type: xxxx;
+  padding-left: xxxx;
+}
+
+/* Footer */
+footer {
+  text-align: xxxx;
+  margin-top: xxxx;
+  font-size: xxxx;
+  color: xxxx;
+}
+```
+
+**Step 4**: Save, Stage, Commit, Push!
+
+
+## Activity, Continued
+
+

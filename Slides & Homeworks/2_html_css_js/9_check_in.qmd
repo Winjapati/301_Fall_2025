@@ -4,15 +4,15 @@ format: pdf
 editor: visual
 ---
 
-## Find the following properties in the below html: 
-- a hyperlink anchor
-- bullet points
-- italics
-- the two bits of code that brings the user back to the top
-- a comment
+## Find the following properties in the below html:
 
+-   a hyperlink anchor
+-   bullet points
+-   italics
+-   the two bits of code that brings the user back to the top
+-   a comment
 
-```html
+``` html
 <!doctype html>
 <html lang="en">
 <head>
@@ -41,14 +41,13 @@ editor: visual
       <h2>Links</h2>
       <p>
         Visit <a href="https://example.com">Example</a>.
-        (Try adding <code>target="_blank"</code> yourself to open in a new tab.)
       </p>
     </section>
 
     <section id="image">
       <h2>Image</h2>
       <p>
-        <img src="https://picsum.photos/200/120" alt="A random placeholder image">
+        <img src="https://picsum.photos/200/120" alt="A random image">
       </p>
     </section>
 

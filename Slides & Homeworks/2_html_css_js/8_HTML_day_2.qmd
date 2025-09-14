@@ -287,8 +287,8 @@ With structure:
 
 ## Activity: Add Structure to Your Own Website!
 
--   Open the HTML file you made yesterday.\
--   At the top of your `<body>`, wrap title in a `<header>`.\
+-   Open the HTML file you made yesterday.
+-   At the top of your `<body>`, wrap title in a `<header>`.
 
 ``` html
   <nav>
