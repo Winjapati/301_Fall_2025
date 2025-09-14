@@ -1,0 +1,45 @@
+---
+title: "Day 2 — Command Line Basics"
+format: revealjs
+---
+
+# Why the CLI?
+- Same computer, just text instead of icons
+- Faster, scriptable, reproducible
+- Works on macOS, Windows, Linux, servers
+
+---
+
+# The prompt
+- Where you type commands (`$`, `%`, or `>`)
+- The shell interprets a line as **one command**
+
+---
+
+# Know where you are
+```bash
+pwd   # present working directory (absolute path)
+ls    # list files/directories here
+```
+Use these **constantly** to keep bearings.
+
+---
+
+# Move around
+```bash
+cd Documents        # down one level
+cd ..               # up one level
+cd Documents/html   # down multiple levels
+cd ~                # home
+```
+
+Tips:
+- **Tab autocomplete** for names
+- After actions: run `pwd` and `ls`
+
+---
+
+# Activity (6–10 min)
+- Open Terminal/PowerShell
+- Navigate to a practice folder using `cd`
+- Use `pwd` + `ls` after every step
