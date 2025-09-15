@@ -179,21 +179,21 @@ selector { property: value; property: value; }
 
 ## Class Selectors
 
-```html
+``` html
 <p class="highlight">This text is highlighted.</p>
 <p class="highlight">This one is too!</p>
 <p>This one is not.</p>
 ```
 
-- Only ```<p>``` marked as ```class="highlight"``` will be treated specially.
+-   Only `<p>` marked as `class="highlight"` will be treated specially.
 
 ## Pseudo-Classes
 
-- Special state of an element
-- Not added in the HTML code, rather in CSS with a ```:```
-- Describe something that's a condition, not a permanent class
+-   Special state of an element
+-   Not added in the HTML code, rather in CSS with a `:`
+-   Describe something that's a condition, not a permanent class
 
-```html
+``` html
 a:hover {
   color: red;   /* when mouse hovers */
 }
@@ -303,16 +303,17 @@ footer { color: var(--ink); }
 
 # Activity : Let's Start Building Your CSS
 
-- We're going to begin working on your ```.css``` file for your website
+-   We're going to begin working on your `.css` file for your website
 
-**Step 1**: Create a new style sheet, called ```lastname_style.css```
+**Step 1**: Create a new style sheet, called `lastname_style.css`
 
-**Step 2**: Link your stylesheet in the ```<head>```
+**Step 2**: Link your stylesheet in the `<head>`
 
 ## Activity
 
 **Step 3**: Add Rules like These, Filling in Values:
-```css
+
+``` css
 /* Headings */
 h1 {
   color: xxxx;
@@ -346,5 +347,3 @@ footer {
 ```
 
 **Step 4**: Save, Stage, Commit, Push!
-
-
