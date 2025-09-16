@@ -7,6 +7,8 @@ Navigation & Location
 ⦁	cd foldername → change directory into foldername
 ⦁	cd .. → go up one directory
 ⦁	cd ~ → jump to your home directory
+⦁	arrow up → fills in the previous command(s) entered
+
 
 Creating & Removing
 

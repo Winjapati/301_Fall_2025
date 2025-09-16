@@ -1,0 +1,57 @@
+---
+title: "Computation for Linguists"
+subtitle: "Learning the Command Line: Files and Directories"
+date: "September 20, 2025"
+author: "Dr. Andrew M. Byrd"
+format:
+  revealjs:
+    css: header_shrink.css
+    theme: beige
+    slide-number: true
+    center: true
+    toc: true
+    toc-title: "Plan for the Day"
+    toc-depth: 1
+editor: visual
+---
+
+# Review
+
+-   What did you learn last time about HTML?
+
+---
+title: "Day 1 — Navigating the File System"
+format: revealjs
+---
+
+# Why the Terminal?
+- Direct access to your computer
+- Learn *where* programs look for files
+- Foundation for Python, Git, servers
+
+---
+
+# Core Commands
+
+- `pwd` → print working directory
+- `ls` → list files/folders
+- `cd foldername` → change directory
+- `cd ..` → go up one level
+- `cd ~` → go home
+
+---
+
+# Making & Renaming
+
+- `mkdir newfolder` → make directory
+- `rmdir oldfolder` → remove empty directory
+- `mv old.txt new.txt` → rename file
+- `mv file.txt folder/` → move file
+
+---
+
+# Activity: Treasure Hunt 🗂️
+1. Navigate into the `practice/` folder provided.
+2. Find the file named `clue.txt`.
+3. Open it with `cat clue.txt` — it tells you the next file.
+4. First to reach the last file wins!
