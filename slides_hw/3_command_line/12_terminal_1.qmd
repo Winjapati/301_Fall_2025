@@ -15,38 +15,131 @@ format:
 editor: visual
 ---
 
-# Review
+# Review: HTML, CSS, JS
 
 -   What did you learn last time about HTML?
 
-# Why the Terminal?
-- Direct access to your computer
-- Learn *where* programs look for files
-- Foundation for Python, Git, servers
+# Learning the Terminal
 
----
+## Why start in the terminal?
 
-# Core Commands
+- Python always runs **in a folder** (working directory).
+- If you can move, list, and fetch files here, this will make understanding accessing files easier in Python later.
+- Same skills for Git, servers, clusters.
 
-- `pwd` → print working directory
-- `ls` → list files/folders
-- `cd foldername` → change directory
-- `cd ..` → go up one level
-- `cd ~` → go home
+## Navigating the Terminal
 
----
+- We'll be working within the `Terminal` in RStudio
+- You should have the setting "New terminals open with:" = "GitBash".  (Tools > Global Options > Terminal)
+
+** PICTURE HERE**
+
+## Navigating the Terminal
+
+- Let's start with the first command
+
+```bash
+pwd         # short for "print working directory"
+```
+
+## Navigating the Terminal
+
+- You can also look to see what's in the current directory
+
+```bash
+ls           # short for "listing files"
+```
+
+## Navigating the Terminal
+
+- Most commands have **options**
+
+```bash
+ls -l        # details (permissions, size, dates)
+ls -a        # include hidden files (like .git)
+```
+
+## Navigating the Terminal
+
+```bash
+cd          # short for "change directory"
+```
+
+- You need to specify which directory to change into
+- For now, use:
+
+```bash
+cd ~         
+```
+
+## Navigating the Terminal
+
+- Type:
+
+```bash
+ls        
+```
+
+- Find a directory (dir_name) within it, and type (replacing `dir_name` with the actual directory name):
+
+```bash
+cd dir_name        
+```
+- This should move you "up" into the directory. Verify this is the case with `ls`.
+
+## Navigating the Terminal
+
+```bash
+cd projects           # into a folder
+cd ..                 # up one
+cd ~                  # to home
+cd /                  # to filesystem root (Mac/Linux)
+cd ~/Desktop          # absolute path to Desktop\
+cd "My Folder"        # if there are any spaces in your named folder
+```
+
+------------------------------------------------------------------------
 
 # Making & Renaming
 
-- `mkdir newfolder` → make directory
-- `rmdir oldfolder` → remove empty directory
-- `mv old.txt new.txt` → rename file
-- `mv file.txt folder/` → move file
+-   `mkdir newfolder` → make directory
+-   `rmdir oldfolder` → remove empty directory
+-   `mv old.txt new.txt` → rename file
+-   `mv file.txt folder/` → move file
 
----
+------------------------------------------------------------------------
 
 # Activity: Treasure Hunt 🗂️
-1. Navigate into the `practice/` folder provided.
-2. Find the file named `clue.txt`.
-3. Open it with `cat clue.txt` — it tells you the next file.
-4. First to reach the last file wins!
+
+1.  Navigate into the `practice/` folder provided.
+2.  Find the file named `clue.txt`.
+3.  Open it with `cat clue.txt` — it tells you the next file.
+4.  First to reach the last file wins!
+
+
+
+Day 1: Navigating the Terminal
+
+- changing directories in the terminal, going up, going down, going to specific location
+- downloading files using "curl"
+- creating a file, deleting a file
+- creating a folder, deleting a folder
+- writing a .sh script
+- activity, integrating all of this
+
+
+Day 2: File Extensions, Beginning Grep
+
+- review activity: navigating, creating, deleting, .sh
+- file extensions, what are they?
+- why word and google docs suck for programming
+- converting files
+- activity
+- searching files with wc (-l, -w)
+- searching files with grep
+- piping
+- activity: explore Project Gutenberg, download txt file of choice, place in unique folder, validate each step along the way 
+
+Day 3: Grep and Regex
+
+- 
