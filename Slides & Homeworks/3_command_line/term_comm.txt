@@ -7,6 +7,7 @@ Navigation & Location
 ⦁	cd foldername → change directory into foldername
 ⦁	cd .. → go up one directory
 ⦁	cd ~ → jump to your home directory
+⦁	cd / → moves to your "top level" directory
 ⦁	arrow up → fills in the previous command(s) entered
 
 
@@ -17,6 +18,10 @@ Creating & Removing
 ⦁	rm file.txt → remove file
 ⦁	rmdir emptyfolder → remove an empty folder
 ⦁	rm -r folder → remove a folder and everything in it (⚠ dangerous!)
+⦁	curl -O https://example.com/file.txt → downloads a file
+⦁	curl -o myfile.txt https://example.com/file.txt → save as myfile.txt
+⦁	source example.sh → run ".sh" file in the Terminal
+
 
 
 Viewing & Editing
@@ -38,6 +43,9 @@ Searching & Finding
 ⦁	grep "word" file.txt → search for “word” inside a file
 ⦁	grep -r "word" folder/ → search recursively in a folder
 ⦁	find . -name "*.txt" → find all .txt files in current directory
+⦁	ls *.txt → lists all files that have any characters and end in  ".txt"
+⦁	ls a*.txt → lists all files that start with "a" and end in  ".txt"
+⦁	ls a*t → lists all files that start with "a" and end in  "t"
 
 
 Other Useful

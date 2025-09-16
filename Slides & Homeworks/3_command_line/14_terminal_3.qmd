@@ -1,7 +1,7 @@
 ---
 title: "Computation for Linguists"
 subtitle: "Learning the Command Line: Files and Directories"
-date: "September 20, 2025"
+date: "September 26, 2025"
 author: "Dr. Andrew M. Byrd"
 format:
   revealjs:

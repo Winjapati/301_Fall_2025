@@ -1,7 +1,7 @@
 ---
 title: "Computation for Linguists"
 subtitle: "Learning the Command Line: Files and Directories"
-date: "September 20, 2025"
+date: "September 22, 2025"
 author: "Dr. Andrew M. Byrd"
 format:
   revealjs:
@@ -18,11 +18,6 @@ editor: visual
 # Review
 
 -   What did you learn last time about HTML?
-
----
-title: "Day 1 — Navigating the File System"
-format: revealjs
----
 
 # Why the Terminal?
 - Direct access to your computer
