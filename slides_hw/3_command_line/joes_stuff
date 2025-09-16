@@ -1,0 +1,594 @@
+Directory Structure
+There has recently been an uptick in discussion among college professors that students are less familiar with the notions of files, folders, directories, and pathsLinks to an external site. than they used to be in the past. This is in part a natural consequence of shifting paradigms in computer use. Many people are exclusively using online services like Google Docs, and don't save files to their computers ever. And even when we do save files on out computer, many operating systems have search based approaches to finding files.
+
+The problem for scientific computing purposes, or even just making some simple HTML pages on your local computer, is that you need to be able to navigate the hierarchical file system of your computer, in order to tell your programs how to navigate it.
+
+Step 1: Files in Folders
+The first thing to be clear about is that all files you've saved on your computer are in a folder (a.k.a. a directory). "Documents" or "My Documents" is a folder. Even your Desktop is a folder. This is true for both macOS and Windows. For example, I have an account on my laptop called "Display" for when I want to show how my computer works without showing everyone all of my personal files. In the Display account, I saved a little text file called Sampletext.txt to the desktop. In this screenshot, you can see Sampletext.txt shown both on my desktop, and as a file in a folder.
+
+Desktop.png
+
+What's nice about this image is that you can see where Sampletext.txt exists in the context of my whole hard drive. My "Desktop" is just a folder that my computer shows the content of on my main screen. The Desktop folder is inside of a folder called "Display". There are other folders in there, including my main user account, joseffruehwald. All of these folders are grouped together in the "Users" folder, and the "Users" folder is one of the first folders immediately underneath my hard drive.
+
+The important thing to keep in mind here is that all files, programs, photos, etc are stored somewhere in a folder, inside of another folder, probably inside of another folder. You might not always interact with the files this way, and they might not always look like they're in a folder, but they are.
+
+Viewing the folder hierarchy on a Mac
+To be able to better view the full hierarchy of folders on a Mac, I would recommend the following:
+
+Open Finder, and in the View menu, select "as Columns"
+Under the View menu again, select "Show Path Bar"
+Viewing the folder hierarchy in Windows
+At the top of the file browser on Windows, you'll see the sequence of files in which the current folder is embedded.
+
+VirtualDen_Desktop.png
+
+Giving Directions to Programs
+Programs are going to need directions for where to find things, and we can do this with "paths". The concept of a path is so important, I'm going to really emphasize it
+
+"paths" 
+
+The "path" to a file is a written instruction for where to find a file on your specific computer.
+
+Relative Paths
+Sometimes, we only need to tell a file where another file is relative to itself. For example, here is an HTML document and a CSS stylesheet for that document.
+
+html_practice.png
+
+From site.html to style.css: style.css
+
+Because style.css is in the same folder as site.html, we only need to tell site.html to look for style.css, like so
+
+<link rel="stylesheet" type="text/css" href="style.css">
+Just telling the html file to look for "style.css", it's going to look inside of, and only inside of the same folder as itself. 
+
+However, sometimes people like to put all of the stylesheets and images for a website inside of a folder called "assets," like so:
+
+assets.png
+
+From site.html to style.css: assets/style.css
+
+Now, if we tell site.html just to look for style.css, it's not going to find it anymore! That's because style.css is no longer in the same folder as site.html. We'll need to update the link to the stylesheet to reflect the fact that it's now in a different folder, like so:
+
+<link rel="stylesheet" type="text/css" href="assets/style.css">
+Here's how site.html interprets the string assets/style.css:
+
+Look inside the folder you're currently in for a folder called assets
+Then, look inside of that folder for a file called style.css
+We could take it a step further, and create a new folder called "css" inside of "assets", and put our stylesheet there instead.
+
+css.png
+
+From site.html to style.css: assets/css/style.css
+
+Now, we'd need to update the link to the stylesheet to look like this
+
+<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+Again, breaking this down into how site.html interprets the string assets/css/style.css goes like this:
+
+Look inside of the same folder as yourself for a folder called assets
+Look inside of that folder for a folder called css
+Look inside of that folder for a file called style.css
+Absolute Paths
+Relative paths define the location of a file relative to another file, usually the one you're writing. However, we can also define the location of a file on our computer that will work no matter where we're looking from. These are called "absolute paths." Put simply, absolute paths just list all of the nested folders a file is in, all the way up to the hard drive. You can see the absolute path for style.css at the bottom of the very last screen shot.
+
+Different operating systems have different short hands for describing the top level, or hard drive level, of the path. On macOS, it's simply a / at the beginning of the path. On Windows, it usually begins with C:\. For the final location of style.css in the screenshot above, the absolute path would be.
+
+/Users/Display/Documents/html_practice/assets/css/style.css
+If for some reason I didn't want to move or copy this stylesheet from this location, and I wanted to link to it from an HTML file saved in some completely different location on my laptop, I could give it this absolute path, and it would find it.
+
+Important Note on Naming
+From here on out in the course, you should avoid using spaces in any of the files or folders you name. While you can take spaces into account when giving a path, it's annoying. Instead, I'd recommend using an underscore _, a dash -, or naming files with "camel case".
+
+my_file.txt
+my-file.txt
+myFile.txt
+Important Note on Using Paths
+There are two crucial things to remember about using paths that can be conceptually difficult when first getting started.
+
+Relative paths always depend on where you're coming from and where you're going to. If either my HTML file was in a location I was confused about, or my CSS file was in a location I was confused about, my relative path might not work.
+Both relative paths and absolute paths depend on how files are organized inside of your own computer. A path copied from an example online, or a professor's template might not work  if your file structure is different.\
+
+Command Line Interface
+Some of what we'll be doing in class will involve interacting with your computer through a "Command Line Interface." Command line interacts are purely text based way to interact with your computer. It's your same exact computer, just a different way of using it without using icons, or clicking. 
+
+macOS
+In macOS, we can access a command line interface using the program Terminal. You can find Terminal in your Applications inside the folder called Utilities, or just by typing in "Terminal" into Spotlight search.
+
+Windows
+For now, on Windows, I'd recommend using PowerShell. You can launch PowerShell by searching for it in the Start menu.
+
+Getting your Bearings
+When you first launch your command line interface, it will look something like this:
+
+Display_—_-zsh_—_72×22.png
+
+This is obviously scary looking, and it doesn't give you much hint as to what to do next. The important to thing to keep in mind is that while you are using the command line interface you are inside of a folder. There are two commands I recommend using over and over again to figure out where you are, and where you can go.
+
+"The Prompt"
+We call the the space waiting for us to type in something the "prompt". It usually has a symbol before it. Depending on your system, it might be any of the following: $, %, or >. If you type something in here, your computer will interpret it as a command, and try to run it. 
+
+pwd
+If you type in pwd into the terminal and hit enter, it will print out the absolute path to where you currently are. When you first launch a terminal, it usually starts you off in your home directory, which is usually going to be named after your username.
+
+Here's how it prints out on my own computer when I first launch Terminal.
+
+% pwd
+/Users/Display
+Use pwd early, and use it often. It stands for present working directory. 
+
+ls
+If you type in ls into the terminal and hit enter, it will print out a list of all of the directories and files inside the folder you are currently in. Here's how it prints out on my own computer when I first launch Terminal:
+
+% ls
+Desktop      Library    Pictures
+Documents    Movies     Public
+Downloads    Music      Sites    
+Each of the items listed here is another directory inside of my current directory. I can look inside and get a list of all the files inside of these directories by typing in ls and the name of the directory I want to see inside of. For example, if I wanted to get a list of all of the files on my desktop, this is what I would type:
+
+% ls Desktop
+Sampletext.txt
+I only have one file on my desktop right now, and it's a document called Sampletext.txt. 
+
+Know your surroundings
+Really skilled and accomplished programmers use the commands pwd and ls constantly, and so should you! It's the only way to keep track of your surroundings on the command line. 
+
+If you ever are looking at a terminal, and don't know what to do next, just type in pwd and ls. 
+
+Every time you do a new thing in the terminal, type in type in pwd and ls afterwards.
+
+Just type in pwd and ls all the time.
+
+Getting around
+You're not always going to want to hang around in your home directory the whole time. You may want to get to a specific directory where some code or a script is to run it. To do this, we use the cd command, which stands for change directory.
+
+Moving down 1 level
+To change the folder you're in, you just need to type in cd and then the name of the folder. For example to move from my home directory into my Documents folder, it would look like this:
+
+% ls
+Desktop     Library   Pictures
+Documents   Movies    Public
+Downloads   Music     Sites
+% cd Documents
+% ls
+FranklinInstituteSamples.pptx   Zoom
+FranklinInstituteSounds         html_practice
+Microsoft User Data
+% pwd
+% /Users/Display/Documents
+First, I double checked which directories were in the folder I was currently in with ls.
+Second, I moved into the Documents directory with cd Documents.
+Third, I checked what files and directories were in my new location with ls.
+Fourth, I double checked my current location with pwd, which gave my the absolute path to where I was.
+Moving up 1 level
+If after moving into my documents folder, I wanted to move back to my home directory, that would involve moving up one level, because my Documents folder is inside of my home directory. We can do this using cd again, but instead of the name of a directory, we follow it with ... The two dots, .., is a short hand for "one level up from where I am." Here's how that works out on my system.
+
+% pwd
+/Users/Display/Documents
+% cd ..
+% pwd
+/Users/Display
+First, I double checked where I was with pwd.
+Second, I moved up one level with cd ..
+Third, I double checked where I would up with pwd again, confirming that I was now in my home directory again.
+Moving down multiple levels
+You don't have to move down just one level at a time. For example, right now we're in my home directory, but inside of my documents there's a directory called html_practice. That's two levels down. To get into html_practice, I just need to enter cd followed by the relative path to it. Remember, the relative path is the sequence of directory names that lie between where we are and where we want to go. Here's how that looks on my system.
+
+% pwd
+/Users/Display
+% cd Documents/html_practice
+% pwd
+/Users/Display/Documents/html_practice
+% ls
+site.html  style.css
+First, I double checked my location with pwd
+Second, I moved down two levels through Documents into html_practice with cd.
+Third, I double checked where I had moved to with pwd.
+Lastly, I checked what files were in my new directory with ls.
+Moving up and over
+Now, we're inside html_practice which is inside Documents. But what if we wanted to move into another directory that is also inside of Documents. For example, the directory Zoom is also inside of Documents, which is where Zoom saves all of the chat logs from our class meetings.
+
+html_practice-1.png
+
+We could do this in a two step process, using cd .. to move up one level, then cd Zoom to move into the zoom directory. But we can also combine the two into one step.
+
+% pwd
+/Users/Display/Documents/html_practice
+% cd ../Zoom
+% pwd
+/Users/Display/Documents/Zoom
+First, I double checked where I was with pwd.
+Then, I moved up into Documents and down into Zoom in one go with cd ../Zoom
+Finally, I double checked where I wound up with pwd.
+Very useful tips!
+There are a few tips, tricks, and shortcuts that can make using the command line a little bit easier.
+
+Tab autocomplete
+When using a command line interface, "tab autocomplete" is a crucial tool to help you get around. For example, if you are in your home directory and you want to move into your documents directory, all you really need to type is cd Doc and the terminal should autocomplete the rest of the file name! 
+
+If you have multiple directories that start with Doc, it will list all of them, and then you'll only need to type in a few more characters before it will be able to autocomplete. 
+
+Tab autocomplete works for ls as well, which can let you explore through directories without needing to move around.
+
+Get back home!
+Technically, your home directory is a directory with a long absolute path. But because it's a directory you'll probably want to keep getting back to often, there's a shortcut built in. If you run cd ~, it will zip you back to your home directory from wherever you are.
+
+Absolute paths
+If, for some reason, you don't know what the relative path is to a directory you want to get to from where you are (or maybe it's very complicated), you can always run cd followed by the absolute path to where you want to go.
+
+This is all going to matter a lot
+Using the command line and navigating your computer is going to come up a lot more in this course. You should try as much as you can to get a handle on how this all works now.
+
+Doing Something at the Command Line
+ Just navigating around the command line is boring. Let's learn how to do some things.
+
+Looking at Text Files
+First, I'll download Pride and Prejudice from Project Gutenberg.
+
+wget https://www.gutenberg.org/files/1342/1342-0.txt
+mv 1342-0.txt PandP.txt
+Since this is a plain text document, we can use the command line programs for text here. We'll begin with less.
+
+less: Read, but not write a document
+The program less lets you read a text document. This is useful for double-checking that you're looking at and working with the right text file. To use it, you simply type less followed by the name of the document. Here's what my terminal looks like when I type the following at the prompt.
+
+less PandP.txt
+I can scroll up and down in the document with the up and down arrows, or hit spacebar to jump down a page. To get out of viewing the document, just hit q and you'll get back to your command line prompt.
+
+wc: Get document statistics
+The wc program calculates statistics about your document, like how many lines, words, and characters there are in the document, and returns it to you. You can run it by typing wc followed by the name of the document. Here's how it looks on site.html
+
+% wc PandP.txt
+ 14579 124749 798774 PandP.txt
+What this is telling us is that there are 14,579 lines in site.html, 124,749 words, and 798,774 characters.
+
+"Flags"
+There are also a few options you can set to change how wc works that you set with things called "flags". Flags are used for many command line programs to set certain options, and they usually take the form of a dash, and a single letter placed immediately after the name of the program. For example, the flag -l tells the program wc to only return the number of lines in the document. Here's how that looks:
+
+% wc -l PandP.txt
+   14579 PandP.txt
+There's also a flag to only get back the number of words in a document, -w. Here's how that looks:
+
+% wc -w PandP.txt
+     124749 PandP.txt
+You can pass multiple options to a command line program, just by putting in all the flags you want one after the other. For example, if I wanted to see the number of lines and the number of words in site.html, I would do this:
+
+% wc -l -w PandP.txt
+     14579 124749 PandP.txt
+Usually, when you look at the man page for a command line program, all of the flags and what they do are listed at the beginning.
+
+grep: Search within documents
+grep is a super useful and commonly used program to search within documents. In fact, in the 1980s and 1990s among certain nerds, the word "grep" was used as a general word for "search", and that made it into the Oxford English Dictionary.
+
+grep__v____Oxford_English_Dictionary.png
+
+With grep, you type in the string you want to search for in quotes, followed by the file name, and it will print out all of the lines of the file where that string appears. For example, let's say I wanted to find all of the lines in PandP.txt where yes appears. Here's how I'd do that:
+
+% grep "yes" PandP.txt
+      and agreeable in your eyes. I never heard you speak ill of a
+      an object of some interest in the eyes of his friend. Mr. Darcy
+      eyes. To this discovery succeeded some others equally mortifying.
+      pleasure which a pair of fine eyes in the face of a pretty woman
+      Miss Bingley immediately fixed her eyes on his face, and desired
+      worthless in their eyes when opposed to the regimentals of an
+      servant waited for an answer. Mrs. Bennet’s eyes sparkled with
+This will be our first lesson in the fact that computers will do whatever you tell them to, even if it's not what you meant to tell it to do. I really just wanted to find all of the lines with the word yes. But grep has mostly just shown us lines where eyes appears. Why? Because all we asked grep for was lines with yes, and there is yes in eyes!
+
+Figuring out more precise ways to search documents with grep is going to be a big topic coming up soon.
+
+|: piping commands together
+Let's say I didn't want to see all of the lines that had yes in them, but I just wanted to know how many lines had yes on them? Here's the tools we have available to us now:
+
+grep: We can search and get back all of the lines in a document
+wc: We can get the number of lines in a document.
+We can connect these two functionalities together by "piping" the output of grep into wc with the symbol |. | is called a "pipe" and can be found on your keyboard above the Enter key. You may need to hit Shift+\ to find it. Here's how it looks to pipe the output of grep into wc.
+
+% grep "yes" PandP.txt | wc
+     83     888    5592
+Here's what's happening
+
+First, grep searched PandP.txt for every line that had yes in it, and returned all of those lines
+Instead of printing out all of the lines, the pipe, |, passed them to wc, which counted all of the lines, words, and characters in them.
+wc then printed out the number of lines, words, and characters from the output of grep.
+Piping like this can be super useful!
+
+ While grep is super useful for searching through text documents, its power is really unlocked when you start using "Regular Expressions", which is shortened to "RegEx" or "regex".
+
+Regular Expressions are a kind of code for searching for strings in text, and while we'll be learning it initially to use with grep, Regular Expressions are used in almost every programming language. Understanding them just a little bit can be super useful.
+
+regular_expressions-1.png
+
+The_Fruehwald_on_Twitter___regex_____Twitter.png
+
+The literal "mindedness" of computers
+The reason we need something like regular expressions is because when we give grep a search string, it takes it extremely literally. For this example, I'm going to be using Grimm's Fairly Tales from Project GutenbergLinks to an external site.. (Side note, Jacob Grimm was a well known historical linguist!)
+
+You can download and rename this text file with the following code
+
+wget https://www.gutenberg.org/files/2591/2591-0.txt
+mv 2591-0.txt grimm.txt
+Let's say I wanted to search the text to see how many of these fairy tales were about bears. I could try doing this by giving grep the search string "bear" like so:
+
+grep --color=auto "bear" grimm.txt
+Here's a few of the lines it returned, with the bolded text indicating what grep matched.
+
+door for him, and the bear was hurrying out, he caught against the bolt
+it. The bear ran away quickly, and was soon out of sight behind the
+snow-white beard a yard long. The end of the beard was caught in a
+beard; so now it is tight and I cannot get away, and the silly, sleek,
+We're getting a lot of results for the word "bear", which is good, but also a lot of results for "beard", which isn't what we wanted. grep is giving us "beard" results because the string of letters bear exist inside of beard. grep doesn't "know" that what we really wanted was to know about was the large brown animal, which is it's own word with a different pronunciation from the word for facial hair. 
+
+This little issue encapsulates the larger issue with working with computers. They will always do exactly what we tell them to, but what we tell them to do is not always the same thing as what we want them to do. 
+
+We can do a quick fix for our bear problem by putting a space before and after "bear" to get " bear ":
+
+grep --color=auto " bear " grimm.txt
+All of our results are bears now, because it's only showing us lines where the word "bear" is surrounded by spaces. But, we're also missing a few valid bears from our results now! Some bears have a comma or some other punctuation following them that aren't a space.
+
+‘Poor bear,’ said the mother, ‘lie down by the fire, only take care that
+little’; so they brought the broom and swept the bear’s hide clean;
+bear: ‘You can lie there by the hearth, and then you will be safe from
+whole summer.’ ‘Where are you going, then, dear bear?’ asked Snow-white.
+the bear; ‘it is a wretched palace, and you are not King’s children, you
+There are also a few instances of "bear" where the "B" is capitalized, and they're all missing too.
+
+honest people! Bear, you will have to pay for that!’
+announced to the Bear, and all four-footed animals were summoned to take
+he cried: ‘Dear Mr Bear, spare me, I will give you all my treasures;
+ 
+
+Options and Ranges
+Options
+The first place to start digging into regex is with options and ranges. Let's say we wanted to get all strings matching "bear", regardless of whether or not the "B" was capitalized. Here's a way to describe that in more precise words:
+
+Find a string that begins in "B" or "B" and then ends in "ear".
+We can also visualize this description with a diagram like this:
+
+image.svg
+
+The way we communicate this request to grep is with [Bb]ear
+
+grep --color=auto "[Bb]ear" grimm.txt
+honest people! Bear, you will have to pay for that!’
+beard from the line, but all in vain, beard and line were entangled fast
+it. The bear ran away quickly, and was soon out of sight behind the
+By putting the B and the b inside of the brackets [] we told grep to find strings that began with either one. This is our first Regular Expression!
+
+You could put as many characters inside the options [] as you want, in whatever order you want. If we wanted to search for bears and "dear" at the same time, we can just throw d into [].
+
+image-2.svg
+
+grep --color=auto "[BbdD]ear" grimm.txt
+whole summer.’ ‘Where are you going, then, dear bear?’ asked Snow-white.
+Ranges
+What if we wanted to see all words that end in "ear", and begin with any of the first 7 letters of the alphabet. We could type out all 6 letters:
+
+image-3.svg
+
+grep --color=auto "[abcdefg]ear" grimm.txt
+Or, we could enter in a range, and say "the first letter has to be within the range between a and g." with [a-g]ear.
+
+image-4.svg
+
+grep --color=auto "[a-g]ear" grimm.txt
+This works for numbers too. For example, if we search for any number between 0 and 9 with [0-9] in Grimm's Fairy Tales, we only get back the copyright and licensing agreements.
+
+To search for all strings that start with any letter at all, followed by ear we can use [a-zA-Z]ear
+
+image-5.svg
+
+grep --color=auto "[a-zA-Z]ear" grimm.txt
+ 
+
+A Possible Application
+Everybody's LinkBlue login name seems to follow a common pattern
+
+First initial
+If there's a middle initial, middle initial
+First two letters of second name
+Three numbers
+With what we've covered so far, we could write a regex that would match people without middle initial's logins. We need three letters, then three numbers.
+
+image-6.svg
+
+That would look like [a-zA-Z][a-zA-Z][a-zA-Z][0-9][0-9][0-9]
+
+Simplify with loops
+One way we could make this a little easier to read and write is by first telling the regex to repeat some of the expressions. Instead of typing out [a-zA-Z][a-zA-Z][a-zA-Z] for three repeats of all the letters, we could say [a-zA-Z]{3}. The {3} at the end of the brackets means "do this three times." We can do the same thing and simplify [0-9][0-9][0-9] to [0-9]{3}.
+
+image-7.svg
+
+Which in all looks like [a-zA-Z]{3}[0-9]{3}.
+
+Simplify more with a shortcut
+People need to search for any number a lot when writing regex, so there's a shortcut included for [0-9], which is \d (short for digit). 
+
+image-8.svg
+
+Which looks like [a-zA-Z]{3}\d{3}.
+
+Getting in the middle initial
+LinkBlue logins can start with either three or four letters. There are at least two ways we could make this work in regex. The first is to include an optional character. This is a character, set of options, or a range that you follow with a ?. 
+
+image-9.svg
+
+Which looks like [a-zA-Z]{3}[a-zA-Z]?\d{3}
+
+Or, we could tell the loop to run 3 or 4 times
+
+image-10.svg
+
+Which would look like[a-zA-Z]{3,4}\d{3}
+
+This is probably the most compact regular expression that would successfully match everyone's LinkBlue id, and would reject anything that's not formatted like a LinkBlue ID.
+
+ l
+Another Application
+Those of you playing Wordle might have been aware that there was a bit of controversy on the day the word was "FAVOR" for British players. That's because in British spelling, it's "FAVOUR". The "our" spelling isn't exclusive to British texts though. In older American books, the "our" spelling was predominant, and eventually got replaced by the "or" spelling.
+
+Google_Ngram_Viewer.png
+
+If I wanted to search a mixture of texts written in both British and American texts, and wanted to do just one search for the word "favo(u)r", I could do it with the ? operator in regex.
+
+In my plaintext book folder, I've saved both the Grimm's Fairy Tales, which have been translated into British spelling, and A Connecticut Yankee in King Arthur's Court by Mark Twain, which is written in American spelling. To search for the word favor in both of these texts, I'll tell regex to optionally include a u.
+
+image-11.svg
+
+Which looks like favou?r
+
+To use the option operator, we need to use a slightly different grep called egrep.
+
+To search both texts, I'll tell egrep to search *, which means "everything you find".
+
+egrep --color=auto "favou?r" *
+Which gets me back results from both books!
+
+ct_yank.txt:their way into favor.  We had a steamboat or two on the Thames,
+ct_yank.txt:Everything would be favorable; it was balmy and beautiful spring
+grimm.txt:People are so kind; they seem really to think I do them a favour in
+grimm.txt:favourite plaything; and she was always tossing it up into the air, and
+
+Boundaries and Other Shortcuts
+ When using regular expressions, we'll often want to search for strings that are at the very beginning or end of a line, or are separated by word boundaries (to avoid getting "beard" when we search for "bear"). To search for these things, we'll use the boundary symbols ^ for the beginning of the line, and $ for the end of the line.
+
+For example, if we wanted to search Grimm's fairy tales for all lines that begin with "the", we'll use the regular expression ^the
+
+image-12.svg
+
+grep --color=auto "^the" grimm.txt
+there was nothing to do.
+their side, the stag leapt merrily by them, and the birds sat still upon
+the boughs, and sang whatever they knew.
+Normally, if we wanted to search for a string at the end of a line, like "ing", we could use ing$. Unfortunately, due to a formatting quirk of books from Project Gutenberg, this won't work as normal!
+
+image-13.svg
+
+The other very important boundary is the word boundary, which is represented with \b. It involves two characters, the slash and the "b", but gets interpreted as referring to just one search character: anything that signals the edge of a word. this will let us solve our "beard" problem.
+
+image-14.svg
+
+egrep --color=auto "\b[Bb]ear\b" grimm.txt
+Tabs, new lines, and "carriage return"
+In addition to spaces, which we can include in a regular expression just by typing a space, the other kinds of important "whitespace" characters are tabs, new lines, and for some systems a "carriage return". The symbols in regex for these are
+
+\t : tab
+\n : new line
+\r : carriage return
+"Carriage returns" are named after how typewriters work, and do basically the same thing as a new line. They're mostly only found in documents generated in Windows.
+
+If you want to find two strings separated by whitespace, and you don't care if it was a tab, space, new line or carriage return, you can use the shortcut \s.
+
+Other Shortcuts
+The word boundary symbol \b and white space symbol \s are handy shortcuts. A few other often used shortcuts are:
+
+\d : Any number. Equivalent to [0-9]
+\w : Any alphanumeric character and underscore. Equivalent to [a-zA-Z0-9_].
+Counting words of different lengths
+So, for example, let's say we wanted to see how common 1 letter words were compared to 2 letter words, and so on, in a text like Grimm's Fairy tales. So far we've been looking at the whole line being printed out when we search for a word like "bear":
+
+egrep --color=auto "\bbear\b" grimm.txt
+If we add the flag -o to the call to egrep, it will print out just the matching string, each one on its own line. With this, we can pipe the output of egrep to wc, and get word counts.
+
+egrep -o --color=auto "\bbear\b" grimm.txt
+So, let's find out how many single character words there are with \b\w\b
+
+image-16.svg
+
+% egrep -o --color=auto "\b\w\b" grimm.txt | wc
+    3693    3693    7386
+We can search for two character words in one of two ways. First we could just enter \w twice, with \b\w\w\b
+
+image-17.svg
+
+Or, we could tell the \w to loop twice, with \b\w{2}\b
+
+image-18.svg
+
+Let's use this second option, and get the number of two character words.
+
+% egrep -o --color=auto "\b\w{2}\b" grimm.txt | wc
+   16555   16555   49665
+Now three character words!
+
+% egrep -o --color=auto "\b\w{3}\b" grimm.txt | wc
+   31499   31499  125
+If we keep doing this for Grimm's fairy tales, we get a pretty interesting distribution
+
+word length	Number of words
+1	3,693
+2	16,666
+3	31,488
+4	24,501
+5	11,418
+6	7,416
+7	5,069
+8	2,672
+9	1,454
+10	673
+Variables
+The last remaining important characters in Regular Expressions are ., +, ?, and *.
+
+Dot: .
+The dot, ., stands for "any character". It could be a number, punctuation, a space, or anything. So, let's say you're playing Wordle, and you've figured out that the word ends in "ight", you could search a large book for inspiration for what the first letter is by using the regular expression \b.ight\b.
+
+image-20.svg
+
+Plus +
+The + operator means "one or more of the previous character". For example, let's say that we wanted to figure out what adjectives modify "man" in Grimm's fairy tales. We could look for all instances of "the ADJECTIVE man". We know we want there to be a word in between "the" and "man", but we don't know ahead of time how long we want it to be. We can use the regular expression \bthe \w+ man\b to get all of these phrases. 
+
+image-21.svg
+
+% egrep -o --color=auto "\bthe \w+ man\b" grimm.txt
+the young man
+the young man
+the young man
+the young man
+the young man
+the happiest man
+Star *
+The * operator means "find zero or more of the preceding character. So, if we wanted to know how often they mentioned "the (adjective) man", whether or not there was anything in between "the" and "man". We could try using the regular expression \bthe .*man\b.
+
+image-22.svg
+
+% egrep -o  --color=auto "\bthe .*?man\b" grimm.txt
+the young man
+the young man
+the king was obliged to keep his word, and away went the young man
+the princess, the horse, and the bird.’ ‘Ah!’ said the young man
+the young man
+the horseman
+This hasn't really gone according to plan. Part of the problem is that * is "greedy", meaning it will try to find the longest possible string that matches. Second, we weren't precise enough with our regex and have examples like "horesman".
+
+Question Mark ?
+The ? operator means "the preceding expression was optional. In the previous module, it was mentioned how favou?r would match both the American spelling "favor" and the British spelling "favour". 
+
+image-24.svg
+
+We can use ? to solve our problem of looking for "the man" with an optional adjective in between. Let's look at our regular expression to find "the ADJECTIVE man" first, \bthe \w+ man\b
+
+image-21-1.svg
+
+What we want to say is that the repeating word character, and its following space, are optional. First step is to "group" those parts of the expression together with parentheses: \bthe (\w+ )man\b
+
+image-25.svg
+
+Then, we can make that group optional, by following it with ?: \bthe (\w+ )?man\b
+
+image-23.svg
+
+If we pass this to egrep, we get what we're looking for.
+
+% egrep -o  --color=auto "\bthe (\w+\s)?\bman\b" grimm.txt
+the young man
+the young man
+the young man
+the young man
+the young man
+the happiest man
+the man
+
+
+
+
+
+
+

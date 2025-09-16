@@ -1,0 +1,36 @@
+Computation for Linguists – Day 1 Review Quiz
+
+Part A – Multiple Choice
+
+Choose the best answer for each question.
+
+Which of the following is *not* assumed about you when starting this course?
+a) You know how to use a computer and can access the internet
+b) You have used generative AI before
+c) You have experience programming in Python
+d) You may not be familiar with the command prompt
+
+What is the primary goal for students by the end of the course?
+a) To memorize all Python syntax
+b) To have a basic understanding of how computer programming works, and to not be scared of computers.
+c) To become professional computational linguists
+d) To avoid using any AI tools
+
+Which tool will be the primary IDE for this class?
+a) PyCharm
+b) Overleaf
+c) RStudio
+d) VS Code
+
+
+Part B – Short Answer
+
+Answer two of the following three questions in 1–2 sentences.
+
+1) What is “DERBi PIE” and why is it important to the instructor?
+
+2) What is the difference between using AI as a tool versus as a crutch in this class?
+
+3) Give one example of an “annoying part of linguistics” that requires computational tools.
+
+

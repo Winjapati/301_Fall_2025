@@ -1,0 +1,389 @@
+---
+title: "Computation for Linguists"
+subtitle: "LaTeX, Day 4"
+date: "September 5, 2025"
+author: "Dr. Andrew M. Byrd"
+format:
+  revealjs:
+    css: header_shrink.css
+    theme: beige
+    slide-number: true
+    center: true
+    toc: true
+    toc-title: "Plan for the Day"
+    toc-depth: 1
+editor: visual
+---
+
+# Review
+
+-   What did you learn on Wednesday?
+
+# Glossing (LGRs)
+
+![](5_leipzig.png){fig-alt="Leipzig, Germany" fig-align="center"}
+
+## What is `gb4e`?
+
+-   A LaTeX package for linguistic examples, sub-examples, glosses, and Leipzig abbreviations
+-   You’ll write in LaTeX and compile in Overleaf
+    -   Helpers: `gb4e` (core)
+    -   `cgloss4e` (glossing)
+    -   `tipa` (IPA if needed)
+
+``` latex
+\documentclass[12pt]{article}
+\usepackage{gb4e}
+\usepackage{cgloss4e}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\begin{document}
+\section*{gb4e Starter}
+\end{document}
+```
+
+## Nested sub-examples
+
+``` latex
+\begin{exe}
+    \ex \begin{xlist}
+        \ex This is a sub-example.
+        \ex This is a second sub-example.
+        \ex \begin{xlist}
+            \ex This is a sub-sub-example.
+            \ex This is a second sub-sub-example.
+        \end{xlist}
+    \end{xlist}
+\end{exe}
+```
+
+## Interlinear glossing
+
+``` latex
+\begin{exe}
+\ex 
+\gll kot est smetanu\\
+cat.NOM eat.3SG.PRS {sour cream}.ACC\\
+\trans `The cat eats sour cream'
+\end{exe}
+```
+
+## Ungrammatical examples
+
+``` latex
+\begin{exe}
+\ex[*]{
+\gll Stolz ist er auf seine Kinder gewesen.\\
+proud is he of his children been\\
+\trans{`He was proud of his children.'}}
+\end{exe}
+```
+
+## `gb4e` Activity
+
+![](5_gb4e_activity.png){fig-alt="gb4e examples" fig-align="center"}
+
+# Trees
+
+-   Often in Linguistics we need to draw tree structures.
+
+-   Sometimes in Phonology:
+
+![](2_syllable_tree.jpg){fig-alt="syllable tree" fig-align="center"}
+
+## Trees
+
+![](5_IE_tree.png){fig-alt="Indo-European tree"}
+
+## Trees
+
+![](2_syntax_tree.png){fig-alt="syntax tree" fig-align="center"}
+
+## Drawing Trees with the `forest` package
+
+-   A TikZ-based LaTeX package for drawing trees (phrase structure, stammbaum, AVMs, more).
+
+``` latex
+\documentclass[12pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{forest}     % trees
+
+% A clean, reusable style for our trees:
+\forestset{
+  mytree/.style={
+    for tree={
+      align=center,
+      parent anchor=south,
+      child anchor=north,
+      edge={-Latex},     % arrowed edges; swap to draw,-> etc.
+      s sep=8mm,         % sibling sep
+      l sep=8mm,         % level sep
+      inner sep=2pt,
+      rounded corners
+    }
+  }
+}
+
+\begin{document}
+text
+\end{document}
+```
+
+## Let's paste this into our document.
+
+-   How does tree structure work in `forest`?
+
+``` latex
+\begin{forest}
+  mytree
+  [TP
+    [DP
+      [D [The] ]
+      [NP [student] ]
+    ]
+    [T$'$
+      [T [will] ]
+      [VP
+        [V$'$
+          [V [read] ]
+          [DP
+            [D [the] ]
+            [NP [book] ]
+          ]
+        ]
+      ]
+    ]
+  ]
+\end{forest}
+```
+
+## Syntax Tree Activity
+
+-   Using `forest`, draw a tree of the sentence, "That cow can jump over the moon."
+-   Remember: PP --\> P NP
+
+## Movement
+
+-   In generative syntax, you often see trees like this:
+
+## Movement
+
+-   Examine this code in LaTeX. How do you show movement?
+
+``` latex
+\documentclass{standalone}  % class to make a single image
+\usepackage{newtx}  % Times font clone
+\usepackage[linguistics]{forest}
+\forestset{default preamble={for tree={edge=semithick}}} % thicker edges
+
+\begin{document}
+\begin{forest}
+[TP [DP\\John, name=SpecTP]
+    [T$'$ [T\\\textsc{past}]
+        [vP [DP\\t, name=SpecvP]
+            [v$'$ [v [V\\roll, name=littlev] [v]]
+                [VP [DP [D\\the] [NP\\ball]]
+                    [V$'$ [V\\t, name=bigV]
+                        [PP [P\\down]
+                            [DP [D\\the] [NP\\hill]]]]]]]]]
+\draw[->] (SpecvP) to[out=south west, in=south] (SpecTP);
+\draw[->] (bigV) to[out=south, in=south] (littlev);
+\end{forest}
+\end{document}
+```
+
+## Movement Activity
+
+-   Using the code on the previous slide as a model, draw a tree for "What did you do?"
+    -   Assume that "what" begins as the direct object (comp of V$'$), and moves to spec of CP
+    -   Assume that "did" is base generated in T and moves to C
+
+## For More on Movement & Syntax Trees
+
+see <https://www.kennethhanson.net/teaching/latex-tree-drawing/>
+
+# Answers to Activities
+
+## `gb4e` Activity
+
+``` latex
+\documentclass{article}
+\usepackage{gb4e}
+\begin{document}
+
+\begin{exe}
+\ex
+\gll Ali kitab-ı oku-du.\\
+Ali.NOM book-ACC read-PST.3SG\\
+\trans `Ali read the book.'
+\end{exe}
+
+\begin{exe}
+\ex[*]{
+\gll Weil er hat das Buch gelesen.\\
+because he has the book read.PTCP\\
+\trans `Because he has read the book.'}
+\end{exe}
+
+\begin{exe}
+\ex
+\gll Maria wasi-ta riku-sha-n.\\
+Maria house-ACC see-PROG-3\\
+\trans `Maria is looking at the house.'
+\end{exe}
+
+\end{document}
+```
+
+## Syntax Tree activity
+
+``` latex
+\documentclass[12pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{forest}     % trees
+
+% A clean, reusable style for our trees:
+\forestset{
+  mytree/.style={
+    for tree={
+      align=center,
+      parent anchor=south,
+      child anchor=north,
+      edge={-Latex},     % arrowed edges; swap to draw,-> etc.
+      s sep=8mm,         % sibling sep
+      l sep=8mm,         % level sep
+      inner sep=2pt,
+      rounded corners
+    }
+  }
+}
+
+\begin{document}
+% Requires: \usepackage{forest}
+\begin{forest}
+  for tree={
+    align=center,
+    parent anchor=south,
+    child anchor=north,
+    edge={-Latex},
+    s sep=8mm,
+    l sep=8mm,
+    inner sep=2pt,
+  }
+  [TP
+    [DP
+      [D [That] ]
+      [NP [cow] ]
+    ]
+    [T$'$
+      [T [can] ]
+      [VP
+        [V$'$
+          [V [jump] ]
+          [PP
+            [P [over] ]
+            [DP
+              [D [the] ]
+              [NP [moon] ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+\end{forest}
+\end{document}
+```
+
+## Movement Activity
+
+``` latex
+\documentclass{standalone}  % single-image output
+\usepackage{newtx}          % Times-like font
+\usepackage[linguistics]{forest}
+\forestset{default preamble={for tree={edge=semithick,align=center}}}
+\usetikzlibrary{arrows.meta}
+
+\begin{document}
+\begin{forest}
+[CP
+  [DP\\\emph{what}$_i$, name=SpecCP]             % landing site (Spec-CP)
+  [C$'$
+    [C\\did, name=Chead]                         % did in C after T→C
+    [TP
+      [DP\\you, name=SpecTP]
+      [T$'$
+        [T\\t, name=Thead]                       % trace of did in T
+        [VP
+          [V$'$
+            [V\\do, name=Vhead]
+            [DP\\t$_i$, name=ObjTrace]          % original object position
+          ]
+        ]
+      ]
+    ]
+  ]
+]
+% ---- movement arrows ----
+\draw[dashed,->] (ObjTrace) to[out=south west, in=south] (SpecCP); % DP (obj) → Spec-CP
+\draw[dashed,->] (Thead)    to[out=south, in=south]       (Chead);  % T → C (did)
+\end{forest}
+\end{document}
+```
+
+## Indo-European Stammbaum Code
+
+``` latex
+\documentclass[12pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{forest} % -> TikZ-based tree drawing
+
+% A clean, readable forest style
+\forestset{
+  ie tree/.style={
+    for tree={
+      align=center,
+      parent anchor=south,
+      child anchor=north,
+      edge={-Latex},
+      s sep=8mm,      % sibling separation
+      l sep=8mm,      % level separation
+      inner sep=2pt,
+    }
+  }
+}
+
+\begin{document}
+\thispagestyle{empty}
+
+% ---- Indo‑European Stammbaum with a "Core IE (layout)" node ----
+\begin{center}
+\scalebox{0.8}{ % shrink to 80%
+\begin{forest}
+  ie tree
+  [Proto-Indo-European\\(PIE)
+    [Anatolian]
+    [Tocharian]
+    [Core IE\\(layout)
+      [Indo-Iranian]
+      [Greek]
+      [Armenian]
+      [Albanian]
+      [Germanic]
+      [Italic]
+      [Celtic]
+      [Balto-Slavic]
+    ]
+  ]
+\end{forest}}
+\end{center}
+
+% (Presentation note: “Core IE (layout)” is just a layout convenience,
+% not a phylogenetic claim.)
+
+\end{document}
+```

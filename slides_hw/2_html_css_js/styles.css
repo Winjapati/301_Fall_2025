@@ -1,0 +1,9 @@
+body {
+  background-color: lightblue;
+}
+p {
+  text-align: center;
+  color: red;
+  padding: 5px;
+  background: midnightblue;
+}
