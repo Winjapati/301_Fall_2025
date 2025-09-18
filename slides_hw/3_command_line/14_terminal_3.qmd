@@ -1,6 +1,6 @@
 ---
 title: "Computation for Linguists"
-subtitle: "Learning the Command Line: Files and Directories"
+subtitle: "Learning the Command Line: Regular Expressions & Advanced Grep"
 date: "September 26, 2025"
 author: "Dr. Andrew M. Byrd"
 format:
@@ -17,27 +17,115 @@ editor: visual
 
 # Review
 
--   What did you learn last time about HTML?
+-   What did you learn last time?
 
-## What We've Learned So Far
+## Review: Grep Basics
 
--   Days 1-2:
+- `grep "word" file.txt` → search for a string in a file
+- Useful flags:
+  - `-i` → ignore case
+  - `-n` → show line numbers
+  - `-r` → recursive search
+- Combine with pipes:
+  - `grep "word" file.txt | wc -l`
 
-    -   We learned **basic tags**: `<h1>`, `<p>`, `<em>`, `<strong>`, `<a>`, `<img>`, `<ul>`, `<li>`
-    -   We practiced **attributes** like `href` and `alt`
-    -   Structure: `<head>`, `<nav>`, `<main>`, `<section>`, `<footer>`
+## What Are Regular Expressions?
 
--   Days 3-4:
+- A **language for patterns**
+- Lets us search for:
+  - Word forms
+  - Phonological environments
+  - Structured data
+- Used in:
+  - Linguistics
+  - Programming
+  - Data science
 
-    -   CSS
-    -   GitHub Pages
+## Wildcards & Metacharacters
 
-# File Structures
+- `.` → any single character  
+- `*` → 0 or more of the preceding  
+- `?` → 0 or 1 of the preceding  
+- `+` → 1 or more of the preceding  
 
-```{python}
-print("test")
+**Example**  
+```bash
+grep -E "c.t" file.txt   # matches cat, cot, cut
 ```
 
-Day 3: Grep and Regex
+- Note the `-E` -- this prompts `grep` to use **Extended Regular Expressions**
 
--   Treasure Hunt, practicing everything they've done so far
+## Character Classes
+
+
+- [aeiou] → any vowel
+- [^aeiou] → anything except a vowel
+- [a-z], [0-9] → ranges
+- Predefined:
+  - \d → digit
+  - \w → word character
+  - \s → whitespace
+
+```bash
+grep -E "[0-9]+" file.txt   # find numbers
+```
+
+## Anchors 
+
+- ^ → beginning of line
+- $ → end of line
+
+```bash
+grep -E "^The" file.txt   # lines starting with "The"
+grep -E "\?$" file.txt    # lines ending with "?"
+```
+
+## Grouping & Alternation
+
+- (cat|dog) → "cat" or "dog"
+- (ab)+ → one or more “ab” sequences
+
+```bash
+grep -E "(cat|dog)" file.txt
+```
+
+## Grep + Regex in Action
+Examples with a text file:
+
+- Words ending in “ing”
+```bash
+grep -E "(cat|dog)" file.txt
+```
+
+- Lines starting with a capital letter
+```bash
+grep -E "^[A-Z]" file.txt
+```
+
+- All numbers
+```bash
+grep -E "[0-9]+" file.txt
+```
+
+## Useful Flags
+
+- E → extended regex
+- o → print only matches
+- c → count matches
+
+```bash
+grep -Eo "\w+ing" file.txt
+```
+
+## Activity
+
+- Work with a text of your choice (e.g., from Project Gutenberg).
+- Try to find:
+  - All words beginning with "a"/ "A" or "z" / "Z"
+  - All four-letter words
+  - Lines ending with a question mark
+  - Words with repeated vowels (food, see)
+
+<!-- -   Treasure Hunt, practicing everything they've done so far -->
+
+<!-- <https://regex101.com/> -->
