@@ -27,6 +27,10 @@ editor: visual
 - If you can move, list, and fetch files here, this will make understanding accessing files easier in Python later.
 - Same skills for Git, servers, clusters.
 
+## Why start in the terminal?
+
+- While this isn't true for me, I've been assured by various linguists that Terminal is crucial for conducting certain types of research, particularly in Phonetics
+
 ## Navigating the Terminal
 
 - We'll be working within the `Terminal` in RStudio
