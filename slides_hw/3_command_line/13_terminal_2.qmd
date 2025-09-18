@@ -1,6 +1,6 @@
 ---
 title: "Computation for Linguists"
-subtitle: "Learning the Command Line: Files and Directories"
+subtitle: "Learning the Command Line: File Extensions, Beginning Grep"
 date: "September 24, 2025"
 author: "Dr. Andrew M. Byrd"
 format:
@@ -17,20 +17,30 @@ editor: visual
 
 # Review
 
--   What did you learn last time about HTML?
+-   What did you learn last time about the Terminal?
 
-## What We've Learned So Far
+## Review of Terminal Commands
 
--   Days 1-2:
+-   `mkdir`
 
-    -   We learned **basic tags**: `<h1>`, `<p>`, `<em>`, `<strong>`, `<a>`, `<img>`, `<ul>`, `<li>`
-    -   We practiced **attributes** like `href` and `alt`
-    -   Structure: `<head>`, `<nav>`, `<main>`, `<section>`, `<footer>`
+-   `ls`
 
--   Days 3-4:
+-   `rmdir`, `rm`
 
-    -   CSS
-    -   GitHub Pages
+-   `touch`
+
+-   `curl -o file.txt`
+
+-   `cd`
+
+## Review Activity
+
+-   Navigate to your `LIN_301` folder
+-   Using Terminal:
+    -   create a folder `p_and_p`
+    -   download *Pride and Prejudice* from the following address: <https://gutenberg.org/files/1342/1342-0.txt>
+    -   call this file `p_and_p.txt`
+    -   move `p_and_p.txt` into the folder `p_and_p`
 
 # File Structures
 
@@ -38,14 +48,14 @@ editor: visual
 print("test")
 ```
 
-Day 2: File Extensions, Beginning Grep
+<!-- Day 2: File Extensions, Beginning Grep -->
 
--   review activity: navigating, creating, deleting, .sh
--   file extensions, what are they?
--   why word and google docs suck for programming
--   converting files
--   activity
--   searching files with wc (-l, -w)
--   searching files with grep
--   piping
--   activity: explore Project Gutenberg, download txt file of choice, place in unique folder, validate each step along the way
+<!-- -   review activity: navigating, creating, deleting, .sh -->
+<!-- -   file extensions, what are they? -->
+<!-- -   why word and google docs suck for programming -->
+<!-- -   converting files -->
+<!-- -   activity -->
+<!-- -   searching files with wc (-l, -w) -->
+<!-- -   searching files with grep -->
+<!-- -   piping -->
+<!-- -   activity: explore Project Gutenberg, download txt file of choice, place in unique folder, validate each step along the way -->
