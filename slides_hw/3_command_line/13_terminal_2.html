@@ -411,6 +411,8 @@ Dr.&nbsp;Andrew M. Byrd
 <ul>
 <li><a href="#/review" id="/toc-review">Review</a></li>
 <li><a href="#/file-extensions" id="/toc-file-extensions">File Extensions</a></li>
+<li><a href="#/wc-grep-and-piping" id="/toc-wc-grep-and-piping"><code>wc</code>, <code>grep</code>, and piping</a></li>
+<li><a href="#/activity-frankenstein" id="/toc-activity-frankenstein">Activity: <em>Frankenstein</em></a></li>
 </ul>
 </nav>
 </section>
@@ -418,7 +420,7 @@ Dr.&nbsp;Andrew M. Byrd
 <section id="review" class="title-slide slide level1 center">
 <h1>Review</h1>
 <ul>
-<li>What did you learn last time about the Terminal?</li>
+<li>What did we learn last time about the Terminal?</li>
 </ul>
 </section>
 <section id="review-of-terminal-commands" class="slide level2 center">
@@ -468,57 +470,198 @@ Dr.&nbsp;Andrew M. Byrd
 <h2>Converting Files</h2>
 <p>All of these can be easily converted, as they’re all just text!</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href=""></a><span class="co"># create md file</span></span>
-<span id="cb1-2"><a href=""></a><span class="fu">touch</span> demo.md</span>
+<span id="cb1-2"><a href=""></a><span class="fu">touch</span> test.md</span>
 <span id="cb1-3"><a href=""></a></span>
 <span id="cb1-4"><a href=""></a><span class="co"># start with a md file</span></span>
-<span id="cb1-5"><a href=""></a><span class="bu">echo</span> <span class="st">"# Hello World"</span> <span class="op">&gt;</span> demo.md</span>
-<span id="cb1-6"><a href=""></a><span class="bu">echo</span> <span class="st">"This is *italic* and **bold**."</span> <span class="op">&gt;&gt;</span> demo.md</span>
+<span id="cb1-5"><a href=""></a><span class="bu">echo</span> <span class="st">"# Hello World"</span> <span class="op">&gt;</span> test.md</span>
+<span id="cb1-6"><a href=""></a><span class="bu">echo</span> <span class="st">"This is *italic* and **bold**."</span> <span class="op">&gt;&gt;</span> test.md</span>
 <span id="cb1-7"><a href=""></a></span>
 <span id="cb1-8"><a href=""></a><span class="co"># convert markdown → html</span></span>
-<span id="cb1-9"><a href=""></a><span class="ex">pandoc</span> demo.md <span class="at">-o</span> demo.html</span>
+<span id="cb1-9"><a href=""></a><span class="ex">pandoc</span> test.md <span class="at">-o</span> test.html</span>
 <span id="cb1-10"><a href=""></a></span>
 <span id="cb1-11"><a href=""></a><span class="co"># convert html → plain text</span></span>
-<span id="cb1-12"><a href=""></a><span class="ex">pandoc</span> demo.html <span class="at">-t</span> plain <span class="at">-o</span> demo.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-12"><a href=""></a><span class="ex">pandoc</span> test.html <span class="at">-t</span> plain <span class="at">-o</span> test.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="activity" class="slide level2 center">
-<h2>Activity</h2>
+<section id="converting-to-docx-and-odt" class="slide level2 center">
+<h2>Converting to <code>docx</code> and <code>odt</code></h2>
 <ul>
 <li>Create a <code>.sh</code> file called <code>convert.sh</code></li>
 <li>Paste in this code:</li>
 </ul>
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href=""></a><span class="co"># 1) Make a tiny Markdown source</span></span>
-<span id="cb2-2"><a href=""></a><span class="bu">echo</span> <span class="st">"# Hello"</span> <span class="op">&gt;</span> demo.md</span>
-<span id="cb2-3"><a href=""></a><span class="bu">echo</span> <span class="st">"This is *italic* and **bold**."</span> <span class="op">&gt;&gt;</span> demo.md</span>
+<span id="cb2-2"><a href=""></a><span class="bu">echo</span> <span class="st">"# Hello!"</span> <span class="op">&gt;</span> demo.md</span>
+<span id="cb2-3"><a href=""></a><span class="bu">echo</span> <span class="st">"This is a *line* and **text**."</span> <span class="op">&gt;&gt;</span> demo.md</span>
 <span id="cb2-4"><a href=""></a></span>
 <span id="cb2-5"><a href=""></a><span class="co"># 2) Convert MD → HTML (plain text file you can open/read)</span></span>
 <span id="cb2-6"><a href=""></a><span class="ex">pandoc</span> demo.md <span class="at">-o</span> demo.html</span>
 <span id="cb2-7"><a href=""></a></span>
 <span id="cb2-8"><a href=""></a><span class="co"># 3) Convert MD → DOCX and → ODT (packaged/binary-ish formats)</span></span>
 <span id="cb2-9"><a href=""></a><span class="ex">pandoc</span> demo.md <span class="at">-o</span> demo.docx</span>
-<span id="cb2-10"><a href=""></a><span class="ex">pandoc</span> demo.md <span class="at">-o</span> demo.odt</span>
-<span id="cb2-11"><a href=""></a></span>
-<span id="cb2-12"><a href=""></a><span class="co"># 4) Compare what the OS thinks these are</span></span>
-<span id="cb2-13"><a href=""></a><span class="fu">file</span> demo.html demo.docx demo.odt  <span class="co"># if 'file' is available</span></span>
-<span id="cb2-14"><a href=""></a><span class="co"># Expect: demo.html = text/html; demo.docx/.odt = Zip archive data</span></span>
-<span id="cb2-15"><a href=""></a></span>
-<span id="cb2-16"><a href=""></a><span class="co"># 5) Peek inside the DOCX/ODT packages (they're ZIPs!)</span></span>
-<span id="cb2-17"><a href=""></a><span class="fu">unzip</span> <span class="at">-l</span> demo.docx <span class="kw">|</span> <span class="fu">head</span></span>
-<span id="cb2-18"><a href=""></a><span class="fu">unzip</span> <span class="at">-l</span> demo.odt  <span class="kw">|</span> <span class="fu">head</span></span>
-<span id="cb2-19"><a href=""></a></span>
-<span id="cb2-20"><a href=""></a><span class="co"># 6) Print the *actual* document XML stored inside</span></span>
-<span id="cb2-21"><a href=""></a><span class="fu">unzip</span> <span class="at">-p</span> demo.docx word/document.xml <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 20</span>
-<span id="cb2-22"><a href=""></a><span class="fu">unzip</span> <span class="at">-p</span> demo.odt  content.xml        <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 20</span>
-<span id="cb2-23"><a href=""></a></span>
-<span id="cb2-24"><a href=""></a><span class="co"># 7) Show that HTML is directly readable text</span></span>
-<span id="cb2-25"><a href=""></a><span class="fu">head</span> <span class="at">-n</span> 20 demo.html</span>
-<span id="cb2-26"><a href=""></a></span>
-<span id="cb2-27"><a href=""></a><span class="co"># 8) Use Pandoc to flatten all three to plain text</span></span>
-<span id="cb2-28"><a href=""></a><span class="ex">pandoc</span> demo.html <span class="at">-t</span> plain <span class="at">-o</span> from_html.txt</span>
-<span id="cb2-29"><a href=""></a><span class="ex">pandoc</span> demo.docx <span class="at">-t</span> plain <span class="at">-o</span> from_docx.txt</span>
-<span id="cb2-30"><a href=""></a><span class="ex">pandoc</span> demo.odt  <span class="at">-t</span> plain <span class="at">-o</span> from_odt.txt</span>
-<span id="cb2-31"><a href=""></a></span>
-<span id="cb2-32"><a href=""></a><span class="co"># 9) Compare sizes (packaged formats are typically larger)</span></span>
-<span id="cb2-33"><a href=""></a><span class="fu">ls</span> <span class="at">-lh</span> demo.<span class="pp">*</span> from_<span class="pp">*</span>.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-10"><a href=""></a><span class="ex">pandoc</span> demo.md <span class="at">-o</span> demo.odt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Run the code:</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href=""></a><span class="bu">source</span> convert.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="identifying-whats-inside-file" class="slide level2 center">
+<h2>Identifying What’s Inside: <code>file</code></h2>
+<ul>
+<li>Let’s see what the Terminal thinks is inside these files:</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href=""></a><span class="fu">file</span> demo.html demo.docx demo.odt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="what-are-these-things" class="slide level2 center">
+<h2>What are these things?</h2>
+<ul>
+<li>Let’s use a command <code>head</code>, to print out what’s inside the file itself.</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href=""></a><span class="fu">head</span> <span class="at">-n</span> 20 demo.md</span>
+<span id="cb5-2"><a href=""></a><span class="fu">head</span> <span class="at">-n</span> 20 demo.html</span>
+<span id="cb5-3"><a href=""></a><span class="fu">head</span> <span class="at">-n</span> 20 demo.odt</span>
+<span id="cb5-4"><a href=""></a><span class="fu">head</span> <span class="at">-n</span> 20 demo.docx</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="what-are-these-things-1" class="slide level2 center">
+<h2>What are these things?</h2>
+<ul>
+<li>Word &amp; Google Docs aren’t text formats at all, they’re zip files!</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href=""></a><span class="fu">unzip</span> <span class="at">-l</span> demo.docx <span class="kw">|</span> <span class="fu">head</span></span>
+<span id="cb6-2"><a href=""></a><span class="fu">unzip</span> <span class="at">-l</span> demo.odt  <span class="kw">|</span> <span class="fu">head</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Contrast that with:</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href=""></a><span class="fu">unzip</span> <span class="at">-l</span> demo.md <span class="kw">|</span> <span class="fu">head</span></span>
+<span id="cb7-2"><a href=""></a><span class="fu">unzip</span> <span class="at">-l</span> demo.html <span class="kw">|</span> <span class="fu">head</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="flattening-files" class="slide level2 center">
+<h2>Flattening Files</h2>
+<ul>
+<li>We can use Pandoc to flatten all three to plain text:</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href=""></a><span class="ex">pandoc</span> demo.html <span class="at">-t</span> plain <span class="at">-o</span> from_html.txt</span>
+<span id="cb8-2"><a href=""></a><span class="ex">pandoc</span> demo.docx <span class="at">-t</span> plain <span class="at">-o</span> from_docx.txt</span>
+<span id="cb8-3"><a href=""></a><span class="ex">pandoc</span> demo.odt  <span class="at">-t</span> plain <span class="at">-o</span> from_odt.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="file-extensions-2" class="slide level2 center">
+<h2>File Extensions</h2>
+<ul>
+<li>How much data does each file type take up?</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href=""></a><span class="fu">ls</span> <span class="at">-lh</span> demo.<span class="pp">*</span> from_<span class="pp">*</span>.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="the-takeaway" class="slide level2 center">
+<h2>The Takeaway?</h2>
+</section></section>
+<section>
+<section id="wc-grep-and-piping" class="title-slide slide level1 center">
+<h1><code>wc</code>, <code>grep</code>, and piping</h1>
+
+</section>
+<section id="pride-prejudice" class="slide level2 center">
+<h2>Pride &amp; Prejudice</h2>
+<ul>
+<li>Earlier you:
+<ul>
+<li>Created a folder called <code>p_and_p</code></li>
+<li>Downloaded <em>Pride and Prejudice</em> from the following address: <a href="https://gutenberg.org/files/1342/1342-0.txt" class="uri">https://gutenberg.org/files/1342/1342-0.txt</a>, naming the file <code>p_and_p.txt</code></li>
+<li>And moved <code>p_and_p.txt</code> into the folder <code>p_and_p</code></li>
+</ul></li>
+<li>Using <code>cd</code>, navigate to <code>LIN_301/p_and_p</code> and using <code>ls</code> confirm that the file is there</li>
+</ul>
+</section>
+<section id="pride-prejudice-1" class="slide level2 center">
+<h2>Pride &amp; Prejudice</h2>
+<ul>
+<li>Confirm that you indeed have <em>Pride and Prejudice</em> downloaded:</li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href=""></a><span class="fu">less</span> p_and_p.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>You can scroll <code>up</code> and <code>down</code> in the document using the up/down arrows</li>
+<li>Hit <code>spacebar</code> to jump down a page</li>
+<li>Press <code>q</code> to return to the command prompt</li>
+</ul>
+</section>
+<section id="lets-analyze-this-thing" class="slide level2 center">
+<h2>Let’s Analyze this Thing</h2>
+<p>In Terminal, type in the following code:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href=""></a><span class="fu">wc</span> p_and_p.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>What is this?
+<ul>
+<li>Lines, Words, Characters</li>
+<li>How many of each?</li>
+</ul></li>
+</ul>
+</section>
+<section id="wc-flags" class="slide level2 center">
+<h2><code>wc</code> Flags</h2>
+<ul>
+<li>Lines only:</li>
+</ul>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href=""></a><span class="fu">wc</span> <span class="at">-l</span> p_and_p.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Words only:</li>
+</ul>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href=""></a><span class="fu">wc</span> <span class="at">-w</span> p_and_p.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>How about characters only?</li>
+</ul>
+</section>
+<section id="grep" class="slide level2 center">
+<h2><code>grep</code></h2>
+<ul>
+<li>Super useful &amp; common command used to search within documents</li>
+<li>Here’s how it works:</li>
+</ul>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href=""></a><span class="fu">grep</span> <span class="st">"search_string"</span> file_name.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>This code gives all of the lines where “search_string” is found in “file_name.txt”</li>
+</ul>
+</section>
+<section id="grep-1" class="slide level2 center">
+<h2><code>grep</code></h2>
+<ul>
+<li>Using this syntax, search for all instances of “yes” in <em>Pride and Prejudice</em></li>
+</ul>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href=""></a><span class="fu">grep</span> <span class="st">"search_string"</span> file_name.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Look at the output in the Terminal – do you notice anything funny?</li>
+</ul>
+</section>
+<section id="piping-commands-together" class="slide level2 center">
+<h2>Piping Commands together</h2>
+<ul>
+<li>So far we can:
+<ul>
+<li>count how many lines, words, and characters there are in a file</li>
+<li>see which lines have instances of a specific <strong>string</strong> there are in a file</li>
+</ul></li>
+<li>But what if we wanted to count how many lines have that specific string?
+<ul>
+<li>We use the <strong>pipe</strong> &lt; | &gt; (just above the enter key)</li>
+</ul></li>
+</ul>
+</section>
+<section id="piping-commands-together-1" class="slide level2 center">
+<h2>Piping Commands together</h2>
+<ul>
+<li>Type in this code:</li>
+</ul>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href=""></a><span class="fu">grep</span> <span class="st">"yes"</span> p_and_p.txt <span class="kw">|</span> <span class="fu">wc</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>This tells us the number of words, lines, and characters are <em>within</em> lines that contain “yes”</li>
+<li>How could we narrow this to just tell us how many lines contain “yes”?</li>
+</ul>
+</section></section>
+<section id="activity-frankenstein" class="title-slide slide level1 center">
+<h1>Activity: <em>Frankenstein</em></h1>
+<p>Using the Terminal:</p>
+<ul>
+<li>Create a new folder called <code>frank</code></li>
+<li>Download <em>Frankenstein</em> from https://www.gutenberg.org/cache/epub/84/pg84.txt</li>
+<li>Name the file <code>frank.txt</code> and move it to the <code>frank</code> folder</li>
+<li>Using <code>grep</code>, <code>wc</code>, and |, count how many lines have the word <code>monster</code> in them</li>
+</ul>
 <!-- Day 2: File Extensions, Beginning Grep -->
 <!-- -   review activity: navigating, creating, deleting, .sh -->
 <!-- -   file extensions, what are they? -->
@@ -534,7 +677,7 @@ Dr.&nbsp;Andrew M. Byrd
 
 </div>
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
