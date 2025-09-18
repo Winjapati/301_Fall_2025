@@ -412,7 +412,7 @@ Dr.&nbsp;Andrew M. Byrd
 <li><a href="#/review" id="/toc-review">Review</a></li>
 <li><a href="#/learning-the-terminal" id="/toc-learning-the-terminal">Learning the Terminal</a></li>
 <li><a href="#/making-and-renaming-files-folders" id="/toc-making-and-renaming-files-folders">Making and Renaming Files &amp; Folders</a></li>
-<li><a href="#/activity-1" id="/toc-activity-1">Activity</a></li>
+<li><a href="#/a-couple-more-tricks" id="/toc-a-couple-more-tricks">A Couple More Tricks</a></li>
 </ul>
 </nav>
 </section>
@@ -438,7 +438,7 @@ Dr.&nbsp;Andrew M. Byrd
 <ul>
 <li>LaTeX commands (<code>\section{}</code>, <code>\usepackage{}</code>)</li>
 <li>CSS rules (<code>color: blue;</code>) are small, precise instructions.</li>
-<li>You have seen learned about proper syntax, flags/options, and order of operations.</li>
+<li>You have learned about proper syntax, arguments, flags/options, and order of operations.</li>
 </ul></li>
 </ul>
 </section>
@@ -581,7 +581,7 @@ Dr.&nbsp;Andrew M. Byrd
 <h2><code>mkdir</code></h2>
 <ul>
 <li>You should now be in your LIN_301 folder in the Terminal Prompt</li>
-<li>Look in the right corner panel of RStudio, what do you see?</li>
+<li>Look in the right bottom corner panel of RStudio, what do you see?</li>
 <li>Type the following code:</li>
 </ul>
 <div class="sourceCode" id="cb9"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href=""></a><span class="fu">mkdir</span> test_folder     <span class="co"># short for "make directory"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -624,10 +624,9 @@ Dr.&nbsp;Andrew M. Byrd
 <li>Ah crap, I misspelled <code>test_bolder</code>, let’s run this code:</li>
 </ul>
 <div class="sourceCode" id="cb13"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href=""></a><span class="fu">mv</span> test_bolder test_folder    <span class="co"># how you rename in bash</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section></section>
-<section>
-<section id="activity-1" class="title-slide slide level1 center">
-<h1>Activity</h1>
+</section>
+<section id="activity-1" class="slide level2 center">
+<h2>Activity</h2>
 <ul>
 <li>Within your <code>LIN_301</code> repo:
 <ul>
@@ -640,34 +639,74 @@ Dr.&nbsp;Andrew M. Byrd
 <li>Use <code>pwd</code> and <code>ls</code> as your guide</li>
 </ul></li>
 </ul>
-</section>
-<section class="slide level2 center">
+</section></section>
+<section>
+<section id="a-couple-more-tricks" class="title-slide slide level1 center">
+<h1>A Couple More Tricks</h1>
 
-<p>Day 1: Navigating the Terminal</p>
+</section>
+<section id="curl" class="slide level2 center">
+<h2><code>curl</code></h2>
 <ul>
-<li>changing directories in the terminal, going up, going down, going to specific location</li>
-<li>downloading files using “curl”</li>
-<li>creating a file, deleting a file</li>
-<li>creating a folder, deleting a folder</li>
-<li>writing a .sh script</li>
-<li>activity, integrating all of this</li>
+<li>We all know how to download things from the Internet, but what about using the Terminal?</li>
+<li>Type this code:</li>
 </ul>
-<p>Day 2: File Extensions, Beginning Grep</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href=""></a><span class="ex">curl</span> <span class="at">-o</span> term_comm.txt https://www.gutenberg.org/files/1342/1342-0.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>review activity: navigating, creating, deleting, .sh</li>
-<li>file extensions, what are they?</li>
-<li>why word and google docs suck for programming</li>
-<li>converting files</li>
-<li>activity</li>
-<li>searching files with wc (-l, -w)</li>
-<li>searching files with grep</li>
-<li>piping</li>
-<li>activity: explore Project Gutenberg, download txt file of choice, place in unique folder, validate each step along the way</li>
+<li>This is a useful list of Terminal commands</li>
+<li>Move this file into <code>folder_1</code></li>
 </ul>
-<p>Day 3: Grep and Regex</p>
+</section>
+<section id="rm--r" class="slide level2 center">
+<h2><code>rm -r</code></h2>
 <ul>
-<li>Treasure Hunt, practicing everything they’ve done so far</li>
+<li>Let’s learn one more bash command</li>
 </ul>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href=""></a><span class="fu">rm</span> <span class="at">-r</span> folder_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>What happens?</li>
+</ul>
+</section>
+<section id="you-bastard" class="slide level2 center">
+<h2>You bastard!</h2>
+<ul>
+<li>Don’t worry! Type the following code:</li>
+</ul>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href=""></a><span class="fu">touch</span> script.sh </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="bringing-it-back" class="slide level2 center">
+<h2>Bringing it Back</h2>
+<ul>
+<li>Now copy and paste (use right click) into the Terminal:</li>
+</ul>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href=""></a><span class="fu">cat</span> <span class="op">&gt;</span> script.sh <span class="op">&lt;&lt;'EOF'</span><span class="st">     </span></span>
+<span id="cb17-2"><a href=""></a><span class="st">#!/bin/bash                 </span></span>
+<span id="cb17-3"><a href=""></a><span class="st">echo "This is my first script."</span></span>
+<span id="cb17-4"><a href=""></a><span class="st">curl -o term_comm.txt https://www.gutenberg.org/files/1342/1342-0.txt</span></span>
+<span id="cb17-5"><a href=""></a><span class="st">mkdir folder_1</span></span>
+<span id="cb17-6"><a href=""></a><span class="st">mv term_comm.txt folder_1</span></span>
+<span id="cb17-7"><a href=""></a><span class="st">echo term_comm.txt</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Then type:</li>
+</ul>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href=""></a><span class="ex">EOF</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Look inside <code>script.sh</code>, what did you do?</li>
+</ul>
+</section>
+<section id="omg" class="slide level2 center">
+<h2>OMG</h2>
+<ul>
+<li>Type:</li>
+</ul>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href=""></a><span class="bu">source</span> script.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<!-- Day 1: Navigating the Terminal -->
+<!-- -   changing directories in the terminal, going up, going down, going to specific location -->
+<!-- -   downloading files using "curl" -->
+<!-- -   creating a file, deleting a file -->
+<!-- -   creating a folder, deleting a folder -->
+<!-- -   writing a .sh script -->
+<!-- -   activity, integrating all of this -->
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 

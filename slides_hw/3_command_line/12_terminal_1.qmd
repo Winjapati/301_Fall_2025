@@ -29,7 +29,7 @@ editor: visual
 -   **Commands as instructions**
     -   LaTeX commands (`\section{}`, `\usepackage{}`)
     -   CSS rules (`color: blue;`) are small, precise instructions.
-    -   You have seen learned about proper syntax, flags/options, and order of operations.
+    -   You have learned about proper syntax, arguments, flags/options, and order of operations.
 
 ## Review: So far, you have learned about...
 
@@ -150,7 +150,7 @@ cd "My Folder"        # if there are any spaces in your named folder
 ## `mkdir`
 
 - You should now be in your LIN_301 folder in the Terminal Prompt
-- Look in the right corner panel of RStudio, what do you see?
+- Look in the right bottom corner panel of RStudio, what do you see?
 - Type the following code:
 
 ```bash
@@ -197,7 +197,7 @@ mv test_doc.txt test_bolder/    # short for "move"
 mv test_bolder test_folder    # how you rename in bash
 ```
 
-# Activity
+## Activity
 
 - Within your `LIN_301` repo:
   - Create a file called `activity.txt`
@@ -206,30 +206,74 @@ mv test_bolder test_folder    # how you rename in bash
 - You can *only* use the Terminal in RStudio!
   - Use `pwd` and `ls` as your guide
 
-------------------------------------------------------------------------
+# A Couple More Tricks
+
+## `curl`
+
+- We all know how to download things from the Internet, but what about using the Terminal?
+- Type this code:
+
+```bash
+curl -o term_comm.txt https://www.gutenberg.org/files/1342/1342-0.txt
+```
+
+- This is a useful list of Terminal commands
+- Move this file into `folder_1`
+
+## `rm -r`
+
+- Let's learn one more bash command
+
+```bash
+rm -r folder_1
+```
+
+- What happens?
+
+## You bastard!
+
+- Don't worry! Type the following code:
+
+```bash
+touch script.sh 
+```
+
+## Bringing it Back
+
+- Now copy and paste (use right click) into the Terminal:
+
+```bash
+cat > script.sh <<'EOF'     
+#!/bin/bash                 
+echo "This is my first script."
+curl -o term_comm.txt https://www.gutenberg.org/files/1342/1342-0.txt
+mkdir folder_1
+mv term_comm.txt folder_1
+echo term_comm.txt
+```
+
+- Then type:
+
+```bash
+EOF
+```
+
+- Look inside `script.sh`, what did you do?
+
+## OMG
+
+- Type:
+
+```bash
+source script.sh
+```
 
 
-Day 1: Navigating the Terminal
+<!-- Day 1: Navigating the Terminal -->
 
--   changing directories in the terminal, going up, going down, going to specific location
--   downloading files using "curl"
--   creating a file, deleting a file
--   creating a folder, deleting a folder
--   writing a .sh script
--   activity, integrating all of this
-
-Day 2: File Extensions, Beginning Grep
-
--   review activity: navigating, creating, deleting, .sh
--   file extensions, what are they?
--   why word and google docs suck for programming
--   converting files
--   activity
--   searching files with wc (-l, -w)
--   searching files with grep
--   piping
--   activity: explore Project Gutenberg, download txt file of choice, place in unique folder, validate each step along the way
-
-Day 3: Grep and Regex
-
--   Treasure Hunt, practicing everything they've done so far
+<!-- -   changing directories in the terminal, going up, going down, going to specific location -->
+<!-- -   downloading files using "curl" -->
+<!-- -   creating a file, deleting a file -->
+<!-- -   creating a folder, deleting a folder -->
+<!-- -   writing a .sh script -->
+<!-- -   activity, integrating all of this -->

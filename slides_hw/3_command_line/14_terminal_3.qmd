@@ -37,3 +37,7 @@ editor: visual
 ```{python}
 print("test")
 ```
+
+Day 3: Grep and Regex
+
+-   Treasure Hunt, practicing everything they've done so far
