@@ -1,2 +1,0 @@
-# Hello
-This is *italic* and **bold**.
