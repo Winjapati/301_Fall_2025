@@ -30,6 +30,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="13_terminal_2_files/libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="header_shrink.css">
@@ -345,7 +410,7 @@ Dr.&nbsp;Andrew M. Byrd
 <h2 id="toc-title">Plan for the Day</h2>
 <ul>
 <li><a href="#/review" id="/toc-review">Review</a></li>
-<li><a href="#/file-structures" id="/toc-file-structures">File Structures</a></li>
+<li><a href="#/file-extensions" id="/toc-file-extensions">File Extensions</a></li>
 </ul>
 </nav>
 </section>
@@ -359,12 +424,13 @@ Dr.&nbsp;Andrew M. Byrd
 <section id="review-of-terminal-commands" class="slide level2 center">
 <h2>Review of Terminal Commands</h2>
 <ul>
-<li><p><code>mkdir</code></p></li>
-<li><p><code>ls</code></p></li>
-<li><p><code>rmdir</code>, <code>rm</code></p></li>
-<li><p><code>touch</code></p></li>
-<li><p><code>curl -o file.txt</code></p></li>
-<li><p><code>cd</code></p></li>
+<li><code>mkdir</code></li>
+<li><code>ls</code></li>
+<li><code>rmdir</code>, <code>rm</code></li>
+<li><code>touch</code></li>
+<li><code>curl -o file.txt</code></li>
+<li><code>cd</code></li>
+<li><code>source script.sh</code></li>
 </ul>
 </section>
 <section id="review-activity" class="slide level2 center">
@@ -380,13 +446,79 @@ Dr.&nbsp;Andrew M. Byrd
 </ul></li>
 </ul>
 </section></section>
-<section id="file-structures" class="title-slide slide level1 center">
-<h1>File Structures</h1>
-<div id="d411ba7a" class="cell" data-execution_count="1">
-<div class="cell-output cell-output-stdout">
-<pre><code>test</code></pre>
-</div>
-</div>
+<section>
+<section id="file-extensions" class="title-slide slide level1 center">
+<h1>File Extensions</h1>
+
+</section>
+<section id="file-extensions-1" class="slide level2 center">
+<h2>File Extensions</h2>
+<p>When programming, there are lots of different file types:</p>
+<ul>
+<li><code>txt</code> - a (raw) text file</li>
+<li><code>html</code> - an html file, to be viewed in a web browser</li>
+<li><code>xml</code> - an Exstensible Markup Language file</li>
+<li><code>md</code> - a Markdown file (can be converted into <code>html</code>)</li>
+<li><code>tex</code> - a LaTeX file (can be converted into a <code>pdf</code>)</li>
+<li><code>py</code> - a Python script</li>
+<li><code>r</code> - an R script</li>
+</ul>
+</section>
+<section id="converting-files" class="slide level2 center">
+<h2>Converting Files</h2>
+<p>All of these can be easily converted, as they’re all just text!</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href=""></a><span class="co"># create md file</span></span>
+<span id="cb1-2"><a href=""></a><span class="fu">touch</span> demo.md</span>
+<span id="cb1-3"><a href=""></a></span>
+<span id="cb1-4"><a href=""></a><span class="co"># start with a md file</span></span>
+<span id="cb1-5"><a href=""></a><span class="bu">echo</span> <span class="st">"# Hello World"</span> <span class="op">&gt;</span> demo.md</span>
+<span id="cb1-6"><a href=""></a><span class="bu">echo</span> <span class="st">"This is *italic* and **bold**."</span> <span class="op">&gt;&gt;</span> demo.md</span>
+<span id="cb1-7"><a href=""></a></span>
+<span id="cb1-8"><a href=""></a><span class="co"># convert markdown → html</span></span>
+<span id="cb1-9"><a href=""></a><span class="ex">pandoc</span> demo.md <span class="at">-o</span> demo.html</span>
+<span id="cb1-10"><a href=""></a></span>
+<span id="cb1-11"><a href=""></a><span class="co"># convert html → plain text</span></span>
+<span id="cb1-12"><a href=""></a><span class="ex">pandoc</span> demo.html <span class="at">-t</span> plain <span class="at">-o</span> demo.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="activity" class="slide level2 center">
+<h2>Activity</h2>
+<ul>
+<li>Create a <code>.sh</code> file called <code>convert.sh</code></li>
+<li>Paste in this code:</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href=""></a><span class="co"># 1) Make a tiny Markdown source</span></span>
+<span id="cb2-2"><a href=""></a><span class="bu">echo</span> <span class="st">"# Hello"</span> <span class="op">&gt;</span> demo.md</span>
+<span id="cb2-3"><a href=""></a><span class="bu">echo</span> <span class="st">"This is *italic* and **bold**."</span> <span class="op">&gt;&gt;</span> demo.md</span>
+<span id="cb2-4"><a href=""></a></span>
+<span id="cb2-5"><a href=""></a><span class="co"># 2) Convert MD → HTML (plain text file you can open/read)</span></span>
+<span id="cb2-6"><a href=""></a><span class="ex">pandoc</span> demo.md <span class="at">-o</span> demo.html</span>
+<span id="cb2-7"><a href=""></a></span>
+<span id="cb2-8"><a href=""></a><span class="co"># 3) Convert MD → DOCX and → ODT (packaged/binary-ish formats)</span></span>
+<span id="cb2-9"><a href=""></a><span class="ex">pandoc</span> demo.md <span class="at">-o</span> demo.docx</span>
+<span id="cb2-10"><a href=""></a><span class="ex">pandoc</span> demo.md <span class="at">-o</span> demo.odt</span>
+<span id="cb2-11"><a href=""></a></span>
+<span id="cb2-12"><a href=""></a><span class="co"># 4) Compare what the OS thinks these are</span></span>
+<span id="cb2-13"><a href=""></a><span class="fu">file</span> demo.html demo.docx demo.odt  <span class="co"># if 'file' is available</span></span>
+<span id="cb2-14"><a href=""></a><span class="co"># Expect: demo.html = text/html; demo.docx/.odt = Zip archive data</span></span>
+<span id="cb2-15"><a href=""></a></span>
+<span id="cb2-16"><a href=""></a><span class="co"># 5) Peek inside the DOCX/ODT packages (they're ZIPs!)</span></span>
+<span id="cb2-17"><a href=""></a><span class="fu">unzip</span> <span class="at">-l</span> demo.docx <span class="kw">|</span> <span class="fu">head</span></span>
+<span id="cb2-18"><a href=""></a><span class="fu">unzip</span> <span class="at">-l</span> demo.odt  <span class="kw">|</span> <span class="fu">head</span></span>
+<span id="cb2-19"><a href=""></a></span>
+<span id="cb2-20"><a href=""></a><span class="co"># 6) Print the *actual* document XML stored inside</span></span>
+<span id="cb2-21"><a href=""></a><span class="fu">unzip</span> <span class="at">-p</span> demo.docx word/document.xml <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 20</span>
+<span id="cb2-22"><a href=""></a><span class="fu">unzip</span> <span class="at">-p</span> demo.odt  content.xml        <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 20</span>
+<span id="cb2-23"><a href=""></a></span>
+<span id="cb2-24"><a href=""></a><span class="co"># 7) Show that HTML is directly readable text</span></span>
+<span id="cb2-25"><a href=""></a><span class="fu">head</span> <span class="at">-n</span> 20 demo.html</span>
+<span id="cb2-26"><a href=""></a></span>
+<span id="cb2-27"><a href=""></a><span class="co"># 8) Use Pandoc to flatten all three to plain text</span></span>
+<span id="cb2-28"><a href=""></a><span class="ex">pandoc</span> demo.html <span class="at">-t</span> plain <span class="at">-o</span> from_html.txt</span>
+<span id="cb2-29"><a href=""></a><span class="ex">pandoc</span> demo.docx <span class="at">-t</span> plain <span class="at">-o</span> from_docx.txt</span>
+<span id="cb2-30"><a href=""></a><span class="ex">pandoc</span> demo.odt  <span class="at">-t</span> plain <span class="at">-o</span> from_odt.txt</span>
+<span id="cb2-31"><a href=""></a></span>
+<span id="cb2-32"><a href=""></a><span class="co"># 9) Compare sizes (packaged formats are typically larger)</span></span>
+<span id="cb2-33"><a href=""></a><span class="fu">ls</span> <span class="at">-lh</span> demo.<span class="pp">*</span> from_<span class="pp">*</span>.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <!-- Day 2: File Extensions, Beginning Grep -->
 <!-- -   review activity: navigating, creating, deleting, .sh -->
 <!-- -   file extensions, what are they? -->
@@ -402,7 +534,7 @@ Dr.&nbsp;Andrew M. Byrd
 
 </div>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 

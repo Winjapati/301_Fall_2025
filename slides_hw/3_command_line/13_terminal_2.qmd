@@ -22,16 +22,12 @@ editor: visual
 ## Review of Terminal Commands
 
 -   `mkdir`
-
 -   `ls`
-
 -   `rmdir`, `rm`
-
 -   `touch`
-
 -   `curl -o file.txt`
-
 -   `cd`
+-   `source script.sh`
 
 ## Review Activity
 
@@ -42,14 +38,83 @@ editor: visual
     -   call this file `p_and_p.txt`
     -   move `p_and_p.txt` into the folder `p_and_p`
 
-# File Structures
+# File Extensions
 
-```{python}
-print("test")
+## File Extensions
+
+When programming, there are lots of different file types:
+
+- `txt` - a (raw) text file
+- `html` - an html file, to be viewed in a web browser
+- `xml` - an Exstensible Markup Language file
+- `md` - a Markdown file (can be converted into `html`)
+- `tex` - a LaTeX file (can be converted into a `pdf`)
+- `py` - a Python script
+- `r` - an R script
+
+## Converting Files
+
+All of these can be easily converted, as they're all just text!
+
+
+```bash
+# create md file
+touch demo.md
+
+# start with a md file
+echo "# Hello World" > demo.md
+echo "This is *italic* and **bold**." >> demo.md
+
+# convert markdown → html
+pandoc demo.md -o demo.html
+
+# convert html → plain text
+pandoc demo.html -t plain -o demo.txt
 ```
 
-<!-- Day 2: File Extensions, Beginning Grep -->
+## Activity
 
+- Create a `.sh` file called `convert.sh`
+- Paste in this code:
+
+```bash
+# 1) Make a tiny Markdown source
+echo "# Hello" > demo.md
+echo "This is *italic* and **bold**." >> demo.md
+
+# 2) Convert MD → HTML (plain text file you can open/read)
+pandoc demo.md -o demo.html
+
+# 3) Convert MD → DOCX and → ODT (packaged/binary-ish formats)
+pandoc demo.md -o demo.docx
+pandoc demo.md -o demo.odt
+
+# 4) Compare what the OS thinks these are
+file demo.html demo.docx demo.odt  # if 'file' is available
+# Expect: demo.html = text/html; demo.docx/.odt = Zip archive data
+
+# 5) Peek inside the DOCX/ODT packages (they're ZIPs!)
+unzip -l demo.docx | head
+unzip -l demo.odt  | head
+
+# 6) Print the *actual* document XML stored inside
+unzip -p demo.docx word/document.xml | head -n 20
+unzip -p demo.odt  content.xml        | head -n 20
+
+# 7) Show that HTML is directly readable text
+head -n 20 demo.html
+
+# 8) Use Pandoc to flatten all three to plain text
+pandoc demo.html -t plain -o from_html.txt
+pandoc demo.docx -t plain -o from_docx.txt
+pandoc demo.odt  -t plain -o from_odt.txt
+
+# 9) Compare sizes (packaged formats are typically larger)
+ls -lh demo.* from_*.txt
+```
+
+
+<!-- Day 2: File Extensions, Beginning Grep -->
 <!-- -   review activity: navigating, creating, deleting, .sh -->
 <!-- -   file extensions, what are they? -->
 <!-- -   why word and google docs suck for programming -->
