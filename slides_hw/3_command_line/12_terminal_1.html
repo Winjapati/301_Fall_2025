@@ -409,20 +409,72 @@ Dr.&nbsp;Andrew M. Byrd
 <nav role="doc-toc"> 
 <h2 id="toc-title">Plan for the Day</h2>
 <ul>
-<li><a href="#/review-html-css-js" id="/toc-review-html-css-js">Review: HTML, CSS, JS</a></li>
+<li><a href="#/review" id="/toc-review">Review</a></li>
 <li><a href="#/learning-the-terminal" id="/toc-learning-the-terminal">Learning the Terminal</a></li>
-<li><a href="#/making-renaming" id="/toc-making-renaming">Making &amp; Renaming</a></li>
-<li><a href="#/activity-treasure-hunt" id="/toc-activity-treasure-hunt">Activity: Treasure Hunt 🗂️</a></li>
+<li><a href="#/making-and-renaming-files-folders" id="/toc-making-and-renaming-files-folders">Making and Renaming Files &amp; Folders</a></li>
+<li><a href="#/activity-1" id="/toc-activity-1">Activity</a></li>
 </ul>
 </nav>
 </section>
-<section id="review-html-css-js" class="title-slide slide level1 center">
-<h1>Review: HTML, CSS, JS</h1>
+<section>
+<section id="review" class="title-slide slide level1 center">
+<h1>Review</h1>
+
+</section>
+<section id="review-so-far-you-have-learned-about" class="slide level2 center">
+<h2>Review: So far, you have learned about…</h2>
 <ul>
-<li>What did you learn last time about HTML?</li>
+<li><p><strong>File structure &amp; dependencies</strong></p>
+<ul>
+<li>In LaTeX, you had to make sure images, .bib files, and style files were in the right folder so the document would compile.</li>
+<li>In HTML/CSS, you linked CSS files and images using relative paths.</li>
+</ul></li>
 </ul>
 </section>
+<section id="review-so-far-you-have-learned-about-1" class="slide level2 center">
+<h2>Review: So far, you have learned about…</h2>
+<ul>
+<li><strong>Commands as instructions</strong>
+<ul>
+<li>LaTeX commands (<code>\section{}</code>, <code>\usepackage{}</code>)</li>
+<li>CSS rules (<code>color: blue;</code>) are small, precise instructions.</li>
+<li>You have seen learned about proper syntax, flags/options, and order of operations.</li>
+</ul></li>
+</ul>
+</section>
+<section id="review-so-far-you-have-learned-about-2" class="slide level2 center">
+<h2>Review: So far, you have learned about…</h2>
+<ul>
+<li><strong>Reproducibility &amp; automation</strong>
+<ul>
+<li>In LaTeX, you built a reproducible doc (compile again, get the same result).</li>
+<li>In HTML/CSS, you built a reusable template within CSS files.</li>
+</ul></li>
+</ul>
+</section>
+<section id="this-week" class="slide level2 center">
+<h2>This week:</h2>
 
+<img data-src="12_powershell.png" alt="An Picture of Windows &quot;Powershell&quot;, a Unix-style Terminal" class="r-stretch"></section>
+<section id="you-may-be-thinking" class="slide level2 center">
+<h2>You may be thinking:</h2>
+<ul>
+<li>Nooooooooooooooooooooooooooooo!</li>
+<li>I’m still scarred from installing GitHub.</li>
+<li>Please let’s not go back there.</li>
+</ul>
+</section>
+<section id="but" class="slide level2 center">
+<h2>But:</h2>
+<ul>
+<li>It’s important to understand how the basics work.
+<ul>
+<li>Where do files live?</li>
+<li>How do we navigate between them?</li>
+</ul></li>
+<li>And the above concepts - file structure &amp; dependencies, commands, and reproducibility - will be present here, too.</li>
+</ul>
+</section></section>
 <section>
 <section id="learning-the-terminal" class="title-slide slide level1 center">
 <h1>Learning the Terminal</h1>
@@ -431,24 +483,34 @@ Dr.&nbsp;Andrew M. Byrd
 <section id="why-start-in-the-terminal" class="slide level2 center">
 <h2>Why start in the terminal?</h2>
 <ul>
-<li>Python always runs <strong>in a folder</strong> (working directory).</li>
-<li>If you can move, list, and fetch files here, this will make understanding accessing files easier in Python later.</li>
-<li>Same skills for Git, servers, clusters.</li>
+<li>Python always runs <strong>inside a folder</strong> (your working directory).</li>
+<li>If you can move, list, and fetch files here, this will make it easier to understand how to access files in Python later.</li>
+<li>Same skills for Git and other computational environments, like:
+<ul>
+<li>servers and clients</li>
+<li>clusters (computers set up to work together)</li>
+</ul></li>
 </ul>
 </section>
 <section id="why-start-in-the-terminal-1" class="slide level2 center">
 <h2>Why start in the terminal?</h2>
 <ul>
-<li>While this isn’t true for me, I’ve been assured by various linguists that Terminal is crucial for conducting certain types of research, particularly in Phonetics</li>
+<li>While this isn’t the case for me, I’ve been assured by various linguists that understanding how the Terminal works is crucial for conducting certain types of research, particularly in Phonetics</li>
 </ul>
 </section>
 <section id="navigating-the-terminal" class="slide level2 center">
 <h2>Navigating the Terminal</h2>
 <ul>
 <li>We’ll be working within the <code>Terminal</code> in RStudio</li>
-<li>You should have the setting “New terminals open with:” = “GitBash”. (Tools &gt; Global Options &gt; Terminal)</li>
 </ul>
-<p>** PICTURE HERE**</p>
+<div style="text-align: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="12_bash_settings.png" style="width:50.0%"></p>
+<figcaption>Tools &gt; Global Options &gt; Terminal &gt; “New terminals open with:” = “GitBash”</figcaption>
+</figure>
+</div>
+</div>
 </section>
 <section id="navigating-the-terminal-1" class="slide level2 center">
 <h2>Navigating the Terminal</h2>
@@ -500,34 +562,87 @@ Dr.&nbsp;Andrew M. Byrd
 <div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href=""></a><span class="bu">cd</span> projects           <span class="co"># into a folder</span></span>
 <span id="cb8-2"><a href=""></a><span class="bu">cd</span> ..                 <span class="co"># up one</span></span>
 <span id="cb8-3"><a href=""></a><span class="bu">cd</span> ~                  <span class="co"># to home</span></span>
-<span id="cb8-4"><a href=""></a><span class="bu">cd</span> /                  <span class="co"># to filesystem root (Mac/Linux)</span></span>
-<span id="cb8-5"><a href=""></a><span class="bu">cd</span> ~/Desktop          <span class="co"># absolute path to Desktop\</span></span>
-<span id="cb8-6"><a href=""></a><span class="bu">cd</span> <span class="st">"My Folder"</span>        <span class="co"># if there are any spaces in your named folder</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-4"><a href=""></a><span class="bu">cd</span> ~/Desktop          <span class="co"># absolute path to Desktop\</span></span>
+<span id="cb8-5"><a href=""></a><span class="bu">cd</span> <span class="st">"My Folder"</span>        <span class="co"># if there are any spaces in your named folder</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section class="slide level2 center">
-
+<section id="activity" class="slide level2 center">
+<h2>Activity</h2>
+<ol type="1">
+<li>Type <code>cd ~</code>, to bring you to your home directory</li>
+<li>Using <code>pwd</code> and <code>ls</code> as your guide, navigate your way into your <code>LIN_301</code> folder</li>
+</ol>
 </section></section>
 <section>
-<section id="making-renaming" class="title-slide slide level1 center">
-<h1>Making &amp; Renaming</h1>
+<section id="making-and-renaming-files-folders" class="title-slide slide level1 center">
+<h1>Making and Renaming Files &amp; Folders</h1>
+
+</section>
+<section id="mkdir" class="slide level2 center">
+<h2><code>mkdir</code></h2>
 <ul>
-<li><code>mkdir newfolder</code> → make directory</li>
-<li><code>rmdir oldfolder</code> → remove empty directory</li>
-<li><code>mv old.txt new.txt</code> → rename file</li>
-<li><code>mv file.txt folder/</code> → move file</li>
+<li>You should now be in your LIN_301 folder in the Terminal Prompt</li>
+<li>Look in the right corner panel of RStudio, what do you see?</li>
+<li>Type the following code:</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href=""></a><span class="fu">mkdir</span> test_folder     <span class="co"># short for "make directory"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Now look in the right corner - did anything change?</li>
+</ul>
+</section>
+<section id="rmdir" class="slide level2 center">
+<h2><code>rmdir</code></h2>
+<ul>
+<li>Now type the following code</li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href=""></a><span class="fu">rmdir</span> test_folder    <span class="co"># short for "remove directory"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Look in the right corner of RStudio - did anything change?</li>
+</ul>
+</section>
+<section id="touch" class="slide level2 center">
+<h2><code>touch</code></h2>
+<ul>
+<li>Now type the following code:</li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href=""></a><span class="fu">mkdir</span> test_bolder</span>
+<span id="cb11-2"><a href=""></a><span class="fu">touch</span> test_doc.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Look in the right corner of RStudio - did anything change?</li>
+<li>What does <code>touch</code> do?</li>
+</ul>
+</section>
+<section id="mv" class="slide level2 center">
+<h2><code>mv</code></h2>
+<ul>
+<li>We want to place our new <code>txt</code> file in the folder, so let’s run this code:</li>
+</ul>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href=""></a><span class="fu">mv</span> test_doc.txt test_bolder/    <span class="co"># short for "move"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="mv-1" class="slide level2 center">
+<h2><code>mv</code></h2>
+<ul>
+<li>Ah crap, I misspelled <code>test_bolder</code>, let’s run this code:</li>
+</ul>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href=""></a><span class="fu">mv</span> test_bolder test_folder    <span class="co"># how you rename in bash</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section></section>
+<section>
+<section id="activity-1" class="title-slide slide level1 center">
+<h1>Activity</h1>
+<ul>
+<li>Within your <code>LIN_301</code> repo:
+<ul>
+<li>Create a file called <code>activity.txt</code></li>
+<li>Create the following folders: <code>folder_1</code> &gt; <code>folder_2</code> &gt; <code>folder_3</code></li>
+<li>Move <code>activity.txt</code> inside <code>folder_3</code></li>
+</ul></li>
+<li>You can <em>only</em> use the Terminal in RStudio!
+<ul>
+<li>Use <code>pwd</code> and <code>ls</code> as your guide</li>
+</ul></li>
 </ul>
 </section>
 <section class="slide level2 center">
 
-</section></section>
-<section id="activity-treasure-hunt" class="title-slide slide level1 center">
-<h1>Activity: Treasure Hunt 🗂️</h1>
-<ol type="1">
-<li>Navigate into the <code>practice/</code> folder provided.</li>
-<li>Find the file named <code>clue.txt</code>.</li>
-<li>Open it with <code>cat clue.txt</code> — it tells you the next file.</li>
-<li>First to reach the last file wins!</li>
-</ol>
 <p>Day 1: Navigating the Terminal</p>
 <ul>
 <li>changing directories in the terminal, going up, going down, going to specific location</li>
@@ -551,14 +666,14 @@ Dr.&nbsp;Andrew M. Byrd
 </ul>
 <p>Day 3: Grep and Regex</p>
 <ul>
-<li></li>
+<li>Treasure Hunt, practicing everything they’ve done so far</li>
 </ul>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 

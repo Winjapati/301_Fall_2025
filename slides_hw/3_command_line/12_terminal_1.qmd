@@ -15,135 +15,221 @@ format:
 editor: visual
 ---
 
-# Review: HTML, CSS, JS
+# Review
 
--   What did you learn last time about HTML?
+## Review: So far, you have learned about...
+
+-   **File structure & dependencies**
+
+    -   In LaTeX, you had to make sure images, .bib files, and style files were in the right folder so the document would compile.
+    -   In HTML/CSS, you linked CSS files and images using relative paths.
+
+## Review: So far, you have learned about...
+
+-   **Commands as instructions**
+    -   LaTeX commands (`\section{}`, `\usepackage{}`)
+    -   CSS rules (`color: blue;`) are small, precise instructions.
+    -   You have seen learned about proper syntax, flags/options, and order of operations.
+
+## Review: So far, you have learned about...
+
+-   **Reproducibility & automation**
+    -   In LaTeX, you built a reproducible doc (compile again, get the same result).
+    -   In HTML/CSS, you built a reusable template within CSS files.
+
+## This week:
+
+![](12_powershell.png){fig-alt="An Picture of Windows \"Powershell\", a Unix-style Terminal"}
+
+## You may be thinking:
+
+-   Nooooooooooooooooooooooooooooo!
+-   I'm still scarred from installing GitHub.
+-   Please let's not go back there.
+
+## But:
+
+-   It's important to understand how the basics work.
+    -   Where do files live?
+    -   How do we navigate between them?
+-   And the above concepts - file structure & dependencies, commands, and reproducibility - will be present here, too.
 
 # Learning the Terminal
 
 ## Why start in the terminal?
 
-- Python always runs **in a folder** (working directory).
-- If you can move, list, and fetch files here, this will make understanding accessing files easier in Python later.
-- Same skills for Git, servers, clusters.
+-   Python always runs **inside a folder** (your working directory).
+-   If you can move, list, and fetch files here, this will make it easier to understand how to access files in Python later.
+-   Same skills for Git and other computational environments, like:
+    -   servers and clients
+    -   clusters (computers set up to work together)
 
 ## Why start in the terminal?
 
-- While this isn't true for me, I've been assured by various linguists that Terminal is crucial for conducting certain types of research, particularly in Phonetics
+-   While this isn't the case for me, I've been assured by various linguists that understanding how the Terminal works is crucial for conducting certain types of research, particularly in Phonetics
 
 ## Navigating the Terminal
 
-- We'll be working within the `Terminal` in RStudio
-- You should have the setting "New terminals open with:" = "GitBash".  (Tools > Global Options > Terminal)
+-   We'll be working within the `Terminal` in RStudio
 
-** PICTURE HERE**
+::: {style="text-align: center;"}
+![Tools \> Global Options \> Terminal \> "New terminals open with:" = "GitBash"](12_bash_settings.png){alt="You should have the setting \"New terminals open with:" width="50%"}
+:::
 
 ## Navigating the Terminal
 
-- Let's start with the first command
+-   Let's start with the first command
 
-```bash
+``` bash
 pwd         # short for "print working directory"
 ```
 
 ## Navigating the Terminal
 
-- You can also look to see what's in the current directory
+-   You can also look to see what's in the current directory
 
-```bash
+``` bash
 ls           # short for "listing files"
 ```
 
 ## Navigating the Terminal
 
-- Most commands have **options**
+-   Most commands have **options**
 
-```bash
+``` bash
 ls -l        # details (permissions, size, dates)
 ls -a        # include hidden files (like .git)
 ```
 
 ## Navigating the Terminal
 
-```bash
+``` bash
 cd          # short for "change directory"
 ```
 
-- You need to specify which directory to change into
-- For now, use:
+-   You need to specify which directory to change into
+-   For now, use:
 
-```bash
+``` bash
 cd ~         
 ```
 
 ## Navigating the Terminal
 
-- Type:
+-   Type:
 
-```bash
+``` bash
 ls        
 ```
 
-- Find a directory (dir_name) within it, and type (replacing `dir_name` with the actual directory name):
+-   Find a directory (dir_name) within it, and type (replacing `dir_name` with the actual directory name):
 
-```bash
+``` bash
 cd dir_name        
 ```
-- This should move you "up" into the directory. Verify this is the case with `ls`.
+
+-   This should move you "up" into the directory. Verify this is the case with `ls`.
 
 ## Navigating the Terminal
 
-```bash
+``` bash
 cd projects           # into a folder
 cd ..                 # up one
 cd ~                  # to home
-cd /                  # to filesystem root (Mac/Linux)
 cd ~/Desktop          # absolute path to Desktop\
 cd "My Folder"        # if there are any spaces in your named folder
 ```
 
+## Activity
+
+1. Type `cd ~`, to bring you to your home directory
+2. Using `pwd` and `ls` as your guide, navigate your way into your `LIN_301` folder
+
+# Making and Renaming Files & Folders
+
+## `mkdir`
+
+- You should now be in your LIN_301 folder in the Terminal Prompt
+- Look in the right corner panel of RStudio, what do you see?
+- Type the following code:
+
+```bash
+mkdir test_folder     # short for "make directory"
+```
+
+- Now look in the right corner - did anything change?
+
+## `rmdir`
+
+- Now type the following code
+
+```bash
+rmdir test_folder    # short for "remove directory"
+```
+
+- Look in the right corner of RStudio - did anything change?
+
+## `touch`
+
+- Now type the following code:
+
+```bash
+mkdir test_bolder
+touch test_doc.txt
+```
+
+- Look in the right corner of RStudio - did anything change?
+- What does `touch` do?
+
+## `mv`
+
+- We want to place our new `txt` file in the folder, so let's run this code:
+
+```bash
+mv test_doc.txt test_bolder/    # short for "move"
+```
+
+## `mv`
+
+- Ah crap, I misspelled `test_bolder`, let's run this code:
+
+```bash
+mv test_bolder test_folder    # how you rename in bash
+```
+
+# Activity
+
+- Within your `LIN_301` repo:
+  - Create a file called `activity.txt`
+  - Create the following folders: `folder_1` > `folder_2` > `folder_3`
+  - Move `activity.txt` inside `folder_3`
+- You can *only* use the Terminal in RStudio!
+  - Use `pwd` and `ls` as your guide
+
 ------------------------------------------------------------------------
-
-# Making & Renaming
-
--   `mkdir newfolder` → make directory
--   `rmdir oldfolder` → remove empty directory
--   `mv old.txt new.txt` → rename file
--   `mv file.txt folder/` → move file
-
-------------------------------------------------------------------------
-
-# Activity: Treasure Hunt 🗂️
-
-1.  Navigate into the `practice/` folder provided.
-2.  Find the file named `clue.txt`.
-3.  Open it with `cat clue.txt` — it tells you the next file.
-4.  First to reach the last file wins!
-
 
 
 Day 1: Navigating the Terminal
 
-- changing directories in the terminal, going up, going down, going to specific location
-- downloading files using "curl"
-- creating a file, deleting a file
-- creating a folder, deleting a folder
-- writing a .sh script
-- activity, integrating all of this
-
+-   changing directories in the terminal, going up, going down, going to specific location
+-   downloading files using "curl"
+-   creating a file, deleting a file
+-   creating a folder, deleting a folder
+-   writing a .sh script
+-   activity, integrating all of this
 
 Day 2: File Extensions, Beginning Grep
 
-- review activity: navigating, creating, deleting, .sh
-- file extensions, what are they?
-- why word and google docs suck for programming
-- converting files
-- activity
-- searching files with wc (-l, -w)
-- searching files with grep
-- piping
-- activity: explore Project Gutenberg, download txt file of choice, place in unique folder, validate each step along the way 
+-   review activity: navigating, creating, deleting, .sh
+-   file extensions, what are they?
+-   why word and google docs suck for programming
+-   converting files
+-   activity
+-   searching files with wc (-l, -w)
+-   searching files with grep
+-   piping
+-   activity: explore Project Gutenberg, download txt file of choice, place in unique folder, validate each step along the way
 
 Day 3: Grep and Regex
 
-- 
+-   Treasure Hunt, practicing everything they've done so far
