@@ -73,7 +73,7 @@ editor: visual
 -   We'll be working within the `Terminal` in RStudio
 
 ::: {style="text-align: center;"}
-![Tools \> Global Options \> Terminal \> "New terminals open with:" = "GitBash"](12_bash_settings.png){alt="You should have the setting \"New terminals open with:" width="50%"}
+![You should have the setting "New terminals open with:](12_bash_settings.png){width="50%"}
 :::
 
 ## Navigating the Terminal
@@ -142,107 +142,107 @@ cd "My Folder"        # if there are any spaces in your named folder
 
 ## Activity
 
-1. Type `cd ~`, to bring you to your home directory
-2. Using `pwd` and `ls` as your guide, navigate your way into your `LIN_301` folder
+1.  Type `cd ~`, to bring you to your home directory
+2.  Using `pwd` and `ls` as your guide, navigate your way into your `LIN_301` folder
 
 # Making and Renaming Files & Folders
 
 ## `mkdir`
 
-- You should now be in your LIN_301 folder in the Terminal Prompt
-- Look in the right bottom corner panel of RStudio, what do you see?
-- Type the following code:
+-   You should now be in your LIN_301 folder in the Terminal Prompt
+-   Look in the right bottom corner panel of RStudio, what do you see?
+-   Type the following code:
 
-```bash
+``` bash
 mkdir test_folder     # short for "make directory"
 ```
 
-- Now look in the right corner - did anything change?
+-   Now look in the right corner - did anything change?
 
 ## `rmdir`
 
-- Now type the following code
+-   Now type the following code
 
-```bash
+``` bash
 rmdir test_folder    # short for "remove directory"
 ```
 
-- Look in the right corner of RStudio - did anything change?
+-   Look in the right corner of RStudio - did anything change?
 
 ## `touch`
 
-- Now type the following code:
+-   Now type the following code:
 
-```bash
+``` bash
 mkdir test_bolder
 touch test_doc.txt
 ```
 
-- Look in the right corner of RStudio - did anything change?
-- What does `touch` do?
+-   Look in the right corner of RStudio - did anything change?
+-   What does `touch` do?
 
 ## `mv`
 
-- We want to place our new `txt` file in the folder, so let's run this code:
+-   We want to place our new `txt` file in the folder, so let's run this code:
 
-```bash
+``` bash
 mv test_doc.txt test_bolder/    # short for "move"
 ```
 
 ## `mv`
 
-- Ah crap, I misspelled `test_bolder`, let's run this code:
+-   Ah crap, I misspelled `test_bolder`, let's run this code:
 
-```bash
+``` bash
 mv test_bolder test_folder    # how you rename in bash
 ```
 
 ## Activity
 
-- Within your `LIN_301` repo:
-  - Create a file called `activity.txt`
-  - Create the following folders: `folder_1` > `folder_2` > `folder_3`
-  - Move `activity.txt` inside `folder_3`
-- You can *only* use the Terminal in RStudio!
-  - Use `pwd` and `ls` as your guide
+-   Within your `LIN_301` repo:
+    -   Create a file called `activity.txt`
+    -   Create the following folders: `folder_1` \> `folder_2` \> `folder_3`
+    -   Move `activity.txt` inside `folder_3`
+-   You can *only* use the Terminal in RStudio!
+    -   Use `pwd` and `ls` as your guide
 
 # A Couple More Tricks
 
 ## `curl`
 
-- We all know how to download things from the Internet, but what about using the Terminal?
-- Type this code:
+-   We all know how to download things from the Internet, but what about using the Terminal?
+-   Type this code:
 
-```bash
+``` bash
 curl -o term_comm.txt https://winjapati.github.io/301_Fall_2025/3_command_line/12_term_comm.txt#
 ```
 
-- This is a useful list of Terminal commands
-- Move this file into `folder_1`
+-   This is a useful list of Terminal commands
+-   Move this file into `folder_1`
 
 ## `rm -r`
 
-- Let's learn one more bash command
+-   Let's learn one more bash command
 
-```bash
+``` bash
 rm -r folder_1
 ```
 
-- What happens?
+-   What happens?
 
 ## You bastard!
 
-- Don't worry! Type the following code:
+-   Don't worry! Type the following code:
 
-```bash
+``` bash
 touch script.sh 
 ```
 
 ## Bringing it Back
 
-- Now copy and paste (use right click) into the Terminal:
+-   Now copy and paste (use right click) into the Terminal:
 
-```bash
+``` bash
 cat > script.sh <<'EOF'     
 #!/bin/bash                 
 echo "This is my first script."
@@ -252,28 +252,32 @@ mv term_comm.txt folder_1
 echo term_comm.txt
 ```
 
-- Then type:
+-   Then type:
 
-```bash
+``` bash
 EOF
 ```
 
-- Look inside `script.sh`, what did you do?
+-   Look inside `script.sh`, what did you do?
 
 ## OMG
 
-- Type:
+-   Type:
 
-```bash
+``` bash
 source script.sh
 ```
-
 
 <!-- Day 1: Navigating the Terminal -->
 
 <!-- -   changing directories in the terminal, going up, going down, going to specific location -->
+
 <!-- -   downloading files using "curl" -->
+
 <!-- -   creating a file, deleting a file -->
+
 <!-- -   creating a folder, deleting a folder -->
+
 <!-- -   writing a .sh script -->
+
 <!-- -   activity, integrating all of this -->
