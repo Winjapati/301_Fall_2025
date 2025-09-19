@@ -27,25 +27,31 @@ editor: visual
 -   Combine with pipes:
     -   `grep "word" file.txt | wc -l`
 
+## Review Activity
+
+Using Terminal:
+
+-   Create a folder called `alice`
+-   Download *Alice's Adventures in Wonderland*
+    - https://www.gutenberg.org/ebooks/11
+    - name it `alice.txt`
+-   Search for "Alice"
+-   How many instances of "Alice" are there in the story? (Or more specifically, how many lines occur in the book that contain at least one "Alice"?)
+
 # Regex
 
 ## What Are Regular Expressions?
 
 -   A **language for patterns**
+    -   Pronounced \[ˌɹɛg.ˈɛks\]
 -   Lets us search for:
     -   Word forms
     -   Phonological environments
     -   Structured data
--   Used in:
-    -   Linguistics
-    -   Programming
-    -   Data science
 
 ## Regular Expressions are WEIRD
 
--   Of all the programming we'll be doing in this class, regex are the most obtuse
-
-    -   Pronounced [ˌɹɛg.ˈɛks]
+-   Of all the programming we'll be doing in this class, (I think) regex is the most obtuse
 
 -   Today we'll learn how basic regex commands can be used in the Terminal
 
@@ -53,46 +59,82 @@ editor: visual
 
 ## Our First Regex
 
-- Type in the following code:
+-   Type in the following code:
 
 ``` bash
-curl -o 14_alice.txt 
-grep -E "c.t" file.txt
+grep -E "c.t" alice.txt
 ```
--   Note the `-E` 
-    - This prompts `grep` to use **Extended Regular Expressions**
-- What does `.` do?
+
+-   Note the `-E`
+    -   This prompts `grep` to use **Extended Regular Expressions**
+-   What does `.` do?
+
+## Useful Flags
+
+-   E → extended regex
+-   o → print only matches
+-   c → count matches
+
+``` bash
+grep -Eo "\w+ing" file.txt
+```
 
 ## Our First Regex
 
 -   `.` → any single character\
 
-## More Symbols
+## Narrowing Down our Search
 
-- Within `14_alice.txt`, use the following code.
-
-
-```bash
-grep -E "c.t" file.txt   # matches cat, cot, cut
-```
-
--   `*` → 0 or more of the preceding\
--   `?` → 0 or 1 of the preceding\
--   `+` → 1 or more of the preceding
-
-
-## Character Classes
-
--   \[aeiou\] → any vowel
--   \[\^aeiou\] → anything except a vowel
--   \[a-z\], \[0-9\] → ranges
--   Predefined:
-    -   \d → digit
-    -   \w → word character
-    -   \s → whitespace
+-   So far we're able to identify *any* sequence of the shape "c_t"
 
 ``` bash
-grep -E "[0-9]+" file.txt   # find numbers
+grep -E "c.t" alice.txt
+```
+- How else might we want to narrow down our search?
+
+## Narrowing Down our Search
+
+- Perhaps we would want to specify certain vowel letters:
+
+``` bash
+grep -E "c[aou]t" alice.txt   
+```
+
+## Narrowing Down our Search
+
+- Perhaps we would want to exclude certain vowel letters:
+
+``` bash
+grep -E "c[^ao]t" alice.txt
+```
+
+## Narrowing Down our Search
+
+- Perhaps we would want to identify a range of certain vowel letters:
+
+``` bash
+grep -E "[a-q]at" alice.txt
+```
+
+- (Also works for digits: e.g., \[0-9\])
+
+## Narrowing Down our Search
+
+- What if we want to say "begins with `cat`"?
+
+
+``` bash
+grep -E "\scat" alice.txt
+```
+
+- How would we say "ends with `cat`"?
+
+## Narrowing Down our Search
+
+- How would we say "either `cat` or `cats`"?
+
+``` bash
+grep -E "\scats?" alice.txt
 ```
 
 ## Anchors
@@ -101,18 +143,43 @@ grep -E "[0-9]+" file.txt   # find numbers
 -   \$ → end of line
 
 ``` bash
-grep -E "^The" file.txt   # lines starting with "The"
-grep -E "\?$" file.txt    # lines ending with "?"
+grep -E "^c.t" file.txt   # lines starting with "c.t"
+grep -E "c.t$" file.txt    # lines ending with "c.t"
 ```
 
 ## Grouping & Alternation
 
--   (cat\|dog) → "cat" or "dog"
--   (ab)+ → one or more “ab” sequences
+-   "(Alice|Rabbit)" → "Alice" or "Rabbit"
+<!-- -   (ab)+ → one or more “ab” sequences -->
 
 ``` bash
 grep -E "(cat|dog)" file.txt
 ```
+
+
+
+## Narrowing Down our Search
+
+-   Predefined:
+    -   `\d` → digit
+    -   `\w` → word character
+    -   `\s` → whitespace
+
+
+## More Symbols
+
+-   Within `14_alice.txt`, use the following code.
+
+``` bash
+grep -E "c.t" file.txt   # matches cat, cot, cut
+```
+
+-   `*` → 0 or more of the preceding\
+-   `?` → 0 or 1 of the preceding\
+-   `+` → 1 or more of the preceding
+
+
+
 
 ## Grep + Regex in Action
 
@@ -136,24 +203,16 @@ grep -E "^[A-Z]" file.txt
 grep -E "[0-9]+" file.txt
 ```
 
-## Useful Flags
 
--   E → extended regex
--   o → print only matches
--   c → count matches
-
-``` bash
-grep -Eo "\w+ing" file.txt
-```
 
 ## Activity
 
--   Work with a text of your choice (e.g., from Project Gutenberg).
--   Try to find:
-    -   All words beginning with "a"/ "A" or "z" / "Z"
-    -   All four-letter words
-    -   Lines ending with a question mark
-    -   Words with repeated vowels (food, see)
+-   Within `alice.txt`, using `grep`/`regex`, find:
+    1. All words beginning with "a"/ "A" or "z" / "Z";
+    2. All four-letter words;
+    3. Lines ending with a question mark (use `\?`);
+    4. Words with repeated vowels ("food", "see");
+    5. The total number of articles ("the, The, a, A, an, An") in the story.
 
 <!-- -   Treasure Hunt, practicing everything they've done so far -->
 
