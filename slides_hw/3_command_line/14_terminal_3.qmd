@@ -157,6 +157,12 @@ grep -E "c.t$" file.txt    # lines ending with "c.t"
 grep -E "(Alice|Rabbit)" alice.txt
 ```
 
+## For a Handy List of Regex 
+
+```bash
+curl -o regex.txt https://winjapati.github.io/301_Fall_2025/3_command_line/14_regex.txt#
+```
+
 # Activity: Putting `regex` to work
 
 ## Group Activity
