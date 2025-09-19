@@ -411,6 +411,7 @@ Dr.&nbsp;Andrew M. Byrd
 <ul>
 <li><a href="#/review" id="/toc-review">Review</a></li>
 <li><a href="#/regex" id="/toc-regex">Regex</a></li>
+<li><a href="#/activity-putting-regex-to-work" id="/toc-activity-putting-regex-to-work">Activity: Putting <code>regex</code> to work</a></li>
 </ul>
 </nav>
 </section>
@@ -472,9 +473,8 @@ Dr.&nbsp;Andrew M. Byrd
 <section id="regular-expressions-are-weird" class="slide level2 center">
 <h2>Regular Expressions are WEIRD</h2>
 <ul>
-<li><p>Of all the programming we’ll be doing in this class, (I think) regex is the most obtuse</p></li>
-<li><p>Today we’ll learn how basic regex commands can be used in the Terminal</p></li>
-<li><p>And we’ll likely return to them later in the semester once we have some Python under our belts</p></li>
+<li><p>Today we’ll learn how basic <code>regex</code> commands can be used in the Terminal</p></li>
+<li><p>While we’re currently working in the Terminal, we will return to all of this later in the semester once we have some Python under our belts</p></li>
 </ul>
 </section>
 <section id="our-first-regex" class="slide level2 center">
@@ -491,21 +491,21 @@ Dr.&nbsp;Andrew M. Byrd
 <li>What does <code>.</code> do?</li>
 </ul>
 </section>
-<section id="useful-flags" class="slide level2 center">
-<h2>Useful Flags</h2>
-<ul>
-<li>E → extended regex</li>
-<li>o → print only matches</li>
-<li>c → count matches</li>
-</ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href=""></a><span class="fu">grep</span> <span class="at">-Eo</span> <span class="st">"\w+ing"</span> file.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
 <section id="our-first-regex-1" class="slide level2 center">
 <h2>Our First Regex</h2>
 <ul>
 <li><code>.</code> → any single character<br>
 </li>
 </ul>
+</section>
+<section id="other-useful-flags" class="slide level2 center">
+<h2>Other Useful Flags</h2>
+<ul>
+<li>o → print only matches</li>
+<li>c → count matches</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href=""></a><span class="fu">grep</span> <span class="at">-Eo</span> <span class="st">"c.t"</span> alice.txt</span>
+<span id="cb2-2"><a href=""></a><span class="fu">grep</span> <span class="at">-Ec</span> <span class="st">"c.t"</span> alice.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="narrowing-down-our-search" class="slide level2 center">
 <h2>Narrowing Down our Search</h2>
@@ -548,7 +548,8 @@ Dr.&nbsp;Andrew M. Byrd
 </ul>
 <div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href=""></a><span class="fu">grep</span> <span class="at">-E</span> <span class="st">"\scat"</span> alice.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>How would we say “ends with <code>cat</code>”?</li>
+<li><p>Note that <code>\s</code> = any whitespace (not just space!)</p></li>
+<li><p>How would we say “ends with <code>cat</code>”?</p></li>
 </ul>
 </section>
 <section id="narrowing-down-our-search-5" class="slide level2 center">
@@ -567,68 +568,58 @@ Dr.&nbsp;Andrew M. Byrd
 <div class="sourceCode" id="cb9"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href=""></a><span class="fu">grep</span> <span class="at">-E</span> <span class="st">"^c.t"</span> file.txt   <span class="co"># lines starting with "c.t"</span></span>
 <span id="cb9-2"><a href=""></a><span class="fu">grep</span> <span class="at">-E</span> <span class="st">"c.t$"</span> file.txt    <span class="co"># lines ending with "c.t"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="grouping-alternation" class="slide level2 center">
-<h2>Grouping &amp; Alternation</h2>
-<ul>
-<li>“(Alice|Rabbit)” → “Alice” or “Rabbit” <!-- -   (ab)+ → one or more “ab” sequences --></li>
-</ul>
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href=""></a><span class="fu">grep</span> <span class="at">-E</span> <span class="st">"(cat|dog)"</span> file.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
 <section id="narrowing-down-our-search-6" class="slide level2 center">
 <h2>Narrowing Down our Search</h2>
 <ul>
-<li>Predefined:
-<ul>
-<li><code>\d</code> → digit</li>
-<li><code>\w</code> → word character</li>
-<li><code>\s</code> → whitespace</li>
-</ul></li>
+<li>“(Alice|Rabbit)” → “Alice” or “Rabbit” <!-- -   (ab)+ → one or more “ab” sequences --></li>
 </ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href=""></a><span class="fu">grep</span> <span class="at">-E</span> <span class="st">"(Alice|Rabbit)"</span> alice.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section></section>
+<section>
+<section id="activity-putting-regex-to-work" class="title-slide slide level1 center">
+<h1>Activity: Putting <code>regex</code> to work</h1>
+
 </section>
-<section id="more-symbols" class="slide level2 center">
-<h2>More Symbols</h2>
+<section id="group-activity" class="slide level2 center">
+<h2>Group Activity</h2>
 <ul>
-<li>Within <code>14_alice.txt</code>, use the following code.</li>
-</ul>
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href=""></a><span class="fu">grep</span> <span class="at">-E</span> <span class="st">"c.t"</span> file.txt   <span class="co"># matches cat, cot, cut</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li><code>*</code> → 0 or more of the preceding<br>
-</li>
-<li><code>?</code> → 0 or 1 of the preceding<br>
-</li>
-<li><code>+</code> → 1 or more of the preceding</li>
-</ul>
-</section>
-<section id="grep-regex-in-action" class="slide level2 center">
-<h2>Grep + Regex in Action</h2>
-<p>Examples with a text file:</p>
-<ul>
-<li>Words ending in “ing”</li>
-</ul>
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href=""></a><span class="fu">grep</span> <span class="at">-E</span> <span class="st">"(cat|dog)"</span> file.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li>Lines starting with a capital letter</li>
-</ul>
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href=""></a><span class="fu">grep</span> <span class="at">-E</span> <span class="st">"^[A-Z]"</span> file.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li>All numbers</li>
-</ul>
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href=""></a><span class="fu">grep</span> <span class="at">-E</span> <span class="st">"[0-9]+"</span> file.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="activity" class="slide level2 center">
-<h2>Activity</h2>
-<ul>
-<li>Within <code>alice.txt</code>, using <code>grep</code>/<code>regex</code>, find:
+<li>Within <code>alice.txt</code>, using <code>grep</code> <code>-E</code>, find:
 <ol type="1">
 <li>All words beginning with “a”/ “A” or “z” / “Z”;</li>
 <li>All four-letter words;</li>
 <li>Lines ending with a question mark (use <code>\?</code>);</li>
-<li>Words with repeated vowels (“food”, “see”);</li>
+<li>Words with repeated vowels (“food”, “see”; for this use <code>\1</code> to capture the exact same text as the previous group; thus ([tp])\1 = “tt”, “pp”);</li>
 <li>The total number of articles (“the, The, a, A, an, An”) in the story.</li>
 </ol></li>
 </ul>
-<!-- -   Treasure Hunt, practicing everything they've done so far -->
 <!-- <https://regex101.com/> -->
+<!-- ## More Symbols -->
+<!-- -   Within `14_alice.txt`, use the following code. -->
+<!-- ``` bash -->
+<!-- grep -E "c.t" file.txt   # matches cat, cot, cut -->
+<!-- ``` -->
+<!-- -   `*` → 0 or more of the preceding\ -->
+<!-- -   `?` → 0 or 1 of the preceding\ -->
+<!-- -   `+` → 1 or more of the preceding -->
+<!-- ## Grep + Regex in Action -->
+<!-- Examples with a text file: -->
+<!-- -   Words ending in “ing” -->
+<!-- ``` bash -->
+<!-- grep -E "(cat|dog)" file.txt -->
+<!-- ``` -->
+<!-- -   Lines starting with a capital letter -->
+<!-- ``` bash -->
+<!-- grep -E "^[A-Z]" file.txt -->
+<!-- ``` -->
+<!-- -   All numbers -->
+<!-- ``` bash -->
+<!-- grep -E "[0-9]+" file.txt -->
+<!-- ``` -->
+<!-- ## Narrowing Down our Search -->
+<!-- -   Predefined: -->
+<!--     -   `\d` → digit -->
+<!--     -   `\w` → word character -->
+<!--     -   `\s` → whitespace -->
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 

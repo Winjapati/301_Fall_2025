@@ -54,3 +54,11 @@ Useful Regular Expressions Cheatsheet
   Example: `A.*e` matches "Alice" and "A white rabbit came".
 - `[[:punct:]]` (POSIX) → any punctuation
   Example: matches "!" in "Hello!".
+
+🔁 Backreferences
+- `(…)` → captures a group
+- `\1` → repeat the *first* captured group
+  Example: `([a-z])\\1` matches "ll" in "hello" or "ss" in "miss".
+- `\2` → repeat the *second* captured group
+  Example: `([a-z])([0-9])\2` requires that [0-9] must repeat ("a33", "c22" match, but "d23" does not)
+

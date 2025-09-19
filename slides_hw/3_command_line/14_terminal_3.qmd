@@ -51,11 +51,9 @@ Using Terminal:
 
 ## Regular Expressions are WEIRD
 
--   Of all the programming we'll be doing in this class, (I think) regex is the most obtuse
+-   Today we'll learn how basic `regex` commands can be used in the Terminal
 
--   Today we'll learn how basic regex commands can be used in the Terminal
-
--   And we'll likely return to them later in the semester once we have some Python under our belts
+-   While we're currently working in the Terminal, we will return to all of this later in the semester once we have some Python under our belts
 
 ## Our First Regex
 
@@ -69,19 +67,19 @@ grep -E "c.t" alice.txt
     -   This prompts `grep` to use **Extended Regular Expressions**
 -   What does `.` do?
 
-## Useful Flags
+## Our First Regex
 
--   E → extended regex
+-   `.` → any single character\
+
+## Other Useful Flags
+
 -   o → print only matches
 -   c → count matches
 
 ``` bash
-grep -Eo "\w+ing" file.txt
+grep -Eo "c.t" alice.txt
+grep -Ec "c.t" alice.txt
 ```
-
-## Our First Regex
-
--   `.` → any single character\
 
 ## Narrowing Down our Search
 
@@ -127,6 +125,9 @@ grep -E "[a-q]at" alice.txt
 grep -E "\scat" alice.txt
 ```
 
+
+- Note that `\s` = any whitespace (not just space!)
+
 - How would we say "ends with `cat`"?
 
 ## Narrowing Down our Search
@@ -147,73 +148,69 @@ grep -E "^c.t" file.txt   # lines starting with "c.t"
 grep -E "c.t$" file.txt    # lines ending with "c.t"
 ```
 
-## Grouping & Alternation
+## Narrowing Down our Search
 
 -   "(Alice|Rabbit)" → "Alice" or "Rabbit"
 <!-- -   (ab)+ → one or more “ab” sequences -->
 
 ``` bash
-grep -E "(cat|dog)" file.txt
+grep -E "(Alice|Rabbit)" alice.txt
 ```
 
+# Activity: Putting `regex` to work
 
+## Group Activity
 
-## Narrowing Down our Search
-
--   Predefined:
-    -   `\d` → digit
-    -   `\w` → word character
-    -   `\s` → whitespace
-
-
-## More Symbols
-
--   Within `14_alice.txt`, use the following code.
-
-``` bash
-grep -E "c.t" file.txt   # matches cat, cot, cut
-```
-
--   `*` → 0 or more of the preceding\
--   `?` → 0 or 1 of the preceding\
--   `+` → 1 or more of the preceding
-
-
-
-
-## Grep + Regex in Action
-
-Examples with a text file:
-
--   Words ending in “ing”
-
-``` bash
-grep -E "(cat|dog)" file.txt
-```
-
--   Lines starting with a capital letter
-
-``` bash
-grep -E "^[A-Z]" file.txt
-```
-
--   All numbers
-
-``` bash
-grep -E "[0-9]+" file.txt
-```
-
-
-
-## Activity
-
--   Within `alice.txt`, using `grep`/`regex`, find:
+-   Within `alice.txt`, using `grep` `-E`, find:
     1. All words beginning with "a"/ "A" or "z" / "Z";
     2. All four-letter words;
     3. Lines ending with a question mark (use `\?`);
-    4. Words with repeated vowels ("food", "see");
+    4. Words with repeated vowels ("food", "see"; for this use `\1` to capture the exact same text as the previous group; thus ([tp])\1 = "tt", "pp"); 
     5. The total number of articles ("the, The, a, A, an, An") in the story.
 
-<!-- -   Treasure Hunt, practicing everything they've done so far -->
 
 <!-- <https://regex101.com/> -->
+
+<!-- ## More Symbols -->
+
+<!-- -   Within `14_alice.txt`, use the following code. -->
+
+<!-- ``` bash -->
+<!-- grep -E "c.t" file.txt   # matches cat, cot, cut -->
+<!-- ``` -->
+
+<!-- -   `*` → 0 or more of the preceding\ -->
+<!-- -   `?` → 0 or 1 of the preceding\ -->
+<!-- -   `+` → 1 or more of the preceding -->
+
+
+
+
+<!-- ## Grep + Regex in Action -->
+
+<!-- Examples with a text file: -->
+
+<!-- -   Words ending in “ing” -->
+
+<!-- ``` bash -->
+<!-- grep -E "(cat|dog)" file.txt -->
+<!-- ``` -->
+
+<!-- -   Lines starting with a capital letter -->
+
+<!-- ``` bash -->
+<!-- grep -E "^[A-Z]" file.txt -->
+<!-- ``` -->
+
+<!-- -   All numbers -->
+
+<!-- ``` bash -->
+<!-- grep -E "[0-9]+" file.txt -->
+<!-- ``` -->
+
+<!-- ## Narrowing Down our Search -->
+
+<!-- -   Predefined: -->
+<!--     -   `\d` → digit -->
+<!--     -   `\w` → word character -->
+<!--     -   `\s` → whitespace -->
