@@ -1,0 +1,71 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Computation for Linguists\"\n",
+        "subtitle: \"Beginning Python: Variables & Types\"\n",
+        "date: \"September 29, 2025\"\n",
+        "author: \"Dr. Andrew M. Byrd\"\n",
+        "format:\n",
+        "  revealjs:\n",
+        "    css: header_shrink.css\n",
+        "    theme: beige\n",
+        "    slide-number: true\n",
+        "    center: true\n",
+        "    toc: true\n",
+        "    toc-title: \"Plan for the Day\"\n",
+        "    toc-depth: 1\n",
+        "editor: visual\n",
+        "---\n",
+        "\n",
+        "\n",
+        "# Review\n",
+        "\n",
+        "-   What did you learn last time?\n",
+        "\n",
+        "## Review: `wc`, `grep`, and `|`\n",
+        "\n",
+        "-   `wc file.txt` → identify number of lines, words, and characters in `file.txt`\n",
+        "    -   `-l`, `-w`, `-c`\n",
+        "-   `grep \"word\" file.txt` → search for a string in a file\n",
+        "-   Combine with pipes:\n",
+        "    -   `grep \"word\" file.txt | wc -l`\n",
+        "\n",
+        "## Review Activity\n",
+        "\n",
+        "Using Terminal:\n",
+        "\n",
+        "-   Create a folder called `alice`\n",
+        "-   Download *Alice's Adventures in Wonderland*\n",
+        "    -   https://www.gutenberg.org/ebooks/11\n",
+        "    -   name it `alice.txt`\n",
+        "-   Search for \"Alice\"\n",
+        "-   How many instances of \"Alice\" are there in the story? (Or more specifically, how many lines occur in the book that contain at least one \"Alice\"?)\n"
+      ],
+      "id": "cb17bc61"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "3+8"
+      ],
+      "id": "9de7f1cf",
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "C:\\Users\\andre\\AppData\\Roaming\\Python\\share\\jupyter\\kernels\\python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

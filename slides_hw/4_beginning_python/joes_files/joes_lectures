@@ -1,0 +1,235 @@
+Intro to Python
+Intro to Python
+What is Python?
+Python is a programming language. With it, we will write plain text documents that do things. Keep in mind that you have already been programming in this course! 
+
+We Programmed with HTML and CSS
+Recall the steps we went through to write a website:
+
+We defined what kind of document we were writing with the <DOCSTRING>
+We imported additional code, in the form of CSS, into the HTML document.
+We wrote out instructions for how the text was supposed to look with commands like <strong></strong>
+Then, we used a web browser to interpret the code in the HTML document, and the browser returned a result in the form of a website.
+
+We programmed with LaTeX
+Here were the steps we used to program with LaTeX:
+
+We defined what kind of document we were writing with \documentclass{}
+We imported additional code, with \usepackage{}
+We wrote out instructions for how the document was supposed to look with commands like \textbf{}
+Then, we used a LaTeX engine (being run by OverLeaf) to interpret the LaTeX code, which returned a result in the form of a typeset pdf.
+
+We even programmed with RegEx
+Regular expressions are much simpler than HTML or LaTeX, but one way to think of a regex like \b\w+ly\b is that it is a very tiny program, that we then used egrep to interpret, resulting in all of the matching strings.
+
+Programming in python will be a lot like this
+When we write a python program, we will
+
+Define what kind of document it is at the top with #! /usr/bin/python3
+We will import additional code, using import
+We will write out instructions for what the document is supposed to do with code.
+We will then use the python interpreter to interpret our code, and do what we asked it to do.
+
+Getting Set Up
+To get set up for writing python scripts, I recommend you create a folder inside the course folder called python. This is where you should save your python scripts, and where you should navigate to in your terminal when we run python scripts. 
+
+A first look at python
+ We can get a first look at python by opening your terminal and running python3.
+
+python3
+Your ordinary terminal should be replaced by some text about the python version, and then >>>. The >>> is there to indicate that anything we type in will be interpreted as python code.
+
+Using python like a calculator
+One way we could use python is as a calculator. Back in the Textual Analysis module, I found that Jane Austen used "the" 29,696 times, and used a total of 798,954 words overall. To find the proportion of here words that were "the", I need to do division in python. (Don't copy the >>> from the code below.)
+
+>>> 29696 / 798854
+0.03717325068160139        
+The / symbol is the code for division in python. Note that we didn't include the commas when we typed in the numbers. An important thing about python, and all programming languages, is that we need to enter all of our numbers without commas.
+
+Getting out of python!
+To get out of python and back to your usual terminal, run quit()
+
+quit()
+Writing our first script
+To write our first python script, open SublimeText (or whichever text editor you're using) and create a new blank document. While the document is still blank save it as hello.py in your python folder. It might seem silly to save a blank document, but this will let SublimeText know that we are writing a python script, and it will give us nice syntax highlighting.
+
+Writing Hello World
+The traditional first python script to write is a "Hello world!" script. Inside your hello.py document, write the following.
+
+print("Hello world!")
+It is important that you enter it in exactly as it appears here.
+
+The command print must be lower case.
+"Hello world!" must be inside quotation marks.
+It's less important what exactly you put inside the quotation marks.
+The opening ( must be matched with a closing ).
+Save your script!
+
+Running hello.py
+To run the script, navigate in your terminal to the python directory where you saved the script. Then, run the following.
+
+python3 hello.py
+What should happen next is the terminal will print out Hello world!, or whatever it was you put in quotes.
+
+What just happened? 
+The Script.
+Our document, hello.py is a script. All a a script is is a plain test document. This specific script is a python script because it contains text that python can interpret. It doesn't have to end in .py, but its helpful for keeping things straight.
+
+hello_py.png
+
+Functions
+Inside of the script is code. Specifically, the print() function. Functions are the pieces of code that do things. In this case, the print() function prints its arguments. 
+
+hello_py-1.png
+
+Arguments
+Functions take arguments. Arguments are the pieces of information the functions use to do what they do. In this case, print() has to print something! The value we pass to print()'s argument is the string "Hello world!"
+
+hello_py-2.png
+
+Running the script
+For the script to do anything, we need our code to be interpreted. Sort of like how we had to open our HTML documents in a web browser for the markup to be interpreted, we need to tell python to interpret the code in hello.py as python code, and do something about it.
+
+We do this by telling our computer to run python3, but instead of launching the interactive prompt, to interpret the text in hello.py as code as if we had just typed it all in.
+
+
+In this module, we will cover
+
+How to assign a value to a variable.
+The kinds of basic values types there are.
+Some basic operations for those values.
+Assignment
+Here, we'll work through an example of calculating how old you will be in the year 2040. We'll do this in two steps:
+
+Subtracting your current age from the current year to get your year of birth.
+Subtracting your year of birth from 2040, to get your age in 2040.
+We'll do this in the interactive python shell, which you can access either by running python3 or ipython3 for a more nicely colored experience.
+
+Variables
+In the steps I described above, there are a few different variables involved, specifically
+
+Your current age.
+The current year.
+Your year of birth.
+In a fresh python session, python doesn't know any of these things. For example, if you run the following code:
+
+my_age
+you'll get the following error:
+
+NameError: name 'my_age' is not defined
+However, we can assign your age to the variable my_age with the assignment operator, =.
+
+my_age = 37
+Running that line of code doesn't result in any output, but now if we re-run my_age on a new line, it will print back out whatever numeric value you gave it.
+
+Variable Names
+There are a few rules about variable names. First, they are case sensitive. We just assigned a numeric value to my_age, and if we tried to run My_age, or my_Age, or anything else that isn't exactly the same as the original variable name, we'll get the NameError again. In fact, we can even assign different values to variables called My_age or my_Age, but I don' recommend it!
+
+The rules for variable names in python are the following:
+
+They can start with any upper case or lower case letter, or underscore (in regex [A-Za-z_])
+They can't start with a number!
+After the first character, they can have any letter, number, or underscore, but that's all.
+No & or * or . or ? etc. are allowed
+Using Variables
+Once you've assigned a value to a variable, you can use that variable like it was the value. For example, to get the year you were born (±1), we subtract your age from the current year.
+
+2022 - my_age
+This will subtract the numeric value you assigned to my_age as if it was that number. If we assign the value 2022 to the variable current_year, we can then use both variables as if they were that number.
+
+current_year = 2022
+current_year - my_age
+We can then assign the output of this subtraction to a new variable called year_of_birth.
+
+year_of_birth = current_year - my_age
+If you run year_of_birth on its own line, it should print out your year of birth.
+
+To get your age in the year 2040, we just subtract your year of birth from 2040.
+
+2040 - year_of_birth
+Overwriting variables
+Once you've assigned a value to a variable, you can assign a new, different, value to that variable using = again. For example, if I wanted to change my age to 50, I could do so like this:
+
+my_age = 50
+Now if we run my_age, it will return 50. 
+
+Important!! Changing the value of my_age to 50 does not update the values of any other variable! The code we ran to assign a value to year_of_birth was current_year - my_age. Even though we just changed the value in my_age, the value in year_of_birth has not been updated.
+
+Types of Values
+There are three basic kinds of values in python
+
+Numbers
+Technically, there are two kinds of numbers in Python: integers (numbers without decimals places) and floats (numbers with decimal places). This used to be a bigger deal in python2, but python3 converts as necessary. We've already done some work with numbers above. The built in arithmetic in python that we can use on numbers is:
+
+x + y addition
+x - y subtraction
+x * y multiplication
+x / y division
+x ** y exponentiation (that is, xy)
+x % y modulus (this gives you the remainder of doing division)
+x // y floor division (this gives you the largest whole number that y can go into x)
+Strings
+In addition to numbers, we also have strings. If we just type text into the prompt, python will think we're asking for a variable, and if such a variable hasn't been created yet, it'll give us a NameError. For example, if you type your first name into the prompt, you'll get a NameError
+
+Josef
+However, if you type in the same text, but inside of quotation marks this time, it'll just print back out to you the text.
+
+"Josef"
+In this second example, it prints out the text because it's interpreting the text as a value instead of a variable.
+
+You can put basically any kind of text inside of a string value. There are no restrictions on the characters inside of a string value like there are on variable names. The only complicated thing is when you want to put an actual " inside of the string, in which case you need to escape it. 
+
+"I said, \"Hello!\""
+ If we assign a few different strings to variables, we can paste them all together with +
+
+title = "Dr."
+first_name = "Josef"
+last_name = "Fruehwald"
+
+title + first_name + last_name
+Or, we can print them all out nicely, separated by spaces, with print().
+
+print(title, first_name, last_name)
+There is a lot more we can do with strings, which we will be doing, since most of the linguistic data we're working with comes in the form of text strings!
+
+Boolean, or Logical Values
+"Boolean" values are actually named after a guy, George BooleLinks to an external site.. There's only two logical values available, which we access by typing in their name without quotation marks: True and False. 
+
+Usually you won't be typing these values in by hand. Instead, they'll be the result of a logical comparison. For example, if I wanted to see if the value in first_name, was "Joseph", I could do so with the == operator.
+
+first_name == "Joseph"
+That line of code returns False, because the value in first_name is different.
+
+This is a place to be careful: A common typo or mistake to make is to use the assignment operator (=) when you mean to use the exactly equal operator (==). 
+
+While == is the only logical operator that works for strings, there are more that work for numbers
+
+== : Exactly equal
+> : Greater than
+>= : Greater than or equal to
+< : Less than
+<= : Less than or equal to
+Some additional fun operators compare or change logical values. For example, if we run not True, we get back the result False, and if we run not False we get back True. 
+
+(Note, in the real world, something that is "not false" is not necessarily "true". This is one of many cases where programming might look like human language, but behaves differently.)
+
+The two other logical connectives we have are and and or. The tables below outline what these operators do.
+
+Input	Output
+True and True	True
+True and False	False
+False and False	False
+ 
+
+Input	Output
+True or True	True
+True or False	True
+False or False	False
+For example, let's say you wanted to check if my first name was "Josef", but you didn't care if it was with an "f" or a "ph". You could check this way.
+
+(first_name == "Joseph") or (first_name == "Josef")
+ Or, let's say we wanted to find a "Josef", but only one who is 37. We could do that with:
+
+(first_name == "Josef") and (my_age == 37)
+
+
