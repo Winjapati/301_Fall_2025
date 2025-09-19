@@ -4,7 +4,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body {
-  background-color: lightblue;
+  padding: 25px;
+  background-color: white;
+  color: black;
+  font-size: 25px;
+}
+
+.dark-mode {
+  background-color: black;
+  color: white;
 }
 </style>
 </head>
@@ -15,12 +23,24 @@ body {
 
 <button onclick="myFunction()">Toggle dark mode</button>
 
+
+
+<footer>
+  <p>&copy; <span id="year"></span> AMB</p>
+</footer>
+
+<script>
+  const yearSpan = document.getElementById("year");
+  yearSpan.textContent = new Date().getFullYear();
+</script>
+
 <script>
 function myFunction() {
    const element = document.body;
    element.classList.toggle("dark-mode");
 }
 </script>
+
 
 </body>
 </html>
