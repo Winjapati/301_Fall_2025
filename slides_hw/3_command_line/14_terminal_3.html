@@ -410,6 +410,7 @@ Dr.&nbsp;Andrew M. Byrd
 <h2 id="toc-title">Plan for the Day</h2>
 <ul>
 <li><a href="#/review" id="/toc-review">Review</a></li>
+<li><a href="#/regex" id="/toc-regex">Regex</a></li>
 </ul>
 </nav>
 </section>
@@ -420,21 +421,24 @@ Dr.&nbsp;Andrew M. Byrd
 <li>What did you learn last time?</li>
 </ul>
 </section>
-<section id="review-grep-basics" class="slide level2 center">
-<h2>Review: Grep Basics</h2>
+<section id="review-wc-grep-and" class="slide level2 center">
+<h2>Review: <code>wc</code>, <code>grep</code>, and <code>|</code></h2>
 <ul>
-<li><code>grep "word" file.txt</code> → search for a string in a file</li>
-<li>Useful flags:
+<li><code>wc file.txt</code> → identify number of lines, words, and characters in <code>file.txt</code>
 <ul>
-<li><code>-i</code> → ignore case</li>
-<li><code>-n</code> → show line numbers</li>
-<li><code>-r</code> → recursive search</li>
+<li><code>-l</code>, <code>-w</code>, <code>-c</code></li>
 </ul></li>
+<li><code>grep "word" file.txt</code> → search for a string in a file</li>
 <li>Combine with pipes:
 <ul>
 <li><code>grep "word" file.txt | wc -l</code></li>
 </ul></li>
 </ul>
+</section></section>
+<section>
+<section id="regex" class="title-slide slide level1 center">
+<h1>Regex</h1>
+
 </section>
 <section id="what-are-regular-expressions" class="slide level2 center">
 <h2>What Are Regular Expressions?</h2>
@@ -454,21 +458,51 @@ Dr.&nbsp;Andrew M. Byrd
 </ul></li>
 </ul>
 </section>
-<section id="wildcards-metacharacters" class="slide level2 center">
-<h2>Wildcards &amp; Metacharacters</h2>
+<section id="regular-expressions-are-weird" class="slide level2 center">
+<h2>Regular Expressions are WEIRD</h2>
+<ul>
+<li><p>Of all the programming we’ll be doing in this class, regex are the most obtuse</p>
+<ul>
+<li>Pronounced [ˌɹɛg.ˈɛks]</li>
+</ul></li>
+<li><p>Today we’ll learn how basic regex commands can be used in the Terminal</p></li>
+<li><p>And we’ll likely return to them later in the semester once we have some Python under our belts</p></li>
+</ul>
+</section>
+<section id="our-first-regex" class="slide level2 center">
+<h2>Our First Regex</h2>
+<ul>
+<li>Type in the following code:</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href=""></a><span class="ex">curl</span> <span class="at">-o</span> 14_alice.txt </span>
+<span id="cb1-2"><a href=""></a><span class="fu">grep</span> <span class="at">-E</span> <span class="st">"c.t"</span> file.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Note the <code>-E</code>
+<ul>
+<li>This prompts <code>grep</code> to use <strong>Extended Regular Expressions</strong></li>
+</ul></li>
+<li>What does <code>.</code> do?</li>
+</ul>
+</section>
+<section id="our-first-regex-1" class="slide level2 center">
+<h2>Our First Regex</h2>
 <ul>
 <li><code>.</code> → any single character<br>
 </li>
+</ul>
+</section>
+<section id="more-symbols" class="slide level2 center">
+<h2>More Symbols</h2>
+<ul>
+<li>Within <code>14_alice.txt</code>, use the following code.</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href=""></a><span class="fu">grep</span> <span class="at">-E</span> <span class="st">"c.t"</span> file.txt   <span class="co"># matches cat, cot, cut</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
 <li><code>*</code> → 0 or more of the preceding<br>
 </li>
 <li><code>?</code> → 0 or 1 of the preceding<br>
 </li>
 <li><code>+</code> → 1 or more of the preceding</li>
-</ul>
-<p><strong>Example</strong></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href=""></a><span class="fu">grep</span> <span class="at">-E</span> <span class="st">"c.t"</span> file.txt   <span class="co"># matches cat, cot, cut</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li>Note the <code>-E</code> – this prompts <code>grep</code> to use <strong>Extended Regular Expressions</strong></li>
 </ul>
 </section>
 <section id="character-classes" class="slide level2 center">
@@ -484,7 +518,7 @@ Dr.&nbsp;Andrew M. Byrd
 <li>→ whitespace</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href=""></a><span class="fu">grep</span> <span class="at">-E</span> <span class="st">"[0-9]+"</span> file.txt   <span class="co"># find numbers</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href=""></a><span class="fu">grep</span> <span class="at">-E</span> <span class="st">"[0-9]+"</span> file.txt   <span class="co"># find numbers</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="anchors" class="slide level2 center">
 <h2>Anchors</h2>
@@ -492,8 +526,8 @@ Dr.&nbsp;Andrew M. Byrd
 <li>^ → beginning of line</li>
 <li>$ → end of line</li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href=""></a><span class="fu">grep</span> <span class="at">-E</span> <span class="st">"^The"</span> file.txt   <span class="co"># lines starting with "The"</span></span>
-<span id="cb3-2"><a href=""></a><span class="fu">grep</span> <span class="at">-E</span> <span class="st">"\?$"</span> file.txt    <span class="co"># lines ending with "?"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href=""></a><span class="fu">grep</span> <span class="at">-E</span> <span class="st">"^The"</span> file.txt   <span class="co"># lines starting with "The"</span></span>
+<span id="cb4-2"><a href=""></a><span class="fu">grep</span> <span class="at">-E</span> <span class="st">"\?$"</span> file.txt    <span class="co"># lines ending with "?"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="grouping-alternation" class="slide level2 center">
 <h2>Grouping &amp; Alternation</h2>
@@ -501,7 +535,7 @@ Dr.&nbsp;Andrew M. Byrd
 <li>(cat|dog) → “cat” or “dog”</li>
 <li>(ab)+ → one or more “ab” sequences</li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href=""></a><span class="fu">grep</span> <span class="at">-E</span> <span class="st">"(cat|dog)"</span> file.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href=""></a><span class="fu">grep</span> <span class="at">-E</span> <span class="st">"(cat|dog)"</span> file.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="grep-regex-in-action" class="slide level2 center">
 <h2>Grep + Regex in Action</h2>
@@ -509,15 +543,15 @@ Dr.&nbsp;Andrew M. Byrd
 <ul>
 <li>Words ending in “ing”</li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href=""></a><span class="fu">grep</span> <span class="at">-E</span> <span class="st">"(cat|dog)"</span> file.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href=""></a><span class="fu">grep</span> <span class="at">-E</span> <span class="st">"(cat|dog)"</span> file.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>Lines starting with a capital letter</li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href=""></a><span class="fu">grep</span> <span class="at">-E</span> <span class="st">"^[A-Z]"</span> file.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href=""></a><span class="fu">grep</span> <span class="at">-E</span> <span class="st">"^[A-Z]"</span> file.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>All numbers</li>
 </ul>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href=""></a><span class="fu">grep</span> <span class="at">-E</span> <span class="st">"[0-9]+"</span> file.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href=""></a><span class="fu">grep</span> <span class="at">-E</span> <span class="st">"[0-9]+"</span> file.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="useful-flags" class="slide level2 center">
 <h2>Useful Flags</h2>
@@ -526,7 +560,7 @@ Dr.&nbsp;Andrew M. Byrd
 <li>o → print only matches</li>
 <li>c → count matches</li>
 </ul>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href=""></a><span class="fu">grep</span> <span class="at">-Eo</span> <span class="st">"\w+ing"</span> file.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href=""></a><span class="fu">grep</span> <span class="at">-Eo</span> <span class="st">"\w+ing"</span> file.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="activity" class="slide level2 center">
 <h2>Activity</h2>

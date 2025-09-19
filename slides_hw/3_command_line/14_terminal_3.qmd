@@ -19,112 +19,141 @@ editor: visual
 
 -   What did you learn last time?
 
-## Review: Grep Basics
+## Review: `wc`, `grep`, and `|`
 
-- `grep "word" file.txt` → search for a string in a file
-- Useful flags:
-  - `-i` → ignore case
-  - `-n` → show line numbers
-  - `-r` → recursive search
-- Combine with pipes:
-  - `grep "word" file.txt | wc -l`
+-   `wc file.txt` → identify number of lines, words, and characters in `file.txt`
+    -   `-l`, `-w`, `-c`
+-   `grep "word" file.txt` → search for a string in a file
+-   Combine with pipes:
+    -   `grep "word" file.txt | wc -l`
+
+# Regex
 
 ## What Are Regular Expressions?
 
-- A **language for patterns**
-- Lets us search for:
-  - Word forms
-  - Phonological environments
-  - Structured data
-- Used in:
-  - Linguistics
-  - Programming
-  - Data science
+-   A **language for patterns**
+-   Lets us search for:
+    -   Word forms
+    -   Phonological environments
+    -   Structured data
+-   Used in:
+    -   Linguistics
+    -   Programming
+    -   Data science
 
-## Wildcards & Metacharacters
+## Regular Expressions are WEIRD
 
-- `.` → any single character  
-- `*` → 0 or more of the preceding  
-- `?` → 0 or 1 of the preceding  
-- `+` → 1 or more of the preceding  
+-   Of all the programming we'll be doing in this class, regex are the most obtuse
 
-**Example**  
+    -   Pronounced [ˌɹɛg.ˈɛks]
+
+-   Today we'll learn how basic regex commands can be used in the Terminal
+
+-   And we'll likely return to them later in the semester once we have some Python under our belts
+
+## Our First Regex
+
+- Type in the following code:
+
+``` bash
+curl -o 14_alice.txt 
+grep -E "c.t" file.txt
+```
+-   Note the `-E` 
+    - This prompts `grep` to use **Extended Regular Expressions**
+- What does `.` do?
+
+## Our First Regex
+
+-   `.` → any single character\
+
+## More Symbols
+
+- Within `14_alice.txt`, use the following code.
+
+
 ```bash
 grep -E "c.t" file.txt   # matches cat, cot, cut
 ```
 
-- Note the `-E` -- this prompts `grep` to use **Extended Regular Expressions**
+-   `*` → 0 or more of the preceding\
+-   `?` → 0 or 1 of the preceding\
+-   `+` → 1 or more of the preceding
+
 
 ## Character Classes
 
+-   \[aeiou\] → any vowel
+-   \[\^aeiou\] → anything except a vowel
+-   \[a-z\], \[0-9\] → ranges
+-   Predefined:
+    -   \d → digit
+    -   \w → word character
+    -   \s → whitespace
 
-- [aeiou] → any vowel
-- [^aeiou] → anything except a vowel
-- [a-z], [0-9] → ranges
-- Predefined:
-  - \d → digit
-  - \w → word character
-  - \s → whitespace
-
-```bash
+``` bash
 grep -E "[0-9]+" file.txt   # find numbers
 ```
 
-## Anchors 
+## Anchors
 
-- ^ → beginning of line
-- $ → end of line
+-   \^ → beginning of line
+-   \$ → end of line
 
-```bash
+``` bash
 grep -E "^The" file.txt   # lines starting with "The"
 grep -E "\?$" file.txt    # lines ending with "?"
 ```
 
 ## Grouping & Alternation
 
-- (cat|dog) → "cat" or "dog"
-- (ab)+ → one or more “ab” sequences
+-   (cat\|dog) → "cat" or "dog"
+-   (ab)+ → one or more “ab” sequences
 
-```bash
+``` bash
 grep -E "(cat|dog)" file.txt
 ```
 
 ## Grep + Regex in Action
+
 Examples with a text file:
 
-- Words ending in “ing”
-```bash
+-   Words ending in “ing”
+
+``` bash
 grep -E "(cat|dog)" file.txt
 ```
 
-- Lines starting with a capital letter
-```bash
+-   Lines starting with a capital letter
+
+``` bash
 grep -E "^[A-Z]" file.txt
 ```
 
-- All numbers
-```bash
+-   All numbers
+
+``` bash
 grep -E "[0-9]+" file.txt
 ```
 
 ## Useful Flags
 
-- E → extended regex
-- o → print only matches
-- c → count matches
+-   E → extended regex
+-   o → print only matches
+-   c → count matches
 
-```bash
+``` bash
 grep -Eo "\w+ing" file.txt
 ```
 
 ## Activity
 
-- Work with a text of your choice (e.g., from Project Gutenberg).
-- Try to find:
-  - All words beginning with "a"/ "A" or "z" / "Z"
-  - All four-letter words
-  - Lines ending with a question mark
-  - Words with repeated vowels (food, see)
+-   Work with a text of your choice (e.g., from Project Gutenberg).
+-   Try to find:
+    -   All words beginning with "a"/ "A" or "z" / "Z"
+    -   All four-letter words
+    -   Lines ending with a question mark
+    -   Words with repeated vowels (food, see)
 
 <!-- -   Treasure Hunt, practicing everything they've done so far -->
 
