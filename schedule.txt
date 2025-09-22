@@ -5,10 +5,10 @@ Assignment 9/3 - Learning Markup Languages (LaTeX)
 Assignment 9/5 - Learning Markup Languages (LaTeX)	 
 Assignment 9/8 - Setting up RStudio & GitHub	  
 Assignment 9/10 - Learning Markup Languages (HTML) 
-Assignment 9/12 - Learning Markup Languages (CSS)	 
-Assignment 9/15 - Learning Markup Languages (JS, day 1)	 
-Assignment 9/17 - Learning Markup Languages (JS, day 2)	 
-Assignment 9/19 - Learning Markup Languages (JS, day 3)	 
+Assignment 9/12 - Learning Markup Languages (HTML)	 
+Assignment 9/15 - Learning Markup Languages (CSS)	 
+Assignment 9/17 - Learning Markup Languages (CSS)	 
+Assignment 9/19 - Learning Markup Languages (Baby JS)	 
 Assignment 9/22 - Learning the Command Line	 
 Assignment 9/24 - Learning the Command Line	 
 Assignment 9/26 - Learning the Command Line	 
