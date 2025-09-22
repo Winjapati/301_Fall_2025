@@ -345,6 +345,10 @@ Dr.&nbsp;Andrew M. Byrd
 <h2 id="toc-title">Plan for the Day</h2>
 <ul>
 <li><a href="#/review" id="/toc-review">Review</a></li>
+<li><a href="#/overview-of-python" id="/toc-overview-of-python">Overview of Python</a></li>
+<li><a href="#/programming-with-latex" id="/toc-programming-with-latex">Programming with LaTeX</a></li>
+<li><a href="#/programming-in-python" id="/toc-programming-in-python">Programming in python</a></li>
+<li><a href="#/writing-our-first-script" id="/toc-writing-our-first-script">Writing Our First Script</a></li>
 </ul>
 </nav>
 </section>
@@ -382,17 +386,88 @@ Dr.&nbsp;Andrew M. Byrd
 <li>Search for “Alice”</li>
 <li>How many instances of “Alice” are there in the story? (Or more specifically, how many lines occur in the book that contain at least one “Alice”?)</li>
 </ul>
-<div id="9de7f1cf" class="cell" data-execution_count="1">
-<div class="cell-output cell-output-display" data-execution_count="1">
-<pre><code>11</code></pre>
-</div>
-</div>
+</section></section>
+<section>
+<section id="overview-of-python" class="title-slide slide level1 center">
+<h1>Overview of Python</h1>
+
+</section>
+<section id="python" class="slide level2 center">
+<h2>Python</h2>
+<ul>
+<li>Python is a programming language. With it, we will write plain text documents that do things. Keep in mind that you have already been programming in this course!</li>
+</ul>
+</section></section>
+<section>
+<section id="programming-with-latex" class="title-slide slide level1 center">
+<h1>Programming with LaTeX</h1>
+<p>Here were the steps we used to program with LaTeX:</p>
+<ul>
+<li>We defined what kind of document we were writing with</li>
+<li>We imported additional code, with</li>
+<li>We wrote out instructions for how the document was supposed to look with commands like </li>
+<li>Then, we used a LaTeX engine (being run by OverLeaf) to interpret the LaTeX code, which returned a result in the form of a typeset pdf.</li>
+</ul>
+</section>
+<section id="programming-with-html-and-css" class="slide level2 center">
+<h2>Programming with HTML and CSS</h2>
+<p>Recall the steps we went through to write a website:</p>
+<ul>
+<li>We defined what kind of document we were writing with the <docstring></docstring></li>
+<li>We imported additional code, in the form of CSS, into the HTML document.</li>
+<li>We wrote out instructions for how the text was supposed to look with commands like <code>&lt;strong&gt;&lt;/strong&gt;</code></li>
+<li>Then, we used a web browser to interpret the code in the HTML document, and the browser returned a result in the form of a website.</li>
+</ul>
+</section>
+<section id="programming-at-the-terminal" class="slide level2 center">
+<h2>Programming at the Terminal</h2>
+<ul>
+<li>We even programmed with RegEx</li>
+<li>Regular expressions are much simpler than HTML or LaTeX, but one way to think of a regex like +lys that it is a very tiny program, that we then used egrep to interpret, resulting in all of the matching strings.</li>
+</ul>
+</section></section>
+<section>
+<section id="programming-in-python" class="title-slide slide level1 center">
+<h1>Programming in python</h1>
+<p>Will be a lot like this! When we write a python program, we will:</p>
+<ul>
+<li>Define what kind of document it is at the top with #! /usr/bin/python3</li>
+<li>Import additional code, using import</li>
+<li>Write out instructions for what the document is supposed to do with code.</li>
+<li>Then use the python interpreter to interpret our code, and do what we asked it to do.</li>
+</ul>
+</section>
+<section id="getting-set-up" class="slide level2 center">
+<h2>Getting Set Up</h2>
+<p>Getting Set Up To get set up for writing python scripts, I recommend you create a folder inside the course folder called python. This is where you should save your python scripts, and where you should navigate to in your terminal when we run python scripts.</p>
+<p>A first look at python We can get a first look at python by opening your terminal and running python3.</p>
+<p>python3 Your ordinary terminal should be replaced by some text about the python version, and then &gt;&gt;&gt;. The &gt;&gt;&gt; is there to indicate that anything we type in will be interpreted as python code.</p>
+<p>Using python like a calculator One way we could use python is as a calculator. Back in the Textual Analysis module, I found that Jane Austen used “the” 29,696 times, and used a total of 798,954 words overall. To find the proportion of here words that were “the”, I need to do division in python. (Don’t copy the &gt;&gt;&gt; from the code below.)</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>29696 / 798854 0.03717325068160139<br>
+The / symbol is the code for division in python. Note that we didn’t include the commas when we typed in the numbers. An important thing about python, and all programming languages, is that we need to enter all of our numbers without commas.</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>Getting out of python! To get out of python and back to your usual terminal, run quit()</p>
+</section></section>
+<section id="writing-our-first-script" class="title-slide slide level1 center">
+<h1>Writing Our First Script</h1>
+<p>To write our first python script, open SublimeText (or whichever text editor you’re using) and create a new blank document. While the document is still blank save it as hello.py in your python folder. It might seem silly to save a blank document, but this will let SublimeText know that we are writing a python script, and it will give us nice syntax highlighting.</p>
+<p>Writing Hello World The traditional first python script to write is a “Hello world!” script. Inside your hello.py document, write the following.</p>
+<p>print(“Hello world!”) It is important that you enter it in exactly as it appears here.</p>
+<p>The command print must be lower case. “Hello world!” must be inside quotation marks. It’s less important what exactly you put inside the quotation marks. The opening ( must be matched with a closing ). Save your script!</p>
+<p>Running hello.py To run the script, navigate in your terminal to the python directory where you saved the script. Then, run the following.</p>
+<p>python3 hello.py What should happen next is the terminal will print out Hello world!, or whatever it was you put in quotes.</p>
+<p>What just happened? The Script. Our document, hello.py is a script. All a a script is is a plain test document. This specific script is a python script because it contains text that python can interpret. It doesn’t have to end in .py, but its helpful for keeping things straight.</p>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
