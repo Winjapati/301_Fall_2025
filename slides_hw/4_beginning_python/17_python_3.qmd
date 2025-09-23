@@ -1,6 +1,6 @@
 ---
 title: "Computation for Linguists"
-subtitle: "Beginning Python: Variables & Types"
+subtitle: "Beginning Python: Lists & Dictionaries"
 date: "October 3, 2025"
 author: "Dr. Andrew M. Byrd"
 format:
@@ -19,97 +19,215 @@ editor: visual
 
 -   What did you learn last time?
 
-## Review: `wc`, `grep`, and `|`
+## Review: `d`
 
--   `wc file.txt` → identify number of lines, words, and characters in `file.txt`
-    -   `-l`, `-w`, `-c`
--   `grep "word" file.txt` → search for a string in a file
--   Combine with pipes:
-    -   `grep "word" file.txt | wc -l`
+-   `d`
 
-## Review Activity
 
-Using Terminal:
+# Lists and Dictionaries
 
--   Create a folder called `alice`
--   Download *Alice's Adventures in Wonderland*
-    -   https://www.gutenberg.org/ebooks/11
-    -   name it `alice.txt`
--   Search for "Alice"
--   How many instances of "Alice" are there in the story? (Or more specifically, how many lines occur in the book that contain at least one "Alice"?)
+## Data Structures
+Recap from last module:
+- Assign a value to a variable with `=`  
+- **Numbers**: we can do math with them  
+- **Strings**: text inside quotes `" "` or `' '`  
+- **Booleans**: `True` and `False`, usually created with logical comparisons  
 
-# Overview of Python
+Example:
 
-## Python
+```python
+this_class = "Lin317"
+this_class == "Lin221"
+# False
+```
 
--   Python is a programming language. With it, we will write plain text documents that do things. Keep in mind that you have already been programming in this course!
+In this module: **lists** and **dictionaries**.
 
-# Programming with LaTeX
+---
 
-Here were the steps we used to program with LaTeX:
+# Lists
 
--   We defined what kind of document we were writing with
+Assign a single value:
 
-    \documentclass{}
+```python
+first_novel = "Sense and Sensibility"
+```
 
--   We imported additional code, with
+But Jane Austen published **seven novels**. Instead of many variables, use a **list**:
 
-    \usepackage{}
+```python
+novels = ["Sense and Sensibility", "Pride and Prejudice",
+          "Mansfield Park", "Emma",
+          "Northanger Abbey", "Persuasion",
+          "Lady Susan"]
+```
 
--   We wrote out instructions for how the document was supposed to look with commands like \textbf{}
+Print list:
 
--   Then, we used a LaTeX engine (being run by OverLeaf) to interpret the LaTeX code, which returned a result in the form of a typeset pdf.
+```python
+print(novels)
+```
 
-## Programming with HTML and CSS
+---
 
-Recall the steps we went through to write a website:
+# Adding Two Lists Together
 
--   We defined what kind of document we were writing with the <DOCSTRING>
--   We imported additional code, in the form of CSS, into the HTML document.
--   We wrote out instructions for how the text was supposed to look with commands like `<strong></strong>`
--   Then, we used a web browser to interpret the code in the HTML document, and the browser returned a result in the form of a website.
+Concatenate lists with `+`:
 
-## Programming at the Terminal
+```python
+unfinished = ["The Watsons", "Sandition"]
+novels + unfinished
+```
 
--   We even programmed with RegEx
--   Regular expressions are much simpler than HTML or LaTeX, but one way to think of a regex like \b\w+ly\b is that it is a very tiny program, that we then used egrep to interpret, resulting in all of the matching strings.
+---
 
-# Programming in python
+# Indexing a List
 
-Will be a lot like this! When we write a python program, we will:
+Access elements with indices (starting at 0):
 
--   Define what kind of document it is at the top with #! /usr/bin/python3
--   Import additional code, using import
--   Write out instructions for what the document is supposed to do with code.
--   Then use the python interpreter to interpret our code, and do what we asked it to do.
+```python
+novels[0]  # first item
+novels[1]  # second item
+```
 
-## Getting Set Up
+⚠️ Indexing starts at 0!
 
-Getting Set Up To get set up for writing python scripts, I recommend you create a folder inside the course folder called python. This is where you should save your python scripts, and where you should navigate to in your terminal when we run python scripts.
+---
 
-A first look at python We can get a first look at python by opening your terminal and running python3.
+# Getting the Index of a Value
 
-python3 Your ordinary terminal should be replaced by some text about the python version, and then \>\>\>. The \>\>\> is there to indicate that anything we type in will be interpreted as python code.
+Lists have methods. Example: `.index()`
 
-Using python like a calculator One way we could use python is as a calculator. Back in the Textual Analysis module, I found that Jane Austen used "the" 29,696 times, and used a total of 798,954 words overall. To find the proportion of here words that were "the", I need to do division in python. (Don't copy the \>\>\> from the code below.)
+```python
+novels.index("Emma")
+# 3
+```
 
-> > > 29696 / 798854 0.03717325068160139\
-> > > The / symbol is the code for division in python. Note that we didn't include the commas when we typed in the numbers. An important thing about python, and all programming languages, is that we need to enter all of our numbers without commas.
+Use index to align with another list:
 
-Getting out of python! To get out of python and back to your usual terminal, run quit()
+```python
+pub_year = [1811, 1813, 1814, 1815, 1818, 1818, 1871]
 
-# Writing Our First Script
+emma_index = novels.index("Emma")
+pub_year[emma_index]  # 1815
+```
 
-To write our first python script, open SublimeText (or whichever text editor you're using) and create a new blank document. While the document is still blank save it as hello.py in your python folder. It might seem silly to save a blank document, but this will let SublimeText know that we are writing a python script, and it will give us nice syntax highlighting.
+---
 
-Writing Hello World The traditional first python script to write is a "Hello world!" script. Inside your hello.py document, write the following.
+# Reverse Lookup
 
-print("Hello world!") It is important that you enter it in exactly as it appears here.
+Find book by year:
 
-The command print must be lower case. "Hello world!" must be inside quotation marks. It's less important what exactly you put inside the quotation marks. The opening ( must be matched with a closing ). Save your script!
+```python
+year_index = pub_year.index(1814)
+novels[year_index]
+# 'Mansfield Park'
+```
 
-Running hello.py To run the script, navigate in your terminal to the python directory where you saved the script. Then, run the following.
+---
 
-python3 hello.py What should happen next is the terminal will print out Hello world!, or whatever it was you put in quotes.
+# Negative Indexing
 
-What just happened? The Script. Our document, hello.py is a script. All a a script is is a plain test document. This specific script is a python script because it contains text that python can interpret. It doesn't have to end in .py, but its helpful for keeping things straight.
+Count from the end:
+
+```python
+novels[-1]
+# 'Lady Susan'
+```
+
+---
+
+# Slicing
+
+Get ranges of values:
+
+```python
+novels[0:3]
+# ['Sense and Sensibility', 'Pride and Prejudice', 'Mansfield Park']
+```
+
+Remember: stop index is not included.
+
+---
+
+# Membership Test
+
+Check if a value is in a list:
+
+```python
+"Emma" in novels        # True
+"Frankenstein" in novels # False
+```
+
+With a variable:
+
+```python
+novel_to_check = "Lady Susan"
+novel_to_check in novels
+```
+
+---
+
+# Complex Lists
+
+Lists can contain anything — even other lists:
+
+```python
+complex_list = [["Sense and Sensibility", 1811],
+                ["Pride and Prejudice", 1813],
+                ["Mansfield Park", 1814],
+                ["Emma", 1815]]
+```
+
+Indexing:
+
+```python
+complex_list[0]      # ["Sense and Sensibility", 1811]
+complex_list[2][1]   # 1814
+```
+
+---
+
+# Dictionaries
+
+Relate **keys** to **values** using `{}`:
+
+```python
+novel_dict = {"Sense and Sensibility": 1811,
+              "Pride and Prejudice": 1813,
+              "Mansfield Park": 1814}
+```
+
+Keys must be unique. Values can repeat.
+
+---
+
+# Indexing a Dictionary
+
+Get values by key:
+
+```python
+novel_dict["Pride and Prejudice"]
+# 1813
+```
+
+---
+
+# Adding to a Dictionary
+
+Add a new key–value pair:
+
+```python
+novel_dict["Emma"] = 1815
+```
+
+---
+
+# Checking Keys
+
+`in` checks keys, not values:
+
+```python
+"Pride and Prejudice" in novel_dict  # True
+1811 in novel_dict                   # False
+```

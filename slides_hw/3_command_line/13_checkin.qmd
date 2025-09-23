@@ -1,0 +1,23 @@
+---
+title: "Day 13: Check-in"
+format: pdf
+---
+
+**Name**: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+**Date**: 9/24/2025
+
+Analyze the following block of code, and describe what happens in each line.
+
+```bash
+$ pwd
+~/LIN_301
+$ ls
+$ touch test.txt
+$ mkdir folder_1
+$ mv test.txt folder_1
+$ cd folder_1
+$ ls
+$ cd ..
+$ rm -r folder_1
+```

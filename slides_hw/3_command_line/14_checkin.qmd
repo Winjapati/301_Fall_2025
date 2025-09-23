@@ -1,0 +1,30 @@
+---
+title: "Day 14: Check-in"
+format: pdf
+---
+
+**Name**: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+**Date**: 9/26/2025
+
+1. What does the program `pandoc` allow us to do?
+
+
+\vspace{15mm}
+
+
+
+2. How are Google docs and Microsoft Word docs fundamentally different from `.txt`, `.html`, and `.tex` files?
+
+\vspace{15mm}
+
+3. Analyze the following block of code, and describe what happens in each line.
+
+```bash
+$ curl -o pride_and_prejudice.txt https://gutenberg.org/files/1342/1342-0.txt
+$ mkdir p_and_p
+$ mv pride_and_prejudice.txt p_and_p
+$ mv pride_and_prejudice.txt p_and_p.txt
+$ cd p_and_p
+$ grep "yes" p_and_p.txt | wc -l
+```

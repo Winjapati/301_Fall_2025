@@ -44,20 +44,19 @@ editor: visual
 
 When programming, there are lots of different file types:
 
-- `txt` - a (raw) text file
-- `html` - an html file, to be viewed in a web browser
-- `xml` - an Exstensible Markup Language file
-- `md` - a Markdown file (can be converted into `html`)
-- `tex` - a LaTeX file (can be converted into a `pdf`)
-- `py` - a Python script
-- `r` - an R script
+-   `txt` - a (raw) text file
+-   `html` - an html file, to be viewed in a web browser
+-   `xml` - an Exstensible Markup Language file
+-   `md` - a Markdown file (can be converted into `html`)
+-   `tex` - a LaTeX file (can be converted into a `pdf`)
+-   `py` - a Python script
+-   `r` - an R script
 
 ## Converting Files
 
 All of these can be easily converted, as they're all just text!
 
-
-```bash
+``` bash
 # create md file
 touch test.md
 
@@ -74,10 +73,11 @@ pandoc test.html -t plain -o test.txt
 
 ## Converting to `docx` and `odt`
 
-- Create a `.sh` file called `convert.sh`
-- Paste in this code:
+-   Together, let's create a `.sh` file called `convert.sh`
+    -   If you want to do this on your own, you'll need to download pandoc to your machine.
+-   Paste in this code:
 
-```bash
+``` bash
 # 1) Make a tiny Markdown source
 echo "# Hello!" > demo.md
 echo "This is a *line* and **text**." >> demo.md
@@ -90,25 +90,25 @@ pandoc demo.md -o demo.docx
 pandoc demo.md -o demo.odt
 ```
 
-- Run the code:
+-   Run the code:
 
-```bash
+``` bash
 source convert.sh
 ```
 
 ## Identifying What's Inside: `file`
 
-- Let's see what the Terminal thinks is inside these files:
+-   Let's see what the Terminal thinks is inside these files:
 
-```bash
+``` bash
 file demo.html demo.docx demo.odt
 ```
 
 ## What are these things?
 
-- Let's use a command `head`, to print out what's inside the file itself.
+-   Let's use a command `head`, to print out what's inside the file itself.
 
-```bash
+``` bash
 head -n 20 demo.md
 head -n 20 demo.html
 head -n 20 demo.odt
@@ -117,24 +117,25 @@ head -n 20 demo.docx
 
 ## What are these things?
 
-- Word & Google Docs aren't text formats at all, they're zip files! 
-```bash
+-   Word & Google Docs aren't text formats at all, they're zip files!
+
+``` bash
 unzip -l demo.docx | head
 unzip -l demo.odt  | head
 ```
 
-- Contrast that with:
+-   Contrast that with:
 
-```bash
+``` bash
 unzip -l demo.md | head
 unzip -l demo.html | head
 ```
 
 ## Flattening Files
 
-- We can use Pandoc to flatten all three to plain text:
+-   We can use Pandoc to flatten all three to plain text:
 
-```bash
+``` bash
 pandoc demo.html -t plain -o from_html.txt
 pandoc demo.docx -t plain -o from_docx.txt
 pandoc demo.odt  -t plain -o from_odt.txt
@@ -142,9 +143,9 @@ pandoc demo.odt  -t plain -o from_odt.txt
 
 ## File Extensions
 
-- How much data does each file type take up?
+-   How much data does each file type take up?
 
-```bash
+``` bash
 ls -lh demo.* from_*.txt
 ```
 
@@ -154,110 +155,117 @@ ls -lh demo.* from_*.txt
 
 ## Pride & Prejudice
 
-- Earlier you:
-  - Created a folder called `p_and_p`
-  - Downloaded *Pride and Prejudice* from the following address: <https://gutenberg.org/files/1342/1342-0.txt>, naming the file `p_and_p.txt`
-  - And moved `p_and_p.txt` into the folder `p_and_p`
-- Using `cd`, navigate to `LIN_301/p_and_p` and using `ls` confirm that the file is there
+-   Earlier you:
+    -   Created a folder called `p_and_p`
+    -   Downloaded *Pride and Prejudice* from the following address: <https://gutenberg.org/files/1342/1342-0.txt>, naming the file `p_and_p.txt`
+    -   And moved `p_and_p.txt` into the folder `p_and_p`
+-   Using `cd`, navigate to `LIN_301/p_and_p` and using `ls` confirm that the file is there
 
 ## Pride & Prejudice
 
-- Confirm that you indeed have *Pride and Prejudice* downloaded:
+-   Confirm that you indeed have *Pride and Prejudice* downloaded:
 
-```bash
+``` bash
 less p_and_p.txt
 ```
 
-- You can scroll `up` and `down` in the document using the up/down arrows
-- Hit `spacebar` to jump down a page
-- Press `q` to return to the command prompt
+-   You can scroll `up` and `down` in the document using the up/down arrows
+-   Hit `spacebar` to jump down a page
+-   Press `q` to return to the command prompt
 
 ## Let's Analyze this Thing
 
 In Terminal, type in the following code:
 
-```bash
+``` bash
 wc p_and_p.txt
 ```
 
-- What is this?
-  - Lines, Words, Characters
-  - How many of each?
-  
+-   What is this?
+    -   Lines, Words, Characters
+    -   How many of each?
+
 ## `wc` Flags
 
+-   Lines only:
 
-- Lines only: 
-
-```bash
+``` bash
 wc -l p_and_p.txt
 ```
 
-- Words only:
+-   Words only:
 
-```bash
+``` bash
 wc -w p_and_p.txt
 ```
 
-- How about characters only?
+-   How about characters only?
 
 ## `grep`
 
-- Super useful & common command used to search within documents
-- Here's how it works:
+-   Super useful & common command used to search within documents
+-   Here's how it works:
 
-```bash
+``` bash
 grep "search_string" file_name.txt
 ```
 
-- This code gives all of the lines where "search_string" is found in "file_name.txt"
+-   This code gives all of the lines where "search_string" is found in "file_name.txt"
 
 ## `grep`
 
-- Using this syntax, search for all instances of "yes" in *Pride and Prejudice*
+-   Using this syntax, search for all instances of "yes" in *Pride and Prejudice*
 
-```bash
+``` bash
 grep "search_string" file_name.txt
 ```
 
-- Look at the output in the Terminal -- do you notice anything funny?
+-   Look at the output in the Terminal -- do you notice anything funny?
 
 ## Piping Commands together
 
-- So far we can:
-  - count how many lines, words, and characters there are in a file
-  - see which lines have instances of a specific **string** there are in a file
-
-- But what if we wanted to count how many lines have that specific string?
-  - We use the **pipe** < | >  (just above the enter key)
+-   So far we can:
+    -   count how many lines, words, and characters there are in a file
+    -   see which lines have instances of a specific **string** there are in a file
+-   But what if we wanted to count how many lines have that specific string?
+    -   We use the **pipe** \< \| \> (just above the enter key)
 
 ## Piping Commands together
 
-- Type in this code:
+-   Type in this code:
 
 ``` bash
 grep "yes" p_and_p.txt | wc
 ```
 
-- This tells us the number of words, lines, and characters are *within* lines that contain "yes"
-- How could we narrow this to just tell us how many lines contain "yes"?
+-   This tells us the number of words, lines, and characters are *within* lines that contain "yes"
+-   How could we narrow this to just tell us how many lines contain "yes"?
 
 # Activity: *Frankenstein*
 
 Using the Terminal:
 
-- Create a new folder called `frank`
-- Download *Frankenstein*  from https://www.gutenberg.org/cache/epub/84/pg84.txt
-- Name the file `frank.txt` and move it to the `frank` folder
-- Using `grep`, `wc`, and |, count how many lines have the word `monster` in them
+-   Create a new folder called `frank`
+-   Download *Frankenstein* from https://www.gutenberg.org/cache/epub/84/pg84.txt
+-   Name the file `frank.txt` and move it to the `frank` folder
+-   Using `grep`, `wc`, and \|, count how many lines have the word `monster` in them
 
 <!-- Day 2: File Extensions, Beginning Grep -->
+
 <!-- -   review activity: navigating, creating, deleting, .sh -->
+
 <!-- -   file extensions, what are they? -->
+
 <!-- -   why word and google docs suck for programming -->
+
 <!-- -   converting files -->
+
 <!-- -   activity -->
+
 <!-- -   searching files with wc (-l, -w) -->
+
 <!-- -   searching files with grep -->
+
 <!-- -   piping -->
+
 <!-- -   activity: explore Project Gutenberg, download txt file of choice, place in unique folder, validate each step along the way -->

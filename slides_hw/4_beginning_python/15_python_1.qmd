@@ -19,114 +19,213 @@ editor: visual
 
 -   What did you learn last time?
 
-## Review: `wc`, `grep`, and `|`
+## Review: `grep` and `regex`
 
 -   `wc file.txt` → identify number of lines, words, and characters in `file.txt`
     -   `-l`, `-w`, `-c`
 -   `grep "word" file.txt` → search for a string in a file
 -   Combine with pipes:
     -   `grep "word" file.txt | wc -l`
-
-## Review Activity
-
-Using Terminal:
-
--   Create a folder called `alice`
--   Download *Alice's Adventures in Wonderland*
-    -   https://www.gutenberg.org/ebooks/11
-    -   name it `alice.txt`
--   Search for "Alice"
--   How many instances of "Alice" are there in the story? (Or more specifically, how many lines occur in the book that contain at least one "Alice"?)
+-   `regex`:
+    -   `.`, `[...]`, `[^...]`, `[a-z]`, etc.
 
 # Overview of Python
 
 ## Python
 
-- Python is a programming language. With it, we will write plain text documents that do things. Keep in mind that you have already been programming in this course! 
+- Python is a programming language, commonly used by linguists & programmers in general.
+- With it, we will write plain text documents that *do* things. 
 
 # Programming with LaTeX
+
 Here were the steps we used to program with LaTeX:
 
-- We defined what kind of document we were writing with \documentclass{}
-- We imported additional code, with \usepackage{}
-- We wrote out instructions for how the document was supposed to look with commands like \textbf{}
-- Then, we used a LaTeX engine (being run by OverLeaf) to interpret the LaTeX code, which returned a result in the form of a typeset pdf.
+-   We defined what kind of document we were writing with `documentclass{}`
 
+-   We imported additional code, with `\usepackage{}`
+
+-   We wrote out instructions for how the document was supposed to look with commands like \textbf{}
+
+-   Then, we used a LaTeX engine (using OverLeaf) to interpret the LaTeX code, which returned a result in the form of a typeset pdf.
 
 ## Programming with HTML and CSS
 
 Recall the steps we went through to write a website:
 
-- We defined what kind of document we were writing with the <DOCSTRING>
-- We imported additional code, in the form of CSS, into the HTML document.
-- We wrote out instructions for how the text was supposed to look with commands like `<strong></strong>`
-- Then, we used a web browser to interpret the code in the HTML document, and the browser returned a result in the form of a website.
+-   We defined what kind of document we were writing with the `<DOCSTRING>`
+-   We imported additional code, in the form of `CSS`, into the `HTML` document.
+-   We wrote out instructions for how the text was supposed to look with commands like `<strong></strong>`
+-   Then, we used a web browser to interpret the code in the `HTML` document, and the browser returned a result in the form of a website.
 
 ## Programming at the Terminal
 
-- We even programmed with RegEx
-- Regular expressions are much simpler than HTML or LaTeX, but one way to think of a regex like \b\w+ly\b is that it is a very tiny program, that we then used egrep to interpret, resulting in all of the matching strings.
+- We even a little bit at the Terminal, using `RegEx`!
+- Regular expressions are much simpler than `HTML` or `LaTeX`
+- But these simple expressions allow us conduct powerful and sweeping searches
 
+## Python will be a lot like this! 
 
-# Programming in python
+When we write a Python program, we will:
 
-Will be a lot like this! When we write a python program, we will:
+-   Define what kind of document it is at the top with `#! /usr/bin/python3`
+-   Import additional code, using import
+-   Write out instructions for what the document is supposed to do with code.
+-   Then use the python interpreter to interpret our code, and do what we asked it to do.
 
-- Define what kind of document it is at the top with #! /usr/bin/python3
-- Import additional code, using import
-- Write out instructions for what the document is supposed to do with code.
-- Then use the python interpreter to interpret our code, and do what we asked it to do.
-
+# Getting Set Up
 
 ## Getting Set Up
 
-Getting Set Up
-To get set up for writing python scripts, I recommend you create a folder inside the course folder called python. This is where you should save your python scripts, and where you should navigate to in your terminal when we run python scripts. 
+- Navigate to your `LIN_301` directory
+- Create a new subfolder, called `py`. 
+    - This is where we'll save our python scripts.
+    
+## Getting Set Up
+ 
+- Make sure that Python 3 is installed on your computer.
 
-A first look at python
- We can get a first look at python by opening your terminal and running python3.
+```r
+install.packages("reticulate")
+library(reticulate)
 
-python3
-Your ordinary terminal should be replaced by some text about the python version, and then >>>. The >>> is there to indicate that anything we type in will be interpreted as python code.
+# Install a private Miniconda just for R/reticulate
+reticulate::install_miniconda()
 
-Using python like a calculator
-One way we could use python is as a calculator. Back in the Textual Analysis module, I found that Jane Austen used "the" 29,696 times, and used a total of 798,954 words overall. To find the proportion of here words that were "the", I need to do division in python. (Don't copy the >>> from the code below.)
+# Create a Python env for the course
+reticulate::conda_create("r-reticulate", packages = c("python=3.11", "pip"))
+```
 
->>> 29696 / 798854
-0.03717325068160139        
-The / symbol is the code for division in python. Note that we didn't include the commas when we typed in the numbers. An important thing about python, and all programming languages, is that we need to enter all of our numbers without commas.
+## Getting Set Up
 
-Getting out of python!
-To get out of python and back to your usual terminal, run quit()
+- Once you have Python installed, confirm that it works in your RStudio Terminal
+
+For Windows:
+
+``` bash
+py --version
+```
+
+For Mac:
+``` bash
+python3 --version
+```
+
+# Working within Quarto
+
+- Quarto docs:
+
+## 
+
+Getting out of python! To get out of python and back to your usual terminal, run quit()
 
 # Writing Our First Script
 
 To write our first python script, open SublimeText (or whichever text editor you're using) and create a new blank document. While the document is still blank save it as hello.py in your python folder. It might seem silly to save a blank document, but this will let SublimeText know that we are writing a python script, and it will give us nice syntax highlighting.
 
-Writing Hello World
-The traditional first python script to write is a "Hello world!" script. Inside your hello.py document, write the following.
+Writing Hello World The traditional first python script to write is a "Hello world!" script. Inside your hello.py document, write the following.
 
-print("Hello world!")
-It is important that you enter it in exactly as it appears here.
+print("Hello world!") It is important that you enter it in exactly as it appears here.
 
-The command print must be lower case.
-"Hello world!" must be inside quotation marks.
-It's less important what exactly you put inside the quotation marks.
-The opening ( must be matched with a closing ).
-Save your script!
+The command print must be lower case. "Hello world!" must be inside quotation marks. It's less important what exactly you put inside the quotation marks. The opening ( must be matched with a closing ). Save your script!
 
-Running hello.py
-To run the script, navigate in your terminal to the python directory where you saved the script. Then, run the following.
+Running hello.py To run the script, navigate in your terminal to the python directory where you saved the script. Then, run the following.
 
-python3 hello.py
-What should happen next is the terminal will print out Hello world!, or whatever it was you put in quotes.
+python3 hello.py What should happen next is the terminal will print out Hello world!, or whatever it was you put in quotes.
 
-What just happened? 
-The Script.
-Our document, hello.py is a script. All a a script is is a plain test document. This specific script is a python script because it contains text that python can interpret. It doesn't have to end in .py, but its helpful for keeping things straight.
+What just happened? The Script. Our document, hello.py is a script. All a a script is is a plain test document. This specific script is a python script because it contains text that python can interpret. It doesn't have to end in .py, but its helpful for keeping things straight.
 
+# Learning about Variables
 
+## Variables
 
+## Variables
 
+## Activity
 
+# Assignment
 
+We’ll calculate how old you will be in **2040** in two steps:  
+1. Subtract your current age from the current year to get your year of birth.  
+2. Subtract your year of birth from 2040 to get your age in 2040.  
+
+We’ll do this in the interactive Python shell (`python3` or `ipython3`).  
+
+---
+
+# Variables
+
+Python doesn’t know your age unless you tell it.
+
+```python
+my_age
+# NameError: name 'my_age' is not defined
+```
+
+Assign a value using `=`:
+
+```python
+my_age = 37
+my_age
+# 37
+```
+
+---
+
+# Variable Names
+
+Rules for variable names:
+- Case sensitive (`my_age` ≠ `My_age`)  
+- Must start with a letter or `_`  
+- Cannot start with a number  
+- Can only contain letters, numbers, underscores  
+
+⚠️ Avoid names with `&`, `*`, `.`, `?`, etc.
+
+---
+
+# Using Variables
+
+We can use variables just like numbers:
+
+```python
+2022 - my_age
+```
+
+Assign year to another variable:
+
+```python
+current_year = 2022
+current_year - my_age
+```
+
+Store result in a new variable:
+
+```python
+year_of_birth = current_year - my_age
+year_of_birth
+```
+
+---
+
+# Your Age in 2040
+
+```python
+2040 - year_of_birth
+```
+
+---
+
+# Overwriting Variables
+
+You can reassign a variable:
+
+```python
+my_age = 50
+my_age
+# 50
+```
+
+⚠️ Other variables don’t automatically update:
+`year_of_birth` still has the old value.
+
+---
