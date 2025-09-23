@@ -23,19 +23,18 @@ editor: visual
 
 -   `d`
 
-
 # Lists and Dictionaries
 
 ## Data Structures
-Recap from last module:
-- Assign a value to a variable with `=`  
-- **Numbers**: we can do math with them  
-- **Strings**: text inside quotes `" "` or `' '`  
-- **Booleans**: `True` and `False`, usually created with logical comparisons  
+
+Recap from last module: - Assign a value to a variable with `=`\
+- **Numbers**: we can do math with them\
+- **Strings**: text inside quotes `" "` or `' '`\
+- **Booleans**: `True` and `False`, usually created with logical comparisons
 
 Example:
 
-```python
+``` python
 this_class = "Lin317"
 this_class == "Lin221"
 # False
@@ -43,19 +42,19 @@ this_class == "Lin221"
 
 In this module: **lists** and **dictionaries**.
 
----
+------------------------------------------------------------------------
 
 # Lists
 
 Assign a single value:
 
-```python
+``` python
 first_novel = "Sense and Sensibility"
 ```
 
 But Jane Austen published **seven novels**. Instead of many variables, use a **list**:
 
-```python
+``` python
 novels = ["Sense and Sensibility", "Pride and Prejudice",
           "Mansfield Park", "Emma",
           "Northanger Abbey", "Persuasion",
@@ -64,115 +63,115 @@ novels = ["Sense and Sensibility", "Pride and Prejudice",
 
 Print list:
 
-```python
+``` python
 print(novels)
 ```
 
----
+------------------------------------------------------------------------
 
 # Adding Two Lists Together
 
 Concatenate lists with `+`:
 
-```python
+``` python
 unfinished = ["The Watsons", "Sandition"]
 novels + unfinished
 ```
 
----
+------------------------------------------------------------------------
 
 # Indexing a List
 
 Access elements with indices (starting at 0):
 
-```python
+``` python
 novels[0]  # first item
 novels[1]  # second item
 ```
 
 ⚠️ Indexing starts at 0!
 
----
+------------------------------------------------------------------------
 
 # Getting the Index of a Value
 
 Lists have methods. Example: `.index()`
 
-```python
+``` python
 novels.index("Emma")
 # 3
 ```
 
 Use index to align with another list:
 
-```python
+``` python
 pub_year = [1811, 1813, 1814, 1815, 1818, 1818, 1871]
 
 emma_index = novels.index("Emma")
 pub_year[emma_index]  # 1815
 ```
 
----
+------------------------------------------------------------------------
 
 # Reverse Lookup
 
 Find book by year:
 
-```python
+``` python
 year_index = pub_year.index(1814)
 novels[year_index]
 # 'Mansfield Park'
 ```
 
----
+------------------------------------------------------------------------
 
 # Negative Indexing
 
 Count from the end:
 
-```python
+``` python
 novels[-1]
 # 'Lady Susan'
 ```
 
----
+------------------------------------------------------------------------
 
 # Slicing
 
 Get ranges of values:
 
-```python
+``` python
 novels[0:3]
 # ['Sense and Sensibility', 'Pride and Prejudice', 'Mansfield Park']
 ```
 
 Remember: stop index is not included.
 
----
+------------------------------------------------------------------------
 
 # Membership Test
 
 Check if a value is in a list:
 
-```python
+``` python
 "Emma" in novels        # True
 "Frankenstein" in novels # False
 ```
 
 With a variable:
 
-```python
+``` python
 novel_to_check = "Lady Susan"
 novel_to_check in novels
 ```
 
----
+------------------------------------------------------------------------
 
 # Complex Lists
 
 Lists can contain anything — even other lists:
 
-```python
+``` python
 complex_list = [["Sense and Sensibility", 1811],
                 ["Pride and Prejudice", 1813],
                 ["Mansfield Park", 1814],
@@ -181,18 +180,18 @@ complex_list = [["Sense and Sensibility", 1811],
 
 Indexing:
 
-```python
+``` python
 complex_list[0]      # ["Sense and Sensibility", 1811]
 complex_list[2][1]   # 1814
 ```
 
----
+------------------------------------------------------------------------
 
 # Dictionaries
 
 Relate **keys** to **values** using `{}`:
 
-```python
+``` python
 novel_dict = {"Sense and Sensibility": 1811,
               "Pride and Prejudice": 1813,
               "Mansfield Park": 1814}
@@ -200,34 +199,34 @@ novel_dict = {"Sense and Sensibility": 1811,
 
 Keys must be unique. Values can repeat.
 
----
+------------------------------------------------------------------------
 
 # Indexing a Dictionary
 
 Get values by key:
 
-```python
+``` python
 novel_dict["Pride and Prejudice"]
 # 1813
 ```
 
----
+------------------------------------------------------------------------
 
 # Adding to a Dictionary
 
 Add a new key–value pair:
 
-```python
+``` python
 novel_dict["Emma"] = 1815
 ```
 
----
+------------------------------------------------------------------------
 
 # Checking Keys
 
 `in` checks keys, not values:
 
-```python
+``` python
 "Pride and Prejudice" in novel_dict  # True
 1811 in novel_dict                   # False
 ```

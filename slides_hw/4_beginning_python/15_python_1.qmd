@@ -36,7 +36,7 @@ editor: visual
 - Python is a programming language, commonly used by linguists & programmers in general.
 - With it, we will write plain text documents that *do* things. 
 
-# Programming with LaTeX
+## Programming with LaTeX
 
 Here were the steps we used to program with LaTeX:
 
@@ -83,6 +83,8 @@ When we write a Python program, we will:
 ## Getting Set Up
  
 - Make sure that Python 3 is installed on your computer.
+  - Visit: https://www.python.org/downloads/
+  - Download the latest version for your OS
 
 ```r
 install.packages("reticulate")

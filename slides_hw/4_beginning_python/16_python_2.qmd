@@ -19,61 +19,58 @@ editor: visual
 
 -   What did you learn last time?
 
-
 # Values and Variables
 
 ## The Plan
-- How to assign a value to a variable  
-- The kinds of basic value types there are  
-- Some basic operations for those values  
 
----
+-   How to assign a value to a variable\
+-   The kinds of basic value types there are\
+-   Some basic operations for those values
+
+------------------------------------------------------------------------
 
 # Types of Values
 
-Three basic kinds in Python:
-- **Numbers**  
-- **Strings**  
-- **Booleans (logical values)**  
+Three basic kinds in Python: - **Numbers**\
+- **Strings**\
+- **Booleans (logical values)**
 
----
+------------------------------------------------------------------------
 
 # Numbers
 
-Two types:
-- **int**: integers (no decimals)  
-- **float**: floating point numbers (decimals)  
+Two types: - **int**: integers (no decimals)\
+- **float**: floating point numbers (decimals)
 
-Operators:
-- `x + y` (add)  
-- `x - y` (subtract)  
-- `x * y` (multiply)  
-- `x / y` (divide)  
-- `x ** y` (exponent)  
-- `x % y` (modulus: remainder)  
-- `x // y` (floor division)  
+Operators: - `x + y` (add)\
+- `x - y` (subtract)\
+- `x * y` (multiply)\
+- `x / y` (divide)\
+- `x ** y` (exponent)\
+- `x % y` (modulus: remainder)\
+- `x // y` (floor division)
 
----
+------------------------------------------------------------------------
 
 # Strings
 
 If you type text without quotes:
 
-```python
+``` python
 Josef
 # NameError
 ```
 
 With quotes:
 
-```python
+``` python
 "Josef"
 # 'Josef'
 ```
 
 Assigning strings:
 
-```python
+``` python
 title = "Dr."
 first_name = "Josef"
 last_name = "Fruehwald"
@@ -81,29 +78,29 @@ last_name = "Fruehwald"
 
 Concatenate with `+`:
 
-```python
+``` python
 title + first_name + last_name
 ```
 
 Or print nicely:
 
-```python
+``` python
 print(title, first_name, last_name)
 ```
 
----
+------------------------------------------------------------------------
 
 # Strings (cont.)
 
 Escape quotes with `\`:
 
-```python
+``` python
 "I said, \"Hello!\""
 ```
 
 Strings can contain almost any characters.
 
----
+------------------------------------------------------------------------
 
 # Boolean (Logical) Values
 
@@ -111,63 +108,53 @@ Only two: `True`, `False`.
 
 Usually created by comparisons:
 
-```python
+``` python
 first_name == "Joseph"
 # False
 ```
 
-⚠️ Remember:  
-- `=` is assignment  
+⚠️ Remember:\
+- `=` is assignment\
 - `==` is equality test
 
----
+------------------------------------------------------------------------
 
 # Comparison Operators
 
-- `==` exactly equal  
-- `>` greater than  
-- `>=` greater than or equal to  
-- `<` less than  
-- `<=` less than or equal to  
+-   `==` exactly equal\
+-   `>` greater than\
+-   `>=` greater than or equal to\
+-   `<` less than\
+-   `<=` less than or equal to
 
----
+------------------------------------------------------------------------
 
 # Logical Operators
 
-- `not` flips a boolean  
-- `and` is true if **both** are true  
-- `or` is true if **at least one** is true  
+-   `not` flips a boolean\
+-   `and` is true if **both** are true\
+-   `or` is true if **at least one** is true
 
----
+------------------------------------------------------------------------
 
 # Truth Tables
 
-**and**
-| Input            | Output |
-|------------------|--------|
-| True and True    | True   |
-| True and False   | False  |
-| False and False  | False  |
+**and** \| Input \| Output \| \|------------------\|--------\| \| True and True \| True \| \| True and False \| False \| \| False and False \| False \|
 
-**or**
-| Input           | Output |
-|-----------------|--------|
-| True or True    | True   |
-| True or False   | True   |
-| False or False  | False  |
+**or** \| Input \| Output \| \|-----------------\|--------\| \| True or True \| True \| \| True or False \| True \| \| False or False \| False \|
 
----
+------------------------------------------------------------------------
 
 # Examples
 
 Check for Josef with “f” or “ph”:
 
-```python
+``` python
 (first_name == "Joseph") or (first_name == "Josef")
 ```
 
 Check for Josef who is 37:
 
-```python
+``` python
 (first_name == "Josef") and (my_age == 37)
 ```
