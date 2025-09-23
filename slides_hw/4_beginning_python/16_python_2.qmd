@@ -1,6 +1,6 @@
 ---
 title: "Computation for Linguists"
-subtitle: "Beginning Python: Variables & Types"
+subtitle: "Beginning Python: Value Types"
 date: "October 1, 2025"
 author: "Dr. Andrew M. Byrd"
 format:
@@ -19,38 +19,106 @@ editor: visual
 
 -   What did you learn last time?
 
-# Values and Variables
+## 
 
-## The Plan
+- Running `python`:
+  - Terminal
+  - Stand-alone `.py` file
+  - Quarto doc (`qmd`)
 
--   How to assign a value to a variable\
--   The kinds of basic value types there are\
--   Some basic operations for those values
+- Starter `python` skills:
+  - `print()`
+  - basic math (`+`, `-`)
+  - assigning variables with `=`
 
-------------------------------------------------------------------------
 
-# Types of Values
+# Value Types
 
-Three basic kinds in Python: - **Numbers**\
-- **Strings**\
-- **Booleans (logical values)**
 
-------------------------------------------------------------------------
+## Three basic value types
+
+1. **Numbers**
+2. **Strings**
+3. **Booleans (logical values)**
+
+- You can check what something is using the `type()` function
 
 # Numbers
 
-Two types: - **int**: integers (no decimals)\
+Two types: 
+
+- **int**: integers (no decimals)
+
+``` python
+num_1 = 1
+type(num_1)
+```
+
 - **float**: floating point numbers (decimals)
 
-Operators: - `x + y` (add)\
+``` python
+num_2 = 1.5
+type(num_2)
+```
+
+## Number Operators
+
+We've seen two operators already: 
+
+- `x + y` (add)\
 - `x - y` (subtract)\
+
+## Number Operators
+
+Here are two more:
+
 - `x * y` (multiply)\
 - `x / y` (divide)\
+
+## Operator Activity:
+
+- Using `python`, compute the following equations:
+
+1. 100 - 37
+2. 4 x 80
+3. 100 ÷ 25
+
+## Number Operators
+
+Operators: 
+
 - `x ** y` (exponent)\
+
+
+2 ** 3
+# 8  (2 × 2 × 2)
+
+5 ** 2
+# 25  (5 × 5)
+
+
 - `x % y` (modulus: remainder)\
+
+10 % 3
+# 1  (3 goes into 10 three times, remainder 1)
+
+14 % 5
+# 4  (5 goes into 14 twice, remainder 4)
+
+
 - `x // y` (floor division)
 
-------------------------------------------------------------------------
+10 // 3
+# 3  (3 goes into 10 three times, ignore remainder)
+
+14 // 5
+# 2  (5 goes into 14 two times, remainder dropped)
+
+
+14 / 5   # 2.8 (normal division)
+14 // 5  # 2   (floor division)
+14 % 5   # 4   (remainder)
+
 
 # Strings
 
@@ -61,6 +129,7 @@ Josef
 # NameError
 ```
 
+## Strings
 With quotes:
 
 ``` python
@@ -68,6 +137,7 @@ With quotes:
 # 'Josef'
 ```
 
+## Strings
 Assigning strings:
 
 ``` python
@@ -76,21 +146,22 @@ first_name = "Josef"
 last_name = "Fruehwald"
 ```
 
+## Strings
 Concatenate with `+`:
 
 ``` python
 title + first_name + last_name
 ```
 
+## Strings
 Or print nicely:
 
 ``` python
 print(title, first_name, last_name)
 ```
 
-------------------------------------------------------------------------
 
-# Strings (cont.)
+## Strings
 
 Escape quotes with `\`:
 
@@ -100,7 +171,6 @@ Escape quotes with `\`:
 
 Strings can contain almost any characters.
 
-------------------------------------------------------------------------
 
 # Boolean (Logical) Values
 
@@ -117,7 +187,6 @@ first_name == "Joseph"
 - `=` is assignment\
 - `==` is equality test
 
-------------------------------------------------------------------------
 
 # Comparison Operators
 
@@ -127,7 +196,6 @@ first_name == "Joseph"
 -   `<` less than\
 -   `<=` less than or equal to
 
-------------------------------------------------------------------------
 
 # Logical Operators
 
@@ -135,7 +203,6 @@ first_name == "Joseph"
 -   `and` is true if **both** are true\
 -   `or` is true if **at least one** is true
 
-------------------------------------------------------------------------
 
 # Truth Tables
 
@@ -143,7 +210,6 @@ first_name == "Joseph"
 
 **or** \| Input \| Output \| \|-----------------\|--------\| \| True or True \| True \| \| True or False \| True \| \| False or False \| False \|
 
-------------------------------------------------------------------------
 
 # Examples
 

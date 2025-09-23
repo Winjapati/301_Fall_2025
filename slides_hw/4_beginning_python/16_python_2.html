@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="15_python_1_files/libs/clipboard/clipboard.min.js"></script>
-<script src="15_python_1_files/libs/quarto-html/tabby.min.js"></script>
-<script src="15_python_1_files/libs/quarto-html/popper.min.js"></script>
-<script src="15_python_1_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="15_python_1_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="15_python_1_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="15_python_1_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="15_python_1_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="16_python_2_files/libs/clipboard/clipboard.min.js"></script>
+<script src="16_python_2_files/libs/quarto-html/tabby.min.js"></script>
+<script src="16_python_2_files/libs/quarto-html/popper.min.js"></script>
+<script src="16_python_2_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="16_python_2_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="16_python_2_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="16_python_2_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="16_python_2_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Dr.&nbsp;Andrew M. Byrd">
-  <meta name="dcterms.date" content="2025-09-29">
+  <meta name="dcterms.date" content="2025-10-01">
   <title>Computation for Linguists</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="15_python_1_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="15_python_1_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="16_python_2_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="16_python_2_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -96,12 +96,12 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="15_python_1_files/libs/revealjs/dist/theme/quarto.css">
+  <link rel="stylesheet" href="16_python_2_files/libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="header_shrink.css">
-  <link href="15_python_1_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="15_python_1_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="15_python_1_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="15_python_1_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link href="16_python_2_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="16_python_2_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="16_python_2_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="16_python_2_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -394,7 +394,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Computation for Linguists</h1>
-  <p class="subtitle">Beginning Python: Setting up Python &amp; Variables</p>
+  <p class="subtitle">Beginning Python: Value Types</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -404,17 +404,20 @@ Dr.&nbsp;Andrew M. Byrd
 </div>
 </div>
 
-  <p class="date">2025-09-29</p>
+  <p class="date">2025-10-01</p>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Plan for the Day</h2>
 <ul>
 <li><a href="#/review" id="/toc-review">Review</a></li>
-<li><a href="#/overview-of-python" id="/toc-overview-of-python">Overview of Python</a></li>
-<li><a href="#/getting-set-up" id="/toc-getting-set-up">Getting Set Up</a></li>
-<li><a href="#/working-within-quarto" id="/toc-working-within-quarto">Working within Quarto</a></li>
-<li><a href="#/learning-about-variables" id="/toc-learning-about-variables">Learning about Variables</a></li>
-<li><a href="#/activity-solution" id="/toc-activity-solution">Activity Solution</a></li>
+<li><a href="#/value-types" id="/toc-value-types">Value Types</a></li>
+<li><a href="#/numbers" id="/toc-numbers">Numbers</a></li>
+<li><a href="#/strings" id="/toc-strings">Strings</a></li>
+<li><a href="#/boolean-logical-values" id="/toc-boolean-logical-values">Boolean (Logical) Values</a></li>
+<li><a href="#/comparison-operators" id="/toc-comparison-operators">Comparison Operators</a></li>
+<li><a href="#/logical-operators" id="/toc-logical-operators">Logical Operators</a></li>
+<li><a href="#/truth-tables" id="/toc-truth-tables">Truth Tables</a></li>
+<li><a href="#/examples" id="/toc-examples">Examples</a></li>
 </ul>
 </nav>
 </section>
@@ -425,380 +428,215 @@ Dr.&nbsp;Andrew M. Byrd
 <li>What did you learn last time?</li>
 </ul>
 </section>
-<section id="review-grep-and-regex" class="slide level2 center">
-<h2>Review: <code>grep</code> and <code>regex</code></h2>
+<section id="section" class="slide level2 center">
+<h2></h2>
 <ul>
-<li><code>wc file.txt</code> → identify number of lines, words, and characters in <code>file.txt</code>
+<li>Running <code>python</code>:
 <ul>
-<li><code>-l</code>, <code>-w</code>, <code>-c</code></li>
+<li>Terminal</li>
+<li>Stand-alone <code>.py</code> file</li>
+<li>Quarto doc (<code>qmd</code>)</li>
 </ul></li>
-<li><code>grep "word" file.txt</code> → search for a string in a file</li>
-<li>Combine with pipes:
+<li>Starter <code>python</code> skills:
 <ul>
-<li><code>grep "word" file.txt | wc -l</code></li>
-</ul></li>
-<li><code>regex</code>:
-<ul>
-<li><code>.</code>, <code>[...]</code>, <code>[^...]</code>, <code>[a-z]</code>, etc.</li>
+<li><code>print()</code></li>
+<li>basic math (<code>+</code>, <code>-</code>)</li>
+<li>assigning variables with <code>=</code></li>
 </ul></li>
 </ul>
 </section></section>
 <section>
-<section id="overview-of-python" class="title-slide slide level1 center">
-<h1>Overview of Python</h1>
+<section id="value-types" class="title-slide slide level1 center">
+<h1>Value Types</h1>
 
 </section>
-<section id="python" class="slide level2 center">
-<h2>Python</h2>
+<section id="three-basic-value-types" class="slide level2 center">
+<h2>Three basic value types</h2>
+<ol type="1">
+<li><strong>Numbers</strong></li>
+<li><strong>Strings</strong></li>
+<li><strong>Booleans (logical values)</strong></li>
+</ol>
 <ul>
-<li>Python is a programming language, commonly used by linguists &amp; programmers in general.</li>
-<li>With it, we will write plain text documents that <em>do</em> things.</li>
-</ul>
-</section>
-<section id="programming-with-latex" class="slide level2 center">
-<h2>Programming with LaTeX</h2>
-<ul>
-<li><p>We defined what kind of document we were writing with <code>documentclass{}</code></p></li>
-<li><p>We imported additional code, with <code>\usepackage{}</code></p></li>
-<li><p>We wrote out instructions for how the document was supposed to look with commands like </p></li>
-<li><p>Then, we used a LaTeX engine (using OverLeaf) to interpret the LaTeX code, which returned a result in the form of a typeset pdf.</p></li>
-</ul>
-</section>
-<section id="making-a-website" class="slide level2 center">
-<h2>Making a website</h2>
-<ul>
-<li>We defined what kind of document we were writing with the <code>&lt;DOCSTRING&gt;</code></li>
-<li>We imported additional code, in the form of <code>CSS</code>, into the <code>HTML</code> document.</li>
-<li>We wrote out instructions for how the text was supposed to look with commands like <code>&lt;strong&gt;&lt;/strong&gt;</code></li>
-<li>Then, we used a web browser to interpret the code in the <code>HTML</code> document, and the browser returned a result in the form of a website.</li>
-</ul>
-</section>
-<section id="programming-at-the-terminal" class="slide level2 center">
-<h2>Programming at the Terminal</h2>
-<ul>
-<li>We even a little bit at the Terminal, using <code>RegEx</code>!</li>
-<li>Regular expressions are much simpler than <code>HTML</code> or <code>LaTeX</code></li>
-<li>But these simple expressions allow us conduct powerful and sweeping searches</li>
-</ul>
-</section>
-<section id="python-will-be-a-lot-like-this" class="slide level2 center">
-<h2>Python will be a lot like this!</h2>
-<p>When we write a Python program, we will:</p>
-<ul>
-<li>Define what kind of document it is at the top with <code>#! /usr/bin/python3</code></li>
-<li>Import additional code, using import</li>
-<li>Write out instructions for what the document is supposed to do with code.</li>
-<li>Then use the python interpreter to interpret our code, and do what we asked it to do.</li>
+<li>You can check what something is using the <code>type()</code> function</li>
 </ul>
 </section></section>
 <section>
-<section id="getting-set-up" class="title-slide slide level1 center">
-<h1>Getting Set Up</h1>
-
+<section id="numbers" class="title-slide slide level1 center">
+<h1>Numbers</h1>
+<p>Two types:</p>
+<ul>
+<li><strong>int</strong>: integers (no decimals)</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a>num_1 <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb1-2"><a href=""></a><span class="bu">type</span>(num_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><strong>float</strong>: floating point numbers (decimals)</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a>num_2 <span class="op">=</span> <span class="fl">1.5</span></span>
+<span id="cb2-2"><a href=""></a><span class="bu">type</span>(num_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="getting-set-up-1" class="slide level2 center">
-<h2>Getting Set Up</h2>
+<section id="number-operators" class="slide level2 center">
+<h2>Number Operators</h2>
+<p>We’ve seen two operators already:</p>
 <ul>
-<li>Navigate to your <code>LIN_301</code> directory</li>
-<li>Create a new subfolder, called <code>py</code>.
-<ul>
-<li>This is where we’ll save our python scripts.</li>
-</ul></li>
-</ul>
-</section>
-<section id="getting-set-up-2" class="slide level2 center">
-<h2>Getting Set Up</h2>
-<ul>
-<li>Make sure that Python 3 is installed on your computer.
-<ul>
-<li><p>Visit: https://www.python.org/downloads/</p></li>
-<li><p>Download the latest version for your OS</p></li>
-<li><p>Once it’s installed, verify that it works in your RStudio Terminal:</p>
-<ul>
-<li>PC:</li>
-</ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href=""></a><span class="ex">python</span> <span class="at">--version</span>      <span class="co">## py --version also works</span></span>
-<span id="cb1-2"><a href=""></a><span class="ex">pip</span> <span class="at">--version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li>Mac:</li>
-</ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href=""></a><span class="ex">python3</span> <span class="at">--version</span></span>
-<span id="cb2-2"><a href=""></a><span class="ex">pip</span> <span class="at">--version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-</ul></li>
-</ul>
-</section>
-<section id="running-your-first-line-of-code" class="slide level2 center">
-<h2>Running Your First Line of Code</h2>
-<ul>
-<li>Now that you have verified that Python works in RStudio, return to the terminal</li>
-<li>PC:</li>
-</ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href=""></a><span class="ex">$</span> py </span>
-<span id="cb3-2"><a href=""></a><span class="ex">$</span> print<span class="er">(</span><span class="st">"Hello world!"</span><span class="kw">)</span></span>
-<span id="cb3-3"><a href=""></a><span class="ex">$</span> quit<span class="er">(</span><span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li>Mac:</li>
-</ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href=""></a><span class="ex">$</span> python3</span>
-<span id="cb4-2"><a href=""></a><span class="ex">$</span> print<span class="er">(</span><span class="st">"Hello world!"</span><span class="kw">)</span></span>
-<span id="cb4-3"><a href=""></a><span class="ex">$</span> quit<span class="er">(</span><span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="the-function-print" class="slide level2 center">
-<h2>The function <code>print</code>:</h2>
-<ul>
-<li>Must be lower case.</li>
-<li>You cannot leave out <code>"</code> within the print function
-<ul>
-<li>That said, you can use <code>'</code> instead!</li>
-<li>Try <code>print(Hello world!)</code>. What happens?</li>
-</ul></li>
-</ul>
-</section>
-<section id="creating-your-first-python-script" class="slide level2 center">
-<h2>Creating Your First Python Script</h2>
-<ul>
-<li>We won’t be working in the Terminal for much longer.</li>
-<li>Let’s create a new <code>.py</code> file, called <code>first_script.py</code></li>
-<li>Within the new script, paste:</li>
-</ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="bu">print</span>(<span class="st">"Hello world!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li>Click <code>Run</code> in the document to run the code.</li>
-</ul>
-</section></section>
-<section>
-<section id="working-within-quarto" class="title-slide slide level1 center">
-<h1>Working within Quarto</h1>
-
-</section>
-<section id="quarto-docs" class="slide level2 center">
-<h2>Quarto Docs</h2>
-<ul>
-<li>A <strong>Quarto document</strong> (<code>.qmd</code>) is a plain text file that mixes:
-<ul>
-<li><strong>Markdown</strong> → text, headings, lists, images</li>
-<li><strong>Code chunks</strong> → Python, R, Julia, Bash, etc.</li>
-<li><strong>Output</strong> → tables, plots, formatted results</li>
-</ul></li>
-<li>Think of it as a <strong>combo notebook + report</strong>.</li>
-<li>All of the slides, homeworks, and check-ins are compiled as Quarto docs.</li>
-</ul>
-</section>
-<section id="why-is-quarto-useful-for-coding" class="slide level2 center">
-<h2>Why is Quarto Useful for Coding?</h2>
-<ul>
-<li>Lets you <strong>write code and explanation in the same file</strong>.<br>
+<li><code>x + y</code> (add)<br>
 </li>
-<li>Can <strong>render</strong> to multiple formats:
-<ul>
-<li>Slides (like these!)</li>
-<li>HTML pages</li>
-<li>PDF reports (LaTeX!)</li>
-<li>Word documents</li>
-</ul></li>
-<li>Encourages <strong>reproducibility</strong>:
-<ul>
-<li>Anyone can rerun your code and get the same results.</li>
-</ul></li>
+<li><code>x - y</code> (subtract)<br>
+</li>
 </ul>
 </section>
-<section id="quarto-code" class="slide level2 center">
-<h2>Quarto Code</h2>
+<section id="number-operators-1" class="slide level2 center">
+<h2>Number Operators</h2>
+<p>Here are two more:</p>
 <ul>
-<li>Create a new <code>Quarto Document</code>, called <code>first_doc.qmd</code></li>
-<li>Make sure it’s a <code>pdf</code> file.</li>
+<li><code>x * y</code> (multiply)<br>
+</li>
+<li><code>x / y</code> (divide)<br>
+</li>
 </ul>
 </section>
-<section id="quarto-code-1" class="slide level2 center">
-<h2>Quarto Code</h2>
+<section id="operator-activity" class="slide level2 center">
+<h2>Operator Activity:</h2>
 <ul>
-<li>Once created, click on “Source”, delete everything within, and then paste the following code:</li>
+<li>Using <code>python</code>, compute the following equations:</li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href=""></a><span class="co">---</span></span>
-<span id="cb6-2"><a href=""></a><span class="an">title:</span><span class="co"> "My First Quarto Document"</span></span>
-<span id="cb6-3"><a href=""></a><span class="an">author:</span><span class="co"> "Your Name Here"</span></span>
-<span id="cb6-4"><a href=""></a><span class="an">date:</span><span class="co"> "2025-09-29"</span></span>
-<span id="cb6-5"><a href=""></a><span class="an">format:</span><span class="co"> pdf</span></span>
-<span id="cb6-6"><a href=""></a><span class="co">---</span></span>
-<span id="cb6-7"><a href=""></a></span>
-<span id="cb6-8"><a href=""></a><span class="fu"># Introduction</span></span>
-<span id="cb6-9"><a href=""></a></span>
-<span id="cb6-10"><a href=""></a>This is my very first Quarto document!  </span>
-<span id="cb6-11"><a href=""></a>It will generate a PDF when I render it.</span>
-<span id="cb6-12"><a href=""></a></span>
-<span id="cb6-13"><a href=""></a><span class="fu"># Python Example</span></span>
-<span id="cb6-14"><a href=""></a></span>
-<span id="cb6-15"><a href=""></a>Here’s a Python code block that prints <span class="in">`"Hello World!"`</span>:</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol type="1">
+<li>100 - 37</li>
+<li>4 x 80</li>
+<li>100 ÷ 25</li>
+</ol>
 </section>
-<section id="quarto-code-2" class="slide level2 center">
-<h2>Quarto Code</h2>
+<section id="number-operators-2" class="slide level2 center">
+<h2>Number Operators</h2>
+<p>Operators:</p>
 <ul>
-<li>Now in “Visual”, click “Insert” &gt; “Executable Cell” &gt; “Python”</li>
-<li>Paste in the following:</li>
+<li><code>x ** y</code> (exponent)<br>
+</li>
 </ul>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a><span class="bu">print</span>(<span class="st">"Hello world!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>2 ** 3 # 8 (2 × 2 × 2)</p>
+<p>5 ** 2 # 25 (5 × 5)</p>
 <ul>
-<li>This is an executable cell of code <em>within</em> your document.</li>
+<li><code>x % y</code> (modulus: remainder)<br>
+</li>
 </ul>
+<p>10 % 3 # 1 (3 goes into 10 three times, remainder 1)</p>
+<p>14 % 5 # 4 (5 goes into 14 twice, remainder 4)</p>
+<ul>
+<li><code>x // y</code> (floor division)</li>
+</ul>
+<p>10 // 3 # 3 (3 goes into 10 three times, ignore remainder)</p>
+<p>14 // 5 # 2 (5 goes into 14 two times, remainder dropped)</p>
+<p>14 / 5 # 2.8 (normal division) 14 // 5 # 2 (floor division) 14 % 5 # 4 (remainder)</p>
 </section></section>
 <section>
-<section id="learning-about-variables" class="title-slide slide level1 center">
-<h1>Learning about Variables</h1>
-
+<section id="strings" class="title-slide slide level1 center">
+<h1>Strings</h1>
+<p>If you type text without quotes:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a>Josef</span>
+<span id="cb3-2"><a href=""></a><span class="co"># NameError</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="printing-hello-world" class="slide level2 center">
-<h2>Printing Hello world!</h2>
-<ul>
-<li>Remember earlier how this gave us error?</li>
-</ul>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href=""></a><span class="bu">print</span>(<span class="st">"Hello world!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li>Create a code block in your <code>qmd</code> file, and try this instead:</li>
-</ul>
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href=""></a>hello_world <span class="op">=</span> <span class="st">"Hello world!"</span></span>
-<span id="cb9-2"><a href=""></a><span class="bu">print</span>(hello_world)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="strings-1" class="slide level2 center">
+<h2>Strings</h2>
+<p>With quotes:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a><span class="co">"Josef"</span></span>
+<span id="cb4-2"><a href=""></a><span class="co"># 'Josef'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="what-just-happened" class="slide level2 center">
-<h2>What just happened?</h2>
-<ul>
-<li>Why did <code>print(hello_world)</code> work, but <code>print(Hello world!)</code> didn’t?</li>
-</ul>
+<section id="strings-2" class="slide level2 center">
+<h2>Strings</h2>
+<p>Assigning strings:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a>title <span class="op">=</span> <span class="st">"Dr."</span></span>
+<span id="cb5-2"><a href=""></a>first_name <span class="op">=</span> <span class="st">"Josef"</span></span>
+<span id="cb5-3"><a href=""></a>last_name <span class="op">=</span> <span class="st">"Fruehwald"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="variables" class="slide level2 center">
-<h2>Variables</h2>
-<ul>
-<li><code>hello_world</code> is a variable that we defined as having the value <code>"Hello world!"</code></li>
-</ul>
+<section id="strings-3" class="slide level2 center">
+<h2>Strings</h2>
+<p>Concatenate with <code>+</code>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a>title <span class="op">+</span> first_name <span class="op">+</span> last_name</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="naming-variables" class="slide level2 center">
-<h2>Naming Variables</h2>
-<ul>
-<li>Case sensitive (<code>hello_world</code> ≠ <code>Hello_world</code>)</li>
-<li>Must start with a letter or <code>_</code>
-<ul>
-<li>Cannot start with a number</li>
-</ul></li>
-<li>Can only contain letters, numbers, underscores
-<ul>
-<li>So avoid <code>&amp;</code>, <code>*</code>, <code>.</code>, <code>?</code></li>
-</ul></li>
-</ul>
+<section id="strings-4" class="slide level2 center">
+<h2>Strings</h2>
+<p>Or print nicely:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a><span class="bu">print</span>(title, first_name, last_name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="variables-1" class="slide level2 center">
-<h2>Variables</h2>
-<ul>
-<li>Let’s look another example.</li>
-<li>Python doesn’t know your age unless you tell it.</li>
-</ul>
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a>my_age</span>
-<span id="cb10-2"><a href=""></a><span class="co"># NameError: name 'my_age' is not defined</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li>We can assign a value to <code>my_age</code> using <code>=</code>:</li>
-</ul>
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a>my_age <span class="op">=</span> <span class="dv">46</span></span>
-<span id="cb11-2"><a href=""></a>my_age</span>
-<span id="cb11-3"><a href=""></a><span class="co"># 46</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="using-variables" class="slide level2 center">
-<h2>Using Variables</h2>
-<ul>
-<li>We can use variables just like numbers:</li>
-</ul>
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href=""></a><span class="dv">2025</span> <span class="op">-</span> my_age</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="using-variables-1" class="slide level2 center">
-<h2>Using Variables</h2>
-<ul>
-<li>Let’s assign the current year to another variable:</li>
-</ul>
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href=""></a>current_year <span class="op">=</span> <span class="dv">2025</span></span>
-<span id="cb13-2"><a href=""></a>current_year <span class="op">-</span> my_age</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="using-variables-2" class="slide level2 center">
-<h2>Using Variables</h2>
-<ul>
-<li>Let’s store the result in a new variable:</li>
-</ul>
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href=""></a>year_of_birth <span class="op">=</span> current_year <span class="op">-</span> my_age</span>
-<span id="cb14-2"><a href=""></a>year_of_birth</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="your-age-in-2040" class="slide level2 center">
-<h2>Your Age in 2040</h2>
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href=""></a><span class="dv">2040</span> <span class="op">-</span> year_of_birth</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="overwriting-variables" class="slide level2 center">
-<h2>Overwriting Variables</h2>
-<ul>
-<li>You can always reassign (i.e., change the value of) a variable:</li>
-</ul>
-<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href=""></a>my_age <span class="op">=</span> <span class="dv">50</span></span>
-<span id="cb16-2"><a href=""></a>my_age</span>
-<span id="cb16-3"><a href=""></a><span class="co"># 50</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li>Note: other variables don’t automatically update: <code>year_of_birth</code> still has the old value.</li>
-</ul>
-</section>
-<section id="activity-when-does-your-kid-turn-18" class="slide level2 center">
-<h2>Activity: When Does your Kid Turn 18?</h2>
-<p>LLet’s extend what we’ve learned with variables:</p>
-<ul>
-<li>Assume you’ll have a child in the future, born when you turn <code>30</code>.<br>
-</li>
-<li>Write code inside an embedded <code>python</code> code block.<br>
-</li>
-<li>The end result should be a variable called <code>child_18_year</code>, which is the year your child turns <strong>18</strong>.<br>
-</li>
-<li>You may:
-<ul>
-<li>Use the math symbols <code>+</code> and <code>-</code></li>
-<li>Define new variables</li>
-<li>Print intermediate results to check your work</li>
-</ul></li>
-</ul>
+<section id="strings-5" class="slide level2 center">
+<h2>Strings</h2>
+<p>Escape quotes with <code>\</code>:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href=""></a><span class="co">"I said, </span><span class="ch">\"</span><span class="co">Hello!</span><span class="ch">\"</span><span class="co">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Strings can contain almost any characters.</p>
 </section></section>
-<section>
-<section id="activity-solution" class="title-slide slide level1 center">
-<h1>Activity Solution</h1>
-
+<section id="boolean-logical-values" class="title-slide slide level1 center">
+<h1>Boolean (Logical) Values</h1>
+<p>Only two: <code>True</code>, <code>False</code>.</p>
+<p>Usually created by comparisons:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href=""></a>first_name <span class="op">==</span> <span class="st">"Joseph"</span></span>
+<span id="cb9-2"><a href=""></a><span class="co"># False</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>⚠️ Remember:<br>
+- <code>=</code> is assignment<br>
+- <code>==</code> is equality test</p>
 </section>
-<section id="activity-solution-1" class="slide level2 center">
-<h2>Activity Solution</h2>
-<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href=""></a>current_year <span class="op">=</span> <span class="dv">2025</span></span>
-<span id="cb17-2"><a href=""></a>my_age <span class="op">=</span> <span class="dv">20</span></span>
-<span id="cb17-3"><a href=""></a></span>
-<span id="cb17-4"><a href=""></a><span class="co"># How many years until you turn 30?</span></span>
-<span id="cb17-5"><a href=""></a>years_til_kid <span class="op">=</span> <span class="dv">30</span> <span class="op">-</span> my_age</span>
-<span id="cb17-6"><a href=""></a></span>
-<span id="cb17-7"><a href=""></a><span class="co"># What year is the child born?</span></span>
-<span id="cb17-8"><a href=""></a>child_birth_year <span class="op">=</span> current_year <span class="op">+</span> years_til_kid</span>
-<span id="cb17-9"><a href=""></a></span>
-<span id="cb17-10"><a href=""></a><span class="co"># What year does the child turn 18?</span></span>
-<span id="cb17-11"><a href=""></a>child_18_year <span class="op">=</span> child_birth_year <span class="op">+</span> <span class="dv">18</span></span>
-<span id="cb17-12"><a href=""></a></span>
-<span id="cb17-13"><a href=""></a><span class="bu">print</span>(child_18_year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<section id="comparison-operators" class="title-slide slide level1 center">
+<h1>Comparison Operators</h1>
+<ul>
+<li><code>==</code> exactly equal<br>
+</li>
+<li><code>&gt;</code> greater than<br>
+</li>
+<li><code>&gt;=</code> greater than or equal to<br>
+</li>
+<li><code>&lt;</code> less than<br>
+</li>
+<li><code>&lt;=</code> less than or equal to</li>
+</ul>
+</section>
+
+<section id="logical-operators" class="title-slide slide level1 center">
+<h1>Logical Operators</h1>
+<ul>
+<li><code>not</code> flips a boolean<br>
+</li>
+<li><code>and</code> is true if <strong>both</strong> are true<br>
+</li>
+<li><code>or</code> is true if <strong>at least one</strong> is true</li>
+</ul>
+</section>
+
+<section id="truth-tables" class="title-slide slide level1 center">
+<h1>Truth Tables</h1>
+<p><strong>and</strong> | Input | Output | |——————|——–| | True and True | True | | True and False | False | | False and False | False |</p>
+<p><strong>or</strong> | Input | Output | |—————–|——–| | True or True | True | | True or False | True | | False or False | False |</p>
+</section>
+
+<section id="examples" class="title-slide slide level1 center">
+<h1>Examples</h1>
+<p>Check for Josef with “f” or “ph”:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a>(first_name <span class="op">==</span> <span class="st">"Joseph"</span>) <span class="kw">or</span> (first_name <span class="op">==</span> <span class="st">"Josef"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Check for Josef who is 37:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a>(first_name <span class="op">==</span> <span class="st">"Josef"</span>) <span class="kw">and</span> (my_age <span class="op">==</span> <span class="dv">37</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="15_python_1_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="16_python_2_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="15_python_1_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="15_python_1_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="15_python_1_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="15_python_1_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="15_python_1_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="16_python_2_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="16_python_2_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="16_python_2_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="16_python_2_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="16_python_2_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="15_python_1_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="15_python_1_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="15_python_1_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="15_python_1_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="16_python_2_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="16_python_2_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="16_python_2_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="16_python_2_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>

@@ -19,26 +19,25 @@ editor: visual
 
 -   What did you learn last time?
 
-## Review: `d`
-
--   `d`
-
-# Lists and Dictionaries
+## Recap from Last Time
 
 ## Data Structures
 
 Recap from last module: - Assign a value to a variable with `=`\
 - **Numbers**: we can do math with them\
-- **Strings**: text inside quotes `" "` or `' '`\
+- **Strings**: text inside quotes `"..."` or `'...'`\
 - **Booleans**: `True` and `False`, usually created with logical comparisons
 
 Example:
 
 ``` python
-this_class = "Lin317"
-this_class == "Lin221"
+this_class = "LIN_301"
+this_class == "LIN_305"
 # False
 ```
+
+# Lists and Dictionaries
+
 
 In this module: **lists** and **dictionaries**.
 

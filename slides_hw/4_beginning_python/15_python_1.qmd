@@ -1,6 +1,6 @@
 ---
 title: "Computation for Linguists"
-subtitle: "Beginning Python: Variables & Types"
+subtitle: "Beginning Python: Setting up Python & Variables"
 date: "September 29, 2025"
 author: "Dr. Andrew M. Byrd"
 format:
@@ -33,12 +33,10 @@ editor: visual
 
 ## Python
 
-- Python is a programming language, commonly used by linguists & programmers in general.
-- With it, we will write plain text documents that *do* things. 
+-   Python is a programming language, commonly used by linguists & programmers in general.
+-   With it, we will write plain text documents that *do* things.
 
 ## Programming with LaTeX
-
-Here were the steps we used to program with LaTeX:
 
 -   We defined what kind of document we were writing with `documentclass{}`
 
@@ -48,9 +46,7 @@ Here were the steps we used to program with LaTeX:
 
 -   Then, we used a LaTeX engine (using OverLeaf) to interpret the LaTeX code, which returned a result in the form of a typeset pdf.
 
-## Programming with HTML and CSS
-
-Recall the steps we went through to write a website:
+## Making a website
 
 -   We defined what kind of document we were writing with the `<DOCSTRING>`
 -   We imported additional code, in the form of `CSS`, into the `HTML` document.
@@ -59,11 +55,11 @@ Recall the steps we went through to write a website:
 
 ## Programming at the Terminal
 
-- We even a little bit at the Terminal, using `RegEx`!
-- Regular expressions are much simpler than `HTML` or `LaTeX`
-- But these simple expressions allow us conduct powerful and sweeping searches
+-   We even a little bit at the Terminal, using `RegEx`!
+-   Regular expressions are much simpler than `HTML` or `LaTeX`
+-   But these simple expressions allow us conduct powerful and sweeping searches
 
-## Python will be a lot like this! 
+## Python will be a lot like this!
 
 When we write a Python program, we will:
 
@@ -76,158 +72,254 @@ When we write a Python program, we will:
 
 ## Getting Set Up
 
-- Navigate to your `LIN_301` directory
-- Create a new subfolder, called `py`. 
-    - This is where we'll save our python scripts.
-    
-## Getting Set Up
- 
-- Make sure that Python 3 is installed on your computer.
-  - Visit: https://www.python.org/downloads/
-  - Download the latest version for your OS
-
-```r
-install.packages("reticulate")
-library(reticulate)
-
-# Install a private Miniconda just for R/reticulate
-reticulate::install_miniconda()
-
-# Create a Python env for the course
-reticulate::conda_create("r-reticulate", packages = c("python=3.11", "pip"))
-```
+-   Navigate to your `LIN_301` directory
+-   Create a new subfolder, called `py`.
+    -   This is where we'll save our python scripts.
 
 ## Getting Set Up
 
-- Once you have Python installed, confirm that it works in your RStudio Terminal
+-   Make sure that Python 3 is installed on your computer.
+    -   Visit: https://www.python.org/downloads/
 
-For Windows:
+    -   Download the latest version for your OS
+
+    -   Once it's installed, verify that it works in your RStudio Terminal:
+
+        -   PC:
+
+        ``` bash
+        python --version      ## py --version also works
+        pip --version
+        ```
+
+        -   Mac:
+
+        ``` bash
+        python3 --version
+        pip --version
+        ```
+
+## Running Your First Line of Code
+
+-   Now that you have verified that Python works in RStudio, return to the terminal
+-   PC:
 
 ``` bash
-py --version
+$ py 
+$ print("Hello world!")
+$ quit()
 ```
 
-For Mac:
+-   Mac:
+
 ``` bash
-python3 --version
+$ python3
+$ print("Hello world!")
+$ quit()
 ```
+
+## The function `print`:
+
+-   Must be lower case.
+-   You cannot leave out `"` within the print function
+    -   That said, you can use `'` instead!
+    -   Try `print(Hello world!)`. What happens?
+
+## Creating Your First Python Script
+
+-   We won't be working in the Terminal for much longer.
+-   Let's create a new `.py` file, called `first_script.py`
+-   Within the new script, paste:
+
+``` python
+print("Hello world!")
+```
+
+-   Click `Run` in the document to run the code.
 
 # Working within Quarto
 
-- Quarto docs:
+## Quarto Docs
 
-## 
+-   A **Quarto document** (`.qmd`) is a plain text file that mixes:
+    -   **Markdown** → text, headings, lists, images
+    -   **Code chunks** → Python, R, Julia, Bash, etc.
+    -   **Output** → tables, plots, formatted results
+-   Think of it as a **combo notebook + report**.
+-   All of the slides, homeworks, and check-ins are compiled as Quarto docs.
 
-Getting out of python! To get out of python and back to your usual terminal, run quit()
+## Why is Quarto Useful for Coding?
 
-# Writing Our First Script
+-   Lets you **write code and explanation in the same file**.\
+-   Can **render** to multiple formats:
+    -   Slides (like these!)
+    -   HTML pages
+    -   PDF reports (LaTeX!)
+    -   Word documents
+-   Encourages **reproducibility**:
+    -   Anyone can rerun your code and get the same results.
 
-To write our first python script, open SublimeText (or whichever text editor you're using) and create a new blank document. While the document is still blank save it as hello.py in your python folder. It might seem silly to save a blank document, but this will let SublimeText know that we are writing a python script, and it will give us nice syntax highlighting.
+## Quarto Code
 
-Writing Hello World The traditional first python script to write is a "Hello world!" script. Inside your hello.py document, write the following.
+-   Create a new `Quarto Document`, called `first_doc.qmd`
+-   Make sure it's a `pdf` file.
 
-print("Hello world!") It is important that you enter it in exactly as it appears here.
+## Quarto Code
 
-The command print must be lower case. "Hello world!" must be inside quotation marks. It's less important what exactly you put inside the quotation marks. The opening ( must be matched with a closing ). Save your script!
+-   Once created, click on "Source", delete everything within, and then paste the following code:
 
-Running hello.py To run the script, navigate in your terminal to the python directory where you saved the script. Then, run the following.
+``` markdown
+---
+title: "My First Quarto Document"
+author: "Your Name Here"
+date: "2025-09-29"
+format: pdf
+---
 
-python3 hello.py What should happen next is the terminal will print out Hello world!, or whatever it was you put in quotes.
+# Introduction
 
-What just happened? The Script. Our document, hello.py is a script. All a a script is is a plain test document. This specific script is a python script because it contains text that python can interpret. It doesn't have to end in .py, but its helpful for keeping things straight.
+This is my very first Quarto document!  
+It will generate a PDF when I render it.
+
+# Python Example
+
+Here’s a Python code block that prints `"Hello World!"`:
+```
+
+## Quarto Code
+
+-   Now in "Visual", click "Insert" \> "Executable Cell" \> "Python"
+-   Paste in the following:
+
+``` python
+print("Hello world!")
+```
+
+-   This is an executable cell of code *within* your document.
 
 # Learning about Variables
 
-## Variables
+## Printing Hello world!
+
+-   Remember earlier how this gave us error?
+
+``` python
+print("Hello world!")
+```
+
+-   Create a code block in your `qmd` file, and try this instead:
+
+``` python
+hello_world = "Hello world!"
+print(hello_world)
+```
+
+## What just happened?
+
+-   Why did `print(hello_world)` work, but `print(Hello world!)` didn't?
 
 ## Variables
 
-## Activity
+-   `hello_world` is a variable that we defined as having the value `"Hello world!"`
 
-# Assignment
+## Naming Variables
 
-We’ll calculate how old you will be in **2040** in two steps:  
-1. Subtract your current age from the current year to get your year of birth.  
-2. Subtract your year of birth from 2040 to get your age in 2040.  
+-   Case sensitive (`hello_world` ≠ `Hello_world`)
+-   Must start with a letter or `_`
+    -   Cannot start with a number
+-   Can only contain letters, numbers, underscores
+    -   So avoid `&`, `*`, `.`, `?`
 
-We’ll do this in the interactive Python shell (`python3` or `ipython3`).  
+## Variables
 
----
+-   Let's look another example.
+-   Python doesn’t know your age unless you tell it.
 
-# Variables
-
-Python doesn’t know your age unless you tell it.
-
-```python
+``` python
 my_age
 # NameError: name 'my_age' is not defined
 ```
 
-Assign a value using `=`:
+-   We can assign a value to `my_age` using `=`:
 
-```python
-my_age = 37
+``` python
+my_age = 46
 my_age
-# 37
+# 46
 ```
 
----
+## Using Variables
 
-# Variable Names
+-   We can use variables just like numbers:
 
-Rules for variable names:
-- Case sensitive (`my_age` ≠ `My_age`)  
-- Must start with a letter or `_`  
-- Cannot start with a number  
-- Can only contain letters, numbers, underscores  
-
-⚠️ Avoid names with `&`, `*`, `.`, `?`, etc.
-
----
-
-# Using Variables
-
-We can use variables just like numbers:
-
-```python
-2022 - my_age
+``` python
+2025 - my_age
 ```
 
-Assign year to another variable:
+## Using Variables
 
-```python
-current_year = 2022
+-   Let's assign the current year to another variable:
+
+``` python
+current_year = 2025
 current_year - my_age
 ```
 
-Store result in a new variable:
+## Using Variables
 
-```python
+-   Let's store the result in a new variable:
+
+``` python
 year_of_birth = current_year - my_age
 year_of_birth
 ```
 
----
+## Your Age in 2040
 
-# Your Age in 2040
-
-```python
+``` python
 2040 - year_of_birth
 ```
 
----
+## Overwriting Variables
 
-# Overwriting Variables
+-   You can always reassign (i.e., change the value of) a variable:
 
-You can reassign a variable:
-
-```python
+``` python
 my_age = 50
 my_age
 # 50
 ```
 
-⚠️ Other variables don’t automatically update:
-`year_of_birth` still has the old value.
+-   Note: other variables don’t automatically update: `year_of_birth` still has the old value.
 
----
+## Activity: When Does your Kid Turn 18?
+
+LLet’s extend what we’ve learned with variables:
+
+-   Assume you’ll have a child in the future, born when you turn `30`.\
+-   Write code inside an embedded `python` code block.\
+-   The end result should be a variable called `child_18_year`, which is the year your child turns **18**.\
+-   You may:
+    -   Use the math symbols `+` and `-`
+    -   Define new variables
+    -   Print intermediate results to check your work
+
+# Activity Solution
+
+## Activity Solution
+
+``` python
+current_year = 2025
+my_age = 20
+
+# How many years until you turn 30?
+years_til_kid = 30 - my_age
+
+# What year is the child born?
+child_birth_year = current_year + years_til_kid
+
+# What year does the child turn 18?
+child_18_year = child_birth_year + 18
+
+print(child_18_year)
+```
