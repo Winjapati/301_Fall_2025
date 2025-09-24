@@ -73,7 +73,7 @@ pandoc test.html -t plain -o test.txt
 
 -   You can download `pandoc` if you'd like; if not, you can just follow along for this section.
 
-## Converting to `docx` and `odt` 
+## Converting to `docx` and `odt`
 
 -   Let's create a `.sh` file called `convert.sh`
 -   We'll paste in this code:

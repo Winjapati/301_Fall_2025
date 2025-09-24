@@ -83,7 +83,7 @@ Here are two more:
 2. 4 x 80
 3. 100 ÷ 25
 
-## Number Operators
+## Number Operators: Exponent
 
 Operators: 
 
@@ -93,9 +93,9 @@ Operators:
 2 ** 2 == 2 * 2
 ```
 
-## Number Operators
+## Number Operators: Modulus
 
-- `x % y` (modulus: remainder)\
+- `x % y` (**modulus**: remainder)\
 
 ``` python
 10 % 3 == 1   # 3 goes into 10 three times, remainder 1
@@ -104,7 +104,7 @@ Operators:
 
 - This is actually quite useful, as these shows us what are non-integers
 
-## Number Operators
+## Number Operators: FLoor Division
 
 - `x // y` (floor division)
 
@@ -113,21 +113,33 @@ Operators:
 14 // 5   # 2  (5 goes into 14 two times, remainder dropped)
 ```
 
-- This is a type of *rounding*
+- This is a way of *rounding down*
 
-## Summing up New Operators
+## Summing up New Operators: 
 
-- 14 / 5   # 2.8 (normal division)
-- 14 // 5  # 2   (floor division)
-- 14 % 5   # 4   (remainder)
+``` python
+14 / 5      # 2.8 (normal division)
+14 // 5     # 2   (floor division)
+14 % 5      # 4   (modulus)
+```
 
+## Operator Activity
 
 # Strings
 
+## Three basic value types
+
+1. **Numbers**
+2. **Strings**
+3. **Booleans (logical values)**
+
+- You can check what something is using the `type()` function
+
+## Strings
 If you type text without quotes:
 
 ``` python
-Josef
+Andrew
 # NameError
 ```
 
@@ -135,8 +147,7 @@ Josef
 With quotes:
 
 ``` python
-"Josef"
-# 'Josef'
+"Andrew"    # 'Andrew' also works
 ```
 
 ## Strings
@@ -144,8 +155,8 @@ Assigning strings:
 
 ``` python
 title = "Dr."
-first_name = "Josef"
-last_name = "Fruehwald"
+first_name = "Andrew"
+last_name = "Byrd"
 ```
 
 ## Strings
@@ -155,42 +166,67 @@ Concatenate with `+`:
 title + first_name + last_name
 ```
 
+- What happens when we print the three? How might we improve the output?
+
+
 ## Strings
-Or print nicely:
+We could also print it this way:
 
 ``` python
 print(title, first_name, last_name)
 ```
 
+## Strings
+
+What happens when we run this code?
+
+``` python
+print("I said, "Hello!"")
+```
 
 ## Strings
 
-Escape quotes with `\`:
+- For this, we'll need to have a character `\"`.
+    - Cf. LaTeX `\#`, etc.
 
 ``` python
 "I said, \"Hello!\""
 ```
 
-Strings can contain almost any characters.
+- Besides `"` (and `'`), almost any character can be within a string.
 
 
 # Boolean (Logical) Values
+
+## Three basic value types
+
+1. **Numbers**
+2. **Strings**
+3. **Booleans (logical values)**
+
+- You can check what something is using the `type()` function
+
+
+## Boolean (Logical) Values
 
 Only two: `True`, `False`.
 
 Usually created by comparisons:
 
 ``` python
-first_name == "Joseph"
+first_name == "Bob"
 # False
 ```
 
-⚠️ Remember:\
-- `=` is assignment\
-- `==` is equality test
+::: callout-important
+## Important!
+
+- `=` means **variable assignment**  
+- `==` meanas **equals** or **testing if two things are equal**
+:::
 
 
-# Comparison Operators
+## Comparison Operators
 
 -   `==` exactly equal\
 -   `>` greater than\
@@ -199,30 +235,83 @@ first_name == "Joseph"
 -   `<=` less than or equal to
 
 
-# Logical Operators
+## Logical Operators
 
 -   `not` flips a boolean\
 -   `and` is true if **both** are true\
 -   `or` is true if **at least one** is true
 
 
-# Truth Tables
+## Examples
 
-**and** \| Input \| Output \| \|------------------\|--------\| \| True and True \| True \| \| True and False \| False \| \| False and False \| False \|
-
-**or** \| Input \| Output \| \|-----------------\|--------\| \| True or True \| True \| \| True or False \| True \| \| False or False \| False \|
-
-
-# Examples
-
-Check for Josef with “f” or “ph”:
+Check for Andrew with “w” or without:
 
 ``` python
-(first_name == "Joseph") or (first_name == "Josef")
+(first_name == "Andrew") or (first_name == "Andre")
 ```
 
-Check for Josef who is 37:
+Check for Andrew who is 46:
 
 ``` python
-(first_name == "Josef") and (my_age == 37)
+(first_name == "Andrew") and (my_age == 46)
 ```
+
+# Activity
+
+## Activity: Predicting Aspiration
+
+- In English, voiceless stops (p, t, k) are usually aspirated when they occur at the beginning of a word.
+- Your task: write a small Python script that predicts whether the first sound in a word will be aspirated.
+
+
+## Activity: Predicting Aspiration
+
+Steps:
+
+1. Assign a word like "pin", "spin" to a variable called `word`.
+    - To identify the first character, use `word[0]`. 
+3. Create three variables: `starts_p`, `starts_t`, `starts_k`
+    - `starts_p = word[0] == "p"`, etc.
+3. Create another variable aspirated, whose value is `True` if any of the above is `True`.
+    - **Hint**: combine them with `or`!
+4. Print out the word and whether it is aspirated.
+
+
+# Activity Answers
+
+## Answers
+``` python
+word = "pin"   # try: "spin", "top", "stop", "cat", "skat"
+
+# Step 1: check if word starts with a voiceless stop
+starts_p = word[0] == "p"
+starts_t = word[0] == "t"
+starts_k = word[0] == "k"
+
+# Step 2: decide aspiration (simplified: only if it’s the first sound)
+aspirated = starts_p or starts_t or starts_k
+
+print("Word:", word)
+print("Aspirated?", aspirated)
+```
+
+# Improving the Activity
+
+## But what if we want to test any word?
+
+``` python
+word = input("Enter a word, any word: ")
+
+# Step 1: check if word starts with a voiceless stop
+starts_p = word[0] == "p"
+starts_t = word[0] == "t"
+starts_k = word[0] == "k"
+
+# Step 2: decide aspiration (simplified: only if it’s the first sound)
+aspirated = starts_p or starts_t or starts_k
+
+print("Word:", word)
+print("Aspirated?", aspirated)
+```
+
+
