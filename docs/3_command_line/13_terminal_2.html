@@ -481,21 +481,24 @@ Dr.&nbsp;Andrew M. Byrd
 <span id="cb1-10"><a href=""></a></span>
 <span id="cb1-11"><a href=""></a><span class="co"># convert html → plain text</span></span>
 <span id="cb1-12"><a href=""></a><span class="ex">pandoc</span> test.html <span class="at">-t</span> plain <span class="at">-o</span> test.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>You can download <code>pandoc</code> if you’d like; if not, you can just follow along for this section.</li>
+</ul>
 </section>
 <section id="converting-to-docx-and-odt" class="slide level2 center">
 <h2>Converting to <code>docx</code> and <code>odt</code></h2>
 <ul>
-<li>Create a <code>.sh</code> file called <code>convert.sh</code></li>
-<li>Paste in this code:</li>
+<li>Let’s create a <code>.sh</code> file called <code>convert.sh</code></li>
+<li>We’ll paste in this code:</li>
 </ul>
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href=""></a><span class="co"># 1) Make a tiny Markdown source</span></span>
 <span id="cb2-2"><a href=""></a><span class="bu">echo</span> <span class="st">"# Hello!"</span> <span class="op">&gt;</span> demo.md</span>
 <span id="cb2-3"><a href=""></a><span class="bu">echo</span> <span class="st">"This is a *line* and **text**."</span> <span class="op">&gt;&gt;</span> demo.md</span>
 <span id="cb2-4"><a href=""></a></span>
-<span id="cb2-5"><a href=""></a><span class="co"># 2) Convert MD → HTML (plain text file you can open/read)</span></span>
+<span id="cb2-5"><a href=""></a><span class="co"># 2) Convert MD → HTML</span></span>
 <span id="cb2-6"><a href=""></a><span class="ex">pandoc</span> demo.md <span class="at">-o</span> demo.html</span>
 <span id="cb2-7"><a href=""></a></span>
-<span id="cb2-8"><a href=""></a><span class="co"># 3) Convert MD → DOCX and → ODT (packaged/binary-ish formats)</span></span>
+<span id="cb2-8"><a href=""></a><span class="co"># 3) Convert MD → DOCX and → ODT</span></span>
 <span id="cb2-9"><a href=""></a><span class="ex">pandoc</span> demo.md <span class="at">-o</span> demo.docx</span>
 <span id="cb2-10"><a href=""></a><span class="ex">pandoc</span> demo.md <span class="at">-o</span> demo.odt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
