@@ -36,14 +36,25 @@ this_class == "LIN_305"
 # False
 ```
 
+## Recap from Last Time
+
+We also learned some useful tricks:
+
+- `word[0]`
+- `input()`
+
 # Lists and Dictionaries
 
 
-In this module: **lists** and **dictionaries**.
+
 
 ------------------------------------------------------------------------
 
 # Lists
+
+Today, we'll be examining two *very* important data structures in Python: **lists** and **dictionaries**.
+
+## Lists
 
 Assign a single value:
 

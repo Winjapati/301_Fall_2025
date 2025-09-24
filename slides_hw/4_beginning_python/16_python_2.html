@@ -416,7 +416,7 @@ Dr.&nbsp;Andrew M. Byrd
 <li><a href="#/boolean-logical-values" id="/toc-boolean-logical-values">Boolean (Logical) Values</a></li>
 <li><a href="#/activity" id="/toc-activity">Activity</a></li>
 <li><a href="#/activity-answers" id="/toc-activity-answers">Activity Answers</a></li>
-<li><a href="#/improving-the-activity" id="/toc-improving-the-activity">Improving the Activity</a></li>
+<li><a href="#/broadening-the-script" id="/toc-broadening-the-script">Broadening the Script</a></li>
 </ul>
 </nav>
 </section>
@@ -735,24 +735,29 @@ Dr.&nbsp;Andrew M. Byrd
 <span id="cb17-12"><a href=""></a><span class="bu">print</span>(<span class="st">"Aspirated?"</span>, aspirated)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section></section>
 <section>
-<section id="improving-the-activity" class="title-slide slide level1 center">
-<h1>Improving the Activity</h1>
+<section id="broadening-the-script" class="title-slide slide level1 center">
+<h1>Broadening the Script</h1>
 
 </section>
 <section id="but-what-if-we-want-to-test-any-word" class="slide level2 center">
 <h2>But what if we want to test any word?</h2>
-<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href=""></a>word <span class="op">=</span> <span class="bu">input</span>(<span class="st">"Enter a word, any word: "</span>)</span>
-<span id="cb18-2"><a href=""></a></span>
-<span id="cb18-3"><a href=""></a><span class="co"># Step 1: check if word starts with a voiceless stop</span></span>
-<span id="cb18-4"><a href=""></a>starts_p <span class="op">=</span> word[<span class="dv">0</span>] <span class="op">==</span> <span class="st">"p"</span></span>
-<span id="cb18-5"><a href=""></a>starts_t <span class="op">=</span> word[<span class="dv">0</span>] <span class="op">==</span> <span class="st">"t"</span></span>
-<span id="cb18-6"><a href=""></a>starts_k <span class="op">=</span> word[<span class="dv">0</span>] <span class="op">==</span> <span class="st">"k"</span></span>
-<span id="cb18-7"><a href=""></a></span>
-<span id="cb18-8"><a href=""></a><span class="co"># Step 2: decide aspiration (simplified: only if it’s the first sound)</span></span>
-<span id="cb18-9"><a href=""></a>aspirated <span class="op">=</span> starts_p <span class="kw">or</span> starts_t <span class="kw">or</span> starts_k</span>
-<span id="cb18-10"><a href=""></a></span>
-<span id="cb18-11"><a href=""></a><span class="bu">print</span>(<span class="st">"Word:"</span>, word)</span>
-<span id="cb18-12"><a href=""></a><span class="bu">print</span>(<span class="st">"Aspirated?"</span>, aspirated)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>First, input this in the Terminal:</li>
+</ul>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href=""></a>word <span class="op">=</span> <span class="bu">input</span>(<span class="st">"Enter a word, any word: "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Then:</li>
+</ul>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href=""></a><span class="co"># Step 1: check if word starts with a voiceless stop</span></span>
+<span id="cb19-2"><a href=""></a>starts_p <span class="op">=</span> word[<span class="dv">0</span>] <span class="op">==</span> <span class="st">"p"</span></span>
+<span id="cb19-3"><a href=""></a>starts_t <span class="op">=</span> word[<span class="dv">0</span>] <span class="op">==</span> <span class="st">"t"</span></span>
+<span id="cb19-4"><a href=""></a>starts_k <span class="op">=</span> word[<span class="dv">0</span>] <span class="op">==</span> <span class="st">"k"</span></span>
+<span id="cb19-5"><a href=""></a></span>
+<span id="cb19-6"><a href=""></a><span class="co"># Step 2: decide aspiration (simplified: only if it’s the first sound)</span></span>
+<span id="cb19-7"><a href=""></a>aspirated <span class="op">=</span> starts_p <span class="kw">or</span> starts_t <span class="kw">or</span> starts_k</span>
+<span id="cb19-8"><a href=""></a></span>
+<span id="cb19-9"><a href=""></a><span class="bu">print</span>(<span class="st">"Word:"</span>, word)</span>
+<span id="cb19-10"><a href=""></a><span class="bu">print</span>(<span class="st">"Aspirated?"</span>, aspirated)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 

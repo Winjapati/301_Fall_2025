@@ -295,13 +295,19 @@ print("Word:", word)
 print("Aspirated?", aspirated)
 ```
 
-# Improving the Activity
+# Broadening the Script
 
 ## But what if we want to test any word?
 
+- First, input this in the Terminal:
+
 ``` python
 word = input("Enter a word, any word: ")
+```
 
+- Then:
+
+``` python
 # Step 1: check if word starts with a voiceless stop
 starts_p = word[0] == "p"
 starts_t = word[0] == "t"
