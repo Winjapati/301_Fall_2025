@@ -71,21 +71,22 @@ pandoc test.md -o test.html
 pandoc test.html -t plain -o test.txt
 ```
 
-## Converting to `docx` and `odt`
+-   You can download `pandoc` if you'd like; if not, you can just follow along for this section.
 
--   Together, let's create a `.sh` file called `convert.sh`
-    -   If you want to do this on your own, you'll need to download pandoc to your machine.
--   Paste in this code:
+## Converting to `docx` and `odt` 
+
+-   Let's create a `.sh` file called `convert.sh`
+-   We'll paste in this code:
 
 ``` bash
 # 1) Make a tiny Markdown source
 echo "# Hello!" > demo.md
 echo "This is a *line* and **text**." >> demo.md
 
-# 2) Convert MD → HTML (plain text file you can open/read)
+# 2) Convert MD → HTML
 pandoc demo.md -o demo.html
 
-# 3) Convert MD → DOCX and → ODT (packaged/binary-ish formats)
+# 3) Convert MD → DOCX and → ODT
 pandoc demo.md -o demo.docx
 pandoc demo.md -o demo.odt
 ```
