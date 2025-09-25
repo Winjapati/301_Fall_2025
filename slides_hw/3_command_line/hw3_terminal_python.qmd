@@ -1,0 +1,90 @@
+---
+title: "Homework 2: From Terminal to Python"
+author: "Dr. Andrew M. Byrd"
+format: pdf
+fontsize: 12pt
+---
+
+# Part 1: Terminal (Setup)
+
+1. Open your Terminal in RStudio.  
+2. Navigate (`cd`) into your course repo folder (e.g., `~/git_repos/301_Fall_2025`).  
+3. Make a new folder called `hw2_files`:
+
+```{.bash}
+mkdir hw2_files
+```
+
+4. Download the file **shakespeare.txt** from Project Gutenberg into that folder (use `curl`):
+
+```{.bash}
+curl -o shakespeare.txt https://www.gutenberg.org/cache/epub/100/pg100.txt
+```
+
+5. Confirm the file is in your folder with:
+
+```{.bash}
+ls hw2_files
+```
+
+---
+
+# Part 2: Python (Lists and Dictionaries)
+
+Create a new Quarto doc called **hw2.qmd** with a Python code chunk.  
+
+## Load the File
+
+```{python}
+with open("hw2_files/shakespeare.txt", "r", encoding="utf-8") as f:
+    text = f.read()
+```
+
+## Make a List
+
+- Take the first 10 *unique* words from the file (in the order they appear) and store them in a list called `words`.  
+- Print the list.  
+- Print the 3rd and 7th items in the list.  
+
+Example:
+
+```{python}
+words = ["The", "Project", "Gutenberg", "EBook", "of", "William", "Shakespeare", "Complete", "by", "Shakespeare"]
+print(words)
+print(words[2])   # 3rd item
+print(words[6])   # 7th item
+```
+
+## Make a Dictionary
+
+- Pick **3 of the words** from your `words` list.  
+- Use `.count()` to see how many times each appears in the text.  
+- Create a dictionary called `word_counts` that pairs each chosen word with its number.  
+
+Example:
+
+```{python}
+word_counts = {
+    "The": text.count("The"),
+    "Project": text.count("Project"),
+    "Shakespeare": text.count("Shakespeare")
+}
+print(word_counts)
+```
+
+---
+
+# Part 3: Reflection
+
+At the bottom of your **hw2.qmd**, write a short (3–5 sentence) reflection:
+
+- What was easiest about this assignment?  
+- What was hardest?  
+- How might a linguist use lists and dictionaries for language data?  
+
+---
+
+# Submission
+
+- Upload **hw2.qmd** and your **hw2_files/shakespeare.txt** file to your GitHub repo.  
+- Post the repo link to Canvas.  

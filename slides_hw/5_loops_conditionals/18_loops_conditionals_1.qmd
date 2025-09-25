@@ -1,0 +1,429 @@
+---
+title: "Computation for Linguists"
+subtitle: "Beginning Python: Lists & Dictionaries"
+date: "October 3, 2025"
+author: "Dr. Andrew M. Byrd"
+format:
+  revealjs:
+    css: header_shrink.css
+    theme: beige
+    slide-number: true
+    center: true
+    toc: true
+    toc-title: "Plan for the Day"
+    toc-depth: 1
+editor: visual
+---
+
+# Review
+
+-   What did you learn last time?
+
+## Recap from Last Time
+
+## Data Structures
+
+Recap from last module: 
+
+- Assign a value to a variable with `=`\
+- **Numbers**: `integer` and `float`\
+- **Strings**: text inside quotes `"..."` or `'...'`\
+- **Booleans**: `True` and `False`, used for logical comparisons
+
+Example:
+
+``` python
+this_class = "LIN_301"
+this_class == "LIN_305"
+# False
+```
+
+## Recap from Last Time
+
+We also learned some useful tricks:
+
+- `word[0]`
+- `input()`
+
+# Lists
+
+## Lists & Dictionaries
+
+Today, we'll be examining two *very* important data structures in Python: **lists** and **dictionaries**.
+
+## Moving from Variables to Lists
+
+- We can assign a single value to a variable:
+
+``` python
+first_novel = "Sense and Sensibility"
+```
+
+- But what if we wanted to create a variable called `novels` with multiple values?
+- For this we can create a **list**
+    - Marked in Python in brackets `[...]`
+    - **Ordered** (the order of items is preserved)
+    - You can delete and add values within them
+
+## Creating a List
+
+- Jane Austen published **seven novels**. Instead of lots of variables, use a **list**:
+
+``` python
+novels = ["Sense and Sensibility", "Pride and Prejudice", "Mansfield Park", "Emma", "Northanger Abbey", "Persuasion", "Lady Susan"]
+```
+
+Print list:
+
+``` python
+print(novels)
+```
+
+## The `+` Operator
+
+``` python
+1 + 1
+"Dr." + " " + Andrew" + " " + "Byrd"
+```
+
+## Adding Two Lists Together
+
+We can also use `+` to **concatenate** lists:
+
+``` python
+unfinished = ["The Watsons", "Sandition"]
+novels + unfinished
+```
+
+## Recall the Activity from Last Time:
+
+``` python
+word = "pin"
+print(word[0])
+```
+- What is printed?
+- The number within the brackets `[ ... ]` is called the **index** 
+
+## Indexing a List
+
+- Just like `word[0]`, we access the first element of a list with the index `[0]`.
+
+``` python
+novels[0]  # first item
+novels[1]  # second item
+```
+
+- Try:
+
+``` python
+novels[6]
+```
+
+## How about the reverse?
+
+- Before we wanted to find out what the **7th** novel was by using novels[6].
+- But what if we wanted to find out the index of a particular novel? (Such as *Lady Susan*)
+
+## Getting the Index of a Value
+
+- We can use the **method** of a value.
+    - Methods are indicated with `.method`
+    - `value.method`
+- Let's use the `list.index()` method to identify the index
+    
+``` python
+novels.index("Lady Susan")
+# 6
+```
+
+
+## Aligning lists using indices
+
+- We can use the index of one list to align with another list
+
+``` python
+pub_year = [1811, 1813, 1814, 1815, 1818, 1818, 1871]
+susan_index = novels.index("Lady Susan")
+pub_year[susan_index]  # 1871
+```
+
+- What is this code really doing?
+
+## Reverse Lookup
+
+- We could do the reverse, and find a specific book by year:
+
+``` python
+year_index = pub_year.index(1814)
+novels[year_index]
+# 'Mansfield Park'
+```
+
+- What happens if we use `1818` as the index? 
+
+## Negative Indexing
+
+We can also count from the end:
+
+``` python
+novels[-1]
+# 'Lady Susan'
+```
+
+## Activity
+
+- Below is a list of novels written by George Orwell. Copy and paste this code to create both lists in your `qmd`.
+
+``` python
+orwell_novels = ["Animal Farm", "Nineteen Eighty-Four", "Burmese Days", "Keep the Aspidistra Flying", "Coming Up for Air"]
+pub_year = [1945, 1949, 1934, 1936, 1939]
+```
+
+- Next, do the following:
+1. Print the names of the first and last novel.
+2. Use `.index()` to find the position of *Burmese Days*. Use that index to print the corresponding publication year from `pub_year`.
+3. Find which novel was published in `1936`.
+
+# Other Useful List Operations
+
+## Slicing
+
+- Let's return to Austen's `novels`
+- We can ranges of values in lists, using the `:` symbol:
+
+``` python
+novels[0:3]
+# ['Sense and Sensibility', 'Pride and Prejudice', 'Mansfield Park']
+```
+
+- Note: the stop index is not included!  (It's not 0-3, it's 0-2)
+
+## Membership Test
+
+- We can also check to see if a value is in a list using the operator `in`
+
+``` python
+"Emma" in novels          # True
+"Frankenstein" in novels  # False
+```
+
+- Or with a variable:
+
+``` python
+novel_to_check = "Lady Susan"
+novel_to_check in novels
+```
+
+## Complex Lists
+
+- Lists can contain pretty much anything — even other lists:
+
+``` python
+complex_list = [["Sense and Sensibility", 1811],
+                ["Pride and Prejudice", 1813],
+                ["Mansfield Park", 1814],
+                ["Emma", 1815]]
+```
+
+## Indexing in Complex Lists
+
+``` python
+complex_list[0]      # ["Sense and Sensibility", 1811]
+complex_list[2][1]   # 1814
+```
+
+- Having a way to have two members within a list would be super useful for linguists
+- Languages do have lexicons after all!
+    - form : meaning
+
+
+# Dictionaries
+
+- There's a more straight-forward way to do this in Python
+- We can use `dict` (**dictionaries**)
+- Pythons `dict` is marked not with `[...]`, but with curly braces `{...}`
+- Note: entries are **unordered**.
+
+## Dictionaries
+
+- We can relate **keys** (the first member) to **values** (the second) using `{}`:
+
+``` python
+novel_dict = {"Sense and Sensibility": 1811,
+              "Pride and Prejudice": 1813,
+              "Mansfield Park": 1814}
+```
+
+- Note the structure { key_0 : value_0, key_1 : value_1, etc.}
+
+## Keys & Values
+
+- Keys must be unique, but values can repeat.
+
+``` python
+austen_dict = {
+    "Sense and Sensibility": 1811,
+    "Pride and Prejudice": 1813,
+    "Mansfield Park": 1814,
+    "Emma": 1815,
+    "Northanger Abbey": 1818,   # duplicate value
+    "Persuasion": 1818,         # duplicate value
+    "Lady Susan": 1871
+}
+```
+
+## Indexing a Dictionary
+
+- Get values by key:
+
+``` python
+austen_dict["Pride and Prejudice"]
+# 1813
+```
+
+- Note: it's easy to find the value of a key, but the opposite is much trickier.
+  - Why might that be so?
+
+## Adding to a Dictionary
+
+- To add a new key–value pair, use the following dict["new_key"] = new_value
+
+``` python
+austen_dict["The Rise of Han Solo"] = 2025
+```
+
+## Overwriting a key's value
+
+- To change the value of a key, you simply restate it:
+
+    - `dict["key"] = changed_value`
+
+``` python
+austen_dict["The Rise of Han Solo"] = 1872
+```
+
+
+## Deleting a `key`-`value` Pair from the Dictionary
+
+- To delete a `key`-`value` pair:
+    - `del dict["key"]`
+    
+    
+``` python
+del austen_dict["The Rise of Han Solo"]
+```
+
+## Checking Keys
+
+- We can use `in` checks to check `keys` (but not `values`)!
+
+``` python
+"Pride and Prejudice" in austen_dict  # True
+1811 in austen_dict                   # False
+```
+
+## Dictionary Activity
+
+- Below is a dictionary pairing George Orwell’s novels with their publication years. Copy this into your qmd:
+
+``` python
+orwell_dict = {
+    "Animal Farm": 1945,
+    "Nineteen Eighty-Four": 1949,
+    "Burmese Days": 1934,
+    "Keep the Aspidistra Flying": 1936,
+    "Coming Up for Air": 1939
+}
+```
+
+## Dictionary Activity
+
+- Print the year that *Animal Farm* was published using its key.
+- Check if *Homage to Catalonia* is in the dictionary. 
+- Add Orwell’s *Homage to Catalonia* (1937) to the dictionary. Print the dictionary again to confirm.
+- Whoops, made a mistake! *Homage to Catalonia* was actually published in 1938. Fix that mistake.
+- Remove *Coming Up for Air* from the dictionary.
+
+# Lists vs. Dictionaries
+
+When should use lists? Dictionaries?
+
+## When to Use Lists
+
+- You care about order (wordlists, texts, morpheme sequences).
+- You want to access items by position (index):
+    - e.g., `ipa_segments[0]` → first sound in a word.
+- If you don't care about *or* have duplicates
+    - e.g., a corpus may have the same word many times
+
+Examples:
+
+``` python
+words = ["dog", "dog", "cat", "horse"]
+morphemes = ["un", "believe", "able"]
+```
+
+## When to Use Dictionaries
+
+- You want to map one kind of information to another (`key` : `value`).
+- Order is not important, but fast lookup is.
+- Your entries (`keys`) are unique, though values can repeat.
+
+Examples:
+
+``` python
+#Mapping languages to families:
+lang_family = {"Latin": "Indo-European", "Finnish": "Uralic"}
+
+#Mapping words to glosses:
+lexicon = {"amo": "I love", "amas": "you love", "amat": "(s)he loves"}
+```
+
+## To Sum Up
+
+- List = a sequence you want to keep in order (words, morphemes, phonemes).
+- Dict = a mapping between two things (form → gloss, language → family, word → year).
+
+# Activities Answers
+
+## Activity 1
+
+``` python
+# 1. First and last novel
+print(orwell_novels[0])    # Animal Farm
+print(orwell_novels[-1])   # Coming Up for Air
+
+# 2. Publication year of Burmese Days
+burm_index = orwell_novels.index("Burmese Days")
+print(pub_year[burm_index])   # 1934
+
+# 3. Which novel was published in 1936?
+index_1936 = pub_year.index(1936)
+print(orwell_novels[index_1936])   # Keep the Aspidistra Flying
+```
+
+## Activity 2
+
+``` python
+# 1. Direct lookup
+print(orwell_dict["Animal Farm"])     # Output: 1945
+
+# 2. Membership check
+print("Homage to Catalonia" in orwell_dict)   # Output: False
+
+
+# 3. Adding a new key–value pair
+orwell_dict["Homage to Catalonia"] = 1937
+print(orwell_dict)      # Now includes: "Homage to Catalonia": 1937
+
+
+# 4. Overwriting a value (fixing a mistake)
+orwell_dict["Homage to Catalonia"] = 1938   # reassigns the correct year
+print(orwell_dict["Homage to Catalonia"])   # Output: 1938
+
+
+# 5. Delete a key–value pair
+del orwell_dict["Coming Up for Air"]
+print(orwell_dict)        # "Coming Up for Air" has been removed
+```
+
