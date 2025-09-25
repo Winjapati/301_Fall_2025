@@ -8,7 +8,7 @@ format: html
 ```
 
 ```{python}
-word = input("Enter a word, any word: ")
+
 
 # Step 1: check if word starts with a voiceless stop
 starts_p = word[0] == "p"
