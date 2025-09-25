@@ -1,82 +1,56 @@
 ---
-title: "Homework 2: From Terminal to Python"
+title: "Homework 3: the Terminal & Beginning Python"
+subtitle: "LIN 301: Computation for Linguists"
 author: "Dr. Andrew M. Byrd"
-format: pdf
+format: html
 fontsize: 12pt
 ---
 
 # Part 1: Terminal (Setup)
 
 1. Open your Terminal in RStudio.  
-2. Navigate (`cd`) into your course repo folder (e.g., `~/git_repos/301_Fall_2025`).  
-3. Make a new folder called `hw2_files`:
-
-```{.bash}
-mkdir hw2_files
-```
-
-4. Download the file **shakespeare.txt** from Project Gutenberg into that folder (use `curl`):
-
-```{.bash}
-curl -o shakespeare.txt https://www.gutenberg.org/cache/epub/100/pg100.txt
-```
-
-5. Confirm the file is in your folder with:
-
-```{.bash}
-ls hw2_files
-```
-
+2. Navigate (`cd`) into your course repo folder (`LIN_301`).  
+3. Make a new folder called `hw3_files`.
+4. Download the file **shakespeare.txt** from Project Gutenberg into that folder (use `curl`). The file is located at this address: https://www.gutenberg.org/cache/epub/100/pg100.txt.  
+5. Confirm the file is in your folder with the `ls` command.
 ---
 
 # Part 2: Python (Lists and Dictionaries)
 
-Create a new Quarto doc called **hw2.qmd** with a Python code chunk.  
+Create a new Quarto doc called **hw3.qmd** with a Python code chunk.  
 
 ## Load the File
 
-```{python}
-with open("hw2_files/shakespeare.txt", "r", encoding="utf-8") as f:
+In the first part of your Quarto doc, run the following code. This assigns the text found in `shakespeare.txt` to a variable named `text`.
+
+``` python
+with open("hw3_files/shakespeare.txt", "r", encoding="utf-8") as f:
     text = f.read()
 ```
 
 ## Make a List
 
-- Take the first 10 *unique* words from the file (in the order they appear) and store them in a list called `words`.  
-- Print the list.  
-- Print the 3rd and 7th items in the list.  
+- Using the method `.split()[:1000]`, take the first 1000 words (in the order they appear) and store them in a list called `first_words`.  
+- Print the list.
+- Print the 500th item in the list.
 
-Example:
+## Narrowing down the List
 
-```{python}
-words = ["The", "Project", "Gutenberg", "EBook", "of", "William", "Shakespeare", "Complete", "by", "Shakespeare"]
-print(words)
-print(words[2])   # 3rd item
-print(words[6])   # 7th item
-```
+- Now pick **10 of the words** from your `first_words` list. You should pick super common ones (like 'the') and rarer ones, too.
+- Manually place these 10 words in a new list called `chosen_ones`.
 
 ## Make a Dictionary
 
-- Pick **3 of the words** from your `words` list.  
-- Use `.count()` to see how many times each appears in the text.  
-- Create a dictionary called `word_counts` that pairs each chosen word with its number.  
-
-Example:
-
-```{python}
-word_counts = {
-    "The": text.count("The"),
-    "Project": text.count("Project"),
-    "Shakespeare": text.count("Shakespeare")
-}
-print(word_counts)
-```
+- You're now going to create a third list, called `bill`, that will contain *all* of the words of Shakespeare. As before, use the method `.split()` to split `shakespeare.txt` into separate words.
+- Use the method `.count()` to see how many times each chosen appears in the text.  
+- Create a dictionary called `word_counts` that pairs each chosen word with its number. 
+- Do **not** manually insert the counts in your `dict`. You should use the format: `"word": text.count("word")`.
 
 ---
 
 # Part 3: Reflection
 
-At the bottom of your **hw2.qmd**, write a short (3–5 sentence) reflection:
+At the bottom of your **hw3.qmd**, write a short (3–5 sentence) reflection:
 
 - What was easiest about this assignment?  
 - What was hardest?  
@@ -86,5 +60,4 @@ At the bottom of your **hw2.qmd**, write a short (3–5 sentence) reflection:
 
 # Submission
 
-- Upload **hw2.qmd** and your **hw2_files/shakespeare.txt** file to your GitHub repo.  
-- Post the repo link to Canvas.  
+- Upload **hw3.qmd** file to Canvas.  
