@@ -19,42 +19,39 @@ editor: visual
 
 -   What did you learn last time?
 
-## 
+## Review
 
-- Running `python`:
-  - Terminal
-  - Stand-alone `.py` file
-  - Quarto doc (`qmd`)
-
-- Starter `python` skills:
-  - `print()`
-  - basic math (`+`, `-`)
-  - assigning variables with `=`
-
+-   Running `python`:
+    -   Terminal
+    -   Stand-alone `.py` file
+    -   Quarto doc (`qmd`)
+-   Starter `python` skills:
+    -   `print()`
+    -   basic math (`+`, `-`)
+    -   assigning variables with `=`
 
 # Value Types
 
-
 ## Three basic value types
 
-1. **Numbers**
-2. **Strings**
-3. **Booleans (logical values)**
+1.  **Numbers**
+2.  **Strings**
+3.  **Booleans (logical values)**
 
-- You can check what something is using the `type()` function
+-   You can check something's type using the `type()` function
 
 # Numbers
 
-Two types: 
+Two types:
 
-- **int**: integers (no decimals)
+-   **int**: integers (no decimals)
 
 ``` python
 num_1 = 1
 type(num_1)
 ```
 
-- **float**: floating point numbers (decimals)
+-   **float**: floating point numbers (decimals)
 
 ``` python
 num_2 = 1.5
@@ -63,31 +60,31 @@ type(num_2)
 
 ## Number Operators
 
-We've seen two operators already: 
+We've seen two operators already:
 
-- `x + y` (add)\
-- `x - y` (subtract)\
+-   `x + y` (add)\
+-   `x - y` (subtract)\
 
 ## Number Operators
 
 Here are two more:
 
-- `x * y` (multiply)\
-- `x / y` (divide)\
+-   `x * y` (multiply)\
+-   `x / y` (divide)\
 
 ## Operator Activity:
 
-- Using `python`, compute the following equations:
+-   Using `python`, compute the following equations:
 
-1. 100 - 37
-2. 4 x 80
-3. 100 ÷ 25
+1.  100 - 37
+2.  4 x 80
+3.  100 ÷ 25
 
 ## Number Operators: Exponent
 
-Operators: 
+Operators:
 
-- `x ** y` (exponent)\
+-   `x ** y` (exponent)\
 
 ``` python
 2 ** 2 == 2 * 2
@@ -95,47 +92,67 @@ Operators:
 
 ## Number Operators: Modulus
 
-- `x % y` (**modulus**: remainder)\
+-   `x % y` (**modulus**: remainder)\
 
 ``` python
 10 % 3 == 1   # 3 goes into 10 three times, remainder 1
 14 % 5 == 4   # 5 goes into 14 twice, remainder 4
 ```
 
-- This is actually quite useful, as these shows us what are non-integers
+## Number Operators: Modulus
+
+-   The `modulus` command is actually quite useful, as it shows us when one number is not evenly divisible by another.
+
+``` python
+n = 17
+if n % 2 == 0:
+    print("even")
+else:
+    print("odd")
+```
 
 ## Number Operators: FLoor Division
 
-- `x // y` (floor division)
+-   `x // y` (floor division)
 
 ``` python
-10 // 3   # 3  (3 goes into 10 three times, ignore remainder)
+10 // 3   # 3  (3 goes into 10 three times, remainder dropped)
 14 // 5   # 2  (5 goes into 14 two times, remainder dropped)
 ```
 
-- This is a way of *rounding down*
+-   This is a way of *rounding down*, resulting in an integer
+-   Note: there's no built-in way to *round up* -- you'll have to do that in other ways
 
-## Summing up New Operators: 
+## Summing up "Divisive" Operators:
 
 ``` python
 14 / 5      # 2.8 (normal division)
-14 // 5     # 2   (floor division)
 14 % 5      # 4   (modulus)
+14 // 5     # 2   (floor division)
 ```
 
 ## Operator Activity
+
+1.  Divide 100 by 9 three different ways:
+
+    -   Normal division `/`
+    -   Floor division (rounding down) `//`
+    -   Modulus `%`
+
+2.  How many full weeks and leftover days are in a full year?
 
 # Strings
 
 ## Three basic value types
 
-1. **Numbers**
-2. **Strings**
-3. **Booleans (logical values)**
+1.  **Numbers**
+2.  **Strings**
+3.  **Booleans (logical values)**
 
-- You can check what something is using the `type()` function
+-   You can check something's type using the `type()` function
 
 ## Strings
+
 If you type text without quotes:
 
 ``` python
@@ -143,14 +160,31 @@ Andrew
 # NameError
 ```
 
+- Why does it do this?
+
 ## Strings
-With quotes:
+
+- If we assign Andrew as having the value "Andrew"...
 
 ``` python
-"Andrew"    # 'Andrew' also works
+>>> Andrew = "Andrew"
+>>> Andrew
+'Andrew'
 ```
 
 ## Strings
+
+With quotes:
+
+``` python
+>>> "Andrew"
+'Andrew'
+>>> 'Andrew'
+'Andrew'
+```
+
+## Strings
+
 Assigning strings:
 
 ``` python
@@ -160,16 +194,18 @@ last_name = "Byrd"
 ```
 
 ## Strings
+
 Concatenate with `+`:
 
 ``` python
 title + first_name + last_name
 ```
 
-- What happens when we print the three? How might we improve the output?
-
+- What happens when we print the three? 
+- How might we improve the output?
 
 ## Strings
+
 We could also print it this way:
 
 ``` python
@@ -186,26 +222,24 @@ print("I said, "Hello!"")
 
 ## Strings
 
-- For this, we'll need to have a character `\"`.
-    - Cf. LaTeX `\#`, etc.
+-   For this, we'll need to have a character `\"`.
+    -   Cf. LaTeX `\#`, etc.
 
 ``` python
 "I said, \"Hello!\""
 ```
 
-- Besides `"` (and `'`), almost any character can be within a string.
-
+-   Besides `"` (and `'`), almost any character can be within a string.
 
 # Boolean (Logical) Values
 
 ## Three basic value types
 
-1. **Numbers**
-2. **Strings**
-3. **Booleans (logical values)**
+1.  **Numbers**
+2.  **Strings**
+3.  **Booleans (logical values)**
 
-- You can check what something is using the `type()` function
-
+-   You can check something's type using the `type()` function
 
 ## Boolean (Logical) Values
 
@@ -221,26 +255,24 @@ first_name == "Bob"
 ::: callout-important
 ## Important!
 
-- `=` means **variable assignment**  
-- `==` meanas **equals** or **testing if two things are equal**
+-   `=` means **variable assignment**\
+-   `==` means **equals** or **testing if two things are equal**
 :::
-
 
 ## Comparison Operators
 
--   `==` exactly equal\
+-   `==` is exactly equal to\
+-   `!=` is not equal to\
 -   `>` greater than\
 -   `>=` greater than or equal to\
 -   `<` less than\
 -   `<=` less than or equal to
-
 
 ## Logical Operators
 
 -   `not` flips a boolean\
 -   `and` is true if **both** are true\
 -   `or` is true if **at least one** is true
-
 
 ## Examples
 
@@ -256,30 +288,35 @@ Check for Andrew who is 46:
 (first_name == "Andrew") and (my_age == 46)
 ```
 
+Check for Andrew who is not 45:
+
+``` python
+(first_name == "Andrew") and not (my_age == 45)
+```
+
 # Activity
 
 ## Activity: Predicting Aspiration
 
-- In English, voiceless stops (p, t, k) are usually aspirated when they occur at the beginning of a word.
-- Your task: write a small Python script that predicts whether the first sound in a word will be aspirated.
-
+-   In English, voiceless stops (p, t, k) are usually aspirated when they occur at the beginning of a word.
+-   Your task: write a small Python script that predicts whether the first sound in a word will be aspirated.
 
 ## Activity: Predicting Aspiration
 
 Steps:
 
-1. Assign a word like "pin", "spin" to a variable called `word`.
-    - To identify the first character, use `word[0]`. 
-3. Create three variables: `starts_p`, `starts_t`, `starts_k`
-    - `starts_p = word[0] == "p"`, etc.
-3. Create another variable aspirated, whose value is `True` if any of the above is `True`.
-    - **Hint**: combine them with `or`!
-4. Print out the word and whether it is aspirated.
-
+1.  Assign a word like "pin", "spin" to a variable called `word`.
+    -   To identify the first character, use `word[0]`.
+2.  Create three variables: `starts_p`, `starts_t`, `starts_k`
+    -   `starts_p = word[0] == "p"`, etc.
+3.  Create another variable `aspirated`, whose value is `True` if any of the above is `True`.
+    -   **Hint**: combine them with `or`
+4.  Print out the word and whether it is aspirated.
 
 # Activity Answers
 
 ## Answers
+
 ``` python
 word = "pin"   # try: "spin", "top", "stop", "cat", "skat"
 
@@ -299,13 +336,13 @@ print("Aspirated?", aspirated)
 
 ## But what if we want to test any word?
 
-- First, input this in the Terminal:
+-   First, input this in the Terminal:
 
 ``` python
 word = input("Enter a word, any word: ")
 ```
 
-- Then:
+-   Then:
 
 ``` python
 # Step 1: check if word starts with a voiceless stop
@@ -319,5 +356,3 @@ aspirated = starts_p or starts_t or starts_k
 print("Word:", word)
 print("Aspirated?", aspirated)
 ```
-
-

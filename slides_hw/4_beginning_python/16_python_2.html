@@ -427,8 +427,8 @@ Dr.&nbsp;Andrew M. Byrd
 <li>What did you learn last time?</li>
 </ul>
 </section>
-<section id="section" class="slide level2 center">
-<h2></h2>
+<section id="review-1" class="slide level2 center">
+<h2>Review</h2>
 <ul>
 <li>Running <code>python</code>:
 <ul>
@@ -457,7 +457,7 @@ Dr.&nbsp;Andrew M. Byrd
 <li><strong>Booleans (logical values)</strong></li>
 </ol>
 <ul>
-<li>You can check what something is using the <code>type()</code> function</li>
+<li>You can check something’s type using the <code>type()</code> function</li>
 </ul>
 </section></section>
 <section>
@@ -523,29 +523,47 @@ Dr.&nbsp;Andrew M. Byrd
 </ul>
 <div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a><span class="dv">10</span> <span class="op">%</span> <span class="dv">3</span> <span class="op">==</span> <span class="dv">1</span>   <span class="co"># 3 goes into 10 three times, remainder 1</span></span>
 <span id="cb4-2"><a href=""></a><span class="dv">14</span> <span class="op">%</span> <span class="dv">5</span> <span class="op">==</span> <span class="dv">4</span>   <span class="co"># 5 goes into 14 twice, remainder 4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="number-operators-modulus-1" class="slide level2 center">
+<h2>Number Operators: Modulus</h2>
 <ul>
-<li>This is actually quite useful, as these shows us what are non-integers</li>
+<li>The <code>modulus</code> command is actually quite useful, as it shows us when one number is not evenly divisible by another.</li>
 </ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a>n <span class="op">=</span> <span class="dv">17</span></span>
+<span id="cb5-2"><a href=""></a><span class="cf">if</span> n <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb5-3"><a href=""></a>    <span class="bu">print</span>(<span class="st">"even"</span>)</span>
+<span id="cb5-4"><a href=""></a><span class="cf">else</span>:</span>
+<span id="cb5-5"><a href=""></a>    <span class="bu">print</span>(<span class="st">"odd"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="number-operators-floor-division" class="slide level2 center">
 <h2>Number Operators: FLoor Division</h2>
 <ul>
 <li><code>x // y</code> (floor division)</li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="dv">10</span> <span class="op">//</span> <span class="dv">3</span>   <span class="co"># 3  (3 goes into 10 three times, ignore remainder)</span></span>
-<span id="cb5-2"><a href=""></a><span class="dv">14</span> <span class="op">//</span> <span class="dv">5</span>   <span class="co"># 2  (5 goes into 14 two times, remainder dropped)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a><span class="dv">10</span> <span class="op">//</span> <span class="dv">3</span>   <span class="co"># 3  (3 goes into 10 three times, remainder dropped)</span></span>
+<span id="cb6-2"><a href=""></a><span class="dv">14</span> <span class="op">//</span> <span class="dv">5</span>   <span class="co"># 2  (5 goes into 14 two times, remainder dropped)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>This is a way of <em>rounding down</em></li>
+<li>This is a way of <em>rounding down</em>, resulting in an integer</li>
+<li>Note: there’s no built-in way to <em>round up</em> – you’ll have to do that in other ways</li>
 </ul>
 </section>
-<section id="summing-up-new-operators" class="slide level2 center">
-<h2>Summing up New Operators:</h2>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a><span class="dv">14</span> <span class="op">/</span> <span class="dv">5</span>      <span class="co"># 2.8 (normal division)</span></span>
-<span id="cb6-2"><a href=""></a><span class="dv">14</span> <span class="op">//</span> <span class="dv">5</span>     <span class="co"># 2   (floor division)</span></span>
-<span id="cb6-3"><a href=""></a><span class="dv">14</span> <span class="op">%</span> <span class="dv">5</span>      <span class="co"># 4   (modulus)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="summing-up-divisive-operators" class="slide level2 center">
+<h2>Summing up “Divisive” Operators:</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a><span class="dv">14</span> <span class="op">/</span> <span class="dv">5</span>      <span class="co"># 2.8 (normal division)</span></span>
+<span id="cb7-2"><a href=""></a><span class="dv">14</span> <span class="op">%</span> <span class="dv">5</span>      <span class="co"># 4   (modulus)</span></span>
+<span id="cb7-3"><a href=""></a><span class="dv">14</span> <span class="op">//</span> <span class="dv">5</span>     <span class="co"># 2   (floor division)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="operator-activity-1" class="slide level2 center">
 <h2>Operator Activity</h2>
+<ol type="1">
+<li><p>Divide 100 by 9 three different ways:</p>
+<ul>
+<li>Normal division <code>/</code></li>
+<li>Floor division (rounding down) <code>//</code></li>
+<li>Modulus <code>%</code></li>
+</ul></li>
+<li><p>How many full weeks and leftover days are in a full year?</p></li>
+</ol>
 </section></section>
 <section>
 <section id="strings" class="title-slide slide level1 center">
@@ -560,46 +578,62 @@ Dr.&nbsp;Andrew M. Byrd
 <li><strong>Booleans (logical values)</strong></li>
 </ol>
 <ul>
-<li>You can check what something is using the <code>type()</code> function</li>
+<li>You can check something’s type using the <code>type()</code> function</li>
 </ul>
 </section>
 <section id="strings-1" class="slide level2 center">
 <h2>Strings</h2>
 <p>If you type text without quotes:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a>Andrew</span>
-<span id="cb7-2"><a href=""></a><span class="co"># NameError</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href=""></a>Andrew</span>
+<span id="cb8-2"><a href=""></a><span class="co"># NameError</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Why does it do this?</li>
+</ul>
 </section>
 <section id="strings-2" class="slide level2 center">
 <h2>Strings</h2>
-<p>With quotes:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href=""></a><span class="co">"Andrew"</span>    <span class="co"># 'Andrew' also works</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>If we assign Andrew as having the value “Andrew”…</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href=""></a><span class="op">&gt;&gt;&gt;</span> Andrew <span class="op">=</span> <span class="st">"Andrew"</span></span>
+<span id="cb9-2"><a href=""></a><span class="op">&gt;&gt;&gt;</span> Andrew</span>
+<span id="cb9-3"><a href=""></a><span class="co">'Andrew'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="strings-3" class="slide level2 center">
 <h2>Strings</h2>
-<p>Assigning strings:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href=""></a>title <span class="op">=</span> <span class="st">"Dr."</span></span>
-<span id="cb9-2"><a href=""></a>first_name <span class="op">=</span> <span class="st">"Andrew"</span></span>
-<span id="cb9-3"><a href=""></a>last_name <span class="op">=</span> <span class="st">"Byrd"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>With quotes:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a><span class="op">&gt;&gt;&gt;</span> <span class="st">"Andrew"</span></span>
+<span id="cb10-2"><a href=""></a><span class="co">'Andrew'</span></span>
+<span id="cb10-3"><a href=""></a><span class="op">&gt;&gt;&gt;</span> <span class="st">'Andrew'</span></span>
+<span id="cb10-4"><a href=""></a><span class="co">'Andrew'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="strings-4" class="slide level2 center">
 <h2>Strings</h2>
-<p>Concatenate with <code>+</code>:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a>title <span class="op">+</span> first_name <span class="op">+</span> last_name</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li>What happens when we print the three? How might we improve the output?</li>
-</ul>
+<p>Assigning strings:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a>title <span class="op">=</span> <span class="st">"Dr."</span></span>
+<span id="cb11-2"><a href=""></a>first_name <span class="op">=</span> <span class="st">"Andrew"</span></span>
+<span id="cb11-3"><a href=""></a>last_name <span class="op">=</span> <span class="st">"Byrd"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="strings-5" class="slide level2 center">
 <h2>Strings</h2>
-<p>We could also print it this way:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a><span class="bu">print</span>(title, first_name, last_name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Concatenate with <code>+</code>:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href=""></a>title <span class="op">+</span> first_name <span class="op">+</span> last_name</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>What happens when we print the three?</li>
+<li>How might we improve the output?</li>
+</ul>
 </section>
 <section id="strings-6" class="slide level2 center">
 <h2>Strings</h2>
-<p>What happens when we run this code?</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href=""></a><span class="bu">print</span>(<span class="st">"I said, "</span>Hello<span class="op">!</span><span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We could also print it this way:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href=""></a><span class="bu">print</span>(title, first_name, last_name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="strings-7" class="slide level2 center">
+<h2>Strings</h2>
+<p>What happens when we run this code?</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href=""></a><span class="bu">print</span>(<span class="st">"I said, "</span>Hello<span class="op">!</span><span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="strings-8" class="slide level2 center">
 <h2>Strings</h2>
 <ul>
 <li>For this, we’ll need to have a character <code>\"</code>.
@@ -607,7 +641,7 @@ Dr.&nbsp;Andrew M. Byrd
 <li>Cf. LaTeX <code>\#</code>, etc.</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href=""></a><span class="co">"I said, </span><span class="ch">\"</span><span class="co">Hello!</span><span class="ch">\"</span><span class="co">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href=""></a><span class="co">"I said, </span><span class="ch">\"</span><span class="co">Hello!</span><span class="ch">\"</span><span class="co">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>Besides <code>"</code> (and <code>'</code>), almost any character can be within a string.</li>
 </ul>
@@ -625,15 +659,15 @@ Dr.&nbsp;Andrew M. Byrd
 <li><strong>Booleans (logical values)</strong></li>
 </ol>
 <ul>
-<li>You can check what something is using the <code>type()</code> function</li>
+<li>You can check something’s type using the <code>type()</code> function</li>
 </ul>
 </section>
 <section id="boolean-logical-values-1" class="slide level2 center">
 <h2>Boolean (Logical) Values</h2>
 <p>Only two: <code>True</code>, <code>False</code>.</p>
 <p>Usually created by comparisons:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href=""></a>first_name <span class="op">==</span> <span class="st">"Bob"</span></span>
-<span id="cb14-2"><a href=""></a><span class="co"># False</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href=""></a>first_name <span class="op">==</span> <span class="st">"Bob"</span></span>
+<span id="cb16-2"><a href=""></a><span class="co"># False</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-important callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -646,7 +680,7 @@ Dr.&nbsp;Andrew M. Byrd
 <ul>
 <li><code>=</code> means <strong>variable assignment</strong><br>
 </li>
-<li><code>==</code> meanas <strong>equals</strong> or <strong>testing if two things are equal</strong></li>
+<li><code>==</code> means <strong>equals</strong> or <strong>testing if two things are equal</strong></li>
 </ul>
 </div>
 </div>
@@ -655,7 +689,9 @@ Dr.&nbsp;Andrew M. Byrd
 <section id="comparison-operators" class="slide level2 center">
 <h2>Comparison Operators</h2>
 <ul>
-<li><code>==</code> exactly equal<br>
+<li><code>==</code> is exactly equal to<br>
+</li>
+<li><code>!=</code> is not equal to<br>
 </li>
 <li><code>&gt;</code> greater than<br>
 </li>
@@ -679,9 +715,11 @@ Dr.&nbsp;Andrew M. Byrd
 <section id="examples" class="slide level2 center">
 <h2>Examples</h2>
 <p>Check for Andrew with “w” or without:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href=""></a>(first_name <span class="op">==</span> <span class="st">"Andrew"</span>) <span class="kw">or</span> (first_name <span class="op">==</span> <span class="st">"Andre"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href=""></a>(first_name <span class="op">==</span> <span class="st">"Andrew"</span>) <span class="kw">or</span> (first_name <span class="op">==</span> <span class="st">"Andre"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Check for Andrew who is 46:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href=""></a>(first_name <span class="op">==</span> <span class="st">"Andrew"</span>) <span class="kw">and</span> (my_age <span class="op">==</span> <span class="dv">46</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href=""></a>(first_name <span class="op">==</span> <span class="st">"Andrew"</span>) <span class="kw">and</span> (my_age <span class="op">==</span> <span class="dv">46</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Check for Andrew who is not 45:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href=""></a>(first_name <span class="op">==</span> <span class="st">"Andrew"</span>) <span class="kw">and</span> <span class="kw">not</span> (my_age <span class="op">==</span> <span class="dv">45</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section></section>
 <section>
 <section id="activity" class="title-slide slide level1 center">
@@ -707,9 +745,9 @@ Dr.&nbsp;Andrew M. Byrd
 <ul>
 <li><code>starts_p = word[0] == "p"</code>, etc.</li>
 </ul></li>
-<li>Create another variable aspirated, whose value is <code>True</code> if any of the above is <code>True</code>.
+<li>Create another variable <code>aspirated</code>, whose value is <code>True</code> if any of the above is <code>True</code>.
 <ul>
-<li><strong>Hint</strong>: combine them with <code>or</code>!</li>
+<li><strong>Hint</strong>: combine them with <code>or</code></li>
 </ul></li>
 <li>Print out the word and whether it is aspirated.</li>
 </ol>
@@ -721,18 +759,18 @@ Dr.&nbsp;Andrew M. Byrd
 </section>
 <section id="answers" class="slide level2 center">
 <h2>Answers</h2>
-<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href=""></a>word <span class="op">=</span> <span class="st">"pin"</span>   <span class="co"># try: "spin", "top", "stop", "cat", "skat"</span></span>
-<span id="cb17-2"><a href=""></a></span>
-<span id="cb17-3"><a href=""></a><span class="co"># Step 1: check if word starts with a voiceless stop</span></span>
-<span id="cb17-4"><a href=""></a>starts_p <span class="op">=</span> word[<span class="dv">0</span>] <span class="op">==</span> <span class="st">"p"</span></span>
-<span id="cb17-5"><a href=""></a>starts_t <span class="op">=</span> word[<span class="dv">0</span>] <span class="op">==</span> <span class="st">"t"</span></span>
-<span id="cb17-6"><a href=""></a>starts_k <span class="op">=</span> word[<span class="dv">0</span>] <span class="op">==</span> <span class="st">"k"</span></span>
-<span id="cb17-7"><a href=""></a></span>
-<span id="cb17-8"><a href=""></a><span class="co"># Step 2: decide aspiration (simplified: only if it’s the first sound)</span></span>
-<span id="cb17-9"><a href=""></a>aspirated <span class="op">=</span> starts_p <span class="kw">or</span> starts_t <span class="kw">or</span> starts_k</span>
-<span id="cb17-10"><a href=""></a></span>
-<span id="cb17-11"><a href=""></a><span class="bu">print</span>(<span class="st">"Word:"</span>, word)</span>
-<span id="cb17-12"><a href=""></a><span class="bu">print</span>(<span class="st">"Aspirated?"</span>, aspirated)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href=""></a>word <span class="op">=</span> <span class="st">"pin"</span>   <span class="co"># try: "spin", "top", "stop", "cat", "skat"</span></span>
+<span id="cb20-2"><a href=""></a></span>
+<span id="cb20-3"><a href=""></a><span class="co"># Step 1: check if word starts with a voiceless stop</span></span>
+<span id="cb20-4"><a href=""></a>starts_p <span class="op">=</span> word[<span class="dv">0</span>] <span class="op">==</span> <span class="st">"p"</span></span>
+<span id="cb20-5"><a href=""></a>starts_t <span class="op">=</span> word[<span class="dv">0</span>] <span class="op">==</span> <span class="st">"t"</span></span>
+<span id="cb20-6"><a href=""></a>starts_k <span class="op">=</span> word[<span class="dv">0</span>] <span class="op">==</span> <span class="st">"k"</span></span>
+<span id="cb20-7"><a href=""></a></span>
+<span id="cb20-8"><a href=""></a><span class="co"># Step 2: decide aspiration (simplified: only if it’s the first sound)</span></span>
+<span id="cb20-9"><a href=""></a>aspirated <span class="op">=</span> starts_p <span class="kw">or</span> starts_t <span class="kw">or</span> starts_k</span>
+<span id="cb20-10"><a href=""></a></span>
+<span id="cb20-11"><a href=""></a><span class="bu">print</span>(<span class="st">"Word:"</span>, word)</span>
+<span id="cb20-12"><a href=""></a><span class="bu">print</span>(<span class="st">"Aspirated?"</span>, aspirated)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section></section>
 <section>
 <section id="broadening-the-script" class="title-slide slide level1 center">
@@ -744,20 +782,20 @@ Dr.&nbsp;Andrew M. Byrd
 <ul>
 <li>First, input this in the Terminal:</li>
 </ul>
-<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href=""></a>word <span class="op">=</span> <span class="bu">input</span>(<span class="st">"Enter a word, any word: "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href=""></a>word <span class="op">=</span> <span class="bu">input</span>(<span class="st">"Enter a word, any word: "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>Then:</li>
 </ul>
-<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href=""></a><span class="co"># Step 1: check if word starts with a voiceless stop</span></span>
-<span id="cb19-2"><a href=""></a>starts_p <span class="op">=</span> word[<span class="dv">0</span>] <span class="op">==</span> <span class="st">"p"</span></span>
-<span id="cb19-3"><a href=""></a>starts_t <span class="op">=</span> word[<span class="dv">0</span>] <span class="op">==</span> <span class="st">"t"</span></span>
-<span id="cb19-4"><a href=""></a>starts_k <span class="op">=</span> word[<span class="dv">0</span>] <span class="op">==</span> <span class="st">"k"</span></span>
-<span id="cb19-5"><a href=""></a></span>
-<span id="cb19-6"><a href=""></a><span class="co"># Step 2: decide aspiration (simplified: only if it’s the first sound)</span></span>
-<span id="cb19-7"><a href=""></a>aspirated <span class="op">=</span> starts_p <span class="kw">or</span> starts_t <span class="kw">or</span> starts_k</span>
-<span id="cb19-8"><a href=""></a></span>
-<span id="cb19-9"><a href=""></a><span class="bu">print</span>(<span class="st">"Word:"</span>, word)</span>
-<span id="cb19-10"><a href=""></a><span class="bu">print</span>(<span class="st">"Aspirated?"</span>, aspirated)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href=""></a><span class="co"># Step 1: check if word starts with a voiceless stop</span></span>
+<span id="cb22-2"><a href=""></a>starts_p <span class="op">=</span> word[<span class="dv">0</span>] <span class="op">==</span> <span class="st">"p"</span></span>
+<span id="cb22-3"><a href=""></a>starts_t <span class="op">=</span> word[<span class="dv">0</span>] <span class="op">==</span> <span class="st">"t"</span></span>
+<span id="cb22-4"><a href=""></a>starts_k <span class="op">=</span> word[<span class="dv">0</span>] <span class="op">==</span> <span class="st">"k"</span></span>
+<span id="cb22-5"><a href=""></a></span>
+<span id="cb22-6"><a href=""></a><span class="co"># Step 2: decide aspiration (simplified: only if it’s the first sound)</span></span>
+<span id="cb22-7"><a href=""></a>aspirated <span class="op">=</span> starts_p <span class="kw">or</span> starts_t <span class="kw">or</span> starts_k</span>
+<span id="cb22-8"><a href=""></a></span>
+<span id="cb22-9"><a href=""></a><span class="bu">print</span>(<span class="st">"Word:"</span>, word)</span>
+<span id="cb22-10"><a href=""></a><span class="bu">print</span>(<span class="st">"Aspirated?"</span>, aspirated)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
