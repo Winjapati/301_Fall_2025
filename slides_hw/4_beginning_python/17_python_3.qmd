@@ -23,10 +23,12 @@ editor: visual
 
 ## Data Structures
 
-Recap from last module: - Assign a value to a variable with `=`\
+Recap from last module: 
+
+- Assign a value to a variable with `=`\
 - **Numbers**: `integer` and `float`\
 - **Strings**: text inside quotes `"..."` or `'...'`\
-- **Booleans**: `True` and `False`, usually created with logical comparisons
+- **Booleans**: `True` and `False`, used for logical comparisons
 
 Example:
 
@@ -60,12 +62,12 @@ first_novel = "Sense and Sensibility"
 - But what if we wanted to create a variable called `novels` with multiple values?
 - For this we can create a **list**
     - Marked in Python in brackets `[...]`
-    - **Ordered** (the ofder of items is preserved)
+    - **Ordered** (the order of items is preserved)
     - You can delete and add values within them
 
 ## Creating a List
 
-- Jane Austen published **seven novels**. Instead of many variables, use a **list**:
+- Jane Austen published **seven novels**. Instead of lots of variables, use a **list**:
 
 ``` python
 novels = ["Sense and Sensibility", "Pride and Prejudice", "Mansfield Park", "Emma", "Northanger Abbey", "Persuasion", "Lady Susan"]
@@ -104,7 +106,7 @@ print(word[0])
 
 ## Indexing a List
 
-- Just like `word[0]`, we access the first element of a list with the index `0`.
+- Just like `word[0]`, we access the first element of a list with the index `[0]`.
 
 ``` python
 novels[0]  # first item
@@ -127,6 +129,7 @@ novels[6]
 - We can use the **method** of a value.
     - Methods are indicated with `.method`
     - `value.method`
+- Let's use the `list.index()` method to identify the index
     
 ``` python
 novels.index("Lady Susan")
@@ -146,7 +149,7 @@ pub_year[susan_index]  # 1871
 
 - What is this code really doing?
 
-# Reverse Lookup
+## Reverse Lookup
 
 - We could do the reverse, and find a specific book by year:
 
@@ -158,7 +161,7 @@ novels[year_index]
 
 - What happens if we use `1818` as the index? 
 
-# Negative Indexing
+## Negative Indexing
 
 We can also count from the end:
 
@@ -193,7 +196,7 @@ novels[0:3]
 # ['Sense and Sensibility', 'Pride and Prejudice', 'Mansfield Park']
 ```
 
-- Note: the stop index is not included!  (It's not 1-4, it's 1-3)
+- Note: the stop index is not included!  (It's not 0-3, it's 0-2)
 
 ## Membership Test
 
@@ -236,10 +239,10 @@ complex_list[2][1]   # 1814
 
 # Dictionaries
 
-- There's a more straight-forward way to do this in Python, though.
+- There's a more straight-forward way to do this in Python
 - We can use `dict` (**dictionaries**)
 - Pythons `dict` is marked not with `[...]`, but with curly braces `{...}`
-
+- Note: entries are **unordered**.
 
 ## Dictionaries
 
@@ -291,22 +294,33 @@ austen_dict["The Rise of Han Solo"] = 2025
 
 ## Overwriting a key's value
 
-- To change the value of a key,
+- To change the value of a key, you simply restate it:
+
+    - `dict["key"] = changed_value`
+
+``` python
+austen_dict["The Rise of Han Solo"] = 1872
+```
 
 
 ## Deleting a `key`-`value` Pair from the Dictionary
 
-- To delete a `key`-`value` pair, 
+- To delete a `key`-`value` pair:
+    - `del dict["key"]`
+    
+    
+``` python
+del austen_dict["The Rise of Han Solo"]
+```
 
 ## Checking Keys
 
-- We can use `in` checks to check keys, but not with values!
+- We can use `in` checks to check `keys` (but not `values`)!
 
 ``` python
 "Pride and Prejudice" in austen_dict  # True
 1811 in austen_dict                   # False
 ```
-## 
 
 ## Dictionary Activity
 
@@ -324,14 +338,51 @@ orwell_dict = {
 
 ## Dictionary Activity
 
-- Print the year that Animal Farm was published using its key.
-- Check if "Homage to Catalonia" is in the dictionary. 
-- Add Orwell’s *Homage to Catalonia* (1938) to the dictionary. Print the dictionary again to confirm.
-- Suppose you make a mistake and type 1937 for Homage to Catalonia. Reassign the correct year (1938) to fix it.
+- Print the year that *Animal Farm* was published using its key.
+- Check if *Homage to Catalonia* is in the dictionary. 
+- Add Orwell’s *Homage to Catalonia* (1937) to the dictionary. Print the dictionary again to confirm.
+- Whoops, made a mistake! *Homage to Catalonia* was actually published in 1938. Fix that mistake.
+- Remove *Coming Up for Air* from the dictionary.
 
-Delete a key–value pair
+# Lists vs. Dictionaries
 
-Remove Coming Up for Air from the dictionary.
+When should use lists? Dictionaries?
+
+## When to Use Lists
+
+- You care about order (wordlists, texts, morpheme sequences).
+- You want to access items by position (index):
+    - e.g., `ipa_segments[0]` → first sound in a word.
+- If you don't care about *or* have duplicates
+    - e.g., a corpus may have the same word many times
+
+Examples:
+
+``` python
+words = ["dog", "dog", "cat", "horse"]
+morphemes = ["un", "believe", "able"]
+```
+
+## When to Use Dictionaries
+
+- You want to map one kind of information to another (`key` : `value`).
+- Order is not important, but fast lookup is.
+- Your entries (`keys`) are unique, though values can repeat.
+
+Examples:
+
+``` python
+#Mapping languages to families:
+lang_family = {"Latin": "Indo-European", "Finnish": "Uralic"}
+
+#Mapping words to glosses:
+lexicon = {"amo": "I love", "amas": "you love", "amat": "(s)he loves"}
+```
+
+## To Sum Up
+
+- List = a sequence you want to keep in order (words, morphemes, phonemes).
+- Dict = a mapping between two things (form → gloss, language → family, word → year).
 
 # Activities Answers
 
@@ -354,39 +405,25 @@ print(orwell_novels[index_1936])   # Keep the Aspidistra Flying
 ## Activity 2
 
 ``` python
-orwell_dict = {
-    "Animal Farm": 1945,
-    "Nineteen Eighty-Four": 1949,
-    "Burmese Days": 1934,
-    "Keep the Aspidistra Flying": 1936,
-    "Coming Up for Air": 1939
-}
-
 # 1. Direct lookup
-print(orwell_dict["Animal Farm"])
-# Output: 1945
-
+print(orwell_dict["Animal Farm"])     # Output: 1945
 
 # 2. Membership check
-print("Homage to Catalonia" in orwell_dict)
-# Output: False
+print("Homage to Catalonia" in orwell_dict)   # Output: False
 
 
 # 3. Adding a new key–value pair
-orwell_dict["Homage to Catalonia"] = 1938
-print(orwell_dict)
-# Now includes: "Homage to Catalonia": 1938
+orwell_dict["Homage to Catalonia"] = 1937
+print(orwell_dict)      # Now includes: "Homage to Catalonia": 1937
 
 
 # 4. Overwriting a value (fixing a mistake)
 orwell_dict["Homage to Catalonia"] = 1938   # reassigns the correct year
-print(orwell_dict["Homage to Catalonia"])
-# Output: 1938
+print(orwell_dict["Homage to Catalonia"])   # Output: 1938
 
 
 # 5. Delete a key–value pair
 del orwell_dict["Coming Up for Air"]
-print(orwell_dict)
-# "Coming Up for Air" has been removed
+print(orwell_dict)        # "Coming Up for Air" has been removed
 ```
 
