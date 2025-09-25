@@ -410,20 +410,12 @@ Dr.&nbsp;Andrew M. Byrd
 <h2 id="toc-title">Plan for the Day</h2>
 <ul>
 <li><a href="#/review" id="/toc-review">Review</a></li>
-<li><a href="#/lists-and-dictionaries" id="/toc-lists-and-dictionaries">Lists and Dictionaries</a></li>
 <li><a href="#/lists" id="/toc-lists">Lists</a></li>
-<li><a href="#/adding-two-lists-together" id="/toc-adding-two-lists-together">Adding Two Lists Together</a></li>
-<li><a href="#/indexing-a-list" id="/toc-indexing-a-list">Indexing a List</a></li>
-<li><a href="#/getting-the-index-of-a-value" id="/toc-getting-the-index-of-a-value">Getting the Index of a Value</a></li>
 <li><a href="#/reverse-lookup" id="/toc-reverse-lookup">Reverse Lookup</a></li>
 <li><a href="#/negative-indexing" id="/toc-negative-indexing">Negative Indexing</a></li>
-<li><a href="#/slicing" id="/toc-slicing">Slicing</a></li>
-<li><a href="#/membership-test" id="/toc-membership-test">Membership Test</a></li>
-<li><a href="#/complex-lists" id="/toc-complex-lists">Complex Lists</a></li>
+<li><a href="#/other-useful-list-operations" id="/toc-other-useful-list-operations">Other Useful List Operations</a></li>
 <li><a href="#/dictionaries" id="/toc-dictionaries">Dictionaries</a></li>
-<li><a href="#/indexing-a-dictionary" id="/toc-indexing-a-dictionary">Indexing a Dictionary</a></li>
-<li><a href="#/adding-to-a-dictionary" id="/toc-adding-to-a-dictionary">Adding to a Dictionary</a></li>
-<li><a href="#/checking-keys" id="/toc-checking-keys">Checking Keys</a></li>
+<li><a href="#/activities-answers" id="/toc-activities-answers">Activities Answers</a></li>
 </ul>
 </nav>
 </section>
@@ -440,7 +432,7 @@ Dr.&nbsp;Andrew M. Byrd
 <section id="data-structures" class="slide level2 center">
 <h2>Data Structures</h2>
 <p>Recap from last module: - Assign a value to a variable with <code>=</code><br>
-- <strong>Numbers</strong>: we can do math with them<br>
+- <strong>Numbers</strong>: <code>integer</code> and <code>float</code><br>
 - <strong>Strings</strong>: text inside quotes <code>"..."</code> or <code>'...'</code><br>
 - <strong>Booleans</strong>: <code>True</code> and <code>False</code>, usually created with logical comparisons</p>
 <p>Example:</p>
@@ -457,171 +449,355 @@ Dr.&nbsp;Andrew M. Byrd
 </ul>
 </section></section>
 <section>
-<section id="lists-and-dictionaries" class="title-slide slide level1 center">
-<h1>Lists and Dictionaries</h1>
-
-</section>
-<section class="slide level2 center">
-
-</section></section>
-<section>
 <section id="lists" class="title-slide slide level1 center">
 <h1>Lists</h1>
+
+</section>
+<section id="lists-dictionaries" class="slide level2 center">
+<h2>Lists &amp; Dictionaries</h2>
 <p>Today, we’ll be examining two <em>very</em> important data structures in Python: <strong>lists</strong> and <strong>dictionaries</strong>.</p>
 </section>
-<section id="lists-1" class="slide level2 center">
-<h2>Lists</h2>
-<p>Assign a single value:</p>
+<section id="moving-from-variables-to-lists" class="slide level2 center">
+<h2>Moving from Variables to Lists</h2>
+<ul>
+<li>We can assign a single value to a variable:</li>
+</ul>
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a>first_novel <span class="op">=</span> <span class="st">"Sense and Sensibility"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>But Jane Austen published <strong>seven novels</strong>. Instead of many variables, use a <strong>list</strong>:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a>novels <span class="op">=</span> [<span class="st">"Sense and Sensibility"</span>, <span class="st">"Pride and Prejudice"</span>,</span>
-<span id="cb3-2"><a href=""></a>          <span class="st">"Mansfield Park"</span>, <span class="st">"Emma"</span>,</span>
-<span id="cb3-3"><a href=""></a>          <span class="st">"Northanger Abbey"</span>, <span class="st">"Persuasion"</span>,</span>
-<span id="cb3-4"><a href=""></a>          <span class="st">"Lady Susan"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>But what if we wanted to create a variable called <code>novels</code> with multiple values?</li>
+<li>For this we can create a <strong>list</strong>
+<ul>
+<li>Marked in Python in brackets <code>[...]</code></li>
+<li><strong>Ordered</strong> (the ofder of items is preserved)</li>
+<li>You can delete and add values within them</li>
+</ul></li>
+</ul>
+</section>
+<section id="creating-a-list" class="slide level2 center">
+<h2>Creating a List</h2>
+<ul>
+<li>Jane Austen published <strong>seven novels</strong>. Instead of many variables, use a <strong>list</strong>:</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a>novels <span class="op">=</span> [<span class="st">"Sense and Sensibility"</span>, <span class="st">"Pride and Prejudice"</span>, <span class="st">"Mansfield Park"</span>, <span class="st">"Emma"</span>, <span class="st">"Northanger Abbey"</span>, <span class="st">"Persuasion"</span>, <span class="st">"Lady Susan"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Print list:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a><span class="bu">print</span>(novels)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section class="slide level2 center">
-
-</section></section>
-<section>
-<section id="adding-two-lists-together" class="title-slide slide level1 center">
-<h1>Adding Two Lists Together</h1>
-<p>Concatenate lists with <code>+</code>:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a>unfinished <span class="op">=</span> [<span class="st">"The Watsons"</span>, <span class="st">"Sandition"</span>]</span>
-<span id="cb5-2"><a href=""></a>novels <span class="op">+</span> unfinished</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="the-operator" class="slide level2 center">
+<h2>The <code>+</code> Operator</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="dv">1</span> <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb5-2"><a href=""></a><span class="co">"Dr."</span> <span class="op">+</span> <span class="st">" "</span> <span class="op">+</span> Andrew<span class="st">" + "</span> <span class="st">" + "</span>Byrd<span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section class="slide level2 center">
-
-</section></section>
-<section>
-<section id="indexing-a-list" class="title-slide slide level1 center">
-<h1>Indexing a List</h1>
-<p>Access elements with indices (starting at 0):</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a>novels[<span class="dv">0</span>]  <span class="co"># first item</span></span>
-<span id="cb6-2"><a href=""></a>novels[<span class="dv">1</span>]  <span class="co"># second item</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>⚠️ Indexing starts at 0!</p>
+<section id="adding-two-lists-together" class="slide level2 center">
+<h2>Adding Two Lists Together</h2>
+<p>We can also use <code>+</code> to <strong>concatenate</strong> lists:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a>unfinished <span class="op">=</span> [<span class="st">"The Watsons"</span>, <span class="st">"Sandition"</span>]</span>
+<span id="cb6-2"><a href=""></a>novels <span class="op">+</span> unfinished</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section class="slide level2 center">
-
-</section></section>
-<section>
-<section id="getting-the-index-of-a-value" class="title-slide slide level1 center">
-<h1>Getting the Index of a Value</h1>
-<p>Lists have methods. Example: <code>.index()</code></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a>novels.index(<span class="st">"Emma"</span>)</span>
-<span id="cb7-2"><a href=""></a><span class="co"># 3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Use index to align with another list:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href=""></a>pub_year <span class="op">=</span> [<span class="dv">1811</span>, <span class="dv">1813</span>, <span class="dv">1814</span>, <span class="dv">1815</span>, <span class="dv">1818</span>, <span class="dv">1818</span>, <span class="dv">1871</span>]</span>
-<span id="cb8-2"><a href=""></a></span>
-<span id="cb8-3"><a href=""></a>emma_index <span class="op">=</span> novels.index(<span class="st">"Emma"</span>)</span>
-<span id="cb8-4"><a href=""></a>pub_year[emma_index]  <span class="co"># 1815</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="recall-the-activity-from-last-time" class="slide level2 center">
+<h2>Recall the Activity from Last Time:</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a>word <span class="op">=</span> <span class="st">"pin"</span></span>
+<span id="cb7-2"><a href=""></a><span class="bu">print</span>(word[<span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>What is printed?</li>
+<li>The number within the brackets <code>[ ... ]</code> is called the <strong>index</strong></li>
+</ul>
 </section>
-<section class="slide level2 center">
-
+<section id="indexing-a-list" class="slide level2 center">
+<h2>Indexing a List</h2>
+<ul>
+<li>Just like <code>word[0]</code>, we access the first element of a list with the index <code>0</code>.</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href=""></a>novels[<span class="dv">0</span>]  <span class="co"># first item</span></span>
+<span id="cb8-2"><a href=""></a>novels[<span class="dv">1</span>]  <span class="co"># second item</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Try:</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href=""></a>novels[<span class="dv">6</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="how-about-the-reverse" class="slide level2 center">
+<h2>How about the reverse?</h2>
+<ul>
+<li>Before we wanted to find out what the <strong>7th</strong> novel was by using novels[6].</li>
+<li>But what if we wanted to find out the index of a particular novel? (Such as <em>Lady Susan</em>)</li>
+</ul>
+</section>
+<section id="getting-the-index-of-a-value" class="slide level2 center">
+<h2>Getting the Index of a Value</h2>
+<ul>
+<li>We can use the <strong>method</strong> of a value.
+<ul>
+<li>Methods are indicated with <code>.method</code></li>
+<li><code>value.method</code></li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a>novels.index(<span class="st">"Lady Susan"</span>)</span>
+<span id="cb10-2"><a href=""></a><span class="co"># 6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="aligning-lists-using-indices" class="slide level2 center">
+<h2>Aligning lists using indices</h2>
+<ul>
+<li>We can use the index of one list to align with another list</li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a>pub_year <span class="op">=</span> [<span class="dv">1811</span>, <span class="dv">1813</span>, <span class="dv">1814</span>, <span class="dv">1815</span>, <span class="dv">1818</span>, <span class="dv">1818</span>, <span class="dv">1871</span>]</span>
+<span id="cb11-2"><a href=""></a>susan_index <span class="op">=</span> novels.index(<span class="st">"Lady Susan"</span>)</span>
+<span id="cb11-3"><a href=""></a>pub_year[susan_index]  <span class="co"># 1871</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>What is this code really doing?</li>
+</ul>
 </section></section>
-<section>
 <section id="reverse-lookup" class="title-slide slide level1 center">
 <h1>Reverse Lookup</h1>
-<p>Find book by year:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href=""></a>year_index <span class="op">=</span> pub_year.index(<span class="dv">1814</span>)</span>
-<span id="cb9-2"><a href=""></a>novels[year_index]</span>
-<span id="cb9-3"><a href=""></a><span class="co"># 'Mansfield Park'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>We could do the reverse, and find a specific book by year:</li>
+</ul>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href=""></a>year_index <span class="op">=</span> pub_year.index(<span class="dv">1814</span>)</span>
+<span id="cb12-2"><a href=""></a>novels[year_index]</span>
+<span id="cb12-3"><a href=""></a><span class="co"># 'Mansfield Park'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>What happens if we use <code>1818</code> as the index?</li>
+</ul>
 </section>
-<section class="slide level2 center">
 
-</section></section>
 <section>
 <section id="negative-indexing" class="title-slide slide level1 center">
 <h1>Negative Indexing</h1>
-<p>Count from the end:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a>novels[<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb10-2"><a href=""></a><span class="co"># 'Lady Susan'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We can also count from the end:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href=""></a>novels[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb13-2"><a href=""></a><span class="co"># 'Lady Susan'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section class="slide level2 center">
-
+<section id="activity" class="slide level2 center">
+<h2>Activity</h2>
+<ul>
+<li>Below is a list of novels written by George Orwell. Copy and paste this code to create both lists in your <code>qmd</code>.</li>
+</ul>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href=""></a>orwell_novels <span class="op">=</span> [<span class="st">"Animal Farm"</span>, <span class="st">"Nineteen Eighty-Four"</span>, <span class="st">"Burmese Days"</span>, <span class="st">"Keep the Aspidistra Flying"</span>, <span class="st">"Coming Up for Air"</span>]</span>
+<span id="cb14-2"><a href=""></a>pub_year <span class="op">=</span> [<span class="dv">1945</span>, <span class="dv">1949</span>, <span class="dv">1934</span>, <span class="dv">1936</span>, <span class="dv">1939</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Next, do the following:</li>
+</ul>
+<ol type="1">
+<li>Print the names of the first and last novel.</li>
+<li>Use <code>.index()</code> to find the position of <em>Burmese Days</em>. Use that index to print the corresponding publication year from <code>pub_year</code>.</li>
+<li>Find which novel was published in <code>1936</code>.</li>
+</ol>
 </section></section>
 <section>
-<section id="slicing" class="title-slide slide level1 center">
-<h1>Slicing</h1>
-<p>Get ranges of values:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a>novels[<span class="dv">0</span>:<span class="dv">3</span>]</span>
-<span id="cb11-2"><a href=""></a><span class="co"># ['Sense and Sensibility', 'Pride and Prejudice', 'Mansfield Park']</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Remember: stop index is not included.</p>
-</section>
-<section class="slide level2 center">
+<section id="other-useful-list-operations" class="title-slide slide level1 center">
+<h1>Other Useful List Operations</h1>
 
-</section></section>
-<section>
-<section id="membership-test" class="title-slide slide level1 center">
-<h1>Membership Test</h1>
-<p>Check if a value is in a list:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href=""></a><span class="co">"Emma"</span> <span class="kw">in</span> novels        <span class="co"># True</span></span>
-<span id="cb12-2"><a href=""></a><span class="co">"Frankenstein"</span> <span class="kw">in</span> novels <span class="co"># False</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>With a variable:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href=""></a>novel_to_check <span class="op">=</span> <span class="st">"Lady Susan"</span></span>
-<span id="cb13-2"><a href=""></a>novel_to_check <span class="kw">in</span> novels</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section class="slide level2 center">
-
-</section></section>
-<section>
-<section id="complex-lists" class="title-slide slide level1 center">
-<h1>Complex Lists</h1>
-<p>Lists can contain anything — even other lists:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href=""></a>complex_list <span class="op">=</span> [[<span class="st">"Sense and Sensibility"</span>, <span class="dv">1811</span>],</span>
-<span id="cb14-2"><a href=""></a>                [<span class="st">"Pride and Prejudice"</span>, <span class="dv">1813</span>],</span>
-<span id="cb14-3"><a href=""></a>                [<span class="st">"Mansfield Park"</span>, <span class="dv">1814</span>],</span>
-<span id="cb14-4"><a href=""></a>                [<span class="st">"Emma"</span>, <span class="dv">1815</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Indexing:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href=""></a>complex_list[<span class="dv">0</span>]      <span class="co"># ["Sense and Sensibility", 1811]</span></span>
-<span id="cb15-2"><a href=""></a>complex_list[<span class="dv">2</span>][<span class="dv">1</span>]   <span class="co"># 1814</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="slicing" class="slide level2 center">
+<h2>Slicing</h2>
+<ul>
+<li>Let’s return to Austen’s <code>novels</code></li>
+<li>We can ranges of values in lists, using the <code>:</code> symbol:</li>
+</ul>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href=""></a>novels[<span class="dv">0</span>:<span class="dv">3</span>]</span>
+<span id="cb15-2"><a href=""></a><span class="co"># ['Sense and Sensibility', 'Pride and Prejudice', 'Mansfield Park']</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Note: the stop index is not included! (It’s not 1-4, it’s 1-3)</li>
+</ul>
 </section>
-<section class="slide level2 center">
-
+<section id="membership-test" class="slide level2 center">
+<h2>Membership Test</h2>
+<ul>
+<li>We can also check to see if a value is in a list using the operator <code>in</code></li>
+</ul>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href=""></a><span class="co">"Emma"</span> <span class="kw">in</span> novels          <span class="co"># True</span></span>
+<span id="cb16-2"><a href=""></a><span class="co">"Frankenstein"</span> <span class="kw">in</span> novels  <span class="co"># False</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Or with a variable:</li>
+</ul>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href=""></a>novel_to_check <span class="op">=</span> <span class="st">"Lady Susan"</span></span>
+<span id="cb17-2"><a href=""></a>novel_to_check <span class="kw">in</span> novels</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="complex-lists" class="slide level2 center">
+<h2>Complex Lists</h2>
+<ul>
+<li>Lists can contain pretty much anything — even other lists:</li>
+</ul>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href=""></a>complex_list <span class="op">=</span> [[<span class="st">"Sense and Sensibility"</span>, <span class="dv">1811</span>],</span>
+<span id="cb18-2"><a href=""></a>                [<span class="st">"Pride and Prejudice"</span>, <span class="dv">1813</span>],</span>
+<span id="cb18-3"><a href=""></a>                [<span class="st">"Mansfield Park"</span>, <span class="dv">1814</span>],</span>
+<span id="cb18-4"><a href=""></a>                [<span class="st">"Emma"</span>, <span class="dv">1815</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="indexing-in-complex-lists" class="slide level2 center">
+<h2>Indexing in Complex Lists</h2>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href=""></a>complex_list[<span class="dv">0</span>]      <span class="co"># ["Sense and Sensibility", 1811]</span></span>
+<span id="cb19-2"><a href=""></a>complex_list[<span class="dv">2</span>][<span class="dv">1</span>]   <span class="co"># 1814</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Having a way to have two members within a list would be super useful for linguists</li>
+<li>Languages do have lexicons after all!
+<ul>
+<li>form : meaning</li>
+</ul></li>
+</ul>
 </section></section>
 <section>
 <section id="dictionaries" class="title-slide slide level1 center">
 <h1>Dictionaries</h1>
-<p>Relate <strong>keys</strong> to <strong>values</strong> using <code>{}</code>:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href=""></a>novel_dict <span class="op">=</span> {<span class="st">"Sense and Sensibility"</span>: <span class="dv">1811</span>,</span>
-<span id="cb16-2"><a href=""></a>              <span class="st">"Pride and Prejudice"</span>: <span class="dv">1813</span>,</span>
-<span id="cb16-3"><a href=""></a>              <span class="st">"Mansfield Park"</span>: <span class="dv">1814</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Keys must be unique. Values can repeat.</p>
+<ul>
+<li>There’s a more straight-forward way to do this in Python, though.</li>
+<li>We can use <code>dict</code> (<strong>dictionaries</strong>)</li>
+<li>Pythons <code>dict</code> is marked not with <code>[...]</code>, but with curly braces <code>{...}</code></li>
+</ul>
 </section>
-<section class="slide level2 center">
-
+<section id="dictionaries-1" class="slide level2 center">
+<h2>Dictionaries</h2>
+<ul>
+<li>We can relate <strong>keys</strong> (the first member) to <strong>values</strong> (the second) using <code>{}</code>:</li>
+</ul>
+<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href=""></a>novel_dict <span class="op">=</span> {<span class="st">"Sense and Sensibility"</span>: <span class="dv">1811</span>,</span>
+<span id="cb20-2"><a href=""></a>              <span class="st">"Pride and Prejudice"</span>: <span class="dv">1813</span>,</span>
+<span id="cb20-3"><a href=""></a>              <span class="st">"Mansfield Park"</span>: <span class="dv">1814</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Note the structure { key_0 : value_0, key_1 : value_1, etc.}</li>
+</ul>
+</section>
+<section id="keys-values" class="slide level2 center">
+<h2>Keys &amp; Values</h2>
+<ul>
+<li>Keys must be unique, but values can repeat.</li>
+</ul>
+<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href=""></a>austen_dict <span class="op">=</span> {</span>
+<span id="cb21-2"><a href=""></a>    <span class="st">"Sense and Sensibility"</span>: <span class="dv">1811</span>,</span>
+<span id="cb21-3"><a href=""></a>    <span class="st">"Pride and Prejudice"</span>: <span class="dv">1813</span>,</span>
+<span id="cb21-4"><a href=""></a>    <span class="st">"Mansfield Park"</span>: <span class="dv">1814</span>,</span>
+<span id="cb21-5"><a href=""></a>    <span class="st">"Emma"</span>: <span class="dv">1815</span>,</span>
+<span id="cb21-6"><a href=""></a>    <span class="st">"Northanger Abbey"</span>: <span class="dv">1818</span>,   <span class="co"># duplicate value</span></span>
+<span id="cb21-7"><a href=""></a>    <span class="st">"Persuasion"</span>: <span class="dv">1818</span>,         <span class="co"># duplicate value</span></span>
+<span id="cb21-8"><a href=""></a>    <span class="st">"Lady Susan"</span>: <span class="dv">1871</span></span>
+<span id="cb21-9"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="indexing-a-dictionary" class="slide level2 center">
+<h2>Indexing a Dictionary</h2>
+<ul>
+<li>Get values by key:</li>
+</ul>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href=""></a>austen_dict[<span class="st">"Pride and Prejudice"</span>]</span>
+<span id="cb22-2"><a href=""></a><span class="co"># 1813</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Note: it’s easy to find the value of a key, but the opposite is much trickier.
+<ul>
+<li>Why might that be so?</li>
+</ul></li>
+</ul>
+</section>
+<section id="adding-to-a-dictionary" class="slide level2 center">
+<h2>Adding to a Dictionary</h2>
+<ul>
+<li>To add a new key–value pair, use the following dict[“new_key”] = new_value</li>
+</ul>
+<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href=""></a>austen_dict[<span class="st">"The Rise of Han Solo"</span>] <span class="op">=</span> <span class="dv">2025</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="overwriting-a-keys-value" class="slide level2 center">
+<h2>Overwriting a key’s value</h2>
+<ul>
+<li>To change the value of a key,</li>
+</ul>
+</section>
+<section id="deleting-a-key-value-pair-from-the-dictionary" class="slide level2 center">
+<h2>Deleting a <code>key</code>-<code>value</code> Pair from the Dictionary</h2>
+<ul>
+<li>To delete a <code>key</code>-<code>value</code> pair,</li>
+</ul>
+</section>
+<section id="checking-keys" class="slide level2 center">
+<h2>Checking Keys</h2>
+<ul>
+<li>We can use <code>in</code> checks to check keys, but not with values!</li>
+</ul>
+<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href=""></a><span class="co">"Pride and Prejudice"</span> <span class="kw">in</span> austen_dict  <span class="co"># True</span></span>
+<span id="cb24-2"><a href=""></a><span class="dv">1811</span> <span class="kw">in</span> austen_dict                   <span class="co"># False</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="section" class="slide level2 center">
+<h2></h2>
+</section>
+<section id="dictionary-activity" class="slide level2 center">
+<h2>Dictionary Activity</h2>
+<ul>
+<li>Below is a dictionary pairing George Orwell’s novels with their publication years. Copy this into your qmd:</li>
+</ul>
+<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href=""></a>orwell_dict <span class="op">=</span> {</span>
+<span id="cb25-2"><a href=""></a>    <span class="st">"Animal Farm"</span>: <span class="dv">1945</span>,</span>
+<span id="cb25-3"><a href=""></a>    <span class="st">"Nineteen Eighty-Four"</span>: <span class="dv">1949</span>,</span>
+<span id="cb25-4"><a href=""></a>    <span class="st">"Burmese Days"</span>: <span class="dv">1934</span>,</span>
+<span id="cb25-5"><a href=""></a>    <span class="st">"Keep the Aspidistra Flying"</span>: <span class="dv">1936</span>,</span>
+<span id="cb25-6"><a href=""></a>    <span class="st">"Coming Up for Air"</span>: <span class="dv">1939</span></span>
+<span id="cb25-7"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="dictionary-activity-1" class="slide level2 center">
+<h2>Dictionary Activity</h2>
+<ul>
+<li>Print the year that Animal Farm was published using its key.</li>
+<li>Check if “Homage to Catalonia” is in the dictionary.</li>
+<li>Add Orwell’s <em>Homage to Catalonia</em> (1938) to the dictionary. Print the dictionary again to confirm.</li>
+<li>Suppose you make a mistake and type 1937 for Homage to Catalonia. Reassign the correct year (1938) to fix it.</li>
+</ul>
+<p>Delete a key–value pair</p>
+<p>Remove Coming Up for Air from the dictionary.</p>
 </section></section>
 <section>
-<section id="indexing-a-dictionary" class="title-slide slide level1 center">
-<h1>Indexing a Dictionary</h1>
-<p>Get values by key:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href=""></a>novel_dict[<span class="st">"Pride and Prejudice"</span>]</span>
-<span id="cb17-2"><a href=""></a><span class="co"># 1813</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section class="slide level2 center">
+<section id="activities-answers" class="title-slide slide level1 center">
+<h1>Activities Answers</h1>
 
-</section></section>
-<section>
-<section id="adding-to-a-dictionary" class="title-slide slide level1 center">
-<h1>Adding to a Dictionary</h1>
-<p>Add a new key–value pair:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href=""></a>novel_dict[<span class="st">"Emma"</span>] <span class="op">=</span> <span class="dv">1815</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section class="slide level2 center">
-
-</section></section>
-<section id="checking-keys" class="title-slide slide level1 center">
-<h1>Checking Keys</h1>
-<p><code>in</code> checks keys, not values:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href=""></a><span class="co">"Pride and Prejudice"</span> <span class="kw">in</span> novel_dict  <span class="co"># True</span></span>
-<span id="cb19-2"><a href=""></a><span class="dv">1811</span> <span class="kw">in</span> novel_dict                   <span class="co"># False</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="activity-1" class="slide level2 center">
+<h2>Activity 1</h2>
+<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href=""></a><span class="co"># 1. First and last novel</span></span>
+<span id="cb26-2"><a href=""></a><span class="bu">print</span>(orwell_novels[<span class="dv">0</span>])    <span class="co"># Animal Farm</span></span>
+<span id="cb26-3"><a href=""></a><span class="bu">print</span>(orwell_novels[<span class="op">-</span><span class="dv">1</span>])   <span class="co"># Coming Up for Air</span></span>
+<span id="cb26-4"><a href=""></a></span>
+<span id="cb26-5"><a href=""></a><span class="co"># 2. Publication year of Burmese Days</span></span>
+<span id="cb26-6"><a href=""></a>burm_index <span class="op">=</span> orwell_novels.index(<span class="st">"Burmese Days"</span>)</span>
+<span id="cb26-7"><a href=""></a><span class="bu">print</span>(pub_year[burm_index])   <span class="co"># 1934</span></span>
+<span id="cb26-8"><a href=""></a></span>
+<span id="cb26-9"><a href=""></a><span class="co"># 3. Which novel was published in 1936?</span></span>
+<span id="cb26-10"><a href=""></a>index_1936 <span class="op">=</span> pub_year.index(<span class="dv">1936</span>)</span>
+<span id="cb26-11"><a href=""></a><span class="bu">print</span>(orwell_novels[index_1936])   <span class="co"># Keep the Aspidistra Flying</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="activity-2" class="slide level2 center">
+<h2>Activity 2</h2>
+<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href=""></a>orwell_dict <span class="op">=</span> {</span>
+<span id="cb27-2"><a href=""></a>    <span class="st">"Animal Farm"</span>: <span class="dv">1945</span>,</span>
+<span id="cb27-3"><a href=""></a>    <span class="st">"Nineteen Eighty-Four"</span>: <span class="dv">1949</span>,</span>
+<span id="cb27-4"><a href=""></a>    <span class="st">"Burmese Days"</span>: <span class="dv">1934</span>,</span>
+<span id="cb27-5"><a href=""></a>    <span class="st">"Keep the Aspidistra Flying"</span>: <span class="dv">1936</span>,</span>
+<span id="cb27-6"><a href=""></a>    <span class="st">"Coming Up for Air"</span>: <span class="dv">1939</span></span>
+<span id="cb27-7"><a href=""></a>}</span>
+<span id="cb27-8"><a href=""></a></span>
+<span id="cb27-9"><a href=""></a><span class="co"># 1. Direct lookup</span></span>
+<span id="cb27-10"><a href=""></a><span class="bu">print</span>(orwell_dict[<span class="st">"Animal Farm"</span>])</span>
+<span id="cb27-11"><a href=""></a><span class="co"># Output: 1945</span></span>
+<span id="cb27-12"><a href=""></a></span>
+<span id="cb27-13"><a href=""></a></span>
+<span id="cb27-14"><a href=""></a><span class="co"># 2. Membership check</span></span>
+<span id="cb27-15"><a href=""></a><span class="bu">print</span>(<span class="st">"Homage to Catalonia"</span> <span class="kw">in</span> orwell_dict)</span>
+<span id="cb27-16"><a href=""></a><span class="co"># Output: False</span></span>
+<span id="cb27-17"><a href=""></a></span>
+<span id="cb27-18"><a href=""></a></span>
+<span id="cb27-19"><a href=""></a><span class="co"># 3. Adding a new key–value pair</span></span>
+<span id="cb27-20"><a href=""></a>orwell_dict[<span class="st">"Homage to Catalonia"</span>] <span class="op">=</span> <span class="dv">1938</span></span>
+<span id="cb27-21"><a href=""></a><span class="bu">print</span>(orwell_dict)</span>
+<span id="cb27-22"><a href=""></a><span class="co"># Now includes: "Homage to Catalonia": 1938</span></span>
+<span id="cb27-23"><a href=""></a></span>
+<span id="cb27-24"><a href=""></a></span>
+<span id="cb27-25"><a href=""></a><span class="co"># 4. Overwriting a value (fixing a mistake)</span></span>
+<span id="cb27-26"><a href=""></a>orwell_dict[<span class="st">"Homage to Catalonia"</span>] <span class="op">=</span> <span class="dv">1938</span>   <span class="co"># reassigns the correct year</span></span>
+<span id="cb27-27"><a href=""></a><span class="bu">print</span>(orwell_dict[<span class="st">"Homage to Catalonia"</span>])</span>
+<span id="cb27-28"><a href=""></a><span class="co"># Output: 1938</span></span>
+<span id="cb27-29"><a href=""></a></span>
+<span id="cb27-30"><a href=""></a></span>
+<span id="cb27-31"><a href=""></a><span class="co"># 5. Delete a key–value pair</span></span>
+<span id="cb27-32"><a href=""></a><span class="kw">del</span> orwell_dict[<span class="st">"Coming Up for Air"</span>]</span>
+<span id="cb27-33"><a href=""></a><span class="bu">print</span>(orwell_dict)</span>
+<span id="cb27-34"><a href=""></a><span class="co"># "Coming Up for Air" has been removed</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
