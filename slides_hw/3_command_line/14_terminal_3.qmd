@@ -125,6 +125,8 @@ grep -E "[a-q]at" alice.txt
 grep -E "\scat" alice.txt
 ```
 
+<!-- BETTER for word breaks: \<, \>, which captures punctuation  as well -->
+
 -   Note that `\s` = any whitespace (not just space!)
 
 -   How would we say "ends with `cat`"?
