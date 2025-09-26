@@ -33,8 +33,8 @@ Using Terminal:
 
 -   Create a folder called `alice`
 -   Download *Alice's Adventures in Wonderland*
-    - https://www.gutenberg.org/ebooks/11
-    - name it `alice.txt`
+    -   <https://www.gutenberg.org/cache/epub/11/pg11.txt>
+    -   name it `alice.txt`
 -   Search for "Alice"
 -   How many instances of "Alice" are there in the story? (Or more specifically, how many lines occur in the book that contain at least one "Alice"?)
 
@@ -88,11 +88,12 @@ grep -Ec "c.t" alice.txt
 ``` bash
 grep -E "c.t" alice.txt
 ```
-- How else might we want to narrow down our search?
+
+-   How else might we want to narrow down our search?
 
 ## Narrowing Down our Search
 
-- Perhaps we would want to specify certain vowel letters:
+-   Perhaps we would want to specify certain vowel letters:
 
 ``` bash
 grep -E "c[aou]t" alice.txt   
@@ -100,7 +101,7 @@ grep -E "c[aou]t" alice.txt
 
 ## Narrowing Down our Search
 
-- Perhaps we would want to exclude certain vowel letters:
+-   Perhaps we would want to exclude certain vowel letters:
 
 ``` bash
 grep -E "c[^ao]t" alice.txt
@@ -108,31 +109,29 @@ grep -E "c[^ao]t" alice.txt
 
 ## Narrowing Down our Search
 
-- Perhaps we would want to identify a range of certain vowel letters:
+-   Perhaps we would want to identify a range of certain vowel letters:
 
 ``` bash
 grep -E "[a-q]at" alice.txt
 ```
 
-- (Also works for digits: e.g., \[0-9\])
+-   (Also works for digits: e.g., \[0-9\])
 
 ## Narrowing Down our Search
 
-- What if we want to say "begins with `cat`"?
-
+-   What if we want to say "begins with `cat`"?
 
 ``` bash
 grep -E "\scat" alice.txt
 ```
 
+-   Note that `\s` = any whitespace (not just space!)
 
-- Note that `\s` = any whitespace (not just space!)
-
-- How would we say "ends with `cat`"?
+-   How would we say "ends with `cat`"?
 
 ## Narrowing Down our Search
 
-- How would we say "either `cat` or `cats`"?
+-   How would we say "either `cat` or `cats`"?
 
 ``` bash
 grep -E "\scats?" alice.txt
@@ -144,22 +143,21 @@ grep -E "\scats?" alice.txt
 -   \$ → end of line
 
 ``` bash
-grep -E "^c.t" file.txt   # lines starting with "c.t"
-grep -E "c.t$" file.txt    # lines ending with "c.t"
+grep -E "^c.t" alice.txt   # lines starting with "c.t"
+grep -E "c.t$" alice.txt    # lines ending with "c.t"
 ```
 
 ## Narrowing Down our Search
 
--   "(Alice|Rabbit)" → "Alice" or "Rabbit"
-<!-- -   (ab)+ → one or more “ab” sequences -->
+-   "(Alice\|Rabbit)" → "Alice" or "Rabbit" <!-- -   (ab)+ → one or more “ab” sequences -->
 
 ``` bash
 grep -E "(Alice|Rabbit)" alice.txt
 ```
 
-## For a Handy List of Regex 
+## For a Handy List of Regex
 
-```bash
+``` bash
 curl -o regex.txt https://winjapati.github.io/301_Fall_2025/3_command_line/14_regex.txt#
 ```
 
@@ -168,12 +166,11 @@ curl -o regex.txt https://winjapati.github.io/301_Fall_2025/3_command_line/14_re
 ## Group Activity
 
 -   Within `alice.txt`, using `grep` `-E`, find:
-    1. All words beginning with "a"/ "A" or "z" / "Z";
-    2. All four-letter words;
-    3. Lines ending with a question mark (use `\?`);
-    4. Words with repeated vowels ("food", "see"; for this use `\1` to capture the exact same text as the previous group; thus ([tp])\1 = "tt", "pp"); 
-    5. The total number of articles ("the, The, a, A, an, An") in the story.
-
+    1.  All words beginning with "a"/ "A" or "z" / "Z";
+    2.  All four-letter words;
+    3.  Lines ending with a question mark (use `\?`);
+    4.  Words with repeated vowels ("food", "see"; for this use `\1` to capture the exact same text as the previous group; thus (\[tp\])\\1 = "tt", "pp");
+    5.  The total number of articles ("the, The, a, A, an, An") in the story.
 
 <!-- <https://regex101.com/> -->
 
@@ -182,15 +179,16 @@ curl -o regex.txt https://winjapati.github.io/301_Fall_2025/3_command_line/14_re
 <!-- -   Within `14_alice.txt`, use the following code. -->
 
 <!-- ``` bash -->
+
 <!-- grep -E "c.t" file.txt   # matches cat, cot, cut -->
+
 <!-- ``` -->
 
 <!-- -   `*` → 0 or more of the preceding\ -->
+
 <!-- -   `?` → 0 or 1 of the preceding\ -->
+
 <!-- -   `+` → 1 or more of the preceding -->
-
-
-
 
 <!-- ## Grep + Regex in Action -->
 
@@ -199,24 +197,33 @@ curl -o regex.txt https://winjapati.github.io/301_Fall_2025/3_command_line/14_re
 <!-- -   Words ending in “ing” -->
 
 <!-- ``` bash -->
+
 <!-- grep -E "(cat|dog)" file.txt -->
+
 <!-- ``` -->
 
 <!-- -   Lines starting with a capital letter -->
 
 <!-- ``` bash -->
+
 <!-- grep -E "^[A-Z]" file.txt -->
+
 <!-- ``` -->
 
 <!-- -   All numbers -->
 
 <!-- ``` bash -->
+
 <!-- grep -E "[0-9]+" file.txt -->
+
 <!-- ``` -->
 
 <!-- ## Narrowing Down our Search -->
 
 <!-- -   Predefined: -->
+
 <!--     -   `\d` → digit -->
+
 <!--     -   `\w` → word character -->
+
 <!--     -   `\s` → whitespace -->
