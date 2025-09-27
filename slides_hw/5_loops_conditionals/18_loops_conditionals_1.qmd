@@ -28,32 +28,72 @@ editor: visual
 
 # Loops and Conditionals
 
+
+## Loops & Conditionals = Control Structures
+
+- This is where programming languages truly become powerful
+- Control structures:
+  - control the flow of a program
+  - tell the program what to do next, and in what order
+- All programming languages have control structures, but they differ in how they're written out
+
+## Loops & Conditionals = Control Structures
+
 - Loops: 
-    for loops: do this task for the entire data set
-    while loops: do this task as longer as a condition is made.
+    - `for` loops: do this task for a set number of times or for each item in a sequence
+    - `while` loops: do this task as longer as a condition is true
     
-- Conditionals: if this is true, do this.
+- Conditionals: check whether a condition is true; if so, execute the corresponding block of code
+    - `if`, `elif`, `else`
 
-Loops and Conditionals Control Structures The real power of programming languages comes into play with the use of control structures. Control structures control the flow of a program, telling it what to do next, and in what order. All programming languages use the same basic set of control structures, and just differ in how they're written out. In this module, we'll be learning about the three main kinds of control structures and how they're implemented in python:
+# Today: Conditionals  
 
-Conditionals, or if, else statements for loops while loops Conditionals Conditional statements tell python to do something if some condition is met. For example, we can write a little block of code that will tell us if a number is odd or even. If you divide an even number by 2, it will have no remainder, and if you divide an odd number by 2, it will have a remainder of 1. To get the remainder of division, we can use the % operator.
+## Conditional Example: Odd or Even?
+
+- Here are the operators we know:
+    - `+` : plus
+    - `-` : minus
+    - `*` : times
+    - `/` : divided by
+    - `**` : to the power of
+    - `//` : floor division
+    - `%` : modulus
+
+## Conditional Example: Odd or Even?
+
+- If you divide an even number by 2, it will have no remainder
+- If you divide an odd number by 2, it will have a remainder of 1. 
 
 ``` python
 100 % 2 \# 0
 117 % 2 \# 1
 ```
 
-We can write a short block of code that will print <x> is even if the number assigned to x is even like so. First, let's assign x = 50 on its own line:
+## Conditional Example: Odd or Even?
+
+- Let's write a short block of code that will print <x> is even if the number assigned to x is even like so. 
+
+- Let's assign x = 50 on its own line, then the `if` statement.
 
 ``` python
-x = 50 
+x = 50
 if x % 2 == 0: print(x, "is even")      # 50 is even
 ```
 
-Now, we can write our if statement.
+- Run this code in your Quarto doc!
+- Redefine `x = 51`.  
+    - What happens when you rerun the `if` statement?
 
+## Conditional Example: Odd or Even?
 
-Let's break down what's going on here. First, we have a logical statement x % 2 == 0. This statement is checking to see if the outcome of x % 2 is exactly equal to 0. If we run it as its own line of code, we'll get True
+- So what's going on here?
+
+``` python
+x = 50
+if x % 2 == 0: print(x, "is even")      # 50 is even
+```
+
+1. Logical statement x % 2 == 0. This statement is checking to see if the outcome of x % 2 is exactly equal to 0. If we run it as its own line of code, we'll get True.
 
 ``` python
 x % 2       # 0
