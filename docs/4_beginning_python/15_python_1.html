@@ -461,13 +461,13 @@ Dr.&nbsp;Andrew M. Byrd
 <li><p>We defined what kind of document we were writing with <code>documentclass{}</code></p></li>
 <li><p>We imported additional code, with <code>\usepackage{}</code></p></li>
 <li><p>We wrote out instructions for how the document was supposed to look with commands like </p></li>
-<li><p>Then, we used a LaTeX engine (using OverLeaf) to interpret the LaTeX code, which returned a result in the form of a typeset pdf.</p></li>
+<li><p>Then, we used a LaTeX engine (using Overleaf) to interpret the LaTeX code, which returned a result in the form of a typeset pdf.</p></li>
 </ul>
 </section>
 <section id="making-a-website" class="slide level2 center">
 <h2>Making a website</h2>
 <ul>
-<li>We defined what kind of document we were writing with the <code>&lt;DOCSTRING&gt;</code></li>
+<li>We defined what kind of document we were writing with the <code>&lt;!DOCSTRING html&gt;</code></li>
 <li>We imported additional code, in the form of <code>CSS</code>, into the <code>HTML</code> document.</li>
 <li>We wrote out instructions for how the text was supposed to look with commands like <code>&lt;strong&gt;&lt;/strong&gt;</code></li>
 <li>Then, we used a web browser to interpret the code in the <code>HTML</code> document, and the browser returned a result in the form of a website.</li>
@@ -476,9 +476,9 @@ Dr.&nbsp;Andrew M. Byrd
 <section id="programming-at-the-terminal" class="slide level2 center">
 <h2>Programming at the Terminal</h2>
 <ul>
-<li>We even a little bit at the Terminal, using <code>RegEx</code>!</li>
+<li>We even programmed a little bit at the Terminal, using <code>RegEx</code>!</li>
 <li>Regular expressions are much simpler than <code>HTML</code> or <code>LaTeX</code></li>
-<li>But these simple expressions allow us conduct powerful and sweeping searches</li>
+<li>But these simple expressions allow us to conduct powerful and sweeping searches</li>
 </ul>
 </section>
 <section id="python-will-be-a-lot-like-this" class="slide level2 center">
@@ -488,7 +488,7 @@ Dr.&nbsp;Andrew M. Byrd
 <li>Define what kind of document it is at the top with <code>#! /usr/bin/python3</code></li>
 <li>Import additional code, using import</li>
 <li>Write out instructions for what the document is supposed to do with code.</li>
-<li>Then use the python interpreter to interpret our code, and do what we asked it to do.</li>
+<li>Then use the Python interpreter to interpret our code, and do what we asked it to do.</li>
 </ul>
 </section></section>
 <section>
@@ -502,7 +502,7 @@ Dr.&nbsp;Andrew M. Byrd
 <li>Navigate to your <code>LIN_301</code> directory</li>
 <li>Create a new subfolder, called <code>py</code>.
 <ul>
-<li>This is where we’ll save our python scripts.</li>
+<li>This is where we’ll save our Python scripts.</li>
 </ul></li>
 </ul>
 </section>
@@ -606,7 +606,7 @@ Dr.&nbsp;Andrew M. Byrd
 <h2>Quarto Code</h2>
 <ul>
 <li>Create a new <code>Quarto Document</code>, called <code>first_doc.qmd</code></li>
-<li>Make sure it’s a <code>pdf</code> file.</li>
+<li>Make sure it’s an <code>html</code> file.</li>
 </ul>
 </section>
 <section id="quarto-code-1" class="slide level2 center">
@@ -618,7 +618,7 @@ Dr.&nbsp;Andrew M. Byrd
 <span id="cb6-2"><a href=""></a><span class="an">title:</span><span class="co"> "My First Quarto Document"</span></span>
 <span id="cb6-3"><a href=""></a><span class="an">author:</span><span class="co"> "Your Name Here"</span></span>
 <span id="cb6-4"><a href=""></a><span class="an">date:</span><span class="co"> "2025-09-29"</span></span>
-<span id="cb6-5"><a href=""></a><span class="an">format:</span><span class="co"> pdf</span></span>
+<span id="cb6-5"><a href=""></a><span class="an">format:</span><span class="co"> html</span></span>
 <span id="cb6-6"><a href=""></a><span class="co">---</span></span>
 <span id="cb6-7"><a href=""></a></span>
 <span id="cb6-8"><a href=""></a><span class="fu"># Introduction</span></span>
@@ -649,9 +649,9 @@ Dr.&nbsp;Andrew M. Byrd
 <section id="printing-hello-world" class="slide level2 center">
 <h2>Printing Hello world!</h2>
 <ul>
-<li>Remember earlier how this gave us error?</li>
+<li>Remember earlier how this gave us an error?</li>
 </ul>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href=""></a><span class="bu">print</span>(<span class="st">"Hello world!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href=""></a><span class="bu">print</span>(Hello world<span class="op">!</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>Create a code block in your <code>qmd</code> file, and try this instead:</li>
 </ul>
@@ -687,7 +687,7 @@ Dr.&nbsp;Andrew M. Byrd
 <section id="variables-1" class="slide level2 center">
 <h2>Variables</h2>
 <ul>
-<li>Let’s look another example.</li>
+<li>Let’s look at another example.</li>
 <li>Python doesn’t know your age unless you tell it.</li>
 </ul>
 <div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a>my_age</span>
@@ -739,12 +739,12 @@ Dr.&nbsp;Andrew M. Byrd
 </ul>
 </section>
 <section id="activity-when-does-your-kid-turn-18" class="slide level2 center">
-<h2>Activity: When Does your Kid Turn 18?</h2>
-<p>LLet’s extend what we’ve learned with variables:</p>
+<h2>Activity: When Does Your Kid Turn 18?</h2>
+<p>Let’s extend what we’ve learned with variables:</p>
 <ul>
 <li>Assume you’ll have a child in the future, born when you turn <code>30</code>.<br>
 </li>
-<li>Write code inside an embedded <code>python</code> code block.<br>
+<li>Write code inside an embedded <code>Python</code> code block.<br>
 </li>
 <li>The end result should be a variable called <code>child_18_year</code>, which is the year your child turns <strong>18</strong>.<br>
 </li>
