@@ -490,12 +490,12 @@ Dr.&nbsp;Andrew M. Byrd
 <section id="the-operator" class="slide level2 center">
 <h2>The <code>+</code> Operator</h2>
 <div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="dv">1</span> <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb5-2"><a href=""></a><span class="co">"Dr."</span> <span class="op">+</span> <span class="st">" "</span> <span class="op">+</span> Andrew<span class="st">" + "</span> <span class="st">" + "</span>Byrd<span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-2"><a href=""></a><span class="co">"Dr."</span> <span class="op">+</span> <span class="st">" "</span> <span class="op">+</span> <span class="st">"Andrew"</span> <span class="op">+</span> <span class="st">" "</span> <span class="op">+</span> <span class="st">"Byrd"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="adding-two-lists-together" class="slide level2 center">
 <h2>Adding Two Lists Together</h2>
 <p>We can also use <code>+</code> to <strong>concatenate</strong> lists:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a>unfinished <span class="op">=</span> [<span class="st">"The Watsons"</span>, <span class="st">"Sandition"</span>]</span>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a>unfinished <span class="op">=</span> [<span class="st">"The Watsons"</span>, <span class="st">"Sanditon"</span>]</span>
 <span id="cb6-2"><a href=""></a>novels <span class="op">+</span> unfinished</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="recall-the-activity-from-last-time" class="slide level2 center">
@@ -641,9 +641,9 @@ Dr.&nbsp;Andrew M. Byrd
 <section id="dictionaries" class="title-slide slide level1 center">
 <h1>Dictionaries</h1>
 <ul>
-<li>There’s a more straight-forward way to do this in Python</li>
+<li>There’s a more straightforward way to do this in Python</li>
 <li>We can use <code>dict</code> (<strong>dictionaries</strong>)</li>
-<li>Pythons <code>dict</code> is marked not with <code>[...]</code>, but with curly braces <code>{...}</code></li>
+<li>Python’s <code>dict</code> is marked not with <code>[...]</code>, but with curly braces <code>{...}</code></li>
 <li>Note: entries are <strong>unordered</strong>.</li>
 </ul>
 </section>
@@ -759,7 +759,7 @@ Dr.&nbsp;Andrew M. Byrd
 <ul>
 <li>e.g., <code>ipa_segments[0]</code> → first sound in a word.</li>
 </ul></li>
-<li>If you don’t care about <em>or</em> have duplicates
+<li>If you don’t care about duplicates, <em>or</em> if you would like to allow them:
 <ul>
 <li>e.g., a corpus may have the same word many times</li>
 </ul></li>

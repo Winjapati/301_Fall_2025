@@ -1,0 +1,241 @@
+---
+title: "Loops and Conditionals"
+format:
+  revealjs:
+    theme: beige
+    slide-number: true
+    toc: true
+    toc-title: "Contents"
+    toc-depth: 1
+---
+
+# For Loops
+Where if statements are used to control which pieces of code are run, depending on certain conditions, for loops are used to run the same block of code over and over again on items in an iterable. For simplicity, let's just stick to lists.
+
+Let's take our list of novels that Charlotte Brontë wrote from above as an example.
+
+charlotte
+# ['The Professor', 'Jane Eyre', 'Shirley', 'Villette']
+If we wanted to print out the name of every novel, one way we could approach it is just to do it by hand with indexing.
+
+print(charlotte[0])
+print(charlotte[1])
+print(charlotte[2])
+print(charlotte[3])
+However, not only is this an inefficient use of our time, it's also not going to work if we don't know how many items are in the list, which we won't most of the time.
+
+Instead, we'll use a for loop to run the print() function on every value in the list automatically. 
+
+for title in charlotte:
+    print(title)
+
+# The Professor
+# Jane Eyre
+# Shirley
+# Villette
+This for loop is saying that we want to do something for every value inside the list charlotte. And as we loop through every value in the list charlotte, it's going to assign that value to a variable called title. Instead of saying for title in charlotte: we could have said for book in charlotte:, and it would have done the same thing, as long as we used the variable book instead of title.
+
+Then, every time the for loop assigns a new value from charlotte to the variable title, it runs the indented code. 
+
+for_loop.gif
+
+We don't have to do anything with the variable title inside of the loop. Python will still run whatever code is inside of the loop every time it updates the value assigned to title. For example, if we forgot that the len() function gave us the length of a list, we could count the number of books Charlotte Brontë wrote like this:
+
+book_counter = 0
+
+for title in charlotte:
+    book_counter = book_counter + 1
+
+print(book_counter)
+# 4
+Setting up an empty counter or a collector before starting a for loop is a very common thing to do. For example, if I wanted to know how many characters Charlotte Brontë used in the title of each book, and in total over all, I could do this:
+
+total_characters = 0
+book_characters = []
+
+for title in charlotte:
+    # exclude spaces
+    no_space = title.replace(" ", "")
+
+    # Update total counter
+    total_characters = total_characters + len(no_space)
+
+    # update by-book list
+    book_characters.append(len(no_space))
+More examples: Preparing Lines
+In the previous module on reading in text, we went over how text often needs to be cleaned up before we can get ready to analyze it. Whitespace characters need to be stripped off of the left and right edges, and we need to convert each line into either lowercase or uppercase.
+
+# define the book path
+book_location = "data/mansfield_park.txt"
+
+# open the text file
+book_file = open(book_location, mode = 'r')
+
+# read in all lines
+book_lines = book_file.readlines()
+
+# get one line
+one_line = book_lines[200]
+
+# uncleaned line
+one_line
+'ours, Sir Thomas, I may say, or at least of _yours_, would not grow up\n'
+
+# cleaned line
+one_line.lstrip().rstrip().lower()
+# 'ours, sir thomas, i may say, or at least of _yours_, would not grow up'
+ But, there are 16,045 total lines in Mansfield Park. It would be inefficient to do this to each line individually. Instead, we'll do it with a for loop with the following steps.
+
+Create an empty collector list.
+For each line in book_lines clean it up.
+Add the cleaned up line to the collector list.
+# collector
+clean_lines = []
+
+for line in book_lines:
+    # cleanup
+    cleaned = line.lstrip().rstrip().lower()
+
+    # collection
+    clean_lines.append(cleaned)
+  
+More examples: Full Lines
+If you look at clean_lines, you'll see that there are a bunch of lines that are zero-length. They look like just ''. These were blank lines in the original text used for things like separating paragraphs. They're not all that important for our analysis, so we'll get rid of them by combining a for loop and an if statement. We'll do it with the following steps:
+
+Set up a counter, set to 0, to keep track of the number of blank lines
+Set up an empty collector list.
+Loop through every value in clean_lines, assigning it to line.
+If the length of the value in line is greater than 0, append it to the collector list.
+Otherwise, add 1 to n_blank.
+# a counter, just to see
+n_blank = 0
+
+# a collector
+full_lines = []
+
+for line in clean_lines:
+    if len(line) > 0:
+        full_lines.append(line)
+    else:
+        n_blank = n_blank + 1
+Doing this, we can see that there were 2,110 blank lines in the text, and now full_lines only contains lines with text!
+
+More examples: Lists of words!
+We also saw how to split up a line of text into a list of words with the .split() method. If we split a line into words by using spaces, it looks like this:
+
+full_lines[200]
+# 'on this point. whatever i can do, as you well know, 
+# i am always ready'
+
+full_lines[200].split(" ")
+# ['on',
+#  'this',
+#  'point.',
+#  'whatever',
+#  'i',
+#  'can',
+#  'do,',
+#  'as',
+#  'you',
+#  'well',
+#  'know,',
+#  'i',
+#  'am',
+#  'always',
+#  'ready']
+If we wanted to turn every line into a list of words, we could do this with a for loop with the following steps.
+
+Set up an empty collector list.
+Loop through every value in full_lines, assigning it to line.
+Split line into a list of words based on the spaces.
+Append this list of words to the collector list.
+# set up collector
+word_lists = []
+
+for line in full_lines:
+    # split on spaces
+    words = line.split(" ")
+
+    # append to collector
+    word_lists.append(words)
+Now, word_lists is a list of lists.
+
+More Examples: Getting the average number of words per line
+If we wanted to know how many words there are per line, we'd need to get the total number of words, then divide it by the number of lines. I'll do this with a for loop with the following steps:
+
+Set up an empty collector list for the length of each list of words.
+Loop through all of the values in word_lists, assigning each value to the variable words.
+Append the length of words to the collector list.
+Get the sum of all values in the collector list with sum(). 
+Divide that by the length of word_lists.
+# set up collector
+line_len = []
+
+for words in word_lists:
+    # get length of list
+    n = len(words)
+
+    # append to collector
+    line_len.append(n)
+
+total_words = sum(line_len)
+total_lines = len(word_lists)
+
+average_len = total_words / total_lines
+Turns out, the average number of words per line is 11.68 words.
+
+More Examples: How many "the"
+Sometimes, we may need to have a for loop inside of a for loop. Right now, word_lists is a list we can loop over, and every value in it is also a list we can loop over. One use case for embedding two for loops here would be if we wanted to count up how many instances of "the" there are in the book. Since the "words" in each list still have punctuation attached to them, we'll have to use some regular expressions.
+
+Create a counter for the number of "the", set to 0.
+Loop every value in word_lists, assigning it to words.
+Loop through every value in words, assigning it to w.
+If w is a match for the regular expression \bthe\b, add 1 to the counter.
+import re
+
+# Set up counter
+the_counter = 0
+total_word_counter = 0
+
+for words in word_lists:
+    for w in words:
+        total_word_counter = total_word_counter + 1
+
+        if re.match(r'\bthe\b', w):
+            the_counter = the_counter + 1
+It turns out that there are 6,340 instances of "the" in Mansfield Park. In order to get the proportion of all words which were "the", we just need to do the_counter / total_counter.
+
+While Loops
+Another kind of loop is the while loop. These are a lot like if statements. In an if statement, when the condition is True, python runs the indented code once.
+
+x  = 0
+if x < 10:
+    print(x, "is less than 10.")
+In while loops, there is also a logical condition, but instead of running the indented code just once, python loops back and re-checks the conditional. If it's still True, it runs the indented code again, and loops back to re-check the conditional. It will keep doing this forever until the conditional returns False.
+
+while x < 10:
+    print(x, "is less than 10.")
+    x = x - 1
+
+# 0 is less than 10
+# 1 is less than 10
+# 2 is less than 10
+# 3 is less than 10
+# 4 is less than 10
+# 5 is less than 10
+# 6 is less than 10
+# 7 is less than 10
+# 8 is less than 10
+# 9 is less than 10
+It is important to write while loops carefully! It is very easy to write a while loop that will accidentally run forever. If you think you've done this, hitting CTRL + c on your keyboard will interrupt the process.
+
+We usually won't be using while in this class. They're mostly used when you want a script to wait for user input. We can do kind of fun looking things with them though.
+
+name = "The University of Kentucky"
+
+while name:
+    print("|" + name + "|")
+    name = name[0:-1]
+ 
+
+

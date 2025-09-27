@@ -21,10 +21,12 @@ editor: visual
 
 ## Recap from Last Week
 
--   Three Value Types: **Numbers**, **Strings**, **Boolean**
--   X
--   Y
--   Z
+-   Variables
+-   Three Value Types:
+    -   **Numbers**
+    -   **Strings**
+    -   **Boolean**
+-   Lists, Dictionaries
 
 # Control Structures
 
@@ -40,7 +42,7 @@ editor: visual
 
 -   Loops:
     -   `for` loops: do this task for a set number of times or for each item in a sequence
-    -   `while` loops: do this task as longer as a condition is true
+    -   `while` loops: do this task as longer as long as a condition is true
 -   Conditionals: check whether a condition is true; if so, execute the corresponding block of code
     -   `if`, `elif`, `else`
 
@@ -104,7 +106,7 @@ if x % 2 == 0: print(x, "is even")      # 50 is even
 ```
 
 -   Let's look at the `if ...` part of the code:
-    -   `if x % 2 == 0` means "should the the modulus of x with 2 equal" (i.e., should x be an even number
+    -   `if x % 2 == 0` means "should the modulus of x with 2 equal to 0" (i.e., is x an even number?)
 -   We then get `:`, followed by the command python will run if the `if` statement is `True`
 
 ## Conditionals: Proper Syntax
@@ -185,12 +187,13 @@ if x % 2 == 0:
 else: 
     print(x, "is odd") 
 ```
+
 -   Run this code block, redefining the value of x.
 
-## `elif` Statments
+## `elif` Statements
 
-- There's one more *keyword** that we need to learn for our `if` statements.
-- Currently our code identifies numbers as even or odd:
+-   There's one more **keyword** that we need to learn for our `if` statements.
+-   Currently our code identifies numbers as even or odd:
 
 ``` python
 if x % 2 == 0: 
@@ -199,43 +202,155 @@ else:
     print(x, "is odd") 
 ```
 
-- But what if the number is neither? 
-    - What if the number is `50.1`?
+-   But what if the number is neither?
+    -   What if the number is `50.1`?
 
-## `elif` Statments
+## `elif` Statements
 
-- Run the following code:
+-   Run the following code:
 
-```python
+``` python
 x = 50.1
 x % 2
 ```
 
-- How might we capture forms that end in a decimal in Python?
-  - Big hint: there are more **comparison operators** than just `==`!
+-   How might we capture forms that end in a decimal in Python?
+    -   Big hint: there are more **comparison operators** than just `==`!
 
-## dd
+## `elif` Statements
 
-50.1 divided by 2 has a remainder of 0.1. 0.1 is not equal to 0. 0.1 == 0 returns False, so we don't print anything yet. All the conditions above returned False, so it prints 50.1 is odd. This is not quite right. It seems like what we really want to do is have some kind of check first, to see if the value in x has a decimal value before we do the rest of our even and odd checks.
+-   You'll note that when using the modulus operator with decimals, the output will itself be a decimal
+-   For even numbers, you get between 0-1; for odd between 1-2
+-   So:
+    -   `Even % 2 == 0`
+    -   `Odd % 2 == 1`
+    -   `Decimal % 2 == 0.01 - 1.99`
 
-There are lots of little math tricks we could do to check to see if x has a decimal place, but I think what I'll want to do is check to see of remainder division returns a remainder that is greater than 0 and less than 1.
+## `elif` Statements
 
-x = 50.1 x % 1 \> 0 and x % 1 \< 1 So, the start of our if block will start with this decimal check.
+-   Let's translate this to code:
 
-if x % 1 \> 0 and x % 1 \< 1: print(x, "is a decimal.") Now we're ready to run our even and odd checks that we worked out before, but we need to do so in a way that tells python that they belong to the same block of checks. We only want python to move on to the even and odd checks if the number is not a decimal. We do this with elif, which is a mashup of else and if. It only runs if the block above was False, and it does its own logical check before running its own code.
+``` python
+x = 50
+if x % 2 == 0:
+    print(x, "is even.")
+elif x % 2 == 1:
+    print(x, "is odd.")
+else:
+    print(x, "is a decimal.")
+```
 
-Our final block of code to classify numbers into even, odd, or decimals, is:
+# Another Example: The Full Brontë
 
-if x % 1 \> 0 and x % 1 \< 1: print(x, "is a decimal.") elif x % 2 == 0: print(x, "is even") else: print(x, "is odd") Go ahead and check it out with any given number.
+## The Full Brontë
 
-elsif-1.svg
+-   Let's combine our knowledge of conditionals with lists.
+-   Let's say we wanted to identify which of the Brontë sisters wrote a particular novel.
+-   We'd first need to create a list of novels for each sister.
 
-More example: Is item in list Let's say we wanted to identify which of the Brontë sisters wrote a particular novel. We'd first need to create a list of novels for each sister.
+``` python
+charlotte = ["The Professor", "Jane Eyre", "Shirley", "Villette"] 
+emily = ["Wuthering Heights"] 
+anne = ["Agnes Grey", "The Tenant of Wildfell Hall"] 
+```
 
-charlotte = \["The Professor", "Jane Eyre", "Shirley", "Villette"\] emily = \["Wuthering Heights"\] anne = \["Agnes Grey", "The Tenant of Wildfell Hall"\] Now, we can test novel titles against each list.
+## Testing Novel Titles
 
-novel = "Jane Eyre" if novel in charlotte: print("Charlotte Brontë wrote", novel) elif novel in emily: print("Emily Brontë wrote", novel) elif novel in anne: print("Anne Brontë wote", novel) else: print(novel, "was not written by one of the Brontë sisters") More Examples: Counting If we complexify our Brontë checking code, we can also keep track of how many times we've checked whether a particular sister wrote a book. First, we need to initialize a dictionary that will keep track.
+``` python
+novel = "Jane Eyre"     # we identify the novel we're looking at
+if novel in charlotte: 
+    print("Charlotte Brontë wrote", novel)  #we first check to see that our variable is in charlotte
+elif novel in emily: 
+    print("Emily Brontë wrote", novel) #then emily
+elif novel in anne: 
+    print("Anne Brontë wrote", novel) #then anne
+else: 
+    print(novel, "was not written by one of the Brontë sisters") #if the novel is in none of these, we get our else statement
+```
 
-bronte_checks = {"charlotte": 0, "emily": 0, "anne" : 0} Now, we include a line of code in each part of the if block to increase the value in the dictionary by 1.
+-   Note that you can have multiple `elif` keywords in your conditional block!
 
-if novel in charlotte: bronte_checks\["charlotte"\] = bronte_checks\["charlotte"\] + 1 print("Charlotte Brontë wrote", novel) elif novel in emily: bronte_checks\["emily"\] = bronte_checks\["emily"\] + 1 print("Emily Brontë wrote", novel) elif novel in anne: bronte_checks\["anne"\] = bronte_checks\["anne"\] + 1 print("Anne Brontë wote", novel) else: print(novel, "was not written by one of the Brontë sisters")
+## Complexifying the Code
+
+-   Let's make our Brontë checking code a bit more complex
+    -   We can also keep track of how many times we've checked whether a particular sister wrote a book.
+    -   First, we need to initialize a dictionary that will keep track.
+
+``` python
+bronte_checks = {"charlotte": 0, "emily": 0, "anne" : 0}  #a starter dict, where the values of each bronte book is at 0
+```
+
+## Complexifying the Code
+
+-   Now, we include a line of code in each part of the if block to increase the value in the dictionary by 1.
+
+``` python
+if novel in charlotte: 
+    bronte_checks["charlotte"] = bronte_checks["charlotte"] + 1
+    print("Charlotte Brontë wrote", novel) 
+elif novel in emily: 
+    bronte_checks["emily"] = bronte_checks["emily"] + 1
+    print("Emily Brontë wrote", novel) 
+elif novel in anne: 
+    bronte_checks["anne"] = bronte_checks["anne"] + 1
+    print("Anne Brontë wrote", novel) 
+else: print(novel, "was not written by one of the Brontë sisters")
+```
+
+## The Full Brontë
+
+``` python
+novel = "Wuthering Heights" 
+
+charlotte = ["The Professor", "Jane Eyre", "Shirley", "Villette"] 
+emily = ["Wuthering Heights"] 
+anne = ["Agnes Grey", "The Tenant of Wildfell Hall"] 
+
+bronte_checks = {"charlotte": 0, "emily": 0, "anne" : 0} 
+
+if novel in charlotte: 
+    bronte_checks["charlotte"] = bronte_checks["charlotte"] + 1
+    print("Charlotte Brontë wrote", novel) 
+elif novel in emily: 
+    bronte_checks["emily"] = bronte_checks["emily"] + 1
+    print("Emily Brontë wrote", novel)
+elif novel in anne: 
+    bronte_checks["anne"] = bronte_checks["anne"] + 1
+    print("Anne Brontë wrote", novel) 
+else: print(novel, "was not written by one of the Brontë sisters")
+
+print(bronte_checks)
+```
+
+# Activity: Phoneme Classifier
+
+## Activity: Phoneme Classifier
+
+-   Create a variable for a single sound, called `sound`.
+
+-   Next, define lists of vowels and consonants (use these or make your own):
+
+``` python
+vowels = ["a", "e", "i", "o", "u"]
+consonants = ["p", "t", "k", "m", "n", "s", "r", "l"]
+```
+
+-   Finally, write a conditional that classifies the `sound` and prints the result.
+    -   Hint: `print(sound, "is a vowel.")`
+
+# Activity Solutions
+
+## Phoneme Classifier:
+
+``` python
+sound = "p"
+vowels = ["a", "e", "i", "o", "u"]
+consonants = ["p", "t", "k", "m", "n", "s", "r", "l"]
+
+if sound in vowels:
+    print(sound, "is a vowel.")
+elif sound in consonants:
+    print(sound, "is a consonant.")
+else:
+    print(sound, "is something else!")
+```

@@ -44,20 +44,20 @@ editor: visual
 
 -   We wrote out instructions for how the document was supposed to look with commands like \textbf{}
 
--   Then, we used a LaTeX engine (using OverLeaf) to interpret the LaTeX code, which returned a result in the form of a typeset pdf.
+-   Then, we used a LaTeX engine (using Overleaf) to interpret the LaTeX code, which returned a result in the form of a typeset pdf.
 
 ## Making a website
 
--   We defined what kind of document we were writing with the `<DOCSTRING>`
+-   We defined what kind of document we were writing with the `<!DOCSTRING html>`
 -   We imported additional code, in the form of `CSS`, into the `HTML` document.
 -   We wrote out instructions for how the text was supposed to look with commands like `<strong></strong>`
 -   Then, we used a web browser to interpret the code in the `HTML` document, and the browser returned a result in the form of a website.
 
 ## Programming at the Terminal
 
--   We even a little bit at the Terminal, using `RegEx`!
+-   We even programmed a little bit at the Terminal, using `RegEx`!
 -   Regular expressions are much simpler than `HTML` or `LaTeX`
--   But these simple expressions allow us conduct powerful and sweeping searches
+-   But these simple expressions allow us to conduct powerful and sweeping searches
 
 ## Python will be a lot like this!
 
@@ -66,7 +66,7 @@ When we write a Python program, we will:
 -   Define what kind of document it is at the top with `#! /usr/bin/python3`
 -   Import additional code, using import
 -   Write out instructions for what the document is supposed to do with code.
--   Then use the python interpreter to interpret our code, and do what we asked it to do.
+-   Then use the Python interpreter to interpret our code, and do what we asked it to do.
 
 # Getting Set Up
 
@@ -74,7 +74,7 @@ When we write a Python program, we will:
 
 -   Navigate to your `LIN_301` directory
 -   Create a new subfolder, called `py`.
-    -   This is where we'll save our python scripts.
+    -   This is where we'll save our Python scripts.
 
 ## Getting Set Up
 
@@ -162,7 +162,7 @@ print("Hello world!")
 ## Quarto Code
 
 -   Create a new `Quarto Document`, called `first_doc.qmd`
--   Make sure it's a `pdf` file.
+-   Make sure it's an `html` file.
 
 ## Quarto Code
 
@@ -173,7 +173,7 @@ print("Hello world!")
 title: "My First Quarto Document"
 author: "Your Name Here"
 date: "2025-09-29"
-format: pdf
+format: html
 ---
 
 # Introduction
@@ -201,10 +201,10 @@ print("Hello world!")
 
 ## Printing Hello world!
 
--   Remember earlier how this gave us error?
+-   Remember earlier how this gave us an error?
 
 ``` python
-print("Hello world!")
+print(Hello world!)
 ```
 
 -   Create a code block in your `qmd` file, and try this instead:
@@ -232,7 +232,7 @@ print(hello_world)
 
 ## Variables
 
--   Let's look another example.
+-   Let's look at another example.
 -   Python doesn’t know your age unless you tell it.
 
 ``` python
@@ -292,12 +292,12 @@ my_age
 
 -   Note: other variables don’t automatically update: `year_of_birth` still has the old value.
 
-## Activity: When Does your Kid Turn 18?
+## Activity: When Does Your Kid Turn 18?
 
-LLet’s extend what we’ve learned with variables:
+Let’s extend what we’ve learned with variables:
 
 -   Assume you’ll have a child in the future, born when you turn `30`.\
--   Write code inside an embedded `python` code block.\
+-   Write code inside an embedded `Python` code block.\
 -   The end result should be a variable called `child_18_year`, which is the year your child turns **18**.\
 -   You may:
     -   Use the math symbols `+` and `-`

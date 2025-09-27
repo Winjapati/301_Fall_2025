@@ -111,7 +111,7 @@ else:
     print("odd")
 ```
 
-## Number Operators: FLoor Division
+## Number Operators: Floor Division
 
 -   `x // y` (floor division)
 
@@ -160,11 +160,11 @@ Andrew
 # NameError
 ```
 
-- Why does it do this?
+-   Why does it do this?
 
 ## Strings
 
-- If we assign Andrew as having the value "Andrew"...
+-   If we assign Andrew as having the value "Andrew"...
 
 ``` python
 >>> Andrew = "Andrew"
@@ -201,8 +201,8 @@ Concatenate with `+`:
 title + first_name + last_name
 ```
 
-- What happens when we print the three? 
-- How might we improve the output?
+-   What happens when we print the three?
+-   How might we improve the output?
 
 ## Strings
 
@@ -282,13 +282,13 @@ Check for Andrew with “w” or without:
 (first_name == "Andrew") or (first_name == "Andre")
 ```
 
-Check for Andrew who is 46:
+Check for Andrew, who is 46:
 
 ``` python
 (first_name == "Andrew") and (my_age == 46)
 ```
 
-Check for Andrew who is not 45:
+Check for Andrew, who is not 45:
 
 ``` python
 (first_name == "Andrew") and not (my_age == 45)
