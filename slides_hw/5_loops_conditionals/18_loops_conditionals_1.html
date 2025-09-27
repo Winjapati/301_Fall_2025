@@ -410,8 +410,9 @@ Dr.&nbsp;Andrew M. Byrd
 <h2 id="toc-title">Plan for the Day</h2>
 <ul>
 <li><a href="#/review" id="/toc-review">Review</a></li>
-<li><a href="#/loops-and-conditionals" id="/toc-loops-and-conditionals">Loops and Conditionals</a></li>
-<li><a href="#/today-conditionals" id="/toc-today-conditionals">Today: Conditionals</a></li>
+<li><a href="#/control-structures" id="/toc-control-structures">Control Structures</a></li>
+<li><a href="#/conditionals" id="/toc-conditionals">Conditionals</a></li>
+<li><a href="#/else-and-elif-statements" id="/toc-else-and-elif-statements"><code>else</code> and <code>elif</code> Statements</a></li>
 </ul>
 </nav>
 </section>
@@ -432,8 +433,8 @@ Dr.&nbsp;Andrew M. Byrd
 </ul>
 </section></section>
 <section>
-<section id="loops-and-conditionals" class="title-slide slide level1 center">
-<h1>Loops and Conditionals</h1>
+<section id="control-structures" class="title-slide slide level1 center">
+<h1>Control Structures</h1>
 
 </section>
 <section id="loops-conditionals-control-structures" class="slide level2 center">
@@ -463,8 +464,8 @@ Dr.&nbsp;Andrew M. Byrd
 </ul>
 </section></section>
 <section>
-<section id="today-conditionals" class="title-slide slide level1 center">
-<h1>Today: Conditionals</h1>
+<section id="conditionals" class="title-slide slide level1 center">
+<h1>Conditionals</h1>
 
 </section>
 <section id="conditional-example-odd-or-even" class="slide level2 center">
@@ -485,8 +486,7 @@ Dr.&nbsp;Andrew M. Byrd
 <section id="conditional-example-odd-or-even-1" class="slide level2 center">
 <h2>Conditional Example: Odd or Even?</h2>
 <ul>
-<li>If you divide an even number by 2, it will have no remainder</li>
-<li>If you divide an odd number by 2, it will have a remainder of 1.</li>
+<li>Using <code>% 2</code></li>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="dv">100</span> <span class="op">%</span> <span class="dv">2</span> \<span class="co"># 0</span></span>
 <span id="cb1-2"><a href=""></a><span class="dv">117</span> <span class="op">%</span> <span class="dv">2</span> \<span class="co"># 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -494,8 +494,8 @@ Dr.&nbsp;Andrew M. Byrd
 <section id="conditional-example-odd-or-even-2" class="slide level2 center">
 <h2>Conditional Example: Odd or Even?</h2>
 <ul>
-<li><p>Let’s write a short block of code that will print <x> is even if the number assigned to x is even like so.</x></p></li>
-<li><p>Let’s assign x = 50 on its own line, then the <code>if</code> statement.</p></li>
+<li>Let’s write a short block of code that will print <code>x</code> is even if true.</li>
+<li>Let’s assign x = 50 on its own line, then the <code>if</code> statement.</li>
 </ul>
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a>x <span class="op">=</span> <span class="dv">50</span></span>
 <span id="cb2-2"><a href=""></a><span class="cf">if</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>: <span class="bu">print</span>(x, <span class="st">"is even"</span>)      <span class="co"># 50 is even</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -507,42 +507,153 @@ Dr.&nbsp;Andrew M. Byrd
 </ul></li>
 </ul>
 </section>
-<section id="conditional-example-odd-or-even-3" class="slide level2 center">
-<h2>Conditional Example: Odd or Even?</h2>
-<ul>
-<li>So what’s going on here?</li>
-</ul>
+<section id="conditional-example-so-whats-going-on-here" class="slide level2 center">
+<h2>Conditional Example: So What’s Going On Here?</h2>
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a>x <span class="op">=</span> <span class="dv">50</span></span>
 <span id="cb3-2"><a href=""></a><span class="cf">if</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>: <span class="bu">print</span>(x, <span class="st">"is even"</span>)      <span class="co"># 50 is even</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol type="1">
-<li>Logical statement x % 2 == 0. This statement is checking to see if the outcome of x % 2 is exactly equal to 0. If we run it as its own line of code, we’ll get True.</li>
-</ol>
+<ul>
+<li>We’re making the logical statement <code>x % 2 == 0</code>.
+<ul>
+<li>This statement is checking to see if the outcome of <code>x % 2</code> is exactly equal to <code>0</code>.</li>
+<li>If we run it as its own line of code, we’ll get True.</li>
+</ul></li>
+</ul>
 <div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a>x <span class="op">%</span> <span class="dv">2</span>       <span class="co"># 0</span></span>
 <span id="cb4-2"><a href=""></a>x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>  <span class="co"># True </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>What the <code>if \&lt;...\&gt;</code> : part of the code is saying is if the statement that comes between if and the colon : comes back as True, it will do something. In the example above, because the value 50 was assigned to x, then x % 50 == 0 comes back as True, therefore, python will run whatever code comes on the next indented line.</p>
-<p>if2.svg</p>
-<p>The syntax and formatting of control blocks An important thing to keep straight when programming is which pieces of code should only be run when the if statement is true, and which parts to run no matter what. Every programming language is going to do this a slightly different way. For example, here’s how a different programming language, R, does it.</p>
-<p>Python already uses curly brackets {} to create dictionaries, so it doesn’t use it here. Instead, it uses indentation to define which pieces of code are being controlled by (or, within the “scope” of) the if statement.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="cf">if</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>: </span>
-<span id="cb5-2"><a href=""></a>    <span class="bu">print</span>(x, <span class="st">"is even."</span>) </span>
-<span id="cb5-3"><a href=""></a>    <span class="bu">print</span>(<span class="st">"This line only prints if it's even too."</span>) </span>
-<span id="cb5-4"><a href=""></a><span class="bu">print</span>(<span class="st">"This line prints no matter what."</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>If you run this block of code, and x still has the value 50, all three lines will print.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a><span class="co"># 50 is even.</span></span>
-<span id="cb6-2"><a href=""></a><span class="co"># This line only prints if it's even too.</span></span>
-<span id="cb6-3"><a href=""></a><span class="co"># This line prints no matter what.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>However, if you change the value assigned to x to an odd number, like 51, and re-run the that block of code, only the last line will be printed.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a><span class="co"># This line prints no matter what.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>This is, in general, how python defines the scope of a control statement.</p>
-<p>Lines of code with the same degree of indentation are controlled by the same control structures.</p>
-<p>The greater the indentation, the narrower the scope of the code.</p>
-<p>Else statements Let’s come back to our original if statement.</p>
-<p>if x % 2 == 0: print(x, “is even”) When x is an even number, this if statement will run the print() command. But when x is an odd number, it doesn’t do anything. If we want to print out a statement telling us whether the number is odd, we need to add an additional control structure: else.</p>
-<p>An else statement can only come at the end of an if block. If the conditionals above have all been False, python will run whatever code comes after else. Here’s how it looks:</p>
-<p>if x % 2 == 0: print(x, “is even”) else: print(x, “is odd”) With this block of code, when x has been assigned 50, python will print 50 is even, and when x has been assigned 51, python will print 51 is odd.</p>
-<p>else.svg</p>
-<p>Elif There’s one last component to our if statements that will fully round them out. Right now, here’s the steps that happens in our if block:</p>
-<p>It does remainder division of 2 on x. It checks if that result is equal to 0 If that returns True, it prints <x> is even If every condition above returned False, it prints <x> is odd This is going to work for all integers, but let’s think about what would happen if we assigned a number with a decimal value, like 50.1 to x.</x></x></p>
+</section>
+<section id="conditional-example-so-whats-going-on-here-1" class="slide level2 center">
+<h2>Conditional Example: So What’s Going On Here?</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a>x <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb5-2"><a href=""></a><span class="cf">if</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>: <span class="bu">print</span>(x, <span class="st">"is even"</span>)      <span class="co"># 50 is even</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Let’s look at the <code>if ...</code> part of the code:
+<ul>
+<li><code>if x % 2 == 0</code> means “should the the modulus of x with 2 equal” (i.e., should x be an even number</li>
+</ul></li>
+<li>We then get <code>:</code>, followed by the command python will run if the <code>if</code> statement is <code>True</code></li>
+</ul>
+</section>
+<section id="conditionals-proper-syntax" class="slide level2 center">
+<h2>Conditionals: Proper Syntax</h2>
+<ul>
+<li>To generalize the syntax of an <code>if</code> statement:</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a><span class="cf">if</span> condition: command()     <span class="co"># if x is true, do y</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>We could also do:</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a><span class="cf">if</span> condition: </span>
+<span id="cb7-2"><a href=""></a>    command()     <span class="co"># if x is true, do y</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Note: the indent is <strong>required</strong>!</li>
+<li>Indented <code>if</code> statements are more common, as they frequently involve multiple lines of code.</li>
+</ul>
+</section>
+<section id="conditionals-proper-syntax-1" class="slide level2 center">
+<h2>Conditionals: Proper Syntax</h2>
+<ul>
+<li>Knowing when and when not to indent is important.</li>
+<li>Take the following code block:</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href=""></a><span class="cf">if</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>: </span>
+<span id="cb8-2"><a href=""></a>    <span class="bu">print</span>(x, <span class="st">"is even."</span>) </span>
+<span id="cb8-3"><a href=""></a>    <span class="bu">print</span>(<span class="st">"This line only prints if it's even too."</span>) </span>
+<span id="cb8-4"><a href=""></a><span class="bu">print</span>(<span class="st">"This line prints no matter what."</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Run this code where <code>x = 50</code></li>
+</ul>
+</section>
+<section id="conditionals-proper-syntax-2" class="slide level2 center">
+<h2>Conditionals: Proper Syntax</h2>
+<ul>
+<li>Now run this code where <code>x = 51</code></li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href=""></a><span class="cf">if</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>: </span>
+<span id="cb9-2"><a href=""></a>    <span class="bu">print</span>(x, <span class="st">"is even."</span>) </span>
+<span id="cb9-3"><a href=""></a>    <span class="bu">print</span>(<span class="st">"This line only prints if it's even too."</span>) </span>
+<span id="cb9-4"><a href=""></a><span class="bu">print</span>(<span class="st">"This line prints no matter what."</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Why is <code>print("This line prints no matter what.")</code> not indented?
+<ul>
+<li>What would happen if we did indent it?</li>
+</ul></li>
+</ul>
+</section>
+<section id="python-indentation" class="slide level2 center">
+<h2>Python &amp; Indentation</h2>
+<ul>
+<li>Through indentations, Python will define the scope of a control statement.</li>
+<li>Lines of code with the same degree of indentation are controlled by the same control structures.</li>
+<li>The greater the indentation, the narrower the scope of the code.</li>
+</ul>
+</section></section>
+<section>
+<section id="else-and-elif-statements" class="title-slide slide level1 center">
+<h1><code>else</code> and <code>elif</code> Statements</h1>
+
+</section>
+<section id="else-statements" class="slide level2 center">
+<h2><code>else</code> Statements</h2>
+<ul>
+<li>Let’s return to our original <code>if</code> statement.</li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a><span class="cf">if</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>: </span>
+<span id="cb10-2"><a href=""></a>    <span class="bu">print</span>(x, <span class="st">"is even."</span>) </span>
+<span id="cb10-3"><a href=""></a>    <span class="bu">print</span>(<span class="st">"This line only prints if it's even too."</span>) </span>
+<span id="cb10-4"><a href=""></a><span class="bu">print</span>(<span class="st">"This line prints no matter what."</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Right now, this code only prompts a command if a number is even.
+<ul>
+<li>But what if we’d like it to also print a statement if the number were odd?</li>
+</ul></li>
+</ul>
+</section>
+<section id="else-statements-1" class="slide level2 center">
+<h2><code>else</code> Statements</h2>
+<ul>
+<li>The <code>else</code> command:</li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a><span class="cf">if</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>: </span>
+<span id="cb11-2"><a href=""></a>    <span class="bu">print</span>(x, <span class="st">"is even"</span>) </span>
+<span id="cb11-3"><a href=""></a><span class="cf">else</span>: </span>
+<span id="cb11-4"><a href=""></a>    <span class="bu">print</span>(x, <span class="st">"is odd"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Run this code block, redefining the value of x.</li>
+</ul>
+</section>
+<section id="elif-statments" class="slide level2 center">
+<h2><code>elif</code> Statments</h2>
+<ul>
+<li>There’s one more *keyword** that we need to learn for our <code>if</code> statements.</li>
+<li>Currently our code identifies numbers as even or odd:</li>
+</ul>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href=""></a><span class="cf">if</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>: </span>
+<span id="cb12-2"><a href=""></a>    <span class="bu">print</span>(x, <span class="st">"is even"</span>) </span>
+<span id="cb12-3"><a href=""></a><span class="cf">else</span>: </span>
+<span id="cb12-4"><a href=""></a>    <span class="bu">print</span>(x, <span class="st">"is odd"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>But what if the number is neither?
+<ul>
+<li>What if the number is <code>50.1</code>?</li>
+</ul></li>
+</ul>
+</section>
+<section id="elif-statments-1" class="slide level2 center">
+<h2><code>elif</code> Statments</h2>
+<ul>
+<li>Run the following code:</li>
+</ul>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href=""></a>x <span class="op">=</span> <span class="fl">50.1</span></span>
+<span id="cb13-2"><a href=""></a>x <span class="op">%</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>How might we capture forms that end in a decimal in Python?
+<ul>
+<li>Big hint: there are more truth operators than just <code>==</code>!</li>
+</ul></li>
+</ul>
+</section>
+<section id="dd" class="slide level2 center">
+<h2>dd</h2>
 <p>50.1 divided by 2 has a remainder of 0.1. 0.1 is not equal to 0. 0.1 == 0 returns False, so we don’t print anything yet. All the conditions above returned False, so it prints 50.1 is odd. This is not quite right. It seems like what we really want to do is have some kind of check first, to see if the value in x has a decimal value before we do the rest of our even and odd checks.</p>
 <p>There are lots of little math tricks we could do to check to see if x has a decimal place, but I think what I’ll want to do is check to see of remainder division returns a remainder that is greater than 0 and less than 1.</p>
 <p>x = 50.1 x % 1 &gt; 0 and x % 1 &lt; 1 So, the start of our if block will start with this decimal check.</p>

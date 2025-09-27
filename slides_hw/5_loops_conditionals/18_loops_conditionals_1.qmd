@@ -26,43 +26,40 @@ editor: visual
 -   Y
 -   Z
 
-# Loops and Conditionals
-
-
-## Loops & Conditionals = Control Structures
-
-- This is where programming languages truly become powerful
-- Control structures:
-  - control the flow of a program
-  - tell the program what to do next, and in what order
-- All programming languages have control structures, but they differ in how they're written out
+# Control Structures
 
 ## Loops & Conditionals = Control Structures
 
-- Loops: 
-    - `for` loops: do this task for a set number of times or for each item in a sequence
-    - `while` loops: do this task as longer as a condition is true
-    
-- Conditionals: check whether a condition is true; if so, execute the corresponding block of code
-    - `if`, `elif`, `else`
+-   This is where programming languages truly become powerful
+-   Control structures:
+    -   control the flow of a program
+    -   tell the program what to do next, and in what order
+-   All programming languages have control structures, but they differ in how they're written out
 
-# Today: Conditionals  
+## Loops & Conditionals = Control Structures
 
-## Conditional Example: Odd or Even?
+-   Loops:
+    -   `for` loops: do this task for a set number of times or for each item in a sequence
+    -   `while` loops: do this task as longer as a condition is true
+-   Conditionals: check whether a condition is true; if so, execute the corresponding block of code
+    -   `if`, `elif`, `else`
 
-- Here are the operators we know:
-    - `+` : plus
-    - `-` : minus
-    - `*` : times
-    - `/` : divided by
-    - `**` : to the power of
-    - `//` : floor division
-    - `%` : modulus
+# Conditionals
 
 ## Conditional Example: Odd or Even?
 
-- If you divide an even number by 2, it will have no remainder
-- If you divide an odd number by 2, it will have a remainder of 1. 
+-   Here are the operators we know:
+    -   `+` : plus
+    -   `-` : minus
+    -   `*` : times
+    -   `/` : divided by
+    -   `**` : to the power of
+    -   `//` : floor division
+    -   `%` : modulus
+
+## Conditional Example: Odd or Even?
+
+-   Using `% 2`
 
 ``` python
 100 % 2 \# 0
@@ -71,82 +68,153 @@ editor: visual
 
 ## Conditional Example: Odd or Even?
 
-- Let's write a short block of code that will print <x> is even if the number assigned to x is even like so. 
-
-- Let's assign x = 50 on its own line, then the `if` statement.
-
-``` python
-x = 50
-if x % 2 == 0: print(x, "is even")      # 50 is even
-```
-
-- Run this code in your Quarto doc!
-- Redefine `x = 51`.  
-    - What happens when you rerun the `if` statement?
-
-## Conditional Example: Odd or Even?
-
-- So what's going on here?
+-   Let's write a short block of code that will print `x` is even if true.
+-   Let's assign x = 50 on its own line, then the `if` statement.
 
 ``` python
 x = 50
 if x % 2 == 0: print(x, "is even")      # 50 is even
 ```
 
-1. Logical statement x % 2 == 0. This statement is checking to see if the outcome of x % 2 is exactly equal to 0. If we run it as its own line of code, we'll get True.
+-   Run this code in your Quarto doc!
+-   Redefine `x = 51`.
+    -   What happens when you rerun the `if` statement?
+
+## Conditional Example: So What's Going On Here?
+
+``` python
+x = 50
+if x % 2 == 0: print(x, "is even")      # 50 is even
+```
+
+-   We're making the logical statement `x % 2 == 0`.
+    -   This statement is checking to see if the outcome of `x % 2` is exactly equal to `0`.
+    -   If we run it as its own line of code, we'll get True.
 
 ``` python
 x % 2       # 0
 x % 2 == 0  # True 
 ```
 
-What the `if \<...\>` : part of the code is saying is if the statement that comes between if and the colon : comes back as True, it will do something. In the example above, because the value 50 was assigned to x, then x % 50 == 0 comes back as True, therefore, python will run whatever code comes on the next indented line.
+## Conditional Example: So What's Going On Here?
 
-if2.svg
+``` python
+x = 50
+if x % 2 == 0: print(x, "is even")      # 50 is even
+```
 
-The syntax and formatting of control blocks An important thing to keep straight when programming is which pieces of code should only be run when the if statement is true, and which parts to run no matter what. Every programming language is going to do this a slightly different way. For example, here's how a different programming language, R, does it.
+-   Let's look at the `if ...` part of the code:
+    -   `if x % 2 == 0` means "should the the modulus of x with 2 equal" (i.e., should x be an even number
+-   We then get `:`, followed by the command python will run if the `if` statement is `True`
 
-Python already uses curly brackets {} to create dictionaries, so it doesn't use it here. Instead, it uses indentation to define which pieces of code are being controlled by (or, within the "scope" of) the if statement.
+## Conditionals: Proper Syntax
 
-```python
+-   To generalize the syntax of an `if` statement:
+
+``` python
+if condition: command()     # if x is true, do y
+```
+
+-   We could also do:
+
+``` python
+if condition: 
+    command()     # if x is true, do y
+```
+
+-   Note: the indent is **required**!
+-   Indented `if` statements are more common, as they frequently involve multiple lines of code.
+
+## Conditionals: Proper Syntax
+
+-   Knowing when and when not to indent is important.
+-   Take the following code block:
+
+``` python
 if x % 2 == 0: 
     print(x, "is even.") 
     print("This line only prints if it's even too.") 
 print("This line prints no matter what.") 
 ```
 
-If you run this block of code, and x still has the value 50, all three lines will print.
+-   Run this code where `x = 50`
 
-```python
-# 50 is even.
-# This line only prints if it's even too.
-# This line prints no matter what.
+## Conditionals: Proper Syntax
+
+-   Now run this code where `x = 51`
+
+``` python
+if x % 2 == 0: 
+    print(x, "is even.") 
+    print("This line only prints if it's even too.") 
+print("This line prints no matter what.") 
 ```
 
-However, if you change the value assigned to x to an odd number, like 51, and re-run the that block of code, only the last line will be printed.
+-   Why is `print("This line prints no matter what.")` not indented?
+    -   What would happen if we did indent it?
+
+## Python & Indentation
+
+-   Through indentations, Python will define the scope of a control statement.
+-   Lines of code with the same degree of indentation are controlled by the same control structures.
+-   The greater the indentation, the narrower the scope of the code.
+
+# `else` and `elif` Statements
+
+## `else` Statements
+
+-   Let's return to our original `if` statement.
+
+``` python
+if x % 2 == 0: 
+    print(x, "is even.") 
+    print("This line only prints if it's even too.") 
+print("This line prints no matter what.") 
+```
+
+-   Right now, this code only prompts a command if a number is even.
+    -   But what if we'd like it to also print a statement if the number were odd?
+
+## `else` Statements
+
+-   The `else` command:
+
+``` python
+if x % 2 == 0: 
+    print(x, "is even") 
+else: 
+    print(x, "is odd") 
+```
+-   Run this code block, redefining the value of x.
+
+## `elif` Statments
+
+- There's one more *keyword** that we need to learn for our `if` statements.
+- Currently our code identifies numbers as even or odd:
+
+``` python
+if x % 2 == 0: 
+    print(x, "is even") 
+else: 
+    print(x, "is odd") 
+```
+
+- But what if the number is neither? 
+    - What if the number is `50.1`?
+
+## `elif` Statments
+
+- Run the following code:
 
 ```python
-# This line prints no matter what.
+x = 50.1
+x % 2
 ```
-This is, in general, how python defines the scope of a control statement.
 
-Lines of code with the same degree of indentation are controlled by the same control structures.
+- How might we capture forms that end in a decimal in Python?
+  - Big hint: there are more truth operators than just `==`!
 
-The greater the indentation, the narrower the scope of the code.
-
-Else statements Let's come back to our original if statement.
-
-if x % 2 == 0: print(x, "is even") When x is an even number, this if statement will run the print() command. But when x is an odd number, it doesn't do anything. If we want to print out a statement telling us whether the number is odd, we need to add an additional control structure: else.
-
-An else statement can only come at the end of an if block. If the conditionals above have all been False, python will run whatever code comes after else. Here's how it looks:
-
-if x % 2 == 0: print(x, "is even") else: print(x, "is odd") With this block of code, when x has been assigned 50, python will print 50 is even, and when x has been assigned 51, python will print 51 is odd.
-
-else.svg
-
-Elif There's one last component to our if statements that will fully round them out. Right now, here's the steps that happens in our if block:
-
-It does remainder division of 2 on x. It checks if that result is equal to 0 If that returns True, it prints <x> is even If every condition above returned False, it prints <x> is odd This is going to work for all integers, but let's think about what would happen if we assigned a number with a decimal value, like 50.1 to x.
+## dd
 
 50.1 divided by 2 has a remainder of 0.1. 0.1 is not equal to 0. 0.1 == 0 returns False, so we don't print anything yet. All the conditions above returned False, so it prints 50.1 is odd. This is not quite right. It seems like what we really want to do is have some kind of check first, to see if the value in x has a decimal value before we do the rest of our even and odd checks.
 
