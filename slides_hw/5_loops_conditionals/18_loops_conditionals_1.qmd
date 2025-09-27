@@ -212,7 +212,7 @@ x % 2
 ```
 
 - How might we capture forms that end in a decimal in Python?
-  - Big hint: there are more truth operators than just `==`!
+  - Big hint: there are more **comparison operators** than just `==`!
 
 ## dd
 
