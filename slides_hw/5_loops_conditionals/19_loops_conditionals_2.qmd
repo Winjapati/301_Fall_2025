@@ -1,7 +1,7 @@
 ---
 title: "Computation for Linguists"
-subtitle: "Beginning Python: Lists & Dictionaries"
-date: "October 3, 2025"
+subtitle: "Beginning Python: For Loops"
+date: "October 8, 2025"
 author: "Dr. Andrew M. Byrd"
 format:
   revealjs:
@@ -22,40 +22,119 @@ editor: visual
 ## Recap from Last Time
 
 -   `if`
-
 -   `elif`
-
 -   `else`
+
+## Review Activity: Plural Generator
+
+- Create a new `qmd`, create a new Python block
+- Copy and paste the following code:
+
+``` python
+word = "bʌs"
+
+sibilants = ["s", "z", "ʃ", "ʒ", "tʃ", "dʒ"] 
+voiceless = ["p", "t", "k", "f", "θ"]
+```
+
+## Review Activity: Plural Generator
+
+- Write a conditional (`if`, `elif`, `else`) that:
+    - Checks whether the last character of `word` is in the list of `sibilants`
+    - If yes, create a new variable `plural` by adding "ɪz" to the word
+    - If no, check whether it's in the list of `voiceless`.
+        - If yes, set `plural` to the word + "s"
+    - Otherwise, set `plural` to the word + "z"
+- Print the plural form.    
+
 
 # For Loops
 
-Where if statements are used to control which pieces of code are run, depending on certain conditions, for loops are used to run the same block of code over and over again on items in an iterable. For simplicity, let's just stick to lists.
+## Back to Brontë
 
-Let's take our list of novels that Charlotte Brontë wrote from above as an example.
+``` python
+charlotte = ['The Professor', 'Jane Eyre', 'Shirley', 'Villette']
+```
 
-charlotte \# \['The Professor', 'Jane Eyre', 'Shirley', 'Villette'\] If we wanted to print out the name of every novel, one way we could approach it is just to do it by hand with indexing.
+-   How would we print up each member of this list? We could:
 
-print(charlotte\[0\]) print(charlotte\[1\]) print(charlotte\[2\]) print(charlotte\[3\]) However, not only is this an inefficient use of our time, it's also not going to work if we don't know how many items are in the list, which we won't most of the time.
+``` python
+print(charlotte[0])
+print(charlotte[1])
+print(charlotte[2])
+print(charlotte[3])
+```
 
-Instead, we'll use a for loop to run the print() function on every value in the list automatically.
+## Back to Brontë
 
-for title in charlotte: print(title)
+-   But what if we don't know how many novels there are?
+-   We could use `len()`, which tells us the length of a string, list, etc.
+-   Try it:
 
-# The Professor
+``` python
+print(len(charlotte))
+```
 
-# Jane Eyre
+## Back to Brontë
 
-# Shirley
+-   How would this help us here?
+-   Well..
 
-# Villette
+``` python
+char_index = 0
+if char_index <= len(charlotte):
+    print(charlotte[char_index])
+    char_index += 1
+else:
+    ????
+```
 
-This for loop is saying that we want to do something for every value inside the list charlotte. And as we loop through every value in the list charlotte, it's going to assign that value to a variable called title. Instead of saying for title in charlotte: we could have said for book in charlotte:, and it would have done the same thing, as long as we used the variable book instead of title.
+-   We have no way for us to **iterate** - to repeat the action over and over again
+    -   We need another way to go about this.
 
-Then, every time the for loop assigns a new value from charlotte to the variable title, it runs the indented code.
+## `if` Statements vs. `for` Loops
 
-for_loop.gif
+-   `if` statements are used to control which pieces of code are run, depending on certain conditions
+-   `for` loops are used to run the same block of code over and over again on items in an iterable.
 
-We don't have to do anything with the variable title inside of the loop. Python will still run whatever code is inside of the loop every time it updates the value assigned to title. For example, if we forgot that the len() function gave us the length of a list, we could count the number of books Charlotte Brontë wrote like this:
+## Back to Brontë
+
+``` python
+for title in charlotte: 
+    print(title)
+```
+
+-   What is this code saying?
+
+## Back to Brontë
+
+``` python
+for book in charlotte: 
+    print(book)
+```
+
+-   `title`, `book` are temporary (loop) variables
+
+## Temporary Variables
+
+-   The value of `book`, `title`, etc. persists after the loop is finished:
+
+``` python
+charlotte = ['The Professor', 'Jane Eyre', 'Shirley', 'Villette']
+for book in charlotte: 
+    print(book)
+print(book)
+```
+
+## `for` Loops
+
+![By Josef Fruehwald](for_loop.gif){fig-alt="Dr. Fruehwald's awesome gif about loops" fig-align="center"}
+
+## `for` Loops
+
+-   We don't have to do anything with the variable title inside of the loop.
+
+-   Python will still run whatever code is inside of the loop every time it updates the value assigned to title. For example, if we forgot that the len() function gave us the length of a list, we could count the number of books Charlotte Brontë wrote like this:
 
 book_counter = 0
 
@@ -67,6 +146,8 @@ total_characters = 0 book_characters = \[\]
 
 for title in charlotte: \# exclude spaces no_space = title.replace(" ", "")
 
+## Activity: `for` loops
+
 ```         
 # Update total counter
 total_characters = total_characters + len(no_space)
@@ -77,27 +158,27 @@ book_characters.append(len(no_space))
 
 More examples: Preparing Lines In the previous module on reading in text, we went over how text often needs to be cleaned up before we can get ready to analyze it. Whitespace characters need to be stripped off of the left and right edges, and we need to convert each line into either lowercase or uppercase.
 
-# define the book path
+## define the book path
 
 book_location = "data/mansfield_park.txt"
 
-# open the text file
+## open the text file
 
 book_file = open(book_location, mode = 'r')
 
-# read in all lines
+## read in all lines
 
 book_lines = book_file.readlines()
 
-# get one line
+## get one line
 
 one_line = book_lines\[200\]
 
-# uncleaned line
+## uncleaned line
 
 one_line 'ours, Sir Thomas, I may say, or at least of *yours*, would not grow up\n'
 
-# cleaned line
+## cleaned line
 
 one_line.lstrip().rstrip().lower() \# 'ours, sir thomas, i may say, or at least of *yours*, would not grow up' But, there are 16,045 total lines in Mansfield Park. It would be inefficient to do this to each line individually. Instead, we'll do it with a for loop with the following steps.
 
@@ -114,7 +195,7 @@ More examples: Full Lines If you look at clean_lines, you'll see that there are 
 
 Set up a counter, set to 0, to keep track of the number of blank lines Set up an empty collector list. Loop through every value in clean_lines, assigning it to line. If the length of the value in line is greater than 0, append it to the collector list. Otherwise, add 1 to n_blank. \# a counter, just to see n_blank = 0
 
-# a collector
+## a collector
 
 full_lines = \[\]
 
@@ -156,7 +237,7 @@ More Examples: How many "the" Sometimes, we may need to have a for loop inside o
 
 Create a counter for the number of "the", set to 0. Loop every value in word_lists, assigning it to words. Loop through every value in words, assigning it to w. If w is a match for the regular expression \bthe\b, add 1 to the counter. import re
 
-# Set up counter
+## Set up counter
 
 the_counter = 0 total_word_counter = 0
 
@@ -168,3 +249,24 @@ for words in word_lists: for w in words: total_word_counter = total_word_counter
 ```
 
 It turns out that there are 6,340 instances of "the" in Mansfield Park. In order to get the proportion of all words which were "the", we just need to do the_counter / total_counter.
+
+
+# Activity Answers
+
+## Plural Generator
+
+```python
+word = "bʌs"
+
+sibilants = ["s", "z", "ʃ", "ʒ", "tʃ", "dʒ"] 
+voiceless = ["p", "t", "k", "f", "θ"]
+
+if word[-1] in sibilants:
+    plural = word + "ɪz" 
+elif word[-1] in voiceless:
+    plural = word + "s" 
+else: 
+    plural = word + "z"
+
+print("Plural: ", plural)
+```

@@ -1,7 +1,7 @@
 ---
 title: "Computation for Linguists"
-subtitle: "Beginning Python: Lists & Dictionaries"
-date: "October 3, 2025"
+subtitle: "Beginning Python: While Loops"
+date: "October 10, 2025"
 author: "Dr. Andrew M. Byrd"
 format:
   revealjs:
