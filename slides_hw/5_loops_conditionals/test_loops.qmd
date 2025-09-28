@@ -1,0 +1,56 @@
+---
+title: "test_loops"
+format: html
+---
+
+```{python}
+import os
+print(os.getcwd())
+```
+
+```{python}
+import urllib.request
+
+url = "https://www.gutenberg.org/files/141/141-0.txt"  # Mansfield Park
+filename = "mansfield_park.txt"
+
+urllib.request.urlretrieve(url, filename)
+
+print("Downloaded:", filename)
+
+```
+
+```{python}
+book_location = "mansfield_park.txt"
+book_file = open(book_location, mode = 'r')
+```
+
+```{python}
+book_file.readline()
+```
+
+```{python}
+book_lines = book_file.readlines()
+len(book_lines)
+```
+
+```{python}
+book_lines[3]
+```
+
+```{python}
+one_line = book_lines[200]
+one_line
+```
+
+```{python}
+one_line.rstrip()
+```
+
+```{python}
+one_line.rstrip().lstrip()
+```
+
+```{python}
+one_line.rstrip().lstrip().lower()
+```
