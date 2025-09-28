@@ -45,7 +45,6 @@ We also learned some useful tricks:
 -   `word[0]`
 -   `input()`
 
-
 ---
 title: "Loops and Conditionals"
 format:
@@ -57,37 +56,36 @@ format:
     toc-depth: 1
 ---
 
+While Loops Another kind of loop is the while loop. These are a lot like if statements. In an if statement, when the condition is True, python runs the indented code once.
 
-While Loops
-Another kind of loop is the while loop. These are a lot like if statements. In an if statement, when the condition is True, python runs the indented code once.
+x = 0 if x \< 10: print(x, "is less than 10.") In while loops, there is also a logical condition, but instead of running the indented code just once, python loops back and re-checks the conditional. If it's still True, it runs the indented code again, and loops back to re-check the conditional. It will keep doing this forever until the conditional returns False.
 
-x  = 0
-if x < 10:
-    print(x, "is less than 10.")
-In while loops, there is also a logical condition, but instead of running the indented code just once, python loops back and re-checks the conditional. If it's still True, it runs the indented code again, and loops back to re-check the conditional. It will keep doing this forever until the conditional returns False.
-
-while x < 10:
-    print(x, "is less than 10.")
-    x = x - 1
+while x \< 10: print(x, "is less than 10.") x = x - 1
 
 # 0 is less than 10
+
 # 1 is less than 10
+
 # 2 is less than 10
+
 # 3 is less than 10
+
 # 4 is less than 10
+
 # 5 is less than 10
+
 # 6 is less than 10
+
 # 7 is less than 10
+
 # 8 is less than 10
+
 # 9 is less than 10
+
 It is important to write while loops carefully! It is very easy to write a while loop that will accidentally run forever. If you think you've done this, hitting CTRL + c on your keyboard will interrupt the process.
 
 We usually won't be using while in this class. They're mostly used when you want a script to wait for user input. We can do kind of fun looking things with them though.
 
 name = "The University of Kentucky"
 
-while name:
-    print("|" + name + "|")
-    name = name[0:-1]
- 
-
+while name: print("\|" + name + "\|") name = name\[0:-1\]
