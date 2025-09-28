@@ -128,7 +128,7 @@ print(book)
 
 ## `for` Loops
 
-![By Josef Fruehwald](for_loop.gif){fig-alt="Dr. Fruehwald's awesome gif about loops" fig-align="center"}
+![By Josef Fruehwald](for_loop.gif){fig-alt="Dr. Fruehwald's awesome gif about `for` loops" fig-align="center"}
 
 ## `for` Loops
 
