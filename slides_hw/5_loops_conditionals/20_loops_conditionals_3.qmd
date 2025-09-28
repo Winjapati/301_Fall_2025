@@ -45,16 +45,110 @@ We also learned some useful tricks:
 -   `word[0]`
 -   `input()`
 
----
-title: "Loops and Conditionals"
-format:
-  revealjs:
-    theme: beige
-    slide-number: true
-    toc: true
-    toc-title: "Contents"
-    toc-depth: 1
----
+
+
+
+
+More examples: Preparing Lines In the previous module on reading in text, we went over how text often needs to be cleaned up before we can get ready to analyze it. Whitespace characters need to be stripped off of the left and right edges, and we need to convert each line into either lowercase or uppercase.
+
+## define the book path
+
+book_location = "data/mansfield_park.txt"
+
+## open the text file
+
+book_file = open(book_location, mode = 'r')
+
+## read in all lines
+
+book_lines = book_file.readlines()
+
+## get one line
+
+one_line = book_lines\[200\]
+
+## uncleaned line
+
+one_line 'ours, Sir Thomas, I may say, or at least of *yours*, would not grow up\n'
+
+## cleaned line
+
+one_line.lstrip().rstrip().lower() \# 'ours, sir thomas, i may say, or at least of *yours*, would not grow up' But, there are 16,045 total lines in Mansfield Park. It would be inefficient to do this to each line individually. Instead, we'll do it with a for loop with the following steps.
+
+Create an empty collector list. For each line in book_lines clean it up. Add the cleaned up line to the collector list. \# collector clean_lines = \[\]
+
+for line in book_lines: \# cleanup cleaned = line.lstrip().rstrip().lower()
+
+```         
+# collection
+clean_lines.append(cleaned)
+```
+
+More examples: Full Lines If you look at clean_lines, you'll see that there are a bunch of lines that are zero-length. They look like just ''. These were blank lines in the original text used for things like separating paragraphs. They're not all that important for our analysis, so we'll get rid of them by combining a for loop and an if statement. We'll do it with the following steps:
+
+Set up a counter, set to 0, to keep track of the number of blank lines Set up an empty collector list. Loop through every value in clean_lines, assigning it to line. If the length of the value in line is greater than 0, append it to the collector list. Otherwise, add 1 to n_blank. \# a counter, just to see n_blank = 0
+
+## a collector
+
+full_lines = \[\]
+
+for line in clean_lines: if len(line) \> 0: full_lines.append(line) else: n_blank = n_blank + 1 Doing this, we can see that there were 2,110 blank lines in the text, and now full_lines only contains lines with text!
+
+More examples: Lists of words! We also saw how to split up a line of text into a list of words with the .split() method. If we split a line into words by using spaces, it looks like this:
+
+full_lines\[200\] \# 'on this point. whatever i can do, as you well know, \# i am always ready'
+
+full_lines\[200\].split(" ") \# \['on', \# 'this', \# 'point.', \# 'whatever', \# 'i', \# 'can', \# 'do,', \# 'as', \# 'you', \# 'well', \# 'know,', \# 'i', \# 'am', \# 'always', \# 'ready'\] If we wanted to turn every line into a list of words, we could do this with a for loop with the following steps.
+
+Set up an empty collector list. Loop through every value in full_lines, assigning it to line. Split line into a list of words based on the spaces. Append this list of words to the collector list. \# set up collector word_lists = \[\]
+
+for line in full_lines: \# split on spaces words = line.split(" ")
+
+```         
+# append to collector
+word_lists.append(words)
+```
+
+Now, word_lists is a list of lists.
+
+More Examples: Getting the average number of words per line If we wanted to know how many words there are per line, we'd need to get the total number of words, then divide it by the number of lines. I'll do this with a for loop with the following steps:
+
+Set up an empty collector list for the length of each list of words. Loop through all of the values in word_lists, assigning each value to the variable words. Append the length of words to the collector list. Get the sum of all values in the collector list with sum(). Divide that by the length of word_lists. \# set up collector line_len = \[\]
+
+for words in word_lists: \# get length of list n = len(words)
+
+```         
+# append to collector
+line_len.append(n)
+```
+
+total_words = sum(line_len) total_lines = len(word_lists)
+
+average_len = total_words / total_lines Turns out, the average number of words per line is 11.68 words.
+
+More Examples: How many "the" Sometimes, we may need to have a for loop inside of a for loop. Right now, word_lists is a list we can loop over, and every value in it is also a list we can loop over. One use case for embedding two for loops here would be if we wanted to count up how many instances of "the" there are in the book. Since the "words" in each list still have punctuation attached to them, we'll have to use some regular expressions.
+
+Create a counter for the number of "the", set to 0. Loop every value in word_lists, assigning it to words. Loop through every value in words, assigning it to w. If w is a match for the regular expression \bthe\b, add 1 to the counter. import re
+
+## Set up counter
+
+the_counter = 0 total_word_counter = 0
+
+for words in word_lists: for w in words: total_word_counter = total_word_counter + 1
+
+```         
+    if re.match(r'\bthe\b', w):
+        the_counter = the_counter + 1
+```
+
+It turns out that there are 6,340 instances of "the" in Mansfield Park. In order to get the proportion of all words which were "the", we just need to do the_counter / total_counter.
+
+
+
+
+
+
+
 
 While Loops Another kind of loop is the while loop. These are a lot like if statements. In an if statement, when the condition is True, python runs the indented code once.
 

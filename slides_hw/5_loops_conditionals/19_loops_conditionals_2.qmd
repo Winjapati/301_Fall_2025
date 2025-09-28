@@ -76,19 +76,18 @@ print(len(charlotte))
 
 ## Back to Brontë
 
--   How would this help us here?
--   Well..
+-   You might think that by knowing the len() of a list, and by creating a **counter**, we could get our script to print each book one by one...
 
 ``` python
 char_index = 0
-if char_index <= len(charlotte):
+if char_index < len(charlotte):
     print(charlotte[char_index])
     char_index += 1
 else:
     ????
 ```
 
--   We have no way for us to **iterate** - to repeat the action over and over again
+-   This won't work because `if` only runs once -- we have no way to **iterate** (to repeat the action over and over again)
     -   We need another way to go about this.
 
 ## `if` Statements vs. `for` Loops
@@ -116,7 +115,7 @@ for book in charlotte:
 
 ## Temporary Variables
 
--   The value of `book`, `title`, etc. persists after the loop is finished:
+-   The very last value of the loop variable (`book`, `title`, etc.) persists after the loop is finished:
 
 ``` python
 charlotte = ['The Professor', 'Jane Eyre', 'Shirley', 'Villette']
@@ -129,17 +128,17 @@ print(book)
 
 ![By Dr. Josef Fruehwald](for_loop.gif){fig-alt="Dr. Fruehwald's awesome gif about `for` loops" fig-align="center"}
 
-## `for` Loops
+<!-- ## `for` Loops -->
 
-book_counter = 0
+<!-- book_counter = 0 -->
 
-for title in charlotte: book_counter = book_counter + 1
+<!-- for title in charlotte: book_counter = book_counter + 1 -->
 
-print(book_counter) \# 4 Setting up an empty counter or a collector before starting a for loop is a very common thing to do. For example, if I wanted to know how many characters Charlotte Brontë used in the title of each book, and in total over all, I could do this:
+<!-- print(book_counter) \# 4 Setting up an empty counter or a collector before starting a for loop is a very common thing to do. For example, if I wanted to know how many characters Charlotte Brontë used in the title of each book, and in total over all, I could do this: -->
 
-total_characters = 0 book_characters = \[\]
+<!-- total_characters = 0 book_characters = \[\] -->
 
-for title in charlotte: \# exclude spaces no_space = title.replace(" ", "")
+<!-- for title in charlotte: \# exclude spaces no_space = title.replace(" ", "") -->
 
 ## Activity: `for` loops
 
@@ -162,27 +161,27 @@ Each should look like the following sentence:
 
 ## Cleaning Text
 
-- Let's now put our knowledge of conditionals and loops to work.
-- This will help you as you work towards your final projects.
-- We'll need to learn how to "clean" the data.
+-   Let's now put our knowledge of conditionals and loops to work.
+-   This will help you as you work towards your final projects.
+-   We'll need to learn how to "clean" the data.
 
 ## Verifying your Python directory
 
-- First, run the following code:
+-   First, run the following code:
 
 ``` python
 import os
 print(os.getcwd())
 ```
 
-- This should tell you which directory you're in. You should be located in your LIN_301 directory, or whichever one this `qmd` doc is found in.
+-   This should tell you which directory you're in. You should be located in your LIN_301 directory, or whichever one this `qmd` doc is found in.
 
 ## Downloading Using Python
 
-- Next, we're going to download a new book from Project Gutenberg.
-- To do so, run the following code:
+-   Next, we're going to download a new book from Project Gutenberg.
+-   To do so, run the following code:
 
-```python
+``` python
 import urllib.request
 
 url = "https://www.gutenberg.org/files/141/141-0.txt"  # Mansfield Park
@@ -193,146 +192,98 @@ urllib.request.urlretrieve(url, filename)
 print("Downloaded:", filename)
 ```
 
-- What does all of this say?
+-   What does all of this say?
 
 ## Opening up Files in Python
 
-``` python
-book_location = "mansfield_park.txt"
-book_file = open(book_location, mode = 'r')
-```
+- Let's now open up our file using a `with open(...)` block
 
 ``` python
-book_file.readline()
+with open("mansfield_park.txt", "r", encoding="utf-8") as f:
+    book_text = f.read()
 ```
 
+- What happens if you just `print(book_text[:200])`?
+
+## Opening up Files in Python
+
+- If we instead want to grab all of the lines separately, we can run:
+
 ``` python
-book_lines = book_file.readlines()
+with open("mansfield_park.txt", "r", encoding="utf-8") as f:
+    book_lines = f.readlines()
+
 len(book_lines)
 ```
 
-``` python
-book_lines[3]
-```
+- Now we can grab individual lines from the book:
 
 ``` python
-one_line = book_lines[200]
-one_line
+book_lines[101]
 ```
 
+## Cleaning Up the Book
+
+- Do you see how each line ends in `\n`?  That's indicating a line break.
+
+```bash
+'Such were its immediate effects, and within a twelvemonth a more\n'
+```
+
+- Let's get rid of that character using the `.rstrip()` method.
+
 ``` python
+one_line = book_lines[101]
 one_line.rstrip()
 ```
 
-``` python
-one_line.rstrip().lstrip()
-```
+## Cleaning Up the Book
+
+- Some lines also start with unnecessary whitespace.
 
 ``` python
-one_line.rstrip().lstrip().lower()
+two_line = book_lines[12]
+two_line
 ```
 
-```         
-# Update total counter
-total_characters = total_characters + len(no_space)
+- Let's get rid of that stuff, too, by tacking on the `.lstrip()` method.
 
-# update by-book list
-book_characters.append(len(no_space))
+``` python
+two_line.rstrip().lstrip()
 ```
 
-More examples: Preparing Lines In the previous module on reading in text, we went over how text often needs to be cleaned up before we can get ready to analyze it. Whitespace characters need to be stripped off of the left and right edges, and we need to convert each line into either lowercase or uppercase.
+- Or we can just use `.strip()`, which will handle both sides at once:
 
-## define the book path
-
-book_location = "data/mansfield_park.txt"
-
-## open the text file
-
-book_file = open(book_location, mode = 'r')
-
-## read in all lines
-
-book_lines = book_file.readlines()
-
-## get one line
-
-one_line = book_lines\[200\]
-
-## uncleaned line
-
-one_line 'ours, Sir Thomas, I may say, or at least of *yours*, would not grow up\n'
-
-## cleaned line
-
-one_line.lstrip().rstrip().lower() \# 'ours, sir thomas, i may say, or at least of *yours*, would not grow up' But, there are 16,045 total lines in Mansfield Park. It would be inefficient to do this to each line individually. Instead, we'll do it with a for loop with the following steps.
-
-Create an empty collector list. For each line in book_lines clean it up. Add the cleaned up line to the collector list. \# collector clean_lines = \[\]
-
-for line in book_lines: \# cleanup cleaned = line.lstrip().rstrip().lower()
-
-```         
-# collection
-clean_lines.append(cleaned)
+``` python
+two_line.strip()
 ```
 
-More examples: Full Lines If you look at clean_lines, you'll see that there are a bunch of lines that are zero-length. They look like just ''. These were blank lines in the original text used for things like separating paragraphs. They're not all that important for our analysis, so we'll get rid of them by combining a for loop and an if statement. We'll do it with the following steps:
+## Cleaning up the Book
 
-Set up a counter, set to 0, to keep track of the number of blank lines Set up an empty collector list. Loop through every value in clean_lines, assigning it to line. If the length of the value in line is greater than 0, append it to the collector list. Otherwise, add 1 to n_blank. \# a counter, just to see n_blank = 0
+- Sometimes, too, we want to convert everything to either uppercase or lowercase., so strings like `"The"` and `"the"` will count as the same word.
+- Methods:
+  - `lower()`
+  - `upper()`
 
-## a collector
-
-full_lines = \[\]
-
-for line in clean_lines: if len(line) \> 0: full_lines.append(line) else: n_blank = n_blank + 1 Doing this, we can see that there were 2,110 blank lines in the text, and now full_lines only contains lines with text!
-
-More examples: Lists of words! We also saw how to split up a line of text into a list of words with the .split() method. If we split a line into words by using spaces, it looks like this:
-
-full_lines\[200\] \# 'on this point. whatever i can do, as you well know, \# i am always ready'
-
-full_lines\[200\].split(" ") \# \['on', \# 'this', \# 'point.', \# 'whatever', \# 'i', \# 'can', \# 'do,', \# 'as', \# 'you', \# 'well', \# 'know,', \# 'i', \# 'am', \# 'always', \# 'ready'\] If we wanted to turn every line into a list of words, we could do this with a for loop with the following steps.
-
-Set up an empty collector list. Loop through every value in full_lines, assigning it to line. Split line into a list of words based on the spaces. Append this list of words to the collector list. \# set up collector word_lists = \[\]
-
-for line in full_lines: \# split on spaces words = line.split(" ")
-
-```         
-# append to collector
-word_lists.append(words)
+``` python
+one_line.strip().lower()
 ```
 
-Now, word_lists is a list of lists.
+## Activity: 
 
-More Examples: Getting the average number of words per line If we wanted to know how many words there are per line, we'd need to get the total number of words, then divide it by the number of lines. I'll do this with a for loop with the following steps:
+- Using what you've learned above:
+  - Load up "mansfield_park.txt"
+  - Strip the whitespace on both sides and make all words in lower case, and save it as `mansfield_cleaned`. You'll need this **list comprehension**: 
 
-Set up an empty collector list for the length of each list of words. Loop through all of the values in word_lists, assigning each value to the variable words. Append the length of words to the collector list. Get the sum of all values in the collector list with sum(). Divide that by the length of word_lists. \# set up collector line_len = \[\]
-
-for words in word_lists: \# get length of list n = len(words)
-
-```         
-# append to collector
-line_len.append(n)
+```python
+mansfield_cleaned = [line.strip().lower() for line in lines]
 ```
 
-total_words = sum(line_len) total_lines = len(word_lists)
+- To make sure it worked, run:
 
-average_len = total_words / total_lines Turns out, the average number of words per line is 11.68 words.
-
-More Examples: How many "the" Sometimes, we may need to have a for loop inside of a for loop. Right now, word_lists is a list we can loop over, and every value in it is also a list we can loop over. One use case for embedding two for loops here would be if we wanted to count up how many instances of "the" there are in the book. Since the "words" in each list still have punctuation attached to them, we'll have to use some regular expressions.
-
-Create a counter for the number of "the", set to 0. Loop every value in word_lists, assigning it to words. Loop through every value in words, assigning it to w. If w is a match for the regular expression \bthe\b, add 1 to the counter. import re
-
-## Set up counter
-
-the_counter = 0 total_word_counter = 0
-
-for words in word_lists: for w in words: total_word_counter = total_word_counter + 1
-
-```         
-    if re.match(r'\bthe\b', w):
-        the_counter = the_counter + 1
+```python
+print(mansfield_cleaned[0:19])
 ```
-
-It turns out that there are 6,340 instances of "the" in Mansfield Park. In order to get the proportion of all words which were "the", we just need to do the_counter / total_counter.
 
 # Activity Answers
 
@@ -360,4 +311,17 @@ print("Plural: ", plural)
 words = ["phoneme", "phrase", "morpheme", "reconstruction", "index"]
 for wd in words:
     print(wd, " has ", len(wd), " letters.")
+```
+
+## Cleaning Mansfield
+
+``` python
+with open("mansfield_park.txt", "r", encoding="utf-8") as f:
+    lines = f.readlines()
+
+# Clean it: strip whitespace + lowercase
+[mansfield_cleaned = line.strip().lower() for line in lines]
+
+# Check the first 200 characters
+print(mansfield_cleaned[0:10])
 ```
