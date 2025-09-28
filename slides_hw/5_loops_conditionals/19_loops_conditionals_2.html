@@ -411,6 +411,7 @@ Dr.&nbsp;Andrew M. Byrd
 <ul>
 <li><a href="#/review" id="/toc-review">Review</a></li>
 <li><a href="#/for-loops" id="/toc-for-loops">For Loops</a></li>
+<li><a href="#/cleaning-text" id="/toc-cleaning-text">Cleaning Text</a></li>
 <li><a href="#/activity-answers" id="/toc-activity-answers">Activity Answers</a></li>
 </ul>
 </nav>
@@ -537,13 +538,9 @@ Dr.&nbsp;Andrew M. Byrd
 <section id="for-loops-1" class="slide level2 center">
 <h2><code>for</code> Loops</h2>
 
-<img data-src="for_loop.gif" alt="Dr. Fruehwald's awesome gif about `for` loops" class="r-stretch quarto-figure-center"><p class="caption">By Josef Fruehwald</p></section>
+<img data-src="for_loop.gif" alt="Dr. Fruehwald's awesome gif about `for` loops" class="r-stretch quarto-figure-center"><p class="caption">By Dr.&nbsp;Josef Fruehwald</p></section>
 <section id="for-loops-2" class="slide level2 center">
 <h2><code>for</code> Loops</h2>
-<ul>
-<li><p>We don’t have to do anything with the variable title inside of the loop.</p></li>
-<li><p>Python will still run whatever code is inside of the loop every time it updates the value assigned to title. For example, if we forgot that the len() function gave us the length of a list, we could count the number of books Charlotte Brontë wrote like this:</p></li>
-</ul>
 <p>book_counter = 0</p>
 <p>for title in charlotte: book_counter = book_counter + 1</p>
 <p>print(book_counter) # 4 Setting up an empty counter or a collector before starting a for loop is a very common thing to do. For example, if I wanted to know how many characters Charlotte Brontë used in the title of each book, and in total over all, I could do this:</p>
@@ -552,6 +549,71 @@ Dr.&nbsp;Andrew M. Byrd
 </section>
 <section id="activity-for-loops" class="slide level2 center">
 <h2>Activity: <code>for</code> loops</h2>
+<p>Below is a list of five important terms in Linguistics:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href=""></a>words <span class="op">=</span> [<span class="st">"phoneme"</span>, <span class="st">"phrase"</span>, <span class="st">"morpheme"</span>, <span class="st">"reconstruction"</span>, <span class="st">"index"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Your task</strong>: Write a <code>for</code> loop that prints out:</p>
+<ol type="1">
+<li>the word</li>
+<li>the length (<code>len()</code>, represented by x below) of each word in the</li>
+</ol>
+<p>Each should look like the following sentence:</p>
+<p>“python has 6 letters.”</p>
+</section></section>
+<section>
+<section id="cleaning-text" class="title-slide slide level1 center">
+<h1>Cleaning Text</h1>
+
+</section>
+<section id="cleaning-text-1" class="slide level2 center">
+<h2>Cleaning Text</h2>
+<ul>
+<li>Let’s now put our knowledge of conditionals and loops to work.</li>
+<li>This will help you as you work towards your final projects.</li>
+<li>We’ll need to learn how to “clean” the data.</li>
+</ul>
+</section>
+<section id="verifying-your-python-directory" class="slide level2 center">
+<h2>Verifying your Python directory</h2>
+<ul>
+<li>First, run the following code:</li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a><span class="im">import</span> os</span>
+<span id="cb10-2"><a href=""></a><span class="bu">print</span>(os.getcwd())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>This should tell you which directory you’re in. You should be located in your LIN_301 directory, or whichever one this <code>qmd</code> doc is found in.</li>
+</ul>
+</section>
+<section id="downloading-using-python" class="slide level2 center">
+<h2>Downloading Using Python</h2>
+<ul>
+<li>Next, we’re going to download a new book from Project Gutenberg.</li>
+<li>To do so, run the following code:</li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a><span class="im">import</span> urllib.request</span>
+<span id="cb11-2"><a href=""></a></span>
+<span id="cb11-3"><a href=""></a>url <span class="op">=</span> <span class="st">"https://www.gutenberg.org/files/141/141-0.txt"</span>  <span class="co"># Mansfield Park</span></span>
+<span id="cb11-4"><a href=""></a>filename <span class="op">=</span> <span class="st">"mansfield_park.txt"</span></span>
+<span id="cb11-5"><a href=""></a></span>
+<span id="cb11-6"><a href=""></a>urllib.request.urlretrieve(url, filename)</span>
+<span id="cb11-7"><a href=""></a></span>
+<span id="cb11-8"><a href=""></a><span class="bu">print</span>(<span class="st">"Downloaded:"</span>, filename)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>What does all of this say?</li>
+</ul>
+</section>
+<section id="opening-up-files-in-python" class="slide level2 center">
+<h2>Opening up Files in Python</h2>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href=""></a>book_location <span class="op">=</span> <span class="st">"mansfield_park.txt"</span></span>
+<span id="cb12-2"><a href=""></a>book_file <span class="op">=</span> <span class="bu">open</span>(book_location, mode <span class="op">=</span> <span class="st">'r'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href=""></a>book_file.readline()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href=""></a>book_lines <span class="op">=</span> book_file.readlines()</span>
+<span id="cb14-2"><a href=""></a><span class="bu">len</span>(book_lines)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href=""></a>book_lines[<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href=""></a>one_line <span class="op">=</span> book_lines[<span class="dv">200</span>]</span>
+<span id="cb16-2"><a href=""></a>one_line</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href=""></a>one_line.rstrip()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href=""></a>one_line.rstrip().lstrip()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href=""></a>one_line.rstrip().lstrip().lower()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code># Update total counter
 total_characters = total_characters + len(no_space)
 
@@ -626,19 +688,25 @@ line_len.append(n)</code></pre>
 </section>
 <section id="plural-generator" class="slide level2 center">
 <h2>Plural Generator</h2>
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href=""></a>word <span class="op">=</span> <span class="st">"bʌs"</span></span>
-<span id="cb14-2"><a href=""></a></span>
-<span id="cb14-3"><a href=""></a>sibilants <span class="op">=</span> [<span class="st">"s"</span>, <span class="st">"z"</span>, <span class="st">"ʃ"</span>, <span class="st">"ʒ"</span>, <span class="st">"tʃ"</span>, <span class="st">"dʒ"</span>] </span>
-<span id="cb14-4"><a href=""></a>voiceless <span class="op">=</span> [<span class="st">"p"</span>, <span class="st">"t"</span>, <span class="st">"k"</span>, <span class="st">"f"</span>, <span class="st">"θ"</span>]</span>
-<span id="cb14-5"><a href=""></a></span>
-<span id="cb14-6"><a href=""></a><span class="cf">if</span> word[<span class="op">-</span><span class="dv">1</span>] <span class="kw">in</span> sibilants:</span>
-<span id="cb14-7"><a href=""></a>    plural <span class="op">=</span> word <span class="op">+</span> <span class="st">"ɪz"</span> </span>
-<span id="cb14-8"><a href=""></a><span class="cf">elif</span> word[<span class="op">-</span><span class="dv">1</span>] <span class="kw">in</span> voiceless:</span>
-<span id="cb14-9"><a href=""></a>    plural <span class="op">=</span> word <span class="op">+</span> <span class="st">"s"</span> </span>
-<span id="cb14-10"><a href=""></a><span class="cf">else</span>: </span>
-<span id="cb14-11"><a href=""></a>    plural <span class="op">=</span> word <span class="op">+</span> <span class="st">"z"</span></span>
-<span id="cb14-12"><a href=""></a></span>
-<span id="cb14-13"><a href=""></a><span class="bu">print</span>(<span class="st">"Plural: "</span>, plural)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href=""></a>word <span class="op">=</span> <span class="st">"bʌs"</span></span>
+<span id="cb25-2"><a href=""></a></span>
+<span id="cb25-3"><a href=""></a>sibilants <span class="op">=</span> [<span class="st">"s"</span>, <span class="st">"z"</span>, <span class="st">"ʃ"</span>, <span class="st">"ʒ"</span>, <span class="st">"tʃ"</span>, <span class="st">"dʒ"</span>] </span>
+<span id="cb25-4"><a href=""></a>voiceless <span class="op">=</span> [<span class="st">"p"</span>, <span class="st">"t"</span>, <span class="st">"k"</span>, <span class="st">"f"</span>, <span class="st">"θ"</span>]</span>
+<span id="cb25-5"><a href=""></a></span>
+<span id="cb25-6"><a href=""></a><span class="cf">if</span> word[<span class="op">-</span><span class="dv">1</span>] <span class="kw">in</span> sibilants:</span>
+<span id="cb25-7"><a href=""></a>    plural <span class="op">=</span> word <span class="op">+</span> <span class="st">"ɪz"</span> </span>
+<span id="cb25-8"><a href=""></a><span class="cf">elif</span> word[<span class="op">-</span><span class="dv">1</span>] <span class="kw">in</span> voiceless:</span>
+<span id="cb25-9"><a href=""></a>    plural <span class="op">=</span> word <span class="op">+</span> <span class="st">"s"</span> </span>
+<span id="cb25-10"><a href=""></a><span class="cf">else</span>: </span>
+<span id="cb25-11"><a href=""></a>    plural <span class="op">=</span> word <span class="op">+</span> <span class="st">"z"</span></span>
+<span id="cb25-12"><a href=""></a></span>
+<span id="cb25-13"><a href=""></a><span class="bu">print</span>(<span class="st">"Plural: "</span>, plural)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="for-loop-activity" class="slide level2 center">
+<h2><code>for</code> loop Activity</h2>
+<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href=""></a>words <span class="op">=</span> [<span class="st">"phoneme"</span>, <span class="st">"phrase"</span>, <span class="st">"morpheme"</span>, <span class="st">"reconstruction"</span>, <span class="st">"index"</span>]</span>
+<span id="cb26-2"><a href=""></a><span class="cf">for</span> wd <span class="kw">in</span> words:</span>
+<span id="cb26-3"><a href=""></a>    <span class="bu">print</span>(wd, <span class="st">" has "</span>, <span class="bu">len</span>(wd), <span class="st">" letters."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 

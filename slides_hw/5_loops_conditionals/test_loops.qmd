@@ -54,3 +54,13 @@ one_line.rstrip().lstrip()
 ```{python}
 one_line.rstrip().lstrip().lower()
 ```
+
+```{python}
+
+import urllib.request
+
+urllib.request.urlretrieve("https://www.gutenberg.org/files/141/141-0.txt", "mansfield_park.txt")
+
+print("Downloaded:", filename)
+
+```
