@@ -21,31 +21,29 @@ editor: visual
 
 ## Recap from Last Time
 
-## Data Structures
+- Conditionals: `if` = 1 x
+- Loops: `for` = multiple times
+- Loading files with 
+- Cleaning text with `.strip()`, `.lower()`
 
-Recap from last module:
+## Review Activity
 
--   Assign a value to a variable with `=`\
--   **Numbers**: `integer` and `float`\
--   **Strings**: text inside quotes `"..."` or `'...'`\
--   **Booleans**: `True` and `False`, used for logical comparisons
+- Copy this list of messy words into your code, creating a list called `words`:
 
-Example:
-
-``` python
-this_class = "LIN_301"
-this_class == "LIN_305"
-# False
+```python
+words = [" Cat\n", "dog", " BIRD ", "fish\n", "LION", "tiger ", "bear", "OWL\n"]
 ```
 
-## Recap from Last Time
+- Write a `for` loop that goes through each word. Inside the loop:
+  - Use `.strip()` and `.lower()` to clean the word
+  - Save each result in a variable called `cleaned`
 
-We also learned some useful tricks:
+## Review Activity
 
--   `word[0]`
--   `input()`
+- If the first letter of `cleaned` is a vowel (`"a", "e", "i", "o", "u"`), print the word and `"starts with a vowel"`.
+- Otherwise, print the word and `"starts with a consonant"`.
 
-
+# ddd
 
 
 
@@ -182,4 +180,30 @@ We usually won't be using while in this class. They're mostly used when you want
 
 name = "The University of Kentucky"
 
-while name: print("\|" + name + "\|") name = name\[0:-1\]
+while name: print("\|" + name + "\|") name = name\
+
+
+
+
+
+
+
+
+# Activity Answers
+
+## Review Activity
+
+``` python
+vowels = ["a", "e", "i", "o", "u"]
+words = [" Cat\n", "dog", " BIRD ", "fish\n", "LION", "tiger ", "bear", "OWL\n"]
+
+for word in words:
+    cleaned = word.strip().lower()
+    if cleaned[0] in vowels:
+        print(cleaned, "starts with a vowel.")
+    else:
+        print(cleaned, "starts with a consonant.")
+```
+
+
+

@@ -36,9 +36,14 @@ two_line
 ```
 
 ```{python}
-one_line.rstrip().lstrip()
-```
+(mansfield_cleaned[0:10])
 
-```{python}
-one_line.rstrip().lstrip().lower()
+with open("mansfield_park.txt", "r", encoding="utf-8") as f:
+    lines = f.readlines()
+
+mansfield_cleaned = [line.strip().lower() for line in lines]
+
+print(mansfield_cleaned[:10])  # show the first 10 cleaned lines
+
+
 ```
