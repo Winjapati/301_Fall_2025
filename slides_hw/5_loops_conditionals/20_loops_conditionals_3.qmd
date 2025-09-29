@@ -43,44 +43,10 @@ words = [" Cat\n", "dog", " BIRD ", "fish\n", "LION", "tiger ", "bear", "OWL\n"]
 - If the first letter of `cleaned` is a vowel (`"a", "e", "i", "o", "u"`), print the word and `"starts with a vowel"`.
 - Otherwise, print the word and `"starts with a consonant"`.
 
-# ddd
+# 
 
 
 
-More examples: Preparing Lines In the previous module on reading in text, we went over how text often needs to be cleaned up before we can get ready to analyze it. Whitespace characters need to be stripped off of the left and right edges, and we need to convert each line into either lowercase or uppercase.
-
-## define the book path
-
-book_location = "data/mansfield_park.txt"
-
-## open the text file
-
-book_file = open(book_location, mode = 'r')
-
-## read in all lines
-
-book_lines = book_file.readlines()
-
-## get one line
-
-one_line = book_lines\[200\]
-
-## uncleaned line
-
-one_line 'ours, Sir Thomas, I may say, or at least of *yours*, would not grow up\n'
-
-## cleaned line
-
-one_line.lstrip().rstrip().lower() \# 'ours, sir thomas, i may say, or at least of *yours*, would not grow up' But, there are 16,045 total lines in Mansfield Park. It would be inefficient to do this to each line individually. Instead, we'll do it with a for loop with the following steps.
-
-Create an empty collector list. For each line in book_lines clean it up. Add the cleaned up line to the collector list. \# collector clean_lines = \[\]
-
-for line in book_lines: \# cleanup cleaned = line.lstrip().rstrip().lower()
-
-```         
-# collection
-clean_lines.append(cleaned)
-```
 
 More examples: Full Lines If you look at clean_lines, you'll see that there are a bunch of lines that are zero-length. They look like just ''. These were blank lines in the original text used for things like separating paragraphs. They're not all that important for our analysis, so we'll get rid of them by combining a for loop and an if statement. We'll do it with the following steps:
 
@@ -153,26 +119,6 @@ While Loops Another kind of loop is the while loop. These are a lot like if stat
 x = 0 if x \< 10: print(x, "is less than 10.") In while loops, there is also a logical condition, but instead of running the indented code just once, python loops back and re-checks the conditional. If it's still True, it runs the indented code again, and loops back to re-check the conditional. It will keep doing this forever until the conditional returns False.
 
 while x \< 10: print(x, "is less than 10.") x = x - 1
-
-# 0 is less than 10
-
-# 1 is less than 10
-
-# 2 is less than 10
-
-# 3 is less than 10
-
-# 4 is less than 10
-
-# 5 is less than 10
-
-# 6 is less than 10
-
-# 7 is less than 10
-
-# 8 is less than 10
-
-# 9 is less than 10
 
 It is important to write while loops carefully! It is very easy to write a while loop that will accidentally run forever. If you think you've done this, hitting CTRL + c on your keyboard will interrupt the process.
 
