@@ -1,0 +1,45 @@
+---
+title: "My First Quarto Document"
+author: "Your Name Here"
+date: "2025-09-29"
+format: html
+---
+
+# Introduction
+
+This is my very first Quarto document!\
+It will generate a PDF when I render it.
+
+# Python Example
+
+Here’s a Python code block that prints `"Hello World!"`:
+
+``` python
+print("Hello World!")
+```
+
+```{python}
+hello_world = "Hello world!"
+print(hello_world)
+```
+
+```{python}
+my_age = 46
+current_year = 2025
+year_of_birth = current_year - my_age
+my_age = 50
+print(my_age)
+```
+
+```{python}
+my_age = 18
+current_year = 2025
+year_of_birth = current_year - my_age
+#print(year_of_birth)
+
+cd_to_kiddo = 30 - my_age
+my_age + cd_to_kiddo + 18
+
+child_18_yr = year_of_birth + 30 + 18
+
+```
