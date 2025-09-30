@@ -1,6 +1,6 @@
 ---
 title: "Computation for Linguists"
-subtitle: "Beginning Python: More Tricks with Lists"
+subtitle: "Beginning Python: More Tricks with Lists, While Loops"
 date: "October 10, 2025"
 author: "Dr. Andrew M. Byrd"
 format:
@@ -12,7 +12,8 @@ format:
     toc: true
     toc-title: "Plan for the Day"
     toc-depth: 1
-editor: visual
+jupyter: python3
+editor: source
 ---
 
 # Review
@@ -215,68 +216,63 @@ getty_3 = getty.split("e")
 print(getty_1, "\n", getty_2, "\n", getty_3)
 ```
 
-## `.split()`
+## `re.split()`
 
 -   How would you split according to whitespace *and* punctuation?
 -   Our old friend `regex`
+-   Create a new `.py` file called `split.py` and paste this code:
 
 ``` python
 import re
 
 text = "Hello, world!   This... is a test."
 words = re.split(r"[\s\W]+", text)
+words = [w for w in words if w]   # remove empty strings
 print(words)
-# ['Hello', 'world', 'This', 'is', 'a', 'test', '']
 ```
 
-# append to collector
+## `re.split()`
 
-word_lists.append(words)
+``` python
+import re
 
-```         
-
-## 
-
-Now, word_lists is a list of lists.
-
-More Examples: Getting the average number of words per line If we wanted to know how many words there are per line, we'd need to get the total number of words, then divide it by the number of lines. I'll do this with a for loop with the following steps:
-
-Set up an empty collector list for the length of each list of words. Loop through all of the values in word_lists, assigning each value to the variable words. Append the length of words to the collector list. Get the sum of all values in the collector list with sum(). Divide that by the length of word_lists. \# set up collector line_len = \[\]
-
-for words in word_lists: \# get length of list n = len(words)
+text = "Hello, world!   This... is a test."
+words = re.split(r"[\s\W]+", text)
+words = [w for w in words if w]   # remove empty strings
+print(words)
 ```
 
-# append to collector
+-   `\s` = whitespace
+-   `\W` = non-word characters (punctuation, symbols, etc.)
+-   `+` = one or more preceding
 
-line_len.append(n)
+# `while` Loops
 
-```         
+## `while` Loops
 
-total_words = sum(line_len) total_lines = len(word_lists)
+-   They're a lot like `if` statements, where something happens if a condition is met:
 
-average_len = total_words / total_lines Turns out, the average number of words per line is 11.68 words.
-
-More Examples: How many "the" Sometimes, we may need to have a for loop inside of a for loop. Right now, word_lists is a list we can loop over, and every value in it is also a list we can loop over. One use case for embedding two for loops here would be if we wanted to count up how many instances of "the" there are in the book. Since the "words" in each list still have punctuation attached to them, we'll have to use some regular expressions.
-
-Create a counter for the number of "the", set to 0. Loop every value in word_lists, assigning it to words. Loop through every value in words, assigning it to w. If w is a match for the regular expression \bthe\b, add 1 to the counter. import re
-
-## Set up counter
-
-the_counter = 0 total_word_counter = 0
-
-for words in word_lists: for w in words: total_word_counter = total_word_counter + 1
+``` python
+x = 0
+if x < 10
+    print(x, "is less than 10.")
 ```
 
-```         
-if re.match(r'\bthe\b', w):
-    the_counter = the_counter + 1
+## `while` Loops
+
+-   In `while` loops, there's also a logical condition
+-   But instead of running the code once, python will loop back and recheck the conditional
+-   It will do this **forever** until the conditional returns `False`
+
+``` python
+while x < 10:
+    print(x, "is less than 10.")
+    x = x - 1
 ```
 
-```         
+## `while` Loops
 
-It turns out that there are 6,340 instances of "the" in Mansfield Park. In order to get the proportion of all words which were "the", we just need to do the_counter / total_counter.
-
-While Loops Another kind of loop is the while loop. These are a lot like if statements. In an if statement, when the condition is True, python runs the indented code once.
+when the condition is True, python runs the indented code once.
 
 x = 0 if x \< 10: print(x, "is less than 10.") In while loops, there is also a logical condition, but instead of running the indented code just once, python loops back and re-checks the conditional. If it's still True, it runs the indented code again, and loops back to re-check the conditional. It will keep doing this forever until the conditional returns False.
 
@@ -327,14 +323,4 @@ for word in items:
     elif word.endswith("yse"): 
         word = word.replace("yse", "yze") down_with_brits.append(word)
 print(down_with_brits)
-```
-
-```{python}
-import re
-
-text = "Hello, world!   This... is a test."
-words = re.split(r"[\s\W]+", text)
-words = [w for w in words if w]   # remove empty strings
-print(words)
-
 ```

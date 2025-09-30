@@ -394,7 +394,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Computation for Linguists</h1>
-  <p class="subtitle">Beginning Python: More Tricks with Lists</p>
+  <p class="subtitle">Beginning Python: More Tricks with Lists, While Loops</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -411,8 +411,8 @@ Dr.&nbsp;Andrew M. Byrd
 <ul>
 <li><a href="#/review" id="/toc-review">Review</a></li>
 <li><a href="#/more-tricks-with-lists" id="/toc-more-tricks-with-lists">More Tricks with Lists</a></li>
-<li><a href="#/append-to-collector" id="/toc-append-to-collector">append to collector</a></li>
-<li><a href="#/append-to-collector-1" id="/toc-append-to-collector-1">append to collector</a></li>
+<li><a href="#/while-loops" id="/toc-while-loops"><code>while</code> Loops</a></li>
+<li><a href="#/activity-answers" id="/toc-activity-answers">Activity Answers</a></li>
 </ul>
 </nav>
 </section>
@@ -616,82 +616,83 @@ Dr.&nbsp;Andrew M. Byrd
 <span id="cb15-5"><a href=""></a>getty_3 <span class="op">=</span> getty.split(<span class="st">"e"</span>)</span>
 <span id="cb15-6"><a href=""></a><span class="bu">print</span>(getty_1, <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>, getty_2, <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>, getty_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="split-2" class="slide level2 center">
-<h2><code>.split()</code></h2>
+<section id="re.split" class="slide level2 center">
+<h2><code>re.split()</code></h2>
 <ul>
 <li>How would you split according to whitespace <em>and</em> punctuation?</li>
 <li>Our old friend <code>regex</code></li>
+<li>Create a new <code>.py</code> file called <code>split.py</code> and paste this code:</li>
 </ul>
 <div class="sourceCode" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href=""></a><span class="im">import</span> re</span>
 <span id="cb16-2"><a href=""></a></span>
 <span id="cb16-3"><a href=""></a>text <span class="op">=</span> <span class="st">"Hello, world!   This... is a test."</span></span>
 <span id="cb16-4"><a href=""></a>words <span class="op">=</span> re.split(<span class="vs">r"[\s\W]+"</span>, text)</span>
-<span id="cb16-5"><a href=""></a><span class="bu">print</span>(words)</span>
-<span id="cb16-6"><a href=""></a><span class="co"># ['Hello', 'world', 'This', 'is', 'a', 'test', '']</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section></section>
-<section id="append-to-collector" class="title-slide slide level1 center">
-<h1>append to collector</h1>
-<p>word_lists.append(words)</p>
-<pre><code>
-## 
-
-Now, word_lists is a list of lists.
-
-More Examples: Getting the average number of words per line If we wanted to know how many words there are per line, we'd need to get the total number of words, then divide it by the number of lines. I'll do this with a for loop with the following steps:
-
-Set up an empty collector list for the length of each list of words. Loop through all of the values in word_lists, assigning each value to the variable words. Append the length of words to the collector list. Get the sum of all values in the collector list with sum(). Divide that by the length of word_lists. \# set up collector line_len = \[\]
-
-for words in word_lists: \# get length of list n = len(words)</code></pre>
+<span id="cb16-5"><a href=""></a>words <span class="op">=</span> [w <span class="cf">for</span> w <span class="kw">in</span> words <span class="cf">if</span> w]   <span class="co"># remove empty strings</span></span>
+<span id="cb16-6"><a href=""></a><span class="bu">print</span>(words)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-
+<section id="re.split-1" class="slide level2 center">
+<h2><code>re.split()</code></h2>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href=""></a><span class="im">import</span> re</span>
+<span id="cb17-2"><a href=""></a></span>
+<span id="cb17-3"><a href=""></a>text <span class="op">=</span> <span class="st">"Hello, world!   This... is a test."</span></span>
+<span id="cb17-4"><a href=""></a>words <span class="op">=</span> re.split(<span class="vs">r"[\s\W]+"</span>, text)</span>
+<span id="cb17-5"><a href=""></a>words <span class="op">=</span> [w <span class="cf">for</span> w <span class="kw">in</span> words <span class="cf">if</span> w]   <span class="co"># remove empty strings</span></span>
+<span id="cb17-6"><a href=""></a><span class="bu">print</span>(words)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><code>\s</code> = whitespace</li>
+<li><code>\W</code> = non-word characters (punctuation, symbols, etc.)</li>
+<li><code>+</code> = one or more preceding</li>
+</ul>
+</section></section>
 <section>
-<section id="append-to-collector-1" class="title-slide slide level1 center">
-<h1>append to collector</h1>
-<p>line_len.append(n)</p>
-<pre><code>
-total_words = sum(line_len) total_lines = len(word_lists)
+<section id="while-loops" class="title-slide slide level1 center">
+<h1><code>while</code> Loops</h1>
 
-average_len = total_words / total_lines Turns out, the average number of words per line is 11.68 words.
+</section>
+<section id="while-loops-1" class="slide level2 center">
+<h2><code>while</code> Loops</h2>
+<ul>
+<li>They’re a lot like <code>if</code> statements, where something happens if a condition is met:</li>
+</ul>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href=""></a>x <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb18-2"><a href=""></a><span class="cf">if</span> x <span class="op">&lt;</span> <span class="dv">10</span></span>
+<span id="cb18-3"><a href=""></a>    <span class="bu">print</span>(x, <span class="st">"is less than 10."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="while-loops-2" class="slide level2 center">
+<h2><code>while</code> Loops</h2>
+<ul>
+<li>In <code>while</code> loops, there’s also a logical condition</li>
+<li>But instead of running the code once, python will loop back and recheck the conditional</li>
+<li>It will do this <strong>forever</strong> until the conditional returns <code>False</code></li>
+</ul>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href=""></a><span class="cf">while</span> x <span class="op">&lt;</span> <span class="dv">10</span>:</span>
+<span id="cb19-2"><a href=""></a>    <span class="bu">print</span>(x, <span class="st">"is less than 10."</span>)</span>
+<span id="cb19-3"><a href=""></a>    x <span class="op">=</span> x <span class="op">-</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="while-loops-3" class="slide level2 center">
+<h2><code>while</code> Loops</h2>
+<p>when the condition is True, python runs the indented code once.</p>
+<p>x = 0 if x &lt; 10: print(x, “is less than 10.”) In while loops, there is also a logical condition, but instead of running the indented code just once, python loops back and re-checks the conditional. If it’s still True, it runs the indented code again, and loops back to re-check the conditional. It will keep doing this forever until the conditional returns False.</p>
+<p>while x &lt; 10: print(x, “is less than 10.”) x = x - 1</p>
+<p>It is important to write while loops carefully! It is very easy to write a while loop that will accidentally run forever. If you think you’ve done this, hitting CTRL + c on your keyboard will interrupt the process.</p>
+<p>We usually won’t be using while in this class. They’re mostly used when you want a script to wait for user input. We can do kind of fun looking things with them though.</p>
+<p>name = “The University of Kentucky”</p>
+<p>while name: print(“|” + name + “|”) name = name<br>
+</p>
+</section></section>
+<section>
+<section id="activity-answers" class="title-slide slide level1 center">
+<h1>Activity Answers</h1>
 
-More Examples: How many "the" Sometimes, we may need to have a for loop inside of a for loop. Right now, word_lists is a list we can loop over, and every value in it is also a list we can loop over. One use case for embedding two for loops here would be if we wanted to count up how many instances of "the" there are in the book. Since the "words" in each list still have punctuation attached to them, we'll have to use some regular expressions.
-
-Create a counter for the number of "the", set to 0. Loop every value in word_lists, assigning it to words. Loop through every value in words, assigning it to w. If w is a match for the regular expression \bthe\b, add 1 to the counter. import re
-
-## Set up counter
-
-the_counter = 0 total_word_counter = 0
-
-for words in word_lists: for w in words: total_word_counter = total_word_counter + 1</code></pre>
-<pre><code>if re.match(r'\bthe\b', w):
-    the_counter = the_counter + 1</code></pre>
-<pre><code>
-It turns out that there are 6,340 instances of "the" in Mansfield Park. In order to get the proportion of all words which were "the", we just need to do the_counter / total_counter.
-
-While Loops Another kind of loop is the while loop. These are a lot like if statements. In an if statement, when the condition is True, python runs the indented code once.
-
-x = 0 if x \&lt; 10: print(x, "is less than 10.") In while loops, there is also a logical condition, but instead of running the indented code just once, python loops back and re-checks the conditional. If it's still True, it runs the indented code again, and loops back to re-check the conditional. It will keep doing this forever until the conditional returns False.
-
-while x \&lt; 10: print(x, "is less than 10.") x = x - 1
-
-It is important to write while loops carefully! It is very easy to write a while loop that will accidentally run forever. If you think you've done this, hitting CTRL + c on your keyboard will interrupt the process.
-
-We usually won't be using while in this class. They're mostly used when you want a script to wait for user input. We can do kind of fun looking things with them though.
-
-name = "The University of Kentucky"
-
-while name: print("\|" + name + "\|") name = name\
-
-# Activity Answers
-
-## Review Activity
-
-``` python
-
-words = [" Cat\n", "dog", " BIRD ", "fish\n", "LION", "tiger ", "bear", "OWL\n"]
-
-for word in words:
-    cleaned = word.strip().lower()
-    print(cleaned)</code></pre>
+</section>
+<section id="review-activity-1" class="slide level2 center">
+<h2>Review Activity</h2>
+<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href=""></a></span>
+<span id="cb20-2"><a href=""></a>words <span class="op">=</span> [<span class="st">" Cat</span><span class="ch">\n</span><span class="st">"</span>, <span class="st">"dog"</span>, <span class="st">" BIRD "</span>, <span class="st">"fish</span><span class="ch">\n</span><span class="st">"</span>, <span class="st">"LION"</span>, <span class="st">"tiger "</span>, <span class="st">"bear"</span>, <span class="st">"OWL</span><span class="ch">\n</span><span class="st">"</span>]</span>
+<span id="cb20-3"><a href=""></a></span>
+<span id="cb20-4"><a href=""></a><span class="cf">for</span> word <span class="kw">in</span> words:</span>
+<span id="cb20-5"><a href=""></a>    cleaned <span class="op">=</span> word.strip().lower()</span>
+<span id="cb20-6"><a href=""></a>    <span class="bu">print</span>(cleaned)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="counter-activity-1" class="slide level2 center">
 <h2>Counter Activity</h2>
@@ -714,11 +715,6 @@ for word in words:
 <span id="cb22-7"><a href=""></a>    <span class="cf">elif</span> word.endswith(<span class="st">"yse"</span>): </span>
 <span id="cb22-8"><a href=""></a>        word <span class="op">=</span> word.replace(<span class="st">"yse"</span>, <span class="st">"yze"</span>) down_with_brits.append(word)</span>
 <span id="cb22-9"><a href=""></a><span class="bu">print</span>(down_with_brits)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="a65f80bc" class="cell" data-execution_count="1">
-<div class="cell-output cell-output-stdout">
-<pre><code>['Hello', 'world', 'This', 'is', 'a', 'test']</code></pre>
-</div>
-</div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
