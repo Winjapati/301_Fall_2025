@@ -16,6 +16,7 @@ editor: visual
 ---
 
 <!-- Suggestion from Sam for next time: constant variables written in ALLCAPS -->
+<!-- Also: make sure to a) show them how to download/install Python *before* class begins & b) that they must identify their Python compiler in RStudio (Tools > ... > Python) -->
 
 # Review
 
