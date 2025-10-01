@@ -190,7 +190,7 @@ pub_year = [1945, 1949, 1934, 1936, 1939]
 ## Slicing
 
 -   Let's return to Austen's `novels`
--   We can ranges of values in lists, using the `:` symbol:
+-   We can use a **range** of values in lists, using the `:` symbol:
 
 ``` python
 novels[0:3]

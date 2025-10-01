@@ -1,6 +1,6 @@
 ---
 title: "Computation for Linguists"
-subtitle: "Beginning Python: While Loops"
+subtitle: "Beginning Python: More Tricks with Lists, While Loops"
 date: "October 10, 2025"
 author: "Dr. Andrew M. Byrd"
 format:
@@ -12,7 +12,8 @@ format:
     toc: true
     toc-title: "Plan for the Day"
     toc-depth: 1
-editor: visual
+jupyter: python3
+editor: source
 ---
 
 # Review
@@ -21,100 +22,257 @@ editor: visual
 
 ## Recap from Last Time
 
-- Conditionals: `if` = 1 x
-- Loops: `for` = multiple times
-- Loading files with 
-- Cleaning text with `.strip()`, `.lower()`
+-   Conditionals: `if` = 1 x
+-   Loops: `for` = multiple times
+-   Cleaning text with `.strip()`, `.lower()`
 
 ## Review Activity
 
-- Copy this list of messy words into your code, creating a list called `words`:
+-   Copy this list of messy words into your code, creating a list called `words`:
 
-```python
+``` python
 words = [" Cat\n", "dog", " BIRD ", "fish\n", "LION", "tiger ", "bear", "OWL\n"]
 ```
 
-- Write a `for` loop that goes through each word. Inside the loop:
-  - Use `.strip()` and `.lower()` to clean the word
-  - Save each result in a variable called `cleaned`
+-   Write a `for` loop that goes through each word. Inside the loop:
+    -   Use `.strip()` and `.lower()` to clean the word
+    -   Save each result in a variable called `cleaned`
+    -   Print each instance of `cleaned` in the loop.
 
-## Review Activity
+# More Tricks with Lists
 
-- If the first letter of `cleaned` is a vowel (`"a", "e", "i", "o", "u"`), print the word and `"starts with a vowel"`.
-- Otherwise, print the word and `"starts with a consonant"`.
+## `.append()`
 
-# 
+-   In the previous activity, we were able to print up each cleaned word
+-   But what if we want the words to remain in a list?
+-   For this, we'll use the method `.append()`
 
-
-
-
-More examples: Full Lines If you look at clean_lines, you'll see that there are a bunch of lines that are zero-length. They look like just ''. These were blank lines in the original text used for things like separating paragraphs. They're not all that important for our analysis, so we'll get rid of them by combining a for loop and an if statement. We'll do it with the following steps:
-
-Set up a counter, set to 0, to keep track of the number of blank lines Set up an empty collector list. Loop through every value in clean_lines, assigning it to line. If the length of the value in line is greater than 0, append it to the collector list. Otherwise, add 1 to n_blank. \# a counter, just to see n_blank = 0
-
-## a collector
-
-full_lines = \[\]
-
-for line in clean_lines: if len(line) \> 0: full_lines.append(line) else: n_blank = n_blank + 1 Doing this, we can see that there were 2,110 blank lines in the text, and now full_lines only contains lines with text!
-
-More examples: Lists of words! We also saw how to split up a line of text into a list of words with the .split() method. If we split a line into words by using spaces, it looks like this:
-
-full_lines\[200\] \# 'on this point. whatever i can do, as you well know, \# i am always ready'
-
-full_lines\[200\].split(" ") \# \['on', \# 'this', \# 'point.', \# 'whatever', \# 'i', \# 'can', \# 'do,', \# 'as', \# 'you', \# 'well', \# 'know,', \# 'i', \# 'am', \# 'always', \# 'ready'\] If we wanted to turn every line into a list of words, we could do this with a for loop with the following steps.
-
-Set up an empty collector list. Loop through every value in full_lines, assigning it to line. Split line into a list of words based on the spaces. Append this list of words to the collector list. \# set up collector word_lists = \[\]
-
-for line in full_lines: \# split on spaces words = line.split(" ")
-
-```         
-# append to collector
-word_lists.append(words)
+``` python
+test_list = ["a", "b", "c"]
+test_list.append("d")
 ```
 
-Now, word_lists is a list of lists.
+## Review Activity - Revisited
 
-More Examples: Getting the average number of words per line If we wanted to know how many words there are per line, we'd need to get the total number of words, then divide it by the number of lines. I'll do this with a for loop with the following steps:
+-   Here is one way that we could have done the review activity:
 
-Set up an empty collector list for the length of each list of words. Loop through all of the values in word_lists, assigning each value to the variable words. Append the length of words to the collector list. Get the sum of all values in the collector list with sum(). Divide that by the length of word_lists. \# set up collector line_len = \[\]
+``` python
+words = [" Cat\n", "dog", " BIRD ", "fish\n", "LION", "tiger ", "bear", "OWL\n"]
 
-for words in word_lists: \# get length of list n = len(words)
-
-```         
-# append to collector
-line_len.append(n)
+for word in words:
+    cleaned = word.strip().lower()
+    print(cleaned)
 ```
 
-total_words = sum(line_len) total_lines = len(word_lists)
+## Review Activity - Revisited
 
-average_len = total_words / total_lines Turns out, the average number of words per line is 11.68 words.
+-   But how to *maintain* these words in a list?
 
-More Examples: How many "the" Sometimes, we may need to have a for loop inside of a for loop. Right now, word_lists is a list we can loop over, and every value in it is also a list we can loop over. One use case for embedding two for loops here would be if we wanted to count up how many instances of "the" there are in the book. Since the "words" in each list still have punctuation attached to them, we'll have to use some regular expressions.
+-   First, more straightforward (but less efficient) way:
 
-Create a counter for the number of "the", set to 0. Loop every value in word_lists, assigning it to words. Loop through every value in words, assigning it to w. If w is a match for the regular expression \bthe\b, add 1 to the counter. import re
+``` python
+words = [" Cat\n", "dog", " BIRD ", "fish\n", "LION", "tiger ", "bear", "OWL\n"]
+cleaned_words = []
 
-## Set up counter
+for word in words:
+    cleaned = word.strip().lower()
+    cleaned_words.append(cleaned)
 
-the_counter = 0 total_word_counter = 0
-
-for words in word_lists: for w in words: total_word_counter = total_word_counter + 1
-
-```         
-    if re.match(r'\bthe\b', w):
-        the_counter = the_counter + 1
+print(cleaned_words)
 ```
 
-It turns out that there are 6,340 instances of "the" in Mansfield Park. In order to get the proportion of all words which were "the", we just need to do the_counter / total_counter.
+-   Here we used the `.append()` method
 
+## Review Activity - Revisited
 
+-   Second, more efficient but trickier way is to use a **list comprehension**, through which we don't even have to use `.append()`:
 
+``` python
+words = [" Cat\n", "dog", " BIRD ", "fish\n", "LION", "tiger ", "bear", "OWL\n"]
 
+cleaned_words = [word.strip().lower() for word in words]
 
+print(cleaned_words)
+```
 
+## Counters
 
+-   In Linguistics, we often want to know how many words are in a text or how many sounds are in a word.
+-   We could use the `len()` command:
 
-While Loops Another kind of loop is the while loop. These are a lot like if statements. In an if statement, when the condition is True, python runs the indented code once.
+``` python
+items = ["color", "flavour", "theater", "center", "analyze", "organize", "favorite", "neighbor", "honor", "catalog", "honour", "flavor", "analyse", "flavor", "traveler"]
+print(len(items))
+```
+
+## Counters
+
+-   Or we could create a **counter**, to count how many items are there:
+
+``` python
+items = ["color", "flavour", "theater", "center", "analyze", "organize", "favorite", "neighbor", "honor", "catalog", "honour", "flavor", "analyse", "flavor", "traveler"]
+
+item_count = 0
+for item in items:
+    item_count += 1
+    print(item, item_count)
+```
+
+## Counters
+
+-   We can do *much* more interesting things with counters, such as:
+
+``` python
+items = ["color", "flavour", "theater", "center", "analyze", "organize", "favorite", "neighbor", "honor", "catalog", "honour", "flavor", "analyse", "flavor", "traveler"]
+
+c_item_count = 0
+for item in items:
+    if item[0] == "c":
+        c_item_count += 1
+        print(item, c_item_count)
+```
+
+## Counter Activity
+
+-   Identify how many words end in "r" in the following list:
+
+``` python
+items = ["color", "flavour", "theater", "center", "analyze", "organize", "favorite", "neighbor", "honor", "catalog", "honour", "flavor", "analyse", "flavor", "traveler"]
+```
+
+## If you're like me, you might be confused by:
+
+-   Index vs. Integer
+
+``` python
+word = "word"
+word[0]
+numb = 0
+```
+
+## `.replace()`
+
+-   Let's return to our `items` list
+-   Notice some inconsistencies in spellings?
+
+``` python
+items = ["color", "flavour", "theater", "center", "analyze", "organize", "favorite", "neighbor", "honor", "catalog", "honour", "flavor", "analyse", "flavor", "traveler"]
+```
+
+## `.replace()`
+
+-   A method to replace one string with another.
+
+``` python
+word = "four"
+new_word  = word.replace("our", "or")
+print(new_word)
+```
+
+## `.replace()`
+
+-   Let's broaden the scope so that it applies to all words ending in "-our"
+
+``` python
+items = ["color", "flavour", "theater", "center", "analyze", "organize", "favorite", "neighbor", "honor", "catalog", "honour", "flavor", "analyse", "flavor", "traveler"]
+
+down_with_brits = []
+for word in items:
+    if word.endswith("our"):
+        word = word.replace("our", "or")
+    down_with_brits.append(word)
+
+print(down_with_brits)
+```
+
+-   Note the `.endswith()` method - there's also `.startswith()`
+
+## `.replace()` Activity
+
+-   Broaden your `if` block to have words ending in "-yse" respelled as "-yze"
+
+## `.split()`
+
+-   We can also take a line of text and split it up into a list.
+
+``` python
+getty = "Four score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal."
+
+getty.split()
+```
+
+-   By default, `split()` separates according to whitespace.
+
+## `.split()`
+
+-   But what happens if you do the following?
+
+``` python
+getty = "Four score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal."
+
+getty_1 = getty.split(",")
+getty_2 = getty.split(".")
+getty_3 = getty.split("e")
+print(getty_1, "\n", getty_2, "\n", getty_3)
+```
+
+## `re.split()`
+
+-   How would you split according to whitespace *and* punctuation?
+-   Our old friend `regex`
+-   Create a new `.py` file called `split.py` and paste this code:
+
+``` python
+import re
+
+text = "Hello, world!   This... is a test."
+words = re.split(r"[\s\W]+", text)
+words = [w for w in words if w]   # remove empty strings
+print(words)
+```
+
+## `re.split()`
+
+``` python
+import re
+
+text = "Hello, world!   This... is a test."
+words = re.split(r"[\s\W]+", text)
+words = [w for w in words if w]   # remove empty strings
+print(words)
+```
+
+-   `\s` = whitespace
+-   `\W` = non-word characters (punctuation, symbols, etc.)
+-   `+` = one or more preceding
+
+# `while` Loops
+
+## `while` Loops
+
+-   They're a lot like `if` statements, where something happens if a condition is met:
+
+``` python
+x = 0
+if x < 10
+    print(x, "is less than 10.")
+```
+
+## `while` Loops
+
+-   In `while` loops, there's also a logical condition
+-   But instead of running the code once, python will loop back and recheck the conditional
+-   It will do this **forever** until the conditional returns `False`
+
+``` python
+while x < 10:
+    print(x, "is less than 10.")
+    x = x - 1
+```
+
+## `while` Loops
+
+when the condition is True, python runs the indented code once.
 
 x = 0 if x \< 10: print(x, "is less than 10.") In while loops, there is also a logical condition, but instead of running the indented code just once, python loops back and re-checks the conditional. If it's still True, it runs the indented code again, and loops back to re-check the conditional. It will keep doing this forever until the conditional returns False.
 
@@ -128,28 +286,41 @@ name = "The University of Kentucky"
 
 while name: print("\|" + name + "\|") name = name\
 
-
-
-
-
-
-
-
 # Activity Answers
 
 ## Review Activity
 
 ``` python
-vowels = ["a", "e", "i", "o", "u"]
+
 words = [" Cat\n", "dog", " BIRD ", "fish\n", "LION", "tiger ", "bear", "OWL\n"]
 
 for word in words:
     cleaned = word.strip().lower()
-    if cleaned[0] in vowels:
-        print(cleaned, "starts with a vowel.")
-    else:
-        print(cleaned, "starts with a consonant.")
+    print(cleaned)
 ```
 
+## Counter Activity
 
+``` python
+items = ["color", "flavour", "theater", "center", "analyze", "organize", "favorite", "neighbor", "honor", "catalog", "honour", "flavor", "analyse", "flavor", "traveler"]
 
+r_item_count = 0
+for item in items:
+    if item[-1] == "r":
+        r_item_count += 1
+        print(item, r_item_count)
+```
+
+## .replace() Activity
+
+``` python
+items = ["color", "flavour", "theater", "center", "analyze", "organize", "favorite", "neighbor", "honor", "catalog", "honour", "flavor", "analyse", "flavor", "traveler"]
+
+down_with_brits = []
+for word in items: 
+    if word.endswith("our"): 
+        word = word.replace("our", "or") 
+    elif word.endswith("yse"): 
+        word = word.replace("yse", "yze") down_with_brits.append(word)
+print(down_with_brits)
+```

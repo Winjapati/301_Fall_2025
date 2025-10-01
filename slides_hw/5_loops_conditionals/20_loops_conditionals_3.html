@@ -394,7 +394,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Computation for Linguists</h1>
-  <p class="subtitle">Beginning Python: While Loops</p>
+  <p class="subtitle">Beginning Python: More Tricks with Lists, While Loops</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -410,17 +410,8 @@ Dr.&nbsp;Andrew M. Byrd
 <h2 id="toc-title">Plan for the Day</h2>
 <ul>
 <li><a href="#/review" id="/toc-review">Review</a></li>
-<li><a href="#/ddd" id="/toc-ddd">ddd</a></li>
-<li><a href="#/is-less-than-10" id="/toc-is-less-than-10">0 is less than 10</a></li>
-<li><a href="#/is-less-than-10-1" id="/toc-is-less-than-10-1">1 is less than 10</a></li>
-<li><a href="#/is-less-than-10-2" id="/toc-is-less-than-10-2">2 is less than 10</a></li>
-<li><a href="#/is-less-than-10-3" id="/toc-is-less-than-10-3">3 is less than 10</a></li>
-<li><a href="#/is-less-than-10-4" id="/toc-is-less-than-10-4">4 is less than 10</a></li>
-<li><a href="#/is-less-than-10-5" id="/toc-is-less-than-10-5">5 is less than 10</a></li>
-<li><a href="#/is-less-than-10-6" id="/toc-is-less-than-10-6">6 is less than 10</a></li>
-<li><a href="#/is-less-than-10-7" id="/toc-is-less-than-10-7">7 is less than 10</a></li>
-<li><a href="#/is-less-than-10-8" id="/toc-is-less-than-10-8">8 is less than 10</a></li>
-<li><a href="#/is-less-than-10-9" id="/toc-is-less-than-10-9">9 is less than 10</a></li>
+<li><a href="#/more-tricks-with-lists" id="/toc-more-tricks-with-lists">More Tricks with Lists</a></li>
+<li><a href="#/while-loops" id="/toc-while-loops"><code>while</code> Loops</a></li>
 <li><a href="#/activity-answers" id="/toc-activity-answers">Activity Answers</a></li>
 </ul>
 </nav>
@@ -437,7 +428,6 @@ Dr.&nbsp;Andrew M. Byrd
 <ul>
 <li>Conditionals: <code>if</code> = 1 x</li>
 <li>Loops: <code>for</code> = multiple times</li>
-<li>Loading files with</li>
 <li>Cleaning text with <code>.strip()</code>, <code>.lower()</code></li>
 </ul>
 </section>
@@ -452,154 +442,279 @@ Dr.&nbsp;Andrew M. Byrd
 <ul>
 <li>Use <code>.strip()</code> and <code>.lower()</code> to clean the word</li>
 <li>Save each result in a variable called <code>cleaned</code></li>
+<li>Print each instance of <code>cleaned</code> in the loop.</li>
 </ul></li>
-</ul>
-</section>
-<section id="review-activity-1" class="slide level2 center">
-<h2>Review Activity</h2>
-<ul>
-<li>If the first letter of <code>cleaned</code> is a vowel (<code>"a", "e", "i", "o", "u"</code>), print the word and <code>"starts with a vowel"</code>.</li>
-<li>Otherwise, print the word and <code>"starts with a consonant"</code>.</li>
 </ul>
 </section></section>
 <section>
-<section id="ddd" class="title-slide slide level1 center">
-<h1>ddd</h1>
-<p>More examples: Preparing Lines In the previous module on reading in text, we went over how text often needs to be cleaned up before we can get ready to analyze it. Whitespace characters need to be stripped off of the left and right edges, and we need to convert each line into either lowercase or uppercase.</p>
+<section id="more-tricks-with-lists" class="title-slide slide level1 center">
+<h1>More Tricks with Lists</h1>
+
 </section>
-<section id="define-the-book-path" class="slide level2 center">
-<h2>define the book path</h2>
-<p>book_location = “data/mansfield_park.txt”</p>
+<section id="append" class="slide level2 center">
+<h2><code>.append()</code></h2>
+<ul>
+<li>In the previous activity, we were able to print up each cleaned word</li>
+<li>But what if we want the words to remain in a list?</li>
+<li>For this, we’ll use the method <code>.append()</code></li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a>test_list <span class="op">=</span> [<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>]</span>
+<span id="cb2-2"><a href=""></a>test_list.append(<span class="st">"d"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="open-the-text-file" class="slide level2 center">
-<h2>open the text file</h2>
-<p>book_file = open(book_location, mode = ‘r’)</p>
+<section id="review-activity---revisited" class="slide level2 center">
+<h2>Review Activity - Revisited</h2>
+<ul>
+<li>Here is one way that we could have done the review activity:</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a>words <span class="op">=</span> [<span class="st">" Cat</span><span class="ch">\n</span><span class="st">"</span>, <span class="st">"dog"</span>, <span class="st">" BIRD "</span>, <span class="st">"fish</span><span class="ch">\n</span><span class="st">"</span>, <span class="st">"LION"</span>, <span class="st">"tiger "</span>, <span class="st">"bear"</span>, <span class="st">"OWL</span><span class="ch">\n</span><span class="st">"</span>]</span>
+<span id="cb3-2"><a href=""></a></span>
+<span id="cb3-3"><a href=""></a><span class="cf">for</span> word <span class="kw">in</span> words:</span>
+<span id="cb3-4"><a href=""></a>    cleaned <span class="op">=</span> word.strip().lower()</span>
+<span id="cb3-5"><a href=""></a>    <span class="bu">print</span>(cleaned)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="read-in-all-lines" class="slide level2 center">
-<h2>read in all lines</h2>
-<p>book_lines = book_file.readlines()</p>
+<section id="review-activity---revisited-1" class="slide level2 center">
+<h2>Review Activity - Revisited</h2>
+<ul>
+<li><p>But how to <em>maintain</em> these words in a list?</p></li>
+<li><p>First, more straightforward (but less efficient) way:</p></li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a>words <span class="op">=</span> [<span class="st">" Cat</span><span class="ch">\n</span><span class="st">"</span>, <span class="st">"dog"</span>, <span class="st">" BIRD "</span>, <span class="st">"fish</span><span class="ch">\n</span><span class="st">"</span>, <span class="st">"LION"</span>, <span class="st">"tiger "</span>, <span class="st">"bear"</span>, <span class="st">"OWL</span><span class="ch">\n</span><span class="st">"</span>]</span>
+<span id="cb4-2"><a href=""></a>cleaned_words <span class="op">=</span> []</span>
+<span id="cb4-3"><a href=""></a></span>
+<span id="cb4-4"><a href=""></a><span class="cf">for</span> word <span class="kw">in</span> words:</span>
+<span id="cb4-5"><a href=""></a>    cleaned <span class="op">=</span> word.strip().lower()</span>
+<span id="cb4-6"><a href=""></a>    cleaned_words.append(cleaned)</span>
+<span id="cb4-7"><a href=""></a></span>
+<span id="cb4-8"><a href=""></a><span class="bu">print</span>(cleaned_words)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Here we used the <code>.append()</code> method</li>
+</ul>
 </section>
-<section id="get-one-line" class="slide level2 center">
-<h2>get one line</h2>
-<p>one_line = book_lines[200]</p>
+<section id="review-activity---revisited-2" class="slide level2 center">
+<h2>Review Activity - Revisited</h2>
+<ul>
+<li>Second, more efficient but trickier way is to use a <strong>list comprehension</strong>, through which we don’t even have to use <code>.append()</code>:</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a>words <span class="op">=</span> [<span class="st">" Cat</span><span class="ch">\n</span><span class="st">"</span>, <span class="st">"dog"</span>, <span class="st">" BIRD "</span>, <span class="st">"fish</span><span class="ch">\n</span><span class="st">"</span>, <span class="st">"LION"</span>, <span class="st">"tiger "</span>, <span class="st">"bear"</span>, <span class="st">"OWL</span><span class="ch">\n</span><span class="st">"</span>]</span>
+<span id="cb5-2"><a href=""></a></span>
+<span id="cb5-3"><a href=""></a>cleaned_words <span class="op">=</span> [word.strip().lower() <span class="cf">for</span> word <span class="kw">in</span> words]</span>
+<span id="cb5-4"><a href=""></a></span>
+<span id="cb5-5"><a href=""></a><span class="bu">print</span>(cleaned_words)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="uncleaned-line" class="slide level2 center">
-<h2>uncleaned line</h2>
-<p>one_line ‘ours, Sir Thomas, I may say, or at least of <em>yours</em>, would not grow up’</p>
+<section id="counters" class="slide level2 center">
+<h2>Counters</h2>
+<ul>
+<li>In Linguistics, we often want to know how many words are in a text or how many sounds are in a word.</li>
+<li>We could use the <code>len()</code> command:</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a>items <span class="op">=</span> [<span class="st">"color"</span>, <span class="st">"flavour"</span>, <span class="st">"theater"</span>, <span class="st">"center"</span>, <span class="st">"analyze"</span>, <span class="st">"organize"</span>, <span class="st">"favorite"</span>, <span class="st">"neighbor"</span>, <span class="st">"honor"</span>, <span class="st">"catalog"</span>, <span class="st">"honour"</span>, <span class="st">"flavor"</span>, <span class="st">"analyse"</span>, <span class="st">"flavor"</span>, <span class="st">"traveler"</span>]</span>
+<span id="cb6-2"><a href=""></a><span class="bu">print</span>(<span class="bu">len</span>(items))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="cleaned-line" class="slide level2 center">
-<h2>cleaned line</h2>
-<p>one_line.lstrip().rstrip().lower() # ‘ours, sir thomas, i may say, or at least of <em>yours</em>, would not grow up’ But, there are 16,045 total lines in Mansfield Park. It would be inefficient to do this to each line individually. Instead, we’ll do it with a for loop with the following steps.</p>
-<p>Create an empty collector list. For each line in book_lines clean it up. Add the cleaned up line to the collector list. # collector clean_lines = []</p>
-<p>for line in book_lines: # cleanup cleaned = line.lstrip().rstrip().lower()</p>
-<pre><code># collection
-clean_lines.append(cleaned)</code></pre>
-<p>More examples: Full Lines If you look at clean_lines, you’ll see that there are a bunch of lines that are zero-length. They look like just ’’. These were blank lines in the original text used for things like separating paragraphs. They’re not all that important for our analysis, so we’ll get rid of them by combining a for loop and an if statement. We’ll do it with the following steps:</p>
-<p>Set up a counter, set to 0, to keep track of the number of blank lines Set up an empty collector list. Loop through every value in clean_lines, assigning it to line. If the length of the value in line is greater than 0, append it to the collector list. Otherwise, add 1 to n_blank. # a counter, just to see n_blank = 0</p>
+<section id="counters-1" class="slide level2 center">
+<h2>Counters</h2>
+<ul>
+<li>Or we could create a <strong>counter</strong>, to count how many items are there:</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a>items <span class="op">=</span> [<span class="st">"color"</span>, <span class="st">"flavour"</span>, <span class="st">"theater"</span>, <span class="st">"center"</span>, <span class="st">"analyze"</span>, <span class="st">"organize"</span>, <span class="st">"favorite"</span>, <span class="st">"neighbor"</span>, <span class="st">"honor"</span>, <span class="st">"catalog"</span>, <span class="st">"honour"</span>, <span class="st">"flavor"</span>, <span class="st">"analyse"</span>, <span class="st">"flavor"</span>, <span class="st">"traveler"</span>]</span>
+<span id="cb7-2"><a href=""></a></span>
+<span id="cb7-3"><a href=""></a>item_count <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb7-4"><a href=""></a><span class="cf">for</span> item <span class="kw">in</span> items:</span>
+<span id="cb7-5"><a href=""></a>    item_count <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb7-6"><a href=""></a>    <span class="bu">print</span>(item, item_count)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="a-collector" class="slide level2 center">
-<h2>a collector</h2>
-<p>full_lines = []</p>
-<p>for line in clean_lines: if len(line) &gt; 0: full_lines.append(line) else: n_blank = n_blank + 1 Doing this, we can see that there were 2,110 blank lines in the text, and now full_lines only contains lines with text!</p>
-<p>More examples: Lists of words! We also saw how to split up a line of text into a list of words with the .split() method. If we split a line into words by using spaces, it looks like this:</p>
-<p>full_lines[200] # ‘on this point. whatever i can do, as you well know, # i am always ready’</p>
-<p>full_lines[200].split(” “) # [‘on’, # ‘this’, # ‘point.’, # ‘whatever’, # ‘i’, # ‘can’, # ‘do,’, # ‘as’, # ‘you’, # ‘well’, # ‘know,’, # ‘i’, # ‘am’, # ‘always’, # ‘ready’] If we wanted to turn every line into a list of words, we could do this with a for loop with the following steps.</p>
-<p>Set up an empty collector list. Loop through every value in full_lines, assigning it to line. Split line into a list of words based on the spaces. Append this list of words to the collector list. # set up collector word_lists = []</p>
-<p>for line in full_lines: # split on spaces words = line.split(” “)</p>
-<pre><code># append to collector
-word_lists.append(words)</code></pre>
-<p>Now, word_lists is a list of lists.</p>
-<p>More Examples: Getting the average number of words per line If we wanted to know how many words there are per line, we’d need to get the total number of words, then divide it by the number of lines. I’ll do this with a for loop with the following steps:</p>
-<p>Set up an empty collector list for the length of each list of words. Loop through all of the values in word_lists, assigning each value to the variable words. Append the length of words to the collector list. Get the sum of all values in the collector list with sum(). Divide that by the length of word_lists. # set up collector line_len = []</p>
-<p>for words in word_lists: # get length of list n = len(words)</p>
-<pre><code># append to collector
-line_len.append(n)</code></pre>
-<p>total_words = sum(line_len) total_lines = len(word_lists)</p>
-<p>average_len = total_words / total_lines Turns out, the average number of words per line is 11.68 words.</p>
-<p>More Examples: How many “the” Sometimes, we may need to have a for loop inside of a for loop. Right now, word_lists is a list we can loop over, and every value in it is also a list we can loop over. One use case for embedding two for loops here would be if we wanted to count up how many instances of “the” there are in the book. Since the “words” in each list still have punctuation attached to them, we’ll have to use some regular expressions.</p>
-<p>Create a counter for the number of “the”, set to 0. Loop every value in word_lists, assigning it to words. Loop through every value in words, assigning it to w. If w is a match for the regular expression add 1 to the counter. import re</p>
+<section id="counters-2" class="slide level2 center">
+<h2>Counters</h2>
+<ul>
+<li>We can do <em>much</em> more interesting things with counters, such as:</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href=""></a>items <span class="op">=</span> [<span class="st">"color"</span>, <span class="st">"flavour"</span>, <span class="st">"theater"</span>, <span class="st">"center"</span>, <span class="st">"analyze"</span>, <span class="st">"organize"</span>, <span class="st">"favorite"</span>, <span class="st">"neighbor"</span>, <span class="st">"honor"</span>, <span class="st">"catalog"</span>, <span class="st">"honour"</span>, <span class="st">"flavor"</span>, <span class="st">"analyse"</span>, <span class="st">"flavor"</span>, <span class="st">"traveler"</span>]</span>
+<span id="cb8-2"><a href=""></a></span>
+<span id="cb8-3"><a href=""></a>c_item_count <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb8-4"><a href=""></a><span class="cf">for</span> item <span class="kw">in</span> items:</span>
+<span id="cb8-5"><a href=""></a>    <span class="cf">if</span> item[<span class="dv">0</span>] <span class="op">==</span> <span class="st">"c"</span>:</span>
+<span id="cb8-6"><a href=""></a>        c_item_count <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb8-7"><a href=""></a>        <span class="bu">print</span>(item, c_item_count)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="set-up-counter" class="slide level2 center">
-<h2>Set up counter</h2>
-<p>the_counter = 0 total_word_counter = 0</p>
-<p>for words in word_lists: for w in words: total_word_counter = total_word_counter + 1</p>
-<pre><code>    if re.match(r'\bthe\b', w):
-        the_counter = the_counter + 1</code></pre>
-<p>It turns out that there are 6,340 instances of “the” in Mansfield Park. In order to get the proportion of all words which were “the”, we just need to do the_counter / total_counter.</p>
-<p>While Loops Another kind of loop is the while loop. These are a lot like if statements. In an if statement, when the condition is True, python runs the indented code once.</p>
+<section id="counter-activity" class="slide level2 center">
+<h2>Counter Activity</h2>
+<ul>
+<li>Identify how many words end in “r” in the following list:</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href=""></a>items <span class="op">=</span> [<span class="st">"color"</span>, <span class="st">"flavour"</span>, <span class="st">"theater"</span>, <span class="st">"center"</span>, <span class="st">"analyze"</span>, <span class="st">"organize"</span>, <span class="st">"favorite"</span>, <span class="st">"neighbor"</span>, <span class="st">"honor"</span>, <span class="st">"catalog"</span>, <span class="st">"honour"</span>, <span class="st">"flavor"</span>, <span class="st">"analyse"</span>, <span class="st">"flavor"</span>, <span class="st">"traveler"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="if-youre-like-me-you-might-be-confused-by" class="slide level2 center">
+<h2>If you’re like me, you might be confused by:</h2>
+<ul>
+<li>Index vs.&nbsp;Integer</li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a>word <span class="op">=</span> <span class="st">"word"</span></span>
+<span id="cb10-2"><a href=""></a>word[<span class="dv">0</span>]</span>
+<span id="cb10-3"><a href=""></a>numb <span class="op">=</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="replace" class="slide level2 center">
+<h2><code>.replace()</code></h2>
+<ul>
+<li>Let’s return to our <code>items</code> list</li>
+<li>Notice some inconsistencies in spellings?</li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a>items <span class="op">=</span> [<span class="st">"color"</span>, <span class="st">"flavour"</span>, <span class="st">"theater"</span>, <span class="st">"center"</span>, <span class="st">"analyze"</span>, <span class="st">"organize"</span>, <span class="st">"favorite"</span>, <span class="st">"neighbor"</span>, <span class="st">"honor"</span>, <span class="st">"catalog"</span>, <span class="st">"honour"</span>, <span class="st">"flavor"</span>, <span class="st">"analyse"</span>, <span class="st">"flavor"</span>, <span class="st">"traveler"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="replace-1" class="slide level2 center">
+<h2><code>.replace()</code></h2>
+<ul>
+<li>A method to replace one string with another.</li>
+</ul>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href=""></a>word <span class="op">=</span> <span class="st">"four"</span></span>
+<span id="cb12-2"><a href=""></a>new_word  <span class="op">=</span> word.replace(<span class="st">"our"</span>, <span class="st">"or"</span>)</span>
+<span id="cb12-3"><a href=""></a><span class="bu">print</span>(new_word)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="replace-2" class="slide level2 center">
+<h2><code>.replace()</code></h2>
+<ul>
+<li>Let’s broaden the scope so that it applies to all words ending in “-our”</li>
+</ul>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href=""></a>items <span class="op">=</span> [<span class="st">"color"</span>, <span class="st">"flavour"</span>, <span class="st">"theater"</span>, <span class="st">"center"</span>, <span class="st">"analyze"</span>, <span class="st">"organize"</span>, <span class="st">"favorite"</span>, <span class="st">"neighbor"</span>, <span class="st">"honor"</span>, <span class="st">"catalog"</span>, <span class="st">"honour"</span>, <span class="st">"flavor"</span>, <span class="st">"analyse"</span>, <span class="st">"flavor"</span>, <span class="st">"traveler"</span>]</span>
+<span id="cb13-2"><a href=""></a></span>
+<span id="cb13-3"><a href=""></a>down_with_brits <span class="op">=</span> []</span>
+<span id="cb13-4"><a href=""></a><span class="cf">for</span> word <span class="kw">in</span> items:</span>
+<span id="cb13-5"><a href=""></a>    <span class="cf">if</span> word.endswith(<span class="st">"our"</span>):</span>
+<span id="cb13-6"><a href=""></a>        word <span class="op">=</span> word.replace(<span class="st">"our"</span>, <span class="st">"or"</span>)</span>
+<span id="cb13-7"><a href=""></a>    down_with_brits.append(word)</span>
+<span id="cb13-8"><a href=""></a></span>
+<span id="cb13-9"><a href=""></a><span class="bu">print</span>(down_with_brits)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Note the <code>.endswith()</code> method - there’s also <code>.startswith()</code></li>
+</ul>
+</section>
+<section id="replace-activity" class="slide level2 center">
+<h2><code>.replace()</code> Activity</h2>
+<ul>
+<li>Broaden your <code>if</code> block to have words ending in “-yse” respelled as “-yze”</li>
+</ul>
+</section>
+<section id="split" class="slide level2 center">
+<h2><code>.split()</code></h2>
+<ul>
+<li>We can also take a line of text and split it up into a list.</li>
+</ul>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href=""></a>getty <span class="op">=</span> <span class="st">"Four score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal."</span></span>
+<span id="cb14-2"><a href=""></a></span>
+<span id="cb14-3"><a href=""></a>getty.split()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>By default, <code>split()</code> separates according to whitespace.</li>
+</ul>
+</section>
+<section id="split-1" class="slide level2 center">
+<h2><code>.split()</code></h2>
+<ul>
+<li>But what happens if you do the following?</li>
+</ul>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href=""></a>getty <span class="op">=</span> <span class="st">"Four score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal."</span></span>
+<span id="cb15-2"><a href=""></a></span>
+<span id="cb15-3"><a href=""></a>getty_1 <span class="op">=</span> getty.split(<span class="st">","</span>)</span>
+<span id="cb15-4"><a href=""></a>getty_2 <span class="op">=</span> getty.split(<span class="st">"."</span>)</span>
+<span id="cb15-5"><a href=""></a>getty_3 <span class="op">=</span> getty.split(<span class="st">"e"</span>)</span>
+<span id="cb15-6"><a href=""></a><span class="bu">print</span>(getty_1, <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>, getty_2, <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>, getty_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="re.split" class="slide level2 center">
+<h2><code>re.split()</code></h2>
+<ul>
+<li>How would you split according to whitespace <em>and</em> punctuation?</li>
+<li>Our old friend <code>regex</code></li>
+<li>Create a new <code>.py</code> file called <code>split.py</code> and paste this code:</li>
+</ul>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href=""></a><span class="im">import</span> re</span>
+<span id="cb16-2"><a href=""></a></span>
+<span id="cb16-3"><a href=""></a>text <span class="op">=</span> <span class="st">"Hello, world!   This... is a test."</span></span>
+<span id="cb16-4"><a href=""></a>words <span class="op">=</span> re.split(<span class="vs">r"[\s\W]+"</span>, text)</span>
+<span id="cb16-5"><a href=""></a>words <span class="op">=</span> [w <span class="cf">for</span> w <span class="kw">in</span> words <span class="cf">if</span> w]   <span class="co"># remove empty strings</span></span>
+<span id="cb16-6"><a href=""></a><span class="bu">print</span>(words)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="re.split-1" class="slide level2 center">
+<h2><code>re.split()</code></h2>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href=""></a><span class="im">import</span> re</span>
+<span id="cb17-2"><a href=""></a></span>
+<span id="cb17-3"><a href=""></a>text <span class="op">=</span> <span class="st">"Hello, world!   This... is a test."</span></span>
+<span id="cb17-4"><a href=""></a>words <span class="op">=</span> re.split(<span class="vs">r"[\s\W]+"</span>, text)</span>
+<span id="cb17-5"><a href=""></a>words <span class="op">=</span> [w <span class="cf">for</span> w <span class="kw">in</span> words <span class="cf">if</span> w]   <span class="co"># remove empty strings</span></span>
+<span id="cb17-6"><a href=""></a><span class="bu">print</span>(words)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><code>\s</code> = whitespace</li>
+<li><code>\W</code> = non-word characters (punctuation, symbols, etc.)</li>
+<li><code>+</code> = one or more preceding</li>
+</ul>
+</section></section>
+<section>
+<section id="while-loops" class="title-slide slide level1 center">
+<h1><code>while</code> Loops</h1>
+
+</section>
+<section id="while-loops-1" class="slide level2 center">
+<h2><code>while</code> Loops</h2>
+<ul>
+<li>They’re a lot like <code>if</code> statements, where something happens if a condition is met:</li>
+</ul>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href=""></a>x <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb18-2"><a href=""></a><span class="cf">if</span> x <span class="op">&lt;</span> <span class="dv">10</span></span>
+<span id="cb18-3"><a href=""></a>    <span class="bu">print</span>(x, <span class="st">"is less than 10."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="while-loops-2" class="slide level2 center">
+<h2><code>while</code> Loops</h2>
+<ul>
+<li>In <code>while</code> loops, there’s also a logical condition</li>
+<li>But instead of running the code once, python will loop back and recheck the conditional</li>
+<li>It will do this <strong>forever</strong> until the conditional returns <code>False</code></li>
+</ul>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href=""></a><span class="cf">while</span> x <span class="op">&lt;</span> <span class="dv">10</span>:</span>
+<span id="cb19-2"><a href=""></a>    <span class="bu">print</span>(x, <span class="st">"is less than 10."</span>)</span>
+<span id="cb19-3"><a href=""></a>    x <span class="op">=</span> x <span class="op">-</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="while-loops-3" class="slide level2 center">
+<h2><code>while</code> Loops</h2>
+<p>when the condition is True, python runs the indented code once.</p>
 <p>x = 0 if x &lt; 10: print(x, “is less than 10.”) In while loops, there is also a logical condition, but instead of running the indented code just once, python loops back and re-checks the conditional. If it’s still True, it runs the indented code again, and loops back to re-check the conditional. It will keep doing this forever until the conditional returns False.</p>
 <p>while x &lt; 10: print(x, “is less than 10.”) x = x - 1</p>
-</section></section>
-<section id="is-less-than-10" class="title-slide slide level1 center">
-<h1>0 is less than 10</h1>
-
-</section>
-
-<section id="is-less-than-10-1" class="title-slide slide level1 center">
-<h1>1 is less than 10</h1>
-
-</section>
-
-<section id="is-less-than-10-2" class="title-slide slide level1 center">
-<h1>2 is less than 10</h1>
-
-</section>
-
-<section id="is-less-than-10-3" class="title-slide slide level1 center">
-<h1>3 is less than 10</h1>
-
-</section>
-
-<section id="is-less-than-10-4" class="title-slide slide level1 center">
-<h1>4 is less than 10</h1>
-
-</section>
-
-<section id="is-less-than-10-5" class="title-slide slide level1 center">
-<h1>5 is less than 10</h1>
-
-</section>
-
-<section id="is-less-than-10-6" class="title-slide slide level1 center">
-<h1>6 is less than 10</h1>
-
-</section>
-
-<section id="is-less-than-10-7" class="title-slide slide level1 center">
-<h1>7 is less than 10</h1>
-
-</section>
-
-<section id="is-less-than-10-8" class="title-slide slide level1 center">
-<h1>8 is less than 10</h1>
-
-</section>
-
-<section id="is-less-than-10-9" class="title-slide slide level1 center">
-<h1>9 is less than 10</h1>
 <p>It is important to write while loops carefully! It is very easy to write a while loop that will accidentally run forever. If you think you’ve done this, hitting CTRL + c on your keyboard will interrupt the process.</p>
 <p>We usually won’t be using while in this class. They’re mostly used when you want a script to wait for user input. We can do kind of fun looking things with them though.</p>
 <p>name = “The University of Kentucky”</p>
 <p>while name: print(“|” + name + “|”) name = name<br>
 </p>
-</section>
-
+</section></section>
 <section>
 <section id="activity-answers" class="title-slide slide level1 center">
 <h1>Activity Answers</h1>
 
 </section>
-<section id="review-activity-2" class="slide level2 center">
+<section id="review-activity-1" class="slide level2 center">
 <h2>Review Activity</h2>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a>vowels <span class="op">=</span> [<span class="st">"a"</span>, <span class="st">"e"</span>, <span class="st">"i"</span>, <span class="st">"o"</span>, <span class="st">"u"</span>]</span>
-<span id="cb6-2"><a href=""></a>words <span class="op">=</span> [<span class="st">" Cat</span><span class="ch">\n</span><span class="st">"</span>, <span class="st">"dog"</span>, <span class="st">" BIRD "</span>, <span class="st">"fish</span><span class="ch">\n</span><span class="st">"</span>, <span class="st">"LION"</span>, <span class="st">"tiger "</span>, <span class="st">"bear"</span>, <span class="st">"OWL</span><span class="ch">\n</span><span class="st">"</span>]</span>
-<span id="cb6-3"><a href=""></a></span>
-<span id="cb6-4"><a href=""></a><span class="cf">for</span> word <span class="kw">in</span> words:</span>
-<span id="cb6-5"><a href=""></a>    cleaned <span class="op">=</span> word.strip().lower()</span>
-<span id="cb6-6"><a href=""></a>    <span class="cf">if</span> cleaned[<span class="dv">0</span>] <span class="kw">in</span> vowels:</span>
-<span id="cb6-7"><a href=""></a>        <span class="bu">print</span>(cleaned, <span class="st">"starts with a vowel."</span>)</span>
-<span id="cb6-8"><a href=""></a>    <span class="cf">else</span>:</span>
-<span id="cb6-9"><a href=""></a>        <span class="bu">print</span>(cleaned, <span class="st">"starts with a consonant."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href=""></a></span>
+<span id="cb20-2"><a href=""></a>words <span class="op">=</span> [<span class="st">" Cat</span><span class="ch">\n</span><span class="st">"</span>, <span class="st">"dog"</span>, <span class="st">" BIRD "</span>, <span class="st">"fish</span><span class="ch">\n</span><span class="st">"</span>, <span class="st">"LION"</span>, <span class="st">"tiger "</span>, <span class="st">"bear"</span>, <span class="st">"OWL</span><span class="ch">\n</span><span class="st">"</span>]</span>
+<span id="cb20-3"><a href=""></a></span>
+<span id="cb20-4"><a href=""></a><span class="cf">for</span> word <span class="kw">in</span> words:</span>
+<span id="cb20-5"><a href=""></a>    cleaned <span class="op">=</span> word.strip().lower()</span>
+<span id="cb20-6"><a href=""></a>    <span class="bu">print</span>(cleaned)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="counter-activity-1" class="slide level2 center">
+<h2>Counter Activity</h2>
+<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href=""></a>items <span class="op">=</span> [<span class="st">"color"</span>, <span class="st">"flavour"</span>, <span class="st">"theater"</span>, <span class="st">"center"</span>, <span class="st">"analyze"</span>, <span class="st">"organize"</span>, <span class="st">"favorite"</span>, <span class="st">"neighbor"</span>, <span class="st">"honor"</span>, <span class="st">"catalog"</span>, <span class="st">"honour"</span>, <span class="st">"flavor"</span>, <span class="st">"analyse"</span>, <span class="st">"flavor"</span>, <span class="st">"traveler"</span>]</span>
+<span id="cb21-2"><a href=""></a></span>
+<span id="cb21-3"><a href=""></a>r_item_count <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb21-4"><a href=""></a><span class="cf">for</span> item <span class="kw">in</span> items:</span>
+<span id="cb21-5"><a href=""></a>    <span class="cf">if</span> item[<span class="op">-</span><span class="dv">1</span>] <span class="op">==</span> <span class="st">"r"</span>:</span>
+<span id="cb21-6"><a href=""></a>        r_item_count <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb21-7"><a href=""></a>        <span class="bu">print</span>(item, r_item_count)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="replace-activity-1" class="slide level2 center">
+<h2>.replace() Activity</h2>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href=""></a>items <span class="op">=</span> [<span class="st">"color"</span>, <span class="st">"flavour"</span>, <span class="st">"theater"</span>, <span class="st">"center"</span>, <span class="st">"analyze"</span>, <span class="st">"organize"</span>, <span class="st">"favorite"</span>, <span class="st">"neighbor"</span>, <span class="st">"honor"</span>, <span class="st">"catalog"</span>, <span class="st">"honour"</span>, <span class="st">"flavor"</span>, <span class="st">"analyse"</span>, <span class="st">"flavor"</span>, <span class="st">"traveler"</span>]</span>
+<span id="cb22-2"><a href=""></a></span>
+<span id="cb22-3"><a href=""></a>down_with_brits <span class="op">=</span> []</span>
+<span id="cb22-4"><a href=""></a><span class="cf">for</span> word <span class="kw">in</span> items: </span>
+<span id="cb22-5"><a href=""></a>    <span class="cf">if</span> word.endswith(<span class="st">"our"</span>): </span>
+<span id="cb22-6"><a href=""></a>        word <span class="op">=</span> word.replace(<span class="st">"our"</span>, <span class="st">"or"</span>) </span>
+<span id="cb22-7"><a href=""></a>    <span class="cf">elif</span> word.endswith(<span class="st">"yse"</span>): </span>
+<span id="cb22-8"><a href=""></a>        word <span class="op">=</span> word.replace(<span class="st">"yse"</span>, <span class="st">"yze"</span>) down_with_brits.append(word)</span>
+<span id="cb22-9"><a href=""></a><span class="bu">print</span>(down_with_brits)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
