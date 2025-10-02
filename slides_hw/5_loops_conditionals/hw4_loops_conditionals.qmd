@@ -1,0 +1,9 @@
+---
+title: "Homework 4: Loops & Conditionals"
+subtitle: "LIN 301: Computation for Linguists"
+author: "Dr. Andrew M. Byrd"
+format: html
+fontsize: 12pt
+---
+
+
