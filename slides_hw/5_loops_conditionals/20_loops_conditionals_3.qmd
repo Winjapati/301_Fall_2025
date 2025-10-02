@@ -107,7 +107,7 @@ print(len(items))
 
 ## Counters
 
--   Or we could create a **counter**, to count how many items are there:
+-   Or we could create a **counter**, to count how many items there are:
 
 ``` python
 items = ["color", "flavour", "theater", "center", "analyze", "organize", "favorite", "neighbor", "honor", "catalog", "honour", "flavor", "analyse", "flavor", "traveler"]
@@ -220,14 +220,14 @@ print(getty_1, "\n", getty_2, "\n", getty_3)
 
 -   How would you split according to whitespace *and* punctuation?
 -   Our old friend `regex`
--   Create a new `.py` file called `split.py` and paste this code:
+-   Create a new codeblock and paste this code (you may have to create a separate `.py` file):
 
 ``` python
 import re
 
 text = "Hello, world!   This... is a test."
 words = re.split(r"[\s\W]+", text)
-words = [w for w in words if w]   # remove empty strings
+words = [w for w in words if w]
 print(words)
 ```
 
@@ -238,13 +238,26 @@ import re
 
 text = "Hello, world!   This... is a test."
 words = re.split(r"[\s\W]+", text)
-words = [w for w in words if w]   # remove empty strings
+words = [w for w in words if w]
 print(words)
 ```
 
 -   `\s` = whitespace
 -   `\W` = non-word characters (punctuation, symbols, etc.)
 -   `+` = one or more preceding
+
+## `re.split()`
+
+-   Revisit your file `alice.txt` (found at https://www.gutenberg.org/cache/epub/11/pg11.txt)
+-   Load up `alice.txt` in Python using the following code:
+
+``` python
+with open("alice.txt", "r", encoding="utf-8") as f:
+    alice_text = f.read()
+```
+
+-   Using `re.split()` create a new list called `alice_list`, containing all words, minus whitespace and non-word characters
+-   Confirm it worked by using `print(alice_text[0:100])`
 
 # `while` Loops
 
@@ -254,7 +267,7 @@ print(words)
 
 ``` python
 x = 0
-if x < 10
+if x < 10:
     print(x, "is less than 10.")
 ```
 
@@ -265,6 +278,18 @@ if x < 10
 -   It will do this **forever** until the conditional returns `False`
 
 ``` python
+x = 10
+while x < 10:
+    print(x, "is less than 10.")
+    x = x + 1
+```
+
+## `while` Loops
+
+-   Be **careful** with `while` loops! Code (like below) will run ad infinitum and could crash your computer:
+
+```         
+x = 0
 while x < 10:
     print(x, "is less than 10.")
     x = x - 1
@@ -272,19 +297,15 @@ while x < 10:
 
 ## `while` Loops
 
-when the condition is True, python runs the indented code once.
+-   In this class, we will mostly use `for` loops
+-   But you can do some interesting things with `while` loops, like:
 
-x = 0 if x \< 10: print(x, "is less than 10.") In while loops, there is also a logical condition, but instead of running the indented code just once, python loops back and re-checks the conditional. If it's still True, it runs the indented code again, and loops back to re-check the conditional. It will keep doing this forever until the conditional returns False.
-
-while x \< 10: print(x, "is less than 10.") x = x - 1
-
-It is important to write while loops carefully! It is very easy to write a while loop that will accidentally run forever. If you think you've done this, hitting CTRL + c on your keyboard will interrupt the process.
-
-We usually won't be using while in this class. They're mostly used when you want a script to wait for user input. We can do kind of fun looking things with them though.
-
+``` python
 name = "The University of Kentucky"
-
-while name: print("\|" + name + "\|") name = name\
+while name: 
+      print("|" + name + "|") 
+      name = name[0:-1]
+```
 
 # Activity Answers
 
@@ -321,6 +342,19 @@ for word in items:
     if word.endswith("our"): 
         word = word.replace("our", "or") 
     elif word.endswith("yse"): 
-        word = word.replace("yse", "yze") down_with_brits.append(word)
+        word = word.replace("yse", "yze") 
+    down_with_brits.append(word)
 print(down_with_brits)
+```
+
+## .re.split() Activity
+
+``` python
+
+import re
+with open("alice.txt", "r", encoding="utf-8") as f:
+    alice_text = f.read()
+alice_list = re.split(r"[\s\W]+", alice_text)
+alice_list = [w for w in alice_list if w]
+print(alice_list[0:100]) 
 ```
