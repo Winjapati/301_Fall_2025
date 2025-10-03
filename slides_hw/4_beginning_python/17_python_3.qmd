@@ -15,6 +15,8 @@ format:
 editor: visual
 ---
 
+<!-- Ran out of time for the dictionary activity, moved to day 1 of next week  -->
+
 # Review
 
 -   What did you learn last time?

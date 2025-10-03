@@ -26,7 +26,46 @@ editor: visual
     -   **Numbers**
     -   **Strings**
     -   **Boolean**
--   Lists, Dictionaries
+
+## Recap from Last Week
+
+-   Lists:
+    -   Ordered, can add & delete
+    -   Within `[` ... `]`
+    -   `list.index()`
+    -   **Slicing**: `[X:Y]`
+        -   if you want to target margins, use blank: `[:2]`, `[-2:]`
+
+## Recap from Last Week
+
+-   Dictionaries:
+    -   `"key": value`
+    -   getting `value`: `dict["key"]`
+    -   adding/reassigning: `dict["key"] = value`
+    -   Checking `dict`: `"key" in dict`
+    -   Removing `key: value` pair -- `del dict["key"]`
+
+## Dictionary Activity
+
+-   Below is a dictionary pairing George Orwell’s novels with their publication years. Copy this into your qmd:
+
+``` python
+orwell_dict = {
+    "Animal Farm": 1945,
+    "Nineteen Eighty-Four": 1949,
+    "Burmese Days": 1934,
+    "Keep the Aspidistra Flying": 1936,
+    "Coming Up for Air": 1939
+}
+```
+
+## Dictionary Activity
+
+-   Print the year that *Animal Farm* was published using its key.
+-   Check if *Homage to Catalonia* is in the dictionary.
+-   Add Orwell’s *Homage to Catalonia* (1937) to the dictionary. Print the dictionary again to confirm.
+-   Whoops, made a mistake! *Homage to Catalonia* was actually published in 1938. Fix that mistake.
+-   Remove *Coming Up for Air* from the dictionary.
 
 # Control Structures
 
@@ -70,8 +109,8 @@ editor: visual
 
 ## Conditional Example: Odd or Even?
 
--   Let's write a short block of code that will print `x` is even if true.
--   Let's assign x = 50 on its own line, then the `if` statement.
+-   Let's write a short block of code that will print `x` is even if `True`.
+-   We'll assign `x = 50` on its own line, then the `if` statement.
 
 ``` python
 x = 50
@@ -98,16 +137,16 @@ x % 2       # 0
 x % 2 == 0  # True 
 ```
 
-## Conditional Example: So What's Going On Here?
+<!-- ## Conditional Example: So What's Going On Here? -->
 
-``` python
-x = 50
-if x % 2 == 0: print(x, "is even")      # 50 is even
-```
+<!-- ``` python -->
+<!-- x = 50 -->
+<!-- if x % 2 == 0: print(x, "is even")      # 50 is even -->
+<!-- ``` -->
 
--   Let's look at the `if ...` part of the code:
-    -   `if x % 2 == 0` means "should the modulus of x with 2 equal to 0" (i.e., is x an even number?)
--   We then get `:`, followed by the command python will run if the `if` statement is `True`
+<!-- -   Let's look at the `if ...` part of the code: -->
+<!--     -   `if x % 2 == 0` means "should the modulus of x with 2 equal to 0" (i.e., is x an even number?) -->
+<!-- -   We then get `:`, followed by the command python will run if the `if` statement is `True`<!--#  --> -->
 
 ## Conditionals: Proper Syntax
 
@@ -215,7 +254,7 @@ x % 2
 ```
 
 -   How might we capture forms that end in a decimal in Python?
-    -   Big hint: there are more **comparison operators** than just `==`!
+    <!-- -   Big hint: there are more **comparison operators** than just `==`! -->
 
 ## `elif` Statements
 
@@ -339,6 +378,28 @@ consonants = ["p", "t", "k", "m", "n", "s", "r", "l"]
     -   Hint: `print(sound, "is a vowel.")`
 
 # Activity Solutions
+
+## Dictionary Activity
+
+``` python
+# 1. Direct lookup
+print(orwell_dict["Animal Farm"])     # Output: 1945
+
+# 2. Membership check
+print("Homage to Catalonia" in orwell_dict)   # Output: False
+
+# 3. Adding a new key–value pair
+orwell_dict["Homage to Catalonia"] = 1937
+print(orwell_dict)      # Now includes: "Homage to Catalonia": 1937
+
+# 4. Overwriting a value (fixing a mistake)
+orwell_dict["Homage to Catalonia"] = 1938   # reassigns the correct year
+print(orwell_dict["Homage to Catalonia"])   # Output: 1938
+
+# 5. Delete a key–value pair
+del orwell_dict["Coming Up for Air"]
+print(orwell_dict)        # "Coming Up for Air" has been removed
+```
 
 ## Phoneme Classifier:
 

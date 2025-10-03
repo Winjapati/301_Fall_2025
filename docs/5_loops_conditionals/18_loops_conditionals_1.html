@@ -436,7 +436,57 @@ Dr.&nbsp;Andrew M. Byrd
 <li><strong>Strings</strong></li>
 <li><strong>Boolean</strong></li>
 </ul></li>
-<li>Lists, Dictionaries</li>
+</ul>
+</section>
+<section id="recap-from-last-week-1" class="slide level2 center">
+<h2>Recap from Last Week</h2>
+<ul>
+<li>Lists:
+<ul>
+<li>Ordered, can add &amp; delete</li>
+<li>Within <code>[</code> … <code>]</code></li>
+<li><code>list.index()</code></li>
+<li><strong>Slicing</strong>: <code>[X:Y]</code>
+<ul>
+<li>if you want to target margins, use blank: <code>[:2]</code>, <code>[-2:]</code></li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="recap-from-last-week-2" class="slide level2 center">
+<h2>Recap from Last Week</h2>
+<ul>
+<li>Dictionaries:
+<ul>
+<li><code>"key": value</code></li>
+<li>getting <code>value</code>: <code>dict["key"]</code></li>
+<li>adding/reassigning: <code>dict["key"] = value</code></li>
+<li>Checking <code>dict</code>: <code>"key" in dict</code></li>
+<li>Removing <code>key: value</code> pair – <code>del dict["key"]</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="dictionary-activity" class="slide level2 center">
+<h2>Dictionary Activity</h2>
+<ul>
+<li>Below is a dictionary pairing George Orwell’s novels with their publication years. Copy this into your qmd:</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a>orwell_dict <span class="op">=</span> {</span>
+<span id="cb1-2"><a href=""></a>    <span class="st">"Animal Farm"</span>: <span class="dv">1945</span>,</span>
+<span id="cb1-3"><a href=""></a>    <span class="st">"Nineteen Eighty-Four"</span>: <span class="dv">1949</span>,</span>
+<span id="cb1-4"><a href=""></a>    <span class="st">"Burmese Days"</span>: <span class="dv">1934</span>,</span>
+<span id="cb1-5"><a href=""></a>    <span class="st">"Keep the Aspidistra Flying"</span>: <span class="dv">1936</span>,</span>
+<span id="cb1-6"><a href=""></a>    <span class="st">"Coming Up for Air"</span>: <span class="dv">1939</span></span>
+<span id="cb1-7"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="dictionary-activity-1" class="slide level2 center">
+<h2>Dictionary Activity</h2>
+<ul>
+<li>Print the year that <em>Animal Farm</em> was published using its key.</li>
+<li>Check if <em>Homage to Catalonia</em> is in the dictionary.</li>
+<li>Add Orwell’s <em>Homage to Catalonia</em> (1937) to the dictionary. Print the dictionary again to confirm.</li>
+<li>Whoops, made a mistake! <em>Homage to Catalonia</em> was actually published in 1938. Fix that mistake.</li>
+<li>Remove <em>Coming Up for Air</em> from the dictionary.</li>
 </ul>
 </section></section>
 <section>
@@ -495,17 +545,17 @@ Dr.&nbsp;Andrew M. Byrd
 <ul>
 <li>Using <code>% 2</code></li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="dv">100</span> <span class="op">%</span> <span class="dv">2</span> \<span class="co"># 0</span></span>
-<span id="cb1-2"><a href=""></a><span class="dv">117</span> <span class="op">%</span> <span class="dv">2</span> \<span class="co"># 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a><span class="dv">100</span> <span class="op">%</span> <span class="dv">2</span> \<span class="co"># 0</span></span>
+<span id="cb2-2"><a href=""></a><span class="dv">117</span> <span class="op">%</span> <span class="dv">2</span> \<span class="co"># 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="conditional-example-odd-or-even-2" class="slide level2 center">
 <h2>Conditional Example: Odd or Even?</h2>
 <ul>
-<li>Let’s write a short block of code that will print <code>x</code> is even if true.</li>
-<li>Let’s assign x = 50 on its own line, then the <code>if</code> statement.</li>
+<li>Let’s write a short block of code that will print <code>x</code> is even if <code>True</code>.</li>
+<li>We’ll assign <code>x = 50</code> on its own line, then the <code>if</code> statement.</li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a>x <span class="op">=</span> <span class="dv">50</span></span>
-<span id="cb2-2"><a href=""></a><span class="cf">if</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>: <span class="bu">print</span>(x, <span class="st">"is even"</span>)      <span class="co"># 50 is even</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a>x <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb3-2"><a href=""></a><span class="cf">if</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>: <span class="bu">print</span>(x, <span class="st">"is even"</span>)      <span class="co"># 50 is even</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>Run this code in your Quarto doc!</li>
 <li>Redefine <code>x = 51</code>.
@@ -516,8 +566,8 @@ Dr.&nbsp;Andrew M. Byrd
 </section>
 <section id="conditional-example-so-whats-going-on-here" class="slide level2 center">
 <h2>Conditional Example: So What’s Going On Here?</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a>x <span class="op">=</span> <span class="dv">50</span></span>
-<span id="cb3-2"><a href=""></a><span class="cf">if</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>: <span class="bu">print</span>(x, <span class="st">"is even"</span>)      <span class="co"># 50 is even</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a>x <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb4-2"><a href=""></a><span class="cf">if</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>: <span class="bu">print</span>(x, <span class="st">"is even"</span>)      <span class="co"># 50 is even</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>We’re making the logical statement <code>x % 2 == 0</code>.
 <ul>
@@ -525,20 +575,17 @@ Dr.&nbsp;Andrew M. Byrd
 <li>If we run it as its own line of code, we’ll get True.</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a>x <span class="op">%</span> <span class="dv">2</span>       <span class="co"># 0</span></span>
-<span id="cb4-2"><a href=""></a>x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>  <span class="co"># True </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="conditional-example-so-whats-going-on-here-1" class="slide level2 center">
-<h2>Conditional Example: So What’s Going On Here?</h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a>x <span class="op">=</span> <span class="dv">50</span></span>
-<span id="cb5-2"><a href=""></a><span class="cf">if</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>: <span class="bu">print</span>(x, <span class="st">"is even"</span>)      <span class="co"># 50 is even</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li>Let’s look at the <code>if ...</code> part of the code:
-<ul>
-<li><code>if x % 2 == 0</code> means “should the modulus of x with 2 equal to 0” (i.e., is x an even number?)</li>
-</ul></li>
-<li>We then get <code>:</code>, followed by the command python will run if the <code>if</code> statement is <code>True</code></li>
-</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a>x <span class="op">%</span> <span class="dv">2</span>       <span class="co"># 0</span></span>
+<span id="cb5-2"><a href=""></a>x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>  <span class="co"># True </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<!-- ## Conditional Example: So What's Going On Here? -->
+<!-- ``` python -->
+<!-- x = 50 -->
+<!-- if x % 2 == 0: print(x, "is even")      # 50 is even -->
+<!-- ``` -->
+<!-- -   Let's look at the `if ...` part of the code: -->
+<!--     -   `if x % 2 == 0` means "should the modulus of x with 2 equal to 0" (i.e., is x an even number?) -->
+<!-- -   We then get `:`, followed by the command python will run if the `if` statement is `True`<!--#  -->
+<p>–&gt;</p>
 </section>
 <section id="conditionals-proper-syntax" class="slide level2 center">
 <h2>Conditionals: Proper Syntax</h2>
@@ -653,10 +700,7 @@ Dr.&nbsp;Andrew M. Byrd
 <div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href=""></a>x <span class="op">=</span> <span class="fl">50.1</span></span>
 <span id="cb13-2"><a href=""></a>x <span class="op">%</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>How might we capture forms that end in a decimal in Python?
-<ul>
-<li>Big hint: there are more <strong>comparison operators</strong> than just <code>==</code>!</li>
-</ul></li>
+<li>How might we capture forms that end in a decimal in Python? <!-- -   Big hint: there are more **comparison operators** than just `==`! --></li>
 </ul>
 </section>
 <section id="elif-statements-2" class="slide level2 center">
@@ -791,18 +835,38 @@ Dr.&nbsp;Andrew M. Byrd
 <h1>Activity Solutions</h1>
 
 </section>
+<section id="dictionary-activity-2" class="slide level2 center">
+<h2>Dictionary Activity</h2>
+<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href=""></a><span class="co"># 1. Direct lookup</span></span>
+<span id="cb21-2"><a href=""></a><span class="bu">print</span>(orwell_dict[<span class="st">"Animal Farm"</span>])     <span class="co"># Output: 1945</span></span>
+<span id="cb21-3"><a href=""></a></span>
+<span id="cb21-4"><a href=""></a><span class="co"># 2. Membership check</span></span>
+<span id="cb21-5"><a href=""></a><span class="bu">print</span>(<span class="st">"Homage to Catalonia"</span> <span class="kw">in</span> orwell_dict)   <span class="co"># Output: False</span></span>
+<span id="cb21-6"><a href=""></a></span>
+<span id="cb21-7"><a href=""></a><span class="co"># 3. Adding a new key–value pair</span></span>
+<span id="cb21-8"><a href=""></a>orwell_dict[<span class="st">"Homage to Catalonia"</span>] <span class="op">=</span> <span class="dv">1937</span></span>
+<span id="cb21-9"><a href=""></a><span class="bu">print</span>(orwell_dict)      <span class="co"># Now includes: "Homage to Catalonia": 1937</span></span>
+<span id="cb21-10"><a href=""></a></span>
+<span id="cb21-11"><a href=""></a><span class="co"># 4. Overwriting a value (fixing a mistake)</span></span>
+<span id="cb21-12"><a href=""></a>orwell_dict[<span class="st">"Homage to Catalonia"</span>] <span class="op">=</span> <span class="dv">1938</span>   <span class="co"># reassigns the correct year</span></span>
+<span id="cb21-13"><a href=""></a><span class="bu">print</span>(orwell_dict[<span class="st">"Homage to Catalonia"</span>])   <span class="co"># Output: 1938</span></span>
+<span id="cb21-14"><a href=""></a></span>
+<span id="cb21-15"><a href=""></a><span class="co"># 5. Delete a key–value pair</span></span>
+<span id="cb21-16"><a href=""></a><span class="kw">del</span> orwell_dict[<span class="st">"Coming Up for Air"</span>]</span>
+<span id="cb21-17"><a href=""></a><span class="bu">print</span>(orwell_dict)        <span class="co"># "Coming Up for Air" has been removed</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 <section id="phoneme-classifier" class="slide level2 center">
 <h2>Phoneme Classifier:</h2>
-<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href=""></a>sound <span class="op">=</span> <span class="st">"p"</span></span>
-<span id="cb21-2"><a href=""></a>vowels <span class="op">=</span> [<span class="st">"a"</span>, <span class="st">"e"</span>, <span class="st">"i"</span>, <span class="st">"o"</span>, <span class="st">"u"</span>]</span>
-<span id="cb21-3"><a href=""></a>consonants <span class="op">=</span> [<span class="st">"p"</span>, <span class="st">"t"</span>, <span class="st">"k"</span>, <span class="st">"m"</span>, <span class="st">"n"</span>, <span class="st">"s"</span>, <span class="st">"r"</span>, <span class="st">"l"</span>]</span>
-<span id="cb21-4"><a href=""></a></span>
-<span id="cb21-5"><a href=""></a><span class="cf">if</span> sound <span class="kw">in</span> vowels:</span>
-<span id="cb21-6"><a href=""></a>    <span class="bu">print</span>(sound, <span class="st">"is a vowel."</span>)</span>
-<span id="cb21-7"><a href=""></a><span class="cf">elif</span> sound <span class="kw">in</span> consonants:</span>
-<span id="cb21-8"><a href=""></a>    <span class="bu">print</span>(sound, <span class="st">"is a consonant."</span>)</span>
-<span id="cb21-9"><a href=""></a><span class="cf">else</span>:</span>
-<span id="cb21-10"><a href=""></a>    <span class="bu">print</span>(sound, <span class="st">"is something else!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href=""></a>sound <span class="op">=</span> <span class="st">"p"</span></span>
+<span id="cb22-2"><a href=""></a>vowels <span class="op">=</span> [<span class="st">"a"</span>, <span class="st">"e"</span>, <span class="st">"i"</span>, <span class="st">"o"</span>, <span class="st">"u"</span>]</span>
+<span id="cb22-3"><a href=""></a>consonants <span class="op">=</span> [<span class="st">"p"</span>, <span class="st">"t"</span>, <span class="st">"k"</span>, <span class="st">"m"</span>, <span class="st">"n"</span>, <span class="st">"s"</span>, <span class="st">"r"</span>, <span class="st">"l"</span>]</span>
+<span id="cb22-4"><a href=""></a></span>
+<span id="cb22-5"><a href=""></a><span class="cf">if</span> sound <span class="kw">in</span> vowels:</span>
+<span id="cb22-6"><a href=""></a>    <span class="bu">print</span>(sound, <span class="st">"is a vowel."</span>)</span>
+<span id="cb22-7"><a href=""></a><span class="cf">elif</span> sound <span class="kw">in</span> consonants:</span>
+<span id="cb22-8"><a href=""></a>    <span class="bu">print</span>(sound, <span class="st">"is a consonant."</span>)</span>
+<span id="cb22-9"><a href=""></a><span class="cf">else</span>:</span>
+<span id="cb22-10"><a href=""></a>    <span class="bu">print</span>(sound, <span class="st">"is something else!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
