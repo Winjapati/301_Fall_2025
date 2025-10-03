@@ -4,33 +4,83 @@ format: html
 ---
 
 ```{python}
-num_1 = 1
-type(num_1)
+novels = ["Sense and Sensibility", "Pride and Prejudice", "Mansfield Park", "Emma", "Northanger Abbey", "Persuasion", "Lady Susan"]
+# print(novels)
+
+"Emma" in novels          # True
+"Frankenstein" in novels  # False
+
+novel_to_check = "Lady Susan"
+novel_to_check in novels
+
 ```
 
 ```{python}
-num_2 = 1.5
-type(num_2)
+pub_year = [1811, 1813, 1814, 1815, 1818, 1818, 1871]
+susan_index = novels.index("Lady Susan")
+pub_year[susan_index]  # 1871
 ```
 
 ```{python}
-
-first_name = "Andrew"
-my_age = 30
-(first_name == "Andrew") and not (my_age == 45)
+year_index = pub_year.index(1814)
+# print(year_index)
+novels[year_index]
+# 'Mansfield Park'
 ```
 
 ```{python}
-word = "sin"   # try: "spin", "top", "stop", "cat", "skat"
+orwell_novels = ["Animal Farm", "Nineteen Eighty-Four", "Burmese Days", "Keep the Aspidistra Flying", "Coming Up for Air"]
+pub_year = [1945, 1949, 1934, 1936, 1939]
 
-# Step 1: check if word starts with a voiceless stop
-starts_p = word[0] == "p"
-starts_t = word[0] == "t"
-starts_k = word[0] == "k"
+#Print the names of the first and last novel.
 
-# Step 2: decide aspiration (simplified: only if it’s the first sound)
-aspirated = starts_p or starts_t or starts_k
+print(orwell_novels[0], orwell_novels[-1])
 
-print("Word:", word)
-print("Aspirated?", aspirated)
+#Use .index() to find the position of Burmese Days. Use that index to print the corresponding publication year from pub_year.
+
+pub_year[orwell_novels.index("Burmese Days")]
+
+#Find which novel was published in 1936.
+
+orwell_novels[pub_year.index(1936)]
+
+len(orwell_novels)
+
+word = "church"
+len(word)
+
+```
+
+```{python}
+complex_list = [["Sense and Sensibility", 1811],
+                ["Pride and Prejudice", 1813],
+                ["Mansfield Park", 1814],
+                ["Emma", 1815],
+                ["Northanger Abbey", 1818],
+                ["Persuasion", 1818],
+                ["Lazy Susan", 1871]]
+
+complex_list[4][1]
+```
+
+```{python}
+austen_dict = {
+    "Sense and Sensibility": 1811,
+    "Pride and Prejudice": 1813,
+    "Mansfield Park": 1814,
+    "Emma": 1815,
+    "Northanger Abbey": 1818,   # duplicate value
+    "Persuasion": 1818,         # duplicate value
+    "Lady Susan": 1871
+}
+
+austen_dict["The Rise of Han Solo"] = 2025
+austen_dict["The Rise of Han Solo"] = 1872
+del austen_dict["The Rise of Han Solo"]
+
+"Pride and Prejudice" in austen_dict  # True
+1811 in austen_dict                   # False
+
+print(austen_dict)
+
 ```
