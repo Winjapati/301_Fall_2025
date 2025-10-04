@@ -1,0 +1,62 @@
+---
+title: "hw4_test"
+format: html
+---
+
+# 1) Load the raw text
+
+```{python}
+# 1) Load the raw text
+with open("hw4_files/conlang.txt", "r", encoding="utf-8") as f:
+    text = f.read()
+```
+
+## Normalize & Split
+
+```{python}
+
+import re
+
+conlang_words = re.split(r"[\s\W]+", text.lower())
+conlang_words = [w for w in conlang_words if w]
+
+# # text_clean = text.strip().lower()
+# conlang_words = text_clean.split()
+print(conlang_words[:15])
+# 
+# conlang_lower = [wd.lower() for wd in conlang_words]
+# 
+# print(conlang_lower[:15])
+# 
+# vowels = set("aeiouɜ")
+# 
+# test = ['ab', 'p', 'tet']
+# 
+# for wd in test:
+#     any(ch in vowels for ch in wd)
+
+```
+
+## Filter
+
+```{python}
+
+vowels = set("aeiouɜ")
+
+no_v = []
+yes_v = []
+
+for wd in conlang_words:
+    if any(ch in vowels for ch in wd):
+        yes_v.append(wd)
+    else:
+        no_v.append(wd)
+      
+        
+```
+
+## Verify
+
+```{python}
+print(yes_v[:50], "AAAAAAAAAAAAA", no_v)
+```
