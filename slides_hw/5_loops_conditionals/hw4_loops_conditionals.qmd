@@ -31,7 +31,7 @@ You will submit **one** Quarto file named `HW4_Lastname_Firstname.qmd`.
 
 # Step 0 — Download the file (Terminal)
 
-Open the **Terminal** pane in RStudio and download a file called `conlang.txt` using bash `curl`. File located at: https:\\temp.doc.
+Open the **Terminal** pane in RStudio and download a file called `conlang.txt` using bash `curl`. File located at: https://winjapati.github.io/301_Fall_2025/5_loops_conditionals/conlang.txt.
 
 Place `conlang.txt` in a new subfolder called `hw4_files`.
 
