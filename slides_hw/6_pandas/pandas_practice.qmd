@@ -1,0 +1,33 @@
+---
+title: "pandas_practice"
+format: html
+---
+
+Basic structure of pd Dataframe, like a dictionary with key:value, with a list as the value
+
+-   the key = the column name
+
+-   The values = the cells underneath
+
+```{python}
+import pandas as pd
+
+mydataset = {
+  'cars': ["BMW", "Volvo", "Ford"],
+  'passings': [3, 7, 2]
+}
+
+myvar = pd.DataFrame(mydataset)
+print(myvar)
+```
+
+Panda Series – Column in a table
+
+```{python}
+import pandas as pd
+
+unbelievable = ["un", "believe", "able"]
+myvar = pd.Series(unbelievable)
+
+print(myvar)
+```

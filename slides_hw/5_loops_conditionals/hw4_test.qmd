@@ -60,3 +60,15 @@ for wd in conlang_words:
 ```{python}
 print(yes_v[:50], "AAAAAAAAAAAAA", no_v)
 ```
+
+```{python}
+print("First 30 words (with vowels):")
+print(yes_v[:30])
+print()
+
+print("Counts:")
+print("  total tokens after edge-punct clean:", len(conlang_words))
+print("  kept (has ≥1 vowel):", len(yes_v))
+print("  removed (no vowels):", len(no_v))
+
+```
