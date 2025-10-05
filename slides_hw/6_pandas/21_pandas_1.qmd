@@ -1,6 +1,6 @@
 ---
 title: "Computation for Linguists"
-subtitle: "Beginning Python: Pandasmonium, Day 1`"
+subtitle: "Beginning Python: Pandasmonium, Day 1"
 date: "October 13, 2025"
 author: "Dr. Andrew M. Byrd"
 format:
@@ -43,52 +43,101 @@ words = [" Cat\n", "dog", " BIRD ", "fish\n", "LION", "tiger ", "bear", "OWL\n"]
 
 ## Panda Power
 
+- We'll use **pandas** for tabular data 
+- This will allow us to compute data found in spreadsheets, lexica, corpora.
+- Note: **pandas** is built on top of a **NumPy** `array`.
+  - This package allows you to compute high-level mathematical functions
+  - You can compute these things within **pandas** as well
+
 ## Installing Pandas
 
-PC: 
+To install:
+- PC: 
 
 ```bash
 pip install pandas
 ```
 
-Mac:
+- Mac:
 ```bash
 pip3 install pandas
 ```
 
-##
+## Loading Pandas
+
+- To run in Python:
+
+```python
+import pandas as pd
+```
+
+⚠️ **Avoid file-name shadowing:** Don’t name your scripts `pandas.py`, `re.py`, `random.py`, etc.
 
 # The Big Picture
 
 ## What is Pandas?
 
+- **Pandas**, short for **Panel Data**
+- Allows the manipulation of tables within Python
+  - very similar to a spreadsheet
+
 ## What is a **DataFrame**?
 
-- a table - like a spreadsheet
+- A table is called **DataFrame**:
+  - 2-D table built from **Series** sharing the same index.
+
+```python
+df = pd.DataFrame({
+    "language": ["Latin", "Greek", "Sanskrit", "Finnish"],
+    "family":   ["Indo-European", "Indo-European", "Indo-European", "Uralic"],
+    "speakers_millions": [0, 0, 0, 6],
+})
+df
+```
 
 ## What is a **Series**?
 
+- **Series**: 1-D labeled data (like an ordered dict).
 - a single labeled column or row
 
-- A DF is a collection of Series objects that share the same index
+```python
+import pandas as pd
+
+langs = pd.Series(["Latin", "Greek", "Sanskrit"], index=["Italic","Greek","Indic"], name="language")
+langs
+```
 
 ## Example of a DF
+
+- A DF is a collection of Series objects that share the same index
 
 ```python
 data = {"language": ["Latin", "Greek", "Sanskrit"], "family": ["IE", "IE", "IE"]}
 df = pd.DataFrame(data)
 ```
 
-# Indexing and Selecting
+- Run the above code. What are the indices of the 1st, 2nd, and 3rd rows?
+
+## Inspecting a DataFrame
+
+- Run this code - what do `.head()`, `.tail()`, `.shape`, `.columns`, and `.index` do? 
 
 ```python
-
+df.head()
+df.tail(2)
+df.shape, df.columns, df.index
+df.info()
 ```
 
-## Accessing One Column
+## DF Activity
+
+# Indexing and Selecting
+
+## Selecting Columns
 
 ```python
-
+df["language"]           # Series
+df[["language","family"]]# DataFrame (note double brackets)
 ```
 
 
@@ -98,48 +147,52 @@ df = pd.DataFrame(data)
 
 ```
 
-
-## Accessing Row by Label
-
+## Selecting Rows by Integer Position
 ```python
-
+df.iloc[0]               # first row
+df.iloc[1:3]             # slice rows 1..2
 ```
 
 
-## Accessing Row by Number
-
+## Selecting Rows By Label
 ```python
-
+# Rows by label (after we set a custom index)
+df2 = df.copy()
+df2.index = ["a","b","c","d"]
+df2.loc["b"]             # row labeled 'b'
 ```
 
 
 ## Cell Access (Row + Column)
 
 ```python
-
+df.loc[0, "language"]        # cell by label/column
+df.iloc[0, 0]                # cell by position
+df.iloc[0:3, 0:2]            # rows 0..2, cols 0..1
 ```
 
 ## Boolean Filtering
 
 ```python
-
+ie = df[df["family"] == "Indo-European"]
+ie
 ```
 
-
-# Modifying DFs
-
+# Modifying DataFrames
 
 ## Adding New Columns
 
 ```python
-
+df["is_extinct"] = [True, False, False, True]
 ```
+
 
 
 ## Dropping Columns & Rows
 
 ```python
-
+# Drop (returns a new DF unless inplace=True)
+df_no_family = df.drop(columns=["family"])
 ```
 
 
@@ -147,7 +200,7 @@ df = pd.DataFrame(data)
 ## Renaming Columns
 
 ```python
-
+df = df.rename(columns={"speakers_millions": "speakers_M"})
 ```
 
 
@@ -155,6 +208,29 @@ df = pd.DataFrame(data)
 
 
 ```python
+df_reset = df.reset_index(drop=True)
+df_set = df.set_index("language")
+df_set
+```
 
+
+
+
+
+## **Day 1 Activity — Mini Lexicon**
+
+Create a small lexicon and practice selection & modification.
+
+```python
+lex = pd.DataFrame({
+    "Language": ["Latin","Greek","Sanskrit","Old English"],
+    "Root": ["fer-","phér-","bhar-","ber-"],
+    "Gloss": ["carry","carry","carry","carry"]
+})
+# Tasks:
+# 1) Show only Language + Root
+# 2) Add Family = "IE" for all
+# 3) Rename Gloss -> Meaning
+# 4) Set index to Language, then select the Sanskrit row by label
 ```
 

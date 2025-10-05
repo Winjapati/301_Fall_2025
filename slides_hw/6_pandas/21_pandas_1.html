@@ -394,7 +394,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Computation for Linguists</h1>
-  <p class="subtitle">Beginning Python: Pandasmonium, Day 1`</p>
+  <p class="subtitle">Beginning Python: Pandasmonium, Day 1</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -413,7 +413,7 @@ Dr.&nbsp;Andrew M. Byrd
 <li><a href="#/setting-up-pandas" id="/toc-setting-up-pandas">Setting up Pandas</a></li>
 <li><a href="#/the-big-picture" id="/toc-the-big-picture">The Big Picture</a></li>
 <li><a href="#/indexing-and-selecting" id="/toc-indexing-and-selecting">Indexing and Selecting</a></li>
-<li><a href="#/modifying-dfs" id="/toc-modifying-dfs">Modifying DFs</a></li>
+<li><a href="#/modifying-dataframes" id="/toc-modifying-dataframes">Modifying DataFrames</a></li>
 </ul>
 </nav>
 </section>
@@ -454,16 +454,32 @@ Dr.&nbsp;Andrew M. Byrd
 </section>
 <section id="panda-power" class="slide level2 center">
 <h2>Panda Power</h2>
+<ul>
+<li>We’ll use <strong>pandas</strong> for tabular data</li>
+<li>This will allow us to compute data found in spreadsheets, lexica, corpora.</li>
+<li>Note: <strong>pandas</strong> is built on top of a <strong>NumPy</strong> <code>array</code>.
+<ul>
+<li>This package allows you to compute high-level mathematical functions</li>
+<li>You can compute these things within <strong>pandas</strong> as well</li>
+</ul></li>
+</ul>
 </section>
 <section id="installing-pandas" class="slide level2 center">
 <h2>Installing Pandas</h2>
-<p>PC:</p>
+<p>To install: - PC:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href=""></a><span class="ex">pip</span> install pandas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Mac:</p>
+<ul>
+<li>Mac:</li>
+</ul>
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href=""></a><span class="ex">pip3</span> install pandas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="section" class="slide level2 center">
-<h2></h2>
+<section id="loading-pandas" class="slide level2 center">
+<h2>Loading Pandas</h2>
+<ul>
+<li>To run in Python:</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>⚠️ <strong>Avoid file-name shadowing:</strong> Don’t name your scripts <code>pandas.py</code>, <code>re.py</code>, <code>random.py</code>, etc.</p>
 </section></section>
 <section>
 <section id="the-big-picture" class="title-slide slide level1 center">
@@ -472,74 +488,138 @@ Dr.&nbsp;Andrew M. Byrd
 </section>
 <section id="what-is-pandas" class="slide level2 center">
 <h2>What is Pandas?</h2>
+<ul>
+<li><strong>Pandas</strong>, short for <strong>Panel Data</strong></li>
+<li>Allows the manipulation of tables within Python
+<ul>
+<li>very similar to a spreadsheet</li>
+</ul></li>
+</ul>
 </section>
 <section id="what-is-a-dataframe" class="slide level2 center">
 <h2>What is a <strong>DataFrame</strong>?</h2>
 <ul>
-<li>a table - like a spreadsheet</li>
+<li>A table is called <strong>DataFrame</strong>:
+<ul>
+<li>2-D table built from <strong>Series</strong> sharing the same index.</li>
+</ul></li>
 </ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a>df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb5-2"><a href=""></a>    <span class="st">"language"</span>: [<span class="st">"Latin"</span>, <span class="st">"Greek"</span>, <span class="st">"Sanskrit"</span>, <span class="st">"Finnish"</span>],</span>
+<span id="cb5-3"><a href=""></a>    <span class="st">"family"</span>:   [<span class="st">"Indo-European"</span>, <span class="st">"Indo-European"</span>, <span class="st">"Indo-European"</span>, <span class="st">"Uralic"</span>],</span>
+<span id="cb5-4"><a href=""></a>    <span class="st">"speakers_millions"</span>: [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">6</span>],</span>
+<span id="cb5-5"><a href=""></a>})</span>
+<span id="cb5-6"><a href=""></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="what-is-a-series" class="slide level2 center">
 <h2>What is a <strong>Series</strong>?</h2>
 <ul>
-<li><p>a single labeled column or row</p></li>
-<li><p>A DF is a collection of Series objects that share the same index</p></li>
+<li><strong>Series</strong>: 1-D labeled data (like an ordered dict).</li>
+<li>a single labeled column or row</li>
 </ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb6-2"><a href=""></a></span>
+<span id="cb6-3"><a href=""></a>langs <span class="op">=</span> pd.Series([<span class="st">"Latin"</span>, <span class="st">"Greek"</span>, <span class="st">"Sanskrit"</span>], index<span class="op">=</span>[<span class="st">"Italic"</span>,<span class="st">"Greek"</span>,<span class="st">"Indic"</span>], name<span class="op">=</span><span class="st">"language"</span>)</span>
+<span id="cb6-4"><a href=""></a>langs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="example-of-a-df" class="slide level2 center">
 <h2>Example of a DF</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a>data <span class="op">=</span> {<span class="st">"language"</span>: [<span class="st">"Latin"</span>, <span class="st">"Greek"</span>, <span class="st">"Sanskrit"</span>], <span class="st">"family"</span>: [<span class="st">"IE"</span>, <span class="st">"IE"</span>, <span class="st">"IE"</span>]}</span>
-<span id="cb4-2"><a href=""></a>df <span class="op">=</span> pd.DataFrame(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>A DF is a collection of Series objects that share the same index</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a>data <span class="op">=</span> {<span class="st">"language"</span>: [<span class="st">"Latin"</span>, <span class="st">"Greek"</span>, <span class="st">"Sanskrit"</span>], <span class="st">"family"</span>: [<span class="st">"IE"</span>, <span class="st">"IE"</span>, <span class="st">"IE"</span>]}</span>
+<span id="cb7-2"><a href=""></a>df <span class="op">=</span> pd.DataFrame(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Run the above code. What are the indices of the 1st, 2nd, and 3rd rows?</li>
+</ul>
+</section>
+<section id="inspecting-a-dataframe" class="slide level2 center">
+<h2>Inspecting a DataFrame</h2>
+<ul>
+<li>Run this code - what do <code>.head()</code>, <code>.tail()</code>, <code>.shape</code>, <code>.columns</code>, and <code>.index</code> do?</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href=""></a>df.head()</span>
+<span id="cb8-2"><a href=""></a>df.tail(<span class="dv">2</span>)</span>
+<span id="cb8-3"><a href=""></a>df.shape, df.columns, df.index</span>
+<span id="cb8-4"><a href=""></a>df.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="df-activity" class="slide level2 center">
+<h2>DF Activity</h2>
 </section></section>
 <section>
 <section id="indexing-and-selecting" class="title-slide slide level1 center">
 <h1>Indexing and Selecting</h1>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
 </section>
-<section id="accessing-one-column" class="slide level2 center">
-<h2>Accessing One Column</h2>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="selecting-columns" class="slide level2 center">
+<h2>Selecting Columns</h2>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href=""></a>df[<span class="st">"language"</span>]           <span class="co"># Series</span></span>
+<span id="cb9-2"><a href=""></a>df[[<span class="st">"language"</span>,<span class="st">"family"</span>]]<span class="co"># DataFrame (note double brackets)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="accessing-multiple-columns" class="slide level2 center">
 <h2>Accessing Multiple Columns</h2>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="accessing-row-by-label" class="slide level2 center">
-<h2>Accessing Row by Label</h2>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="selecting-rows-by-integer-position" class="slide level2 center">
+<h2>Selecting Rows by Integer Position</h2>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a>df.iloc[<span class="dv">0</span>]               <span class="co"># first row</span></span>
+<span id="cb11-2"><a href=""></a>df.iloc[<span class="dv">1</span>:<span class="dv">3</span>]             <span class="co"># slice rows 1..2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="accessing-row-by-number" class="slide level2 center">
-<h2>Accessing Row by Number</h2>
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="selecting-rows-by-label" class="slide level2 center">
+<h2>Selecting Rows By Label</h2>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href=""></a><span class="co"># Rows by label (after we set a custom index)</span></span>
+<span id="cb12-2"><a href=""></a>df2 <span class="op">=</span> df.copy()</span>
+<span id="cb12-3"><a href=""></a>df2.index <span class="op">=</span> [<span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span>,<span class="st">"d"</span>]</span>
+<span id="cb12-4"><a href=""></a>df2.loc[<span class="st">"b"</span>]             <span class="co"># row labeled 'b'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="cell-access-row-column" class="slide level2 center">
 <h2>Cell Access (Row + Column)</h2>
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href=""></a>df.loc[<span class="dv">0</span>, <span class="st">"language"</span>]        <span class="co"># cell by label/column</span></span>
+<span id="cb13-2"><a href=""></a>df.iloc[<span class="dv">0</span>, <span class="dv">0</span>]                <span class="co"># cell by position</span></span>
+<span id="cb13-3"><a href=""></a>df.iloc[<span class="dv">0</span>:<span class="dv">3</span>, <span class="dv">0</span>:<span class="dv">2</span>]            <span class="co"># rows 0..2, cols 0..1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="boolean-filtering" class="slide level2 center">
 <h2>Boolean Filtering</h2>
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href=""></a>ie <span class="op">=</span> df[df[<span class="st">"family"</span>] <span class="op">==</span> <span class="st">"Indo-European"</span>]</span>
+<span id="cb14-2"><a href=""></a>ie</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section></section>
 <section>
-<section id="modifying-dfs" class="title-slide slide level1 center">
-<h1>Modifying DFs</h1>
+<section id="modifying-dataframes" class="title-slide slide level1 center">
+<h1>Modifying DataFrames</h1>
 
 </section>
 <section id="adding-new-columns" class="slide level2 center">
 <h2>Adding New Columns</h2>
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href=""></a>df[<span class="st">"is_extinct"</span>] <span class="op">=</span> [<span class="va">True</span>, <span class="va">False</span>, <span class="va">False</span>, <span class="va">True</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="dropping-columns-rows" class="slide level2 center">
 <h2>Dropping Columns &amp; Rows</h2>
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href=""></a><span class="co"># Drop (returns a new DF unless inplace=True)</span></span>
+<span id="cb16-2"><a href=""></a>df_no_family <span class="op">=</span> df.drop(columns<span class="op">=</span>[<span class="st">"family"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="renaming-columns" class="slide level2 center">
 <h2>Renaming Columns</h2>
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href=""></a>df <span class="op">=</span> df.rename(columns<span class="op">=</span>{<span class="st">"speakers_millions"</span>: <span class="st">"speakers_M"</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="resetting-indices" class="slide level2 center">
 <h2>(Re)setting Indices</h2>
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href=""></a>df_reset <span class="op">=</span> df.reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb18-2"><a href=""></a>df_set <span class="op">=</span> df.set_index(<span class="st">"language"</span>)</span>
+<span id="cb18-3"><a href=""></a>df_set</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="day-1-activity-mini-lexicon" class="slide level2 center">
+<h2><strong>Day 1 Activity — Mini Lexicon</strong></h2>
+<p>Create a small lexicon and practice selection &amp; modification.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href=""></a>lex <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb19-2"><a href=""></a>    <span class="st">"Language"</span>: [<span class="st">"Latin"</span>,<span class="st">"Greek"</span>,<span class="st">"Sanskrit"</span>,<span class="st">"Old English"</span>],</span>
+<span id="cb19-3"><a href=""></a>    <span class="st">"Root"</span>: [<span class="st">"fer-"</span>,<span class="st">"phér-"</span>,<span class="st">"bhar-"</span>,<span class="st">"ber-"</span>],</span>
+<span id="cb19-4"><a href=""></a>    <span class="st">"Gloss"</span>: [<span class="st">"carry"</span>,<span class="st">"carry"</span>,<span class="st">"carry"</span>,<span class="st">"carry"</span>]</span>
+<span id="cb19-5"><a href=""></a>})</span>
+<span id="cb19-6"><a href=""></a><span class="co"># Tasks:</span></span>
+<span id="cb19-7"><a href=""></a><span class="co"># 1) Show only Language + Root</span></span>
+<span id="cb19-8"><a href=""></a><span class="co"># 2) Add Family = "IE" for all</span></span>
+<span id="cb19-9"><a href=""></a><span class="co"># 3) Rename Gloss -&gt; Meaning</span></span>
+<span id="cb19-10"><a href=""></a><span class="co"># 4) Set index to Language, then select the Sanskrit row by label</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
