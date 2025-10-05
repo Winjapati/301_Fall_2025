@@ -39,322 +39,168 @@ words = [" Cat\n", "dog", " BIRD ", "fish\n", "LION", "tiger ", "bear", "OWL\n"]
     -   Save each result in a variable called `cleaned`
     -   Print each instance of `cleaned` in the loop.
 
-# More Tricks with Lists
 
-## `.append()`
+# Day 3 — Summaries, Grouping, I/O, Quick Plots
 
--   In the previous activity, we were able to print up each cleaned word
--   But what if we want the words to remain in a list?
--   For this, we'll use the method `.append()`
+## Quick Summaries
 
-``` python
-test_list = ["a", "b", "c"]
-test_list.append("d")
+```python
+df.describe(include="all")
+df["family"].value_counts()
+df["family"].unique()
 ```
 
-## Review Activity - Revisited
+## Grouping & Aggregation
 
--   Here is one way that we could have done the review activity:
+```python
+# Example small reflex table for demo
+ref_df = pd.DataFrame({
+    "Language": ["Latin","Greek","Sanskrit","Gothic","OCS","Latin"],
+    "Family":   ["IE","IE","IE","Germanic","Slavic","IE"],
+    "Reflexes": [8,10,12,4,3,5]
+})
 
-``` python
-words = [" Cat\n", "dog", " BIRD ", "fish\n", "LION", "tiger ", "bear", "OWL\n"]
-
-for word in words:
-    cleaned = word.strip().lower()
-    print(cleaned)
+ref_df.groupby("Family")["Reflexes"].sum()
+ref_df.groupby("Family").agg(
+    total=("Reflexes","sum"),
+    mean=("Reflexes","mean"),
+    n=("Reflexes","count")
+)
 ```
 
-## Review Activity - Revisited
+## Reading / Writing Files
 
--   But how to *maintain* these words in a list?
+```python
+# CSV
+ref_df.to_csv("reflexes_summary.csv", index=False)
+loaded = pd.read_csv("reflexes_summary.csv")
+loaded.head()
 
--   First, more straightforward (but less efficient) way:
-
-``` python
-words = [" Cat\n", "dog", " BIRD ", "fish\n", "LION", "tiger ", "bear", "OWL\n"]
-cleaned_words = []
-
-for word in words:
-    cleaned = word.strip().lower()
-    cleaned_words.append(cleaned)
-
-print(cleaned_words)
+# Excel (if needed)
+# ref_df.to_excel("reflexes_summary.xlsx", index=False)
+# pd.read_excel("reflexes_summary.xlsx")
 ```
 
--   Here we used the `.append()` method
+## Quick Visualization (optional)
 
-## Review Activity - Revisited
-
--   Second, more efficient but trickier way is to use a **list comprehension**, through which we don't even have to use `.append()`:
-
-``` python
-words = [" Cat\n", "dog", " BIRD ", "fish\n", "LION", "tiger ", "bear", "OWL\n"]
-
-cleaned_words = [word.strip().lower() for word in words]
-
-print(cleaned_words)
+```python
+# Simple bar plot (requires matplotlib to be present)
+counts = ref_df.groupby("Family")["Reflexes"].sum()
+ax = counts.plot(kind="bar", title="Reflex Counts by Family")
+ax.set_xlabel("Family")
+ax.set_ylabel("Total Reflexes")
 ```
 
-## Counters
+> Note: In some environments you may need:
+> ```python
+> import matplotlib.pyplot as plt
+> plt.show()
+> ```
 
--   In Linguistics, we often want to know how many words are in a text or how many sounds are in a word.
--   We could use the `len()` command:
+## **Day 3 Activity — From Rows to Insight**
 
-``` python
-items = ["color", "flavour", "theater", "center", "analyze", "organize", "favorite", "neighbor", "honor", "catalog", "honour", "flavor", "analyse", "flavor", "traveler"]
-print(len(items))
+Using `ref_df` (or your own small table):
+
+1. Group by `Family` and compute: total reflexes, mean reflexes, and count.
+2. Sort families by total reflexes (descending).
+3. Save the grouped summary to `family_reflexes.csv`.
+4. Make a bar plot of total reflexes by family.
+
+```python
+summary = (ref_df
+    .groupby("Family")["Reflexes"]
+    .agg(total="sum", mean="mean", n="count")
+    .sort_values(by="total", ascending=False)
+)
+summary
+summary.to_csv("family_reflexes.csv")
 ```
 
-## Counters
+---
 
--   Or we could create a **counter**, to count how many items there are:
+# Appendix — Quick Reference
 
-``` python
-items = ["color", "flavour", "theater", "center", "analyze", "organize", "favorite", "neighbor", "honor", "catalog", "honour", "flavor", "analyse", "flavor", "traveler"]
+## Selection Cheatsheet
 
-item_count = 0
-for item in items:
-    item_count += 1
-    print(item, item_count)
+- **Columns:** `df["col"]`, `df[["col1","col2"]]`
+- **Rows (position):** `df.iloc[0]`, `df.iloc[1:3]`
+- **Rows (label):** `df.loc["a"]`, `df.loc["a":"c"]`
+- **Cell:** `df.loc["a","col"]` or `df.iloc[0, 1]`
+- **Filter:** `df[df["col"] == value]`, `df[(cond1) & (cond2)]`
+
+## Common Ops
+
+```python
+df.rename(columns={"old":"new"})
+df.drop(columns=["col"])
+df.set_index("col")
+df.reset_index(drop=True)
+df.sort_values(by="col", ascending=False)
+df.isna().sum()
+df.fillna(0)
 ```
 
-## Counters
+## Alignment & Combining
 
--   We can do *much* more interesting things with counters, such as:
-
-``` python
-items = ["color", "flavour", "theater", "center", "analyze", "organize", "favorite", "neighbor", "honor", "catalog", "honour", "flavor", "analyse", "flavor", "traveler"]
-
-c_item_count = 0
-for item in items:
-    if item[0] == "c":
-        c_item_count += 1
-        print(item, c_item_count)
+```python
+s1.add(s2, fill_value=0)
+pd.concat([df1, df2], axis=0, ignore_index=True)  # vertical
+pd.concat([s1, s2], axis=1)                       # side-by-side
 ```
 
-## Counter Activity
+---
 
--   Identify how many words end in "r" in the following list:
+## Final Tips
 
-``` python
-items = ["color", "flavour", "theater", "center", "analyze", "organize", "favorite", "neighbor", "honor", "catalog", "honour", "flavor", "analyse", "flavor", "traveler"]
-```
+- Keep indices simple early on; reset with `reset_index(drop=True)` if confused.
+- Prefer unique column names and (eventually) a unique index.
+- Build intuition with *small*, *visible* examples before loading big CSVs.
 
-## If you're like me, you might be confused by:
 
--   Index vs. Integer
+---
 
-``` python
-word = "word"
-word[0]
-numb = 0
-```
+# What You Can Do Now 🧠
 
-## `.replace()`
+## Linguistic Tasks Now Possible with Pandas
 
--   Let's return to our `items` list
--   Notice some inconsistencies in spellings?
+- ✅ **Build structured lexica**
+  - Create and modify DataFrames of words, glosses, and languages
+  - Filter or sort them instantly (no more manual loops)
 
-``` python
-items = ["color", "flavour", "theater", "center", "analyze", "organize", "favorite", "neighbor", "honor", "catalog", "honour", "flavor", "analyse", "flavor", "traveler"]
-```
+- ✅ **Compare data across sources**
+  - Merge two datasets (e.g., LIV + IEW)
+  - Identify missing reflexes or mismatched glosses automatically
 
-## `.replace()`
+- ✅ **Quantify linguistic patterns**
+  - Count how many reflexes each family has per root
+  - Measure which morphological types are most frequent
 
--   A method to replace one string with another.
+- ✅ **Clean and normalize datasets**
+  - Capitalize, strip, or standardize glosses and forms
+  - Fill in missing data (`NaN → 0`) and rename columns in bulk
 
-``` python
-word = "four"
-new_word  = word.replace("our", "or")
-print(new_word)
-```
+- ✅ **Group and summarize**
+  - Group by family, POS, or semantic field
+  - Compute totals, averages, or frequencies per category
 
-## `.replace()`
+- ✅ **Visualize and export**
+  - Create quick bar charts of linguistic statistics
+  - Save clean CSVs for use in R, Excel, or later analysis
 
--   Let's broaden the scope so that it applies to all words ending in "-our"
+---
 
-``` python
-items = ["color", "flavour", "theater", "center", "analyze", "organize", "favorite", "neighbor", "honor", "catalog", "honour", "flavor", "analyse", "flavor", "traveler"]
+## The Big Shift
 
-down_with_brits = []
-for word in items:
-    if word.endswith("our"):
-        word = word.replace("our", "or")
-    down_with_brits.append(word)
+| Old Approach | New Approach with Pandas |
+|---------------|---------------------------|
+| Lists of strings | Structured tables |
+| Loops over words | Operations over columns |
+| Manual counting | Built-in aggregation |
+| Hard-coded comparisons | Automatic alignment by label |
+| Descriptive patterns | Quantitative insights |
 
-print(down_with_brits)
-```
+> ⚡ You now think like a *linguistic data scientist*:  
+> “Each row is a word; each column is a property; the DataFrame is my corpus.”
 
--   Note the `.endswith()` method - there's also `.startswith()`
+---
 
-## `.replace()` Activity
-
--   Broaden your `if` block to have words ending in "-yse" respelled as "-yze"
-
-## `.split()`
-
--   We can also take a line of text and split it up into a list.
-
-``` python
-getty = "Four score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal."
-
-getty.split()
-```
-
--   By default, `split()` separates according to whitespace.
-
-## `.split()`
-
--   But what happens if you do the following?
-
-``` python
-getty = "Four score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal."
-
-getty_1 = getty.split(",")
-getty_2 = getty.split(".")
-getty_3 = getty.split("e")
-print(getty_1, "\n", getty_2, "\n", getty_3)
-```
-
-## `re.split()`
-
--   How would you split according to whitespace *and* punctuation?
--   Our old friend `regex`
--   Create a new codeblock and paste this code (you may have to create a separate `.py` file):
-
-``` python
-import re
-
-text = "Hello, world!   This... is a test."
-words = re.split(r"[\s\W]+", text)
-words = [w for w in words if w]
-print(words)
-```
-
-## `re.split()`
-
-``` python
-import re
-
-text = "Hello, world!   This... is a test."
-words = re.split(r"[\s\W]+", text)
-words = [w for w in words if w]
-print(words)
-```
-
--   `\s` = whitespace
--   `\W` = non-word characters (punctuation, symbols, etc.)
--   `+` = one or more preceding
-
-## `re.split()`
-
--   Revisit your file `alice.txt` (found at https://www.gutenberg.org/cache/epub/11/pg11.txt)
--   Load up `alice.txt` in Python using the following code:
-
-``` python
-with open("alice.txt", "r", encoding="utf-8") as f:
-    alice_text = f.read()
-```
-
--   Using `re.split()` create a new list called `alice_list`, containing all words, minus whitespace and non-word characters
--   Confirm it worked by using `print(alice_text[0:100])`
-
-# `while` Loops
-
-## `while` Loops
-
--   They're a lot like `if` statements, where something happens if a condition is met:
-
-``` python
-x = 0
-if x < 10:
-    print(x, "is less than 10.")
-```
-
-## `while` Loops
-
--   In `while` loops, there's also a logical condition
--   But instead of running the code once, python will loop back and recheck the conditional
--   It will do this **forever** until the conditional returns `False`
-
-``` python
-x = 10
-while x < 10:
-    print(x, "is less than 10.")
-    x = x + 1
-```
-
-## `while` Loops
-
--   Be **careful** with `while` loops! Code (like below) will run ad infinitum and could crash your computer:
-
-```         
-x = 0
-while x < 10:
-    print(x, "is less than 10.")
-    x = x - 1
-```
-
-## `while` Loops
-
--   In this class, we will mostly use `for` loops
--   But you can do some interesting things with `while` loops, like:
-
-``` python
-name = "The University of Kentucky"
-while name: 
-      print("|" + name + "|") 
-      name = name[0:-1]
-```
-
-# Activity Answers
-
-## Review Activity
-
-``` python
-
-words = [" Cat\n", "dog", " BIRD ", "fish\n", "LION", "tiger ", "bear", "OWL\n"]
-
-for word in words:
-    cleaned = word.strip().lower()
-    print(cleaned)
-```
-
-## Counter Activity
-
-``` python
-items = ["color", "flavour", "theater", "center", "analyze", "organize", "favorite", "neighbor", "honor", "catalog", "honour", "flavor", "analyse", "flavor", "traveler"]
-
-r_item_count = 0
-for item in items:
-    if item[-1] == "r":
-        r_item_count += 1
-        print(item, r_item_count)
-```
-
-## .replace() Activity
-
-``` python
-items = ["color", "flavour", "theater", "center", "analyze", "organize", "favorite", "neighbor", "honor", "catalog", "honour", "flavor", "analyse", "flavor", "traveler"]
-
-down_with_brits = []
-for word in items: 
-    if word.endswith("our"): 
-        word = word.replace("our", "or") 
-    elif word.endswith("yse"): 
-        word = word.replace("yse", "yze") 
-    down_with_brits.append(word)
-print(down_with_brits)
-```
-
-## .re.split() Activity
-
-``` python
-
-import re
-with open("alice.txt", "r", encoding="utf-8") as f:
-    alice_text = f.read()
-alice_list = re.split(r"[\s\W]+", alice_text)
-alice_list = [w for w in alice_list if w]
-print(alice_list[0:100]) 
-```
