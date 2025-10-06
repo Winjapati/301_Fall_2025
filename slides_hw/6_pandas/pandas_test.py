@@ -1,10 +1,7 @@
-import pandas
+word = "computation"
+vowels = "aeiou"
 
-mydataset = {
-  'cars': ["BMW", "Volvo", "Ford"],
-  'passings': [3, 7, 2]
-}
+for c in word:
+    if c in vowels:
+        print(c, "is a vowel.")
 
-myvar = pandas.DataFrame(mydataset)
-
-print(myvar)

@@ -411,7 +411,7 @@ Dr.&nbsp;Andrew M. Byrd
 <ul>
 <li><a href="#/review" id="/toc-review">Review</a></li>
 <li><a href="#/setting-up-pandas" id="/toc-setting-up-pandas">Setting up Pandas</a></li>
-<li><a href="#/the-big-picture" id="/toc-the-big-picture">The Big Picture</a></li>
+<li><a href="#/how-does-pandas-work" id="/toc-how-does-pandas-work">How does Pandas Work?</a></li>
 <li><a href="#/indexing-and-selecting" id="/toc-indexing-and-selecting">Indexing and Selecting</a></li>
 <li><a href="#/modifying-dataframes" id="/toc-modifying-dataframes">Modifying DataFrames</a></li>
 </ul>
@@ -435,9 +435,16 @@ Dr.&nbsp;Andrew M. Byrd
 <section id="review-activity" class="slide level2 center">
 <h2>Review Activity</h2>
 <ul>
-<li>Copy this list of messy words into your code, creating a list called <code>words</code>:</li>
+<li>The</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a>words <span class="op">=</span> [<span class="st">" Cat</span><span class="ch">\n</span><span class="st">"</span>, <span class="st">"dog"</span>, <span class="st">" BIRD "</span>, <span class="st">"fish</span><span class="ch">\n</span><span class="st">"</span>, <span class="st">"LION"</span>, <span class="st">"tiger "</span>, <span class="st">"bear"</span>, <span class="st">"OWL</span><span class="ch">\n</span><span class="st">"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a>word <span class="op">=</span> <span class="st">"computation"</span></span>
+<span id="cb1-2"><a href=""></a>vowels <span class="op">=</span> <span class="st">"aeiou"</span></span>
+<span id="cb1-3"><a href=""></a></span>
+<span id="cb1-4"><a href=""></a><span class="cf">for</span> c <span class="kw">in</span> word:</span>
+<span id="cb1-5"><a href=""></a>    <span class="cf">if</span> c <span class="kw">in</span> vowels:</span>
+<span id="cb1-6"><a href=""></a>        <span class="bu">print</span>(c, <span class="st">"is a vowel."</span>)</span>
+<span id="cb1-7"><a href=""></a>    <span class="cf">else</span>:</span>
+<span id="cb1-8"><a href=""></a>        <span class="bu">print</span>(c, <span class="st">"is not a vowel."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>Write a <code>for</code> loop that goes through each word. Inside the loop:
 <ul>
@@ -482,8 +489,8 @@ Dr.&nbsp;Andrew M. Byrd
 <p>⚠️ <strong>Avoid file-name shadowing:</strong> Don’t name your scripts <code>pandas.py</code>, <code>re.py</code>, <code>random.py</code>, etc.</p>
 </section></section>
 <section>
-<section id="the-big-picture" class="title-slide slide level1 center">
-<h1>The Big Picture</h1>
+<section id="how-does-pandas-work" class="title-slide slide level1 center">
+<h1>How does Pandas Work?</h1>
 
 </section>
 <section id="what-is-pandas" class="slide level2 center">

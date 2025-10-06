@@ -28,10 +28,17 @@ editor: source
 
 ## Review Activity
 
--   Copy this list of messy words into your code, creating a list called `words`:
+-   The
 
-``` python
-words = [" Cat\n", "dog", " BIRD ", "fish\n", "LION", "tiger ", "bear", "OWL\n"]
+```python
+word = "computation"
+vowels = "aeiou"
+
+for c in word:
+    if c in vowels:
+        print(c, "is a vowel.")
+    else:
+        print(c, "is not a vowel.")
 ```
 
 -   Write a `for` loop that goes through each word. Inside the loop:
@@ -73,7 +80,7 @@ import pandas as pd
 
 ⚠️ **Avoid file-name shadowing:** Don’t name your scripts `pandas.py`, `re.py`, `random.py`, etc.
 
-# The Big Picture
+# How does Pandas Work?
 
 ## What is Pandas?
 
@@ -233,4 +240,5 @@ lex = pd.DataFrame({
 # 3) Rename Gloss -> Meaning
 # 4) Set index to Language, then select the Sanskrit row by label
 ```
+
 
