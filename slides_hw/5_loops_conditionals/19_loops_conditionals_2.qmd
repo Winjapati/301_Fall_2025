@@ -76,7 +76,7 @@ print(len(charlotte))
 
 ## Back to Brontë
 
--   You might think that by knowing the len() of a list, and by creating a **counter**, we could get our script to print each book one by one...
+-   You might think that by knowing the `len()` of a list, and by creating a **counter**, we could get our script to print each book one by one...
 
 ``` python
 char_index = 0
@@ -151,11 +151,9 @@ words = ["phoneme", "phrase", "morpheme", "reconstruction", "index"]
 **Your task**: Write a `for` loop that prints out:
 
 1.  the word
-2.  the length (`len()`, represented by x below) of each word in the
+2.  the length (`len()`) of each word in the list
 
-Each should look like the following sentence:
-
-"python has 6 letters."
+Each printed statement should look like: "python has 6 letters."
 
 # Cleaning Text
 
@@ -196,18 +194,18 @@ print("Downloaded:", filename)
 
 ## Opening up Files in Python
 
-- Let's now open up our file using a `with open(...)` block
+-   Let's now open up our file using a `with open(...)` block
 
 ``` python
 with open("mansfield_park.txt", "r", encoding="utf-8") as f:
     book_text = f.read()
 ```
 
-- What happens if you just `print(book_text[:200])`?
+-   What happens if you just `print(book_text[:200])`?
 
 ## Opening up Files in Python
 
-- If we instead want to grab all of the lines separately, we can run:
+-   If we instead want to grab all of the lines separately, we can run:
 
 ``` python
 with open("mansfield_park.txt", "r", encoding="utf-8") as f:
@@ -216,7 +214,7 @@ with open("mansfield_park.txt", "r", encoding="utf-8") as f:
 len(book_lines)
 ```
 
-- Now we can grab individual lines from the book:
+-   Now we can grab individual lines from the book:
 
 ``` python
 book_lines[101]
@@ -224,13 +222,13 @@ book_lines[101]
 
 ## Cleaning Up the Book
 
-- Do you see how each line ends in `\n`?  That's indicating a line break.
+-   Do you see how each line ends in `\n`? That's indicating a line break.
 
-```bash
+``` bash
 'Such were its immediate effects, and within a twelvemonth a more\n'
 ```
 
-- Let's get rid of that character using the `.rstrip()` method.
+-   Let's get rid of that character using the `.rstrip()` method.
 
 ``` python
 one_line = book_lines[101]
@@ -239,20 +237,20 @@ one_line.rstrip()
 
 ## Cleaning Up the Book
 
-- Some lines also start with unnecessary whitespace.
+-   Some lines also start with unnecessary whitespace.
 
 ``` python
 two_line = book_lines[12]
 two_line
 ```
 
-- Let's get rid of that stuff, too, by tacking on the `.lstrip()` method.
+-   Let's get rid of that stuff, too, by tacking on the `.lstrip()` method.
 
 ``` python
 two_line.rstrip().lstrip()
 ```
 
-- Or we can just use `.strip()`, which will handle both sides at once:
+-   Or we can just use `.strip()`, which will handle both sides at once:
 
 ``` python
 two_line.strip()
@@ -260,28 +258,28 @@ two_line.strip()
 
 ## Cleaning up the Book
 
-- Sometimes, too, we want to convert everything to either uppercase or lowercase., so strings like `"The"` and `"the"` will count as the same word.
-- Methods:
-  - `lower()`
-  - `upper()`
+-   Sometimes, too, we want to convert everything to either uppercase or lowercase, so strings like `"The"` and `"the"` will count as the same word.
+-   Methods:
+    -   `lower()`
+    -   `upper()`
 
 ``` python
 one_line.strip().lower()
 ```
 
-## Activity: 
+## Activity:
 
-- Using what you've learned above:
-  - Load up "mansfield_park.txt"
-  - Strip the whitespace on both sides and make all words in lower case, and save it as `mansfield_cleaned`. You'll need this **list comprehension**: 
+-   Using what you've learned above:
+    -   Load up "mansfield_park.txt"
+    -   Strip the whitespace on both sides and make all words in lower case, and save it as `mansfield_cleaned`. You'll need this **list comprehension**:
 
-```python
+``` python
 mansfield_cleaned = [line.strip().lower() for line in lines]
 ```
 
-- To make sure it worked, run:
+-   To make sure it worked, run:
 
-```python
+``` python
 print(mansfield_cleaned[0:19])
 ```
 

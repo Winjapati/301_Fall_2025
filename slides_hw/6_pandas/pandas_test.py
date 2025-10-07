@@ -1,7 +1,12 @@
-word = "computation"
-vowels = "aeiou"
+import pandas as pd
 
-for c in word:
-    if c in vowels:
-        print(c, "is a vowel.")
+languages = {
+    "French": "Romance",
+    "Spanish": "Romance",
+    "Italian": "Romance",
+    "English": "Germanic"
+}
+
+lang = [value for value in languages.values()]
+print(lang)
 

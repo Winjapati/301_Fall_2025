@@ -28,33 +28,24 @@ editor: source
 
 ## Review Activity
 
--   The
+1. Copy the code below.
+2. Use a `for` loop and a conditional to sort each letter of the word "computation" into consonants & vowels.
+3. If the character is a vowel, print "x is a vowel." If it is not a vowel, print "x is not a vowel."
 
 ```python
 word = "computation"
 vowels = "aeiou"
-
-for c in word:
-    if c in vowels:
-        print(c, "is a vowel.")
-    else:
-        print(c, "is not a vowel.")
 ```
-
--   Write a `for` loop that goes through each word. Inside the loop:
-    -   Use `.strip()` and `.lower()` to clean the word
-    -   Save each result in a variable called `cleaned`
-    -   Print each instance of `cleaned` in the loop.
 
 # Setting up Pandas
 
 ## Panda Power
 
-- We'll use **pandas** for tabular data 
+- Python programmers often use **pandas** to sort, create, and analyze tabular data 
 - This will allow us to compute data found in spreadsheets, lexica, corpora.
 - Note: **pandas** is built on top of a **NumPy** `array`.
   - This package allows you to compute high-level mathematical functions
-  - You can compute these things within **pandas** as well
+  - For this reason, you can compute these things within **pandas** as well! (But we won't in 301)
 
 ## Installing Pandas
 
@@ -78,6 +69,9 @@ pip3 install pandas
 import pandas as pd
 ```
 
+
+
+
 ⚠️ **Avoid file-name shadowing:** Don’t name your scripts `pandas.py`, `re.py`, `random.py`, etc.
 
 # How does Pandas Work?
@@ -88,24 +82,12 @@ import pandas as pd
 - Allows the manipulation of tables within Python
   - very similar to a spreadsheet
 
-## What is a **DataFrame**?
-
-- A table is called **DataFrame**:
-  - 2-D table built from **Series** sharing the same index.
-
-```python
-df = pd.DataFrame({
-    "language": ["Latin", "Greek", "Sanskrit", "Finnish"],
-    "family":   ["Indo-European", "Indo-European", "Indo-European", "Uralic"],
-    "speakers_millions": [0, 0, 0, 6],
-})
-df
-```
-
 ## What is a **Series**?
 
-- **Series**: 1-D labeled data (like an ordered dict).
-- a single labeled column or row
+- At the heart of a `pd` `df` (pandas dataframe), are **Series**: 
+    - 1-D labeled data
+    - like an ordered `dict`
+    - a single labeled column or row
 
 ```python
 import pandas as pd
@@ -114,16 +96,69 @@ langs = pd.Series(["Latin", "Greek", "Sanskrit"], index=["Italic","Greek","Indic
 langs
 ```
 
-## Example of a DF
+## What is a **DataFrame**?
 
-- A DF is a collection of Series objects that share the same index
+- You can combine **Series** that share the same index to create a **DataFrame**
+  - a 2-D `pd` table
 
 ```python
-data = {"language": ["Latin", "Greek", "Sanskrit"], "family": ["IE", "IE", "IE"]}
-df = pd.DataFrame(data)
+import pandas as pd
+
+df = pd.DataFrame({
+    "language": ["Latin", "Greek", "Sanskrit", "Finnish"],
+    "family":   ["Indo-European", "Indo-European", "Indo-European", "Uralic"],
+    "speakers_millions": [0, 0, 0, 6],
+})
+```
+
+
+## Example of a DF
+
+- A DF is a collection of Series objects that share the same **index**
+
+```python
+import pandas as pd
+
+df = pd.DataFrame({
+    "language": ["Latin", "Greek", "Sanskrit", "Finnish"],
+    "family":   ["Indo-European", "Indo-European", "Indo-European", "Uralic"],
+    "speakers_millions": [0, 0, 0, 6],
+})
 ```
 
 - Run the above code. What are the indices of the 1st, 2nd, and 3rd rows?
+
+## Activity: Building a `df`
+
+Let’s practice *building* DataFrames from scratch.
+
+- Start with a list of languages:
+
+```python
+import pandas as pd
+
+languages = {
+    "French": "Romance",
+    "Spanish": "Romance",
+    "Italian": "Romance",
+    "English": "Germanic"
+}
+lang = [key for key in languages[key]]
+```
+
+##
+
+```python
+families = ["Romance", "Romance", "Romance", "Germanic"]
+
+df = pd.DataFrame({
+    "language": langs,
+    "family": families
+})
+
+print(df)
+```
+
 
 ## Inspecting a DataFrame
 
@@ -241,4 +276,17 @@ lex = pd.DataFrame({
 # 4) Set index to Language, then select the Sanskrit row by label
 ```
 
+# Activity Answers
 
+## Review Activity
+
+```python
+word = "computation"
+vowels = "aeiou"
+
+for c in word:
+    if c in vowels:
+        print(c, "is a vowel.")
+    else:
+        print(c, "is not a vowel.")
+```
