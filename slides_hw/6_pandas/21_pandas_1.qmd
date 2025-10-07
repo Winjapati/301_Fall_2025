@@ -128,9 +128,46 @@ df = pd.DataFrame({
 
 - Run the above code. What are the indices of the 1st, 2nd, and 3rd rows?
 
-## Activity: Building a `df`
+## Building a `df`
 
-Let’s practice *building* DataFrames from scratch.
+- Let’s practice *building* DataFrames from scratch. We can do this from a `list` or a `dict`.
+- Let's look at how to extract data from a `dict` to convert into a `df`.
+- Our starting point:
+
+```python
+languages = {
+    "French": "Romance",
+    "Spanish": "Romance",
+    "Italian": "Romance",
+    "English": "Germanic"
+}
+```
+
+## Extracting Keys and Values
+
+- We're going to use the following methods:
+  - `dict.keys()` - access keys
+  - `dict.values()` - access values
+- We can use a **list comprehension** to get what we need.  
+
+```python
+lang = [key for key in languages.keys()]
+fam = [value for value in languages.values()]
+print(lang, fam)
+```
+
+## Converting Lists to a Series
+
+```python
+import pandas as pd
+
+langs = pd.Series(lang, name="languages")
+fams = pd.Series(fam, name="families")
+langs, fams
+```
+
+
+## 
 
 - Start with a list of languages:
 

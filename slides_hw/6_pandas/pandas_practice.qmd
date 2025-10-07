@@ -49,7 +49,7 @@ myvar = pd.Series(unbelievable, index = ["prefix", "root", "suffix"])
 print(myvar["prefix"])
 ```
 
-Adding row labels 
+Adding row labels
 
 ```{python}
 import pandas as pd
@@ -60,6 +60,7 @@ myvar = pd.Series(calories, index = ["day1", "day2"])
 
 print(myvar)
 ```
+
 ```{python}
 import pandas as pd
 
@@ -72,19 +73,18 @@ data = {
 df = pd.DataFrame(data)
 print(df)
 ```
+
 Selecting a column as a Series
 
 ```{python}
 df["language"]
 ```
 
-
 Selecting a column as a DF
 
 ```{python}
 df[["language"]]
 ```
-
 
 Selecting multiple columns
 
@@ -94,22 +94,23 @@ df[["language", "family"]]
 
 Selecting Rows
 
-- `iloc` = "integer location"
+-   `iloc` = "integer location"
 
 ```{python}
 df.iloc[0]       # first row
 df.iloc[1:3]     # rows 1 and 2 (Python slices stop before the end)
 ```
 
-- Note the difference in presentation between 1 row and multiple
+-   Note the difference in presentation between 1 row and multiple
 
 Selecting Rows
 
-- `loc` = "label location"
+-   `loc` = "label location"
 
 ```{python}
 df.loc[0]          # same as .iloc[0] since our index = 0,1,2,3
 ```
+
 ```{python}
 langs = {"Italic": ["Latin", "Oscan", "Umbrian"], "Greek": ["Doric", "Aeolic"], "Indic": ["Sanskrit", "Hindi", "Prakrit", "Vedic"]}
 s = pd.Series(langs)
@@ -146,3 +147,26 @@ combined = pd.DataFrame({"verb": reflexes_verb, "noun": reflexes_noun})
 print(combined)
 ```
 
+```{python}
+df = pd.DataFrame({
+    "language": ["Latin", "Greek", "Sanskrit", "Finnish"],
+    "family":   ["Indo-European", "Indo-European", "Indo-European", "Uralic"],
+    "speakers_millions": [0, 0, 0, 6],
+})
+df
+```
+
+```{python}
+import pandas as pd
+
+languages = {
+    "French": "Romance",
+    "Spanish": "Romance",
+    "Italian": "Romance",
+    "English": "Germanic"
+}
+
+lang = [key for key in languages.keys()]
+fam = [value for value in languages.values()]
+print(lang, fam)
+```
