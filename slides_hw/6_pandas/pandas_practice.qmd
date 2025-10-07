@@ -178,9 +178,25 @@ langs = pd.Series(lang, name="languages")
 fams = pd.Series(fam, name="families")
 langs, fams
 
-df = pd.DataFrame({
-    "languages": langs,
-    "family": fams
+# df = pd.DataFrame({
+#     "languages": langs,
+#     "family": fams
+# })
+# df
+```
+
+```{python}
+
+
+import pandas as pd
+
+fresh_df = pd.DataFrame({
+    "language": ["Latin", "Greek", "Sanskrit", "Finnish"],
+    "family":   ["Indo-European", "Indo-European", "Indo-European", "Uralic"],
+    "speakers_millions": [0, 0, 0, 6],
+    "location": ["Italy", "Greece", "India", "Finland"]
 })
-df
+
+print(fresh_df)
+
 ```
