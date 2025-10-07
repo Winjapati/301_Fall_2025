@@ -140,13 +140,20 @@ x % 2 == 0  # True
 <!-- ## Conditional Example: So What's Going On Here? -->
 
 <!-- ``` python -->
+
 <!-- x = 50 -->
+
 <!-- if x % 2 == 0: print(x, "is even")      # 50 is even -->
+
 <!-- ``` -->
 
 <!-- -   Let's look at the `if ...` part of the code: -->
+
 <!--     -   `if x % 2 == 0` means "should the modulus of x with 2 equal to 0" (i.e., is x an even number?) -->
-<!-- -   We then get `:`, followed by the command python will run if the `if` statement is `True`<!--#  --> -->
+
+<!-- -   We then get `:`, followed by the command python will run if the `if` statement is `True`<!--#  -->
+
+--\>
 
 ## Conditionals: Proper Syntax
 
@@ -253,8 +260,7 @@ x = 50.1
 x % 2
 ```
 
--   How might we capture forms that end in a decimal in Python?
-    <!-- -   Big hint: there are more **comparison operators** than just `==`! -->
+-   How might we capture forms that end in a decimal in Python? <!-- -   Big hint: there are more **comparison operators** than just `==`! -->
 
 ## `elif` Statements
 
