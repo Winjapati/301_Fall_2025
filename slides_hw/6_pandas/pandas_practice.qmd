@@ -170,3 +170,17 @@ lang = [key for key in languages.keys()]
 fam = [value for value in languages.values()]
 print(lang, fam)
 ```
+
+```{python}
+import pandas as pd
+
+langs = pd.Series(lang, name="languages")
+fams = pd.Series(fam, name="families")
+langs, fams
+
+df = pd.DataFrame({
+    "languages": langs,
+    "family": fams
+})
+df
+```
