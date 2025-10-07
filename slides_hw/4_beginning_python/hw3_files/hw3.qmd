@@ -1,0 +1,35 @@
+---
+title: "hw3"
+format: html
+---
+
+```{python}
+with open("shakespeare.txt", "r", encoding="utf-8") as f:
+    text = f.read()
+```
+
+```{python}
+first_words = text.split()[:1000]
+print(first_words)
+print(first_words[499])
+```
+
+```{python}
+chosen_ones = ['all-eating', 'thy', 'the', 'And', 'or', 'all', 'cruel', 'treasure', 'tattered', 'of']
+print(chosen_ones)
+```
+
+```{python}
+bill = text.split()
+word_counts = {"all-eating": bill.count("all-eating"), 
+'thy': bill.count("thy"),
+'the': bill.count("the"),
+'And': bill.count("And"),
+'or': bill.count("or"),
+'all': bill.count("all"),
+'cruel': bill.count("cruel"),
+'treasure': bill.count("treasure"),
+'tattered': bill.count("tattered"),
+'of': bill.count("of")}
+print(word_counts)
+```

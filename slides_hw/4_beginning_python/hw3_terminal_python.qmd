@@ -42,9 +42,9 @@ with open("hw3_files/shakespeare.txt", "r", encoding="utf-8") as f:
 ## Make a Dictionary
 
 - You're now going to create a third list, called `bill`, that will contain *all* of the words of Shakespeare. As before, use the method `.split()` to split `shakespeare.txt` into separate words.
-- Use the method `.count()` to see how many times each chosen appears in the text.  
+- Use the method `.count()` to see how many times each chosen appears in the newly created list.  
 - Create a dictionary called `word_counts` that pairs each chosen word with its number. 
-- Do **not** manually insert the counts in your `dict`. You should use the format: `"word": text.count("word")`.
+- Do **not** manually insert the counts in your `dict`. You should use the format: `"word": bill.count("word")`.
 
 ---
 
