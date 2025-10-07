@@ -45,7 +45,7 @@ vowels = "aeiou"
 -   This will allow us to compute data found in spreadsheets, lexica, corpora.
 -   Note: **pandas** is built on top of a **NumPy** `array`.
     -   This package allows you to compute high-level mathematical functions
-    -   For this reason, you can compute these things within **pandas** as well! (But not quite yet in 301)
+    -   For this reason, you can compute these things within **pandas** as well! (but not just yet)
 
 ## Installing Pandas
 
@@ -199,23 +199,43 @@ fresh_df = pd.DataFrame({
     "family":   ["Indo-European", "Indo-European", "Indo-European", "Uralic"],
     "speakers_millions": [0, 0, 0, 6],
     "location": ["Italy", "Greece", "India", "Finland"]
-})
+}, index=["a","b","c","d"])
 
 print(new_df)
 ```
 
-## Activity
+## Pandas Activity: Phonemic Inventory
 
 Using Pandas, recreate the following table:
 
+|     | voicing   | place    | manner    |
+|-----|-----------|----------|-----------|
+| /p/ | voiceless | bilabial | stop      |
+| /b/ | voiced    | bilabial | stop      |
+| /t/ | voiceless | alveolar | stop      |
+| /d/ | voiced    | alveolar | stop      |
+| /s/ | voiceless | alveolar | fricative |
+| /h/ | voiceless | glottal  | fricative |
+
 # Going from `[]`/`{}` to `df`
 
-## Building a `df`
+## Converting Lists to a Series
 
--   Let’s practice *building* DataFrames from scratch. We can do this from a `list` or a `dict`.
--   Let's look at how to extract data from a `dict` to convert into a `df`.
--   Our starting point:
+- If you think about it, a list is just a single column of a `.DataFrame()`
+- And for this reason, it's super easy to convert it to a `.Series()`
 
+```python
+import pandas as pd
+
+gettysburg = ["Four", "score", "and", "seven", "years", "ago"]
+getty = pd.Series(gettysburg)
+
+print(getty)
+```
+
+## Converting Dictionaries to a Series
+
+- How would we convert a `dict` to a `.DataFrame()`?
 ``` python
 languages = {
     "French": "Romance",
@@ -224,6 +244,11 @@ languages = {
     "English": "Germanic"
 }
 ```
+
+
+## Activity
+
+
 
 ## Extracting Keys and Values
 
@@ -238,7 +263,8 @@ fam = [value for value in languages.values()]
 print(lang, fam)
 ```
 
-## Converting Lists to a Series
+
+##
 
 ``` python
 import pandas as pd
@@ -394,4 +420,18 @@ for c in word:
         print(c, "is a vowel.")
     else:
         print(c, "is not a vowel.")
+```
+
+## Phonemic Inventory Pandas Activity
+
+``` python
+import pandas as pd
+
+phon_inv = pd.DataFrame({
+    "voicing": ["voiceless", "voiced", "voiceless", "voiced", "voiceless", "voiceless"],
+    "place": ["bilabial", "bilabial", "alveolar", "alveolar", "alveolar", "glottal"], 
+    "manner": ["stop", "stop", "stop", "stop", "fricative", "fricative"]},
+    index=["p","b","t","d","s","h"])
+
+print(phon_inv)
 ```

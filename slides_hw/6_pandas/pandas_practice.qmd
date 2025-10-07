@@ -190,13 +190,14 @@ langs, fams
 
 import pandas as pd
 
-fresh_df = pd.DataFrame({
-    "language": ["Latin", "Greek", "Sanskrit", "Finnish"],
-    "family":   ["Indo-European", "Indo-European", "Indo-European", "Uralic"],
-    "speakers_millions": [0, 0, 0, 6],
-    "location": ["Italy", "Greece", "India", "Finland"]
-})
+gettysburg = ["Four", "score", "and", "seven", "years", "ago"]
+gettysburg_ser = pd.Series(gettysburg)
 
-print(fresh_df)
 
 ```
+
+import pandas as pd
+
+fresh_df = pd.DataFrame({ "language": \["Latin", "Greek", "Sanskrit", "Finnish"\], "family": \["Indo-European", "Indo-European", "Indo-European", "Uralic"\], "speakers_millions": \[0, 0, 0, 6\], "location": \["Italy", "Greece", "India", "Finland"\] })
+
+print(new_df)
