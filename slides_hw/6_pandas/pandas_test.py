@@ -1,12 +1,10 @@
 import pandas as pd
 
-languages = {
-    "French": "Romance",
-    "Spanish": "Romance",
-    "Italian": "Romance",
-    "English": "Germanic"
+data_dict = {
+    'Name': ['Alice', 'Bob', 'Charlie'],
+    'Age': [25, 30, 35],
+    'City': ['New York', 'London', 'Paris']
 }
 
-lang = [value for value in languages.values()]
-print(lang)
-
+df = pd.DataFrame(data_dict)
+print(df)

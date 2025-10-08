@@ -107,3 +107,95 @@ combined_dropped = combined.dropna()
 
 
 
+# Indexing and Selecting
+
+## Selecting Columns
+
+``` python
+df["language"]           # Series
+df[["language","family"]]# DataFrame (note double brackets)
+```
+
+## Accessing Multiple Columns
+
+``` python
+```
+
+## Selecting Rows by Integer Position
+
+``` python
+df.iloc[0]               # first row
+df.iloc[1:3]             # slice rows 1..2
+```
+
+## Selecting Rows By Label
+
+``` python
+# Rows by label (after we set a custom index)
+df2 = df.copy()
+df2.index = ["a","b","c","d"]
+df2.loc["b"]             # row labeled 'b'
+```
+
+## Cell Access (Row + Column)
+
+``` python
+df.loc[0, "language"]        # cell by label/column
+df.iloc[0, 0]                # cell by position
+df.iloc[0:3, 0:2]            # rows 0..2, cols 0..1
+```
+
+## Boolean Filtering
+
+``` python
+ie = df[df["family"] == "Indo-European"]
+ie
+```
+
+# Modifying DataFrames
+
+## Adding New Columns
+
+``` python
+df["is_extinct"] = [True, False, False, True]
+```
+
+## Dropping Columns & Rows
+
+``` python
+# Drop (returns a new DF unless inplace=True)
+df_no_family = df.drop(columns=["family"])
+```
+
+## Renaming Columns
+
+``` python
+df = df.rename(columns={"speakers_millions": "speakers_M"})
+```
+
+## (Re)setting Indices
+
+``` python
+df_reset = df.reset_index(drop=True)
+df_set = df.set_index("language")
+df_set
+```
+
+## **Day 1 Activity — Mini Lexicon**
+
+Create a small lexicon and practice selection & modification.
+
+``` python
+lex = pd.DataFrame({
+    "Language": ["Latin","Greek","Sanskrit","Old English"],
+    "Root": ["fer-","phér-","bhar-","ber-"],
+    "Gloss": ["carry","carry","carry","carry"]
+})
+# Tasks:
+# 1) Show only Language + Root
+# 2) Add Family = "IE" for all
+# 3) Rename Gloss -> Meaning
+# 4) Set index to Language, then select the Sanskrit row by label
+```
+
+
