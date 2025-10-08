@@ -4,6 +4,38 @@ format: html
 ---
 
 ```{python}
+word = "cat"
+
+sibilants = ["s", "z", "ʃ", "ʒ", "tʃ", "dʒ"]
+voiceless = ["p", "t", "k", "f", "θ"]
+
+if word[-1] in sibilants:
+    plural = word + "Iz"
+
+elif word[-1] in voiceless:
+    plural = word + "s"
+
+else:
+    plural = word + "z"
+
+print(plural)
+```
+
+```{python}
+charlotte = ['The Professor', 'Jane Eyre', 'Villette', 'Shirley']
+for book in charlotte: 
+    print(book)
+print(book)
+```
+
+```{python}
+words = ["phoneme", "phrase", "morpheme", "reconstruction", "index"]
+
+for word in words:
+    print(word, "has", len(word), "letters")
+```
+
+```{python}
 import urllib.request
 
 url = "https://www.gutenberg.org/files/141/141-0.txt"  # Mansfield Park
@@ -24,8 +56,6 @@ print(book_text[:200])
 ```{python}
 with open("mansfield_park.txt", "r", encoding="utf-8") as f:
     book_lines = f.readlines()
-
-len(book_lines)
 ```
 
 ```{python}
@@ -52,4 +82,13 @@ two_line.strip()
 
 ```{python}
 one_line.strip().lower()
+```
+
+```{python}
+with open("mansfield_park.txt", "r", encoding="utf-8") as f:
+    lines = f.readlines()
+
+mansfield_cleaned = [line.strip().lower() for line in lines]
+
+print(mansfield_cleaned[:10])
 ```
