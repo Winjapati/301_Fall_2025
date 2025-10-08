@@ -15,6 +15,9 @@ format:
 editor: visual
 ---
 
+<!-- Note: the final activity is not great.  Would help if list comprehensions were introduced today, so that students would know how to create one themselves. -->
+
+
 # Review
 
 -   What did you learn last time?
