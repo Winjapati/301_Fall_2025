@@ -198,4 +198,33 @@ lex = pd.DataFrame({
 # 4) Set index to Language, then select the Sanskrit row by label
 ```
 
+## Extracting Keys and Values
+
+-   We're going to use the following methods:
+    -   `dict.keys()` - access keys
+    -   `dict.values()` - access values
+-   We can use a **list comprehension** to get what we need.
+
+``` python
+lang = [key for key in languages.keys()] fam = [value for value in languages.values()] print(lang, fam)
+```
+
+## Activity
+
+``` python
+import pandas as pd  langs = pd.Series(lang, name="languages") fams = pd.Series(fam, name="families") langs, fams
+```
+
+## 
+
+## Inspecting a DataFrame
+
+-   Run this code - what do `.head()`, `.tail()`, `.shape`, `.columns`, and `.index` do?
+
+``` python
+df.head() df.tail(2) df.shape, df.columns, df.index df.info()
+```
+
+## 
+
 

@@ -13,8 +13,23 @@ languages = {
     "Italian": "Romance",
     "English": "Germanic"
 }
-lang_df = pd.DataFrame(languages)
 
+lang_df = pd.DataFrame(list(languages.items()), columns=["Language", "Family"])
 print(lang_df)
 
+```
+
+```{python}
+import pandas as pd
+# Create new DF
+new_info = pd.DataFrame({
+    "Location": ["France", "Spain", "Italy", "England"],
+    "Speakers_millions": [80, 485, 65, 380],
+    "Writing_System": ["Latin", "Latin", "Latin", "Latin"],
+    "ISO_code": ["fra", "spa", "ita", "eng"]
+})
+# Concatenate horizontally
+lang_updated = pd.concat([lang_df, new_info], axis=1)
+
+print(lang_updated)
 ```

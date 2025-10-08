@@ -208,23 +208,23 @@ print(new_df)
 
 Using Pandas, recreate the following table:
 
-|     | voicing   | place    | manner    |
-|-----|-----------|----------|-----------|
-| /p/ | voiceless | bilabial | stop      |
-| /b/ | voiced    | bilabial | stop      |
-| /t/ | voiceless | alveolar | stop      |
-| /d/ | voiced    | alveolar | stop      |
-| /s/ | voiceless | alveolar | fricative |
-| /h/ | voiceless | glottal  | fricative |
+|     | sound | voicing   | place    | manner    |
+|-----|-------|-----------|----------|-----------|
+| 0   | /p/   | voiceless | bilabial | stop      |
+| 1   | /b/   | voiced    | bilabial | stop      |
+| 2   | /t/   | voiceless | alveolar | stop      |
+| 3   | /d/   | voiced    | alveolar | stop      |
+| 4   | /s/   | voiceless | alveolar | fricative |
+| 5   | /h/   | voiceless | glottal  | fricative |
 
 # Going from `[]`/`{}` to `df`
 
 ## Converting Lists to a Series
 
-- If you think about it, a list is just a single column of a `.DataFrame()`
-- And for this reason, it's super easy to convert it to a `.Series()`
+-   If you think about it, a list is just a single column of a `.DataFrame()`
+-   And for this reason, it's super easy to convert it to a `.Series()`
 
-```python
+``` python
 import pandas as pd
 
 gettysburg = ["Four", "score", "and", "seven", "years", "ago"]
@@ -233,9 +233,10 @@ getty = pd.Series(gettysburg)
 print(getty)
 ```
 
-## Converting Dictionaries to a Series
+## Converting a `dict` to `.Series()`
 
-- How would we convert a `dict` to a `.DataFrame()`?
+-   How would we convert a `dict` to a `.DataFrame()`?
+
 ``` python
 languages = {
     "French": "Romance",
@@ -245,55 +246,28 @@ languages = {
 }
 ```
 
+## Converting a `dict` to `df`
 
-## Activity
-
-
-
-## Extracting Keys and Values
-
--   We're going to use the following methods:
-    -   `dict.keys()` - access keys
-    -   `dict.values()` - access values
--   We can use a **list comprehension** to get what we need.
-
-``` python
-lang = [key for key in languages.keys()]
-fam = [value for value in languages.values()]
-print(lang, fam)
-```
-
-
-##
-
-``` python
-import pandas as pd
-
-langs = pd.Series(lang, name="languages")
-fams = pd.Series(fam, name="families")
-langs, fams
-```
-
-## Keys & Values as Separate Columns
-
--   Start with a list of languages:
+-   You can simply using the below code, but:
+    -   Values must be placed inside of a list for this to work
+    -   It also gives the table a bit of an odd structure
 
 ``` python
 import pandas as pd
 
 languages = {
-    "French": "Romance",
-    "Spanish": "Romance",
-    "Italian": "Romance",
-    "English": "Germanic"
+    "French": ["Romance"],
+    "Spanish": ["Romance"],
+    "Italian": ["Romance"],
+    "English": ["Germanic"]
 }
-lang_df = pd.DataFrame(list(languages.items()), columns=["Language", "Family"])
+lang_df = pd.DataFrame(languages)
 print(lang_df)
 ```
 
-## If you want the Key as the Index
+## Making the Key the Index
 
-```python
+``` python
 import pandas as pd
 
 languages = {
@@ -307,27 +281,32 @@ lang_df = pd.DataFrame.from_dict(languages, orient="index", columns=["Family"])
 print(lang_df)
 ```
 
-## 
+## Keys & Values as Separate Columns
 
-``` python
+```python
+import pandas as pd
 
+languages = {
+    "French": "Romance",
+    "Spanish": "Romance",
+    "Italian": "Romance",
+    "English": "Germanic"
+}
 
-
-print(df)
-```
-
-## Inspecting a DataFrame
-
--   Run this code - what do `.head()`, `.tail()`, `.shape`, `.columns`, and `.index` do?
-
-``` python
-df.head()
-df.tail(2)
-df.shape, df.columns, df.index
-df.info()
+lang_df = pd.DataFrame(list(languages.items()), columns=["Language", "Family"])
+print(lang_df)
 ```
 
 ## DF Activity
+
+- Build upon the most recent `df`, where the language & family were in separate columns.
+- Create a new `df` called `new_info`, where you add values to:
+  - Primary (original?) location
+  - Number of speakers (in millions)
+  - Writing System
+  - ISO code
+- Concatenate this list, saving as `lang_updated`
+
 
 
 # Activity Answers
@@ -351,12 +330,33 @@ for c in word:
 import pandas as pd
 
 phon_inv = pd.DataFrame({
+    "sound" : ["p","b","t","d","s","h"],
     "voicing": ["voiceless", "voiced", "voiceless", "voiced", "voiceless", "voiceless"],
     "place": ["bilabial", "bilabial", "alveolar", "alveolar", "alveolar", "glottal"], 
-    "manner": ["stop", "stop", "stop", "stop", "fricative", "fricative"]},
-    index=["p","b","t","d","s","h"])
+    "manner": ["stop", "stop", "stop", "stop", "fricative", "fricative"]})
 
 print(phon_inv)
 ```
 
-## 
+## DF Activity
+
+```python
+import pandas as pd
+# Create new DF
+new_info = pd.DataFrame({
+    "Location": ["France", "Spain", "Italy", "England"],
+    "Speakers_millions": [80, 485, 65, 380],
+    "Writing_System": ["Latin", "Latin", "Latin", "Latin"],
+    "ISO_code": ["fra", "spa", "ita", "eng"]
+})
+# Concatenate horizontally
+lang_updated = pd.concat([lang_df, new_info], axis=1)
+
+print(lang_updated)
+```
+
+
+
+
+
+
