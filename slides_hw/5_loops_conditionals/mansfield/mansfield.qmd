@@ -1,0 +1,55 @@
+---
+title: "mansfield"
+format: html
+---
+
+```{python}
+import urllib.request
+
+url = "https://www.gutenberg.org/files/141/141-0.txt"  # Mansfield Park
+filename = "mansfield_park.txt"
+
+urllib.request.urlretrieve(url, filename)
+
+print("Downloaded:", filename)
+```
+
+```{python}
+with open("mansfield_park.txt", "r", encoding="utf-8") as f:
+    book_text = f.read()
+    
+print(book_text[:200])
+```
+
+```{python}
+with open("mansfield_park.txt", "r", encoding="utf-8") as f:
+    book_lines = f.readlines()
+
+len(book_lines)
+```
+
+```{python}
+book_lines[101]
+```
+
+```{python}
+one_line = book_lines[101] 
+one_line.rstrip()
+```
+
+```{python}
+two_line = book_lines[12]
+two_line
+```
+
+```{python}
+two_line.rstrip().lstrip()
+```
+
+```{python}
+two_line.strip()
+```
+
+```{python}
+one_line.strip().lower()
+```

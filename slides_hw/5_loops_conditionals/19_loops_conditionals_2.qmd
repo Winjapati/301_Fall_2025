@@ -128,18 +128,6 @@ print(book)
 
 ![By Dr. Josef Fruehwald](for_loop.gif){fig-alt="Dr. Fruehwald's awesome gif about `for` loops" fig-align="center"}
 
-<!-- ## `for` Loops -->
-
-<!-- book_counter = 0 -->
-
-<!-- for title in charlotte: book_counter = book_counter + 1 -->
-
-<!-- print(book_counter) \# 4 Setting up an empty counter or a collector before starting a for loop is a very common thing to do. For example, if I wanted to know how many characters Charlotte Brontë used in the title of each book, and in total over all, I could do this: -->
-
-<!-- total_characters = 0 book_characters = \[\] -->
-
-<!-- for title in charlotte: \# exclude spaces no_space = title.replace(" ", "") -->
-
 ## Activity: `for` loops
 
 Below is a list of five important terms in Linguistics:
@@ -165,7 +153,7 @@ Each printed statement should look like: "python has 6 letters."
 
 ## Verifying your Python directory
 
--   First, run the following code:
+-   First, check what directory you're in with `pwd` or run the following Python code:
 
 ``` python
 import os
@@ -173,6 +161,7 @@ print(os.getcwd())
 ```
 
 -   This should tell you which directory you're in. You should be located in your LIN_301 directory, or whichever one this `qmd` doc is found in.
+-   If not, use `cd` to get to the right path.
 
 ## Downloading Using Python
 
