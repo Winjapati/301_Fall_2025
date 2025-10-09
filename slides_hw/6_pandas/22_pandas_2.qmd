@@ -1,6 +1,6 @@
 ---
 title: "Computation for Linguists"
-subtitle: "Beginning Python: More Tricks with Lists, While Loops"
+subtitle: "Beginning Python: Pandasmonium, Day 2"
 date: "October 10, 2025"
 author: "Dr. Andrew M. Byrd"
 format:
@@ -22,106 +22,65 @@ editor: source
 
 ## Recap from Last Time
 
--   Conditionals: `if` = 1 x
--   Loops: `for` = multiple times
--   Cleaning text with `.strip()`, `.lower()`
-
-## Review Activity
-
--   Copy this list of messy words into your code, creating a list called `words`:
-
-``` python
-words = [" Cat\n", "dog", " BIRD ", "fish\n", "LION", "tiger ", "bear", "OWL\n"]
-```
-
--   Write a `for` loop that goes through each word. Inside the loop:
-    -   Use `.strip()` and `.lower()` to clean the word
-    -   Save each result in a variable called `cleaned`
-    -   Print each instance of `cleaned` in the loop.
-    
-    
-# Day 2 — Filtering, Sorting, Combining
-
-## Complex Filtering
-
-```python
-# Logical AND (&) and OR (|)
-df[(df["family"]=="Indo-European") & (df["is_extinct"]==False)]
-```
-
-## Sorting
-
-```python
-df.sort_values(by="speakers_M", ascending=False)
-df.sort_index()  # by row labels
-```
-
-## Combining Series Side-by-Side
-
-```python
-reflexes_verb = pd.Series(
-    {"Latin": 8, "Greek": 10, "Sanskrit": 12, "Old English": 6}
-)
-reflexes_noun = pd.Series(
-    {"Latin": 5, "Greek": 7, "Gothic": 4, "Old Church Slavonic": 3}
-)
-
-combined = pd.DataFrame({"verb": reflexes_verb, "noun": reflexes_noun})
-combined
-```
-
-## Arithmetic with Alignment (fill missing)
-
-```python
-total = reflexes_verb.add(reflexes_noun, fill_value=0)
-total.sort_values(ascending=False)
-```
-
-## Concatenation (Stacking)
-
-```python
-# Vertical stack (same columns)
-latin_df = pd.DataFrame({"lang":["Latin","Latin"],"root":["fer-","port-"]})
-greek_df = pd.DataFrame({"lang":["Greek"],"root":["phér-"]})
-pd.concat([latin_df, greek_df], ignore_index=True)
-```
-
-## Handling Missing Data
-
-```python
-combined.isna().sum()
-combined_filled = combined.fillna(0)
-combined_dropped = combined.dropna()
-```
-
-## **Day 2 Activity — Compare Reflex Lists**
-
-```python
-# 1) Build the two Series (verb/noun) from above
-# 2) Combine into one DF with columns verb, noun
-# 3) Add a 'total' column = verb + noun (treat NaN as 0)
-# 4) Sort by total descending, show top 5
-```
-
----
-
-
+-   pandas!
+    -   `.Series()`
+    -   `.DataFrame`
+-   Creating `df`
+    -   `pd.DataFrame(dict)`
+    -   `pd.concat([series_1, series_2], axis=1`
+    -   `pd.DataFrame.from_dict(dict, orient="index", columns=[dict_value])`
+    -   `pd.DataFrame(list(dict.items()), columns=[key, value])`
 
 # Indexing and Selecting
 
-## Selecting Columns
+## Loading up our previous `pd`
+
+``` python
+import pandas as pd
+
+fresh_df = pd.DataFrame({
+    "language": ["Latin", "Greek", "Sanskrit", "Finnish"],
+    "family":   ["Indo-European", "Indo-European", "Indo-European", "Uralic"],
+    "speakers_millions": [0, 0, 0, 6],
+    "location": ["Italy", "Greece", "India", "Finland"]
+})
+
+print(fresh_df)
+```
+
+## Inspecting a DataFrame
+
+-   Run this code - what do `.head()`, `.tail()`, `.shape`, `.columns`, and `.index` do?
+
+``` python
+df.head(2) 
+df.tail(2) 
+df.shape
+df.columns
+df.index
+df.info()
+```
+
+## Accessing Single Columns
+
+- We can access a single `.Series()` using `df[ ]`
 
 ``` python
 df["language"]           # Series
-df[["language","family"]]# DataFrame (note double brackets)
 ```
 
 ## Accessing Multiple Columns
 
+- Or multiple columns using `df[[ ]]`
+
 ``` python
+df[["language","family"]] # DataFrame
 ```
 
 ## Selecting Rows by Integer Position
+
+-  We can access specific rows using `df.iloc`
+    -  "integer location"
 
 ``` python
 df.iloc[0]               # first row
@@ -129,6 +88,8 @@ df.iloc[1:3]             # slice rows 1..2
 ```
 
 ## Selecting Rows By Label
+
+- Or rows with a custom index using `df.loc`
 
 ``` python
 # Rows by label (after we set a custom index)
@@ -139,25 +100,127 @@ df2.loc["b"]             # row labeled 'b'
 
 ## Cell Access (Row + Column)
 
+- We can access a specific cell by label/column
 ``` python
 df.loc[0, "language"]        # cell by label/column
+```
+
+- Or using `.iloc` with specific coordinates
+```python
 df.iloc[0, 0]                # cell by position
+```
+
+- We can also slice in 2D ways:
+```python
 df.iloc[0:3, 0:2]            # rows 0..2, cols 0..1
 ```
 
 ## Boolean Filtering
+
+- And lastly we can filter our table using Boolean operators for specific properties:
 
 ``` python
 ie = df[df["family"] == "Indo-European"]
 ie
 ```
 
+## Complex Filtering
+
+- Use the operators `&` (and) and `|` (or)
+
+``` python
+df[(df["family"]=="Indo-European") & (df["location"]=="India")]
+df[(df["family"]=="Indo-European") | (df["location"]=="Finland")]
+```
+
+## Complex Filtering
+
+- Place `~` in front of the filter to mean **not**
+
+``` python
+df[~(df["family"]=="Indo-European")]
+```
+
+## Complex Filtering
+
+- To sort a `df` alphabetically by a specific `.Series()`, use the method `.sort_values()`
+
+```python
+df.sort_values(["location"])
+```
+
+## Counting
+
+- You can add up the total number of a `.Series()` using the `.sum()` method
+
+```python
+df["speakers_millions"].sum()
+```
+
+- Which you can convert to a regular `int`:
+
+```python
+int(df["speakers_millions"].sum())
+```
+
+
+## Activity: English Vowels 
+
+```python
+import pandas as pd
+
+eng_vowels = pd.DataFrame({
+    "symbol": ["i", "ɪ", "e", "ɛ", "æ", "u", "ʊ", "o", "ɔ", "ɑ", "ʌ", "ə"],
+    "height": ["high", "high", "mid", "mid", "low", "high", "high", "mid", "mid", "low", "mid", "mid"],
+    "backness": ["front", "front", "front", "front", "front",
+                 "back", "back", "back", "back", "back",
+                 "central", "central"],
+    "tense":   [True, False, True, False, False,
+                True, False, True, False, False,
+                False, False],
+    "rounded": [False, False, False, False, False,
+                True, True, True, True, False,
+                False, False]
+})
+
+eng_vowels
+```
+## Activity: English Vowels 
+
+1. Filter the `df`: show only **high back rounded vowels**
+
+2. Negation and slicing: display all vowels that are **not tense**. 
+
+3. Then display only the first three vowels of that group.
+
+4. Sort the `df` by **height** and **backness**. 
+
+5. Count how many vowels are rounded, tense or both.
+
+
+
+
 # Modifying DataFrames
+
+## Reloading the `df`
+
+``` python
+import pandas as pd
+
+df = pd.DataFrame({
+    "language": ["Latin", "Greek", "Sanskrit", "Finnish"],
+    "family":   ["Indo-European", "Indo-European", "Indo-European", "Uralic"],
+    "speakers_millions": [0, 0, 0, 6],
+    "location": ["Italy", "Greece", "India", "Finland"]
+})
+
+print(df)
+```
 
 ## Adding New Columns
 
 ``` python
-df["is_extinct"] = [True, False, False, True]
+df["is_extinct"] = [True, True, True, False]
 ```
 
 ## Dropping Columns & Rows
@@ -198,33 +261,108 @@ lex = pd.DataFrame({
 # 4) Set index to Language, then select the Sanskrit row by label
 ```
 
-## Extracting Keys and Values
 
--   We're going to use the following methods:
-    -   `dict.keys()` - access keys
-    -   `dict.values()` - access values
--   We can use a **list comprehension** to get what we need.
 
-``` python
-lang = [key for key in languages.keys()] fam = [value for value in languages.values()] print(lang, fam)
-```
-
-## Activity
-
-``` python
-import pandas as pd  langs = pd.Series(lang, name="languages") fams = pd.Series(fam, name="families") langs, fams
 ```
 
 ## 
 
-## Inspecting a DataFrame
+# Day 2 — Filtering, Sorting, Combining
 
--   Run this code - what do `.head()`, `.tail()`, `.shape`, `.columns`, and `.index` do?
+
+## Sorting
 
 ``` python
-df.head() df.tail(2) df.shape, df.columns, df.index df.info()
+df.sort_values(by="speakers_M", ascending=False)
+df.sort_index()  # by row labels
 ```
 
-## 
+## Combining Series Side-by-Side
+
+``` python
+reflexes_verb = pd.Series(
+    {"Latin": 8, "Greek": 10, "Sanskrit": 12, "Old English": 6}
+)
+reflexes_noun = pd.Series(
+    {"Latin": 5, "Greek": 7, "Gothic": 4, "Old Church Slavonic": 3}
+)
+
+combined = pd.DataFrame({"verb": reflexes_verb, "noun": reflexes_noun})
+combined
+```
+
+## Arithmetic with Alignment (fill missing)
+
+``` python
+total = reflexes_verb.add(reflexes_noun, fill_value=0)
+total.sort_values(ascending=False)
+```
+
+## Concatenation (Stacking)
+
+``` python
+# Vertical stack (same columns)
+latin_df = pd.DataFrame({"lang":["Latin","Latin"],"root":["fer-","port-"]})
+greek_df = pd.DataFrame({"lang":["Greek"],"root":["phér-"]})
+pd.concat([latin_df, greek_df], ignore_index=True)
+```
+
+## Handling Missing Data
+
+``` python
+combined.isna().sum()
+combined_filled = combined.fillna(0)
+combined_dropped = combined.dropna()
+```
+
+## **Day 2 Activity — Compare Reflex Lists**
+
+``` python
+# 1) Build the two Series (verb/noun) from above
+# 2) Combine into one DF with columns verb, noun
+# 3) Add a 'total' column = verb + noun (treat NaN as 0)
+# 4) Sort by total descending, show top 5
+```
 
 
+
+
+
+
+# Activity Answers
+
+## Activity: English Vowels
+
+```python
+import pandas as pd
+
+eng_vowels = pd.DataFrame({
+    "symbol": ["i", "ɪ", "e", "ɛ", "æ", "u", "ʊ", "o", "ɔ", "ɑ", "ʌ", "ə"],
+    "height": ["high", "high", "mid", "mid", "low", "high", "high", "mid", "mid", "low", "mid", "mid"],
+    "backness": ["front", "front", "front", "front", "front",
+                 "back", "back", "back", "back", "back",
+                 "central", "central"],
+    "tense":   [True, False, True, False, False,
+                True, False, True, False, False,
+                False, False],
+    "rounded": [False, False, False, False, False,
+                True, True, True, True, False,
+                False, False]
+})
+```
+
+## Activity: English Vowels
+
+```python
+import pandas as pd
+
+# 1. Filter the `df`: show only **high back rounded vowels**
+eng_vowels[(eng_vowels["height"]=="high") & (eng_vowels["backness"]=="back") & (eng_vowels["rounded"] = True)]
+# 2. Negation and slicing: display all vowels that are **not tense**. 
+eng_vowels[~(eng_vowels["tense"]==False)]
+# 3. Then display only the first three vowels of that group.
+eng_vowels[~(eng_vowels["tense"]==False)].head(2)
+# 4. Sort the `df` by **height** and **backness**. 
+
+# 5. Count how many vowels are rounded, tense or both.
+```

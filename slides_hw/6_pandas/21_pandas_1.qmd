@@ -49,7 +49,7 @@ vowels = "aeiou"
 
 ## Installing Pandas
 
-To install: - PC:
+- PC:
 
 ``` bash
 pip install pandas
@@ -75,9 +75,14 @@ import pandas as pd
 
 ## What is Pandas?
 
--   **Pandas**, short for **Panel Data**
+-   **Pandas**, short for **Panel Data**, is a Python **library**
 -   Allows the manipulation of tables within Python
     -   very similar to a spreadsheet
+-  This is how we load pandas in our code
+
+``` python
+import pandas as pd
+```
 
 ## Pandas **Series**
 
@@ -201,7 +206,7 @@ fresh_df = pd.DataFrame({
     "location": ["Italy", "Greece", "India", "Finland"]
 }, index=["a","b","c","d"])
 
-print(new_df)
+print(fresh_df)
 ```
 
 ## Pandas Activity: Phonemic Inventory
@@ -248,7 +253,7 @@ languages = {
 
 ## Converting a `dict` to `df`
 
--   You can simply using the below code, but:
+-   You can by simply using the below code, but:
     -   Values must be placed inside of a list for this to work
     -   It also gives the table a bit of an odd structure
 
@@ -300,13 +305,12 @@ print(lang_df)
 ## DF Activity
 
 - Build upon the most recent `df`, where the language & family were in separate columns.
-- Create a new `df` called `new_info`, where you add values to:
+- Create a new `df` called `new_info`, where you add the following values you will need to look up:
   - Primary (original?) location
   - Number of speakers (in millions)
   - Writing System
   - ISO code
 - Concatenate this list, saving as `lang_updated`
-
 
 
 # Activity Answers
