@@ -1,6 +1,6 @@
 ---
 title: "Computation for Linguists"
-subtitle: "Beginning Python: Pandasmonium, Day 1"
+subtitle: "Pandasmonium, Day 1"
 date: "October 13, 2025"
 author: "Dr. Andrew M. Byrd"
 format:

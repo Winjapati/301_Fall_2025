@@ -130,6 +130,38 @@ df_no_family.head()
 ```
 
 ```{python}
-df = df.rename(index={[0]=["latin"]})
-df.head()
+# df_reset = df.reset_index(drop=True)
+df_set = df.set_index("language")
+df_set
+```
+
+```{python}
+reflexes_verb = pd.Series(
+    {"Latin": 8, "Greek": 10, "Sanskrit": 12, "Old English": 6}
+)
+reflexes_noun = pd.Series(
+    {"Latin": 5, "Greek": 7, "Gothic": 4, "Old Church Slavonic": 3}
+)
+
+combined = pd.DataFrame({"verb": reflexes_verb, "noun": reflexes_noun})
+combined
+```
+
+```{python}
+total = reflexes_verb.add(reflexes_noun, fill_value=0)
+total.sort_values(ascending=False)
+```
+
+```{python}
+# Vertical stack (same columns)
+latin_df = pd.DataFrame({"lang":["Latin","Latin"],"root":["fer-","port-"]})
+greek_df = pd.DataFrame({"lang":["Greek"],"root":["phér-"]})
+pd.concat([latin_df, greek_df], ignore_index=True)
+```
+
+```{python}
+combined.isna().sum()
+combined_filled = combined.fillna(0)
+combined_dropped = combined.dropna()
+combined_dropped.head()
 ```

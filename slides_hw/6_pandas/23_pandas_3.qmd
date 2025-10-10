@@ -22,25 +22,26 @@ editor: source
 
 ## Recap from Last Time
 
--   Conditionals: `if` = 1 x
--   Loops: `for` = multiple times
--   Cleaning text with `.strip()`, `.lower()`
+-   ddddddddd
 
 ## Review Activity
 
--   Copy this list of messy words into your code, creating a list called `words`:
+-   
 
-``` python
-words = [" Cat\n", "dog", " BIRD ", "fish\n", "LION", "tiger ", "bear", "OWL\n"]
+# Loading up `csv` and `xls` files
+
+## Reading / Writing Files
+
+```python
+# CSV
+ref_df.to_csv("reflexes_summary.csv", index=False)
+loaded = pd.read_csv("reflexes_summary.csv")
+loaded.head()
+
+# Excel (if needed)
+# ref_df.to_excel("reflexes_summary.xlsx", index=False)
+# pd.read_excel("reflexes_summary.xlsx")
 ```
-
--   Write a `for` loop that goes through each word. Inside the loop:
-    -   Use `.strip()` and `.lower()` to clean the word
-    -   Save each result in a variable called `cleaned`
-    -   Print each instance of `cleaned` in the loop.
-
-
-# Day 3 — Summaries, Grouping, I/O, Quick Plots
 
 ## Quick Summaries
 
@@ -68,18 +69,6 @@ ref_df.groupby("Family").agg(
 )
 ```
 
-## Reading / Writing Files
-
-```python
-# CSV
-ref_df.to_csv("reflexes_summary.csv", index=False)
-loaded = pd.read_csv("reflexes_summary.csv")
-loaded.head()
-
-# Excel (if needed)
-# ref_df.to_excel("reflexes_summary.xlsx", index=False)
-# pd.read_excel("reflexes_summary.xlsx")
-```
 
 ## Quick Visualization (optional)
 
