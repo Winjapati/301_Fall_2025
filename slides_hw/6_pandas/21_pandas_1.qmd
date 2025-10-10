@@ -49,7 +49,7 @@ vowels = "aeiou"
 
 ## Installing Pandas
 
-- PC:
+-   PC:
 
 ``` bash
 pip install pandas
@@ -78,7 +78,7 @@ import pandas as pd
 -   **Pandas**, short for **Panel Data**, is a Python **library**
 -   Allows the manipulation of tables within Python
     -   very similar to a spreadsheet
--  This is how we load pandas in our code
+-   This is how we load pandas in our code
 
 ``` python
 import pandas as pd
@@ -86,7 +86,7 @@ import pandas as pd
 
 ## Pandas **Series**
 
--   At the heart of a `pd` `df` (pandas dataframe), are **Series**:
+-   At the heart of a `pd` `df` (pandas dataframe), are `.Series()`:
     -   1-D labeled data
     -   a single labeled column or row
 
@@ -101,7 +101,7 @@ langs
 
 ## Pandas **Series**
 
--   You can give specific labels to the `index` of the **series**
+-   You can give specific labels to the `index` of the `.Series()`
 
 ``` python
 import pandas as pd
@@ -288,7 +288,7 @@ print(lang_df)
 
 ## Keys & Values as Separate Columns
 
-```python
+``` python
 import pandas as pd
 
 languages = {
@@ -304,14 +304,13 @@ print(lang_df)
 
 ## DF Activity
 
-- Build upon the most recent `df`, where the language & family were in separate columns.
-- Create a new `df` called `new_info`, where you add the following values you will need to look up:
-  - Primary (original?) location
-  - Number of speakers (in millions)
-  - Writing System
-  - ISO code
-- Concatenate this list, saving as `lang_updated`
-
+-   Build upon the most recent `df`, where the language & family were in separate columns.
+-   Create a new `df` called `new_info`, where you add the following values you will need to look up:
+    -   Primary (original?) location
+    -   Number of speakers (in millions)
+    -   Writing System
+    -   ISO code
+-   Concatenate this list, saving as `lang_updated`
 
 # Activity Answers
 
@@ -344,7 +343,7 @@ print(phon_inv)
 
 ## DF Activity
 
-```python
+``` python
 import pandas as pd
 # Create new DF
 new_info = pd.DataFrame({
@@ -358,9 +357,3 @@ lang_updated = pd.concat([lang_df, new_info], axis=1)
 
 print(lang_updated)
 ```
-
-
-
-
-
-
