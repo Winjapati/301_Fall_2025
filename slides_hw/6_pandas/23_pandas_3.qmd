@@ -1,7 +1,7 @@
 ---
 title: "Computation for Linguists"
-subtitle: "Beginning Python: More Tricks with Lists, While Loops"
-date: "October 10, 2025"
+subtitle: "Pandasmonium: Day 3"
+date: "October 17, 2025"
 author: "Dr. Andrew M. Byrd"
 format:
   revealjs:
@@ -157,7 +157,87 @@ pd.concat([s1, s2], axis=1)                       # side-by-side
 - Build intuition with *small*, *visible* examples before loading big CSVs.
 
 
+## Cleaning Data in Pandas
+
+### Why Clean?
+- Real data is messy.  
+- Clean data means:
+  - Consistent structure  
+  - Clear column names  
+  - No missing, duplicated, or mis-typed values  
+
 ---
+
+## Cleaning **Before** You Build a DataFrame
+
+> “If it looks messy in your list or dictionary, pandas will just mirror that mess.”
+
+## Common Pre-DF Fixes
+| Goal | Example |
+|------|----------|
+| Remove whitespace / newlines | `" word\n".strip()` |
+| Standardize capitalization | `"Word".lower()` |
+| Remove punctuation | `re.sub(r"[^\w\s]", "", text)` |
+| Split text into tokens | `text.split()` |
+| Validate list/dict lengths | `len(list)`, `list(zip(...))` |
+| Handle placeholders | Replace `"NA"`, `"None"` with `None` |
+
+🧠 *Use basic Python + regex for text cleaning.*
+
+---
+
+## Cleaning **Within** the DataFrame
+
+> “Once it’s a table, use pandas tools to fix the structure.”
+
+## Useful Methods
+| Task | Example |
+|------|----------|
+| Inspect structure | `df.info()`, `df.shape`, `df.columns` |
+| Rename columns | `df.rename(columns={"old":"new"})` |
+| Drop columns or rows | `df.drop(columns=["col"])`, `df.dropna()` |
+| Fill / replace values | `df.fillna("Unknown")`, `df.replace("?", None)` |
+| Remove duplicates | `df.drop_duplicates()` |
+| Convert data types | `df["col"] = df["col"].astype(int)` |
+| String cleanup | `df["col"] = df["col"].str.strip().str.lower()` |
+| Compute new columns | `df["new"] = df["col1"] + df["col2"]` |
+| Sort and reset | `df.sort_values(["col"])`, `df.reset_index(drop=True)` |
+
+---
+
+## 🧩 A Mental Model
+
+| Phase | Mindset | Tools |
+|-------|----------|-------|
+| **Before** | Clean the input | String methods, lists, dicts, `re` |
+| **Inside DF** | Clean the structure | `.rename()`, `.dropna()`, `.astype()` |
+| **After** | Analyze and summarize | `.loc`, `.sum()`, `.mean()`, `.groupby()` |
+
+
+
+---
+
+## 🧭 Ten Core Methods to Remember
+
+1. `df.info()` – check structure  
+2. `df.columns` – list columns  
+3. `df.rename()` – fix column names  
+4. `df.dropna()` / `df.fillna()` – handle missing data  
+5. `df.drop_duplicates()` – remove repeats  
+6. `df.astype()` – convert data type  
+7. `df["col"].str.lower()` – text cleanup  
+8. `df.replace()` – fix placeholders  
+9. `df.sort_values()` – organize  
+10. `df.reset_index()` – tidy indices after filtering  
+
+---
+
+## Key Takeaway
+
+> Python cleans **strings** and **lists**.  
+> Pandas cleans **tables**.
+
+
 
 # What You Can Do Now 🧠
 
@@ -171,6 +251,8 @@ pd.concat([s1, s2], axis=1)                       # side-by-side
   - Merge two datasets (e.g., LIV + IEW)
   - Identify missing reflexes or mismatched glosses automatically
 
+## Linguistic Tasks Now Possible with Pandas
+
 - ✅ **Quantify linguistic patterns**
   - Count how many reflexes each family has per root
   - Measure which morphological types are most frequent
@@ -178,6 +260,8 @@ pd.concat([s1, s2], axis=1)                       # side-by-side
 - ✅ **Clean and normalize datasets**
   - Capitalize, strip, or standardize glosses and forms
   - Fill in missing data (`NaN → 0`) and rename columns in bulk
+
+## Linguistic Tasks Now Possible with Pandas
 
 - ✅ **Group and summarize**
   - Group by family, POS, or semantic field

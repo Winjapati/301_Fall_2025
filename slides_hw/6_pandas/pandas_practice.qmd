@@ -61,7 +61,7 @@ df.sort_values(["location"])
 df["speakers_millions"].sum()
 ```
 
-``` {python}
+```{python}
 int(df["speakers_millions"].sum())
 ```
 
@@ -84,4 +84,52 @@ eng_vowels = pd.DataFrame({
 
 eng_vowels
 
+```
+
+```{python}
+import pandas as pd
+
+# 1. Filter the `df`: show only **high back rounded vowels**
+eng_vowels[(eng_vowels["height"]=="high") & (eng_vowels["backness"]=="back") & (eng_vowels["rounded"] == True)]
+# 2. Negation and slicing: display all vowels that are **not tense**. 
+eng_vowels[~(eng_vowels["tense"]==True)]
+# 3. Then display only the first three vowels of that group.
+eng_vowels[~(eng_vowels["tense"]==True)].head(3)
+# 4. Sort the `df` by **height** and **backness**. 
+eng_vowels.sort_values(["height", "backness"])
+# 5. Count how many vowels are rounded, tense or both.
+rounded = eng_vowels["rounded"].sum()
+tense = eng_vowels["tense"].sum()
+both = (eng_vowels["rounded"] & eng_vowels["tense"]).sum()
+print("Rounded:", rounded, "| Tense:", tense, "| Both:", both)
+```
+
+```{python}
+import pandas as pd
+
+df = pd.DataFrame({
+    "language": ["Latin", "Greek", "Sanskrit", "Finnish"],
+    "family":   ["Indo-European", "Indo-European", "Indo-European", "Uralic"],
+    "speakers_millions": [0, 0, 0, 6],
+    "location": ["Italy", "Greece", "India", "Finland"]
+})
+
+df["is_extinct"] = [True, True, True, False]
+
+df.head()
+
+```
+
+```{python}
+# Drop (returns a new DF unless inplace=True)
+df_no_family = df.drop([1])
+
+df = df.rename(columns={"speakers_millions": "speakers_M"})
+
+df_no_family.head()
+```
+
+```{python}
+df = df.rename(index={[0]=["latin"]})
+df.head()
 ```
