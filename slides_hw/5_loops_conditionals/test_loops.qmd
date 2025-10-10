@@ -1,49 +1,125 @@
 ---
-title: "test_loops"
+title: "test_cond_loops"
 format: html
 ---
 
 ```{python}
-book_location = "mansfield_park.txt"
-book_file = open(book_location, mode = 'r')
+words = [" Cat\n", "dog", " BIRD ", "fish\n", "LION", "tiger ", "bear", "OWL\n"]
+
+clean_var = 0
+
+for word in words:
+    cleaned = word.strip().lower()
+    clean_var = clean_var+ 1
+    print(cleaned, clean_var, len(cleaned))
+
+print(len(words))
 ```
 
 ```{python}
-book_file.readline()
+test_list = ["a", "b", "c"]
+test_list.append("d")
+
+print(test_list)
 ```
 
 ```{python}
-book_lines = book_file.readlines()
-len(book_lines)
+words = [" Cat\n", "dog", " BIRD ", "fish\n", "LION", "tiger ", "bear", "OWL\n"]
+cleaned_words = []
+
+for word in words:
+    cleaned = word.strip().lower()
+    cleaned_words.append(cleaned)
+
+print(cleaned_words)
 ```
 
 ```{python}
-book_lines[101]
+words = [" Cat\n", "dog", " BIRD ", "fish\n", "LION", "tiger ", "bear", "OWL\n"]
+
+cleaned_words = [word.strip().lower() for word in words]
+
+print(cleaned_words)
 ```
 
 ```{python}
-one_line = book_lines[101]
-one_line
+items = ["color", "flavour", "theater", "center", "analyze", "organize", "favorite", "neighbor", "honor", "catalog", "honour", "flavor", "analyse", "flavor", "traveler"]
+print(len(items))
 ```
 
 ```{python}
-one_line.rstrip()
+items = ["color", "flavour", "theater", "center", "analyze", "organize", "favorite", "neighbor", "honor", "catalog", "honour", "flavor", "analyse", "flavor", "traveler"]
+
+item_count = 0
+for item in items:
+    item_count += 1
+    print(item, item_count)
 ```
 
 ```{python}
-two_line = book_lines[12]
-two_line
+items = ["color", "flavour", "theater", "center", "analyze", "organize", "favorite", "neighbor", "honor", "catalog", "honour", "flavor", "analyse", "flavor", "traveler"]
+
+c_item_count = 0
+for item in items:
+    if item[0] == "c":
+        c_item_count += 1
+        print(item, c_item_count)
 ```
 
 ```{python}
-(mansfield_cleaned[0:10])
+items = ["color", "flavour", "theater", "center", "analyze", "organize", "favorite", "neighbor", "honor", "catalog", "honour", "flavor", "analyse", "flavor", "traveler"]
 
-with open("mansfield_park.txt", "r", encoding="utf-8") as f:
-    lines = f.readlines()
+r_item_count = 0
+for item in items:
+    if item[-1] == "r":
+        r_item_count += 1
+        print(item, r_item_count)
+```
 
-mansfield_cleaned = [line.strip().lower() for line in lines]
+```{python}
+items = ["neighbourhood", "color", "flavour", "theater", "center", "analyze", "organize", "favorite", "neighbor", "honor", "catalog", "honour", "flavor", "analyse", "flavor", "traveler"]
 
-print(mansfield_cleaned[:10])  # show the first 10 cleaned lines
+down_with_brits = []
+for word in items:
+    if word.endswith("our"):
+        word = word.replace("our", "or")
+    elif word.endswith("yse"):
+        word = word.replace("yse", "yze")
+    down_with_brits.append(word)
 
+print(down_with_brits)
 
+```
+
+```{python}
+getty = "Four score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal."
+
+getty.split()
+```
+
+```{python}
+getty = "Four score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal."
+
+getty_1 = getty.split(",")
+getty_2 = getty.split(".")
+getty_3 = getty.split("e")
+print(getty_1, "\n", getty_2, "\n", getty_3)
+```
+
+```{python}
+import re
+
+text = "Hello, world!   This... is a test."
+words = re.split(r"[\s\W]+", text)
+words = [w for w in words if w]
+print(words)
+```
+
+```{python}
+with open("alice.txt", "r", encoding="utf-8") as f:
+    alice_text = f.read()
+
+alice_words = re.split(r"[\s\W]+", alice_text)
+alice_words = [w for w in alice_words if w]
+print(alice_words[:100])
 ```
