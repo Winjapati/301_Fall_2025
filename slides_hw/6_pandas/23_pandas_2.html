@@ -411,8 +411,6 @@ Dr.&nbsp;Andrew M. Byrd
 <ul>
 <li><a href="#/review" id="/toc-review">Review</a></li>
 <li><a href="#/indexing-and-selecting" id="/toc-indexing-and-selecting">Indexing and Selecting</a></li>
-<li><a href="#/modifying-dataframes" id="/toc-modifying-dataframes">Modifying DataFrames</a></li>
-<li><a href="#/filtering-sorting-combining" id="/toc-filtering-sorting-combining">Filtering, Sorting, Combining</a></li>
 <li><a href="#/activity-answers" id="/toc-activity-answers">Activity Answers</a></li>
 </ul>
 </nav>
@@ -427,27 +425,71 @@ Dr.&nbsp;Andrew M. Byrd
 <section id="recap-from-last-time" class="slide level2 center">
 <h2>Recap from Last Time</h2>
 <ul>
-<li>pandas!
-<ul>
-<li><code>.Series()</code></li>
-<li><code>.DataFrame</code></li>
-</ul></li>
+<li><code>pd.Series()</code>, <code>pd.DataFrame</code></li>
 <li>Creating <code>df</code>
 <ul>
+<li><code>pd.DataFrame({ column_name : [value_1, value_2] })</code></li>
 <li><code>pd.DataFrame(dict)</code></li>
-<li><code>pd.concat([series_1, series_2], axis=1</code></li>
+<li><code>pd.concat([series_1, series_2], axis=1)</code></li>
 <li><code>pd.DataFrame.from_dict(dict, orient="index", columns=[dict_value])</code></li>
 <li><code>pd.DataFrame(list(dict.items()), columns=[key, value])</code></li>
 </ul></li>
 </ul>
+</section>
+<section id="review-activity-pie-time" class="slide level2 center">
+<h2>Review Activity: PIE time</h2>
+<ul>
+<li>Using <code>pd.DataFrame({ ... })</code>, create the following table</li>
+</ul>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Root</th>
+<th style="text-align: left;">Meaning</th>
+<th style="text-align: left;">Latin</th>
+<th style="text-align: left;">Greek</th>
+<th style="text-align: left;">English</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">*bʰer-</td>
+<td style="text-align: left;">‘to carry’</td>
+<td style="text-align: left;">ferō</td>
+<td style="text-align: left;">pʰérō</td>
+<td style="text-align: left;">bear</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">*ĝenh₁-</td>
+<td style="text-align: left;">‘to beget’</td>
+<td style="text-align: left;">gignō</td>
+<td style="text-align: left;">gígnomai</td>
+<td style="text-align: left;">kin</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">*ped-</td>
+<td style="text-align: left;">‘foot’</td>
+<td style="text-align: left;">pēs</td>
+<td style="text-align: left;">poús</td>
+<td style="text-align: left;">foot</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">*doh₃-</td>
+<td style="text-align: left;">‘to give’</td>
+<td style="text-align: left;">dō</td>
+<td style="text-align: left;">dídōmi</td>
+<td style="text-align: left;">donate</td>
+</tr>
+</tbody>
+</table>
 </section></section>
 <section>
 <section id="indexing-and-selecting" class="title-slide slide level1 center">
 <h1>Indexing and Selecting</h1>
 
 </section>
-<section id="loading-up-our-previous-pd" class="slide level2 center">
-<h2>Loading up our previous <code>pd</code></h2>
+<section id="load-up-our-previous-pd" class="slide level2 center">
+<h2>Load up our previous <code>pd</code></h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href=""></a></span>
 <span id="cb1-3"><a href=""></a>fresh_df <span class="op">=</span> pd.DataFrame({</span>
@@ -477,6 +519,9 @@ Dr.&nbsp;Andrew M. Byrd
 <li>We can access a single <code>.Series()</code> using <code>df[ ]</code></li>
 </ul>
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a>df[<span class="st">"language"</span>]           <span class="co"># Series</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Does this remind you of anything?</li>
+</ul>
 </section>
 <section id="accessing-multiple-columns" class="slide level2 center">
 <h2>Accessing Multiple Columns</h2>
@@ -564,23 +609,20 @@ Dr.&nbsp;Andrew M. Byrd
 </section>
 <section id="activity-english-vowels" class="slide level2 center">
 <h2>Activity: English Vowels</h2>
+<ul>
+<li>Copy the below code, and complete the values for “height”, “backness”, “tense”, and “roundedness”</li>
+</ul>
 <div class="sourceCode" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb16-2"><a href=""></a></span>
 <span id="cb16-3"><a href=""></a>eng_vowels <span class="op">=</span> pd.DataFrame({</span>
 <span id="cb16-4"><a href=""></a>    <span class="st">"symbol"</span>: [<span class="st">"i"</span>, <span class="st">"ɪ"</span>, <span class="st">"e"</span>, <span class="st">"ɛ"</span>, <span class="st">"æ"</span>, <span class="st">"u"</span>, <span class="st">"ʊ"</span>, <span class="st">"o"</span>, <span class="st">"ɔ"</span>, <span class="st">"ɑ"</span>, <span class="st">"ʌ"</span>, <span class="st">"ə"</span>],</span>
-<span id="cb16-5"><a href=""></a>    <span class="st">"height"</span>: [<span class="st">"high"</span>, <span class="st">"high"</span>, <span class="st">"mid"</span>, <span class="st">"mid"</span>, <span class="st">"low"</span>, <span class="st">"high"</span>, <span class="st">"high"</span>, <span class="st">"mid"</span>, <span class="st">"mid"</span>, <span class="st">"low"</span>, <span class="st">"mid"</span>, <span class="st">"mid"</span>],</span>
-<span id="cb16-6"><a href=""></a>    <span class="st">"backness"</span>: [<span class="st">"front"</span>, <span class="st">"front"</span>, <span class="st">"front"</span>, <span class="st">"front"</span>, <span class="st">"front"</span>,</span>
-<span id="cb16-7"><a href=""></a>                 <span class="st">"back"</span>, <span class="st">"back"</span>, <span class="st">"back"</span>, <span class="st">"back"</span>, <span class="st">"back"</span>,</span>
-<span id="cb16-8"><a href=""></a>                 <span class="st">"central"</span>, <span class="st">"central"</span>],</span>
-<span id="cb16-9"><a href=""></a>    <span class="st">"tense"</span>:   [<span class="va">True</span>, <span class="va">False</span>, <span class="va">True</span>, <span class="va">False</span>, <span class="va">False</span>,</span>
-<span id="cb16-10"><a href=""></a>                <span class="va">True</span>, <span class="va">False</span>, <span class="va">True</span>, <span class="va">False</span>, <span class="va">False</span>,</span>
-<span id="cb16-11"><a href=""></a>                <span class="va">False</span>, <span class="va">False</span>],</span>
-<span id="cb16-12"><a href=""></a>    <span class="st">"rounded"</span>: [<span class="va">False</span>, <span class="va">False</span>, <span class="va">False</span>, <span class="va">False</span>, <span class="va">False</span>,</span>
-<span id="cb16-13"><a href=""></a>                <span class="va">True</span>, <span class="va">True</span>, <span class="va">True</span>, <span class="va">True</span>, <span class="va">False</span>,</span>
-<span id="cb16-14"><a href=""></a>                <span class="va">False</span>, <span class="va">False</span>]</span>
-<span id="cb16-15"><a href=""></a>})</span>
-<span id="cb16-16"><a href=""></a></span>
-<span id="cb16-17"><a href=""></a>eng_vowels</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-5"><a href=""></a>    <span class="st">"height"</span>: [], <span class="co">#choose from "high", "mid", and "low"</span></span>
+<span id="cb16-6"><a href=""></a>    <span class="st">"backness"</span>: [], <span class="co"># choose from "front", "back", and "central"</span></span>
+<span id="cb16-7"><a href=""></a>    <span class="st">"tense"</span>:   [], <span class="co">#choose from True or False</span></span>
+<span id="cb16-8"><a href=""></a>    <span class="st">"rounded"</span>: [], <span class="co">#choose from True or False</span></span>
+<span id="cb16-9"><a href=""></a>})</span>
+<span id="cb16-10"><a href=""></a></span>
+<span id="cb16-11"><a href=""></a>eng_vowels</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="activity-english-vowels-1" class="slide level2 center">
 <h2>Activity: English Vowels</h2>
@@ -593,146 +635,60 @@ Dr.&nbsp;Andrew M. Byrd
 </ol>
 </section></section>
 <section>
-<section id="modifying-dataframes" class="title-slide slide level1 center">
-<h1>Modifying DataFrames</h1>
-
-</section>
-<section id="reloading-the-languages-df" class="slide level2 center">
-<h2>Reloading the languages <code>df</code></h2>
-<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb17-2"><a href=""></a></span>
-<span id="cb17-3"><a href=""></a>df <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb17-4"><a href=""></a>    <span class="st">"language"</span>: [<span class="st">"Latin"</span>, <span class="st">"Greek"</span>, <span class="st">"Sanskrit"</span>, <span class="st">"Finnish"</span>],</span>
-<span id="cb17-5"><a href=""></a>    <span class="st">"family"</span>:   [<span class="st">"Indo-European"</span>, <span class="st">"Indo-European"</span>, <span class="st">"Indo-European"</span>, <span class="st">"Uralic"</span>],</span>
-<span id="cb17-6"><a href=""></a>    <span class="st">"speakers_millions"</span>: [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">6</span>],</span>
-<span id="cb17-7"><a href=""></a>    <span class="st">"location"</span>: [<span class="st">"Italy"</span>, <span class="st">"Greece"</span>, <span class="st">"India"</span>, <span class="st">"Finland"</span>]</span>
-<span id="cb17-8"><a href=""></a>})</span>
-<span id="cb17-9"><a href=""></a></span>
-<span id="cb17-10"><a href=""></a><span class="bu">print</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="adding-new-columns" class="slide level2 center">
-<h2>Adding New Columns</h2>
-<ul>
-<li><p>We’ve seen that you can combine two <code>df</code>s together with `pd.concat()`</p></li>
-<li><p>There’s a simpler way, though, to add a <code>.Series()</code> that should remind you of lists and dicts:</p></li>
-</ul>
-<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href=""></a>df[<span class="st">"is_extinct"</span>] <span class="op">=</span> [<span class="va">True</span>, <span class="va">True</span>, <span class="va">True</span>, <span class="va">False</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="dropping-columns-rows" class="slide level2 center">
-<h2>Dropping Columns &amp; Rows</h2>
-<ul>
-<li>We can drop a <code>.Series()</code> with <code>.drop()</code></li>
-</ul>
-<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href=""></a><span class="co"># Drop (returns a new DF unless inplace=True)</span></span>
-<span id="cb19-2"><a href=""></a>df_no_family <span class="op">=</span> df.drop(columns<span class="op">=</span>[<span class="st">"family"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li>Or a row with <code>.drop([#])</code></li>
-</ul>
-<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href=""></a><span class="co"># Drop (returns a new DF unless inplace=True) </span></span>
-<span id="cb20-2"><a href=""></a>df_no_latin <span class="op">=</span> df.drop([<span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="renaming-columns" class="slide level2 center">
-<h2>Renaming Columns</h2>
-<ul>
-<li>You can easily rename a column with the <code>.rename()</code> method</li>
-</ul>
-<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href=""></a>df <span class="op">=</span> df.rename(columns<span class="op">=</span>{<span class="st">"speakers_millions"</span>: <span class="st">"speakers_M"</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="resetting-indices" class="slide level2 center">
-<h2>(Re)setting Indices</h2>
-<ul>
-<li><p>Or you can drop an index with <code>.reset_index(drop=True)</code></p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href=""></a>df_reset <span class="op">=</span> df.reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb22-2"><a href=""></a>df_set <span class="op">=</span> df.set_index(<span class="st">"language"</span>)</span>
-<span id="cb22-3"><a href=""></a>df_set</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-</ul>
-</section></section>
-<section>
-<section id="filtering-sorting-combining" class="title-slide slide level1 center">
-<h1>Filtering, Sorting, Combining</h1>
-
-</section>
-<section id="sorting" class="slide level2 center">
-<h2>Sorting</h2>
-<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href=""></a>df.sort_values(by<span class="op">=</span><span class="st">"speakers_M"</span>, ascending<span class="op">=</span><span class="va">False</span>) df.sort_index() <span class="co"># by row labels</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="combining-series-side-by-side" class="slide level2 center">
-<h2>Combining Series Side-by-Side</h2>
-<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href=""></a>reflexes_verb <span class="op">=</span> pd.Series(</span>
-<span id="cb24-2"><a href=""></a>    {<span class="st">"Latin"</span>: <span class="dv">8</span>, <span class="st">"Greek"</span>: <span class="dv">10</span>, <span class="st">"Sanskrit"</span>: <span class="dv">12</span>, <span class="st">"Old English"</span>: <span class="dv">6</span>}</span>
-<span id="cb24-3"><a href=""></a>)</span>
-<span id="cb24-4"><a href=""></a>reflexes_noun <span class="op">=</span> pd.Series(</span>
-<span id="cb24-5"><a href=""></a>    {<span class="st">"Latin"</span>: <span class="dv">5</span>, <span class="st">"Greek"</span>: <span class="dv">7</span>, <span class="st">"Gothic"</span>: <span class="dv">4</span>, <span class="st">"Old Church Slavonic"</span>: <span class="dv">3</span>}</span>
-<span id="cb24-6"><a href=""></a>)</span>
-<span id="cb24-7"><a href=""></a></span>
-<span id="cb24-8"><a href=""></a>combined <span class="op">=</span> pd.DataFrame({<span class="st">"verb"</span>: reflexes_verb, <span class="st">"noun"</span>: reflexes_noun})</span>
-<span id="cb24-9"><a href=""></a>combined</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="arithmetic-with-alignment-fill-missing" class="slide level2 center">
-<h2>Arithmetic with Alignment (fill missing)</h2>
-<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href=""></a>total <span class="op">=</span> reflexes_verb.add(reflexes_noun, fill_value<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb25-2"><a href=""></a>total.sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="concatenation-stacking" class="slide level2 center">
-<h2>Concatenation (Stacking)</h2>
-<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href=""></a><span class="co"># Vertical stack (same columns)</span></span>
-<span id="cb26-2"><a href=""></a>latin_df <span class="op">=</span> pd.DataFrame({<span class="st">"lang"</span>:[<span class="st">"Latin"</span>,<span class="st">"Latin"</span>],<span class="st">"root"</span>:[<span class="st">"fer-"</span>,<span class="st">"port-"</span>]})</span>
-<span id="cb26-3"><a href=""></a>greek_df <span class="op">=</span> pd.DataFrame({<span class="st">"lang"</span>:[<span class="st">"Greek"</span>],<span class="st">"root"</span>:[<span class="st">"phér-"</span>]})</span>
-<span id="cb26-4"><a href=""></a>pd.concat([latin_df, greek_df], ignore_index<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="handling-missing-data" class="slide level2 center">
-<h2>Handling Missing Data</h2>
-<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href=""></a>combined.isna().<span class="bu">sum</span>()</span>
-<span id="cb27-2"><a href=""></a>combined_filled <span class="op">=</span> combined.fillna(<span class="dv">0</span>)</span>
-<span id="cb27-3"><a href=""></a>combined_dropped <span class="op">=</span> combined.dropna()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="day-2-activity-compare-reflex-lists" class="slide level2 center">
-<h2><strong>Day 2 Activity — Compare Reflex Lists</strong></h2>
-<div class="sourceCode" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href=""></a><span class="co"># 1) Build the two Series (verb/noun) from above</span></span>
-<span id="cb28-2"><a href=""></a><span class="co"># 2) Combine into one DF with columns verb, noun</span></span>
-<span id="cb28-3"><a href=""></a><span class="co"># 3) Add a 'total' column = verb + noun (treat NaN as 0)</span></span>
-<span id="cb28-4"><a href=""></a><span class="co"># 4) Sort by total descending, show top 5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section></section>
-<section>
 <section id="activity-answers" class="title-slide slide level1 center">
 <h1>Activity Answers</h1>
 
 </section>
+<section id="review-activity" class="slide level2 center">
+<h2>Review Activity</h2>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb17-2"><a href=""></a></span>
+<span id="cb17-3"><a href=""></a>roots <span class="op">=</span> {</span>
+<span id="cb17-4"><a href=""></a>    <span class="st">"Root"</span>: [<span class="st">"*bher-"</span>, <span class="st">"*gen-"</span>, <span class="st">"*ped-"</span>, <span class="st">"*dō-"</span>],</span>
+<span id="cb17-5"><a href=""></a>    <span class="st">"Meaning"</span>: [<span class="st">"carry"</span>, <span class="st">"beget"</span>, <span class="st">"foot"</span>, <span class="st">"give"</span>],</span>
+<span id="cb17-6"><a href=""></a>    <span class="st">"Latin"</span>: [<span class="st">"fero"</span>, <span class="st">"gigno"</span>, <span class="st">"pes"</span>, <span class="st">"do"</span>],</span>
+<span id="cb17-7"><a href=""></a>    <span class="st">"Greek"</span>: [<span class="st">"phérō"</span>, <span class="st">"gígnomai"</span>, <span class="st">"poús"</span>, <span class="st">"dídōmi"</span>],</span>
+<span id="cb17-8"><a href=""></a>    <span class="st">"English"</span>: [<span class="st">"bear"</span>, <span class="st">"kin"</span>, <span class="st">"foot"</span>, <span class="st">"donate"</span>]</span>
+<span id="cb17-9"><a href=""></a>}</span>
+<span id="cb17-10"><a href=""></a></span>
+<span id="cb17-11"><a href=""></a>pie_df <span class="op">=</span> pd.DataFrame(roots)</span>
+<span id="cb17-12"><a href=""></a><span class="bu">print</span>(pie_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 <section id="activity-english-vowels-2" class="slide level2 center">
 <h2>Activity: English Vowels</h2>
-<div class="sourceCode" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb29-2"><a href=""></a></span>
-<span id="cb29-3"><a href=""></a>eng_vowels <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb29-4"><a href=""></a>    <span class="st">"symbol"</span>: [<span class="st">"i"</span>, <span class="st">"ɪ"</span>, <span class="st">"e"</span>, <span class="st">"ɛ"</span>, <span class="st">"æ"</span>, <span class="st">"u"</span>, <span class="st">"ʊ"</span>, <span class="st">"o"</span>, <span class="st">"ɔ"</span>, <span class="st">"ɑ"</span>, <span class="st">"ʌ"</span>, <span class="st">"ə"</span>],</span>
-<span id="cb29-5"><a href=""></a>    <span class="st">"height"</span>: [<span class="st">"high"</span>, <span class="st">"high"</span>, <span class="st">"mid"</span>, <span class="st">"mid"</span>, <span class="st">"low"</span>, <span class="st">"high"</span>, <span class="st">"high"</span>, <span class="st">"mid"</span>, <span class="st">"mid"</span>, <span class="st">"low"</span>, <span class="st">"mid"</span>, <span class="st">"mid"</span>],</span>
-<span id="cb29-6"><a href=""></a>    <span class="st">"backness"</span>: [<span class="st">"front"</span>, <span class="st">"front"</span>, <span class="st">"front"</span>, <span class="st">"front"</span>, <span class="st">"front"</span>,</span>
-<span id="cb29-7"><a href=""></a>                 <span class="st">"back"</span>, <span class="st">"back"</span>, <span class="st">"back"</span>, <span class="st">"back"</span>, <span class="st">"back"</span>,</span>
-<span id="cb29-8"><a href=""></a>                 <span class="st">"central"</span>, <span class="st">"central"</span>],</span>
-<span id="cb29-9"><a href=""></a>    <span class="st">"tense"</span>:   [<span class="va">True</span>, <span class="va">False</span>, <span class="va">True</span>, <span class="va">False</span>, <span class="va">False</span>,</span>
-<span id="cb29-10"><a href=""></a>                <span class="va">True</span>, <span class="va">False</span>, <span class="va">True</span>, <span class="va">False</span>, <span class="va">False</span>,</span>
-<span id="cb29-11"><a href=""></a>                <span class="va">False</span>, <span class="va">False</span>],</span>
-<span id="cb29-12"><a href=""></a>    <span class="st">"rounded"</span>: [<span class="va">False</span>, <span class="va">False</span>, <span class="va">False</span>, <span class="va">False</span>, <span class="va">False</span>,</span>
-<span id="cb29-13"><a href=""></a>                <span class="va">True</span>, <span class="va">True</span>, <span class="va">True</span>, <span class="va">True</span>, <span class="va">False</span>,</span>
-<span id="cb29-14"><a href=""></a>                <span class="va">False</span>, <span class="va">False</span>]</span>
-<span id="cb29-15"><a href=""></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb18-2"><a href=""></a></span>
+<span id="cb18-3"><a href=""></a>eng_vowels <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb18-4"><a href=""></a>    <span class="st">"symbol"</span>: [<span class="st">"i"</span>, <span class="st">"ɪ"</span>, <span class="st">"e"</span>, <span class="st">"ɛ"</span>, <span class="st">"æ"</span>, <span class="st">"u"</span>, <span class="st">"ʊ"</span>, <span class="st">"o"</span>, <span class="st">"ɔ"</span>, <span class="st">"ɑ"</span>, <span class="st">"ʌ"</span>, <span class="st">"ə"</span>],</span>
+<span id="cb18-5"><a href=""></a>    <span class="st">"height"</span>: [<span class="st">"high"</span>, <span class="st">"high"</span>, <span class="st">"mid"</span>, <span class="st">"mid"</span>, <span class="st">"low"</span>, <span class="st">"high"</span>, <span class="st">"high"</span>, <span class="st">"mid"</span>, <span class="st">"mid"</span>, <span class="st">"low"</span>, <span class="st">"mid"</span>, <span class="st">"mid"</span>],</span>
+<span id="cb18-6"><a href=""></a>    <span class="st">"backness"</span>: [<span class="st">"front"</span>, <span class="st">"front"</span>, <span class="st">"front"</span>, <span class="st">"front"</span>, <span class="st">"front"</span>,</span>
+<span id="cb18-7"><a href=""></a>                 <span class="st">"back"</span>, <span class="st">"back"</span>, <span class="st">"back"</span>, <span class="st">"back"</span>, <span class="st">"back"</span>,</span>
+<span id="cb18-8"><a href=""></a>                 <span class="st">"central"</span>, <span class="st">"central"</span>],</span>
+<span id="cb18-9"><a href=""></a>    <span class="st">"tense"</span>:   [<span class="va">True</span>, <span class="va">False</span>, <span class="va">True</span>, <span class="va">False</span>, <span class="va">False</span>,</span>
+<span id="cb18-10"><a href=""></a>                <span class="va">True</span>, <span class="va">False</span>, <span class="va">True</span>, <span class="va">False</span>, <span class="va">False</span>,</span>
+<span id="cb18-11"><a href=""></a>                <span class="va">False</span>, <span class="va">False</span>],</span>
+<span id="cb18-12"><a href=""></a>    <span class="st">"rounded"</span>: [<span class="va">False</span>, <span class="va">False</span>, <span class="va">False</span>, <span class="va">False</span>, <span class="va">False</span>,</span>
+<span id="cb18-13"><a href=""></a>                <span class="va">True</span>, <span class="va">True</span>, <span class="va">True</span>, <span class="va">True</span>, <span class="va">False</span>,</span>
+<span id="cb18-14"><a href=""></a>                <span class="va">False</span>, <span class="va">False</span>]</span>
+<span id="cb18-15"><a href=""></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="activity-english-vowels-3" class="slide level2 center">
 <h2>Activity: English Vowels</h2>
-<div class="sourceCode" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb30-2"><a href=""></a></span>
-<span id="cb30-3"><a href=""></a><span class="co"># 1. Filter the `df`: show only **high back rounded vowels**</span></span>
-<span id="cb30-4"><a href=""></a>eng_vowels[(eng_vowels[<span class="st">"height"</span>]<span class="op">==</span><span class="st">"high"</span>) <span class="op">&amp;</span> (eng_vowels[<span class="st">"backness"</span>]<span class="op">==</span><span class="st">"back"</span>) <span class="op">&amp;</span> (eng_vowels[<span class="st">"rounded"</span>] <span class="op">==</span> <span class="va">True</span>)]</span>
-<span id="cb30-5"><a href=""></a><span class="co"># 2. Negation and slicing: display all vowels that are **not tense**. </span></span>
-<span id="cb30-6"><a href=""></a>eng_vowels[<span class="op">~</span>(eng_vowels[<span class="st">"tense"</span>]<span class="op">==</span><span class="va">True</span>)]</span>
-<span id="cb30-7"><a href=""></a><span class="co"># 3. Then display only the first three vowels of that group.</span></span>
-<span id="cb30-8"><a href=""></a>eng_vowels[<span class="op">~</span>(eng_vowels[<span class="st">"tense"</span>]<span class="op">==</span><span class="va">True</span>)].head(<span class="dv">3</span>)</span>
-<span id="cb30-9"><a href=""></a><span class="co"># 4. Sort the `df` by **height** and **backness**. </span></span>
-<span id="cb30-10"><a href=""></a>eng_vowels.sort_values([<span class="st">"height"</span>, <span class="st">"backness"</span>])</span>
-<span id="cb30-11"><a href=""></a><span class="co"># 5. Count how many vowels are rounded, tense or both.</span></span>
-<span id="cb30-12"><a href=""></a>rounded <span class="op">=</span> eng_vowels[<span class="st">"rounded"</span>].<span class="bu">sum</span>()</span>
-<span id="cb30-13"><a href=""></a>tense <span class="op">=</span> eng_vowels[<span class="st">"tense"</span>].<span class="bu">sum</span>()</span>
-<span id="cb30-14"><a href=""></a>both <span class="op">=</span> (eng_vowels[<span class="st">"rounded"</span>] <span class="op">&amp;</span> eng_vowels[<span class="st">"tense"</span>]).<span class="bu">sum</span>()</span>
-<span id="cb30-15"><a href=""></a><span class="bu">print</span>(<span class="st">"Rounded:"</span>, rounded, <span class="st">"| Tense:"</span>, tense, <span class="st">"| Both:"</span>, both)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb19-2"><a href=""></a></span>
+<span id="cb19-3"><a href=""></a><span class="co"># 1. Filter the `df`: show only **high back rounded vowels**</span></span>
+<span id="cb19-4"><a href=""></a>eng_vowels[(eng_vowels[<span class="st">"height"</span>]<span class="op">==</span><span class="st">"high"</span>) <span class="op">&amp;</span> (eng_vowels[<span class="st">"backness"</span>]<span class="op">==</span><span class="st">"back"</span>) <span class="op">&amp;</span> (eng_vowels[<span class="st">"rounded"</span>] <span class="op">==</span> <span class="va">True</span>)]</span>
+<span id="cb19-5"><a href=""></a><span class="co"># 2. Negation and slicing: display all vowels that are **not tense**. </span></span>
+<span id="cb19-6"><a href=""></a>eng_vowels[<span class="op">~</span>(eng_vowels[<span class="st">"tense"</span>]<span class="op">==</span><span class="va">True</span>)]</span>
+<span id="cb19-7"><a href=""></a><span class="co"># 3. Then display only the first three vowels of that group.</span></span>
+<span id="cb19-8"><a href=""></a>eng_vowels[<span class="op">~</span>(eng_vowels[<span class="st">"tense"</span>]<span class="op">==</span><span class="va">True</span>)].head(<span class="dv">3</span>)</span>
+<span id="cb19-9"><a href=""></a><span class="co"># 4. Sort the `df` by **height** and **backness**. </span></span>
+<span id="cb19-10"><a href=""></a>eng_vowels.sort_values([<span class="st">"height"</span>, <span class="st">"backness"</span>])</span>
+<span id="cb19-11"><a href=""></a><span class="co"># 5. Count how many vowels are rounded, tense or both.</span></span>
+<span id="cb19-12"><a href=""></a>rounded <span class="op">=</span> eng_vowels[<span class="st">"rounded"</span>].<span class="bu">sum</span>()</span>
+<span id="cb19-13"><a href=""></a>tense <span class="op">=</span> eng_vowels[<span class="st">"tense"</span>].<span class="bu">sum</span>()</span>
+<span id="cb19-14"><a href=""></a>both <span class="op">=</span> (eng_vowels[<span class="st">"rounded"</span>] <span class="op">&amp;</span> eng_vowels[<span class="st">"tense"</span>]).<span class="bu">sum</span>()</span>
+<span id="cb19-15"><a href=""></a><span class="bu">print</span>(<span class="st">"Rounded:"</span>, rounded, <span class="st">"| Tense:"</span>, tense, <span class="st">"| Both:"</span>, both)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 

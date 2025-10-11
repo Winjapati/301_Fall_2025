@@ -30,7 +30,7 @@ editor: source
 
 # Modifying DataFrames
 
-## Load up the languages `df`
+## Reloading the languages `df`
 
 ``` python
 import pandas as pd
@@ -42,18 +42,17 @@ df = pd.DataFrame({
     "location": ["Italy", "Greece", "India", "Finland"]
 })
 
-df
+print(df)
 ```
 
 ## Adding New Columns
 
--   We've seen that you can combine two `df`s together with `pd.concat()`
+-   We've seen that you can combine two `df`s together with \`pd.concat()\`
 
 -   There's a simpler way, though, to add a `.Series()` that should remind you of lists and dicts:
 
 ``` python
 df["is_extinct"] = [True, True, True, False]
-df
 ```
 
 ## Dropping Columns & Rows
@@ -63,15 +62,13 @@ df
 ``` python
 # Drop (returns a new DF unless inplace=True)
 df_no_family = df.drop(columns=["family"])
-df_no_family
 ```
 
--   Or a row with `.drop([index])`
+-   Or a row with `.drop([#])`
 
 ``` python
 # Drop (returns a new DF unless inplace=True) 
 df_no_latin = df.drop([0])
-df_no_latin
 ```
 
 ## Renaming Columns
@@ -80,57 +77,27 @@ df_no_latin
 
 ``` python
 df = df.rename(columns={"speakers_millions": "speakers_M"})
-df
 ```
 
 ## (Re)setting Indices
 
--   Or you can reset or drop an index with `.reset_index(drop=True)`
+-   Or you can drop an index with `.reset_index(drop=True)`
 
-``` python
-df_reset_no_latin = df_no_latin.reset_index(drop=True)
-df_reset_no_latin
-
-df_reset = df.reset_index(drop=True)
-df_reset
-
-df_set = df.set_index("language")
-df_set
-```
-
-## Activity: Change Index of the pd df they built for review activity
+    ``` python
+    df_reset = df.reset_index(drop=True)
+    df_set = df.set_index("language")
+    df_set
+    ```
 
 # Filtering, Sorting, Combining
 
 ## Sorting
 
-- You can sort values in all sorts of ways in `pd`
-
 ```python 
-import pandas as pd
-
-df = pd.DataFrame({
-    "language": ["Latin", "Greek", "Sanskrit", "Finnish"],
-    "family":   ["Indo-European", "Indo-European", "Indo-European", "Uralic"],
-    "speakers_M": [0, 0, 0, 6],
-    "location": ["Italy", "Greece", "India", "Finland"]
-})
-
-df.sort_values(by="location", ascending=True)
-```
-
-
-## Sorting
-
-- Or if you'd like to organize by the index
-
-```python
-df.sort_index() # by index
+df.sort_values(by="speakers_M", ascending=False) df.sort_index() # by row labels
 ```
 
 ## Combining Series Side-by-Side
-
-- So far you've only combined `df`s that are aligned by index
 
 ``` python
 reflexes_verb = pd.Series(
