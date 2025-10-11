@@ -1,7 +1,7 @@
 ---
 title: "Computation for Linguists"
 subtitle: "Pandasmonium, Day 2"
-date: "October 15, 2025"
+date: "October 17, 2025"
 author: "Dr. Andrew M. Byrd"
 format:
   revealjs:

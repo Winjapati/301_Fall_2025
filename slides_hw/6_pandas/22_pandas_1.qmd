@@ -1,7 +1,7 @@
 ---
 title: "Computation for Linguists"
 subtitle: "Pandasmonium, Day 1"
-date: "October 13, 2025"
+date: "October 15, 2025"
 author: "Dr. Andrew M. Byrd"
 format:
   revealjs:
@@ -39,14 +39,6 @@ vowels = "aeiou"
 
 # Setting up Pandas
 
-## Panda Power
-
--   Python programmers often use **pandas** to sort, create, and analyze tabular data
--   This will allow us to compute data found in spreadsheets, lexica, corpora.
--   Note: **pandas** is built on top of a **NumPy** `array`.
-    -   This package allows you to compute high-level mathematical functions
-    -   For this reason, you can compute these things within **pandas** as well! (but not just yet)
-
 ## Installing Pandas
 
 -   PC:
@@ -76,13 +68,15 @@ import pandas as pd
 ## What is Pandas?
 
 -   **Pandas**, short for **Panel Data**, is a Python **library**
--   Allows the manipulation of tables within Python
-    -   very similar to a spreadsheet
--   This is how we load pandas in our code
+    - libraries are like LaTeX packages
+-   Python programmers often use **pandas** to sort, create, and analyze tabular data
+    -   This will allow us to compute data found in spreadsheets (such as lexica and corpora).
 
-``` python
-import pandas as pd
-```
+## Panda Power
+
+-   Note: **pandas** is built on top of a **NumPy** `array`.
+    -   This package allows you to compute high-level mathematical functions
+    -   For this reason, you can compute these things within **pandas** as well! (but not just yet)
 
 ## Pandas **Series**
 
@@ -179,7 +173,7 @@ print(languages_df)
 
 ## Pandas **DataFrames**
 
--   New method: pd.concat()
+-   New method: `pd.concat()`
     -   *concatenate* `pd` object with other(s) to make a `df`.
 -   Try this:
 
@@ -240,7 +234,7 @@ print(getty)
 
 ## Converting a `dict` to `.Series()`
 
--   How would we convert a `dict` to a `.DataFrame()`?
+- How would we convert a `dict` to a `.DataFrame()`?
 
 ``` python
 languages = {
@@ -250,12 +244,12 @@ languages = {
     "English": "Germanic"
 }
 ```
+- This really depends what you want your table to look like!
+
 
 ## Converting a `dict` to `df`
 
--   You can by simply using the below code, but:
-    -   Values must be placed inside of a list for this to work
-    -   It also gives the table a bit of an odd structure
+-   You can easily convert using the below code:
 
 ``` python
 import pandas as pd
@@ -270,7 +264,32 @@ lang_df = pd.DataFrame(languages)
 print(lang_df)
 ```
 
+- But:
+    -  Values must be placed inside of a list for this to work
+    -  Keys -> column labels
+    -  Values -> column values
+
+## Converting a `dict` to `df`
+
+- It works quite well, though, with  multi-item lists set as the value
+
+``` python
+import pandas as pd
+
+languages = {
+    "French": ["Romance", 1, "b"],
+    "Spanish": ["Romance", 1, "c"],
+    "Italian": ["Romance", 4, "a"],
+    "English": ["Germanic", 10, "x"]
+}
+lang_df = pd.DataFrame(languages)
+print(lang_df)
+```
+
 ## Making the Key the Index
+
+- Let's go back to single values within a `dict`
+- We can use `.from_dict(dict, orient="index", columns = [value])` to make the key the index
 
 ``` python
 import pandas as pd
@@ -288,6 +307,8 @@ print(lang_df)
 
 ## Keys & Values as Separate Columns
 
+- Or we can use `.DataFrame(list(dict.items()), columns = [key, value])` to set the key as one column, and the value as the second
+
 ``` python
 import pandas as pd
 
@@ -301,6 +322,7 @@ languages = {
 lang_df = pd.DataFrame(list(languages.items()), columns=["Language", "Family"])
 print(lang_df)
 ```
+
 
 ## DF Activity
 

@@ -18,6 +18,55 @@ editor: source
 
 # Review
 
+# `while` Loops
+
+## `while` Loops
+
+-   They're a lot like `if` statements, where something happens if a condition is met:
+
+``` python
+x = 0
+if x < 10:
+    print(x, "is less than 10.")
+```
+
+## `while` Loops
+
+-   In `while` loops, there's also a logical condition
+-   But instead of running the code once, python will loop back and recheck the conditional
+-   It will do this **forever** until the conditional returns `False`
+
+``` python
+x = 10
+while x < 10:
+    print(x, "is less than 10.")
+    x = x + 1
+```
+
+## `while` Loops
+
+-   Be **careful** with `while` loops! Code (like below) will run ad infinitum and could crash your computer:
+
+```         
+x = 0
+while x < 10:
+    print(x, "is less than 10.")
+    x = x - 1
+```
+
+## `while` Loops
+
+-   In this class, we will mostly use `for` loops
+-   But you can do some interesting things with `while` loops, like:
+
+``` python
+name = "The University of Kentucky"
+while name: 
+      print("|" + name + "|") 
+      name = name[0:-1]
+```
+
+
 # Activity: Detective Gutenberg
 
 ## Detective Gutenberg

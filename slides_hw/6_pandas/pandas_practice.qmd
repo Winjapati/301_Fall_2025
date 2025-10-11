@@ -179,3 +179,17 @@ for wd in words:
 print(word_counts)
 
 ```
+
+```{python}
+
+import pandas as pd
+
+languages = {
+    "French": "Romance",
+    "Spanish": "Romance",
+    "Italian": "Romance",
+    "English": "Germanic"
+}
+lang_df = pd.DataFrame(languages)
+print(lang_df)
+```

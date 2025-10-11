@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="23_pandas_3_files/libs/clipboard/clipboard.min.js"></script>
-<script src="23_pandas_3_files/libs/quarto-html/tabby.min.js"></script>
-<script src="23_pandas_3_files/libs/quarto-html/popper.min.js"></script>
-<script src="23_pandas_3_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="23_pandas_3_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="23_pandas_3_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="23_pandas_3_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="23_pandas_3_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="22_pandas_1_files/libs/clipboard/clipboard.min.js"></script>
+<script src="22_pandas_1_files/libs/quarto-html/tabby.min.js"></script>
+<script src="22_pandas_1_files/libs/quarto-html/popper.min.js"></script>
+<script src="22_pandas_1_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="22_pandas_1_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="22_pandas_1_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="22_pandas_1_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="22_pandas_1_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Dr.&nbsp;Andrew M. Byrd">
-  <meta name="dcterms.date" content="2025-10-17">
+  <meta name="dcterms.date" content="2025-10-15">
   <title>Computation for Linguists</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="23_pandas_3_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="23_pandas_3_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="22_pandas_1_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="22_pandas_1_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -96,12 +96,12 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="23_pandas_3_files/libs/revealjs/dist/theme/quarto.css">
+  <link rel="stylesheet" href="22_pandas_1_files/libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="header_shrink.css">
-  <link href="23_pandas_3_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="23_pandas_3_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="23_pandas_3_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="23_pandas_3_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link href="22_pandas_1_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="22_pandas_1_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="22_pandas_1_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="22_pandas_1_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -394,7 +394,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Computation for Linguists</h1>
-  <p class="subtitle">Pandasmonium: Day 3</p>
+  <p class="subtitle">Pandasmonium, Day 1</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -404,15 +404,16 @@ Dr.&nbsp;Andrew M. Byrd
 </div>
 </div>
 
-  <p class="date">2025-10-17</p>
+  <p class="date">2025-10-15</p>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Plan for the Day</h2>
 <ul>
 <li><a href="#/review" id="/toc-review">Review</a></li>
-<li><a href="#/day-3-summaries-grouping-io-quick-plots" id="/toc-day-3-summaries-grouping-io-quick-plots">Day 3 — Summaries, Grouping, I/O, Quick Plots</a></li>
-<li><a href="#/appendix-quick-reference" id="/toc-appendix-quick-reference">Appendix — Quick Reference</a></li>
-<li><a href="#/what-you-can-do-now" id="/toc-what-you-can-do-now">What You Can Do Now 🧠</a></li>
+<li><a href="#/setting-up-pandas" id="/toc-setting-up-pandas">Setting up Pandas</a></li>
+<li><a href="#/how-does-pandas-work" id="/toc-how-does-pandas-work">How does Pandas Work?</a></li>
+<li><a href="#/going-from-to-df" id="/toc-going-from-to-df">Going from <code>[]</code>/<code>{}</code> to <code>df</code></a></li>
+<li><a href="#/activity-answers" id="/toc-activity-answers">Activity Answers</a></li>
 </ul>
 </nav>
 </section>
@@ -433,402 +434,411 @@ Dr.&nbsp;Andrew M. Byrd
 </section>
 <section id="review-activity" class="slide level2 center">
 <h2>Review Activity</h2>
-<ul>
-<li>Copy this list of messy words into your code, creating a list called <code>words</code>:</li>
-</ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a>words <span class="op">=</span> [<span class="st">" Cat</span><span class="ch">\n</span><span class="st">"</span>, <span class="st">"dog"</span>, <span class="st">" BIRD "</span>, <span class="st">"fish</span><span class="ch">\n</span><span class="st">"</span>, <span class="st">"LION"</span>, <span class="st">"tiger "</span>, <span class="st">"bear"</span>, <span class="st">"OWL</span><span class="ch">\n</span><span class="st">"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li>Write a <code>for</code> loop that goes through each word. Inside the loop:
-<ul>
-<li>Use <code>.strip()</code> and <code>.lower()</code> to clean the word</li>
-<li>Save each result in a variable called <code>cleaned</code></li>
-<li>Print each instance of <code>cleaned</code> in the loop.</li>
-</ul></li>
-</ul>
-</section></section>
-<section>
-<section id="day-3-summaries-grouping-io-quick-plots" class="title-slide slide level1 center">
-<h1>Day 3 — Summaries, Grouping, I/O, Quick Plots</h1>
-
-</section>
-<section id="quick-summaries" class="slide level2 center">
-<h2>Quick Summaries</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a>df.describe(include<span class="op">=</span><span class="st">"all"</span>)</span>
-<span id="cb2-2"><a href=""></a>df[<span class="st">"family"</span>].value_counts()</span>
-<span id="cb2-3"><a href=""></a>df[<span class="st">"family"</span>].unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="grouping-aggregation" class="slide level2 center">
-<h2>Grouping &amp; Aggregation</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="co"># Example small reflex table for demo</span></span>
-<span id="cb3-2"><a href=""></a>ref_df <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb3-3"><a href=""></a>    <span class="st">"Language"</span>: [<span class="st">"Latin"</span>,<span class="st">"Greek"</span>,<span class="st">"Sanskrit"</span>,<span class="st">"Gothic"</span>,<span class="st">"OCS"</span>,<span class="st">"Latin"</span>],</span>
-<span id="cb3-4"><a href=""></a>    <span class="st">"Family"</span>:   [<span class="st">"IE"</span>,<span class="st">"IE"</span>,<span class="st">"IE"</span>,<span class="st">"Germanic"</span>,<span class="st">"Slavic"</span>,<span class="st">"IE"</span>],</span>
-<span id="cb3-5"><a href=""></a>    <span class="st">"Reflexes"</span>: [<span class="dv">8</span>,<span class="dv">10</span>,<span class="dv">12</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">5</span>]</span>
-<span id="cb3-6"><a href=""></a>})</span>
-<span id="cb3-7"><a href=""></a></span>
-<span id="cb3-8"><a href=""></a>ref_df.groupby(<span class="st">"Family"</span>)[<span class="st">"Reflexes"</span>].<span class="bu">sum</span>()</span>
-<span id="cb3-9"><a href=""></a>ref_df.groupby(<span class="st">"Family"</span>).agg(</span>
-<span id="cb3-10"><a href=""></a>    total<span class="op">=</span>(<span class="st">"Reflexes"</span>,<span class="st">"sum"</span>),</span>
-<span id="cb3-11"><a href=""></a>    mean<span class="op">=</span>(<span class="st">"Reflexes"</span>,<span class="st">"mean"</span>),</span>
-<span id="cb3-12"><a href=""></a>    n<span class="op">=</span>(<span class="st">"Reflexes"</span>,<span class="st">"count"</span>)</span>
-<span id="cb3-13"><a href=""></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="reading-writing-files" class="slide level2 center">
-<h2>Reading / Writing Files</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a><span class="co"># CSV</span></span>
-<span id="cb4-2"><a href=""></a>ref_df.to_csv(<span class="st">"reflexes_summary.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb4-3"><a href=""></a>loaded <span class="op">=</span> pd.read_csv(<span class="st">"reflexes_summary.csv"</span>)</span>
-<span id="cb4-4"><a href=""></a>loaded.head()</span>
-<span id="cb4-5"><a href=""></a></span>
-<span id="cb4-6"><a href=""></a><span class="co"># Excel (if needed)</span></span>
-<span id="cb4-7"><a href=""></a><span class="co"># ref_df.to_excel("reflexes_summary.xlsx", index=False)</span></span>
-<span id="cb4-8"><a href=""></a><span class="co"># pd.read_excel("reflexes_summary.xlsx")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="quick-visualization-optional" class="slide level2 center">
-<h2>Quick Visualization (optional)</h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="co"># Simple bar plot (requires matplotlib to be present)</span></span>
-<span id="cb5-2"><a href=""></a>counts <span class="op">=</span> ref_df.groupby(<span class="st">"Family"</span>)[<span class="st">"Reflexes"</span>].<span class="bu">sum</span>()</span>
-<span id="cb5-3"><a href=""></a>ax <span class="op">=</span> counts.plot(kind<span class="op">=</span><span class="st">"bar"</span>, title<span class="op">=</span><span class="st">"Reflex Counts by Family"</span>)</span>
-<span id="cb5-4"><a href=""></a>ax.set_xlabel(<span class="st">"Family"</span>)</span>
-<span id="cb5-5"><a href=""></a>ax.set_ylabel(<span class="st">"Total Reflexes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<blockquote>
-<p>Note: In some environments you may need:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb6-2"><a href=""></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</blockquote>
-</section>
-<section id="day-3-activity-from-rows-to-insight" class="slide level2 center">
-<h2><strong>Day 3 Activity — From Rows to Insight</strong></h2>
-<p>Using <code>ref_df</code> (or your own small table):</p>
 <ol type="1">
-<li>Group by <code>Family</code> and compute: total reflexes, mean reflexes, and count.</li>
-<li>Sort families by total reflexes (descending).</li>
-<li>Save the grouped summary to <code>family_reflexes.csv</code>.</li>
-<li>Make a bar plot of total reflexes by family.</li>
+<li>Copy the code below.</li>
+<li>Use a <code>for</code> loop and a conditional to sort each letter of the word “computation” into consonants &amp; vowels.</li>
+<li>If the character is a vowel, print “x is a vowel.” If it is not a vowel, print “x is not a vowel.”</li>
 </ol>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a>summary <span class="op">=</span> (ref_df</span>
-<span id="cb7-2"><a href=""></a>    .groupby(<span class="st">"Family"</span>)[<span class="st">"Reflexes"</span>]</span>
-<span id="cb7-3"><a href=""></a>    .agg(total<span class="op">=</span><span class="st">"sum"</span>, mean<span class="op">=</span><span class="st">"mean"</span>, n<span class="op">=</span><span class="st">"count"</span>)</span>
-<span id="cb7-4"><a href=""></a>    .sort_values(by<span class="op">=</span><span class="st">"total"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb7-5"><a href=""></a>)</span>
-<span id="cb7-6"><a href=""></a>summary</span>
-<span id="cb7-7"><a href=""></a>summary.to_csv(<span class="st">"family_reflexes.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section class="slide level2 center">
-
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a>word <span class="op">=</span> <span class="st">"computation"</span></span>
+<span id="cb1-2"><a href=""></a>vowels <span class="op">=</span> <span class="st">"aeiou"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section></section>
 <section>
-<section id="appendix-quick-reference" class="title-slide slide level1 center">
-<h1>Appendix — Quick Reference</h1>
+<section id="setting-up-pandas" class="title-slide slide level1 center">
+<h1>Setting up Pandas</h1>
 
 </section>
-<section id="selection-cheatsheet" class="slide level2 center">
-<h2>Selection Cheatsheet</h2>
+<section id="installing-pandas" class="slide level2 center">
+<h2>Installing Pandas</h2>
 <ul>
-<li><strong>Columns:</strong> <code>df["col"]</code>, <code>df[["col1","col2"]]</code></li>
-<li><strong>Rows (position):</strong> <code>df.iloc[0]</code>, <code>df.iloc[1:3]</code></li>
-<li><strong>Rows (label):</strong> <code>df.loc["a"]</code>, <code>df.loc["a":"c"]</code></li>
-<li><strong>Cell:</strong> <code>df.loc["a","col"]</code> or <code>df.iloc[0, 1]</code></li>
-<li><strong>Filter:</strong> <code>df[df["col"] == value]</code>, <code>df[(cond1) &amp; (cond2)]</code></li>
+<li>PC:</li>
 </ul>
-</section>
-<section id="common-ops" class="slide level2 center">
-<h2>Common Ops</h2>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href=""></a>df.rename(columns<span class="op">=</span>{<span class="st">"old"</span>:<span class="st">"new"</span>})</span>
-<span id="cb8-2"><a href=""></a>df.drop(columns<span class="op">=</span>[<span class="st">"col"</span>])</span>
-<span id="cb8-3"><a href=""></a>df.set_index(<span class="st">"col"</span>)</span>
-<span id="cb8-4"><a href=""></a>df.reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb8-5"><a href=""></a>df.sort_values(by<span class="op">=</span><span class="st">"col"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb8-6"><a href=""></a>df.isna().<span class="bu">sum</span>()</span>
-<span id="cb8-7"><a href=""></a>df.fillna(<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="alignment-combining" class="slide level2 center">
-<h2>Alignment &amp; Combining</h2>
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href=""></a>s1.add(s2, fill_value<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb9-2"><a href=""></a>pd.concat([df1, df2], axis<span class="op">=</span><span class="dv">0</span>, ignore_index<span class="op">=</span><span class="va">True</span>)  <span class="co"># vertical</span></span>
-<span id="cb9-3"><a href=""></a>pd.concat([s1, s2], axis<span class="op">=</span><span class="dv">1</span>)                       <span class="co"># side-by-side</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="final-tips" class="slide level2 center">
-<h2>Final Tips</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href=""></a><span class="ex">pip</span> install pandas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>Keep indices simple early on; reset with <code>reset_index(drop=True)</code> if confused.</li>
-<li>Prefer unique column names and (eventually) a unique index.</li>
-<li>Build intuition with <em>small</em>, <em>visible</em> examples before loading big CSVs.</li>
+<li>Mac:</li>
 </ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href=""></a><span class="ex">pip3</span> install pandas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="cleaning-data-in-pandas" class="slide level2 center">
-<h2>Cleaning Data in Pandas</h2>
-<h3 id="why-clean">Why Clean?</h3>
+<section id="loading-pandas" class="slide level2 center">
+<h2>Loading Pandas</h2>
 <ul>
-<li>Real data is messy.<br>
-</li>
-<li>Clean data means:
-<ul>
-<li>Consistent structure<br>
-</li>
-<li>Clear column names<br>
-</li>
-<li>No missing, duplicated, or mis-typed values</li>
-</ul></li>
+<li>To run in Python:</li>
 </ul>
-</section>
-<section id="cleaning-before-you-build-a-dataframe" class="slide level2 center">
-<h2>Cleaning <strong>Before</strong> You Build a DataFrame</h2>
-<blockquote>
-<p>“If it looks messy in your list or dictionary, pandas will just mirror that mess.”</p>
-</blockquote>
-</section>
-<section id="common-pre-df-fixes" class="slide level2 center">
-<h2>Common Pre-DF Fixes</h2>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>Goal</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Remove whitespace / newlines</td>
-<td><code>" word\n".strip()</code></td>
-</tr>
-<tr class="even">
-<td>Standardize capitalization</td>
-<td><code>"Word".lower()</code></td>
-</tr>
-<tr class="odd">
-<td>Remove punctuation</td>
-<td><code>re.sub(r"[^\w\s]", "", text)</code></td>
-</tr>
-<tr class="even">
-<td>Split text into tokens</td>
-<td><code>text.split()</code></td>
-</tr>
-<tr class="odd">
-<td>Validate list/dict lengths</td>
-<td><code>len(list)</code>, <code>list(zip(...))</code></td>
-</tr>
-<tr class="even">
-<td>Handle placeholders</td>
-<td>Replace <code>"NA"</code>, <code>"None"</code> with <code>None</code></td>
-</tr>
-</tbody>
-</table>
-<p>🧠 <em>Use basic Python + regex for text cleaning.</em></p>
-</section>
-<section id="cleaning-within-the-dataframe" class="slide level2 center">
-<h2>Cleaning <strong>Within</strong> the DataFrame</h2>
-<blockquote>
-<p>“Once it’s a table, use pandas tools to fix the structure.”</p>
-</blockquote>
-</section>
-<section id="useful-methods" class="slide level2 center">
-<h2>Useful Methods</h2>
-<table class="caption-top">
-<colgroup>
-<col style="width: 37%">
-<col style="width: 62%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Task</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Inspect structure</td>
-<td><code>df.info()</code>, <code>df.shape</code>, <code>df.columns</code></td>
-</tr>
-<tr class="even">
-<td>Rename columns</td>
-<td><code>df.rename(columns={"old":"new"})</code></td>
-</tr>
-<tr class="odd">
-<td>Drop columns or rows</td>
-<td><code>df.drop(columns=["col"])</code>, <code>df.dropna()</code></td>
-</tr>
-<tr class="even">
-<td>Fill / replace values</td>
-<td><code>df.fillna("Unknown")</code>, <code>df.replace("?", None)</code></td>
-</tr>
-<tr class="odd">
-<td>Remove duplicates</td>
-<td><code>df.drop_duplicates()</code></td>
-</tr>
-<tr class="even">
-<td>Convert data types</td>
-<td><code>df["col"] = df["col"].astype(int)</code></td>
-</tr>
-<tr class="odd">
-<td>String cleanup</td>
-<td><code>df["col"] = df["col"].str.strip().str.lower()</code></td>
-</tr>
-<tr class="even">
-<td>Compute new columns</td>
-<td><code>df["new"] = df["col1"] + df["col2"]</code></td>
-</tr>
-<tr class="odd">
-<td>Sort and reset</td>
-<td><code>df.sort_values(["col"])</code>, <code>df.reset_index(drop=True)</code></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="a-mental-model" class="slide level2 center">
-<h2>🧩 A Mental Model</h2>
-<table class="caption-top">
-<colgroup>
-<col style="width: 29%">
-<col style="width: 41%">
-<col style="width: 29%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Phase</th>
-<th>Mindset</th>
-<th>Tools</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Before</strong></td>
-<td>Clean the input</td>
-<td>String methods, lists, dicts, <code>re</code></td>
-</tr>
-<tr class="even">
-<td><strong>Inside DF</strong></td>
-<td>Clean the structure</td>
-<td><code>.rename()</code>, <code>.dropna()</code>, <code>.astype()</code></td>
-</tr>
-<tr class="odd">
-<td><strong>After</strong></td>
-<td>Analyze and summarize</td>
-<td><code>.loc</code>, <code>.sum()</code>, <code>.mean()</code>, <code>.groupby()</code></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="ten-core-methods-to-remember" class="slide level2 center">
-<h2>🧭 Ten Core Methods to Remember</h2>
-<ol type="1">
-<li><code>df.info()</code> – check structure<br>
-</li>
-<li><code>df.columns</code> – list columns<br>
-</li>
-<li><code>df.rename()</code> – fix column names<br>
-</li>
-<li><code>df.dropna()</code> / <code>df.fillna()</code> – handle missing data<br>
-</li>
-<li><code>df.drop_duplicates()</code> – remove repeats<br>
-</li>
-<li><code>df.astype()</code> – convert data type<br>
-</li>
-<li><code>df["col"].str.lower()</code> – text cleanup<br>
-</li>
-<li><code>df.replace()</code> – fix placeholders<br>
-</li>
-<li><code>df.sort_values()</code> – organize<br>
-</li>
-<li><code>df.reset_index()</code> – tidy indices after filtering</li>
-</ol>
-</section>
-<section id="key-takeaway" class="slide level2 center">
-<h2>Key Takeaway</h2>
-<blockquote>
-<p>Python cleans <strong>strings</strong> and <strong>lists</strong>.<br>
-Pandas cleans <strong>tables</strong>.</p>
-</blockquote>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>⚠️ <strong>Avoid file-name shadowing:</strong> Don’t name your scripts <code>pandas.py</code>, <code>re.py</code>, <code>random.py</code>, etc.</p>
 </section></section>
 <section>
-<section id="what-you-can-do-now" class="title-slide slide level1 center">
-<h1>What You Can Do Now 🧠</h1>
+<section id="how-does-pandas-work" class="title-slide slide level1 center">
+<h1>How does Pandas Work?</h1>
 
 </section>
-<section id="linguistic-tasks-now-possible-with-pandas" class="slide level2 center">
-<h2>Linguistic Tasks Now Possible with Pandas</h2>
+<section id="what-is-pandas" class="slide level2 center">
+<h2>What is Pandas?</h2>
 <ul>
-<li>✅ <strong>Build structured lexica</strong>
+<li><strong>Pandas</strong>, short for <strong>Panel Data</strong>, is a Python <strong>library</strong>
 <ul>
-<li>Create and modify DataFrames of words, glosses, and languages</li>
-<li>Filter or sort them instantly (no more manual loops)</li>
+<li>libraries are like LaTeX packages</li>
 </ul></li>
-<li>✅ <strong>Compare data across sources</strong>
+<li>Python programmers often use <strong>pandas</strong> to sort, create, and analyze tabular data
 <ul>
-<li>Merge two datasets (e.g., LIV + IEW)</li>
-<li>Identify missing reflexes or mismatched glosses automatically</li>
+<li>This will allow us to compute data found in spreadsheets (such as lexica and corpora).</li>
 </ul></li>
 </ul>
 </section>
-<section id="linguistic-tasks-now-possible-with-pandas-1" class="slide level2 center">
-<h2>Linguistic Tasks Now Possible with Pandas</h2>
+<section id="panda-power" class="slide level2 center">
+<h2>Panda Power</h2>
 <ul>
-<li>✅ <strong>Quantify linguistic patterns</strong>
+<li>Note: <strong>pandas</strong> is built on top of a <strong>NumPy</strong> <code>array</code>.
 <ul>
-<li>Count how many reflexes each family has per root</li>
-<li>Measure which morphological types are most frequent</li>
-</ul></li>
-<li>✅ <strong>Clean and normalize datasets</strong>
-<ul>
-<li>Capitalize, strip, or standardize glosses and forms</li>
-<li>Fill in missing data (<code>NaN → 0</code>) and rename columns in bulk</li>
+<li>This package allows you to compute high-level mathematical functions</li>
+<li>For this reason, you can compute these things within <strong>pandas</strong> as well! (but not just yet)</li>
 </ul></li>
 </ul>
 </section>
-<section id="linguistic-tasks-now-possible-with-pandas-2" class="slide level2 center">
-<h2>Linguistic Tasks Now Possible with Pandas</h2>
+<section id="pandas-series" class="slide level2 center">
+<h2>Pandas <strong>Series</strong></h2>
 <ul>
-<li>✅ <strong>Group and summarize</strong>
+<li>At the heart of a <code>pd</code> <code>df</code> (pandas dataframe), are <code>.Series()</code>:
 <ul>
-<li>Group by family, POS, or semantic field</li>
-<li>Compute totals, averages, or frequencies per category</li>
-</ul></li>
-<li>✅ <strong>Visualize and export</strong>
-<ul>
-<li>Create quick bar charts of linguistic statistics</li>
-<li>Save clean CSVs for use in R, Excel, or later analysis</li>
+<li>1-D labeled data</li>
+<li>a single labeled column or row</li>
 </ul></li>
 </ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb5-2"><a href=""></a></span>
+<span id="cb5-3"><a href=""></a>langs <span class="op">=</span> pd.Series([<span class="st">"Latin"</span>, <span class="st">"Greek"</span>, <span class="st">"Sanskrit"</span>], name<span class="op">=</span><span class="st">"language"</span>)</span>
+<span id="cb5-4"><a href=""></a>langs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Right now, <code>name="language"</code> isn’t doing anything, but will later on.</li>
+</ul>
 </section>
-<section id="the-big-shift" class="slide level2 center">
-<h2>The Big Shift</h2>
+<section id="pandas-series-1" class="slide level2 center">
+<h2>Pandas <strong>Series</strong></h2>
+<ul>
+<li>You can give specific labels to the <code>index</code> of the <code>.Series()</code></li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb6-2"><a href=""></a></span>
+<span id="cb6-3"><a href=""></a>langs <span class="op">=</span> pd.Series([<span class="st">"Latin"</span>, <span class="st">"Greek"</span>, <span class="st">"Sanskrit"</span>, <span class="st">"Finnish"</span>], index<span class="op">=</span>[<span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span>,<span class="st">"d"</span>], name<span class="op">=</span><span class="st">"language"</span>)</span>
+<span id="cb6-4"><a href=""></a>langs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="pandas-series-2" class="slide level2 center">
+<h2>Pandas <strong>Series</strong></h2>
+<ul>
+<li><code>pd.Series()</code>:</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb7-2"><a href=""></a></span>
+<span id="cb7-3"><a href=""></a>langs <span class="op">=</span> pd.Series([<span class="st">"Latin"</span>, <span class="st">"Greek"</span>, <span class="st">"Sanskrit"</span>, <span class="st">"Finnish"</span>], index<span class="op">=</span>[<span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span>,<span class="st">"d"</span>], name<span class="op">=</span><span class="st">"language"</span>)</span>
+<span id="cb7-4"><a href=""></a>langs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Are conceptually similar to <code>dict</code>:</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href=""></a>langs <span class="op">=</span> {<span class="st">"a"</span>: <span class="st">"Latin"</span>, <span class="st">"b"</span>: <span class="st">"Greek"</span>, <span class="st">"c"</span>:<span class="st">"Sanskrit"</span>, <span class="st">"d"</span>:<span class="st">"Finnish"</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="pandas-dataframes" class="slide level2 center">
+<h2>Pandas <strong>DataFrames</strong></h2>
+<ul>
+<li>Pandas <code>.DataFrame()</code> is the most popular way to create csv structure in Python</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb9-2"><a href=""></a></span>
+<span id="cb9-3"><a href=""></a>lang_df <span class="op">=</span> pd.DataFrame(langs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="pandas-dataframes-1" class="slide level2 center">
+<h2>Pandas <strong>DataFrames</strong></h2>
+<ul>
+<li>You can combine <strong>Series</strong> that share the same index to create a <strong>DataFrame</strong></li>
+<li>To do so let’s create a second series.
+<ul>
+<li>Note the indices!</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb10-2"><a href=""></a></span>
+<span id="cb10-3"><a href=""></a>fam <span class="op">=</span> pd.Series([<span class="st">"Indo-European"</span>, <span class="st">"Indo-European"</span>, <span class="st">"Indo-European"</span>, <span class="st">"Uralic"</span>], index<span class="op">=</span>[<span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span>,<span class="st">"d"</span>], name<span class="op">=</span><span class="st">"family"</span>)</span>
+<span id="cb10-4"><a href=""></a>fam</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="pandas-dataframes-2" class="slide level2 center">
+<h2>Pandas <strong>DataFrames</strong></h2>
+<ul>
+<li>And a third:</li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb11-2"><a href=""></a>speakers <span class="op">=</span> pd.Series([<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">6</span>], index<span class="op">=</span>[<span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span>,<span class="st">"d"</span>], name<span class="op">=</span><span class="st">"speakers_millions"</span>)</span>
+<span id="cb11-3"><a href=""></a>speakers</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="pandas-dataframes-3" class="slide level2 center">
+<h2>Pandas <strong>DataFrames</strong></h2>
+<ul>
+<li>We can combine them all together into a <code>df</code></li>
+</ul>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb12-2"><a href=""></a></span>
+<span id="cb12-3"><a href=""></a>langs <span class="op">=</span> pd.Series([<span class="st">"Latin"</span>, <span class="st">"Greek"</span>, <span class="st">"Sanskrit"</span>, <span class="st">"Finnish"</span>], index<span class="op">=</span>[<span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span>,<span class="st">"d"</span>], name<span class="op">=</span><span class="st">"language"</span>)</span>
+<span id="cb12-4"><a href=""></a>fam <span class="op">=</span> pd.Series([<span class="st">"Indo-European"</span>, <span class="st">"Indo-European"</span>, <span class="st">"Indo-European"</span>, <span class="st">"Uralic"</span>], index<span class="op">=</span>[<span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span>,<span class="st">"d"</span>], name<span class="op">=</span><span class="st">"family"</span>)</span>
+<span id="cb12-5"><a href=""></a>speakers <span class="op">=</span> pd.Series([<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">6</span>], index<span class="op">=</span>[<span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span>,<span class="st">"d"</span>], name<span class="op">=</span><span class="st">"speakers_millions"</span>)</span>
+<span id="cb12-6"><a href=""></a></span>
+<span id="cb12-7"><a href=""></a>languages_df <span class="op">=</span> pd.concat([langs, fam, speakers], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb12-8"><a href=""></a><span class="bu">print</span>(languages_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>What does <code>axis=1</code> do?</li>
+</ul>
+</section>
+<section id="pandas-dataframes-4" class="slide level2 center">
+<h2>Pandas <strong>DataFrames</strong></h2>
+<ul>
+<li>New method: <code>pd.concat()</code>
+<ul>
+<li><em>concatenate</em> <code>pd</code> object with other(s) to make a <code>df</code>.</li>
+</ul></li>
+<li>Try this:</li>
+</ul>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb13-2"><a href=""></a></span>
+<span id="cb13-3"><a href=""></a>location <span class="op">=</span> pd.Series([<span class="st">"Italy"</span>, <span class="st">"Greece"</span>, <span class="st">"India"</span>, <span class="st">"Finland"</span>], index<span class="op">=</span>[<span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span>,<span class="st">"d"</span>], name<span class="op">=</span><span class="st">"location"</span>)</span>
+<span id="cb13-4"><a href=""></a>new_df <span class="op">=</span> pd.concat([languages_df, location], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb13-5"><a href=""></a></span>
+<span id="cb13-6"><a href=""></a><span class="bu">print</span>(new_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="pandas-dataframes-5" class="slide level2 center">
+<h2>Pandas <strong>DataFrames</strong></h2>
+<ul>
+<li>Or you can just bypass the middle step and create the <code>df</code> initially:</li>
+</ul>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb14-2"><a href=""></a></span>
+<span id="cb14-3"><a href=""></a>fresh_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb14-4"><a href=""></a>    <span class="st">"language"</span>: [<span class="st">"Latin"</span>, <span class="st">"Greek"</span>, <span class="st">"Sanskrit"</span>, <span class="st">"Finnish"</span>],</span>
+<span id="cb14-5"><a href=""></a>    <span class="st">"family"</span>:   [<span class="st">"Indo-European"</span>, <span class="st">"Indo-European"</span>, <span class="st">"Indo-European"</span>, <span class="st">"Uralic"</span>],</span>
+<span id="cb14-6"><a href=""></a>    <span class="st">"speakers_millions"</span>: [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">6</span>],</span>
+<span id="cb14-7"><a href=""></a>    <span class="st">"location"</span>: [<span class="st">"Italy"</span>, <span class="st">"Greece"</span>, <span class="st">"India"</span>, <span class="st">"Finland"</span>]</span>
+<span id="cb14-8"><a href=""></a>}, index<span class="op">=</span>[<span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span>,<span class="st">"d"</span>])</span>
+<span id="cb14-9"><a href=""></a></span>
+<span id="cb14-10"><a href=""></a><span class="bu">print</span>(fresh_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="pandas-activity-phonemic-inventory" class="slide level2 center">
+<h2>Pandas Activity: Phonemic Inventory</h2>
+<p>Using Pandas, recreate the following table:</p>
 <table class="caption-top">
 <thead>
 <tr class="header">
-<th>Old Approach</th>
-<th>New Approach with Pandas</th>
+<th></th>
+<th>sound</th>
+<th>voicing</th>
+<th>place</th>
+<th>manner</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Lists of strings</td>
-<td>Structured tables</td>
+<td>0</td>
+<td>/p/</td>
+<td>voiceless</td>
+<td>bilabial</td>
+<td>stop</td>
 </tr>
 <tr class="even">
-<td>Loops over words</td>
-<td>Operations over columns</td>
+<td>1</td>
+<td>/b/</td>
+<td>voiced</td>
+<td>bilabial</td>
+<td>stop</td>
 </tr>
 <tr class="odd">
-<td>Manual counting</td>
-<td>Built-in aggregation</td>
+<td>2</td>
+<td>/t/</td>
+<td>voiceless</td>
+<td>alveolar</td>
+<td>stop</td>
 </tr>
 <tr class="even">
-<td>Hard-coded comparisons</td>
-<td>Automatic alignment by label</td>
+<td>3</td>
+<td>/d/</td>
+<td>voiced</td>
+<td>alveolar</td>
+<td>stop</td>
 </tr>
 <tr class="odd">
-<td>Descriptive patterns</td>
-<td>Quantitative insights</td>
+<td>4</td>
+<td>/s/</td>
+<td>voiceless</td>
+<td>alveolar</td>
+<td>fricative</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>/h/</td>
+<td>voiceless</td>
+<td>glottal</td>
+<td>fricative</td>
 </tr>
 </tbody>
 </table>
-<blockquote>
-<p>⚡ You now think like a <em>linguistic data scientist</em>:<br>
-“Each row is a word; each column is a property; the DataFrame is my corpus.”</p>
-</blockquote>
-</section>
-<section class="slide level2 center">
+</section></section>
+<section>
+<section id="going-from-to-df" class="title-slide slide level1 center">
+<h1>Going from <code>[]</code>/<code>{}</code> to <code>df</code></h1>
 
+</section>
+<section id="converting-lists-to-a-series" class="slide level2 center">
+<h2>Converting Lists to a Series</h2>
+<ul>
+<li>If you think about it, a list is just a single column of a <code>.DataFrame()</code></li>
+<li>And for this reason, it’s super easy to convert it to a <code>.Series()</code></li>
+</ul>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb15-2"><a href=""></a></span>
+<span id="cb15-3"><a href=""></a>gettysburg <span class="op">=</span> [<span class="st">"Four"</span>, <span class="st">"score"</span>, <span class="st">"and"</span>, <span class="st">"seven"</span>, <span class="st">"years"</span>, <span class="st">"ago"</span>]</span>
+<span id="cb15-4"><a href=""></a>getty <span class="op">=</span> pd.Series(gettysburg)</span>
+<span id="cb15-5"><a href=""></a></span>
+<span id="cb15-6"><a href=""></a><span class="bu">print</span>(getty)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="converting-a-dict-to-.series" class="slide level2 center">
+<h2>Converting a <code>dict</code> to <code>.Series()</code></h2>
+<ul>
+<li>How would we convert a <code>dict</code> to a <code>.DataFrame()</code>?</li>
+</ul>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href=""></a>languages <span class="op">=</span> {</span>
+<span id="cb16-2"><a href=""></a>    <span class="st">"French"</span>: <span class="st">"Romance"</span>,</span>
+<span id="cb16-3"><a href=""></a>    <span class="st">"Spanish"</span>: <span class="st">"Romance"</span>,</span>
+<span id="cb16-4"><a href=""></a>    <span class="st">"Italian"</span>: <span class="st">"Romance"</span>,</span>
+<span id="cb16-5"><a href=""></a>    <span class="st">"English"</span>: <span class="st">"Germanic"</span></span>
+<span id="cb16-6"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>This really depends what you want your table to look like!</li>
+</ul>
+</section>
+<section id="converting-a-dict-to-df" class="slide level2 center">
+<h2>Converting a <code>dict</code> to <code>df</code></h2>
+<ul>
+<li>You can easily convert using the below code:</li>
+</ul>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb17-2"><a href=""></a></span>
+<span id="cb17-3"><a href=""></a>languages <span class="op">=</span> {</span>
+<span id="cb17-4"><a href=""></a>    <span class="st">"French"</span>: [<span class="st">"Romance"</span>],</span>
+<span id="cb17-5"><a href=""></a>    <span class="st">"Spanish"</span>: [<span class="st">"Romance"</span>],</span>
+<span id="cb17-6"><a href=""></a>    <span class="st">"Italian"</span>: [<span class="st">"Romance"</span>],</span>
+<span id="cb17-7"><a href=""></a>    <span class="st">"English"</span>: [<span class="st">"Germanic"</span>]</span>
+<span id="cb17-8"><a href=""></a>}</span>
+<span id="cb17-9"><a href=""></a>lang_df <span class="op">=</span> pd.DataFrame(languages)</span>
+<span id="cb17-10"><a href=""></a><span class="bu">print</span>(lang_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>But:
+<ul>
+<li>Values must be placed inside of a list for this to work</li>
+<li>Keys -&gt; column labels</li>
+<li>Values -&gt; column values</li>
+</ul></li>
+</ul>
+</section>
+<section id="converting-a-dict-to-df-1" class="slide level2 center">
+<h2>Converting a <code>dict</code> to <code>df</code></h2>
+<ul>
+<li>It works quite well, though, with multi-item lists set as the value</li>
+</ul>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb18-2"><a href=""></a></span>
+<span id="cb18-3"><a href=""></a>languages <span class="op">=</span> {</span>
+<span id="cb18-4"><a href=""></a>    <span class="st">"French"</span>: [<span class="st">"Romance"</span>, <span class="dv">1</span>, <span class="st">"b"</span>],</span>
+<span id="cb18-5"><a href=""></a>    <span class="st">"Spanish"</span>: [<span class="st">"Romance"</span>, <span class="dv">1</span>, <span class="st">"c"</span>],</span>
+<span id="cb18-6"><a href=""></a>    <span class="st">"Italian"</span>: [<span class="st">"Romance"</span>, <span class="dv">4</span>, <span class="st">"a"</span>],</span>
+<span id="cb18-7"><a href=""></a>    <span class="st">"English"</span>: [<span class="st">"Germanic"</span>, <span class="dv">10</span>, <span class="st">"x"</span>]</span>
+<span id="cb18-8"><a href=""></a>}</span>
+<span id="cb18-9"><a href=""></a>lang_df <span class="op">=</span> pd.DataFrame(languages)</span>
+<span id="cb18-10"><a href=""></a><span class="bu">print</span>(lang_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="making-the-key-the-index" class="slide level2 center">
+<h2>Making the Key the Index</h2>
+<ul>
+<li>Let’s go back to single values within a <code>dict</code></li>
+<li>We can use <code>.from_dict(dict, orient="index", columns = [value])</code> to make the key the index</li>
+</ul>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb19-2"><a href=""></a></span>
+<span id="cb19-3"><a href=""></a>languages <span class="op">=</span> {</span>
+<span id="cb19-4"><a href=""></a>    <span class="st">"French"</span>: <span class="st">"Romance"</span>,</span>
+<span id="cb19-5"><a href=""></a>    <span class="st">"Spanish"</span>: <span class="st">"Romance"</span>,</span>
+<span id="cb19-6"><a href=""></a>    <span class="st">"Italian"</span>: <span class="st">"Romance"</span>,</span>
+<span id="cb19-7"><a href=""></a>    <span class="st">"English"</span>: <span class="st">"Germanic"</span></span>
+<span id="cb19-8"><a href=""></a>}</span>
+<span id="cb19-9"><a href=""></a></span>
+<span id="cb19-10"><a href=""></a>lang_df <span class="op">=</span> pd.DataFrame.from_dict(languages, orient<span class="op">=</span><span class="st">"index"</span>, columns<span class="op">=</span>[<span class="st">"Family"</span>])</span>
+<span id="cb19-11"><a href=""></a><span class="bu">print</span>(lang_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="keys-values-as-separate-columns" class="slide level2 center">
+<h2>Keys &amp; Values as Separate Columns</h2>
+<ul>
+<li>Or we can use <code>.DataFrame(list(dict.items()), columns = [key, value])</code> to set the key as one column, and the value as the second</li>
+</ul>
+<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb20-2"><a href=""></a></span>
+<span id="cb20-3"><a href=""></a>languages <span class="op">=</span> {</span>
+<span id="cb20-4"><a href=""></a>    <span class="st">"French"</span>: <span class="st">"Romance"</span>,</span>
+<span id="cb20-5"><a href=""></a>    <span class="st">"Spanish"</span>: <span class="st">"Romance"</span>,</span>
+<span id="cb20-6"><a href=""></a>    <span class="st">"Italian"</span>: <span class="st">"Romance"</span>,</span>
+<span id="cb20-7"><a href=""></a>    <span class="st">"English"</span>: <span class="st">"Germanic"</span></span>
+<span id="cb20-8"><a href=""></a>}</span>
+<span id="cb20-9"><a href=""></a></span>
+<span id="cb20-10"><a href=""></a>lang_df <span class="op">=</span> pd.DataFrame(<span class="bu">list</span>(languages.items()), columns<span class="op">=</span>[<span class="st">"Language"</span>, <span class="st">"Family"</span>])</span>
+<span id="cb20-11"><a href=""></a><span class="bu">print</span>(lang_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="df-activity" class="slide level2 center">
+<h2>DF Activity</h2>
+<ul>
+<li>Build upon the most recent <code>df</code>, where the language &amp; family were in separate columns.</li>
+<li>Create a new <code>df</code> called <code>new_info</code>, where you add the following values you will need to look up:
+<ul>
+<li>Primary (original?) location</li>
+<li>Number of speakers (in millions)</li>
+<li>Writing System</li>
+<li>ISO code</li>
+</ul></li>
+<li>Concatenate this list, saving as <code>lang_updated</code></li>
+</ul>
+</section></section>
+<section>
+<section id="activity-answers" class="title-slide slide level1 center">
+<h1>Activity Answers</h1>
+
+</section>
+<section id="review-activity-1" class="slide level2 center">
+<h2>Review Activity</h2>
+<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href=""></a>word <span class="op">=</span> <span class="st">"computation"</span></span>
+<span id="cb21-2"><a href=""></a>vowels <span class="op">=</span> <span class="st">"aeiou"</span></span>
+<span id="cb21-3"><a href=""></a></span>
+<span id="cb21-4"><a href=""></a><span class="cf">for</span> c <span class="kw">in</span> word:</span>
+<span id="cb21-5"><a href=""></a>    <span class="cf">if</span> c <span class="kw">in</span> vowels:</span>
+<span id="cb21-6"><a href=""></a>        <span class="bu">print</span>(c, <span class="st">"is a vowel."</span>)</span>
+<span id="cb21-7"><a href=""></a>    <span class="cf">else</span>:</span>
+<span id="cb21-8"><a href=""></a>        <span class="bu">print</span>(c, <span class="st">"is not a vowel."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="phonemic-inventory-pandas-activity" class="slide level2 center">
+<h2>Phonemic Inventory Pandas Activity</h2>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb22-2"><a href=""></a></span>
+<span id="cb22-3"><a href=""></a>phon_inv <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb22-4"><a href=""></a>    <span class="st">"sound"</span> : [<span class="st">"p"</span>,<span class="st">"b"</span>,<span class="st">"t"</span>,<span class="st">"d"</span>,<span class="st">"s"</span>,<span class="st">"h"</span>],</span>
+<span id="cb22-5"><a href=""></a>    <span class="st">"voicing"</span>: [<span class="st">"voiceless"</span>, <span class="st">"voiced"</span>, <span class="st">"voiceless"</span>, <span class="st">"voiced"</span>, <span class="st">"voiceless"</span>, <span class="st">"voiceless"</span>],</span>
+<span id="cb22-6"><a href=""></a>    <span class="st">"place"</span>: [<span class="st">"bilabial"</span>, <span class="st">"bilabial"</span>, <span class="st">"alveolar"</span>, <span class="st">"alveolar"</span>, <span class="st">"alveolar"</span>, <span class="st">"glottal"</span>], </span>
+<span id="cb22-7"><a href=""></a>    <span class="st">"manner"</span>: [<span class="st">"stop"</span>, <span class="st">"stop"</span>, <span class="st">"stop"</span>, <span class="st">"stop"</span>, <span class="st">"fricative"</span>, <span class="st">"fricative"</span>]})</span>
+<span id="cb22-8"><a href=""></a></span>
+<span id="cb22-9"><a href=""></a><span class="bu">print</span>(phon_inv)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="df-activity-1" class="slide level2 center">
+<h2>DF Activity</h2>
+<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb23-2"><a href=""></a><span class="co"># Create new DF</span></span>
+<span id="cb23-3"><a href=""></a>new_info <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb23-4"><a href=""></a>    <span class="st">"Location"</span>: [<span class="st">"France"</span>, <span class="st">"Spain"</span>, <span class="st">"Italy"</span>, <span class="st">"England"</span>],</span>
+<span id="cb23-5"><a href=""></a>    <span class="st">"Speakers_millions"</span>: [<span class="dv">80</span>, <span class="dv">485</span>, <span class="dv">65</span>, <span class="dv">380</span>],</span>
+<span id="cb23-6"><a href=""></a>    <span class="st">"Writing_System"</span>: [<span class="st">"Latin"</span>, <span class="st">"Latin"</span>, <span class="st">"Latin"</span>, <span class="st">"Latin"</span>],</span>
+<span id="cb23-7"><a href=""></a>    <span class="st">"ISO_code"</span>: [<span class="st">"fra"</span>, <span class="st">"spa"</span>, <span class="st">"ita"</span>, <span class="st">"eng"</span>]</span>
+<span id="cb23-8"><a href=""></a>})</span>
+<span id="cb23-9"><a href=""></a><span class="co"># Concatenate horizontally</span></span>
+<span id="cb23-10"><a href=""></a>lang_updated <span class="op">=</span> pd.concat([lang_df, new_info], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb23-11"><a href=""></a></span>
+<span id="cb23-12"><a href=""></a><span class="bu">print</span>(lang_updated)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
@@ -839,19 +849,19 @@ Pandas cleans <strong>tables</strong>.</p>
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="23_pandas_3_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="22_pandas_1_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="23_pandas_3_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="23_pandas_3_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="23_pandas_3_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="23_pandas_3_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="23_pandas_3_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="22_pandas_1_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="22_pandas_1_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="22_pandas_1_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="22_pandas_1_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="22_pandas_1_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="23_pandas_3_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="23_pandas_3_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="23_pandas_3_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="23_pandas_3_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="22_pandas_1_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="22_pandas_1_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="22_pandas_1_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="22_pandas_1_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
