@@ -165,3 +165,17 @@ combined_filled = combined.fillna(0)
 combined_dropped = combined.dropna()
 combined_dropped.head()
 ```
+
+```{python}
+
+words = ["the", "the", "the", "boy", "boy", "dog", "dog", "cat"]
+
+word_counts = {}
+
+
+for wd in words:
+    word_counts[wd] = word_counts.get(wd, 0) + 1
+    
+print(word_counts)
+
+```
