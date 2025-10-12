@@ -17,91 +17,36 @@ print(df)
 ```
 
 ```{python}
-df["language"]           # Series
-df[["language","family"]]# DataFrame (note double brackets)
+df["is_extinct"] = [True, True, True, False]
+df
 ```
 
 ```{python}
-df.iloc[0]               # first row
-df.iloc[1:3]             # slice rows 1..2
+# Drop (returns a new DF unless inplace=True)
+df_no_family = df.drop(columns=["family"])
+df_no_family
 ```
 
 ```{python}
-# Rows by label (after we set a custom index)
-df2 = df.copy()
-df2.index = ["a","b","c","d"]
-df2.loc["b"]             # row labeled 'b'
+# Drop (returns a new DF unless inplace=True) 
+df_no_latin = df.drop([0])
+df_no_latin
 ```
 
 ```{python}
-df.loc[0, "language"]        # cell by label/column
-df.iloc[0, 0]                # cell by position
-df.iloc[0:3, 0:2]            # rows 0..2, cols 0..1
+df = df.rename(columns={"speakers_millions": "speakers_M"})
+df
 ```
 
 ```{python}
-ie = df[df["family"] == "Indo-European"]
-ie
-```
+df_reset_no_latin = df_no_latin.reset_index(drop=True)
+df_reset_no_latin
 
-```{python}
-df[(df["family"]=="Indo-European") & (df["location"]=="India")]
-df[(df["family"]=="Indo-European") | (df["location"]=="Finland")]
-```
+df_reset = df.reset_index(drop=True)
+df_reset
 
-```{python}
-df[~(df["family"]=="Indo-European")]
-```
-
-```{python}
-df.sort_values(["location"])
-```
-
-```{python}
-df["speakers_millions"].sum()
-```
-
-```{python}
-int(df["speakers_millions"].sum())
-```
-
-```{python}
-import pandas as pd
-
-eng_vowels = pd.DataFrame({
-    "symbol": ["i", "ɪ", "e", "ɛ", "æ", "u", "ʊ", "o", "ɔ", "ɑ", "ʌ", "ə"],
-    "height": ["high", "high", "mid", "mid", "low", "high", "high", "mid", "mid", "low", "mid", "mid"],
-    "backness": ["front", "front", "front", "front", "front",
-                 "back", "back", "back", "back", "back",
-                 "central", "central"],
-    "tense":   [True, False, True, False, False,
-                True, False, True, False, False,
-                False, False],
-    "rounded": [False, False, False, False, False,
-                True, True, True, True, False,
-                False, False]
-})
-
-eng_vowels
-
-```
-
-```{python}
-import pandas as pd
-
-# 1. Filter the `df`: show only **high back rounded vowels**
-eng_vowels[(eng_vowels["height"]=="high") & (eng_vowels["backness"]=="back") & (eng_vowels["rounded"] == True)]
-# 2. Negation and slicing: display all vowels that are **not tense**. 
-eng_vowels[~(eng_vowels["tense"]==True)]
-# 3. Then display only the first three vowels of that group.
-eng_vowels[~(eng_vowels["tense"]==True)].head(3)
-# 4. Sort the `df` by **height** and **backness**. 
-eng_vowels.sort_values(["height", "backness"])
-# 5. Count how many vowels are rounded, tense or both.
-rounded = eng_vowels["rounded"].sum()
-tense = eng_vowels["tense"].sum()
-both = (eng_vowels["rounded"] & eng_vowels["tense"]).sum()
-print("Rounded:", rounded, "| Tense:", tense, "| Both:", both)
+df_set = df.set_index("language")
+df_set
 ```
 
 ```{python}
@@ -110,29 +55,15 @@ import pandas as pd
 df = pd.DataFrame({
     "language": ["Latin", "Greek", "Sanskrit", "Finnish"],
     "family":   ["Indo-European", "Indo-European", "Indo-European", "Uralic"],
-    "speakers_millions": [0, 0, 0, 6],
+    "speakers_M": [0, 0, 0, 6],
     "location": ["Italy", "Greece", "India", "Finland"]
 })
 
-df["is_extinct"] = [True, True, True, False]
+df.sort_index() # by row labels
+print("-----------------------------------------------")
+df.sort_values(by="location", ascending=True)
+print("-----------------------------------------------")
 
-df.head()
-
-```
-
-```{python}
-# Drop (returns a new DF unless inplace=True)
-df_no_family = df.drop([1])
-
-df = df.rename(columns={"speakers_millions": "speakers_M"})
-
-df_no_family.head()
-```
-
-```{python}
-# df_reset = df.reset_index(drop=True)
-df_set = df.set_index("language")
-df_set
 ```
 
 ```{python}
@@ -153,43 +84,55 @@ total.sort_values(ascending=False)
 ```
 
 ```{python}
-# Vertical stack (same columns)
-latin_df = pd.DataFrame({"lang":["Latin","Latin"],"root":["fer-","port-"]})
-greek_df = pd.DataFrame({"lang":["Greek"],"root":["phér-"]})
-pd.concat([latin_df, greek_df], ignore_index=True)
-```
-
-```{python}
 combined.isna().sum()
 combined_filled = combined.fillna(0)
 combined_dropped = combined.dropna()
-combined_dropped.head()
+
+combined
+combined_filled
+combined_dropped
 ```
 
 ```{python}
-
-words = ["the", "the", "the", "boy", "boy", "dog", "dog", "cat"]
-
-word_counts = {}
-
-
-for wd in words:
-    word_counts[wd] = word_counts.get(wd, 0) + 1
-    
-print(word_counts)
-
+total = reflexes_verb.add(reflexes_noun, fill_value=0)
+total.sort_values(ascending=False)
 ```
 
 ```{python}
-
 import pandas as pd
 
-languages = {
-    "French": "Romance",
-    "Spanish": "Romance",
-    "Italian": "Romance",
-    "English": "Germanic"
-}
-lang_df = pd.DataFrame(languages)
-print(lang_df)
+sound_df = pd.DataFrame({
+    "s": [35, 28, 40],
+    "z": [20, 25, 18],
+    "t": [50, 40, 53],
+    "k": [42, 35, 48],
+    "m": [18, 12, 17],
+    "n": [22, 20, 19],
+})
+
+total_c = sound_df["s"].add(sound_df["z"]).add(sound_df["t"]).add(sound_df["k"]).add(sound_df["m"]).add(sound_df["n"])
+#total_fric = sound_df["s"].add(sound_df["z"])
+# total_nas = 
+# total_obs = 
+```
+
+```{python}
+import pandas as pd
+
+sound_df = pd.DataFrame({
+    "s": [35, 28, 40],
+    "z": [20, 25, 18],
+    "t": [50, 40, 53],
+    "k": [42, 35, 48],
+    "m": [18, 12, 17],
+    "n": [22, 20, 19],
+})
+
+sound_comb = sound_df.sum(axis=0)
+sound_comb
+
+for c in sound_comb:
+    if sound_comb["s" or "z" in sound_comb.items():
+      print(c)
+# total_fric = sound_comb["s"].add(sound_comb["z"])
 ```
