@@ -124,17 +124,18 @@ with open("alice.txt", "r", encoding="utf-8") as f:
     
 mans_quot_count = 0
 alice_quot_count = 0
+quot_list = ['"', '“', '”']
 
 for c in mans:
-    if c == '"' or '“' or '”':
+    if c in quot_list:
       mans_quot_count += 1
 
 for c in alice:
-    if c == '"':
+    if c in quot_list:
       alice_quot_count += 1
 
-print("There are", mans_quot_count, "instances of dialogue in Mansfield Park.")
-print("There are", alice_quot_count, "instances of dialogue in Alice in Wonderland.")
+print("There are", mans_quot_count / 2, "instances of dialogue in Mansfield Park.")
+print("There are", alice_quot_count / 2, "instances of dialogue in Alice in Wonderland.")
 ```
 
 ## What are the most common words (excluding "the", "and", and "of"?)

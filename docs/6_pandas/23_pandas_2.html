@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="21_gut_detective_files/libs/clipboard/clipboard.min.js"></script>
-<script src="21_gut_detective_files/libs/quarto-html/tabby.min.js"></script>
-<script src="21_gut_detective_files/libs/quarto-html/popper.min.js"></script>
-<script src="21_gut_detective_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="21_gut_detective_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="21_gut_detective_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="21_gut_detective_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="21_gut_detective_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="23_pandas_2_files/libs/clipboard/clipboard.min.js"></script>
+<script src="23_pandas_2_files/libs/quarto-html/tabby.min.js"></script>
+<script src="23_pandas_2_files/libs/quarto-html/popper.min.js"></script>
+<script src="23_pandas_2_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="23_pandas_2_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="23_pandas_2_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="23_pandas_2_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="23_pandas_2_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Dr.&nbsp;Andrew M. Byrd">
-  <meta name="dcterms.date" content="2025-10-13">
+  <meta name="dcterms.date" content="2025-10-17">
   <title>Computation for Linguists</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="21_gut_detective_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="21_gut_detective_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="23_pandas_2_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="23_pandas_2_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -96,12 +96,12 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="21_gut_detective_files/libs/revealjs/dist/theme/quarto.css">
+  <link rel="stylesheet" href="23_pandas_2_files/libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="header_shrink.css">
-  <link href="21_gut_detective_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="21_gut_detective_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="21_gut_detective_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="21_gut_detective_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link href="23_pandas_2_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="23_pandas_2_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="23_pandas_2_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="23_pandas_2_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -394,7 +394,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Computation for Linguists</h1>
-  <p class="subtitle">Activity Day: Detective Gutenberg</p>
+  <p class="subtitle">Pandasmonium, Day 2</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -404,165 +404,291 @@ Dr.&nbsp;Andrew M. Byrd
 </div>
 </div>
 
-  <p class="date">2025-10-13</p>
+  <p class="date">2025-10-17</p>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Plan for the Day</h2>
 <ul>
 <li><a href="#/review" id="/toc-review">Review</a></li>
-<li><a href="#/while-loops" id="/toc-while-loops"><code>while</code> Loops</a></li>
-<li><a href="#/activity-detective-gutenberg" id="/toc-activity-detective-gutenberg">Activity: Detective Gutenberg</a></li>
-<li><a href="#/possible-discussions" id="/toc-possible-discussions">Possible Discussions</a></li>
+<li><a href="#/indexing-and-selecting" id="/toc-indexing-and-selecting">Indexing and Selecting</a></li>
+<li><a href="#/activity-answers" id="/toc-activity-answers">Activity Answers</a></li>
 </ul>
 </nav>
 </section>
+<section>
 <section id="review" class="title-slide slide level1 center">
 <h1>Review</h1>
-
-</section>
-
-<section>
-<section id="while-loops" class="title-slide slide level1 center">
-<h1><code>while</code> Loops</h1>
-
-</section>
-<section id="while-loops-1" class="slide level2 center">
-<h2><code>while</code> Loops</h2>
 <ul>
-<li>They’re a lot like <code>if</code> statements, where something happens if a condition is met:</li>
+<li>What did you learn last time?</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a>x <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb1-2"><a href=""></a><span class="cf">if</span> x <span class="op">&lt;</span> <span class="dv">10</span>:</span>
-<span id="cb1-3"><a href=""></a>    <span class="bu">print</span>(x, <span class="st">"is less than 10."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="while-loops-2" class="slide level2 center">
-<h2><code>while</code> Loops</h2>
+<section id="recap-from-last-time" class="slide level2 center">
+<h2>Recap from Last Time</h2>
 <ul>
-<li>In <code>while</code> loops, there’s also a logical condition</li>
-<li>But instead of running the code once, python will loop back and recheck the conditional</li>
-<li>It will do this <strong>forever</strong> until the conditional returns <code>False</code></li>
-</ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a>x <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb2-2"><a href=""></a><span class="cf">while</span> x <span class="op">&lt;</span> <span class="dv">10</span>:</span>
-<span id="cb2-3"><a href=""></a>    <span class="bu">print</span>(x, <span class="st">"is less than 10."</span>)</span>
-<span id="cb2-4"><a href=""></a>    x <span class="op">=</span> x <span class="op">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="while-loops-3" class="slide level2 center">
-<h2><code>while</code> Loops</h2>
+<li><code>pd.Series()</code>, <code>pd.DataFrame</code></li>
+<li>Creating <code>df</code>
 <ul>
-<li>Be <strong>careful</strong> with <code>while</code> loops! Code (like below) will run ad infinitum and could crash your computer:</li>
-</ul>
-<pre><code>x = 0
-while x &lt; 10:
-    print(x, "is less than 10.")
-    x = x - 1</code></pre>
-</section>
-<section id="while-loops-4" class="slide level2 center">
-<h2><code>while</code> Loops</h2>
-<ul>
-<li>In this class, we will mostly use <code>for</code> loops</li>
-<li>But you can do some interesting things with <code>while</code> loops, like:</li>
-</ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a>name <span class="op">=</span> <span class="st">"The University of Kentucky"</span></span>
-<span id="cb4-2"><a href=""></a><span class="cf">while</span> name: </span>
-<span id="cb4-3"><a href=""></a>      <span class="bu">print</span>(<span class="st">"|"</span> <span class="op">+</span> name <span class="op">+</span> <span class="st">"|"</span>) </span>
-<span id="cb4-4"><a href=""></a>      name <span class="op">=</span> name[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section></section>
-<section>
-<section id="activity-detective-gutenberg" class="title-slide slide level1 center">
-<h1>Activity: Detective Gutenberg</h1>
-
-</section>
-<section id="detective-gutenberg" class="slide level2 center">
-<h2>Detective Gutenberg</h2>
-<p><strong>Goal:</strong> discover what makes an author’s writing style distinctive using the Python tools you already know.</p>
-<ul>
-<li>If you don’t remember how to do something, revisit past lectures.</li>
-</ul>
-<p><strong>Today, you’ll:</strong></p>
-<ol type="1">
-<li>Download two novels of your choice from Project Gutenberg</li>
-<li>Load &amp; clean the texts</li>
-<li>Measure style and print up the results</li>
-</ol>
-</section>
-<section id="overview-of-activity-setup" class="slide level2 center">
-<h2>Overview of Activity — Setup</h2>
-<ul>
-<li>Create a new <code>qmd</code>, called <code>gut_detective</code>.</li>
-<li>Choose <em>any</em> <strong>two novels</strong> from <a href="https://www.gutenberg.org/">Project Gutenberg</a>, and download them using Python.
-<ul>
-<li>Use simple filenames (such as <code>alice.txt</code>)</li>
+<li><code>pd.DataFrame({ column_name : [value_1, value_2] })</code></li>
+<li><code>pd.DataFrame(dict)</code></li>
+<li><code>pd.concat([series_1, series_2], axis=1)</code></li>
+<li><code>pd.DataFrame.from_dict(dict, orient="index", columns=[dict_value])</code></li>
+<li><code>pd.DataFrame(list(dict.items()), columns=[key, value])</code></li>
 </ul></li>
-<li>Manually edit your <code>txt</code> files, deleting any Project Gutenberg headers &amp; footers (that aren’t part of the book text itself)</li>
 </ul>
 </section>
-<section id="overview-of-activity-read-clean" class="slide level2 center">
-<h2>Overview of Activity — Read &amp; Clean</h2>
+<section id="review-activity-pie-time" class="slide level2 center">
+<h2>Review Activity: PIE time</h2>
 <ul>
-<li>Read both files, and assign each to a clear variable name.</li>
-<li>Split the words up, cleaning whitespace and punctuation. Make all words lowercase as well.</li>
+<li>Using <code>pd.DataFrame({ ... })</code>, create the following table</li>
 </ul>
-</section>
-<section id="overview-of-activity-explore-the-data" class="slide level2 center">
-<h2>Overview of Activity — Explore the Data</h2>
-<ol type="1">
-<li>How many words are there <strong>in total</strong>? How many <strong>unique</strong> words?</li>
-<li>What is the <strong>average word length</strong>?</li>
-<li>How many <strong>adverbs</strong> are there? Pick <strong>three other affixes</strong> to investigate.</li>
-<li>How much <strong>dialogue</strong> is there? (Use <code>quot_list = ['"', '“', '”']</code>)</li>
-<li>What are the <strong>most common words</strong> (excluding “the,” “and,” “of”)? Arrange your values with <code>sorted(dict_name.items(), key=lambda x: x[1], reverse=True)</code></li>
-</ol>
-</section>
-<section id="if-you-finish-early" class="slide level2 center">
-<h2>If You Finish Early</h2>
-<ul>
-<li>Add a third author (Dickens, Poe, Twain)<br>
-</li>
-<li>Feel free to add yourself as the third author!</li>
-</ul>
-</section>
-<section id="go-for-it" class="slide level2 center">
-<h2>Go for it!</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Root</th>
+<th style="text-align: left;">Meaning</th>
+<th style="text-align: left;">Latin</th>
+<th style="text-align: left;">Greek</th>
+<th style="text-align: left;">English</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">*bʰer-</td>
+<td style="text-align: left;">‘to carry’</td>
+<td style="text-align: left;">ferō</td>
+<td style="text-align: left;">pʰérō</td>
+<td style="text-align: left;">bear</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">*ĝenh₁-</td>
+<td style="text-align: left;">‘to beget’</td>
+<td style="text-align: left;">gignō</td>
+<td style="text-align: left;">gígnomai</td>
+<td style="text-align: left;">kin</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">*ped-</td>
+<td style="text-align: left;">‘foot’</td>
+<td style="text-align: left;">pēs</td>
+<td style="text-align: left;">poús</td>
+<td style="text-align: left;">foot</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">*doh₃-</td>
+<td style="text-align: left;">‘to give’</td>
+<td style="text-align: left;">dō</td>
+<td style="text-align: left;">dídōmi</td>
+<td style="text-align: left;">donate</td>
+</tr>
+</tbody>
+</table>
 </section></section>
 <section>
-<section id="possible-discussions" class="title-slide slide level1 center">
-<h1>Possible Discussions</h1>
+<section id="indexing-and-selecting" class="title-slide slide level1 center">
+<h1>Indexing and Selecting</h1>
 
 </section>
-<section id="calculating-averages-in-python" class="slide level2 center">
-<h2>Calculating Averages in Python</h2>
+<section id="load-up-our-previous-pd" class="slide level2 center">
+<h2>Load up our previous <code>pd</code></h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href=""></a></span>
+<span id="cb1-3"><a href=""></a>fresh_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb1-4"><a href=""></a>    <span class="st">"language"</span>: [<span class="st">"Latin"</span>, <span class="st">"Greek"</span>, <span class="st">"Sanskrit"</span>, <span class="st">"Finnish"</span>],</span>
+<span id="cb1-5"><a href=""></a>    <span class="st">"family"</span>:   [<span class="st">"Indo-European"</span>, <span class="st">"Indo-European"</span>, <span class="st">"Indo-European"</span>, <span class="st">"Uralic"</span>],</span>
+<span id="cb1-6"><a href=""></a>    <span class="st">"speakers_millions"</span>: [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">6</span>],</span>
+<span id="cb1-7"><a href=""></a>    <span class="st">"location"</span>: [<span class="st">"Italy"</span>, <span class="st">"Greece"</span>, <span class="st">"India"</span>, <span class="st">"Finland"</span>]</span>
+<span id="cb1-8"><a href=""></a>})</span>
+<span id="cb1-9"><a href=""></a></span>
+<span id="cb1-10"><a href=""></a><span class="bu">print</span>(fresh_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="inspecting-a-dataframe" class="slide level2 center">
+<h2>Inspecting a DataFrame</h2>
 <ul>
-<li>What is an <strong>average</strong>? How do we calculate it?</li>
+<li>Run this code - what do <code>.head()</code>, <code>.tail()</code>, <code>.shape</code>, <code>.columns</code>, and <code>.index</code> do?</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a>df.head(<span class="dv">2</span>) </span>
+<span id="cb2-2"><a href=""></a>df.tail(<span class="dv">2</span>) </span>
+<span id="cb2-3"><a href=""></a>df.shape</span>
+<span id="cb2-4"><a href=""></a>df.columns</span>
+<span id="cb2-5"><a href=""></a>df.index</span>
+<span id="cb2-6"><a href=""></a>df.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="accessing-single-columns" class="slide level2 center">
+<h2>Accessing Single Columns</h2>
+<ul>
+<li>We can access a single <code>.Series()</code> using <code>df[ ]</code></li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a>df[<span class="st">"language"</span>]           <span class="co"># Series</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Does this remind you of anything?</li>
 </ul>
 </section>
-<section id="how-to-tally-words" class="slide level2 center">
-<h2>How to Tally Words?</h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a>words <span class="op">=</span> [<span class="st">"the"</span>, <span class="st">"the"</span>, <span class="st">"the"</span>, <span class="st">"boy"</span>, <span class="st">"boy"</span>, <span class="st">"dog"</span>, <span class="st">"dog"</span>, <span class="st">"cat"</span>]</span>
-<span id="cb5-2"><a href=""></a></span>
-<span id="cb5-3"><a href=""></a>word_counts <span class="op">=</span> {}</span>
-<span id="cb5-4"><a href=""></a></span>
-<span id="cb5-5"><a href=""></a><span class="cf">for</span> wd <span class="kw">in</span> words:</span>
-<span id="cb5-6"><a href=""></a>    <span class="cf">if</span> wd <span class="kw">in</span> word_counts:              <span class="co"># Check to see if wd is there; if it is, increase value by 1</span></span>
-<span id="cb5-7"><a href=""></a>        word_counts[wd] <span class="op">=</span> word_counts[wd] <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb5-8"><a href=""></a>    <span class="cf">else</span>:                              <span class="co"># If not, create a new entry, set value at 1</span></span>
-<span id="cb5-9"><a href=""></a>        word_counts[wd] <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb5-10"><a href=""></a>        </span>
-<span id="cb5-11"><a href=""></a><span class="bu">print</span>(word_counts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="a-more-efficient-approach" class="slide level2 center">
-<h2>A More Efficient Approach:</h2>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a>words <span class="op">=</span> [<span class="st">"the"</span>, <span class="st">"the"</span>, <span class="st">"the"</span>, <span class="st">"boy"</span>, <span class="st">"boy"</span>, <span class="st">"dog"</span>, <span class="st">"dog"</span>, <span class="st">"cat"</span>]</span>
-<span id="cb6-2"><a href=""></a></span>
-<span id="cb6-3"><a href=""></a>word_counts <span class="op">=</span> {}</span>
-<span id="cb6-4"><a href=""></a></span>
-<span id="cb6-5"><a href=""></a><span class="cf">for</span> wd <span class="kw">in</span> words:</span>
-<span id="cb6-6"><a href=""></a>    word_counts[wd] <span class="op">=</span> word_counts.get(wd, <span class="dv">0</span>) <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb6-7"><a href=""></a>        </span>
-<span id="cb6-8"><a href=""></a><span class="bu">print</span>(word_counts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="accessing-multiple-columns" class="slide level2 center">
+<h2>Accessing Multiple Columns</h2>
 <ul>
-<li><code>.get(wd, 0)</code> checks if <code>wd</code> already has a count; which we then increase by 1</li>
+<li>Or multiple columns using <code>df[[ ]]</code></li>
 </ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a>df[[<span class="st">"language"</span>,<span class="st">"family"</span>]] <span class="co"># DataFrame</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="selecting-rows-by-integer-position" class="slide level2 center">
+<h2>Selecting Rows by Integer Position</h2>
+<ul>
+<li>We can access specific rows using <code>df.iloc</code>
+<ul>
+<li>“integer location”</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a>df.iloc[<span class="dv">0</span>]               <span class="co"># first row</span></span>
+<span id="cb5-2"><a href=""></a>df.iloc[<span class="dv">1</span>:<span class="dv">3</span>]             <span class="co"># slice rows 1..2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="selecting-rows-by-label" class="slide level2 center">
+<h2>Selecting Rows By Label</h2>
+<ul>
+<li>Or rows with a custom index using <code>df.loc</code></li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a><span class="co"># Rows by label (after we set a custom index)</span></span>
+<span id="cb6-2"><a href=""></a>df2 <span class="op">=</span> df.copy()</span>
+<span id="cb6-3"><a href=""></a>df2.index <span class="op">=</span> [<span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span>,<span class="st">"d"</span>]</span>
+<span id="cb6-4"><a href=""></a>df2.loc[<span class="st">"b"</span>]             <span class="co"># row labeled 'b'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="cell-access-row-column" class="slide level2 center">
+<h2>Cell Access (Row + Column)</h2>
+<ul>
+<li>We can access a specific cell by label/column</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a>df.loc[<span class="dv">0</span>, <span class="st">"language"</span>]        <span class="co"># cell by label/column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Or using <code>.iloc</code> with specific coordinates</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href=""></a>df.iloc[<span class="dv">0</span>, <span class="dv">0</span>]                <span class="co"># cell by position</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>We can also slice in 2D ways:</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href=""></a>df.iloc[<span class="dv">0</span>:<span class="dv">3</span>, <span class="dv">0</span>:<span class="dv">2</span>]            <span class="co"># rows 0..2, cols 0..1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="boolean-filtering" class="slide level2 center">
+<h2>Boolean Filtering</h2>
+<ul>
+<li>And lastly we can filter our table using Boolean operators for specific properties:</li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a>ie <span class="op">=</span> df[df[<span class="st">"family"</span>] <span class="op">==</span> <span class="st">"Indo-European"</span>]</span>
+<span id="cb10-2"><a href=""></a>ie</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="complex-filtering" class="slide level2 center">
+<h2>Complex Filtering</h2>
+<ul>
+<li>Use the operators <code>&amp;</code> (and) and <code>|</code> (or)</li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a>df[(df[<span class="st">"family"</span>]<span class="op">==</span><span class="st">"Indo-European"</span>) <span class="op">&amp;</span> (df[<span class="st">"location"</span>]<span class="op">==</span><span class="st">"India"</span>)]</span>
+<span id="cb11-2"><a href=""></a>df[(df[<span class="st">"family"</span>]<span class="op">==</span><span class="st">"Indo-European"</span>) <span class="op">|</span> (df[<span class="st">"location"</span>]<span class="op">==</span><span class="st">"Finland"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="complex-filtering-1" class="slide level2 center">
+<h2>Complex Filtering</h2>
+<ul>
+<li>Place <code>~</code> in front of the filter to mean <strong>not</strong></li>
+</ul>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href=""></a>df[<span class="op">~</span>(df[<span class="st">"family"</span>]<span class="op">==</span><span class="st">"Indo-European"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="complex-filtering-2" class="slide level2 center">
+<h2>Complex Filtering</h2>
+<ul>
+<li>To sort a <code>df</code> alphabetically by a specific <code>.Series()</code>, use the method <code>.sort_values()</code></li>
+</ul>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href=""></a>df.sort_values([<span class="st">"location"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="counting" class="slide level2 center">
+<h2>Counting</h2>
+<ul>
+<li>You can add up the total number of a <code>.Series()</code> using the <code>.sum()</code> method</li>
+</ul>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href=""></a>df[<span class="st">"speakers_millions"</span>].<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Which you can display as a regular <code>int</code> using <code>int()</code>:</li>
+</ul>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href=""></a><span class="bu">int</span>(df[<span class="st">"speakers_millions"</span>].<span class="bu">sum</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="activity-english-vowels" class="slide level2 center">
+<h2>Activity: English Vowels</h2>
+<ul>
+<li>Copy the below code, and complete the values for “height”, “backness”, “tense”, and “roundedness”</li>
+</ul>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb16-2"><a href=""></a></span>
+<span id="cb16-3"><a href=""></a>eng_vowels <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb16-4"><a href=""></a>    <span class="st">"symbol"</span>: [<span class="st">"i"</span>, <span class="st">"ɪ"</span>, <span class="st">"e"</span>, <span class="st">"ɛ"</span>, <span class="st">"æ"</span>, <span class="st">"u"</span>, <span class="st">"ʊ"</span>, <span class="st">"o"</span>, <span class="st">"ɔ"</span>, <span class="st">"ɑ"</span>, <span class="st">"ʌ"</span>, <span class="st">"ə"</span>],</span>
+<span id="cb16-5"><a href=""></a>    <span class="st">"height"</span>: [], <span class="co">#choose from "high", "mid", and "low"</span></span>
+<span id="cb16-6"><a href=""></a>    <span class="st">"backness"</span>: [], <span class="co"># choose from "front", "back", and "central"</span></span>
+<span id="cb16-7"><a href=""></a>    <span class="st">"tense"</span>:   [], <span class="co">#choose from True or False</span></span>
+<span id="cb16-8"><a href=""></a>    <span class="st">"rounded"</span>: [], <span class="co">#choose from True or False</span></span>
+<span id="cb16-9"><a href=""></a>})</span>
+<span id="cb16-10"><a href=""></a></span>
+<span id="cb16-11"><a href=""></a>eng_vowels</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="activity-english-vowels-1" class="slide level2 center">
+<h2>Activity: English Vowels</h2>
+<ol type="1">
+<li><p>Filter the <code>df</code>: show only <strong>high back rounded vowels</strong></p></li>
+<li><p>Negation and slicing: display all vowels that are <strong>not tense</strong>.</p></li>
+<li><p>Then display only the first three vowels of that group.</p></li>
+<li><p>Sort the <code>df</code> by <strong>height</strong> and <strong>backness</strong>.</p></li>
+<li><p>Count how many vowels are <strong>rounded</strong>, <strong>tense</strong> and <strong>both</strong>.</p></li>
+</ol>
+</section></section>
+<section>
+<section id="activity-answers" class="title-slide slide level1 center">
+<h1>Activity Answers</h1>
+
+</section>
+<section id="review-activity" class="slide level2 center">
+<h2>Review Activity</h2>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb17-2"><a href=""></a></span>
+<span id="cb17-3"><a href=""></a>roots <span class="op">=</span> {</span>
+<span id="cb17-4"><a href=""></a>    <span class="st">"Root"</span>: [<span class="st">"*bher-"</span>, <span class="st">"*gen-"</span>, <span class="st">"*ped-"</span>, <span class="st">"*dō-"</span>],</span>
+<span id="cb17-5"><a href=""></a>    <span class="st">"Meaning"</span>: [<span class="st">"carry"</span>, <span class="st">"beget"</span>, <span class="st">"foot"</span>, <span class="st">"give"</span>],</span>
+<span id="cb17-6"><a href=""></a>    <span class="st">"Latin"</span>: [<span class="st">"fero"</span>, <span class="st">"gigno"</span>, <span class="st">"pes"</span>, <span class="st">"do"</span>],</span>
+<span id="cb17-7"><a href=""></a>    <span class="st">"Greek"</span>: [<span class="st">"phérō"</span>, <span class="st">"gígnomai"</span>, <span class="st">"poús"</span>, <span class="st">"dídōmi"</span>],</span>
+<span id="cb17-8"><a href=""></a>    <span class="st">"English"</span>: [<span class="st">"bear"</span>, <span class="st">"kin"</span>, <span class="st">"foot"</span>, <span class="st">"donate"</span>]</span>
+<span id="cb17-9"><a href=""></a>}</span>
+<span id="cb17-10"><a href=""></a></span>
+<span id="cb17-11"><a href=""></a>pie_df <span class="op">=</span> pd.DataFrame(roots)</span>
+<span id="cb17-12"><a href=""></a><span class="bu">print</span>(pie_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="activity-english-vowels-2" class="slide level2 center">
+<h2>Activity: English Vowels</h2>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb18-2"><a href=""></a></span>
+<span id="cb18-3"><a href=""></a>eng_vowels <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb18-4"><a href=""></a>    <span class="st">"symbol"</span>: [<span class="st">"i"</span>, <span class="st">"ɪ"</span>, <span class="st">"e"</span>, <span class="st">"ɛ"</span>, <span class="st">"æ"</span>, <span class="st">"u"</span>, <span class="st">"ʊ"</span>, <span class="st">"o"</span>, <span class="st">"ɔ"</span>, <span class="st">"ɑ"</span>, <span class="st">"ʌ"</span>, <span class="st">"ə"</span>],</span>
+<span id="cb18-5"><a href=""></a>    <span class="st">"height"</span>: [<span class="st">"high"</span>, <span class="st">"high"</span>, <span class="st">"mid"</span>, <span class="st">"mid"</span>, <span class="st">"low"</span>, <span class="st">"high"</span>, <span class="st">"high"</span>, <span class="st">"mid"</span>, <span class="st">"mid"</span>, <span class="st">"low"</span>, <span class="st">"mid"</span>, <span class="st">"mid"</span>],</span>
+<span id="cb18-6"><a href=""></a>    <span class="st">"backness"</span>: [<span class="st">"front"</span>, <span class="st">"front"</span>, <span class="st">"front"</span>, <span class="st">"front"</span>, <span class="st">"front"</span>,</span>
+<span id="cb18-7"><a href=""></a>                 <span class="st">"back"</span>, <span class="st">"back"</span>, <span class="st">"back"</span>, <span class="st">"back"</span>, <span class="st">"back"</span>,</span>
+<span id="cb18-8"><a href=""></a>                 <span class="st">"central"</span>, <span class="st">"central"</span>],</span>
+<span id="cb18-9"><a href=""></a>    <span class="st">"tense"</span>:   [<span class="va">True</span>, <span class="va">False</span>, <span class="va">True</span>, <span class="va">False</span>, <span class="va">False</span>,</span>
+<span id="cb18-10"><a href=""></a>                <span class="va">True</span>, <span class="va">False</span>, <span class="va">True</span>, <span class="va">False</span>, <span class="va">False</span>,</span>
+<span id="cb18-11"><a href=""></a>                <span class="va">False</span>, <span class="va">False</span>],</span>
+<span id="cb18-12"><a href=""></a>    <span class="st">"rounded"</span>: [<span class="va">False</span>, <span class="va">False</span>, <span class="va">False</span>, <span class="va">False</span>, <span class="va">False</span>,</span>
+<span id="cb18-13"><a href=""></a>                <span class="va">True</span>, <span class="va">True</span>, <span class="va">True</span>, <span class="va">True</span>, <span class="va">False</span>,</span>
+<span id="cb18-14"><a href=""></a>                <span class="va">False</span>, <span class="va">False</span>]</span>
+<span id="cb18-15"><a href=""></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="activity-english-vowels-3" class="slide level2 center">
+<h2>Activity: English Vowels</h2>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb19-2"><a href=""></a></span>
+<span id="cb19-3"><a href=""></a><span class="co"># 1. Filter the `df`: show only **high back rounded vowels**</span></span>
+<span id="cb19-4"><a href=""></a>eng_vowels[(eng_vowels[<span class="st">"height"</span>]<span class="op">==</span><span class="st">"high"</span>) <span class="op">&amp;</span> (eng_vowels[<span class="st">"backness"</span>]<span class="op">==</span><span class="st">"back"</span>) <span class="op">&amp;</span> (eng_vowels[<span class="st">"rounded"</span>] <span class="op">==</span> <span class="va">True</span>)]</span>
+<span id="cb19-5"><a href=""></a><span class="co"># 2. Negation and slicing: display all vowels that are **not tense**. </span></span>
+<span id="cb19-6"><a href=""></a>eng_vowels[<span class="op">~</span>(eng_vowels[<span class="st">"tense"</span>]<span class="op">==</span><span class="va">True</span>)]</span>
+<span id="cb19-7"><a href=""></a><span class="co"># 3. Then display only the first three vowels of that group.</span></span>
+<span id="cb19-8"><a href=""></a>eng_vowels[<span class="op">~</span>(eng_vowels[<span class="st">"tense"</span>]<span class="op">==</span><span class="va">True</span>)].head(<span class="dv">3</span>)</span>
+<span id="cb19-9"><a href=""></a><span class="co"># 4. Sort the `df` by **height** and **backness**. </span></span>
+<span id="cb19-10"><a href=""></a>eng_vowels.sort_values([<span class="st">"height"</span>, <span class="st">"backness"</span>])</span>
+<span id="cb19-11"><a href=""></a><span class="co"># 5. Count how many vowels are rounded, tense or both.</span></span>
+<span id="cb19-12"><a href=""></a>rounded <span class="op">=</span> eng_vowels[<span class="st">"rounded"</span>].<span class="bu">sum</span>()</span>
+<span id="cb19-13"><a href=""></a>tense <span class="op">=</span> eng_vowels[<span class="st">"tense"</span>].<span class="bu">sum</span>()</span>
+<span id="cb19-14"><a href=""></a>both <span class="op">=</span> (eng_vowels[<span class="st">"rounded"</span>] <span class="op">&amp;</span> eng_vowels[<span class="st">"tense"</span>]).<span class="bu">sum</span>()</span>
+<span id="cb19-15"><a href=""></a><span class="bu">print</span>(<span class="st">"Rounded:"</span>, rounded, <span class="st">"| Tense:"</span>, tense, <span class="st">"| Both:"</span>, both)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
@@ -573,19 +699,19 @@ while x &lt; 10:
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="21_gut_detective_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="23_pandas_2_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="21_gut_detective_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="21_gut_detective_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="21_gut_detective_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="21_gut_detective_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="21_gut_detective_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="23_pandas_2_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="23_pandas_2_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="23_pandas_2_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="23_pandas_2_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="23_pandas_2_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="21_gut_detective_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="21_gut_detective_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="21_gut_detective_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="21_gut_detective_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="23_pandas_2_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="23_pandas_2_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="23_pandas_2_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="23_pandas_2_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>

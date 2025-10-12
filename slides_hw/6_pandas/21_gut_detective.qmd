@@ -98,16 +98,8 @@ while name:
 1. How many words are there **in total**? How many **unique** words?
 2. What is the **average word length**?
 3. How many **adverbs** are there? Pick **three other affixes** to investigate.
-4. How much **dialogue** is there?
+4. How much **dialogue** is there? (Use `quot_list = ['"', '“', '”']`)
 5. What are the **most common words** (excluding “the,” “and,” “of”)? Arrange your values with `sorted(dict_name.items(), key=lambda x: x[1], reverse=True)`
-
-## Overview of Activity — Share a Finding with Your Neighbors
-
-Each of you will report at least one finding, such as:
-
-> “Austen uses twice as many adverbs.”  
-> “Brontë has longer words but fewer unique ones.”  
-> “Dialogue = 12 % of *Jane Eyre*, 5 % of *Austen*.”
 
 ## If You Finish Early
 
@@ -117,6 +109,10 @@ Each of you will report at least one finding, such as:
 ## Go for it!
 
 # Possible Discussions
+
+## Calculating Averages in Python
+
+- What is an **average**?  How do we calculate it?
 
 ## How to Tally Words?
 
@@ -147,7 +143,3 @@ print(word_counts)
 ```
 
 - `.get(wd, 0)` checks if `wd` already has a count; which we then increase by 1
-
-## Calculating Averages in Python
-
-- What is an **average**?  How do we calculate it?

@@ -1,0 +1,253 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"gut_det_in_class\"\n",
+        "format: html\n",
+        "---\n",
+        "\n",
+        "\n",
+        "## Download & Load files\n"
+      ],
+      "id": "d365ffe0"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "with open(\"mansfield_park.txt\", \"r\", encoding=\"utf-8\") as f:\n",
+        "    mans = f.read()\n",
+        "    \n",
+        "with open(\"alice.txt\", \"r\", encoding=\"utf-8\") as f:\n",
+        "    alice = f.read()"
+      ],
+      "id": "7b12d141",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Split words up, cleaning whitespace & punctuation. Make lowercase.\n"
+      ],
+      "id": "4bd6d7ae"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "import re\n",
+        "\n",
+        "mans_words = re.split(r\"[\\s\\W]+\", mans)\n",
+        "mans_words = [w for w in mans_words if w]\n",
+        "mans_clean = [w.lower() for w in mans_words]\n",
+        "\n",
+        "alice_words = re.split(r\"[\\s\\W]+\", alice)\n",
+        "alice_words = [w for w in alice_words if w]\n",
+        "alice_clean = [w.lower() for w in alice_words]"
+      ],
+      "id": "571e8ac4",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## How words total? How many unique words?\n"
+      ],
+      "id": "04f3afae"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print(\"There are\", len(mans_clean), \"words in Mansfield Park.txt\")\n",
+        "print(\"There are\", len(alice_clean), \"words in Alice in Wonderland.txt\")\n",
+        "\n",
+        "unique_mans = []\n",
+        "\n",
+        "for wd in mans_clean:\n",
+        "    if wd not in unique_mans:\n",
+        "        unique_mans.append(wd)\n",
+        "\n",
+        "unique_alice = []\n",
+        "\n",
+        "for wd in alice_clean:\n",
+        "    if wd not in unique_alice:\n",
+        "        unique_alice.append(wd)\n",
+        "\n",
+        "print(\"There are\", len(unique_mans), \"unique words in Mansfield Park.txt\")\n",
+        "print(\"There are\", len(unique_alice), \"unique words in Alice in Wonderland.txt\")\n"
+      ],
+      "id": "040a9eaf",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## What is the average word length?\n"
+      ],
+      "id": "09d00ba4"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "mans_len = 0\n",
+        "alice_len = 0\n",
+        "\n",
+        "for wd in mans_clean:\n",
+        "    mans_len += len(wd)\n",
+        "\n",
+        "for wd in alice_clean:\n",
+        "    alice_len += len(wd)\n",
+        "\n",
+        "print(\"The average word length in Mansfield Park is\", mans_len / len(mans_clean), \"letters.\")\n",
+        "print(\"The average word length in Alice in Wonderland is\", alice_len / len(alice_clean), \"letters.\")"
+      ],
+      "id": "22c1e6a2",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## How many adverbs? Pick three other suffixes.\n"
+      ],
+      "id": "4f0580d5"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "adv_count_mans = 0\n",
+        "wise_count_mans = 0\n",
+        "pst_count_mans = 0\n",
+        "pre_count_mans = 0\n",
+        "\n",
+        "for wd in mans_clean:\n",
+        "    if wd.endswith(\"ly\"):\n",
+        "      adv_count_mans += 1\n",
+        "    elif wd.endswith(\"wise\"):\n",
+        "      wise_count_mans += 1\n",
+        "    elif wd.endswith(\"ed\"):\n",
+        "      pst_count_mans += 1\n",
+        "    elif wd.startswith(\"pre\"):\n",
+        "      pre_count_mans += 1\n",
+        "\n",
+        "print(adv_count_mans, wise_count_mans, pst_count_mans, pre_count_mans)\n",
+        "\n",
+        "adv_count_alice = 0\n",
+        "wise_count_alice = 0\n",
+        "pst_count_alice = 0\n",
+        "pre_count_alice = 0\n",
+        "\n",
+        "for wd in alice_clean:\n",
+        "    if wd.endswith(\"ly\"):\n",
+        "      adv_count_alice += 1\n",
+        "    elif wd.endswith(\"wise\"):\n",
+        "      wise_count_alice += 1\n",
+        "    elif wd.endswith(\"ed\"):\n",
+        "      pst_count_alice += 1\n",
+        "    elif wd.startswith(\"pre\"):\n",
+        "      pre_count_alice += 1\n",
+        "\n",
+        "print(adv_count_alice, wise_count_alice, pst_count_alice, pre_count_alice)"
+      ],
+      "id": "df30b171",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## How much dialogue is there?\n"
+      ],
+      "id": "2652bcf5"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "with open(\"mansfield_park.txt\", \"r\", encoding=\"utf-8\") as f:\n",
+        "    mans = f.read()\n",
+        "    \n",
+        "with open(\"alice.txt\", \"r\", encoding=\"utf-8\") as f:\n",
+        "    alice = f.read()\n",
+        "    \n",
+        "mans_quot_count = 0\n",
+        "alice_quot_count = 0\n",
+        "quot_list = ['\"', '“', '”']\n",
+        "\n",
+        "for c in mans:\n",
+        "    if c in quot_list:\n",
+        "      mans_quot_count += 1\n",
+        "\n",
+        "for c in alice:\n",
+        "    if c in quot_list:\n",
+        "      alice_quot_count += 1\n",
+        "\n",
+        "print(\"There are\", mans_quot_count / 2, \"instances of dialogue in Mansfield Park.\")\n",
+        "print(\"There are\", alice_quot_count / 2, \"instances of dialogue in Alice in Wonderland.\")"
+      ],
+      "id": "9b68afbe",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## What are the most common words (excluding \"the\", \"and\", and \"of\"?)\n"
+      ],
+      "id": "b5c899fb"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "word_counts_alice = {}\n",
+        "word_counts_mans = {}\n",
+        "\n",
+        "for wd in mans_clean:\n",
+        "    if wd in word_counts_mans:              \n",
+        "        word_counts_mans[wd] = word_counts_mans[wd] + 1\n",
+        "    else:                              \n",
+        "        word_counts_mans[wd] = 1\n",
+        "sort_mans = sorted(word_counts_mans.items(), key=lambda x: x[1], reverse=True)\n",
+        "\n",
+        "for wd in alice_clean:\n",
+        "    if wd in word_counts_alice:              \n",
+        "        word_counts_alice[wd] = word_counts_alice[wd] + 1\n",
+        "    else:                              \n",
+        "        word_counts_alice[wd] = 1\n",
+        "sort_alice = sorted(word_counts_alice.items(), key=lambda x: x[1], reverse=True)\n",
+        "\n",
+        "print(\"The most common 20 words in Mansfield Park are:\", sort_mans[:20])\n",
+        "print(\"The most common 20 wordsd in Alice are:\", sort_alice[:20])"
+      ],
+      "id": "2c4a53ad",
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "py311",
+      "language": "python",
+      "display_name": "py311",
+      "path": "C:\\Users\\andre\\AppData\\Roaming\\jupyter\\kernels\\py311"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}
