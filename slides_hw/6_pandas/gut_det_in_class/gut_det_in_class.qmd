@@ -1,0 +1,162 @@
+---
+title: "gut_det_in_class"
+format: html
+---
+
+## Download & Load files
+
+```{python}
+
+with open("mansfield_park.txt", "r", encoding="utf-8") as f:
+    mans = f.read()
+    
+with open("alice.txt", "r", encoding="utf-8") as f:
+    alice = f.read()
+```
+
+## Split words up, cleaning whitespace & punctuation. Make lowercase.
+
+```{python}
+
+import re
+
+mans_words = re.split(r"[\s\W]+", mans)
+mans_words = [w for w in mans_words if w]
+mans_clean = [w.lower() for w in mans_words]
+
+alice_words = re.split(r"[\s\W]+", alice)
+alice_words = [w for w in alice_words if w]
+alice_clean = [w.lower() for w in alice_words]
+```
+
+## How words total? How many unique words?
+
+```{python}
+
+
+print("There are", len(mans_clean), "words in Mansfield Park.txt")
+print("There are", len(alice_clean), "words in Alice in Wonderland.txt")
+
+unique_mans = []
+
+for wd in mans_clean:
+    if wd not in unique_mans:
+        unique_mans.append(wd)
+
+unique_alice = []
+
+for wd in alice_clean:
+    if wd not in unique_alice:
+        unique_alice.append(wd)
+
+print("There are", len(unique_mans), "unique words in Mansfield Park.txt")
+print("There are", len(unique_alice), "unique words in Alice in Wonderland.txt")
+
+
+```
+
+## What is the average word length?
+
+```{python}
+
+mans_len = 0
+alice_len = 0
+
+for wd in mans_clean:
+    mans_len += len(wd)
+
+for wd in alice_clean:
+    alice_len += len(wd)
+
+print("The average word length in Mansfield Park is", mans_len / len(mans_clean), "letters.")
+print("The average word length in Alice in Wonderland is", alice_len / len(alice_clean), "letters.")
+
+```
+
+## How many adverbs? Pick three other suffixes.
+
+```{python}
+
+adv_count_mans = 0
+wise_count_mans = 0
+pst_count_mans = 0
+pre_count_mans = 0
+
+for wd in mans_clean:
+    if wd.endswith("ly"):
+      adv_count_mans += 1
+    elif wd.endswith("wise"):
+      wise_count_mans += 1
+    elif wd.endswith("ed"):
+      pst_count_mans += 1
+    elif wd.startswith("pre"):
+      pre_count_mans += 1
+
+print(adv_count_mans, wise_count_mans, pst_count_mans, pre_count_mans)
+
+adv_count_alice = 0
+wise_count_alice = 0
+pst_count_alice = 0
+pre_count_alice = 0
+
+for wd in alice_clean:
+    if wd.endswith("ly"):
+      adv_count_alice += 1
+    elif wd.endswith("wise"):
+      wise_count_alice += 1
+    elif wd.endswith("ed"):
+      pst_count_alice += 1
+    elif wd.startswith("pre"):
+      pre_count_alice += 1
+
+print(adv_count_alice, wise_count_alice, pst_count_alice, pre_count_alice)
+```
+
+## How much dialogue is there?
+
+```{python}
+
+with open("mansfield_park.txt", "r", encoding="utf-8") as f:
+    mans = f.read()
+    
+with open("alice.txt", "r", encoding="utf-8") as f:
+    alice = f.read()
+    
+mans_quot_count = 0
+alice_quot_count = 0
+
+for c in mans:
+    if c == '"' or '“' or '”':
+      mans_quot_count += 1
+
+for c in alice:
+    if c == '"':
+      alice_quot_count += 1
+
+print("There are", mans_quot_count, "instances of dialogue in Mansfield Park.")
+print("There are", alice_quot_count, "instances of dialogue in Alice in Wonderland.")
+```
+
+## What are the most common words (excluding "the", "and", and "of"?)
+
+```{python}
+word_counts_alice = {}
+word_counts_mans = {}
+
+for wd in mans_clean:
+    if wd in word_counts_mans:              
+        word_counts_mans[wd] = word_counts_mans[wd] + 1
+    else:                              
+        word_counts_mans[wd] = 1
+sort_mans = sorted(word_counts_mans.items(), key=lambda x: x[1], reverse=True)
+
+for wd in alice_clean:
+    if wd in word_counts_alice:              
+        word_counts_alice[wd] = word_counts_alice[wd] + 1
+    else:                              
+        word_counts_alice[wd] = 1
+sort_alice = sorted(word_counts_alice.items(), key=lambda x: x[1], reverse=True)
+
+print("The most common 20 words in Mansfield Park are:", sort_mans[:20])
+print("The most common 20 wordsd in Alice are:", sort_alice[:20])
+```

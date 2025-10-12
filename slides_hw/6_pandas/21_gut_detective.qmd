@@ -83,7 +83,7 @@ while name:
 
 ## Overview of Activity — Setup
 
-- Create a new `qmd`, called `style_detective`. 
+- Create a new `qmd`, called `gut_detective`. 
 - Choose *any* **two novels** from [Project Gutenberg](https://www.gutenberg.org/), and download them using Python.
   - Use simple filenames (such as `alice.txt`)
 - Manually edit your `txt` files, deleting any Project Gutenberg headers & footers (that aren't part of the book text itself)
@@ -95,13 +95,11 @@ while name:
 
 ## Overview of Activity — Explore the Data
 
-- Next,  you will look for specific patterns.
-
 1. How many words are there **in total**? How many **unique** words?
 2. What is the **average word length**?
 3. How many **adverbs** are there? Pick **three other affixes** to investigate.
 4. How much **dialogue** is there?
-5. What are the **most common words** (excluding “the,” “and,” “of”)?
+5. What are the **most common words** (excluding “the,” “and,” “of”)? Arrange your values with `sorted(dict_name.items(), key=lambda x: x[1], reverse=True)`
 
 ## Overview of Activity — Share a Finding with Your Neighbors
 
