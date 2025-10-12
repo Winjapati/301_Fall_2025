@@ -1,0 +1,153 @@
+---
+title: "Project Component 2 — Data Collection & Cleaning"
+subtitle: "LIN 301: Computation for Linguists"
+author: "Your Name"
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    code-tools: true
+jupyter: python3
+fontsize: 12pt
+---
+
+# Overview
+
+In this component, you’ll **use Python through pandas** to collect and clean your data, producing a tidy `.csv` file that you’ll use for later analysis and visualization.
+
+**Goal:**  
+- Gather your raw data  
+- Clean and standardize it  
+- Export a UTF-8 `.csv` file  
+
+**Deliverables:**
+1. `component2_clean.qmd` (this file, runnable top-to-bottom)
+2. `data/component2_clean.csv`
+3. `component2_dictionary.md`
+
+---
+
+# Step 1 — Choose Your Dataset
+
+Pick **one** of the two options below:
+
+1. **Text corpus (recommended)** — e.g., *Alice in Wonderland*, *Mansfield Park*, or your conlang wordlist.  
+   - Output rows: one per *unique token*  
+   - Columns: `token`, `freq`, `length`
+
+2. **Tabular dataset** — e.g., a small lexicon, phoneme inventory, or wordlist in CSV format.  
+   - Output rows: one per cleaned observation  
+   - Columns: at least four total, with standardized names
+
+> Place your raw file in a folder named `data/` in the same directory as this `.qmd`.
+
+---
+
+
+Cleaning rules (apply via pandas)
+
+- Lowercase all text fields.
+- Trim leading/trailing whitespace.
+- Remove obvious noise (duplicate rows, empty strings).
+- Replace missing values with 0 or another appropriate choice.
+- Standardize column names (snake_case, no spaces, ASCII if practical).
+- Ensure each column’s dtype is correct (int/float/string/boolean).
+- Keep Unicode/diacritics intact where linguistically meaningful (use UTF-8 everywhere)
+
+# Step 2 — Text Corpus Option
+
+```python
+#| label: load-and-clean-text
+#| echo: true
+
+import pandas as pd
+import re
+from pathlib import Path
+
+data_dir = Path("data")
+data_dir.mkdir(exist_ok=True)
+raw_txt = data_dir / "raw_text.txt"   # <-- rename this to your own file
+
+with open(raw_txt, "r", encoding="utf-8") as f:
+    text = f.read()
+
+tokens = re.findall(r"[A-Za-zÀ-ÿ0-9]+(?:'[A-Za-zÀ-ÿ0-9]+)?", text)
+
+s = pd.Series(tokens, name="token").str.lower().str.strip()
+s = s[s.ne("")]
+
+df = s.value_counts(dropna=False).rename_axis("token").reset_index(name="freq")
+df["length"] = df["token"].str.len()
+df = df.sort_values(["freq", "token"], ascending=[False, True], ignore_index=True)
+
+out_csv = data_dir / "component2_clean.csv"
+df.to_csv(out_csv, index=False, encoding="utf-8")
+
+print("✅ Saved:", out_csv.resolve())
+df.head(10)
+```
+
+## Step 3 -- Tabular Data Option
+
+#| label: clean-tabular-data
+#| echo: true
+
+```python
+import pandas as pd
+from pathlib import Path
+
+data_dir = Path("data")
+data_dir.mkdir(exist_ok=True)
+raw_csv = data_dir / "raw_table.csv"  # <-- rename to your actual file
+
+df = pd.read_csv(raw_csv, encoding="utf-8")
+
+df.columns = (df.columns
+              .str.strip()
+              .str.lower()
+              .str.replace(r"[^0-9a-zA-Z]+", "_", regex=True)
+              .str.strip("_"))
+
+str_cols = df.select_dtypes(include=["object"]).columns
+df[str_cols] = df[str_cols].apply(lambda col: col.str.strip().str.lower())
+
+df = df.dropna(how="all")
+
+if "form" in df.columns:
+    df["length"] = df["form"].str.len()
+
+df = df.sort_values(df.columns.tolist(), ignore_index=True)
+
+out_csv = data_dir / "component2_clean.csv"
+df.to_csv(out_csv, index=False, encoding="utf-8")
+
+print("✅ Saved:", out_csv.resolve())
+df.head(10)
+```
+
+Step 4 - Data Dictionary
+
+# Component 2 — Data Dictionary
+
+**File:** data/component2_clean.csv  
+**Encoding:** UTF-8  
+
+## Columns
+1. token (string) — lowercased token  
+2. freq (int) — frequency of token  
+3. length (int) — number of characters in token  
+
+## Cleaning decisions
+- Whitespace trimmed  
+- Missing values dropped  
+- Unicode preserved  
+- Column names standardized
+
+
+Step 5 - Final Checks
+
+✅ CSV exists and opens cleanly
+✅ UTF-8 encoding
+✅ Correct column names
+✅ Script runs top-to-bottom
+✅ Data dictionary matches CSV
