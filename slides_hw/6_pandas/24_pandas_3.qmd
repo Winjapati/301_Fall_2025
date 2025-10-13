@@ -24,9 +24,24 @@ editor: source
 
 -   ddddddddd
 
+```python
+import pandas as pd
+
+df = pd.DataFrame([word1, word2, word3], columns=langs)
+print(df)
+```
+
 ## Review Activity
 
--   
+- Copy the below strings, and convert to lists.
+
+```python
+line1 = "English German Spanish French"
+line2 = "dog Hund perro chien"
+line3 = "cat Katze gato chat"
+line4 = "house Haus casa maison"
+```
+- Once you've done that, convert to a `DataFrame`, with the languages in `line1` serving as the column headers.
 
 # Modifying DataFrames
 
@@ -65,6 +80,7 @@ df
 df_no_family = df.drop(columns=["family"])
 df_no_family
 ```
+## Dropping Columns & Rows
 
 -   Or a row with `.drop([index])`
 
@@ -85,20 +101,39 @@ df
 
 ## (Re)setting Indices
 
--   Or you can reset or drop an index with `.reset_index(drop=True)`
+- You can reset an index with `.reset_index()`
 
 ``` python
-df_reset_no_latin = df_no_latin.reset_index(drop=True)
+df_reset_no_latin = df_no_latin.reset_index()
 df_reset_no_latin
+```
 
-df_reset = df.reset_index(drop=True)
-df_reset
+## (Re)setting Indices
 
+-   Drop an index with `.reset_index(drop=True)`
+
+``` python
+df_ind_drop = df.reset_index(drop=True)
+df_ind_drop
+```
+
+
+## (Re)setting Indices
+
+Or convert a `.Series()` to the index
+
+``` python
 df_set = df.set_index("language")
 df_set
 ```
 
 ## Activity: Change Index of the pd df they built for review activity
+
+- Load up the `df` you built for the Review Activity
+- Create three new `df` by:
+  - Dropping the first row, then resetting the index
+  - Leave the `df` intact, but drop the index altogether
+  - Convert the `English` column into the index.
 
 # Filtering, Sorting, Combining
 
@@ -215,6 +250,23 @@ print(column_totals)
 
 ## Review Activity
 
+```python
+import pandas as pd
+
+line1 = "English German Spanish French"
+line2 = "dog Hund perro chien"
+line3 = "cat Katze gato chat"
+line4 = "house Haus casa maison"
+
+langs = line1.split()
+word1 = line2.split()
+word2 = line3.split()
+word3 = line4.split()
+
+df = pd.DataFrame([word1, word2, word3], columns=langs)
+print(df)
+```
+
 ## Activity: Change Index of the pd df they built for review activity
 
 ## Activity: Counting Sounds, Part 1
@@ -236,8 +288,9 @@ total_c = sound_df["s"].add(sound_df["z"]).add(sound_df["t"]).add(sound_df["k"])
 
 ## Activity: Counting Sounds, Part 2
 
+```python
 sound_df = sound_df.set_index("Chapter")
 
 print(sound_df)
 
-
+```
