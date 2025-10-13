@@ -27,6 +27,28 @@ mans_clean = [w.lower() for w in mans_words]
 alice_words = re.split(r"[\s\W]+", alice)
 alice_words = [w for w in alice_words if w]
 alice_clean = [w.lower() for w in alice_words]
+
+print(mans_clean[:50], "\n --------------------------------------- \n", alice_clean[:50])
+```
+
+```{python}
+print(len(mans_clean), len(alice_clean))
+
+mans_unique = []
+alice_unique = []
+
+for wd in mans_clean:
+    if wd not in mans_unique:
+      mans_unique.append(wd)
+
+print(len(mans_unique))
+
+```
+
+```{python}
+
+for wd in alice_clean:
+    print(len(wd))
 ```
 
 ## How words total? How many unique words?
@@ -92,7 +114,9 @@ for wd in mans_clean:
     elif wd.startswith("pre"):
       pre_count_mans += 1
 
-print(adv_count_mans, wise_count_mans, pst_count_mans, pre_count_mans)
+print("In Mansfield Park, there are: \n", adv_count_mans,"adverbs in '-ly'\n", wise_count_mans, "forms ending in '-wise'\n", pst_count_mans, "past tense forms in '-ed'\n", "and", pre_count_mans, "forms prefixed with 'pre-'")
+
+print("\n---------------------------------------------------\n")
 
 adv_count_alice = 0
 wise_count_alice = 0
@@ -109,7 +133,7 @@ for wd in alice_clean:
     elif wd.startswith("pre"):
       pre_count_alice += 1
 
-print(adv_count_alice, wise_count_alice, pst_count_alice, pre_count_alice)
+print("In Alice, there are: \n", adv_count_alice,"adverbs in '-ly'\n", wise_count_alice, "forms ending in '-wise'\n", pst_count_alice, "past tense forms in '-ed'\n", "and", pre_count_alice, "forms prefixed with 'pre-'")
 ```
 
 ## How much dialogue is there?
@@ -143,21 +167,26 @@ print("There are", alice_quot_count / 2, "instances of dialogue in Alice in Wond
 ```{python}
 word_counts_alice = {}
 word_counts_mans = {}
+bad_words = ["the", "and", "of"]
 
 for wd in mans_clean:
-    if wd in word_counts_mans:              
+    if wd in bad_words:
+        pass
+    elif wd in word_counts_mans:              
         word_counts_mans[wd] = word_counts_mans[wd] + 1
     else:                              
         word_counts_mans[wd] = 1
 sort_mans = sorted(word_counts_mans.items(), key=lambda x: x[1], reverse=True)
 
 for wd in alice_clean:
-    if wd in word_counts_alice:              
+    if wd in bad_words:
+        pass
+    elif wd in word_counts_alice:              
         word_counts_alice[wd] = word_counts_alice[wd] + 1
     else:                              
         word_counts_alice[wd] = 1
 sort_alice = sorted(word_counts_alice.items(), key=lambda x: x[1], reverse=True)
 
 print("The most common 20 words in Mansfield Park are:", sort_mans[:20])
-print("The most common 20 wordsd in Alice are:", sort_alice[:20])
+print("The most common 20 words in Alice are:", sort_alice[:20])
 ```

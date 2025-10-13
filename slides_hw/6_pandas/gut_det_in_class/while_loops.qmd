@@ -1,0 +1,24 @@
+---
+title: "while_loops"
+format: html
+---
+
+```{python}
+x = 0
+if x < 10:
+    print(x, "is less than 10.")
+```
+
+```{python}
+x = 0
+while x < 10:
+    print(x, "is less than 10.")
+    x = x + 1
+```
+
+```{python}
+name = "The University of Kentucky"
+while name: 
+      print("|" + name + "|") 
+      name = name[0:-1]
+```
