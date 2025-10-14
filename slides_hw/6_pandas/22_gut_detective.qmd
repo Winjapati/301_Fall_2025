@@ -1,0 +1,145 @@
+---
+title: "Computation for Linguists"
+subtitle: "Activity Day: Detective Gutenberg"
+date: "October 13, 2025"
+author: "Dr. Andrew M. Byrd"
+format:
+  revealjs:
+    css: header_shrink.css
+    theme: beige
+    slide-number: true
+    center: true
+    toc: true
+    toc-title: "Plan for the Day"
+    toc-depth: 1
+jupyter: python3
+editor: source
+---
+
+# Review
+
+# `while` Loops
+
+## `while` Loops
+
+-   They're a lot like `if` statements, where something happens if a condition is met:
+
+``` python
+x = 0
+if x < 10:
+    print(x, "is less than 10.")
+```
+
+## `while` Loops
+
+-   In `while` loops, there's also a logical condition
+-   But instead of running the code once, python will loop back and recheck the conditional
+-   It will do this **forever** until the conditional returns `False`
+
+``` python
+x = 10
+while x < 10:
+    print(x, "is less than 10.")
+    x = x + 1
+```
+
+## `while` Loops
+
+-   Be **careful** with `while` loops! Code (like below) will run ad infinitum and could crash your computer:
+
+```         
+x = 0
+while x < 10:
+    print(x, "is less than 10.")
+    x = x - 1
+```
+
+## `while` Loops
+
+-   In this class, we will mostly use `for` loops
+-   But you can do some interesting things with `while` loops, like:
+
+``` python
+name = "The University of Kentucky"
+while name: 
+      print("|" + name + "|") 
+      name = name[0:-1]
+```
+
+
+# Activity: Detective Gutenberg
+
+## Detective Gutenberg
+
+**Goal:** discover what makes an author’s writing style distinctive using the Python tools you already know. 
+
+  - If you don't remember how to do something, revisit past lectures.
+
+**Today, you'll:**
+  
+1. Download two novels of your choice from Project Gutenberg
+2. Load & clean the texts
+3. Measure style and print up the results 
+
+## Overview of Activity — Setup
+
+- Create a new `qmd`, called `gut_detective`. 
+- Choose *any* **two novels** from [Project Gutenberg](https://www.gutenberg.org/), and download them using Python.
+  - Use simple filenames (such as `alice.txt`)
+- Manually edit your `txt` files, deleting any Project Gutenberg headers & footers (that aren't part of the book text itself)
+
+## Overview of Activity — Read & Clean
+
+- Read both files, and assign each to a clear variable name.
+- Split the words up, cleaning whitespace and punctuation. Make all words lowercase as well.
+
+## Overview of Activity — Explore the Data
+
+1. How many words are there **in total**? How many **unique** words?
+2. What is the **average word length**?
+3. How many **adverbs** are there? Pick **three other affixes** to investigate.
+4. How much **dialogue** is there? (Use `quot_list = ['"', '“', '”']`)
+5. What are the **most common words** (excluding “the,” “and,” “of”)? Arrange your values with `sorted(dict_name.items(), key=lambda x: x[1], reverse=True)`
+
+## If You Finish Early
+
+- Add a third author (Dickens, Poe, Twain)  
+- Feel free to add yourself as the third author!
+
+## Go for it!
+
+# Possible Discussions
+
+## Calculating Averages in Python
+
+- What is an **average**?  How do we calculate it?
+
+## How to Tally Words?
+
+```python
+words = ["the", "the", "the", "boy", "boy", "dog", "dog", "cat"]
+
+word_counts = {}
+
+for wd in words:
+    if wd in word_counts:              # Check to see if wd is there; if it is, increase value by 1
+        word_counts[wd] = word_counts[wd] + 1
+    else:                              # If not, create a new entry, set value at 1
+        word_counts[wd] = 1
+        
+print(word_counts)
+```
+## A More Efficient Approach:
+
+```python
+words = ["the", "the", "the", "boy", "boy", "dog", "dog", "cat"]
+
+word_counts = {}
+
+for wd in words:
+    word_counts[wd] = word_counts.get(wd, 0) + 1
+        
+print(word_counts)
+```
+
+- `.get(wd, 0)` checks if `wd` already has a count; which we then increase by 1
