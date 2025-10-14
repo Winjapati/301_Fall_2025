@@ -1,6 +1,9 @@
 ---
 title: "pandas_practice"
 format: html
+editor: 
+  markdown: 
+    wrap: 72
 ---
 
 ```{python}
@@ -154,4 +157,126 @@ import pandas as pd
 
 recap_df = pd.DataFrame([prof_split, age_split], columns=name_split)
 print(recap_df)
+```
+
+```{python}
+import pandas as pd
+
+data = { "Language": ["English", "Spanish", "Hindi"], 
+"Nasals": [3, 3, 4], 
+"Oral Stops": [6, 6, 5] }
+
+df = pd.DataFrame(data)
+
+add_1 = df["Nasals"].add(df["Oral Stops"])
+sum_1 = df.sum()
+
+
+print(add_1, sum_1)
+```
+
+```{python}
+import pandas as pd
+
+# Create the data
+data = {
+    "Consonant": ["p", "b", "t", "d", "k", "g", "s", "z", "m", "n", "l", "r", "w", "j", "h"],
+    "Place": ["bilabial", "bilabial", "alveolar", "alveolar", "velar", "velar",
+              "alveolar", "alveolar", "bilabial", "alveolar", "alveolar", "alveolar",
+              "labial-velar", "palatal", "glottal"],
+    "Manner": ["stop", "stop", "stop", "stop", "stop", "stop",
+               "fricative", "fricative", "nasal", "nasal", "lateral", "trill",
+               "glide", "glide", "fricative"],
+    "Voicing": ["voiceless", "voiced", "voiceless", "voiced", "voiceless", "voiced",
+                "voiceless", "voiced", "voiced", "voiced", "voiced", "voiced",
+                "voiced", "voiced", "voiceless"]
+}
+
+# Create DataFrame
+df = pd.DataFrame(data)
+
+# Show DataFrame
+print(df)
+
+# Save to CSV
+df.to_csv("conlang_c.csv", index=False)
+```
+
+```{python}
+data = {
+    "Consonant": ["p", "b", "t", "d", "k", "g", "s", "z", "m", "n", "l", "r", "w", "j", "h"],
+    "Place": ["bilabial", "bilabial", "alveolar", "alveolar", "velar", "velar",
+              "alveolar", "alveolar", "bilabial", "alveolar", "alveolar", "alveolar",
+              "labial-velar", "palatal", "glottal"],
+    "Manner": ["stop", "stop", "stop", "stop", "stop", "stop",
+               "fricative", "fricative", "nasal", "nasal", "lateral", "trill",
+               "glide", "glide", "fricative"],
+    "Voicing": ["voiceless", "voiced", "voiceless", "voiced", "voiceless", "voiced",
+                "voiceless", "voiced", "voiced", "voiced", "voiced", "voiced",
+                "voiced", "voiced", "voiceless"]
+}
+
+# Create DataFrame
+df = pd.DataFrame(data)
+
+df.to_excel("conlang_c.xlsx", index=False)
+```
+
+```{python}
+stops_csv_df = pd.read_csv("conlang_c.csv")
+stops_csv_df.head()
+
+print("\n-------------------------------------\n")
+
+stops_excel_df = pd.read_excel("conlang_c.xlsx")
+stops_excel_df.head()
+```
+
+```{python}
+# Simple bar plot (requires matplotlib to be present)
+import matplotlib.pyplot as plt
+
+# Example small reflex table for demo
+ref_df = pd.DataFrame({
+    "Language": ["Latin","Greek","Sanskrit","Gothic","OCS","Oscan"],
+    "Family":   ["Italic","Hellenic","Indic","Germanic","Slavic","Italic"],
+    "Reflexes": [8,10,12,4,3,5]
+})
+
+ref_df.groupby("Family")["Reflexes"].sum()
+ref_df.groupby("Family").agg(
+    total=("Reflexes","sum"),
+    mean=("Reflexes","mean"),
+    n=("Reflexes","count")
+)
+
+counts = ref_df.groupby("Family")["Reflexes"].sum()
+ax = counts.plot(kind="bar", title="Reflex Counts by Family")
+ax.set_xlabel("Family")
+ax.set_ylabel("Total Reflexes")
+
+plt.tight_layout()   # optional, avoids label cutoff
+plt.show()           # <-- this actually displays the plot
+```
+
+```{python}
+import matplotlib.pyplot as plt
+
+stops = pd.read_csv("conlang_c.csv")
+
+c_counts = stops["Place"].value_counts().sort_values(ascending=False)
+
+print(stops["Place"].value_counts())
+
+print(c_counts)
+
+ax = c_counts.plot(kind="bar", title="Number of Consonants by Place of Articulation")
+ax.set_xlabel("Place of Articulation")
+ax.set_ylabel("Total Cs")
+
+# Rotate labels for readability
+plt.xticks(rotation=45, ha="right")
+
+plt.tight_layout()   
+plt.show()           
 ```

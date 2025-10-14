@@ -1,0 +1,295 @@
+---
+title: "Computation for Linguists"
+subtitle: "HTML and Javascript, Day 4: CSS & GitHub Pages"
+date: "September 17, 2025"
+author: "Dr. Andrew M. Byrd"
+format:
+  revealjs:
+    css: header_shrink.css
+    theme: beige
+    slide-number: true
+    center: true
+    toc: true
+    toc-title: "Plan for the Day"
+    toc-depth: 1
+editor: visual
+---
+
+# Review
+
+-   What did you learn last time about HTML?
+
+## Review from Days 1, 2, & 3
+
+-   Day 1:
+
+    -   We learned **basic tags**: `<h1>`, `<p>`, `<em>`, `<strong>`, `<a>`, `<img>`, `<ul>`, `<li>`
+    -   We practiced **attributes** like `href` and `alt`
+
+-   Day 2:
+
+    -   Structure: `<head>`, `<nav>`, `<main>`, `<section>`, `<footer>`
+
+-   Day 3:
+
+    -   Beginning CSS!
+
+## Recall: Class Selectors
+
+``` html
+<p class="highlight">This text is highlighted.</p>
+<p class="highlight">This one is too!</p>
+<p>This one is not.</p>
+```
+
+-   Only `<p>` marked as `class="highlight"` will be treated specially.
+
+## Recall: Pseudo-Classes
+
+-   Special state of an element
+-   Not added in the HTML code, rather in CSS with a `:`
+-   Describe something that's a condition, not a permanent class
+
+``` html
+a:hover {
+  color: red;   /* when mouse hovers */
+}
+
+a:visited {
+  color: purple;  /* after you’ve clicked the link */
+}
+
+input:focus {
+  border: 2px solid blue; /* when user clicks inside a text field */
+}
+
+li:first-child {
+  font-weight: bold; /* only the first <li> inside its parent */
+}
+```
+
+## Recall: Variables
+
+-   How do they work?
+
+``` css
+:root {
+  --ink: black;        /* variable definition */
+  --paper: oldlace;
+}
+
+body {
+  color: var(--ink);   /* using the variable */
+  background: var(--paper);
+}
+```
+
+# One More Look at Stinky's
+
+## Activity: Stinky's Revisted
+
+-  Let's take another look at our Stinky's website, <a href="9_stinkys_beautified.html">beautified</a>
+-   Open up **Dev Tools** to inspect the style file, `9_stinky_style.css`
+
+## Additional CSS Terminology
+
+-   **Units**
+    -   `rem` = relative to root font size (scales with user settings)
+    -   `ch` = width of one character (good for readable line length)
+    -   `px` = pixel; 1px = 1/96th of 1in; note relative to viewing device!
+
+``` css
+nav a { padding: 0.25rem 0.5rem; border-radius: 6px; color: var(--brand-gold); text-decoration: none; }
+```
+
+## Additional CSS Terminology
+
+-   **Sticky header**
+    -   keeps header visible while scrolling
+
+``` css
+header { position: sticky; top: 0; background: var(--paper); border-bottom: 1px solid rgba(0,0,0,0.12); }
+```
+
+## Additional CSS Terminology
+
+-   **Flexbox**
+    -   arranges items in a horizontal row
+    -   default (`display: block`) stacks vertically!
+
+``` css
+nav { display: flex; gap: var(--space-2); justify-content: center; padding: calc(var(--space-2) * 0.75) 0; }
+```
+
+## Additional CSS Terminology
+
+-   **:last-child**
+    -   Styles only the last element in a group
+
+``` css
+#cheeses li:last-child { border-bottom: 0; }
+```
+
+-   What do you think the code is for the first element?
+
+## Additional CSS Terminology
+
+``` css
+nav a:hover { background: rgba(218,165,32,0.15); /* goldenrod tint */ }
+```
+
+-   **rgba()**
+    -   red, green, blue, alpha
+    -   alpha controls for transparency
+
+``` css
+/* Solid red */
+color: rgba(255, 0, 0, 1);
+
+/* Half-transparent red */
+color: rgba(255, 0, 0, 0.5);
+
+/* Mostly see-through black (good for shadows/overlays) */
+background-color: rgba(0, 0, 0, 0.2);
+
+/* Invisible (but still takes up space in layout) */
+background-color: rgba(0, 0, 0, 0);
+```
+
+## Finding RGB values easily
+
+<https://www.w3schools.com/colors/colors_picker.asp>
+
+## Additional CSS Terminology
+
+-   **calc()**
+    -   Lets you do math with CSS values
+
+``` css
+nav { display: flex; gap: var(--space-2); justify-content: center; padding: calc(var(--space-2) * 0.75) 0; }
+```
+
+# Activity: Beautifying Your Site, Part 2
+
+## Activity
+
+**Step 1**: Return to your `firstname_lastname.html` file, and make sure your style sheet is loaded properly.
+
+**Step 2**: Define a minimal design system, using variables (tokens):
+
+```css
+:root{
+  --ink: xxxx;                /* text color */
+  --paper: xxxx;              /* page background */
+  --brand-gold: xxxx;         /* accent */
+  --space-2: XXxxrem;         /* spacing scale */
+}
+body{ color: var(--ink); background: var(--paper); }
+```
+
+## Activity
+
+**Step 3**: Make the header stick and center your nav links in a row.
+
+```css
+header{
+  position: sticky; top: 0;
+  background: var(--paper);
+  border-bottom: 1px solid rgba(0,0,0,0.12);
+}
+nav{
+  display: flex;
+  gap: var(--space-2);
+  justify-content: center;
+  padding: calc(var(--space-2) * 0.75) 0;
+}
+```
+
+## Activity
+**Step 4**:
+
+- Create a class selector and give it a name with values. For instance:
+
+
+```css
+.tagline{ opacity: .9; font-style: italic; }
+```
+
+- Use it in your HTML, such as:
+```html
+<h2 class="tagline">Student • Researcher</h2>
+```
+
+## Activity
+
+**Step 5**:
+
+- Add rgba values to an `<a:hover{}>`
+
+```css
+nav a:hover{ background: rgba(xxxx,xxxx,xxxx,xxxx); } /* input your values! */
+```
+
+**Step 6**: Save, Stage, Commit, Push!
+
+# GitHub Pages
+
+
+## Step 1: Create a New Repo
+
+- In GitHub, create a new repo
+- It must be named `yourusername.github.io`
+
+## Step 2: Add Repo to RStudio
+
+- New Project > Version Control > Git
+
+## Step 3: Create a `docs` folder
+
+- In `yourusername.github.io`, you need to make a folder named **docs**.
+- In RStudio: 
+    - right-click in Files pane
+    - create new folder
+    - call it **docs**
+    
+## Step 4: Add Files to `docs`
+
+- From LIN_301, copy your finished `.html` and `.css` files into `docs`  
+- Note: your homepage **must be named `index.html`**, so rename it if it's not called that
+  
+## Step 5: Save, Stage, Commit, Push!
+
+## Step 6: GitHub Settings
+
+- Go to your `yourusername.github.io` repo
+- Visit Settings → Pages  
+- Under “Branch,” choose **main** and folder **/docs**
+- Save
+
+## Step 7: Loading Your Page
+
+- **Wait a minute**  
+- GitHub builds your site automatically.  
+- You’ll see a green check + a URL like:  `https://yourusername.github.io/`
+
+## Troubleshooting GitHub Pages
+
+- **My site won’t load**  
+  - Did you name the repo **yourusername.github.io** exactly?  
+  - Did you rename your homepage file to **index.html**?
+
+- **404 error**  
+  - Make sure your files are inside the **docs/** folder.  
+  - Check that Pages is set to **Branch: main** and **Folder: /docs**.
+
+## Troubleshooting GitHub Pages
+
+- **Changes not showing up**  
+  - Did you **Stage → Commit → Push** after editing?  
+  - Sometimes you need to refresh or wait ~1–2 minutes.
+
+- **Still stuck?**  
+  - Open **Settings → Pages** and see if GitHub shows a red ❌ error.  
+  - Double-check file names (no spaces, all lowercase is safest).
+
+

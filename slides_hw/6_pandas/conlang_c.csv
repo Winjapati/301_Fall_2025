@@ -1,0 +1,16 @@
+Consonant,Place,Manner,Voicing
+p,bilabial,stop,voiceless
+b,bilabial,stop,voiced
+t,alveolar,stop,voiceless
+d,alveolar,stop,voiced
+k,velar,stop,voiceless
+g,velar,stop,voiced
+s,alveolar,fricative,voiceless
+z,alveolar,fricative,voiced
+m,bilabial,nasal,voiced
+n,alveolar,nasal,voiced
+l,alveolar,lateral,voiced
+r,alveolar,trill,voiced
+w,labial-velar,glide,voiced
+j,palatal,glide,voiced
+h,glottal,fricative,voiceless

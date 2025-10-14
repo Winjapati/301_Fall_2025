@@ -212,9 +212,10 @@ Dr.&nbsp;Andrew M. Byrd
 <h2 id="toc-title">Plan for the Day</h2>
 <ul>
 <li><a href="#/review" id="/toc-review">Review</a></li>
-<li><a href="#/loading-up-csv-and-xls-files" id="/toc-loading-up-csv-and-xls-files">Loading up <code>csv</code> and <code>xls</code> files</a></li>
-<li><a href="#/appendix-quick-reference" id="/toc-appendix-quick-reference">Appendix — Quick Reference</a></li>
-<li><a href="#/what-you-can-do-now" id="/toc-what-you-can-do-now">What You Can Do Now 🧠</a></li>
+<li><a href="#/reading-writing-csv-and-xls-files" id="/toc-reading-writing-csv-and-xls-files">Reading &amp; Writing <code>csv</code> and <code>xls</code> files</a></li>
+<li><a href="#/grouping-aggregation" id="/toc-grouping-aggregation">Grouping &amp; Aggregation</a></li>
+<li><a href="#/our-first-visualization" id="/toc-our-first-visualization">Our First Visualization</a></li>
+<li><a href="#/appendix-reference-guide-for-pd" id="/toc-appendix-reference-guide-for-pd">Appendix — Reference Guide for <code>pd</code></a></li>
 </ul>
 </nav>
 </section>
@@ -228,89 +229,211 @@ Dr.&nbsp;Andrew M. Byrd
 <section id="recap-from-last-time" class="slide level2 center">
 <h2>Recap from Last Time</h2>
 <ul>
-<li>ddddddddd</li>
+<li>Modifying <code>DataFrame()</code>s
+<ul>
+<li><code>.concat()</code>, <code>.drop()</code>, <code>.rename()</code>, <code>.reset_index()</code></li>
+<li><code>.sort_index()</code>, <code>.sort_values(ascending=False)</code></li>
+<li><code>.fillna(0)</code></li>
+</ul></li>
+<li>Adding:
+<ul>
+<li>columns: <code>df[series_1].add(df[series_2])</code></li>
+<li>rows: <code>df.sum()</code></li>
+</ul></li>
 </ul>
 </section>
 <section id="review-activity" class="slide level2 center">
 <h2>Review Activity</h2>
 <ul>
-<li></li>
+<li>Import the following data as a <code>.DataFrame()</code></li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a>stops <span class="op">=</span> {</span>
+<span id="cb1-2"><a href=""></a>    <span class="st">"Language"</span>: [<span class="st">"English"</span>, <span class="st">"Spanish"</span>, <span class="st">"Hindi"</span>],</span>
+<span id="cb1-3"><a href=""></a>    <span class="st">"Nasals"</span>: [<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">4</span>],</span>
+<span id="cb1-4"><a href=""></a>    <span class="st">"Oral Stops"</span>: [<span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">5</span>]</span>
+<span id="cb1-5"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Use <code>.sum()</code> to find the total number of nasals &amp; oral stops.</li>
+<li>Use <code>.add()</code> to combine the number of nasals and oral stops in each language.</li>
 </ul>
 </section></section>
 <section>
-<section id="loading-up-csv-and-xls-files" class="title-slide slide level1 center">
-<h1>Loading up <code>csv</code> and <code>xls</code> files</h1>
+<section id="reading-writing-csv-and-xls-files" class="title-slide slide level1 center">
+<h1>Reading &amp; Writing <code>csv</code> and <code>xls</code> files</h1>
 
 </section>
-<section id="reading-writing-files" class="slide level2 center">
-<h2>Reading / Writing Files</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="co"># CSV</span></span>
-<span id="cb1-2"><a href=""></a>ref_df.to_csv(<span class="st">"reflexes_summary.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb1-3"><a href=""></a>loaded <span class="op">=</span> pd.read_csv(<span class="st">"reflexes_summary.csv"</span>)</span>
-<span id="cb1-4"><a href=""></a>loaded.head()</span>
-<span id="cb1-5"><a href=""></a></span>
-<span id="cb1-6"><a href=""></a><span class="co"># Excel (if needed)</span></span>
-<span id="cb1-7"><a href=""></a><span class="co"># ref_df.to_excel("reflexes_summary.xlsx", index=False)</span></span>
-<span id="cb1-8"><a href=""></a><span class="co"># pd.read_excel("reflexes_summary.xlsx")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="writing-a-csv-file" class="slide level2 center">
+<h2>Writing a <code>csv</code> file</h2>
+<ul>
+<li><code>df.to_csv("file_name.csv", index=False)</code>
+<ul>
+<li>What happens when <code>index=True</code>?</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href=""></a></span>
+<span id="cb2-3"><a href=""></a><span class="co"># Create the data</span></span>
+<span id="cb2-4"><a href=""></a>data <span class="op">=</span> {</span>
+<span id="cb2-5"><a href=""></a>    <span class="st">"Consonant"</span>: [<span class="st">"p"</span>, <span class="st">"b"</span>, <span class="st">"t"</span>, <span class="st">"d"</span>, <span class="st">"k"</span>, <span class="st">"g"</span>, <span class="st">"s"</span>, <span class="st">"z"</span>, <span class="st">"m"</span>, <span class="st">"n"</span>, <span class="st">"l"</span>, <span class="st">"r"</span>, <span class="st">"w"</span>, <span class="st">"j"</span>, <span class="st">"h"</span>],</span>
+<span id="cb2-6"><a href=""></a>    <span class="st">"Place"</span>: [<span class="st">"bilabial"</span>, <span class="st">"bilabial"</span>, <span class="st">"alveolar"</span>, <span class="st">"alveolar"</span>, <span class="st">"velar"</span>, <span class="st">"velar"</span>,</span>
+<span id="cb2-7"><a href=""></a>              <span class="st">"alveolar"</span>, <span class="st">"alveolar"</span>, <span class="st">"bilabial"</span>, <span class="st">"alveolar"</span>, <span class="st">"alveolar"</span>, <span class="st">"alveolar"</span>,</span>
+<span id="cb2-8"><a href=""></a>              <span class="st">"labial-velar"</span>, <span class="st">"palatal"</span>, <span class="st">"glottal"</span>],</span>
+<span id="cb2-9"><a href=""></a>    <span class="st">"Manner"</span>: [<span class="st">"stop"</span>, <span class="st">"stop"</span>, <span class="st">"stop"</span>, <span class="st">"stop"</span>, <span class="st">"stop"</span>, <span class="st">"stop"</span>,</span>
+<span id="cb2-10"><a href=""></a>               <span class="st">"fricative"</span>, <span class="st">"fricative"</span>, <span class="st">"nasal"</span>, <span class="st">"nasal"</span>, <span class="st">"lateral"</span>, <span class="st">"trill"</span>,</span>
+<span id="cb2-11"><a href=""></a>               <span class="st">"glide"</span>, <span class="st">"glide"</span>, <span class="st">"fricative"</span>],</span>
+<span id="cb2-12"><a href=""></a>    <span class="st">"Voicing"</span>: [<span class="st">"voiceless"</span>, <span class="st">"voiced"</span>, <span class="st">"voiceless"</span>, <span class="st">"voiced"</span>, <span class="st">"voiceless"</span>, <span class="st">"voiced"</span>,</span>
+<span id="cb2-13"><a href=""></a>                <span class="st">"voiceless"</span>, <span class="st">"voiced"</span>, <span class="st">"voiced"</span>, <span class="st">"voiced"</span>, <span class="st">"voiced"</span>, <span class="st">"voiced"</span>,</span>
+<span id="cb2-14"><a href=""></a>                <span class="st">"voiced"</span>, <span class="st">"voiced"</span>, <span class="st">"voiceless"</span>]</span>
+<span id="cb2-15"><a href=""></a>}</span>
+<span id="cb2-16"><a href=""></a></span>
+<span id="cb2-17"><a href=""></a><span class="co"># Create DataFrame</span></span>
+<span id="cb2-18"><a href=""></a>df <span class="op">=</span> pd.DataFrame(data)</span>
+<span id="cb2-19"><a href=""></a></span>
+<span id="cb2-20"><a href=""></a><span class="co"># Show DataFrame</span></span>
+<span id="cb2-21"><a href=""></a><span class="bu">print</span>(df)</span>
+<span id="cb2-22"><a href=""></a></span>
+<span id="cb2-23"><a href=""></a><span class="co"># Save to CSV</span></span>
+<span id="cb2-24"><a href=""></a>df.to_csv(<span class="st">"conlang_c.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="quick-summaries" class="slide level2 center">
-<h2>Quick Summaries</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a>df.describe(include<span class="op">=</span><span class="st">"all"</span>)</span>
-<span id="cb2-2"><a href=""></a>df[<span class="st">"family"</span>].value_counts()</span>
-<span id="cb2-3"><a href=""></a>df[<span class="st">"family"</span>].unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="csv-activity" class="slide level2 center">
+<h2><code>.csv</code> Activity:</h2>
+<ul>
+<li>Convert the stops <code>df</code> from the Review Activity into a <code>.csv</code> file</li>
+</ul>
 </section>
-<section id="grouping-aggregation" class="slide level2 center">
-<h2>Grouping &amp; Aggregation</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="co"># Example small reflex table for demo</span></span>
-<span id="cb3-2"><a href=""></a>ref_df <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb3-3"><a href=""></a>    <span class="st">"Language"</span>: [<span class="st">"Latin"</span>,<span class="st">"Greek"</span>,<span class="st">"Sanskrit"</span>,<span class="st">"Gothic"</span>,<span class="st">"OCS"</span>,<span class="st">"Latin"</span>],</span>
-<span id="cb3-4"><a href=""></a>    <span class="st">"Family"</span>:   [<span class="st">"IE"</span>,<span class="st">"IE"</span>,<span class="st">"IE"</span>,<span class="st">"Germanic"</span>,<span class="st">"Slavic"</span>,<span class="st">"IE"</span>],</span>
-<span id="cb3-5"><a href=""></a>    <span class="st">"Reflexes"</span>: [<span class="dv">8</span>,<span class="dv">10</span>,<span class="dv">12</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">5</span>]</span>
-<span id="cb3-6"><a href=""></a>})</span>
-<span id="cb3-7"><a href=""></a></span>
-<span id="cb3-8"><a href=""></a>ref_df.groupby(<span class="st">"Family"</span>)[<span class="st">"Reflexes"</span>].<span class="bu">sum</span>()</span>
-<span id="cb3-9"><a href=""></a>ref_df.groupby(<span class="st">"Family"</span>).agg(</span>
-<span id="cb3-10"><a href=""></a>    total<span class="op">=</span>(<span class="st">"Reflexes"</span>,<span class="st">"sum"</span>),</span>
-<span id="cb3-11"><a href=""></a>    mean<span class="op">=</span>(<span class="st">"Reflexes"</span>,<span class="st">"mean"</span>),</span>
-<span id="cb3-12"><a href=""></a>    n<span class="op">=</span>(<span class="st">"Reflexes"</span>,<span class="st">"count"</span>)</span>
-<span id="cb3-13"><a href=""></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="writing-to-excel" class="slide level2 center">
+<h2>Writing to Excel:</h2>
+<ul>
+<li>You can also write Excel files, but you have to <code>pip install openpyxl</code> first.</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a>data <span class="op">=</span> {</span>
+<span id="cb3-2"><a href=""></a>    <span class="st">"Consonant"</span>: [<span class="st">"p"</span>, <span class="st">"b"</span>, <span class="st">"t"</span>, <span class="st">"d"</span>, <span class="st">"k"</span>, <span class="st">"g"</span>, <span class="st">"s"</span>, <span class="st">"z"</span>, <span class="st">"m"</span>, <span class="st">"n"</span>, <span class="st">"l"</span>, <span class="st">"r"</span>, <span class="st">"w"</span>, <span class="st">"j"</span>, <span class="st">"h"</span>],</span>
+<span id="cb3-3"><a href=""></a>    <span class="st">"Place"</span>: [<span class="st">"bilabial"</span>, <span class="st">"bilabial"</span>, <span class="st">"alveolar"</span>, <span class="st">"alveolar"</span>, <span class="st">"velar"</span>, <span class="st">"velar"</span>,</span>
+<span id="cb3-4"><a href=""></a>              <span class="st">"alveolar"</span>, <span class="st">"alveolar"</span>, <span class="st">"bilabial"</span>, <span class="st">"alveolar"</span>, <span class="st">"alveolar"</span>, <span class="st">"alveolar"</span>,</span>
+<span id="cb3-5"><a href=""></a>              <span class="st">"labial-velar"</span>, <span class="st">"palatal"</span>, <span class="st">"glottal"</span>],</span>
+<span id="cb3-6"><a href=""></a>    <span class="st">"Manner"</span>: [<span class="st">"stop"</span>, <span class="st">"stop"</span>, <span class="st">"stop"</span>, <span class="st">"stop"</span>, <span class="st">"stop"</span>, <span class="st">"stop"</span>,</span>
+<span id="cb3-7"><a href=""></a>               <span class="st">"fricative"</span>, <span class="st">"fricative"</span>, <span class="st">"nasal"</span>, <span class="st">"nasal"</span>, <span class="st">"lateral"</span>, <span class="st">"trill"</span>,</span>
+<span id="cb3-8"><a href=""></a>               <span class="st">"glide"</span>, <span class="st">"glide"</span>, <span class="st">"fricative"</span>],</span>
+<span id="cb3-9"><a href=""></a>    <span class="st">"Voicing"</span>: [<span class="st">"voiceless"</span>, <span class="st">"voiced"</span>, <span class="st">"voiceless"</span>, <span class="st">"voiced"</span>, <span class="st">"voiceless"</span>, <span class="st">"voiced"</span>,</span>
+<span id="cb3-10"><a href=""></a>                <span class="st">"voiceless"</span>, <span class="st">"voiced"</span>, <span class="st">"voiced"</span>, <span class="st">"voiced"</span>, <span class="st">"voiced"</span>, <span class="st">"voiced"</span>,</span>
+<span id="cb3-11"><a href=""></a>                <span class="st">"voiced"</span>, <span class="st">"voiced"</span>, <span class="st">"voiceless"</span>]</span>
+<span id="cb3-12"><a href=""></a>}</span>
+<span id="cb3-13"><a href=""></a></span>
+<span id="cb3-14"><a href=""></a><span class="co"># Create DataFrame</span></span>
+<span id="cb3-15"><a href=""></a>df <span class="op">=</span> pd.DataFrame(data)</span>
+<span id="cb3-16"><a href=""></a></span>
+<span id="cb3-17"><a href=""></a>df.to_excel(<span class="st">"conlang_c.xlsx"</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="quick-visualization-optional" class="slide level2 center">
-<h2>Quick Visualization (optional)</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a><span class="co"># Simple bar plot (requires matplotlib to be present)</span></span>
-<span id="cb4-2"><a href=""></a>counts <span class="op">=</span> ref_df.groupby(<span class="st">"Family"</span>)[<span class="st">"Reflexes"</span>].<span class="bu">sum</span>()</span>
-<span id="cb4-3"><a href=""></a>ax <span class="op">=</span> counts.plot(kind<span class="op">=</span><span class="st">"bar"</span>, title<span class="op">=</span><span class="st">"Reflex Counts by Family"</span>)</span>
-<span id="cb4-4"><a href=""></a>ax.set_xlabel(<span class="st">"Family"</span>)</span>
-<span id="cb4-5"><a href=""></a>ax.set_ylabel(<span class="st">"Total Reflexes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<blockquote>
-<p>Note: In some environments you may need:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb5-2"><a href=""></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</blockquote>
+<section id="xlsx-activity" class="slide level2 center">
+<h2><code>.xlsx</code> Activity:</h2>
+<ul>
+<li>Convert the stops <code>df</code> from the Review Activity into a <code>.xlsx</code> file</li>
+</ul>
 </section>
-<section id="day-3-activity-from-rows-to-insight" class="slide level2 center">
-<h2><strong>Day 3 Activity — From Rows to Insight</strong></h2>
-<p>Using <code>ref_df</code> (or your own small table):</p>
-<ol type="1">
-<li>Group by <code>Family</code> and compute: total reflexes, mean reflexes, and count.</li>
-<li>Sort families by total reflexes (descending).</li>
-<li>Save the grouped summary to <code>family_reflexes.csv</code>.</li>
-<li>Make a bar plot of total reflexes by family.</li>
-</ol>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a>summary <span class="op">=</span> (ref_df</span>
-<span id="cb6-2"><a href=""></a>    .groupby(<span class="st">"Family"</span>)[<span class="st">"Reflexes"</span>]</span>
-<span id="cb6-3"><a href=""></a>    .agg(total<span class="op">=</span><span class="st">"sum"</span>, mean<span class="op">=</span><span class="st">"mean"</span>, n<span class="op">=</span><span class="st">"count"</span>)</span>
-<span id="cb6-4"><a href=""></a>    .sort_values(by<span class="op">=</span><span class="st">"total"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb6-5"><a href=""></a>)</span>
-<span id="cb6-6"><a href=""></a>summary</span>
-<span id="cb6-7"><a href=""></a>summary.to_csv(<span class="st">"family_reflexes.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="reading-.csv-and-.xlsx" class="slide level2 center">
+<h2>Reading <code>.csv</code> and <code>.xlsx</code></h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a>{python}</span>
+<span id="cb4-2"><a href=""></a>stops_csv_df <span class="op">=</span> pd.read_csv(<span class="st">"conlang_c.csv"</span>)</span>
+<span id="cb4-3"><a href=""></a>stops_csv_df.head()</span>
+<span id="cb4-4"><a href=""></a></span>
+<span id="cb4-5"><a href=""></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">-------------------------------------</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb4-6"><a href=""></a></span>
+<span id="cb4-7"><a href=""></a>stops_excel_df <span class="op">=</span> pd.read_excel(<span class="st">"conlang_c.xlsx"</span>)</span>
+<span id="cb4-8"><a href=""></a>stops_excel_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section class="slide level2 center">
-
+<section id="activity" class="slide level2 center">
+<h2>Activity:</h2>
+<ul>
+<li>Now read both of your newly created <code>.csv</code> and <code>.xlsx</code> files in a <strong>pandas</strong> <code>df</code></li>
+</ul>
+<!-- ## Quick Summaries -->
+<!-- ```python -->
+<!-- df.describe(include="all") -->
+<!-- df["family"].value_counts() -->
+<!-- df["family"].unique() -->
+<!-- ``` -->
 </section></section>
 <section>
-<section id="appendix-quick-reference" class="title-slide slide level1 center">
-<h1>Appendix — Quick Reference</h1>
+<section id="grouping-aggregation" class="title-slide slide level1 center">
+<h1>Grouping &amp; Aggregation</h1>
+
+</section>
+<section id="grouping-aggregation-1" class="slide level2 center">
+<h2>Grouping &amp; Aggregation</h2>
+<ul>
+<li>Let’s create a new <code>df</code></li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a>ref_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb5-2"><a href=""></a>    <span class="st">"Language"</span>: [<span class="st">"Latin"</span>,<span class="st">"Greek"</span>,<span class="st">"Sanskrit"</span>,<span class="st">"Gothic"</span>,<span class="st">"OCS"</span>,<span class="st">"Oscan"</span>],</span>
+<span id="cb5-3"><a href=""></a>    <span class="st">"Family"</span>:   [<span class="st">"Italic"</span>,<span class="st">"Hellenic"</span>,<span class="st">"Indic"</span>,<span class="st">"Germanic"</span>,<span class="st">"Slavic"</span>,<span class="st">"Italic"</span>],</span>
+<span id="cb5-4"><a href=""></a>    <span class="st">"Reflexes"</span>: [<span class="dv">8</span>,<span class="dv">10</span>,<span class="dv">12</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">5</span>]</span>
+<span id="cb5-5"><a href=""></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="grouping-aggregation-2" class="slide level2 center">
+<h2>Grouping &amp; Aggregation</h2>
+<ul>
+<li>We can use <code>.sum()</code> to add some <code>.Series()</code> together</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a>ref_df.groupby(<span class="st">"Family"</span>)[<span class="st">"Reflexes"</span>].<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="grouping-aggregation-3" class="slide level2 center">
+<h2>Grouping &amp; Aggregation</h2>
+<ul>
+<li>The method <code>.agg</code> <strong>aggregates</strong> – it collects different types of mathematical operations:
+<ul>
+<li><code>.sum()</code> – total reflexes per family</li>
+<li><code>.mean()</code> – average reflexes per family</li>
+<li><code>count</code> – number of languges in that family.</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a>ref_df.groupby(<span class="st">"Family"</span>).agg(</span>
+<span id="cb7-2"><a href=""></a>    total<span class="op">=</span>(<span class="st">"Reflexes"</span>,<span class="st">"sum"</span>),</span>
+<span id="cb7-3"><a href=""></a>    mean<span class="op">=</span>(<span class="st">"Reflexes"</span>,<span class="st">"mean"</span>),</span>
+<span id="cb7-4"><a href=""></a>    n<span class="op">=</span>(<span class="st">"Reflexes"</span>,<span class="st">"count"</span>)</span>
+<span id="cb7-5"><a href=""></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section></section>
+<section>
+<section id="our-first-visualization" class="title-slide slide level1 center">
+<h1>Our First Visualization</h1>
+
+</section>
+<section id="install-one-more-library" class="slide level2 center">
+<h2>Install one more library</h2>
+<p>PC:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href=""></a>pip install matplotlib</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Mac:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href=""></a>pip3 install matplotlib</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="creating-our-first-visualization" class="slide level2 center">
+<h2>Creating our First Visualization</h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb10-2"><a href=""></a></span>
+<span id="cb10-3"><a href=""></a>counts <span class="op">=</span> ref_df.groupby(<span class="st">"Family"</span>)[<span class="st">"Reflexes"</span>].<span class="bu">sum</span>()</span>
+<span id="cb10-4"><a href=""></a>ax <span class="op">=</span> counts.plot(kind<span class="op">=</span><span class="st">"bar"</span>, title<span class="op">=</span><span class="st">"Reflex Counts by Family"</span>)</span>
+<span id="cb10-5"><a href=""></a>ax.set_xlabel(<span class="st">"Family"</span>)</span>
+<span id="cb10-6"><a href=""></a>ax.set_ylabel(<span class="st">"Total Reflexes"</span>)</span>
+<span id="cb10-7"><a href=""></a></span>
+<span id="cb10-8"><a href=""></a>plt.tight_layout()   <span class="co"># optional, avoids label cutoff</span></span>
+<span id="cb10-9"><a href=""></a>plt.show()           <span class="co"># displays the plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="activity-visualization" class="slide level2 center">
+<h2>Activity: Visualization</h2>
+<ul>
+<li>For this activity you will:
+<ul>
+<li>Import <code>conlang_c.csv</code> as a <code>df</code></li>
+<li>Create a bar shart that shows the number of consonants by place of articulation
+<ul>
+<li>For this, you’ll use the <code>.value_counts</code> method</li>
+</ul></li>
+<li>Make the x axis “Place” and the y axis “Number of Consonants”</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a>stop_counts <span class="op">=</span> df[<span class="st">"Place"</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section></section>
+<section>
+<section id="appendix-reference-guide-for-pd" class="title-slide slide level1 center">
+<h1>Appendix — Reference Guide for <code>pd</code></h1>
 
 </section>
 <section id="selection-cheatsheet" class="slide level2 center">
@@ -323,303 +446,21 @@ Dr.&nbsp;Andrew M. Byrd
 <li><strong>Filter:</strong> <code>df[df["col"] == value]</code>, <code>df[(cond1) &amp; (cond2)]</code></li>
 </ul>
 </section>
-<section id="common-ops" class="slide level2 center">
-<h2>Common Ops</h2>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a>df.rename(columns<span class="op">=</span>{<span class="st">"old"</span>:<span class="st">"new"</span>})</span>
-<span id="cb7-2"><a href=""></a>df.drop(columns<span class="op">=</span>[<span class="st">"col"</span>])</span>
-<span id="cb7-3"><a href=""></a>df.set_index(<span class="st">"col"</span>)</span>
-<span id="cb7-4"><a href=""></a>df.reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb7-5"><a href=""></a>df.sort_values(by<span class="op">=</span><span class="st">"col"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb7-6"><a href=""></a>df.isna().<span class="bu">sum</span>()</span>
-<span id="cb7-7"><a href=""></a>df.fillna(<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="common-operations" class="slide level2 center">
+<h2>Common Operations</h2>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href=""></a>df.rename(columns<span class="op">=</span>{<span class="st">"old"</span>:<span class="st">"new"</span>})</span>
+<span id="cb12-2"><a href=""></a>df.drop(columns<span class="op">=</span>[<span class="st">"col"</span>])</span>
+<span id="cb12-3"><a href=""></a>df.set_index(<span class="st">"col"</span>)</span>
+<span id="cb12-4"><a href=""></a>df.reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb12-5"><a href=""></a>df.sort_values(by<span class="op">=</span><span class="st">"col"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb12-6"><a href=""></a>df.isna().<span class="bu">sum</span>()</span>
+<span id="cb12-7"><a href=""></a>df.fillna(<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="alignment-combining" class="slide level2 center">
 <h2>Alignment &amp; Combining</h2>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href=""></a>s1.add(s2, fill_value<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb8-2"><a href=""></a>pd.concat([df1, df2], axis<span class="op">=</span><span class="dv">0</span>, ignore_index<span class="op">=</span><span class="va">True</span>)  <span class="co"># vertical</span></span>
-<span id="cb8-3"><a href=""></a>pd.concat([s1, s2], axis<span class="op">=</span><span class="dv">1</span>)                       <span class="co"># side-by-side</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="final-tips" class="slide level2 center">
-<h2>Final Tips</h2>
-<ul>
-<li>Keep indices simple early on; reset with <code>reset_index(drop=True)</code> if confused.</li>
-<li>Prefer unique column names and (eventually) a unique index.</li>
-<li>Build intuition with <em>small</em>, <em>visible</em> examples before loading big CSVs.</li>
-</ul>
-</section>
-<section id="cleaning-data-in-pandas" class="slide level2 center">
-<h2>Cleaning Data in Pandas</h2>
-<h3 id="why-clean">Why Clean?</h3>
-<ul>
-<li>Real data is messy.<br>
-</li>
-<li>Clean data means:
-<ul>
-<li>Consistent structure<br>
-</li>
-<li>Clear column names<br>
-</li>
-<li>No missing, duplicated, or mis-typed values</li>
-</ul></li>
-</ul>
-</section>
-<section id="cleaning-before-you-build-a-dataframe" class="slide level2 center">
-<h2>Cleaning <strong>Before</strong> You Build a DataFrame</h2>
-<blockquote>
-<p>“If it looks messy in your list or dictionary, pandas will just mirror that mess.”</p>
-</blockquote>
-</section>
-<section id="common-pre-df-fixes" class="slide level2 center">
-<h2>Common Pre-DF Fixes</h2>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>Goal</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Remove whitespace / newlines</td>
-<td><code>" word\n".strip()</code></td>
-</tr>
-<tr class="even">
-<td>Standardize capitalization</td>
-<td><code>"Word".lower()</code></td>
-</tr>
-<tr class="odd">
-<td>Remove punctuation</td>
-<td><code>re.sub(r"[^\w\s]", "", text)</code></td>
-</tr>
-<tr class="even">
-<td>Split text into tokens</td>
-<td><code>text.split()</code></td>
-</tr>
-<tr class="odd">
-<td>Validate list/dict lengths</td>
-<td><code>len(list)</code>, <code>list(zip(...))</code></td>
-</tr>
-<tr class="even">
-<td>Handle placeholders</td>
-<td>Replace <code>"NA"</code>, <code>"None"</code> with <code>None</code></td>
-</tr>
-</tbody>
-</table>
-<p>🧠 <em>Use basic Python + regex for text cleaning.</em></p>
-</section>
-<section id="cleaning-within-the-dataframe" class="slide level2 center">
-<h2>Cleaning <strong>Within</strong> the DataFrame</h2>
-<blockquote>
-<p>“Once it’s a table, use pandas tools to fix the structure.”</p>
-</blockquote>
-</section>
-<section id="useful-methods" class="slide level2 center">
-<h2>Useful Methods</h2>
-<table class="caption-top">
-<colgroup>
-<col style="width: 37%">
-<col style="width: 62%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Task</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Inspect structure</td>
-<td><code>df.info()</code>, <code>df.shape</code>, <code>df.columns</code></td>
-</tr>
-<tr class="even">
-<td>Rename columns</td>
-<td><code>df.rename(columns={"old":"new"})</code></td>
-</tr>
-<tr class="odd">
-<td>Drop columns or rows</td>
-<td><code>df.drop(columns=["col"])</code>, <code>df.dropna()</code></td>
-</tr>
-<tr class="even">
-<td>Fill / replace values</td>
-<td><code>df.fillna("Unknown")</code>, <code>df.replace("?", None)</code></td>
-</tr>
-<tr class="odd">
-<td>Remove duplicates</td>
-<td><code>df.drop_duplicates()</code></td>
-</tr>
-<tr class="even">
-<td>Convert data types</td>
-<td><code>df["col"] = df["col"].astype(int)</code></td>
-</tr>
-<tr class="odd">
-<td>String cleanup</td>
-<td><code>df["col"] = df["col"].str.strip().str.lower()</code></td>
-</tr>
-<tr class="even">
-<td>Compute new columns</td>
-<td><code>df["new"] = df["col1"] + df["col2"]</code></td>
-</tr>
-<tr class="odd">
-<td>Sort and reset</td>
-<td><code>df.sort_values(["col"])</code>, <code>df.reset_index(drop=True)</code></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="a-mental-model" class="slide level2 center">
-<h2>🧩 A Mental Model</h2>
-<table class="caption-top">
-<colgroup>
-<col style="width: 29%">
-<col style="width: 41%">
-<col style="width: 29%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Phase</th>
-<th>Mindset</th>
-<th>Tools</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Before</strong></td>
-<td>Clean the input</td>
-<td>String methods, lists, dicts, <code>re</code></td>
-</tr>
-<tr class="even">
-<td><strong>Inside DF</strong></td>
-<td>Clean the structure</td>
-<td><code>.rename()</code>, <code>.dropna()</code>, <code>.astype()</code></td>
-</tr>
-<tr class="odd">
-<td><strong>After</strong></td>
-<td>Analyze and summarize</td>
-<td><code>.loc</code>, <code>.sum()</code>, <code>.mean()</code>, <code>.groupby()</code></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="ten-core-methods-to-remember" class="slide level2 center">
-<h2>🧭 Ten Core Methods to Remember</h2>
-<ol type="1">
-<li><code>df.info()</code> – check structure<br>
-</li>
-<li><code>df.columns</code> – list columns<br>
-</li>
-<li><code>df.rename()</code> – fix column names<br>
-</li>
-<li><code>df.dropna()</code> / <code>df.fillna()</code> – handle missing data<br>
-</li>
-<li><code>df.drop_duplicates()</code> – remove repeats<br>
-</li>
-<li><code>df.astype()</code> – convert data type<br>
-</li>
-<li><code>df["col"].str.lower()</code> – text cleanup<br>
-</li>
-<li><code>df.replace()</code> – fix placeholders<br>
-</li>
-<li><code>df.sort_values()</code> – organize<br>
-</li>
-<li><code>df.reset_index()</code> – tidy indices after filtering</li>
-</ol>
-</section>
-<section id="key-takeaway" class="slide level2 center">
-<h2>Key Takeaway</h2>
-<blockquote>
-<p>Python cleans <strong>strings</strong> and <strong>lists</strong>.<br>
-Pandas cleans <strong>tables</strong>.</p>
-</blockquote>
-</section></section>
-<section>
-<section id="what-you-can-do-now" class="title-slide slide level1 center">
-<h1>What You Can Do Now 🧠</h1>
-
-</section>
-<section id="linguistic-tasks-now-possible-with-pandas" class="slide level2 center">
-<h2>Linguistic Tasks Now Possible with Pandas</h2>
-<ul>
-<li>✅ <strong>Build structured lexica</strong>
-<ul>
-<li>Create and modify DataFrames of words, glosses, and languages</li>
-<li>Filter or sort them instantly (no more manual loops)</li>
-</ul></li>
-<li>✅ <strong>Compare data across sources</strong>
-<ul>
-<li>Merge two datasets (e.g., LIV + IEW)</li>
-<li>Identify missing reflexes or mismatched glosses automatically</li>
-</ul></li>
-</ul>
-</section>
-<section id="linguistic-tasks-now-possible-with-pandas-1" class="slide level2 center">
-<h2>Linguistic Tasks Now Possible with Pandas</h2>
-<ul>
-<li>✅ <strong>Quantify linguistic patterns</strong>
-<ul>
-<li>Count how many reflexes each family has per root</li>
-<li>Measure which morphological types are most frequent</li>
-</ul></li>
-<li>✅ <strong>Clean and normalize datasets</strong>
-<ul>
-<li>Capitalize, strip, or standardize glosses and forms</li>
-<li>Fill in missing data (<code>NaN → 0</code>) and rename columns in bulk</li>
-</ul></li>
-</ul>
-</section>
-<section id="linguistic-tasks-now-possible-with-pandas-2" class="slide level2 center">
-<h2>Linguistic Tasks Now Possible with Pandas</h2>
-<ul>
-<li>✅ <strong>Group and summarize</strong>
-<ul>
-<li>Group by family, POS, or semantic field</li>
-<li>Compute totals, averages, or frequencies per category</li>
-</ul></li>
-<li>✅ <strong>Visualize and export</strong>
-<ul>
-<li>Create quick bar charts of linguistic statistics</li>
-<li>Save clean CSVs for use in R, Excel, or later analysis</li>
-</ul></li>
-</ul>
-</section>
-<section id="the-big-shift" class="slide level2 center">
-<h2>The Big Shift</h2>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>Old Approach</th>
-<th>New Approach with Pandas</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Lists of strings</td>
-<td>Structured tables</td>
-</tr>
-<tr class="even">
-<td>Loops over words</td>
-<td>Operations over columns</td>
-</tr>
-<tr class="odd">
-<td>Manual counting</td>
-<td>Built-in aggregation</td>
-</tr>
-<tr class="even">
-<td>Hard-coded comparisons</td>
-<td>Automatic alignment by label</td>
-</tr>
-<tr class="odd">
-<td>Descriptive patterns</td>
-<td>Quantitative insights</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>⚡ You now think like a <em>linguistic data scientist</em>:<br>
-“Each row is a word; each column is a property; the DataFrame is my corpus.”</p>
-</blockquote>
-</section>
-<section class="slide level2 center">
-
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href=""></a>s1.add(s2, fill_value<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb13-2"><a href=""></a>pd.concat([df1, df2], axis<span class="op">=</span><span class="dv">0</span>, ignore_index<span class="op">=</span><span class="va">True</span>)  <span class="co"># vertical</span></span>
+<span id="cb13-3"><a href=""></a>pd.concat([s1, s2], axis<span class="op">=</span><span class="dv">1</span>)                       <span class="co"># side-by-side</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </section></section>
     </div>

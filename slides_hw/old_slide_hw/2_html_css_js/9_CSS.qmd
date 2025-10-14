@@ -1,0 +1,349 @@
+---
+title: "Computation for Linguists"
+subtitle: "HTML and Javascript, Day 3: CSS"
+date: "September 15, 2025"
+author: "Dr. Andrew M. Byrd"
+format:
+  revealjs:
+    css: header_shrink.css
+    theme: beige
+    slide-number: true
+    center: true
+    toc: true
+    toc-title: "Plan for the Day"
+    toc-depth: 1
+editor: visual
+---
+
+# Review
+
+-   What did you learn last time about HTML?
+
+## Review from Days 1 & 2
+
+-   Day 1:
+
+    -   We learned **basic tags**: `<h1>`, `<p>`, `<em>`, `<strong>`, `<a>`, `<img>`, `<ul>`, `<li>`
+    -   We practiced **attributes** like `href` and `alt`
+
+-   Day 2:
+
+    -   Structure: `<head>`, `<nav>`, `<main>`, `<section>`, `<footer>`
+
+-   We built a simple page with our name, a paragraph, a link, an image, and a list, and then structured it.
+
+# Let's Make Things Pretty
+
+## What is CSS?
+
+-   There is a default way that text is displayed on a website: size of H1, organization of lists, etc.
+-   **Cascading Style Sheets** (CSS) allow us to make websites more interesting
+    -   Change the color and size of text, such as headings and links
+    -   Create layouts to organize content, create multi-column texts or organizing your site in a specific way
+    -   Create animations
+-   Note: exercises are taken from [here](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/); check it out for more details!
+
+## CSS syntax basics
+
+-   Open up `firstname_lastname.html`
+-   Within the `<head>`, paste:
+
+``` html
+<style>
+body {
+  background-color: lightblue;
+}
+</style>
+```
+
+## Let's add this to the `<style>` section.
+
+``` html
+p {
+  text-align: center;
+  color: red;
+} 
+```
+
+## Let's add this to the `<style>` section.
+
+``` html
+p {
+  color: aqua;
+  padding: 5px;
+  background: midnightblue;
+}
+```
+
+-   What color is the text? Why?
+
+## Creating a `.css` file
+
+-   We don't *have* to put the `<style>` code in the `<head>`, though
+-   We can put it in a `.css` file.
+    -   Why would we want to do that?
+-   Let's now create a new file, called `styles.css`.
+
+## Creating a `.css` file
+
+-   Let's paste this code into the `.css` file.
+
+``` html
+body {
+  background-color: lightblue;
+}
+p {
+  text-align: center;
+  color: red;
+  padding: 5px;
+  background: midnightblue;
+}
+```
+
+## Loading a `.css` file
+
+-   You can now delete all of that style code in your `firstname_lastname.html`
+-   Then paste the following code in your `<head>`
+
+``` html
+    <link rel="stylesheet" href="styles.css">
+```
+
+# Beautifying Stinky's
+
+## Remember Stinky's?
+
+-   Last time you built a website for The Stinky Cheesemonger.
+-   It was fairly basic, but we were able to add some structural features to it.
+-   If you'll recall, it looked something like <a href="8_stinkys.html">this</a>
+
+## Stinky's, Beautified
+
+-   Let's look at our website, <a href="9_stinkys_beautified.html">beautified</a>
+-   Its change in look is dictated by a `.css` file
+-   How can we see this on websites?
+    -   Dev tools!
+
+## Dev Tools
+
+-   `F12`
+-   `Ctrl/Command` + `Shift` + `i`
+
+## Activity: Deciphering CSS code
+
+-   Open up **Dev Tools**
+    -   Inspect the style file, `9_stinky_style.css`
+-   How do you make a comment in CSS?
+-   Find as many familiar tags (like `<h1>`) as you can. How do we edit their style?
+-   Now look for unfamiliar tags. Any guesses as to what they mean?
+-   You'll see values marked as `px`, `rem`, and `ch`. Ponder what they mean, then double check your guess using Google.
+
+------------------------------------------------------------------------
+
+## Let's Look Under the Hood
+
+``` css
+h1 { font-size: 2rem; margin: var(--space-1) 0 0; color: var(--brand-brown); text-align: center; }
+```
+
+-   `h1` = the **Selector**
+    -   indicates the part of the page you want to style
+
+``` css
+p {
+  color: red;
+  font-size: 1.2rem;
+}
+```
+
+## Selectors & Friends
+
+-   **Declaration block** → the `{ … }` after a selector: `{ font-size:...}`
+-   **Property** → what you want to change (`color`, `margin`)
+-   **Value** → how you want it to look (`black`, `1rem`)
+
+``` css
+selector { property: value; property: value; }
+```
+
+## Different Kinds of Selectors
+
+-   Element selector: `p { … }`
+    -   applies to all paragraphs
+-   Class selector: `.highlight { … }`
+    -   applies to anything where class="highlight"
+-   ID selector: `#cheeses { … }`
+    -   applies to anything with the element with id="cheeses"
+-   Pseudo-class: `a:hover { … }`
+    -   applies to links when hovered
+
+## Class Selectors
+
+``` html
+<p class="highlight">This text is highlighted.</p>
+<p class="highlight">This one is too!</p>
+<p>This one is not.</p>
+```
+
+-   Only `<p>` marked as `class="highlight"` will be treated specially.
+
+## Pseudo-Classes
+
+-   Special state of an element
+-   Not added in the HTML code, rather in CSS with a `:`
+-   Describe something that's a condition, not a permanent class
+
+``` html
+a:hover {
+  color: red;   /* when mouse hovers */
+}
+
+a:visited {
+  color: purple;  /* after you’ve clicked the link */
+}
+
+input:focus {
+  border: 2px solid blue; /* when user clicks inside a text field */
+}
+
+li:first-child {
+  font-weight: bold; /* only the first <li> inside its parent */
+}
+```
+
+## `var(--???)`
+
+-   In this and other `css` code, we find some properties marked as follows:
+
+``` css
+h1 { color: var(--brand-brown) }
+```
+
+-   Why not just:
+
+``` css
+h1 { color: brand-brown }
+```
+
+## `var(--???)`
+
+-   The answer lies here, in the `:root{}`
+
+``` css
+:root {
+  /* Palette (named colors for now) */
+  --brand-brown: brown;
+  --brand-gold: goldenrod;
+  --paper: oldlace;      /* warm page background */
+  --ink: black;          /* default text color */
+
+  /* Layout & rhythm */
+  --page-width: 60ch;    /* ~60 characters per line for readability */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+
+  /* Rounding */
+  --radius: 12px;
+}
+```
+
+## `var(--???)`
+
+-   All of these things are **variables**
+    -   We define variables in the `css` head
+    -   Their value remains constant through the file
+-   Nickname for a value
+-   Basic Syntax for a **variable**:
+
+``` css
+--name: value
+```
+
+## Variables in CSS
+
+-   Defined in `:root` so they apply everywhere
+-   Reusable nicknames for colors, spacing, sizes
+-   Change it once; this updates all instances of that variable throughout the code
+
+``` css
+:root {
+  --ink: black;        /* variable definition */
+  --paper: oldlace;
+}
+
+body {
+  color: var(--ink);   /* using the variable */
+  background: var(--paper);
+}
+```
+
+## Why Use Variables?
+
+-   Without variables:
+
+``` css
+body   { color: black; }
+h1     { color: black; }
+footer { color: black; }
+```
+
+-   With variables:
+
+``` css
+:root { --ink: black; }
+
+body   { color: var(--ink); }
+h1     { color: var(--ink); }
+footer { color: var(--ink); }
+```
+
+-   Why use variables at all?
+
+# Activity : Let's Start Building Your CSS
+
+-   We're going to begin working on your `.css` file for your website
+
+**Step 1**: Create a new style sheet, called `lastname_style.css`
+
+**Step 2**: Link your stylesheet in the `<head>`
+
+## Activity
+
+**Step 3**: Add Rules like These, Filling in Values:
+
+``` css
+/* Headings */
+h1 {
+  color: xxxx;
+  text-align: xxxx;
+}
+
+h2 {
+  color: xxxx;
+  margin-top: xxxx;
+}
+
+/* Paragraphs */
+p {
+  line-height: xxxx;
+  font-size: xxxx;
+}
+
+/* Lists */
+ul {
+  list-style-type: xxxx;
+  padding-left: xxxx;
+}
+
+/* Footer */
+footer {
+  text-align: xxxx;
+  margin-top: xxxx;
+  font-size: xxxx;
+  color: xxxx;
+}
+```
+
+**Step 4**: Save, Stage, Commit, Push!

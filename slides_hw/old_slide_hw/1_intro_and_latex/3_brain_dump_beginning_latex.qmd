@@ -1,0 +1,66 @@
+---
+title: "LaTeX Day 2 — Brain Dump"
+subtitle: "Find the Bug!"
+author: "__________________________________"
+format: pdf
+---
+
+### Instructions
+
+Each question shows a snippet of LaTeX with an error.  
+**Your task:** Circle the error and write how the line should be fixed.
+
+---
+
+## 1) 
+
+```{latex}
+\documentclass[12pt,letterpaper{article}
+
+\begin{document}
+Hello!
+\end{document}
+```
+
+## 2) 
+
+```{latex}
+\documentclass{article}
+\title{LaTeX Day 2 — Brain Dump}
+\author{Student Name}
+
+\maketitle
+
+\begin{document}
+This is the first paragraph.
+\end{document}
+```
+
+## 3)
+```{latex}
+\documentclass{article}
+
+\begin{document}
+Today is \today}.
+\end{document}
+```
+
+## 4)
+```{latex}
+\documentclass{article}
+
+\begin{document}
+\begin{figure}
+\includegraphics[width=0.5\textwidth]{atom.png}
+\caption{An atom}
+\end{figure}
+\end{document}
+```
+
+## 5)
+```{latex}
+\documentclass{article}
+
+\begin{document}
+Hello world!
+```

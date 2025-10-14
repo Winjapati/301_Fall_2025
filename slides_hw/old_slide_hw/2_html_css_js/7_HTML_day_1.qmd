@@ -1,0 +1,264 @@
+---
+title: "Computation for Linguists"
+subtitle: "HTML and Javascript, Day 1"
+date: "September 10, 2025"
+author: "Dr. Andrew M. Byrd"
+format:
+  revealjs:
+    css: header_shrink.css
+    theme: beige
+    slide-number: true
+    center: true
+    toc: true
+    toc-title: "Plan for the Day"
+    toc-depth: 1
+editor: visual
+---
+
+# Review
+
+-   What did you learn last time?
+
+# Our Goal
+
+## For the next two weeks:
+
+-   Learn the basics of HTML and CSS
+
+-   Do a *teeny bit* of programming with JavaScript
+
+-   Create a personal homepage at GitHub Pages, that is a simplified version of [this](https://winjapati.github.io/ "link to Dr. Byrd's webpage")
+
+::: callout-important
+## Our Goal
+
+Create a webpage that showcases *you*, which you can use to promote yourself for internships and future jobs
+:::
+
+# How LaTeX Works
+
+-   Let's review how LaTeX works.
+
+# LaTeX → HTML
+
+## Moving from LaTeX to HTML
+
+By and large, things in HTML function much more so like LaTeX **environments**. In HTML, these are called **tags**. Both environments & tags:
+
+-   Have opening and closing markers
+-   Wrap content
+-   Describe what that content *is* (a paragraph, a list, a section) rather than how it looks.
+    -   In HTML, indicating how something looks is done using **style sheets** (CSS), which we'll talk about in a few days
+
+<!-- ## Moving from LaTeX to HTML -->
+
+<!-- -   LaTeX: `\documentclass` / preamble -->
+
+<!--     -   HTML: `<!DOCTYPE html>` + `<head>` -->
+
+<!-- -   LaTeX:`\begin{document}...\end{document}` -->
+
+<!--     -   HTML: `<body>...</body>` -->
+
+<!-- -   LaTeX: **commands** like `\textbf{}` -->
+
+<!--     -   HTML: **Tags** like `<strong>` -->
+
+<!-- -   LaTeX: **environments** like `\itemize` -->
+
+<!--     -   HTML: **container tags** like `<ul>` -->
+
+## LaTeX vs. HTML Terminology
+
+```{=html}
+<style>
+  .smaller { font-size: 80%; }
+</style>
+```
+
+::: smaller
+| **LaTeX**                          | **HTML**                          |
+|------------------------------------|-----------------------------------|
+| Preamble (`\documentclass`)        | **Doctype** + **Head** (`<head>`) |
+| Document body (`\begin{document}`) | **Body** (`<body>`)               |
+| Command (`\emph{}`)                | **Inline tag** (`<em>`)           |
+| Environment (`\begin{itemize}`)    | **Element** (`<ul>...</ul>`)      |
+| Comment: `% ...`                   | Comment: `<!-- ... -->`           |
+:::
+
+-   To "comment" (`<!--# ... -->`) within RStudio, press "Ctrl + Shift + C" or "⌘ + Shift + C"
+
+## Tags vs. Elements?
+
+-   Tags:
+    -   These are things marked in `< >`
+    -   Usually comes in pairs: `<p> ... </p>`, `<emph> ... </emph>`, etc.
+    -   Can be self-contained: `<img src="cat.jpg" alt="Cat">`
+-   Elements:
+    -   The tags *plus* everything within.
+        -   `<p> Hello World! </p>`
+
+<!-- ------------------------------------------------------------------------ -->
+
+<!-- ## The Big Picture -->
+
+<!-- -   **Preamble** (`\documentclass`, packages, title info)\ -->
+
+<!--     ↔ **`<!DOCTYPE html>`, `<head>`** -->
+
+<!-- -   **Document body** (`\begin{document}...\end{document}`)\ -->
+
+<!--     ↔ **`<body>...</body>`** -->
+
+<!-- -   **Environments** (`\begin{itemize}`, `\begin{figure}`)\ -->
+
+<!--     ↔ **block containers** (`<ul>`, `<figure>`, `<section>`) -->
+
+<!-- -   **Commands** (`\textbf{}`, `\emph{}`)\ -->
+
+<!--     ↔ **inline tags** (`<strong>`, `<em>`) -->
+
+------------------------------------------------------------------------
+
+## Let's create an HTML file
+
+-   Find the folder in RStudio that you'd like to create an html file.
+-   Click on "New File", then "R HTML"
+-   Delete the "r" in the file extension (.rhtml).
+-   Create a file called "test.html".
+
+## Preamble (LaTeX)
+
+``` latex
+\documentclass{article}
+\usepackage{graphicx}
+\title{My Page}
+\date{2025-09-10}
+\author{Andrew M. Byrd}
+```
+
+## HTML (doctype + head)
+
+```{html}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>My Page</title>
+    <meta name="author" content="Andrew M. Byrd">
+    <meta name="date" content="2025-09-10">
+    <meta name="description" content="Personal homepage for Andrew Byrd">
+  </head>
+```
+
+-   Copy and paste this code into your "test.html" file.
+    -   How similar is the HTML head to the LaTeX preamble?
+-   Click on "test.html" in your RStudio folder, select "View in Web Browser".
+    -   What happens?
+
+## Document Body (LaTeX)
+
+``` latex
+\begin{document}
+\maketitle
+Hello world!
+\end{document}
+```
+
+## Document Body (HTML)
+
+```{html}
+<body>
+  <h1>Hello World!</h1>
+  <p>This is my first webpage.</p>
+</body>
+</html>
+```
+
+-   Copy & paste this code into test.html.
+
+## Headings & Paragraphs
+
+-   In LaTeX (three deep):
+
+``` latex
+\section{About Me}
+I study linguistics.
+
+\subsection{Interests}
+Historical linguistics, NLP.
+```
+
+-   In HTML (six deep: `<h1>`-`<h6>`):
+
+``` html
+<h1>About Me</h1>
+<p>I study linguistics.</p>
+
+<h2>Interests</h2>
+<p>Historical linguistics is awesome.</p>
+<p>NLP is cool, too.</p>
+```
+
+-   Copy and paste the HTML code into your test.html file. Try running the code without `<p>...</p>`. What does this **tag** do?
+
+## Paragraphs
+
+-   Browsers will automatically treat plain text as if it were wrapped in a paragraph
+-   But...
+    -   Screen readers won't know where your paragraphs begin and end.
+    -   Also, once we load in style sheets (CSS), we may have specific instructions for paragraphs, like setting margins
+
+<!-- ## Inline Emphasis (Commands ↔ Inline Tags) -->
+
+<!-- ``` latex -->
+
+<!-- \textbf{Important} and \emph{interesting}. -->
+
+<!-- ``` -->
+
+<!-- ``` html -->
+
+<!-- <p><strong>Important</strong> and <em>interesting</em>.</p> -->
+
+<!-- ``` -->
+
+<!-- ``` latex -->
+
+<!-- \textbf{Important} and \emph{interesting}. -->
+
+<!-- ``` -->
+
+<!-- ``` html -->
+
+<!-- <p><strong>Important</strong> and <em>interesting</em>.</p> -->
+
+<!-- ``` -->
+
+<!-- ::: :::: -->
+
+<!-- ::: -->
+
+# Activity: Build Your Own Website!
+
+## Activity, Step One: Analyze
+
+-   Download \<href="7_mock_sita e.html" download\>this `html` file</a> and analyze its code.
+-   Identify how to:
+    -   <em> emphasize </em> a word
+    -   make a word <strong> strong </strong>
+    -   add an html link anchor to a word or string of words
+    -   add an image
+    -   add an unordered list
+
+## Activity, Step Two: Build
+
+-   Create `firstname_lastname.html`. Add to it: <span style="font-size:80%;">
+    1.  A head and body.
+    2.  Two `<p>` elements talking about yourself (or whatever you want). Use `<h1>` and `<h2>`.
+    3.  Emphasize one word and make another word strong.
+    4.  Add a link that points to your GitHub profile (mine is <https://github.com/Winjapati>).
+    5.  Add an image of yourself (or whatever you want).
+    6.  Add a simple unordered list (`<ul>`).
+    7.  Save and view the file by, "Open with Browser."
+    8.  Sync with your GitHub. </span>

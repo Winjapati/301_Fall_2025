@@ -1,0 +1,305 @@
+---
+title: "Computation for Linguists"
+subtitle: "HTML and Javascript, Day 2"
+date: "September 12, 2025"
+author: "Dr. Andrew M. Byrd"
+format:
+  revealjs:
+    css: header_shrink.css
+    theme: beige
+    slide-number: true
+    center: true
+    toc: true
+    toc-title: "Plan for the Day"
+    toc-depth: 1
+editor: visual
+---
+
+# Review
+
+-   What did you learn last time about HTML?
+
+## Review from Day 1
+
+-   We learned **basic tags**: `<h1>`, `<p>`, `<em>`, `<strong>`, `<a>`, `<img>`, `<ul>`, `<li>`
+-   We practiced **attributes** like `href` and `alt`
+-   We built a simple page with our name, a paragraph, a link, an image, and a list
+
+# Structure in HTML
+
+## Why Structure Matters
+
+Without structure:
+
+``` html
+<!doctype html>
+<html lang="en">
+<h1>My Mini Site</h1>
+<p>Hello world! ...</p>
+<h2>Links</h2>
+<p>Visit <a href="https://example.com">Example</a>.</p>
+<h2>Image</h2>
+<p><img src="pic.jpg" alt="..."></p>
+</html>
+```
+
+-   We get a site, but this is bad HTML with no semantic outline.
+
+## Why Structure Matters
+
+With structure:
+
+``` html
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>My Mini Site</title>
+</head>
+<body>
+  <h1>My Mini Site</h1>
+
+  <p>Hi, I'm Student Name. This site will become my simple portfolio.</p>
+
+  <h2>Education</h2>
+  <p>University of Somewhere — B.A. (2025)</p>
+
+  <h2>Projects</h2>
+  <p>Project One: a short description goes here.</p>
+
+  <h2>Contact</h2>
+  <p>Email me at <a href="mailto:student@example.edu">student@example.edu</a>.</p>
+
+  <p><img src="https://picsum.photos/300/180" alt="A random placeholder image"></p>
+</body>
+</html>
+```
+
+## Today’s Focus
+
+-   Add **structure** with semantic tags
+-   Learn the page skeleton:
+    -   `<header>` — title + navigation
+    -   `<nav>` — menu of links
+    -   `<main>` — main content
+    -   `<section>` — thematic grouping
+    -   `<footer>` — closing info
+-   Add **internal navigation** with `id` and `href="#..."`
+
+# Learning HTML Structure
+
+## Create a New `html` File
+
+-   Create a new .html file, call it `stinkys.html`.
+-   Here is the starting code. You can see that right now it's completely *flat* – there's no inherent structure at the moment.
+
+``` html
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>The Stinky Cheesemonger</title>
+</head>
+<body>
+  <h1>The Stinky Cheesemonger</h1>
+
+  <p>Welcome to The Stinky Cheesemonger — your neighborhood shop for gloriously pungent cheeses.</p>
+
+  <h2>Cheeses</h2>
+  <p>Try our favorites: Époisses, Limburger, Blue Stilton.</p>
+
+  <h2>Shop Info</h2>
+  <p>123 Rind Lane, Fromage City, Idaho</p>
+
+  <h2>Contact</h2>
+  <p>Email us at <a href="mailto:hello@stinkys.cheese">hello@stinkys.cheese</a></p>
+
+  <p><img src="https://picsum.photos/320/200" alt="A plate of assorted cheeses"></p>
+</body>
+</html>
+```
+
+## `<header>`
+
+**Purpose:** Introduces the page (or a big section). Commonly holds the site name/logo and navigation.
+
+**How it Works:** You can have a top-level `<header>` for the page.\
+- You can also have headers *inside* sections, but this is advanced – we’ll stick to one for now.
+
+## Add a `<header>`
+
+``` html
+<body>
+ <header>
+    <h1>The Stinky Cheesemonger</h1>
+ </header>
+
+...
+</body>
+```
+
+## `<nav>` with links
+
+**Purpose:** A container for site links (menus, table of contents, etc).
+
+**How it Works**:
+
+-   Put it **inside** your page `<header>`.
+-   Links can be internal (jump to a section) or external.
+
+## Add a `<nav>` with links
+
+``` html
+<body>
+  <header>
+    <h1>The Stinky Cheesemonger</h1>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#cheeses">Cheeses</a>
+      <a href="#shop">Shop Info</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+...
+</body>
+```
+
+## `<main>`
+
+**Purpose:** Contains the primary page content.\
+
+**How it Works**:
+
+-   One per page. Improves accessibility.
+
+-   Wrap your page's primary content in a `<main>...</main>` element.
+
+## Add `<main>`
+
+``` html
+<body>
+
+...
+
+  <main>
+    <p>Welcome to The Stinky Cheesemonger — your neighborhood shop for gloriously pungent cheeses.</p>
+
+    <h2>Cheeses</h2>
+    <p>Try our favorites: Époisses, Limburger, Blue Stilton.</p>
+
+    <h2>Shop Info</h2>
+    <p>123 Rind Lane, Fromage City, Idaho</p>
+
+    <h2>Contact</h2>
+    <p>Email us at <a href="mailto:hello@stinkys.cheese">hello@stinkys.cheese</a></p>
+
+    <p><img src="https://picsum.photos/320/200" alt="A plate of assorted cheeses"></p>
+  </main>
+</body>
+```
+
+## `<section>`
+
+**Purpose:** Groups related content with a heading.\
+
+**How it Works**:
+
+-   Each section begins with an `<h2>`.
+
+-   Give each an `id`.
+
+## Add `<section>`s and `id`s
+
+``` html
+<body>
+  ...
+
+  <main>
+    <section id="about">
+      <h2>About</h2>
+      <p>Welcome to The Stinky Cheesemonger — your neighborhood shop for gloriously pungent cheeses.</p>
+      <p><img src="https://picsum.photos/320/200" alt="A plate of assorted cheeses"></p>
+    </section>
+
+    <section id="cheeses">
+      <h2>Cheeses</h2>
+      <p>Try our favorites:</p>
+      <ul>
+        <li>Époisses — washed-rind, famously aromatic</li>
+        <li>Limburger — creamy, assertive, legendary funk</li>
+        <li>Blue Stilton — crumbly, sharp, deeply savory</li>
+      </ul>
+    </section>
+
+    <section id="shop">
+      <h2>Shop Info</h2>
+      <p>123 Rind Lane, Fromage City, Idaho</p>
+      <p>Open Tue–Sat, 11am–6pm</p>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>Email us at <a href="mailto:hello@stinkys.cheese">hello@stinkys.cheese</a></p>
+    </section>
+  </main>
+</body>
+```
+
+## The `<nav>` links don't seem to be working...
+
+-   Let's use *lorem ipsum*
+-   Copy the below code and paste it a bunch of times in your `stinkys_html` file
+
+``` html
+<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+```
+
+## `<footer>`
+
+**Purpose:**
+
+-   Ends the page. Great for © YEAR, contact info, or “Back to top.”
+
+-   You can add an anchor that takes the user back to the top, which goes right after `<body>`.
+
+    -   Go ahead and do that now.
+
+``` html
+<body>
+  <a id="top"></a> <!-- back-to-top anchor -->
+```
+
+## Add a `<footer>`
+
+-   At the end of your site, after `</main>` but before `</body>`, you can add your`<footer>...</footer>` element
+
+``` html
+  </main>
+
+  <footer>
+    © 2025 The Stinky Cheesemonger · <a href="#top">Back to top</a>
+  </footer>
+</body>
+```
+
+# Activity: Add Structure to Your Own Website!
+
+## Activity: Add Structure to Your Own Website!
+
+-   Open the HTML file you made yesterday.
+-   At the top of your `<body>`, wrap title in a `<header>`.
+
+``` html
+  <nav>
+     <a href="#about">About</a>
+     <a href="#education">Education</a>
+     <a href="#projects">Projects</a>
+     <a href="#contact">Contact</a>
+  </nav>
+```
+
+-   Wrap content in `<main>`.
+-   Split into `<section>`s.
+-   Add a `<footer>`. Be sure to add a **page anchor** at the top.
+-   If you have time, add a fifth section on "Hobbies", with links.

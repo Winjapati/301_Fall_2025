@@ -22,47 +22,151 @@ editor: source
 
 ## Recap from Last Time
 
--   ddddddddd
+- Modifying `DataFrame()`s
+  - `.concat()`, `.drop()`, `.rename()`, `.reset_index()`
+  - `.sort_index()`, `.sort_values(ascending=False)`
+  - `.fillna(0)`
+
+- Adding:
+  - columns: `df[series_1].add(df[series_2])`
+  - rows: `df.sum()`
 
 ## Review Activity
 
--   
-
-# Loading up `csv` and `xls` files
-
-## Reading / Writing Files
+-   Import the following data as a `.DataFrame()`
 
 ```python
-# CSV
-ref_df.to_csv("reflexes_summary.csv", index=False)
-loaded = pd.read_csv("reflexes_summary.csv")
-loaded.head()
+stops = {
+    "Language": ["English", "Spanish", "Hindi"],
+    "Nasals": [3, 3, 4],
+    "Oral Stops": [6, 6, 5]
+}
+```
+- Use `.sum()` to find the total number of nasals & oral stops.
+- Use `.add()` to combine the number of nasals and oral stops in each language.
 
-# Excel (if needed)
-# ref_df.to_excel("reflexes_summary.xlsx", index=False)
-# pd.read_excel("reflexes_summary.xlsx")
+
+# Reading & Writing `csv` and `xls` files
+
+## Writing a `csv` file
+
+- `df.to_csv("file_name.csv", index=False)`
+  - What happens when `index=True`?
+
+```python
+import pandas as pd
+
+# Create the data
+data = {
+    "Consonant": ["p", "b", "t", "d", "k", "g", "s", "z", "m", "n", "l", "r", "w", "j", "h"],
+    "Place": ["bilabial", "bilabial", "alveolar", "alveolar", "velar", "velar",
+              "alveolar", "alveolar", "bilabial", "alveolar", "alveolar", "alveolar",
+              "labial-velar", "palatal", "glottal"],
+    "Manner": ["stop", "stop", "stop", "stop", "stop", "stop",
+               "fricative", "fricative", "nasal", "nasal", "lateral", "trill",
+               "glide", "glide", "fricative"],
+    "Voicing": ["voiceless", "voiced", "voiceless", "voiced", "voiceless", "voiced",
+                "voiceless", "voiced", "voiced", "voiced", "voiced", "voiced",
+                "voiced", "voiced", "voiceless"]
+}
+
+# Create DataFrame
+df = pd.DataFrame(data)
+
+# Show DataFrame
+print(df)
+
+# Save to CSV
+df.to_csv("conlang_c.csv", index=False)
 ```
 
+## `.csv` Activity:
 
-## Quick Summaries
+- Convert the stops `df` from the Review Activity into a `.csv` file
+
+## Writing to Excel:
+
+- You can also write Excel files, but you have to `pip install openpyxl` first.
 
 ```python
-df.describe(include="all")
-df["family"].value_counts()
-df["family"].unique()
+data = {
+    "Consonant": ["p", "b", "t", "d", "k", "g", "s", "z", "m", "n", "l", "r", "w", "j", "h"],
+    "Place": ["bilabial", "bilabial", "alveolar", "alveolar", "velar", "velar",
+              "alveolar", "alveolar", "bilabial", "alveolar", "alveolar", "alveolar",
+              "labial-velar", "palatal", "glottal"],
+    "Manner": ["stop", "stop", "stop", "stop", "stop", "stop",
+               "fricative", "fricative", "nasal", "nasal", "lateral", "trill",
+               "glide", "glide", "fricative"],
+    "Voicing": ["voiceless", "voiced", "voiceless", "voiced", "voiceless", "voiced",
+                "voiceless", "voiced", "voiced", "voiced", "voiced", "voiced",
+                "voiced", "voiced", "voiceless"]
+}
+
+# Create DataFrame
+df = pd.DataFrame(data)
+
+df.to_excel("conlang_c.xlsx", index=False)
+```
+
+## `.xlsx` Activity:
+
+- Convert the stops `df` from the Review Activity into a `.xlsx` file
+
+## Reading `.csv` and `.xlsx`
+
+```python
+{python}
+stops_csv_df = pd.read_csv("conlang_c.csv")
+stops_csv_df.head()
+
+print("\n-------------------------------------\n")
+
+stops_excel_df = pd.read_excel("conlang_c.xlsx")
+stops_excel_df.head()
+```
+
+## Activity: 
+
+- Now read both of your newly created `.csv` and `.xlsx` files in a **pandas** `df`
+
+<!-- ## Quick Summaries -->
+
+<!-- ```python -->
+<!-- df.describe(include="all") -->
+<!-- df["family"].value_counts() -->
+<!-- df["family"].unique() -->
+<!-- ``` -->
+
+# Grouping & Aggregation
+
+## Grouping & Aggregation
+
+- Let's create a new `df`
+
+```python
+ref_df = pd.DataFrame({
+    "Language": ["Latin","Greek","Sanskrit","Gothic","OCS","Oscan"],
+    "Family":   ["Italic","Hellenic","Indic","Germanic","Slavic","Italic"],
+    "Reflexes": [8,10,12,4,3,5]
+})
 ```
 
 ## Grouping & Aggregation
 
-```python
-# Example small reflex table for demo
-ref_df = pd.DataFrame({
-    "Language": ["Latin","Greek","Sanskrit","Gothic","OCS","Latin"],
-    "Family":   ["IE","IE","IE","Germanic","Slavic","IE"],
-    "Reflexes": [8,10,12,4,3,5]
-})
+- We can use `.sum()` to add some `.Series()` together
 
+```python
 ref_df.groupby("Family")["Reflexes"].sum()
+```
+
+## Grouping & Aggregation
+
+- The method `.agg` **aggregates** -- it collects different types of mathematical operations:
+  - `.sum()` -- total reflexes per family
+  - `.mean()` -- average reflexes per family
+  - `count` -- number of languges in that family.
+
+```python
 ref_df.groupby("Family").agg(
     total=("Reflexes","sum"),
     mean=("Reflexes","mean"),
@@ -70,45 +174,50 @@ ref_df.groupby("Family").agg(
 )
 ```
 
+# Our First Visualization
 
-## Quick Visualization (optional)
+## Install one more library
+
+PC: 
 
 ```python
-# Simple bar plot (requires matplotlib to be present)
+pip install matplotlib
+```
+
+Mac:
+
+```python
+pip3 install matplotlib
+```
+
+## Creating our First Visualization
+
+```python
+import matplotlib.pyplot as plt
+
 counts = ref_df.groupby("Family")["Reflexes"].sum()
 ax = counts.plot(kind="bar", title="Reflex Counts by Family")
 ax.set_xlabel("Family")
 ax.set_ylabel("Total Reflexes")
+
+plt.tight_layout()   # optional, avoids label cutoff
+plt.show()           # displays the plot
 ```
 
-> Note: In some environments you may need:
-> ```python
-> import matplotlib.pyplot as plt
-> plt.show()
-> ```
+## Activity: Visualization
 
-## **Day 3 Activity — From Rows to Insight**
-
-Using `ref_df` (or your own small table):
-
-1. Group by `Family` and compute: total reflexes, mean reflexes, and count.
-2. Sort families by total reflexes (descending).
-3. Save the grouped summary to `family_reflexes.csv`.
-4. Make a bar plot of total reflexes by family.
+- For this activity you will:
+  - Import `conlang_c.csv` as a `df`
+  - Create a bar shart that shows the number of consonants by place of articulation
+    - For this, you'll use the `.value_counts` method
+  - Make the x axis "Place" and the y axis "Number of Consonants"
 
 ```python
-summary = (ref_df
-    .groupby("Family")["Reflexes"]
-    .agg(total="sum", mean="mean", n="count")
-    .sort_values(by="total", ascending=False)
-)
-summary
-summary.to_csv("family_reflexes.csv")
+stop_counts = df["Place"].value_counts()
 ```
 
----
 
-# Appendix — Quick Reference
+# Appendix — Reference Guide for `pd`
 
 ## Selection Cheatsheet
 
@@ -118,7 +227,7 @@ summary.to_csv("family_reflexes.csv")
 - **Cell:** `df.loc["a","col"]` or `df.iloc[0, 1]`
 - **Filter:** `df[df["col"] == value]`, `df[(cond1) & (cond2)]`
 
-## Common Ops
+## Common Operations
 
 ```python
 df.rename(columns={"old":"new"})
@@ -137,144 +246,3 @@ s1.add(s2, fill_value=0)
 pd.concat([df1, df2], axis=0, ignore_index=True)  # vertical
 pd.concat([s1, s2], axis=1)                       # side-by-side
 ```
-
----
-
-## Final Tips
-
-- Keep indices simple early on; reset with `reset_index(drop=True)` if confused.
-- Prefer unique column names and (eventually) a unique index.
-- Build intuition with *small*, *visible* examples before loading big CSVs.
-
-
-## Cleaning Data in Pandas
-
-### Why Clean?
-- Real data is messy.  
-- Clean data means:
-  - Consistent structure  
-  - Clear column names  
-  - No missing, duplicated, or mis-typed values  
-
----
-
-## Cleaning **Before** You Build a DataFrame
-
-> “If it looks messy in your list or dictionary, pandas will just mirror that mess.”
-
-## Common Pre-DF Fixes
-| Goal | Example |
-|------|----------|
-| Remove whitespace / newlines | `" word\n".strip()` |
-| Standardize capitalization | `"Word".lower()` |
-| Remove punctuation | `re.sub(r"[^\w\s]", "", text)` |
-| Split text into tokens | `text.split()` |
-| Validate list/dict lengths | `len(list)`, `list(zip(...))` |
-| Handle placeholders | Replace `"NA"`, `"None"` with `None` |
-
-🧠 *Use basic Python + regex for text cleaning.*
-
----
-
-## Cleaning **Within** the DataFrame
-
-> “Once it’s a table, use pandas tools to fix the structure.”
-
-## Useful Methods
-| Task | Example |
-|------|----------|
-| Inspect structure | `df.info()`, `df.shape`, `df.columns` |
-| Rename columns | `df.rename(columns={"old":"new"})` |
-| Drop columns or rows | `df.drop(columns=["col"])`, `df.dropna()` |
-| Fill / replace values | `df.fillna("Unknown")`, `df.replace("?", None)` |
-| Remove duplicates | `df.drop_duplicates()` |
-| Convert data types | `df["col"] = df["col"].astype(int)` |
-| String cleanup | `df["col"] = df["col"].str.strip().str.lower()` |
-| Compute new columns | `df["new"] = df["col1"] + df["col2"]` |
-| Sort and reset | `df.sort_values(["col"])`, `df.reset_index(drop=True)` |
-
----
-
-## 🧩 A Mental Model
-
-| Phase | Mindset | Tools |
-|-------|----------|-------|
-| **Before** | Clean the input | String methods, lists, dicts, `re` |
-| **Inside DF** | Clean the structure | `.rename()`, `.dropna()`, `.astype()` |
-| **After** | Analyze and summarize | `.loc`, `.sum()`, `.mean()`, `.groupby()` |
-
-
-
----
-
-## 🧭 Ten Core Methods to Remember
-
-1. `df.info()` – check structure  
-2. `df.columns` – list columns  
-3. `df.rename()` – fix column names  
-4. `df.dropna()` / `df.fillna()` – handle missing data  
-5. `df.drop_duplicates()` – remove repeats  
-6. `df.astype()` – convert data type  
-7. `df["col"].str.lower()` – text cleanup  
-8. `df.replace()` – fix placeholders  
-9. `df.sort_values()` – organize  
-10. `df.reset_index()` – tidy indices after filtering  
-
----
-
-## Key Takeaway
-
-> Python cleans **strings** and **lists**.  
-> Pandas cleans **tables**.
-
-
-
-# What You Can Do Now 🧠
-
-## Linguistic Tasks Now Possible with Pandas
-
-- ✅ **Build structured lexica**
-  - Create and modify DataFrames of words, glosses, and languages
-  - Filter or sort them instantly (no more manual loops)
-
-- ✅ **Compare data across sources**
-  - Merge two datasets (e.g., LIV + IEW)
-  - Identify missing reflexes or mismatched glosses automatically
-
-## Linguistic Tasks Now Possible with Pandas
-
-- ✅ **Quantify linguistic patterns**
-  - Count how many reflexes each family has per root
-  - Measure which morphological types are most frequent
-
-- ✅ **Clean and normalize datasets**
-  - Capitalize, strip, or standardize glosses and forms
-  - Fill in missing data (`NaN → 0`) and rename columns in bulk
-
-## Linguistic Tasks Now Possible with Pandas
-
-- ✅ **Group and summarize**
-  - Group by family, POS, or semantic field
-  - Compute totals, averages, or frequencies per category
-
-- ✅ **Visualize and export**
-  - Create quick bar charts of linguistic statistics
-  - Save clean CSVs for use in R, Excel, or later analysis
-
----
-
-## The Big Shift
-
-| Old Approach | New Approach with Pandas |
-|---------------|---------------------------|
-| Lists of strings | Structured tables |
-| Loops over words | Operations over columns |
-| Manual counting | Built-in aggregation |
-| Hard-coded comparisons | Automatic alignment by label |
-| Descriptive patterns | Quantitative insights |
-
-> ⚡ You now think like a *linguistic data scientist*:  
-> “Each row is a word; each column is a property; the DataFrame is my corpus.”
-
----
-

@@ -1,0 +1,531 @@
+---
+title: "Computation for Linguists"
+subtitle: "LaTeX, Day 3"
+date: "September 3, 2025"
+author: "Dr. Andrew M. Byrd"
+format:
+  revealjs:
+    css: header_shrink.css
+    theme: beige
+    slide-number: true
+    center: true
+    toc: true
+    toc-title: "Plan for the Day"
+    toc-depth: 1
+editor: visual
+---
+
+# Review
+
+-   What did we talk about in Friday's class?
+
+# Finishing up Citations
+
+## Additional Features: Citations
+
+-   Citations in LaTeX will refer to a .bib file
+
+-   Let's create one in our "301-LaTeX-practice" project folder
+
+-   Call this .bib file "refs.bib"
+
+## Additional Features: Your First .bib
+
+```{latex}
+@article{smith2017,
+    author = {Smith, John},
+    title = {Some paper},
+    year = {2017},
+    journal = {Journal of Research},
+    volume = {2},
+    number = {1},
+    pages = {1--69}
+}
+
+@book{knuth1986,
+  author    = "Donald E. Knuth",
+  title     = "The {TeX} Book",
+  year      = "1986",
+  publisher = "Addison-Wesley Professional",
+  address   = "Massachusetts"
+}
+```
+
+## Additional Features: Citations
+
+-   With these two references now in the system, let's practice citing them.
+
+-   Edit your preamble with the following text, after the **documentclass** command.
+
+```         
+\documentclass{article} 
+\usepackage{natbib} 
+\bibliographystyle{apalike} 
+\begin{document}
+```
+
+## Additional Features: Citations
+
+-   End your document as follows:
+
+```         
+\bibliography{refs}  
+\end{document}
+```
+
+## Additional Features: Citations
+
+```{latex}
+\documentclass{article}
+\usepackage{natbib}
+\bibliographystyle{apalike}
+
+\begin{document}
+\title{My First Document}
+\author{My Name}
+\date{December 6, 2017}
+\maketitle
+
+\section{Introduction}
+ This is the introduction.\cite{smith2017}
+\section{Methods}
+\subsection{Stage 1}
+The first part of the methods.\nocite{knuth1986}
+ \subsection{Stage 2}
+The second part of the methods.\cite[p. 215]{smith2017}
+ \section{Results}
+ Here are my results \citep{knuth1986,smith2017}.
+ 
+\bibliography{refs} 
+\end{document}
+```
+
+-   Copy the above code and run it in your project tex file.
+
+## To Do at Home: Zotero
+
+-   A *much* more user-friendly reference platform is Zotero.
+
+-   Click here to sign up for the platform or log into your account.
+
+-   Add at least one reference if you do not have one already.
+
+-   Select all of the references to export
+
+-   Click the "upwards arrow" icon
+
+-   You now have a .bib file!
+
+# LaTeX Packages
+
+-   Allow you to use LaTeX in ways beyond its base features
+
+-   "Declared" in the preamble with the command `\usepackage{packagename}`
+
+-   ***Can*** conflict with each other!
+
+    -   For this reason, the order in which you install the packages actually does matter.
+
+        -   But, why?
+
+## Loading a Package
+
+-   Copy and paste the following in your "301-LaTeX-practice" project tex file.
+-   The `lipsum` package generates placeholder text.
+
+``` latex
+\usepackage{lipsum}
+\begin{document}
+
+The \texttt{lipsum} package generates placeholder text.
+
+One paragraph of filler:
+
+\lipsum[1]
+
+Two paragraphs of filler:
+
+\lipsum[1-2]
+
+\end{document}
+```
+
+## Loading a Package that's not in Overleaf
+
+-   Let's try a different style for our "lorem ipsum" text. What happens when you load the following code?
+
+``` latex
+\documentclass{article}
+\usepackage{duckuments}
+
+\begin{document}
+% Duck-themed filler (like blindtext):
+\blindduck[1]     % 1 paragraph
+\blindduck[1-2]   % paragraphs 1–2
+\end{document}
+```
+
+## Loading a Package that's not in Overleaf
+
+-   Download <a href="duckuments.sty" download>duckuments.sty</a>.
+-   Upload this file into your project folder in Overleaf.
+-   Now run the same code as before.
+    -   What happens? What does this tell you about installing packages not automatically built into Overleaf?
+
+<!-- Make sure duckuments works!! -->
+
+## Packages: Options & Optional Arguments
+
+-   We'll be loading up a useful list package: `enumitem`
+-   Why not just use enumerate / itemize?
+    -   `itemize` = black dots, fixed indentation, spacing
+    -   `enumerate` = 1., 2., 3. ... only
+    -   changing label style (a., i., A., etc.) or margins requires redefining macros, which isn't user-friendly
+    -   vertical spacing is often too wide for handouts/homework.
+-   TLDR - your examples and lists look more professional!
+
+## Packages: Options & Optional Arguments
+
+-   Let's load up `enumitem` to see how it works
+-   Check out the customizations - can you modify the code so that the list starts with (d)?
+
+``` latex
+\documentclass{article}
+\usepackage{enumitem} % no options
+
+\begin{document}
+
+% Default enumerate
+\begin{enumerate}
+  \item Alpha
+  \item Beta
+\end{enumerate}
+
+% Customized enumerate (full label syntax)
+\begin{enumerate}[label=(\alph*), start=3, nosep, leftmargin=*]
+  \item starts at (c)
+  \item then (d)
+\end{enumerate}
+
+\end{document}
+```
+
+## Packages: Options & Optional Arguments
+
+-   `\begin{enumerate}[label=(\alph*), start=3, nosep, leftmargin=*]`
+    -   We'd have to do this for all of our lists, if we wanted to modify them accordingly.
+    -   Is there any way we can make this less clunky?
+-   Yes! Invoke some options in your package declaration.
+
+## Baseline: no package options
+
+-   Let's add the option `shortlabels` to the package.
+
+``` latex
+\documentclass{article}
+\usepackage[shortlabels]{enumitem}
+
+\begin{document}
+
+% Same effect, shorter to type:
+\begin{enumerate}[(a)] % shorthand for label=(\alph*)
+  \item alpha
+  \item beta
+\end{enumerate}
+
+% Start at (c) with shorthand:
+\begin{enumerate}[(a), start=3, nosep, leftmargin=*]
+  \item starts at (c)
+  \item then (d)
+\end{enumerate}
+
+% Other shorthands:
+\begin{enumerate}[A.]   % -> A., B., C.
+  \item First
+  \item Second
+\end{enumerate}
+
+\begin{enumerate}[i.]   % -> i., ii., iii.
+  \item One
+  \item Two
+\end{enumerate}
+\end{document}
+```
+
+<!-- ## Activity: Packages -->
+
+<!-- -   Copy and paste this code into your "301-LaTeX-practice" project tex file. -->
+
+<!--     -   **Your task**: study the code, and identify precisely what the optional arguments and commands are doing. -->
+
+<!--     -   Feel free to discuss with neighbors! -->
+
+<!-- ``` latex -->
+
+<!-- \documentclass[12pt]{article} -->
+
+<!-- % enumitem with two options declared -->
+
+<!-- \usepackage[shortlabels,inline]{enumitem} -->
+
+<!-- % Setting defaults -->
+
+<!-- \setlist[enumerate,1]{label=(\arabic*)}          % level 1: (1), (2), ... -->
+
+<!-- \setlist[enumerate,2]{label=(\alph*)}            % level 2: (a), (b), ... -->
+
+<!-- \setlist[itemize]{label=--}                      % itemize bullets are dashes -->
+
+<!-- \begin{document} -->
+
+<!-- \begin{itemize} -->
+
+<!--   \item Data: 100 speakers across 5 regions. -->
+
+<!--   \item Methods: Forced alignment \& manual checks. -->
+
+<!--   \item[\textbf{Note:}] Region 3 recordings have higher noise levels. -->
+
+<!--   \item Deliverable: 2–3 pages with plots. -->
+
+<!-- \end{itemize} -->
+
+<!-- \begin{enumerate}[start=3]             % (3), (4), ... -->
+
+<!--   \item Prepare audio -->
+
+<!--     \begin{enumerate} -->
+
+<!--       \item normalize -->
+
+<!--       \item trim silences -->
+
+<!--     \end{enumerate} -->
+
+<!--   \item Extract features -->
+
+<!-- \end{enumerate} -->
+
+<!-- % ... some text ... -->
+
+<!-- \begin{enumerate}[resume]              % continues with (5) -->
+
+<!--   \item Train model -->
+
+<!-- \end{enumerate} -->
+
+<!-- In this study we (briefly) confirm  -->
+
+<!-- \begin{enumerate*}[label=a., itemjoin={{; }}, itemjoin*={{; and }}] -->
+
+<!--   \item speaker balance -->
+
+<!--   \item region stratification -->
+
+<!--   \item license compliance -->
+
+<!-- \end{enumerate*} -->
+
+<!-- before proceeding. -->
+
+<!-- \end{document} -->
+
+<!-- ``` -->
+
+# Funny Symbols
+
+-   We're linguists, so of course we work with lots of languages and funny scripts.
+-   For instance, what do we do if we're citing French data?
+
+``` latex
+\'{a}, \`{a}, \^{a}, \c{c} --> á, à, â, ç 
+```
+
+-   Or German?
+
+``` latex
+\"{a}, \ss --> ä, ß 
+```
+
+-   **Note**: modifying diacritics work for any symbol:
+
+``` latex
+\'{h}, \"{p}, \^{g}, \c{\%}
+```
+
+## Funny Symbols: IPA
+
+-   We're going to use this idea with IPA
+-   But we've of course got to load a package for this: `tipa`
+    -   To see full instructions, download the [TIPA manual](http://www.l.u-tokyo.ac.jp/~fkr/tipa/tipaman.pdf)
+-   Let's load it up.
+
+``` latex
+\documentclass{article}
+\usepackage{tipa}
+```
+
+## Funny Symbols: IPA
+
+-   There are two ways you can use TIPA:
+
+    1.  With individual characters:
+
+    ``` latex
+    \textprimstress h\textepsilon.\textltilde\t{o\textupsilon}
+    ```
+
+    2.  Within a `\textipa` environment
+
+    ``` latex
+    \textprimstress\textipa{hE.\textltilde\t{oU}}
+    ```
+
+-   To find the symbols, check out the [TIPA manual](http://www.l.u-tokyo.ac.jp/~fkr/tipa/tipaman.pdf)
+
+## IPA Activity
+
+-   In LaTeX, type out "your first name" using the TIPA package.
+
+<!-- 1.  computer -->
+
+<!-- 2.  sleepy   -->
+
+## Funny Symbols: IPA & Other Scripts
+
+-   But what about Japanese? It's easier than you think...
+-   What happens when you run this code?
+
+``` latex
+\documentclass{article}
+\usepackage{fontspec} % lets you pick system fonts
+
+\setmainfont{Noto Serif CJK JP} % or another Japanese-capable font
+
+\begin{document}
+
+日本語の文を書いています。  % “I am writing a sentence in Japanese.”
+
+\end{document}
+```
+
+## Funny Symbols: XeLaTeX
+
+-   Click "Menu" --\> "Compiler" --\> "XeLaTeX"
+
+``` latex
+\documentclass{article}
+\usepackage{fontspec} % lets you pick system fonts
+
+\setmainfont{Noto Serif CJK JP} % or another Japanese-capable font
+
+\begin{document}
+
+日本語の文を書いています。  % “I am writing a sentence in Japanese.”
+
+\end{document}
+```
+
+## Funny Symbols: XeLaTeX and IPA
+
+-   Wait a minute... does this mean that we can use XeLaTeX with IPA symbols? See for yourself...
+
+``` latex
+\documentclass{article}
+\usepackage{fontspec}
+
+\setmainfont{Doulos SIL} % a font with good IPA coverage
+
+\begin{document}
+
+ˈkʰæn ju ˈkɑpi ən ˈpeɪst ðɪs ˈsɛntəns ˈɪntu ˈoʊvɚˌlif
+
+\end{document}
+```
+
+# Phonological Rules
+
+-   In Linguistics, we invoke sounds in talking about how they are used in language
+-   And frequently, this means talking about phonological rules, which looks like:
+
+![](4_phon_rules.png){fig-alt="5 phonological rules" fig-align="center" width="1200"}
+
+## Phonological Rules in LaTeX
+
+-   To create phonological rules we'll be using the `phonrule` package
+
+``` latex
+\documentclass{article}
+\usepackage{phonrule} #phonological rule package
+\usepackage{tipa}
+
+\begin{document}
+\begin{enumerate} 
+\item \phonb{s}{z}{V}{V} (\textbackslash phonb) 
+\item \phonl{k}{c}{i} (\textbackslash phonl) 
+\item \phonr{t}{ts}{u} (\textbackslash phonr) 
+\item \phon{\textturnw}{w} (\textbackslash phon) 
+\item \phonb{\phonfeat{+stop \\ +consonant \\ +alveolar}}{[\textfishhookr]}{ \phonfeat{+vowel \\ +stressed}}{\phonfeat{+vowel \\ +stressed}} 
+\end{enumerate}
+\end{document}
+```
+
+## Phonology Activity
+
+-   Now it's your turn! Let's analyze this small sample of invented data together, and then render a phonological rule in LaTeX that describes the alternation.
+
+| 1[sg]{.smallcaps} | 2[sg]{.smallcaps} | 3[sg]{.smallcaps} |
+|-------------------|-------------------|-------------------|
+| pagis             | pagat             | pak               |
+| tabis             | tabat             | tap               |
+| zobis             | zobat             | zop               |
+| bagis             | bagat             | bag               |
+| zudis             | zudat             | zud               |
+
+## An Aside: Doing Optimality Theory (OT) in LaTeX
+
+![](4_OT_ex.png){fig-alt="Optimality Theory examples" fig-align="center"}
+
+## OT Tableaux
+
+<http://meluhha.com/tableau/>
+
+## OT Tableaux
+
+``` latex
+\documentclass{article}
+\usepackage{tipa}    %for ipa
+\usepackage[table]{xcolor}    %for shading*
+\usepackage{pifont}    %for pointing hand
+\usepackage{arydshln}    %for dashed lines
+\usepackage{rotating}    %for angled text
+
+\begin{document}
+
+\begin{table}[h]
+  \centering
+  \renewcommand{\arraystretch}{1.2}
+  \setlength{\tabcolsep}{6pt}
+
+  \begin{tabular}{|rrl||*{3}{c|}}
+    \hline
+    \multicolumn{3}{|c||}{\textipa{/tup/}} &
+      \rotatebox{45}{NoCoda} &
+      \rotatebox{45}{Dep-V}  &
+      \rotatebox{45}{Max-C}  \\
+    \hline\hline
+    a. &        & \textipa{tup}  & $\ast$! & \cellcolor{lightgray} & \cellcolor{lightgray} \\
+    \hline
+    b. & \ding{43} & \textipa{tu}   &         &                       & \cellcolor{lightgray}$\ast$ \\
+    \hline
+    c. &        & \textipa{tupi} &         & $\ast$!               & \cellcolor{lightgray} \\
+    \hline
+  \end{tabular}
+
+  \renewcommand{\arraystretch}{1}
+\end{table}
+
+\end{document}
+```
+
+<!-- # Activity Answers -->
