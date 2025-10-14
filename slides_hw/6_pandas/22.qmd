@@ -1,0 +1,51 @@
+---
+title: "Computation for Linguists"
+subtitle: "Activity Day: Detective Gutenberg, Day 2"
+date: "October 15, 2025"
+author: "Dr. Andrew M. Byrd"
+format:
+  revealjs:
+    css: header_shrink.css
+    theme: beige
+    slide-number: true
+    center: true
+    toc: true
+    toc-title: "Plan for the Day"
+    toc-depth: 1
+jupyter: python3
+editor: source
+---
+
+# Review
+
+# Activity: Detective Gutenberg
+
+## Detective Gutenberg
+
+**Goal:** discover what makes an author’s writing style distinctive using the Python tools you already know. 
+
+  - If you don't remember how to do something, revisit past lectures.
+
+**Last time:**
+ 
+ - Downloaded two files, loaded & cleaned them.
+ - Counted how many words there were (total \& unique).
+
+**Today, you'll:**
+  
+- Measure style and print up the results.
+
+## Overview of Activity — Explore the Data
+
+2. What is the **average word length**?
+3. How many **adverbs** are there? Pick **three other affixes** to investigate.
+4. How much **dialogue** is there? (Use `quot_list = ['"', '“', '”']`)
+5. What are the **most common words** (excluding “the,” “and,” “of”)? Arrange your values with `sorted(dict_name.items(), key=lambda x: x[1], reverse=True)`
+
+## If You Finish Early
+
+- Add a third author (Dickens, Poe, Twain)  
+- Feel free to add yourself as the third author!
+
+## Go for it!
+

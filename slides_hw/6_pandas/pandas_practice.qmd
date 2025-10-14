@@ -136,3 +136,22 @@ for c in sound_comb:
       print(c)
 # total_fric = sound_comb["s"].add(sound_comb["z"])
 ```
+
+```{python}
+name = "Bob, Susie, Jimbo"
+prof = "teacher, doctor, lawyer"
+age = "45, 63, 119"
+```
+
+```{python}
+name_split = name.split(",")
+prof_split = prof.split(",")
+age_split = age.split(",")
+```
+
+```{python}
+import pandas as pd
+
+recap_df = pd.DataFrame([prof_split, age_split], columns=name_split)
+print(recap_df)
+```

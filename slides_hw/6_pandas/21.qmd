@@ -1,0 +1,61 @@
+---
+title: "Computation for Linguists"
+subtitle: "Activity Day: Detective Gutenberg"
+date: "October 13, 2025"
+author: "Dr. Andrew M. Byrd"
+format:
+  revealjs:
+    css: header_shrink.css
+    theme: beige
+    slide-number: true
+    center: true
+    toc: true
+    toc-title: "Plan for the Day"
+    toc-depth: 1
+jupyter: python3
+editor: source
+---
+
+# Review
+
+
+# Activity: Detective Gutenberg
+
+## Detective Gutenberg
+
+**Goal:** discover what makes an author’s writing style distinctive using the Python tools you already know. 
+
+  - If you don't remember how to do something, revisit past lectures.
+
+**Today, you'll:**
+  
+1. Download two novels of your choice from Project Gutenberg
+2. Load & clean the texts
+3. Counts how many words there are in total, and how many unique words there are.
+
+## Overview of Activity — Setup
+
+- Create a new `qmd`, called `gut_detective`. 
+- Choose *any* **two novels** from [Project Gutenberg](https://www.gutenberg.org/), and download them using Python.
+  - Use simple filenames (such as `alice.txt`)
+- Manually edit your `txt` files, deleting any Project Gutenberg headers & footers (that aren't part of the book text itself)
+
+## Overview of Activity — Read & Clean
+
+- Read both files, and assign each to a clear variable name.
+- Split the words up, cleaning whitespace and punctuation. Make all words lowercase as well.
+
+## Overview of Activity — Explore the Data
+
+1. How many words are there **in total**? How many **unique** words?
+2. What is the **average word length**?
+3. How many **adverbs** are there? Pick **three other affixes** to investigate.
+4. How much **dialogue** is there? (Use `quot_list = ['"', '“', '”']`)
+5. What are the **most common words** (excluding “the,” “and,” “of”)? Arrange your values with `sorted(dict_name.items(), key=lambda x: x[1], reverse=True)`
+
+## If You Finish Early
+
+- Add a third author (Dickens, Poe, Twain)  
+- Feel free to add yourself as the third author!
+
+## Go for it!
