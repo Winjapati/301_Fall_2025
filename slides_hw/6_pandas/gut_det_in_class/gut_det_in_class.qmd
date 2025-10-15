@@ -31,26 +31,6 @@ alice_clean = [w.lower() for w in alice_words]
 print(mans_clean[:50], "\n --------------------------------------- \n", alice_clean[:50])
 ```
 
-```{python}
-print(len(mans_clean), len(alice_clean))
-
-mans_unique = []
-alice_unique = []
-
-for wd in mans_clean:
-    if wd not in mans_unique:
-      mans_unique.append(wd)
-
-print(len(mans_unique))
-
-```
-
-```{python}
-
-for wd in alice_clean:
-    print(len(wd))
-```
-
 ## How words total? How many unique words?
 
 ```{python}
