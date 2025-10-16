@@ -1,0 +1,48 @@
+---
+title: "HW4_Campen_CJ"
+format: html
+---
+
+```{python}
+with open("./conlang.txt", "r", encoding="utf-8") as f:
+    text = f.read()
+```
+
+```{python}
+import re
+
+words_all = re.split(r"[\s\W]+", text) 
+words_all = [w.lower() for w in words_all if w]
+print(words_all)
+```
+
+```{python}
+words_all[:15]
+```
+
+```{python}
+vowels = set("aeiouɜ")
+
+words_v = []
+words_no_v = []
+
+for word in words_all:
+  if any(ch in vowels for ch in word):
+    words_v.append(word)
+  elif any(ch not in vowels for ch in word):
+    words_no_v.append(word)
+    
+print("Words with vowels:", words_v)
+print("Words without vowels:", words_no_v)
+```
+
+```{python}
+print("First 30 words (with vowels):")
+print(words_v[:30])
+print()
+
+print("Counts:")
+print("  total tokens after edge-punct clean:", len(words_all))
+print("  kept (has ≥1 vowel):", len(words_v))
+print("  removed (no vowels):", len(words_no_v))
+```

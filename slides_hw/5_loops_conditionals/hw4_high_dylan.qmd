@@ -1,0 +1,46 @@
+```{python}
+# 1) Load the raw text
+with open("conlang.txt", "r", encoding="utf-8") as f:
+    text = f.read()
+
+import re
+
+words = re.split(r"[\s\W]+", text)
+
+vowela = "a"
+vowele = "e"
+voweli = "i"
+vowelo = "o"
+vowelu = "u"
+vowelɜ = "ɜ"
+
+words_v = []
+words_no_v = []
+
+cleaned_words = [word.strip().lower() for word in words]
+
+for cleaned_word in cleaned_words:
+    if vowela in cleaned_word:
+        words_v.append(cleaned_word)
+    elif vowele in cleaned_word:
+        words_v.append(cleaned_word)
+    elif voweli in cleaned_word:
+        words_v.append(cleaned_word)
+    elif vowelo in cleaned_word:
+        words_v.append(cleaned_word)
+    elif vowelu in cleaned_word:
+        words_v.append(cleaned_word)
+    elif vowelɜ in cleaned_word:
+        words_v.append(cleaned_word)
+    else:
+        words_no_v.append(cleaned_word)
+
+print("First 30 words (with vowels):")
+print(words_v[:30])
+print()
+
+print("Counts:")
+print("  total tokens after edge-punct clean:", len(words_all))
+print("  kept (has ≥1 vowel):", len(words_v))
+print("  removed (no vowels):", len(words_no_v))
+```

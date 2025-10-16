@@ -1,0 +1,49 @@
+------------------------------------------------------------------------
+
+title: "HW4_Lopezcastano_Melanie"
+
+------------------------------------------------------------------------
+
+**Step 1 - Load the Text**
+
+```{python}
+# 1) Load the raw text
+with open("conlang.txt", "r", encoding="utf-8") as f:
+    conlang_text = f.read()
+```
+
+**Step 2 - Normalize + Split**
+
+```{python}
+import re
+words_all = re.split(r"\W+", conlang_text.lower())
+words_all = [w for w in words_all if w]
+words_all[:15]
+```
+
+**Step 3 - Filter Out Words By Vowel**
+
+```{python}
+vowels = set("aeiouɜ")
+words_v = []
+words_no_v = []
+
+for wd in words_all:
+  if any(ch in vowels for ch in wd):
+    words_v.append(wd)
+  else:
+    words_no_v.append(wd)
+```
+
+**Step 4 - Verify**
+
+```{python}
+print("First 30 words (with vowels):")
+print(words_v[:30])
+print()
+
+print("Counts:")
+print("  total tokens after edge-punct clean:", len(words_all))
+print("  kept (has ≥1 vowel):", len(words_v))
+print("  removed (no vowels):", len(words_no_v))
+```

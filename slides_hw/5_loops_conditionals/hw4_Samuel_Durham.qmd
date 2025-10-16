@@ -1,0 +1,50 @@
+---
+title: "hw4_Samuel_Durham"
+format: html
+---
+
+## Import the Conlang List
+
+```{python}
+# 1) Load the raw text
+with open("./conlang.txt", "r", encoding="utf-8") as f:
+    text = f.read()
+```
+
+## Splitting into Workable Strings
+
+```{python}
+import re
+list_all = re.split(r"\W+", text)
+for i in range(0,len(list_all)-1):
+  list_all[i] = list_all[i].lower()
+
+
+words_all = [w for w in list_all if w]
+print(words_all[:15])
+```
+
+## Filter by Vowels
+
+```{python}
+words_v = []
+words_no_v = []
+vowels = set("aɜeiou")
+
+for word in words_all:
+    if any(ch in vowels for ch in word):
+        words_v.append(word)
+    else:
+        words_no_v.append(word)
+```
+
+```{python}
+print("First 30 words (with vowels):")
+print(words_v[:30])
+print()
+
+print("Counts:")
+print("  total tokens after edge-punct clean:", len(words_all))
+print("  kept (has ≥1 vowel):", len(words_v))
+print("  removed (no vowels):", len(words_no_v))
+```
