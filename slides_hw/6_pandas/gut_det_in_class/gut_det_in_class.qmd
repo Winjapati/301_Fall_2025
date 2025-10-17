@@ -7,11 +7,13 @@ format: html
 
 ```{python}
 
-with open("mansfield_park.txt", "r", encoding="utf-8") as f:
-    mans = f.read()
+with open("rom.txt", "r", encoding="utf-8") as f:
+    rom = f.read()
     
-with open("alice.txt", "r", encoding="utf-8") as f:
-    alice = f.read()
+with open("med.txt", "r", encoding="utf-8") as f:
+    med = f.read()
+    
+print(rom[:100], med[:100])
 ```
 
 ## Split words up, cleaning whitespace & punctuation. Make lowercase.
@@ -20,39 +22,40 @@ with open("alice.txt", "r", encoding="utf-8") as f:
 
 import re
 
-mans_words = re.split(r"[\s\W]+", mans)
-mans_words = [w for w in mans_words if w]
-mans_clean = [w.lower() for w in mans_words]
+rom_words = re.split(r"[\s\W]+", rom)
+rom_clean = [w.lower() for w in rom_words if w]
+# rom_clean = [w.lower() for w in rom_words]
 
-alice_words = re.split(r"[\s\W]+", alice)
-alice_words = [w for w in alice_words if w]
-alice_clean = [w.lower() for w in alice_words]
+med_words = re.split(r"[\s\W]+", med)
+med_clean = [w.lower() for w in med_words if w]
+# med_clean = [w.lower() for w in med_words]
 
-print(mans_clean[:50], "\n --------------------------------------- \n", alice_clean[:50])
+print(rom_clean[:50], "\n --------------------------------------- \n", med_clean[:50])
 ```
 
 ## How words total? How many unique words?
 
 ```{python}
 
+# print("There are", len(rom_clean), "words in Mansfield Park.txt")
+# print("There are", len(med_clean), "words in Alice in Wonderland.txt")
 
-print("There are", len(mans_clean), "words in Mansfield Park.txt")
-print("There are", len(alice_clean), "words in Alice in Wonderland.txt")
+print(f"There are {len(rom_clean)} words in Roman Empire. There are {len(med_clean)} words in Mediaeval Church")
 
-unique_mans = []
+unique_rom = []
 
-for wd in mans_clean:
-    if wd not in unique_mans:
-        unique_mans.append(wd)
+for wd in rom_clean:
+    if wd not in unique_rom:
+        unique_rom.append(wd)
 
-unique_alice = []
+unique_med = []
 
-for wd in alice_clean:
-    if wd not in unique_alice:
-        unique_alice.append(wd)
+for wd in med_clean:
+    if wd not in unique_med:
+        unique_med.append(wd)
 
-print("There are", len(unique_mans), "unique words in Mansfield Park.txt")
-print("There are", len(unique_alice), "unique words in Alice in Wonderland.txt")
+print("There are", len(unique_rom), "unique words in Roman Empire.txt")
+print("There are", len(unique_med), "unique words in Mediaeval Church.txt")
 
 
 ```
@@ -61,17 +64,20 @@ print("There are", len(unique_alice), "unique words in Alice in Wonderland.txt")
 
 ```{python}
 
-mans_len = 0
-alice_len = 0
+rom_len = 0
+med_len = 0
 
-for wd in mans_clean:
-    mans_len += len(wd)
+for wd in rom_clean:
+    # rom_len += len(wd)
+    rom_len = rom_len + len(wd)
+    
+for wd in med_clean:
+    med_len += len(wd)
 
-for wd in alice_clean:
-    alice_len += len(wd)
+print(rom_len, med_len)
 
-print("The average word length in Mansfield Park is", mans_len / len(mans_clean), "letters.")
-print("The average word length in Alice in Wonderland is", alice_len / len(alice_clean), "letters.")
+print("The average word length in Roman Empire is", rom_len / len(rom_clean), "letters.")
+print("The average word length in Mediaeval Church is", med_len / len(med_clean), "letters.")
 
 ```
 
@@ -79,41 +85,41 @@ print("The average word length in Alice in Wonderland is", alice_len / len(alice
 
 ```{python}
 
-adv_count_mans = 0
-wise_count_mans = 0
-pst_count_mans = 0
-pre_count_mans = 0
+adv_count_rom = 0
+wise_count_rom = 0
+pst_count_rom = 0
+pre_count_rom = 0
 
-for wd in mans_clean:
+for wd in rom_clean:
     if wd.endswith("ly"):
-      adv_count_mans += 1
+      adv_count_rom += 1
     elif wd.endswith("wise"):
-      wise_count_mans += 1
+      wise_count_rom += 1
     elif wd.endswith("ed"):
-      pst_count_mans += 1
+      pst_count_rom += 1
     elif wd.startswith("pre"):
-      pre_count_mans += 1
+      pre_count_rom += 1
 
-print("In Mansfield Park, there are: \n", adv_count_mans,"adverbs in '-ly'\n", wise_count_mans, "forms ending in '-wise'\n", pst_count_mans, "past tense forms in '-ed'\n", "and", pre_count_mans, "forms prefixed with 'pre-'")
+print("In Roman Empire, there are: \n", adv_count_rom,"adverbs in '-ly'\n", wise_count_rom, "forms ending in '-wise'\n", pst_count_rom, "past tense forms in '-ed'\n", "and", pre_count_rom, "forms prefixed with 'pre-'")
 
 print("\n---------------------------------------------------\n")
 
-adv_count_alice = 0
-wise_count_alice = 0
-pst_count_alice = 0
-pre_count_alice = 0
+adv_count_med = 0
+wise_count_med = 0
+pst_count_med = 0
+pre_count_med = 0
 
-for wd in alice_clean:
+for wd in med_clean:
     if wd.endswith("ly"):
-      adv_count_alice += 1
+      adv_count_med += 1
     elif wd.endswith("wise"):
-      wise_count_alice += 1
+      wise_count_med += 1
     elif wd.endswith("ed"):
-      pst_count_alice += 1
+      pst_count_med += 1
     elif wd.startswith("pre"):
-      pre_count_alice += 1
+      pre_count_med += 1
 
-print("In Alice, there are: \n", adv_count_alice,"adverbs in '-ly'\n", wise_count_alice, "forms ending in '-wise'\n", pst_count_alice, "past tense forms in '-ed'\n", "and", pre_count_alice, "forms prefixed with 'pre-'")
+print("In Mediaeval Church, there are: \n", adv_count_med,"adverbs in '-ly'\n", wise_count_med, "forms ending in '-wise'\n", pst_count_med, "past tense forms in '-ed'\n", "and", pre_count_med, "forms prefixed with 'pre-'")
 ```
 
 ## How much dialogue is there?
@@ -145,28 +151,28 @@ print("There are", alice_quot_count / 2, "instances of dialogue in Alice in Wond
 ## What are the most common words (excluding "the", "and", and "of"?)
 
 ```{python}
-word_counts_alice = {}
-word_counts_mans = {}
+word_counts_med = {}
+word_counts_rom = {}
 bad_words = ["the", "and", "of"]
 
-for wd in mans_clean:
+for wd in rom_clean:
     if wd in bad_words:
         pass
-    elif wd in word_counts_mans:              
-        word_counts_mans[wd] = word_counts_mans[wd] + 1
+    elif wd in word_counts_rom:              
+        word_counts_rom[wd] += 1
     else:                              
-        word_counts_mans[wd] = 1
-sort_mans = sorted(word_counts_mans.items(), key=lambda x: x[1], reverse=True)
+        word_counts_rom[wd] = 1
+sort_rom = sorted(word_counts_rom.items(), key=lambda x: x[1], reverse=True)
 
-for wd in alice_clean:
+for wd in med_clean:
     if wd in bad_words:
         pass
-    elif wd in word_counts_alice:              
-        word_counts_alice[wd] = word_counts_alice[wd] + 1
+    elif wd in word_counts_med:              
+        word_counts_med[wd] += 1
     else:                              
-        word_counts_alice[wd] = 1
-sort_alice = sorted(word_counts_alice.items(), key=lambda x: x[1], reverse=True)
+        word_counts_med[wd] = 1
+sort_med = sorted(word_counts_med.items(), key=lambda x: x[1], reverse=True)
 
-print("The most common 20 words in Mansfield Park are:", sort_mans[:20])
-print("The most common 20 words in Alice are:", sort_alice[:20])
+print("The most common 20 words in Roman Empire are:", sort_rom[:20])
+print("The most common 20 words in Mediaeval Church are:", sort_med[:20])
 ```
