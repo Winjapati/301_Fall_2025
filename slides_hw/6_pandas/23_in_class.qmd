@@ -1,0 +1,47 @@
+---
+title: "23_in_class"
+format: html
+---
+
+# Review Activity
+
+``` {python}
+word = "computation"
+vowels = "aeiou"
+
+for c in word:
+    if c in vowels:
+        print(c, "is a vowel.")
+    else:
+        print(c, "is not a vowel.")
+```
+
+## Phonemic Inventory Pandas Activity
+
+``` {python}
+import pandas as pd
+
+phon_inv = pd.DataFrame({
+    "sound" : ["p","b","t","d","s","h"],
+    "voicing": ["voiceless", "voiced", "voiceless", "voiced", "voiceless", "voiceless"],
+    "place": ["bilabial", "bilabial", "alveolar", "alveolar", "alveolar", "glottal"],
+    "manner": ["stop", "stop", "stop", "stop", "fricative", "fricative"]})
+
+print(phon_inv)
+```
+
+## DF Activity
+
+``` {python}
+import pandas as pd
+# Create new DF
+new_info = pd.DataFrame({
+    "Location": ["France", "Spain", "Italy", "England"],
+    "Speakers_millions": [80, 485, 65, 380],
+    "Writing_System": ["Latin", "Latin", "Latin", "Latin"],
+    "ISO_code": ["fra", "spa", "ita", "eng"]
+})
+# Concatenate horizontally
+lang_updated = pd.concat([lang_df, new_info], axis=1)
+
+print(lang_updated)
