@@ -1,0 +1,58 @@
+---
+title: "HW4_Luthje_Dom"
+format: html
+---
+
+```{python}
+
+with open("conlang.txt", "r", encoding="utf-8") as f:
+    text = f.read()
+
+# Preview first 8000 characters
+print(text[:8000])
+
+```
+
+```{python}
+import re
+
+# Normalize text: convert to lowercase
+text_lower = text.lower()
+
+# Split text using regex (\W+ matches any sequence of non-word characters)
+words_all = re.split(r'\W+', text_lower)
+
+# Remove any blank strings
+words_all = [w for w in words_all if w]
+
+# Verify: show the first 15 words
+words_all[:15]
+
+```
+
+```{python}
+vowels = set("aeiouꞫɜʔ")  
+
+words_v = []      # words that contain at least one vowel
+words_no_v = []   # words that contain no vowels
+
+for wd in words_all:
+    if any(ch in vowels for ch in wd):
+        words_v.append(wd)
+    else:
+        words_no_v.append(wd)
+
+print("First 15 words with vowels:", words_v[:15])
+print("First 15 words without vowels:", words_no_v[:15])
+```
+
+```{python}
+print("First 30 words (with vowels):")
+print(words_v[:30])
+print()
+
+print("Counts:")
+print("  total tokens after edge-punct clean:", len(words_all))
+print("  kept (has ≥1 vowel):", len(words_v))
+print("  removed (no vowels):", len(words_no_v))
+```

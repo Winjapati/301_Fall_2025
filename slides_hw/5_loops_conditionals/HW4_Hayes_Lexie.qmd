@@ -1,0 +1,46 @@
+---
+title: "HW4_Hayes_Lexie"
+format: html
+---
+
+```{python}
+with open("/Users/lefie/301/hw4_files/conlang.txt") as f:
+    text = f.read()
+    
+print(text)
+```
+
+```{python}
+import re
+
+words_all = re.split(r"[\s\W]+", text.lower().strip()) 
+words_all = [w for w in words_all if w] 
+
+print(words_all[:15])
+```
+
+```{python}
+vowels = set("aeiouɜ")
+words_v = []
+words_no_v = []
+
+for word in words_all:
+    if any(ch in vowels for ch in word):
+        words_v.append(word)
+    else:
+        words_no_v.append(word)
+    
+print("Words with vowels:", words_v)
+print("Words without vowels:", words_no_v)
+```
+
+```{python}
+print("First 30 words (with vowels):")
+print(words_v[:30])
+print()
+
+print("Counts:")
+print("  total tokens after edge-punct clean:", len(words_all))
+print("  kept (has ≥1 vowel):", len(words_v))
+print("  removed (no vowels):", len(words_no_v))
+```

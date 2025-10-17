@@ -1,0 +1,32 @@
+---
+title: "HW4"
+format: html
+---
+
+```{python}
+import re
+with open("conlang.txt", "r", encoding="utf-8") as f:
+    text = f.read()
+
+words = re.split(r"[\s\W]+", text)
+words_all = [word.strip().lower() for word in words]
+
+words_v = []
+words_no_v = []
+vowels = set("aɜeiou")
+
+for word in words_all:
+  if any(ch in vowels for ch in word): 
+    words_v.append(word)
+  else: 
+    words_no_v.append(word)
+
+print("First 30 words (with vowels):")
+print(words_v[:30])
+print()
+
+print("Counts:")
+print("  total tokens after edge-punct clean:", len(words_all))
+print("  kept (has ≥1 vowel):", len(words_v))
+print("  removed (no vowels):", len(words_no_v))
+```

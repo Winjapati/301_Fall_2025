@@ -1,0 +1,40 @@
+---
+title: "hw4"
+format: html
+---
+
+```{python}
+# 1) Load the raw text
+with open("conlang.txt", "r", encoding="utf-8") as f:
+    text = f.read()
+    
+#print(text) 
+
+words_all = [w.lower() for w in text.split()]
+print(words_all[:15])
+
+vowels = {"a", "e", "i", "o", "u" , "ɜ"}    
+
+# find all of the vowels in the conlang, and list them here.
+
+words_v = []
+words_no_v = []
+
+for wd in words_all:
+  if any(chr in vowels for chr in wd):
+    words_v.append(wd)
+  else:
+    words_no_v.append(wd)
+    
+print("-------") #to help clean up printed space
+    
+print("First 30 words (with vowels):")
+print(words_v[:30])
+print()
+
+print("Counts:")
+print("  total tokens after edge-punct clean:", len(words_all))
+print("  kept (has ≥1 vowel):", len(words_v))
+print("  removed (no vowels):", len(words_no_v))
+
+```

@@ -1,0 +1,45 @@
+---
+title: "HW4_Smith_Casey"
+format: html
+editor: visual
+---
+
+```{python}
+import re
+
+with open('conlang.txt', 'r') as file:
+    words_all = [w for w in re.split(r'\W+', file.read().lower().strip()) if w]
+    words_all[:15]
+```
+
+```{python}
+with open("conlang.txt", "r", encoding="utf-8") as f:
+    text = f.read()
+
+vowels = set("aeiouɜꞫAEIOU")   
+
+tokens = text.split()
+
+words_v = []       
+words_no_v = []    
+
+for wd in tokens:
+    if any(ch in vowels for ch in wd):
+        words_v.append(wd)
+    else:
+        words_no_v.append(wd)
+
+print("Tokens with vowels:", len(words_v))
+print("Tokens without vowels:", len(words_no_v))
+```
+
+```{python}
+print("First 30 words (with vowels):")
+print(words_v[:30])
+print()
+
+print("Counts:")
+print("  total tokens after edge-punct clean:", len(words_all))
+print("  kept (has ≥1 vowel):", len(words_v))
+print("  removed (no vowels):", len(words_no_v))
+```

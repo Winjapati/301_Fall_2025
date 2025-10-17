@@ -1,0 +1,196 @@
+---
+title: "23_in_class"
+format: html
+---
+
+
+```{python}
+word = "computation"
+vowels = ["a", "e", "i", "o", "u"]
+
+for c in word: 
+  if c in vowels:
+    print(f"{c} is a vowel.")
+  else:
+    print(c, "is not a vowel.")
+```
+
+```{python}
+import pandas as pd
+
+langs = pd.Series(["Latin", "Greek", "Sanskrit"], name="language")
+langs
+```
+
+```{python}
+import pandas as pd
+
+langs = pd.Series(["Latin", "Greek", "Sanskrit", "Finnish"], index=["a","b","c","d"], name="language")
+langs
+```
+```{python}
+import pandas as pd
+
+lang_df = pd.DataFrame(langs)
+lang_df
+```
+
+```{python}
+import pandas as pd
+
+fam = pd.Series(["Indo-European", "Indo-European", "Indo-European", "Uralic"], index=["a","b","c","d"], name="family")
+fam
+```
+
+```{python}
+import pandas as pd
+speakers = pd.Series([0, 0, 0, 6], index=["a","b","c","d"], name="speakers_millions")
+speakers
+```
+
+
+
+```{python}
+import pandas as pd
+
+langs = pd.Series(["Latin", "Greek", "Sanskrit", "Finnish"], index=["a","b","c","d"], name="language")
+fam = pd.Series(["Indo-European", "Indo-European", "Indo-European", "Uralic"], index=["a","b","c","d"], name="family")
+speakers = pd.Series([0, 0, 0, 6], index=["a","b","c","d"], name="speakers_millions")
+
+languages_df = pd.concat([langs, fam, speakers], axis=1)
+print(languages_df)
+```
+
+```{python}
+import pandas as pd
+
+location = pd.Series(["Italy", "Greece", "India", "Finland"], index=["a","b","c","d"], name="location")
+new_df = pd.concat([languages_df, location], axis=1)
+
+new_df
+```
+
+
+```{python}
+import pandas as pd
+
+fresh_df = pd.DataFrame({
+    "language": ["Latin", "Greek", "Sanskrit", "Finnish"],
+    "family":   ["Indo-European", "Indo-European", "Indo-European", "Uralic"],
+    "speakers_millions": [0, 0, 0, 6],
+    "location": ["Italy", "Greece", "India", "Finland"]
+}, index=["a","b","c","d"])
+print(fresh_df)
+```
+
+
+
+
+
+
+
+
+
+
+# Review Activity
+
+``` {python}
+word = "computation"
+vowels = "aeiou"
+
+for c in word:
+    if c in vowels:
+        print(c, "is a vowel.")
+    else:
+        print(c, "is not a vowel.")
+```
+
+## Phonemic Inventory Pandas Activity
+
+``` {python}
+import pandas as pd
+
+phon_inv = pd.DataFrame({
+    "sound" : ["p","b","t","d","s","h"],
+    "voicing": ["voiceless", "voiced", "voiceless", "voiced", "voiceless", "voiceless"],
+    "place": ["bilabial", "bilabial", "alveolar", "alveolar", "alveolar", "glottal"],
+    "manner": ["stop", "stop", "stop", "stop", "fricative", "fricative"]})
+
+print(phon_inv)
+```
+
+```{python}
+import pandas as pd
+
+languages = {
+    "French": ["Romance"],
+    "Spanish": ["Romance"],
+    "Italian": ["Romance"],
+    "English": ["Germanic"]
+}
+lang_df = pd.DataFrame(languages)
+print(lang_df)
+```
+```{python}
+import pandas as pd
+
+languages = {
+    "French": ["Romance", 1, "b"],
+    "Spanish": ["Romance", 1, "c"],
+    "Italian": ["Romance", 4, "a"],
+    "English": ["Germanic", 10, "x"]
+}
+lang_df = pd.DataFrame(languages)
+print(lang_df)
+```
+
+```{python}
+import pandas as pd
+
+languages = {
+    "French": "Romance",
+    "Spanish": "Romance",
+    "Italian": "Romance",
+    "English": "Germanic"
+}
+
+lang_df = pd.DataFrame.from_dict(languages, orient="index", columns=["Family"])
+print(lang_df)
+```
+
+
+
+
+```{python}
+import pandas as pd
+
+languages = {
+    "French": "Romance",
+    "Spanish": "Romance",
+    "Italian": "Romance",
+    "English": "Germanic"
+}
+
+lang_df = pd.DataFrame(list(languages.items()), columns=["Language", "Family"])
+print(lang_df)
+```
+
+
+
+
+
+## DF Activity
+
+``` {python}
+import pandas as pd
+# Create new DF
+new_info = pd.DataFrame({
+    "Location": ["France", "Spain", "Italy", "England"],
+    "Speakers_millions": [80, 485, 65, 380],
+    "Writing_System": ["Latin", "Latin", "Latin", "Latin"],
+    "ISO_code": ["fra", "spa", "ita", "eng"]
+})
+# Concatenate horizontally
+lang_updated = pd.concat([lang_df, new_info], axis=1)
+
+print(lang_updated)
