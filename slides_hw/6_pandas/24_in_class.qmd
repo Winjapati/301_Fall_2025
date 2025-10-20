@@ -1,0 +1,209 @@
+---
+title: "24_in_class"
+format: html
+---
+
+```{python}
+import pandas as pd
+
+languages = {
+    "French": "Romance",
+    "Spanish": "Romance",
+    "Italian": "Romance",
+    "English": "Germanic"
+}
+
+lang_df = pd.DataFrame(list(languages.items()), columns=["Language", "Family"])
+
+# Create new DF
+new_info = pd.DataFrame({
+    "Location": ["France", "Spain", "Italy", "England"],
+    "Speakers_millions": [80, 485, 65, 380],
+    "Writing_System": ["Latin", "Latin", "Latin", "Latin"],
+    "ISO_code": ["fra", "spa", "ita", "eng"]
+})
+# Concatenate horizontally
+lang_updated = pd.concat([new_info, lang_df], axis=1)
+
+print(lang_updated)
+```
+
+```{python}
+import pandas as pd
+
+fresh_df = pd.DataFrame({
+      "Root" : ["*bʰer-", "*ĝenh1-", "*ped-", "*doh₃-"],
+      "Meaning" : ["‘to carry’", "'to beget'", "'foot'", "'to give'"],
+      "Latin"	: ["ferō", "gignō", "pēs", "dō"],
+      "Greek"	: ["pʰérō", "gígnomai", "poús", "dídōmi"],
+      "English" :  ["bear", "kin", "foot", "donate"]
+})
+
+fresh_df
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Review Activity
+
+```{python}
+import pandas as pd
+
+roots = {
+    "Root": ["*bher-", "*gen-", "*ped-", "*dō-"],
+    "Meaning": ["carry", "beget", "foot", "give"],
+    "Latin": ["fero", "gigno", "pes", "do"],
+    "Greek": ["phérō", "gígnomai", "poús", "dídōmi"],
+    "English": ["bear", "kin", "foot", "donate"]
+}
+
+pie_df = pd.DataFrame(roots)
+print(pie_df)
+```
+
+```{python}
+import pandas as pd
+
+fresh_df = pd.DataFrame({
+    "language": ["Latin", "Greek", "Sanskrit", "Finnish"],
+    "family":   ["Indo-European", "Indo-European", "Indo-European", "Uralic"],
+    "speakers_millions": [0, 0, 0, 6],
+    "location": ["Italy", "Greece", "India", "Finland"]
+})
+
+print(fresh_df)
+```
+
+
+```{python}
+import pandas as pd 
+
+fresh_df.head(2) 
+print("-------------")
+fresh_df.tail(2) 
+print("-------------")
+fresh_df.shape
+print("-------------")
+fresh_df.columns
+print("-------------")
+fresh_df.index
+print("-------------")
+fresh_df.info()
+```
+
+```{python}
+fresh_df.iloc[0]               # first row
+fresh_df.iloc[1:3]             # slice rows 1..2
+```
+
+```{python}
+# Rows by label (after we set a custom index)
+df2 = fresh_df.copy()
+df2.index = ["a","b","c","d"]
+df2.loc["b"]             # row labeled 'b'
+```
+
+
+```{python}
+fresh_df.loc[0, "language"]        # cell by label/column
+fresh_df.iloc[0, 0]                # cell by position
+fresh_df.iloc[0:3, 0:2]            # rows 0..2, cols 0..1
+```
+
+
+```{python}
+df = fresh_df.copy()
+ie = df[df["family"] == "Indo-European"]
+
+ie2 = df[(df["family"]=="Indo-European") & (df["location"]=="India")]
+ie3 = df[(df["family"]=="Indo-European") | (df["location"]=="Finland")]
+
+ie2
+print("---------------------")
+ie3
+print("-----")
+df[~(df["family"]=="Indo-European")]
+```
+
+
+```{python}
+df.sort_values(["location"])
+```
+
+```{python}
+df["speakers_millions"].sum()
+int(df["speakers_millions"].sum())
+```
+```{python}
+import pandas as pd
+
+eng_vowels = pd.DataFrame({
+    "symbol": ["i", "ɪ", "e", "ɛ", "æ", "u", "ʊ", "o", "ɔ", "ɑ", "ʌ", "ə"],
+    "height": ["high", "high", "mid", ], #choose from "high", "mid", and "low"
+    "backness": [], # choose from "front", "back", and "central"
+    "tense":   [], #choose from True or False
+    "rounded": [], #choose from True or False
+})
+
+eng_vowels
+```
+
+
+
+
+## Activity: English Vowels
+
+``` {python}
+import pandas as pd
+
+eng_vowels = pd.DataFrame({
+    "symbol": ["i", "ɪ", "e", "ɛ", "æ", "u", "ʊ", "o", "ɔ", "ɑ", "ʌ", "ə"],
+    "height": ["high", "high", "mid", "mid", "low", "high", "high", "mid", "mid", "low", "mid", "mid"],
+    "backness": ["front", "front", "front", "front", "front",
+                 "back", "back", "back", "back", "back",
+                 "central", "central"],
+    "tense":   [True, False, True, False, False,
+                True, False, True, False, False,
+                False, False],
+    "rounded": [False, False, False, False, False,
+                True, True, True, True, False,
+                False, False]
+})
+eng_vowels
+```
+
+## Activity: English Vowels
+
+``` {python}
+import pandas as pd
+
+# 1. Filter the `df`: show only **high back rounded vowels**
+eng_vowels[(eng_vowels["height"]=="high") & (eng_vowels["backness"]=="back") & (eng_vowels["rounded"] == True)]
+# 2. Negation and slicing: display all vowels that are **not tense**.
+eng_vowels[~(eng_vowels["tense"]==True)]
+# 3. Then display only the first three vowels of that group.
+eng_vowels[~(eng_vowels["tense"]==True)].head(3)
+# 4. Sort the `df` by **height** and **backness**.
+eng_vowels.sort_values(["height", "backness"])
+# 5. Count how many vowels are rounded, tense or both.
+rounded = eng_vowels["rounded"].sum()
+tense = eng_vowels["tense"].sum()
+both = (eng_vowels["rounded"] & eng_vowels["tense"]).sum()
+print("Rounded:", rounded, "| Tense:", tense, "| Both:", both)
+```
