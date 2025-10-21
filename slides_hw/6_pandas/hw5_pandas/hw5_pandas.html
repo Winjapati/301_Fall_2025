@@ -1,0 +1,1675 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Dr.&nbsp;Andrew M. Byrd">
+
+<title>HW5 — Exploring PHOIBLE with pandas</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="hw5_pandas_files/libs/clipboard/clipboard.min.js"></script>
+<script src="hw5_pandas_files/libs/quarto-html/quarto.js"></script>
+<script src="hw5_pandas_files/libs/quarto-html/popper.min.js"></script>
+<script src="hw5_pandas_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="hw5_pandas_files/libs/quarto-html/anchor.min.js"></script>
+<link href="hw5_pandas_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="hw5_pandas_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="hw5_pandas_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="hw5_pandas_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="hw5_pandas_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul class="collapse">
+  <li><a href="#step-0-setup-load" id="toc-step-0-setup-load" class="nav-link active" data-scroll-target="#step-0-setup-load">Step 0 — Setup &amp; Load</a></li>
+  <li><a href="#step-1-inspect-the-dataframe-clean-the-data" id="toc-step-1-inspect-the-dataframe-clean-the-data" class="nav-link" data-scroll-target="#step-1-inspect-the-dataframe-clean-the-data">Step 1 — Inspect the DataFrame, Clean the Data</a></li>
+  <li><a href="#step-2-basic-exploration" id="toc-step-2-basic-exploration" class="nav-link" data-scroll-target="#step-2-basic-exploration">Step 2 — Basic Exploration</a></li>
+  <li><a href="#step-3-derived-columns-add-at-least-two" id="toc-step-3-derived-columns-add-at-least-two" class="nav-link" data-scroll-target="#step-3-derived-columns-add-at-least-two">Step 3 — Derived Columns (add at least TWO)</a></li>
+  <li><a href="#step-4-focus-on-one-language" id="toc-step-4-focus-on-one-language" class="nav-link" data-scroll-target="#step-4-focus-on-one-language">Step 4 — Focus on One Language</a></li>
+  <li><a href="#step-5-short-reflection-35-sentences" id="toc-step-5-short-reflection-35-sentences" class="nav-link" data-scroll-target="#step-5-short-reflection-35-sentences">Step 5 — Short Reflection (3–5 sentences)</a></li>
+  <li><a href="#grading-20-pts" id="toc-grading-20-pts" class="nav-link" data-scroll-target="#grading-20-pts">Grading (20 pts)</a></li>
+  <li><a href="#appendix-quick-pd-reference" id="toc-appendix-quick-pd-reference" class="nav-link" data-scroll-target="#appendix-quick-pd-reference">Appendix — Quick <code>pd</code> Reference</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">HW5 — Exploring PHOIBLE with pandas</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<p class="subtitle lead">LIN 301: Computation for Linguists</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Dr.&nbsp;Andrew M. Byrd </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<blockquote class="blockquote">
+<p><strong>Goal:</strong> Practice loading a real linguistic dataset (PHOIBLE) into pandas, inspecting structure, filtering, grouping, adding derived columns, and exporting a CSV for later use.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>Instructions:</strong> Fill out this <code>.qmd</code> file and submit as <code>hw5_lastname_firstname.qmd</code> to Canvas.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>Tip:</strong> I’ve compiled a fairly large appendix of pandas methods at the end of this document. Look through it if you’re stuck about how to proceed in the homework.</p>
+</blockquote>
+<section id="step-0-setup-load" class="level2">
+<h2 class="anchored" data-anchor-id="step-0-setup-load">Step 0 — Setup &amp; Load</h2>
+<p>Load up the csv using the below code. Note that you can download the .csv file, save it locally, and load it that way, or load it directly from the website <code>.csv</code> file.</p>
+<div id="42e497e7" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://github.com/phoible/dev/blob/master/data/phoible.csv?raw=true"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">InventoryID</th>
+<th data-quarto-table-cell-role="th">Glottocode</th>
+<th data-quarto-table-cell-role="th">ISO6393</th>
+<th data-quarto-table-cell-role="th">LanguageName</th>
+<th data-quarto-table-cell-role="th">SpecificDialect</th>
+<th data-quarto-table-cell-role="th">GlyphID</th>
+<th data-quarto-table-cell-role="th">Phoneme</th>
+<th data-quarto-table-cell-role="th">Allophones</th>
+<th data-quarto-table-cell-role="th">Marginal</th>
+<th data-quarto-table-cell-role="th">SegmentClass</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">advancedTongueRoot</th>
+<th data-quarto-table-cell-role="th">periodicGlottalSource</th>
+<th data-quarto-table-cell-role="th">epilaryngealSource</th>
+<th data-quarto-table-cell-role="th">spreadGlottis</th>
+<th data-quarto-table-cell-role="th">constrictedGlottis</th>
+<th data-quarto-table-cell-role="th">fortis</th>
+<th data-quarto-table-cell-role="th">lenis</th>
+<th data-quarto-table-cell-role="th">raisedLarynxEjective</th>
+<th data-quarto-table-cell-role="th">loweredLarynxImplosive</th>
+<th data-quarto-table-cell-role="th">click</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1</td>
+<td>kore1280</td>
+<td>kor</td>
+<td>Korean</td>
+<td>NaN</td>
+<td>0068</td>
+<td>h</td>
+<td>ç h ɦ</td>
+<td>NaN</td>
+<td>consonant</td>
+<td>...</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>1</td>
+<td>kore1280</td>
+<td>kor</td>
+<td>Korean</td>
+<td>NaN</td>
+<td>006A</td>
+<td>j</td>
+<td>j</td>
+<td>NaN</td>
+<td>consonant</td>
+<td>...</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>1</td>
+<td>kore1280</td>
+<td>kor</td>
+<td>Korean</td>
+<td>NaN</td>
+<td>006B</td>
+<td>k</td>
+<td>k̚ ɡ k</td>
+<td>NaN</td>
+<td>consonant</td>
+<td>...</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>1</td>
+<td>kore1280</td>
+<td>kor</td>
+<td>Korean</td>
+<td>NaN</td>
+<td>006B+02B0</td>
+<td>kʰ</td>
+<td>kʰ</td>
+<td>NaN</td>
+<td>consonant</td>
+<td>...</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>1</td>
+<td>kore1280</td>
+<td>kor</td>
+<td>Korean</td>
+<td>NaN</td>
+<td>006B+02C0</td>
+<td>kˀ</td>
+<td>kˀ</td>
+<td>NaN</td>
+<td>consonant</td>
+<td>...</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+
+<p>5 rows × 49 columns</p>
+</div>
+</div>
+</div>
+<p>You’re also going to run the below code block that will replace all “+” values with <code>True</code>, and “-” with <code>False</code>.</p>
+<div id="31fc2282" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 1) Identify "feature-like" columns (only punctuation +, -, 0, commas, spaces after stripping)</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_feature_like(series, sample_n<span class="op">=</span><span class="dv">300</span>):</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> series.dropna().astype(<span class="bu">str</span>).<span class="bu">str</span>.strip()</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(s) <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(s) <span class="op">&gt;</span> sample_n:</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        s <span class="op">=</span> s.sample(sample_n, random_state<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># allow only + - 0 , and whitespace</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> s.<span class="bu">str</span>.match(<span class="vs">r'^[\s,\+\-0]+$'</span>).<span class="bu">all</span>()</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>feature_cols <span class="op">=</span> [c <span class="cf">for</span> c <span class="kw">in</span> df.columns <span class="cf">if</span> df[c].dtype <span class="op">==</span> <span class="st">"object"</span> <span class="kw">and</span> is_feature_like(df[c])]</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 2) Normalize strings -&gt; booleans: True if ANY '+' present; else False</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plus_any_to_bool(x):</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> pd.isna(x):</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">isinstance</span>(x, (<span class="bu">bool</span>, np.bool_)):</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">bool</span>(x)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> <span class="bu">str</span>(x).strip()</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> s <span class="op">==</span> <span class="st">""</span> <span class="kw">or</span> s <span class="op">==</span> <span class="st">"0"</span>:</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># split on commas/spaces; True if any token has '+'</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">any</span>(<span class="st">'+'</span> <span class="kw">in</span> tok <span class="cf">for</span> tok <span class="kw">in</span> re.split(<span class="vs">r'[,\s]+'</span>, s) <span class="cf">if</span> tok <span class="op">!=</span> <span class="st">""</span>)</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>df[feature_cols] <span class="op">=</span> df[feature_cols].applymap(plus_any_to_bool).astype(<span class="st">"boolean"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="step-1-inspect-the-dataframe-clean-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-inspect-the-dataframe-clean-the-data">Step 1 — Inspect the DataFrame, Clean the Data</h2>
+<p>In an executable cell, write code that identifies:</p>
+<ol type="1">
+<li>How many <strong>rows</strong> and <strong>columns</strong> are in the dataset;</li>
+<li><strong>Column names</strong>;</li>
+<li>The type of <strong>index</strong> the <code>df</code> has created, if any</li>
+</ol>
+</section>
+<section id="step-2-basic-exploration" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-basic-exploration">Step 2 — Basic Exploration</h2>
+<p>In an executable cell, write code that completes each of the below tasks and shows the relevant output only (i.e, avoid printing the whole df).</p>
+<ol type="1">
+<li>How many <strong>distinct languages</strong> are represented?<br>
+</li>
+<li>Which <strong>language</strong> has the <strong>largest inventory</strong>? (To figure this out you need to filter out unique phonemes, and sort the values in descending order)<br>
+</li>
+<li>Display only rows where <strong>SegmentClass</strong> is <code>"vowel"</code>.<br>
+</li>
+<li>What’s the most common <strong>Manner</strong> of articulation? You’ll be examining the frequency of sounds in the following list:</li>
+</ol>
+<p>Note: there is not one single <strong>manner</strong> column, rather the columns listed here:</p>
+<p><strong>IDENTIFY CLASSES</strong></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>manner_features <span class="op">=</span> [<span class="st">"nasal"</span>, <span class="st">"trill"</span>, <span class="st">"tap"</span>, <span class="st">"approximant"</span>, <span class="st">"continuant"</span>, <span class="st">"lateral"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="5" type="1">
+<li>How many <strong>languages with tones</strong> are listed in Phoible?</li>
+</ol>
+<div id="a4c04da8" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2.4 Your code</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>df.columns</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">## identifying natural classes</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Traditional natural classes using PHOIBLE boolean features</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>classes <span class="op">=</span> {</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"stop"</span>: (df[<span class="st">"continuant"</span>] <span class="op">==</span> <span class="va">False</span>) <span class="op">&amp;</span> (df[<span class="st">"delayedRelease"</span>] <span class="op">==</span> <span class="va">False</span>),</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"affricate"</span>: (df[<span class="st">"continuant"</span>] <span class="op">==</span> <span class="va">False</span>) <span class="op">&amp;</span> (df[<span class="st">"delayedRelease"</span>] <span class="op">==</span> <span class="va">True</span>),</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"fricative"</span>: (df[<span class="st">"continuant"</span>] <span class="op">==</span> <span class="va">True</span>) <span class="op">&amp;</span> (df[<span class="st">"delayedRelease"</span>] <span class="op">==</span> <span class="va">True</span>),</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"nasal"</span>: (df[<span class="st">"consonantal"</span>] <span class="op">==</span> <span class="va">True</span>) <span class="op">&amp;</span> (df[<span class="st">"continuant"</span>] <span class="op">==</span> <span class="va">False</span>) <span class="op">&amp;</span> (df[<span class="st">"nasal"</span>] <span class="op">==</span> <span class="va">True</span>),</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"liquid"</span>: (df[<span class="st">"approximant"</span>] <span class="op">==</span> <span class="va">True</span>) <span class="op">&amp;</span> (df[<span class="st">"consonantal"</span>] <span class="op">==</span> <span class="va">True</span>),</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"glide"</span>: (df[<span class="st">"approximant"</span>] <span class="op">==</span> <span class="va">True</span>) <span class="op">&amp;</span> (df[<span class="st">"syllabic"</span>] <span class="op">==</span> <span class="va">False</span>),</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"tap"</span>: df[<span class="st">"tap"</span>] <span class="op">==</span> <span class="va">True</span>,</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"vowel"</span>: (df[<span class="st">"approximant"</span>] <span class="op">==</span> <span class="va">True</span>) <span class="op">&amp;</span> (df[<span class="st">"syllabic"</span>] <span class="op">==</span> <span class="va">True</span>),</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: count how many phonemes per class</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, mask <span class="kw">in</span> classes.items():</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>name<span class="sc">:10s}</span><span class="ss"> → </span><span class="sc">{</span>mask<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">:&gt;6}</span><span class="ss"> segments"</span>)</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co">##</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">"LanguageName"</span>)[<span class="st">"continuant"</span>].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>stop       →  41088 segments
+affricate  →   5648 segments
+fricative  →  14417 segments
+nasal      →  13440 segments
+liquid     →   7338 segments
+glide      →  13351 segments
+tap        →   1258 segments
+vowel      →  31017 segments</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>LanguageName
+!XU                0.468085
+!Xóõ             0.298137
+!Xun                  0.325
+ABIPON                  0.6
+ACHE               0.571429
+                     ...   
+western xwla       0.644444
+xwela              0.644444
+yala               0.421053
+yao                0.448276
+Öñge; Ong; Onge         0.5
+Name: continuant, Length: 2716, dtype: Float64</code></pre>
+</div>
+</div>
+</section>
+<section id="step-3-derived-columns-add-at-least-two" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-derived-columns-add-at-least-two">Step 3 — Derived Columns (add at least TWO)</h2>
+<p>Create <strong>at least two</strong> helpful columns. Example ideas (pick any two or more):</p>
+<ul>
+<li><code>IsVowel</code> — True if <code>SegmentClass</code> is <code>"vowel"</code>.<br>
+</li>
+<li><code>HasDiacritic</code> — True if <code>Phoneme</code> contains common diacritics (e.g., <code>ː ʰ ʷ ʼ ̃</code>).<br>
+</li>
+<li><code>PhonemeLength</code> — character length of the <code>Phoneme</code> string.</li>
+</ul>
+<div class="callout-hint">
+<p>Useful tools: <code>.str.contains(...)</code>, <code>.astype(str).apply(len)</code>, boolean expressions.</p>
+</div>
+<div id="04877670" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create your derived columns here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="11e20b7a" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Preview your new columns (first ~10 rows)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="step-4-focus-on-one-language" class="level2">
+<h2 class="anchored" data-anchor-id="step-4-focus-on-one-language">Step 4 — Focus on One Language</h2>
+<p>Pick one language (e.g., <strong>Ancient Greek</strong>, <strong>English</strong>, <strong>Yoruba</strong>, <strong>Quechua</strong>). Within an executable cell, write code that</p>
+<ol type="1">
+<li>Performs the following tasks:</li>
+</ol>
+<ol type="a">
+<li>Filter the DataFrame to only that language.<br>
+</li>
+<li>How many <strong>total segments</strong>?<br>
+</li>
+<li>How many <strong>vowels vs.&nbsp;consonants</strong>?<br>
+</li>
+<li>What are the most frequent <strong>Places</strong> or <strong>Manners</strong> of articulation?</li>
+</ol>
+<ol start="2" type="1">
+<li><strong>Exports</strong> your filtered DataFrame as <code>phoible_output.csv</code>.</li>
+</ol>
+<div id="6eb0414e" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4.x Your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="0bfe0b5c" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Export</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="step-5-short-reflection-35-sentences" class="level2">
+<h2 class="anchored" data-anchor-id="step-5-short-reflection-35-sentences">Step 5 — Short Reflection (3–5 sentences)</h2>
+<ul>
+<li>What patterns did you notice in your language’s inventory?<br>
+</li>
+<li>Any surprises in vowels/consonants/tones?<br>
+</li>
+<li>How might PHOIBLE connect to your project’s goals?</li>
+</ul>
+<p><em>(Write here in markdown.)</em></p>
+<hr>
+<hr>
+</section>
+<section id="grading-20-pts" class="level2">
+<h2 class="anchored" data-anchor-id="grading-20-pts">Grading (20 pts)</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Component</th>
+<th style="text-align: right;">Points</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Load dataset successfully</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td>Inspect &amp; describe dataset</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="odd">
+<td>Complete main exploration tasks</td>
+<td style="text-align: right;">7</td>
+</tr>
+<tr class="even">
+<td>Add &amp; display ≥2 derived columns</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="odd">
+<td>Language-focused analysis &amp; export</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td>Reflection</td>
+<td style="text-align: right;">2</td>
+</tr>
+</tbody>
+</table>
+<!-- ## Appendix: Quick `pd` Reference -->
+<!-- ### Inspecting your `df` -->
+<!-- | Command                      | Purpose                                                    | -->
+<!-- | ---------------------------- | ---------------------------------------------------------- | -->
+<!-- | `df.head()`                  | Show the first 5 rows of the DataFrame.                    | -->
+<!-- | `df.tail()`                  | Show the last 5 rows.                                      | -->
+<!-- | `df.shape`                   | Returns a tuple of (rows, columns).                        | -->
+<!-- | `df.info()`                  | Overview of column names, data types, and non-null counts. | -->
+<!-- | `df.columns`                 | Lists all column names.                                    | -->
+<!-- | `df.describe()`              | Summary stats (works for numeric columns).                 | -->
+<!-- | `df.describe(include='all')` | Summary of all columns, including text.                    | -->
+<!-- ### Selecting Data -->
+<!-- | Command                | Purpose                                    | -->
+<!-- | ---------------------- | ------------------------------------------ | -->
+<!-- | `df["ColumnName"]`     | Select a single column (returns a Series). | -->
+<!-- | `df[["Col1", "Col2"]]` | Select multiple columns.                   | -->
+<!-- | `df.loc[row_index]`    | Access a row by its label.                 | -->
+<!-- | `df.iloc[row_index]`   | Access a row by its position.              | -->
+<!-- ### Filtering & Boolean Logic -->
+<!-- | Command                                         | Purpose                                 |                          | -->
+<!-- | ----------------------------------------------- | --------------------------------------- | ------------------------ | -->
+<!-- | `df[df["col"] == "value"]`                      | Filter rows that match a value.         |                          | -->
+<!-- | `df[df["col"] != "value"]`                      | Filter rows that *don’t* match a value. |                          | -->
+<!-- | `df[(df["col1"] == "x") & (df["col2"] == "y")]` | Combine multiple conditions (AND).      |                          | -->
+<!-- | `df[(df["col1"] == "x")                         | (df["col2"] == "y")]`                   | Combine conditions (OR). | -->
+<!-- ### Summaries & Counts -->
+<!-- | Command                                 | Purpose                                                 | -->
+<!-- | --------------------------------------- | ------------------------------------------------------- | -->
+<!-- | `df["col"].value_counts()`              | Counts how many times each unique value occurs.         | -->
+<!-- | `df["col"].unique()`                    | Lists all unique values.                                | -->
+<!-- | `df["col"].nunique()`                   | Counts the number of unique values.                     | -->
+<!-- | `df.groupby("col").count()`             | Groups rows by one column and counts within each group. | -->
+<!-- | `df.groupby("col")["other_col"].mean()` | Groups and takes the mean of another column.            | -->
+<!-- | `df["bool_col"].sum()` | count of `True` (since `True==1`, `False==0`) | -->
+<!-- - `df["num_col"].sum()` / `.mean()` / `.median()` / `.min()` / `.max()` / `.std()` -->
+<!-- - `df.groupby("col").size()` — group counts -->
+<!-- - `df.groupby("col")["num_col"].agg(["count","mean","min","max"])` -->
+<!-- - `df.idxmax()` / `df["col"].idxmax()` — index position of the maximum -->
+<!-- ### Derived Columns & String Methods -->
+<!-- | Command                             | Purpose                                                 | -->
+<!-- | ----------------------------------- | ------------------------------------------------------- | -->
+<!-- | `df["new"] = df["old"].apply(len)`  | Apply a Python function (like `len`) to a column.       | -->
+<!-- | `df["col"].str.contains("pattern")` | True/False depending on whether a regex pattern occurs. | -->
+<!-- | `df["col"].astype(str)`             | Ensure all values are treated as strings.               | -->
+<!-- ### Sorting & Exporting -->
+<!-- | Command                                  | Purpose                       | -->
+<!-- | ---------------------------------------- | ----------------------------- | -->
+<!-- | `df.sort_values("col")`                  | Sort by a column (ascending). | -->
+<!-- | `df.sort_values("col", ascending=False)` | Sort descending.              | -->
+<!-- | `df.to_csv("filename.csv", index=False)` | Save to a CSV file.           | -->
+<!-- | `pd.read_csv("filename.csv")`            | Load a CSV file.              | -->
+<!-- ### Common Helpers -->
+<!-- | Command                   | Purpose                               | -->
+<!-- | ------------------------- | ------------------------------------- | -->
+<!-- | `len(df)`                 | Number of rows in the DataFrame.      | -->
+<!-- | `len(df["col"].unique())` | Number of unique entries in a column. | -->
+<!-- | `df.isna().sum()`         | Count missing values per column.      | -->
+<!-- | `df.dtypes`               | Show data types of all columns.       | -->
+</section>
+<section id="appendix-quick-pd-reference" class="level2">
+<h2 class="anchored" data-anchor-id="appendix-quick-pd-reference">Appendix — Quick <code>pd</code> Reference</h2>
+<p>Use this appendix as a quick guide to common pandas operations.<br>
+It’s not exhaustive, but includes everything you’ll need for HW6 and future assignments.</p>
+<hr>
+<section id="inspecting-your-dataframe" class="level3">
+<h3 class="anchored" data-anchor-id="inspecting-your-dataframe">Inspecting Your DataFrame</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 41%">
+<col style="width: 58%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>df.head()</code> / <code>df.tail()</code></td>
+<td>Show the first / last 5 rows.</td>
+</tr>
+<tr class="even">
+<td><code>df.shape</code></td>
+<td>Returns <code>(rows, columns)</code>.</td>
+</tr>
+<tr class="odd">
+<td><code>df.info()</code></td>
+<td>Displays column names, types, and non-null counts.</td>
+</tr>
+<tr class="even">
+<td><code>df.columns</code></td>
+<td>Lists all column names.</td>
+</tr>
+<tr class="odd">
+<td><code>df.describe()</code> / <code>df.describe(include='all')</code></td>
+<td>Summary stats for numeric / all columns.</td>
+</tr>
+<tr class="even">
+<td><code>df.isna().sum()</code> / <code>df.notna().sum()</code></td>
+<td>Count missing or non-missing values.</td>
+</tr>
+<tr class="odd">
+<td><code>df.dtypes</code></td>
+<td>Displays the data type of each column.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="selecting-filtering-rows" class="level3">
+<h3 class="anchored" data-anchor-id="selecting-filtering-rows">Selecting &amp; Filtering Rows</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 43%">
+<col style="width: 56%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>df["col"]</code></td>
+<td>Select one column (returns a Series).</td>
+</tr>
+<tr class="even">
+<td><code>df[["col1","col2"]]</code></td>
+<td>Select multiple columns.</td>
+</tr>
+<tr class="odd">
+<td><code>df[df["col"] == "value"]</code></td>
+<td>Filter rows where the condition is true.</td>
+</tr>
+<tr class="even">
+<td><code>df[(df["col1"] == "x") &amp; (df["col2"] == "y")]</code></td>
+<td>Combine filters with AND (<code>&amp;</code>).</td>
+</tr>
+<tr class="odd">
+<td><code>df[(df["col1"] == "x") | (df["col2"] == "y")]</code></td>
+<td>Combine filters with OR (<code>|</code>).</td>
+</tr>
+<tr class="even">
+<td><code>df.query("SegmentClass == 'vowel' and LanguageName == 'English'")</code></td>
+<td>Alternate syntax for filtering with queries.</td>
+</tr>
+<tr class="odd">
+<td><code>df.drop_duplicates(subset=["col"])</code></td>
+<td>Remove duplicate rows based on one column.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="summaries-aggregations" class="level3">
+<h3 class="anchored" data-anchor-id="summaries-aggregations">Summaries &amp; Aggregations</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 43%">
+<col style="width: 56%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>df["col"].value_counts()</code></td>
+<td>Frequency of unique values.</td>
+</tr>
+<tr class="even">
+<td><code>df["col"].unique()</code></td>
+<td>List of all unique values.</td>
+</tr>
+<tr class="odd">
+<td><code>df["col"].nunique()</code></td>
+<td>Number of unique values.</td>
+</tr>
+<tr class="even">
+<td><code>df["num_col"].sum()</code></td>
+<td>Sum of numeric values in a column.</td>
+</tr>
+<tr class="odd">
+<td><code>df["num_col"].mean()</code> / <code>.median()</code> / <code>.min()</code> / <code>.max()</code> / <code>.std()</code></td>
+<td>Basic statistics for numeric columns.</td>
+</tr>
+<tr class="even">
+<td><code>df["bool_col"]).sum()</code></td>
+<td>Count of <code>True</code> values (since <code>True</code>=1).</td>
+</tr>
+<tr class="odd">
+<td><code>df.groupby("col").size()</code></td>
+<td>Count rows per group.</td>
+</tr>
+<tr class="even">
+<td><code>df.groupby("col")["num_col"].agg(["count","mean","min","max"])</code></td>
+<td>Multiple summary stats by group.</td>
+</tr>
+<tr class="odd">
+<td><code>df.idxmax()</code> / <code>df["col"].idxmax()</code></td>
+<td>Index position of the maximum value.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="string-operations-derived-columns" class="level3">
+<h3 class="anchored" data-anchor-id="string-operations-derived-columns">String Operations &amp; Derived Columns</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 43%">
+<col style="width: 56%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>df["col"].astype(str)</code></td>
+<td>Convert column to strings.</td>
+</tr>
+<tr class="even">
+<td><code>df["col"].str.contains("pattern", case=False, na=False)</code></td>
+<td>True/False if pattern appears in each string.</td>
+</tr>
+<tr class="odd">
+<td><code>df["col"].str.len()</code></td>
+<td>Length of each string.</td>
+</tr>
+<tr class="even">
+<td><code>df["col"].str.lower()</code> / <code>.str.upper()</code> / <code>.str.strip()</code></td>
+<td>Common string transformations.</td>
+</tr>
+<tr class="odd">
+<td><code>df["col"].str.replace("a","b",regex=True)</code></td>
+<td>Replace text using regex.</td>
+</tr>
+<tr class="even">
+<td><code>df["new"] = df["old"].apply(func)</code></td>
+<td>Apply a Python function to each value.</td>
+</tr>
+<tr class="odd">
+<td><code>pd.to_numeric(df["col"], errors="coerce")</code></td>
+<td>Convert strings to numbers (invalids → NaN).</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="sorting-indexing-and-exporting" class="level3">
+<h3 class="anchored" data-anchor-id="sorting-indexing-and-exporting">Sorting, Indexing, and Exporting</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 43%">
+<col style="width: 56%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>df.sort_values(["col1","col2"], ascending=[True, False])</code></td>
+<td>Sort by one or more columns.</td>
+</tr>
+<tr class="even">
+<td><code>df.sort_index()</code></td>
+<td>Sort by index labels.</td>
+</tr>
+<tr class="odd">
+<td><code>df.reset_index(drop=True)</code></td>
+<td>Reset index after filtering/sorting.</td>
+</tr>
+<tr class="even">
+<td><code>df.to_csv("file.csv", index=False)</code></td>
+<td>Save DataFrame as a CSV file.</td>
+</tr>
+<tr class="odd">
+<td><code>pd.read_csv("file.csv")</code></td>
+<td>Load a CSV file into a DataFrame.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="handy-python-pandas-patterns" class="level3">
+<h3 class="anchored" data-anchor-id="handy-python-pandas-patterns">Handy Python + pandas Patterns</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 43%">
+<col style="width: 56%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>len(df)</code></td>
+<td>Number of rows.</td>
+</tr>
+<tr class="even">
+<td><code>len(set(df["col"]))</code></td>
+<td>Number of unique items (pure Python).</td>
+</tr>
+<tr class="odd">
+<td><code>(df["col"] == "x").sum()</code></td>
+<td>Count rows where condition is True.</td>
+</tr>
+<tr class="even">
+<td><code>df["num_col"].between(10, 20)</code></td>
+<td>Filter rows with values in a range.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<!-- -->
+
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb11" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "HW5 — Exploring PHOIBLE with pandas"</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "LIN 301: Computation for Linguists"</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Dr. Andrew M. Byrd"</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co">    toc-depth: 2</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="an">jupyter:</span><span class="co"> python3</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co">  freeze: auto</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co">  warning: false</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co">  message: false</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="an">fontsize:</span><span class="co"> 12pt</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **Goal:** Practice loading a real linguistic dataset (PHOIBLE) into pandas, inspecting structure, filtering, grouping, adding derived columns, and exporting a CSV for later use.</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **Instructions:** Fill out this </span><span class="in">`.qmd`</span><span class="at"> file and submit as </span><span class="in">`hw5_lastname_firstname.qmd`</span><span class="at"> to Canvas.</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **Tip:** I've compiled a fairly large appendix of pandas methods at the end of this document. Look through it if you're stuck about how to proceed in the homework.</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="fu">## Step 0 — Setup &amp; Load</span></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>Load up the csv using the below code. Note that you can download the .csv file, save it locally, and load it that way, or load it directly from the website <span class="in">`.csv`</span> file.</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://github.com/phoible/dev/blob/master/data/phoible.csv?raw=true"</span></span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>df.head()</span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>You're also going to run the below code block that will replace all "+" values with <span class="in">`True`</span>, and "-" with <span class="in">`False`</span>.</span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a><span class="co"># 1) Identify "feature-like" columns (only punctuation +, -, 0, commas, spaces after stripping)</span></span>
+<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_feature_like(series, sample_n<span class="op">=</span><span class="dv">300</span>):</span>
+<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> series.dropna().astype(<span class="bu">str</span>).<span class="bu">str</span>.strip()</span>
+<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(s) <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(s) <span class="op">&gt;</span> sample_n:</span>
+<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a>        s <span class="op">=</span> s.sample(sample_n, random_state<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a>    <span class="co"># allow only + - 0 , and whitespace</span></span>
+<span id="cb11-55"><a href="#cb11-55" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> s.<span class="bu">str</span>.match(<span class="vs">r'^[\s,\+\-0]+$'</span>).<span class="bu">all</span>()</span>
+<span id="cb11-56"><a href="#cb11-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-57"><a href="#cb11-57" aria-hidden="true" tabindex="-1"></a>feature_cols <span class="op">=</span> [c <span class="cf">for</span> c <span class="kw">in</span> df.columns <span class="cf">if</span> df[c].dtype <span class="op">==</span> <span class="st">"object"</span> <span class="kw">and</span> is_feature_like(df[c])]</span>
+<span id="cb11-58"><a href="#cb11-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-59"><a href="#cb11-59" aria-hidden="true" tabindex="-1"></a><span class="co"># 2) Normalize strings -&gt; booleans: True if ANY '+' present; else False</span></span>
+<span id="cb11-60"><a href="#cb11-60" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plus_any_to_bool(x):</span>
+<span id="cb11-61"><a href="#cb11-61" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> pd.isna(x):</span>
+<span id="cb11-62"><a href="#cb11-62" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb11-63"><a href="#cb11-63" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">isinstance</span>(x, (<span class="bu">bool</span>, np.bool_)):</span>
+<span id="cb11-64"><a href="#cb11-64" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">bool</span>(x)</span>
+<span id="cb11-65"><a href="#cb11-65" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> <span class="bu">str</span>(x).strip()</span>
+<span id="cb11-66"><a href="#cb11-66" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> s <span class="op">==</span> <span class="st">""</span> <span class="kw">or</span> s <span class="op">==</span> <span class="st">"0"</span>:</span>
+<span id="cb11-67"><a href="#cb11-67" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb11-68"><a href="#cb11-68" aria-hidden="true" tabindex="-1"></a>    <span class="co"># split on commas/spaces; True if any token has '+'</span></span>
+<span id="cb11-69"><a href="#cb11-69" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">any</span>(<span class="st">'+'</span> <span class="kw">in</span> tok <span class="cf">for</span> tok <span class="kw">in</span> re.split(<span class="vs">r'[,\s]+'</span>, s) <span class="cf">if</span> tok <span class="op">!=</span> <span class="st">""</span>)</span>
+<span id="cb11-70"><a href="#cb11-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-71"><a href="#cb11-71" aria-hidden="true" tabindex="-1"></a>df[feature_cols] <span class="op">=</span> df[feature_cols].applymap(plus_any_to_bool).astype(<span class="st">"boolean"</span>)</span>
+<span id="cb11-72"><a href="#cb11-72" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-73"><a href="#cb11-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-74"><a href="#cb11-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-75"><a href="#cb11-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-76"><a href="#cb11-76" aria-hidden="true" tabindex="-1"></a><span class="fu">## Step 1 — Inspect the DataFrame, Clean the Data</span></span>
+<span id="cb11-77"><a href="#cb11-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-78"><a href="#cb11-78" aria-hidden="true" tabindex="-1"></a>In an executable cell, write code that identifies:</span>
+<span id="cb11-79"><a href="#cb11-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-80"><a href="#cb11-80" aria-hidden="true" tabindex="-1"></a>1) How many **rows** and **columns** are in the dataset; </span>
+<span id="cb11-81"><a href="#cb11-81" aria-hidden="true" tabindex="-1"></a>2) **Column names**; </span>
+<span id="cb11-82"><a href="#cb11-82" aria-hidden="true" tabindex="-1"></a>3) The type of **index** the <span class="in">`df`</span> has created, if any</span>
+<span id="cb11-83"><a href="#cb11-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-84"><a href="#cb11-84" aria-hidden="true" tabindex="-1"></a><span class="fu">## Step 2 — Basic Exploration</span></span>
+<span id="cb11-85"><a href="#cb11-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-86"><a href="#cb11-86" aria-hidden="true" tabindex="-1"></a>In an executable cell, write code that completes each of the below tasks and shows the relevant output only (i.e, avoid printing the whole df).</span>
+<span id="cb11-87"><a href="#cb11-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-88"><a href="#cb11-88" aria-hidden="true" tabindex="-1"></a>1) How many **distinct languages** are represented?  </span>
+<span id="cb11-89"><a href="#cb11-89" aria-hidden="true" tabindex="-1"></a>2) Which **language** has the **largest inventory**? (To figure this out you need to filter out unique phonemes, and sort the values in descending order)  </span>
+<span id="cb11-90"><a href="#cb11-90" aria-hidden="true" tabindex="-1"></a>3) Display only rows where **SegmentClass** is <span class="in">`"vowel"`</span>.  </span>
+<span id="cb11-91"><a href="#cb11-91" aria-hidden="true" tabindex="-1"></a>4) What’s the most common **Manner** of articulation? You'll be examining the frequency of sounds in the following list:</span>
+<span id="cb11-92"><a href="#cb11-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-93"><a href="#cb11-93" aria-hidden="true" tabindex="-1"></a>Note: there is not one single **manner** column, rather the columns listed here:</span>
+<span id="cb11-94"><a href="#cb11-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-95"><a href="#cb11-95" aria-hidden="true" tabindex="-1"></a>**IDENTIFY CLASSES**</span>
+<span id="cb11-96"><a href="#cb11-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-97"><a href="#cb11-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-98"><a href="#cb11-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-99"><a href="#cb11-99" aria-hidden="true" tabindex="-1"></a><span class="in">```python</span></span>
+<span id="cb11-100"><a href="#cb11-100" aria-hidden="true" tabindex="-1"></a>manner_features <span class="op">=</span> [<span class="st">"nasal"</span>, <span class="st">"trill"</span>, <span class="st">"tap"</span>, <span class="st">"approximant"</span>, <span class="st">"continuant"</span>, <span class="st">"lateral"</span>]</span>
+<span id="cb11-101"><a href="#cb11-101" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-102"><a href="#cb11-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-103"><a href="#cb11-103" aria-hidden="true" tabindex="-1"></a>5) How many **languages with tones** are listed in Phoible?</span>
+<span id="cb11-104"><a href="#cb11-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-107"><a href="#cb11-107" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb11-108"><a href="#cb11-108" aria-hidden="true" tabindex="-1"></a><span class="co"># 2.4 Your code</span></span>
+<span id="cb11-109"><a href="#cb11-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-110"><a href="#cb11-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-111"><a href="#cb11-111" aria-hidden="true" tabindex="-1"></a>df.columns</span>
+<span id="cb11-112"><a href="#cb11-112" aria-hidden="true" tabindex="-1"></a><span class="co">## identifying natural classes</span></span>
+<span id="cb11-113"><a href="#cb11-113" aria-hidden="true" tabindex="-1"></a><span class="co"># Traditional natural classes using PHOIBLE boolean features</span></span>
+<span id="cb11-114"><a href="#cb11-114" aria-hidden="true" tabindex="-1"></a>classes <span class="op">=</span> {</span>
+<span id="cb11-115"><a href="#cb11-115" aria-hidden="true" tabindex="-1"></a>    <span class="st">"stop"</span>: (df[<span class="st">"continuant"</span>] <span class="op">==</span> <span class="va">False</span>) <span class="op">&amp;</span> (df[<span class="st">"delayedRelease"</span>] <span class="op">==</span> <span class="va">False</span>),</span>
+<span id="cb11-116"><a href="#cb11-116" aria-hidden="true" tabindex="-1"></a>    <span class="st">"affricate"</span>: (df[<span class="st">"continuant"</span>] <span class="op">==</span> <span class="va">False</span>) <span class="op">&amp;</span> (df[<span class="st">"delayedRelease"</span>] <span class="op">==</span> <span class="va">True</span>),</span>
+<span id="cb11-117"><a href="#cb11-117" aria-hidden="true" tabindex="-1"></a>    <span class="st">"fricative"</span>: (df[<span class="st">"continuant"</span>] <span class="op">==</span> <span class="va">True</span>) <span class="op">&amp;</span> (df[<span class="st">"delayedRelease"</span>] <span class="op">==</span> <span class="va">True</span>),</span>
+<span id="cb11-118"><a href="#cb11-118" aria-hidden="true" tabindex="-1"></a>    <span class="st">"nasal"</span>: (df[<span class="st">"consonantal"</span>] <span class="op">==</span> <span class="va">True</span>) <span class="op">&amp;</span> (df[<span class="st">"continuant"</span>] <span class="op">==</span> <span class="va">False</span>) <span class="op">&amp;</span> (df[<span class="st">"nasal"</span>] <span class="op">==</span> <span class="va">True</span>),</span>
+<span id="cb11-119"><a href="#cb11-119" aria-hidden="true" tabindex="-1"></a>    <span class="st">"liquid"</span>: (df[<span class="st">"approximant"</span>] <span class="op">==</span> <span class="va">True</span>) <span class="op">&amp;</span> (df[<span class="st">"consonantal"</span>] <span class="op">==</span> <span class="va">True</span>),</span>
+<span id="cb11-120"><a href="#cb11-120" aria-hidden="true" tabindex="-1"></a>    <span class="st">"glide"</span>: (df[<span class="st">"approximant"</span>] <span class="op">==</span> <span class="va">True</span>) <span class="op">&amp;</span> (df[<span class="st">"syllabic"</span>] <span class="op">==</span> <span class="va">False</span>),</span>
+<span id="cb11-121"><a href="#cb11-121" aria-hidden="true" tabindex="-1"></a>    <span class="st">"tap"</span>: df[<span class="st">"tap"</span>] <span class="op">==</span> <span class="va">True</span>,</span>
+<span id="cb11-122"><a href="#cb11-122" aria-hidden="true" tabindex="-1"></a>    <span class="st">"vowel"</span>: (df[<span class="st">"approximant"</span>] <span class="op">==</span> <span class="va">True</span>) <span class="op">&amp;</span> (df[<span class="st">"syllabic"</span>] <span class="op">==</span> <span class="va">True</span>),</span>
+<span id="cb11-123"><a href="#cb11-123" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-124"><a href="#cb11-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-125"><a href="#cb11-125" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: count how many phonemes per class</span></span>
+<span id="cb11-126"><a href="#cb11-126" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, mask <span class="kw">in</span> classes.items():</span>
+<span id="cb11-127"><a href="#cb11-127" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>name<span class="sc">:10s}</span><span class="ss"> → </span><span class="sc">{</span>mask<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">:&gt;6}</span><span class="ss"> segments"</span>)</span>
+<span id="cb11-128"><a href="#cb11-128" aria-hidden="true" tabindex="-1"></a><span class="co">##</span></span>
+<span id="cb11-129"><a href="#cb11-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-130"><a href="#cb11-130" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">"LanguageName"</span>)[<span class="st">"continuant"</span>].mean()</span>
+<span id="cb11-131"><a href="#cb11-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-132"><a href="#cb11-132" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-133"><a href="#cb11-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-136"><a href="#cb11-136" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb11-137"><a href="#cb11-137" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-138"><a href="#cb11-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-139"><a href="#cb11-139" aria-hidden="true" tabindex="-1"></a><span class="fu">## Step 3 — Derived Columns (add at least TWO)</span></span>
+<span id="cb11-140"><a href="#cb11-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-141"><a href="#cb11-141" aria-hidden="true" tabindex="-1"></a>Create **at least two** helpful columns. Example ideas (pick any two or more):</span>
+<span id="cb11-142"><a href="#cb11-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-143"><a href="#cb11-143" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`IsVowel`</span> — True if <span class="in">`SegmentClass`</span> is <span class="in">`"vowel"`</span>.  </span>
+<span id="cb11-144"><a href="#cb11-144" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`HasDiacritic`</span> — True if <span class="in">`Phoneme`</span> contains common diacritics (e.g., <span class="in">`ː ʰ ʷ ʼ ̃`</span>).  </span>
+<span id="cb11-145"><a href="#cb11-145" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`PhonemeLength`</span> — character length of the <span class="in">`Phoneme`</span> string.</span>
+<span id="cb11-146"><a href="#cb11-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-147"><a href="#cb11-147" aria-hidden="true" tabindex="-1"></a>::: {.callout-hint}</span>
+<span id="cb11-148"><a href="#cb11-148" aria-hidden="true" tabindex="-1"></a>Useful tools: <span class="in">`.str.contains(...)`</span>, <span class="in">`.astype(str).apply(len)`</span>, boolean expressions.</span>
+<span id="cb11-149"><a href="#cb11-149" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb11-150"><a href="#cb11-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-153"><a href="#cb11-153" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb11-154"><a href="#cb11-154" aria-hidden="true" tabindex="-1"></a><span class="co"># Create your derived columns here</span></span>
+<span id="cb11-155"><a href="#cb11-155" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-156"><a href="#cb11-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-159"><a href="#cb11-159" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb11-160"><a href="#cb11-160" aria-hidden="true" tabindex="-1"></a><span class="co"># Preview your new columns (first ~10 rows)</span></span>
+<span id="cb11-161"><a href="#cb11-161" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-162"><a href="#cb11-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-163"><a href="#cb11-163" aria-hidden="true" tabindex="-1"></a><span class="fu">## Step 4 — Focus on One Language</span></span>
+<span id="cb11-164"><a href="#cb11-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-165"><a href="#cb11-165" aria-hidden="true" tabindex="-1"></a>Pick one language (e.g., **Ancient Greek**, **English**, **Yoruba**, **Quechua**). Within an executable cell, write code that</span>
+<span id="cb11-166"><a href="#cb11-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-167"><a href="#cb11-167" aria-hidden="true" tabindex="-1"></a>1) Performs the following tasks:</span>
+<span id="cb11-168"><a href="#cb11-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-169"><a href="#cb11-169" aria-hidden="true" tabindex="-1"></a>a) Filter the DataFrame to only that language.  </span>
+<span id="cb11-170"><a href="#cb11-170" aria-hidden="true" tabindex="-1"></a>b) How many **total segments**?  </span>
+<span id="cb11-171"><a href="#cb11-171" aria-hidden="true" tabindex="-1"></a>c) How many **vowels vs. consonants**?  </span>
+<span id="cb11-172"><a href="#cb11-172" aria-hidden="true" tabindex="-1"></a>d) What are the most frequent **Places** or **Manners** of articulation?</span>
+<span id="cb11-173"><a href="#cb11-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-174"><a href="#cb11-174" aria-hidden="true" tabindex="-1"></a>2) **Exports** your filtered DataFrame as <span class="in">`phoible_output.csv`</span>.</span>
+<span id="cb11-175"><a href="#cb11-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-178"><a href="#cb11-178" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb11-179"><a href="#cb11-179" aria-hidden="true" tabindex="-1"></a><span class="co"># 4.x Your code here</span></span>
+<span id="cb11-180"><a href="#cb11-180" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-181"><a href="#cb11-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-184"><a href="#cb11-184" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb11-185"><a href="#cb11-185" aria-hidden="true" tabindex="-1"></a><span class="co"># Export</span></span>
+<span id="cb11-186"><a href="#cb11-186" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-187"><a href="#cb11-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-188"><a href="#cb11-188" aria-hidden="true" tabindex="-1"></a><span class="fu">## Step 5 — Short Reflection (3–5 sentences)</span></span>
+<span id="cb11-189"><a href="#cb11-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-190"><a href="#cb11-190" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>What patterns did you notice in your language’s inventory?  </span>
+<span id="cb11-191"><a href="#cb11-191" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Any surprises in vowels/consonants/tones?  </span>
+<span id="cb11-192"><a href="#cb11-192" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>How might PHOIBLE connect to your project’s goals?</span>
+<span id="cb11-193"><a href="#cb11-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-194"><a href="#cb11-194" aria-hidden="true" tabindex="-1"></a>*(Write here in markdown.)*</span>
+<span id="cb11-195"><a href="#cb11-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-196"><a href="#cb11-196" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb11-197"><a href="#cb11-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-198"><a href="#cb11-198" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb11-199"><a href="#cb11-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-200"><a href="#cb11-200" aria-hidden="true" tabindex="-1"></a><span class="fu">## Grading (20 pts)</span></span>
+<span id="cb11-201"><a href="#cb11-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-202"><a href="#cb11-202" aria-hidden="true" tabindex="-1"></a>| Component | Points |</span>
+<span id="cb11-203"><a href="#cb11-203" aria-hidden="true" tabindex="-1"></a>|---|---:|</span>
+<span id="cb11-204"><a href="#cb11-204" aria-hidden="true" tabindex="-1"></a>| Load dataset successfully | 2 |</span>
+<span id="cb11-205"><a href="#cb11-205" aria-hidden="true" tabindex="-1"></a>| Inspect &amp; describe dataset | 3 |</span>
+<span id="cb11-206"><a href="#cb11-206" aria-hidden="true" tabindex="-1"></a>| Complete main exploration tasks | 7 |</span>
+<span id="cb11-207"><a href="#cb11-207" aria-hidden="true" tabindex="-1"></a>| Add &amp; display ≥2 derived columns | 4 |</span>
+<span id="cb11-208"><a href="#cb11-208" aria-hidden="true" tabindex="-1"></a>| Language-focused analysis &amp; export | 2 |</span>
+<span id="cb11-209"><a href="#cb11-209" aria-hidden="true" tabindex="-1"></a>| Reflection | 2 |</span>
+<span id="cb11-210"><a href="#cb11-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-211"><a href="#cb11-211" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- ## Appendix: Quick `pd` Reference --&gt;</span></span>
+<span id="cb11-212"><a href="#cb11-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-213"><a href="#cb11-213" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- </span><span class="al">###</span><span class="co"> Inspecting your `df` --&gt;</span></span>
+<span id="cb11-214"><a href="#cb11-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-215"><a href="#cb11-215" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | Command                      | Purpose                                                    | --&gt;</span></span>
+<span id="cb11-216"><a href="#cb11-216" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | ---------------------------- | ---------------------------------------------------------- | --&gt;</span></span>
+<span id="cb11-217"><a href="#cb11-217" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | `df.head()`                  | Show the first 5 rows of the DataFrame.                    | --&gt;</span></span>
+<span id="cb11-218"><a href="#cb11-218" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | `df.tail()`                  | Show the last 5 rows.                                      | --&gt;</span></span>
+<span id="cb11-219"><a href="#cb11-219" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | `df.shape`                   | Returns a tuple of (rows, columns).                        | --&gt;</span></span>
+<span id="cb11-220"><a href="#cb11-220" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | `df.info()`                  | Overview of column names, data types, and non-null counts. | --&gt;</span></span>
+<span id="cb11-221"><a href="#cb11-221" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | `df.columns`                 | Lists all column names.                                    | --&gt;</span></span>
+<span id="cb11-222"><a href="#cb11-222" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | `df.describe()`              | Summary stats (works for numeric columns).                 | --&gt;</span></span>
+<span id="cb11-223"><a href="#cb11-223" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | `df.describe(include='all')` | Summary of all columns, including text.                    | --&gt;</span></span>
+<span id="cb11-224"><a href="#cb11-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-225"><a href="#cb11-225" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- </span><span class="al">###</span><span class="co"> Selecting Data --&gt;</span></span>
+<span id="cb11-226"><a href="#cb11-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-227"><a href="#cb11-227" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | Command                | Purpose                                    | --&gt;</span></span>
+<span id="cb11-228"><a href="#cb11-228" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | ---------------------- | ------------------------------------------ | --&gt;</span></span>
+<span id="cb11-229"><a href="#cb11-229" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | `df["ColumnName"]`     | Select a single column (returns a Series). | --&gt;</span></span>
+<span id="cb11-230"><a href="#cb11-230" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | `df[["Col1", "Col2"]]` | Select multiple columns.                   | --&gt;</span></span>
+<span id="cb11-231"><a href="#cb11-231" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | `df.loc[row_index]`    | Access a row by its label.                 | --&gt;</span></span>
+<span id="cb11-232"><a href="#cb11-232" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | `df.iloc[row_index]`   | Access a row by its position.              | --&gt;</span></span>
+<span id="cb11-233"><a href="#cb11-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-234"><a href="#cb11-234" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- </span><span class="al">###</span><span class="co"> Filtering &amp; Boolean Logic --&gt;</span></span>
+<span id="cb11-235"><a href="#cb11-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-236"><a href="#cb11-236" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | Command                                         | Purpose                                 |                          | --&gt;</span></span>
+<span id="cb11-237"><a href="#cb11-237" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | ----------------------------------------------- | --------------------------------------- | ------------------------ | --&gt;</span></span>
+<span id="cb11-238"><a href="#cb11-238" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | `df[df["col"] == "value"]`                      | Filter rows that match a value.         |                          | --&gt;</span></span>
+<span id="cb11-239"><a href="#cb11-239" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | `df[df["col"] != "value"]`                      | Filter rows that *don’t* match a value. |                          | --&gt;</span></span>
+<span id="cb11-240"><a href="#cb11-240" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | `df[(df["col1"] == "x") &amp; (df["col2"] == "y")]` | Combine multiple conditions (AND).      |                          | --&gt;</span></span>
+<span id="cb11-241"><a href="#cb11-241" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | `df[(df["col1"] == "x")                         | (df["col2"] == "y")]`                   | Combine conditions (OR). | --&gt;</span></span>
+<span id="cb11-242"><a href="#cb11-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-243"><a href="#cb11-243" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- </span><span class="al">###</span><span class="co"> Summaries &amp; Counts --&gt;</span></span>
+<span id="cb11-244"><a href="#cb11-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-245"><a href="#cb11-245" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | Command                                 | Purpose                                                 | --&gt;</span></span>
+<span id="cb11-246"><a href="#cb11-246" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | --------------------------------------- | ------------------------------------------------------- | --&gt;</span></span>
+<span id="cb11-247"><a href="#cb11-247" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | `df["col"].value_counts()`              | Counts how many times each unique value occurs.         | --&gt;</span></span>
+<span id="cb11-248"><a href="#cb11-248" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | `df["col"].unique()`                    | Lists all unique values.                                | --&gt;</span></span>
+<span id="cb11-249"><a href="#cb11-249" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | `df["col"].nunique()`                   | Counts the number of unique values.                     | --&gt;</span></span>
+<span id="cb11-250"><a href="#cb11-250" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | `df.groupby("col").count()`             | Groups rows by one column and counts within each group. | --&gt;</span></span>
+<span id="cb11-251"><a href="#cb11-251" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | `df.groupby("col")["other_col"].mean()` | Groups and takes the mean of another column.            | --&gt;</span></span>
+<span id="cb11-252"><a href="#cb11-252" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | `df["bool_col"].sum()` | count of `True` (since `True==1`, `False==0`) | --&gt;</span></span>
+<span id="cb11-253"><a href="#cb11-253" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- - `df["num_col"].sum()` / `.mean()` / `.median()` / `.min()` / `.max()` / `.std()` --&gt;</span></span>
+<span id="cb11-254"><a href="#cb11-254" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- - `df.groupby("col").size()` — group counts --&gt;</span></span>
+<span id="cb11-255"><a href="#cb11-255" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- - `df.groupby("col")["num_col"].agg(["count","mean","min","max"])` --&gt;</span></span>
+<span id="cb11-256"><a href="#cb11-256" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- - `df.idxmax()` / `df["col"].idxmax()` — index position of the maximum --&gt;</span></span>
+<span id="cb11-257"><a href="#cb11-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-258"><a href="#cb11-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-259"><a href="#cb11-259" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- </span><span class="al">###</span><span class="co"> Derived Columns &amp; String Methods --&gt;</span></span>
+<span id="cb11-260"><a href="#cb11-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-261"><a href="#cb11-261" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | Command                             | Purpose                                                 | --&gt;</span></span>
+<span id="cb11-262"><a href="#cb11-262" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | ----------------------------------- | ------------------------------------------------------- | --&gt;</span></span>
+<span id="cb11-263"><a href="#cb11-263" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | `df["new"] = df["old"].apply(len)`  | Apply a Python function (like `len`) to a column.       | --&gt;</span></span>
+<span id="cb11-264"><a href="#cb11-264" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | `df["col"].str.contains("pattern")` | True/False depending on whether a regex pattern occurs. | --&gt;</span></span>
+<span id="cb11-265"><a href="#cb11-265" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | `df["col"].astype(str)`             | Ensure all values are treated as strings.               | --&gt;</span></span>
+<span id="cb11-266"><a href="#cb11-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-267"><a href="#cb11-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-268"><a href="#cb11-268" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- </span><span class="al">###</span><span class="co"> Sorting &amp; Exporting --&gt;</span></span>
+<span id="cb11-269"><a href="#cb11-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-270"><a href="#cb11-270" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | Command                                  | Purpose                       | --&gt;</span></span>
+<span id="cb11-271"><a href="#cb11-271" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | ---------------------------------------- | ----------------------------- | --&gt;</span></span>
+<span id="cb11-272"><a href="#cb11-272" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | `df.sort_values("col")`                  | Sort by a column (ascending). | --&gt;</span></span>
+<span id="cb11-273"><a href="#cb11-273" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | `df.sort_values("col", ascending=False)` | Sort descending.              | --&gt;</span></span>
+<span id="cb11-274"><a href="#cb11-274" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | `df.to_csv("filename.csv", index=False)` | Save to a CSV file.           | --&gt;</span></span>
+<span id="cb11-275"><a href="#cb11-275" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | `pd.read_csv("filename.csv")`            | Load a CSV file.              | --&gt;</span></span>
+<span id="cb11-276"><a href="#cb11-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-277"><a href="#cb11-277" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- </span><span class="al">###</span><span class="co"> Common Helpers --&gt;</span></span>
+<span id="cb11-278"><a href="#cb11-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-279"><a href="#cb11-279" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | Command                   | Purpose                               | --&gt;</span></span>
+<span id="cb11-280"><a href="#cb11-280" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | ------------------------- | ------------------------------------- | --&gt;</span></span>
+<span id="cb11-281"><a href="#cb11-281" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | `len(df)`                 | Number of rows in the DataFrame.      | --&gt;</span></span>
+<span id="cb11-282"><a href="#cb11-282" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | `len(df["col"].unique())` | Number of unique entries in a column. | --&gt;</span></span>
+<span id="cb11-283"><a href="#cb11-283" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | `df.isna().sum()`         | Count missing values per column.      | --&gt;</span></span>
+<span id="cb11-284"><a href="#cb11-284" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- | `df.dtypes`               | Show data types of all columns.       | --&gt;</span></span>
+<span id="cb11-285"><a href="#cb11-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-286"><a href="#cb11-286" aria-hidden="true" tabindex="-1"></a><span class="fu">## Appendix — Quick `pd` Reference</span></span>
+<span id="cb11-287"><a href="#cb11-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-288"><a href="#cb11-288" aria-hidden="true" tabindex="-1"></a>Use this appendix as a quick guide to common pandas operations.  </span>
+<span id="cb11-289"><a href="#cb11-289" aria-hidden="true" tabindex="-1"></a>It’s not exhaustive, but includes everything you’ll need for HW6 and future assignments.</span>
+<span id="cb11-290"><a href="#cb11-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-291"><a href="#cb11-291" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb11-292"><a href="#cb11-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-293"><a href="#cb11-293" aria-hidden="true" tabindex="-1"></a><span class="fu">### Inspecting Your DataFrame</span></span>
+<span id="cb11-294"><a href="#cb11-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-295"><a href="#cb11-295" aria-hidden="true" tabindex="-1"></a>| Command | Description |</span>
+<span id="cb11-296"><a href="#cb11-296" aria-hidden="true" tabindex="-1"></a>|----------|--------------|</span>
+<span id="cb11-297"><a href="#cb11-297" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df.head()`</span> / <span class="in">`df.tail()`</span> | Show the first / last 5 rows. |</span>
+<span id="cb11-298"><a href="#cb11-298" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df.shape`</span> | Returns <span class="in">`(rows, columns)`</span>. |</span>
+<span id="cb11-299"><a href="#cb11-299" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df.info()`</span> | Displays column names, types, and non-null counts. |</span>
+<span id="cb11-300"><a href="#cb11-300" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df.columns`</span> | Lists all column names. |</span>
+<span id="cb11-301"><a href="#cb11-301" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df.describe()`</span> / <span class="in">`df.describe(include='all')`</span> | Summary stats for numeric / all columns. |</span>
+<span id="cb11-302"><a href="#cb11-302" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df.isna().sum()`</span> / <span class="in">`df.notna().sum()`</span> | Count missing or non-missing values. |</span>
+<span id="cb11-303"><a href="#cb11-303" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df.dtypes`</span> | Displays the data type of each column. |</span>
+<span id="cb11-304"><a href="#cb11-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-305"><a href="#cb11-305" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb11-306"><a href="#cb11-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-307"><a href="#cb11-307" aria-hidden="true" tabindex="-1"></a><span class="fu">### Selecting &amp; Filtering Rows</span></span>
+<span id="cb11-308"><a href="#cb11-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-309"><a href="#cb11-309" aria-hidden="true" tabindex="-1"></a>| Command | Description |</span>
+<span id="cb11-310"><a href="#cb11-310" aria-hidden="true" tabindex="-1"></a>|----------|-------------|</span>
+<span id="cb11-311"><a href="#cb11-311" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df["col"]`</span> | Select one column (returns a Series). |</span>
+<span id="cb11-312"><a href="#cb11-312" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df[["col1","col2"]]`</span> | Select multiple columns. |</span>
+<span id="cb11-313"><a href="#cb11-313" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df[df["col"] == "value"]`</span> | Filter rows where the condition is true. |</span>
+<span id="cb11-314"><a href="#cb11-314" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df[(df["col1"] == "x") &amp; (df["col2"] == "y")]`</span> | Combine filters with AND (<span class="in">`&amp;`</span>). |</span>
+<span id="cb11-315"><a href="#cb11-315" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df[(df["col1"] == "x") | (df["col2"] == "y")]`</span> | Combine filters with OR (<span class="in">`|`</span>). |</span>
+<span id="cb11-316"><a href="#cb11-316" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df.query("SegmentClass == 'vowel' and LanguageName == 'English'")`</span> | Alternate syntax for filtering with queries. |</span>
+<span id="cb11-317"><a href="#cb11-317" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df.drop_duplicates(subset=["col"])`</span> | Remove duplicate rows based on one column. |</span>
+<span id="cb11-318"><a href="#cb11-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-319"><a href="#cb11-319" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb11-320"><a href="#cb11-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-321"><a href="#cb11-321" aria-hidden="true" tabindex="-1"></a><span class="fu">### Summaries &amp; Aggregations</span></span>
+<span id="cb11-322"><a href="#cb11-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-323"><a href="#cb11-323" aria-hidden="true" tabindex="-1"></a>| Command | Description |</span>
+<span id="cb11-324"><a href="#cb11-324" aria-hidden="true" tabindex="-1"></a>|----------|-------------|</span>
+<span id="cb11-325"><a href="#cb11-325" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df["col"].value_counts()`</span> | Frequency of unique values. |</span>
+<span id="cb11-326"><a href="#cb11-326" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df["col"].unique()`</span> | List of all unique values. |</span>
+<span id="cb11-327"><a href="#cb11-327" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df["col"].nunique()`</span> | Number of unique values. |</span>
+<span id="cb11-328"><a href="#cb11-328" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df["num_col"].sum()`</span> | Sum of numeric values in a column. |</span>
+<span id="cb11-329"><a href="#cb11-329" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df["num_col"].mean()`</span> / <span class="in">`.median()`</span> / <span class="in">`.min()`</span> / <span class="in">`.max()`</span> / <span class="in">`.std()`</span> | Basic statistics for numeric columns. |</span>
+<span id="cb11-330"><a href="#cb11-330" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df["bool_col"]).sum()`</span> | Count of <span class="in">`True`</span> values (since <span class="in">`True`</span>=1). |</span>
+<span id="cb11-331"><a href="#cb11-331" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df.groupby("col").size()`</span> | Count rows per group. |</span>
+<span id="cb11-332"><a href="#cb11-332" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df.groupby("col")["num_col"].agg(["count","mean","min","max"])`</span> | Multiple summary stats by group. |</span>
+<span id="cb11-333"><a href="#cb11-333" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df.idxmax()`</span> / <span class="in">`df["col"].idxmax()`</span> | Index position of the maximum value. |</span>
+<span id="cb11-334"><a href="#cb11-334" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-335"><a href="#cb11-335" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb11-336"><a href="#cb11-336" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-337"><a href="#cb11-337" aria-hidden="true" tabindex="-1"></a><span class="fu">### String Operations &amp; Derived Columns</span></span>
+<span id="cb11-338"><a href="#cb11-338" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-339"><a href="#cb11-339" aria-hidden="true" tabindex="-1"></a>| Command | Description |</span>
+<span id="cb11-340"><a href="#cb11-340" aria-hidden="true" tabindex="-1"></a>|----------|-------------|</span>
+<span id="cb11-341"><a href="#cb11-341" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df["col"].astype(str)`</span> | Convert column to strings. |</span>
+<span id="cb11-342"><a href="#cb11-342" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df["col"].str.contains("pattern", case=False, na=False)`</span> | True/False if pattern appears in each string. |</span>
+<span id="cb11-343"><a href="#cb11-343" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df["col"].str.len()`</span> | Length of each string. |</span>
+<span id="cb11-344"><a href="#cb11-344" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df["col"].str.lower()`</span> / <span class="in">`.str.upper()`</span> / <span class="in">`.str.strip()`</span> | Common string transformations. |</span>
+<span id="cb11-345"><a href="#cb11-345" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df["col"].str.replace("a","b",regex=True)`</span> | Replace text using regex. |</span>
+<span id="cb11-346"><a href="#cb11-346" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df["new"] = df["old"].apply(func)`</span> | Apply a Python function to each value. |</span>
+<span id="cb11-347"><a href="#cb11-347" aria-hidden="true" tabindex="-1"></a>| <span class="in">`pd.to_numeric(df["col"], errors="coerce")`</span> | Convert strings to numbers (invalids → NaN). |</span>
+<span id="cb11-348"><a href="#cb11-348" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-349"><a href="#cb11-349" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb11-350"><a href="#cb11-350" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-351"><a href="#cb11-351" aria-hidden="true" tabindex="-1"></a><span class="fu">### Sorting, Indexing, and Exporting</span></span>
+<span id="cb11-352"><a href="#cb11-352" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-353"><a href="#cb11-353" aria-hidden="true" tabindex="-1"></a>| Command | Description |</span>
+<span id="cb11-354"><a href="#cb11-354" aria-hidden="true" tabindex="-1"></a>|----------|-------------|</span>
+<span id="cb11-355"><a href="#cb11-355" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df.sort_values(["col1","col2"], ascending=[True, False])`</span> | Sort by one or more columns. |</span>
+<span id="cb11-356"><a href="#cb11-356" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df.sort_index()`</span> | Sort by index labels. |</span>
+<span id="cb11-357"><a href="#cb11-357" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df.reset_index(drop=True)`</span> | Reset index after filtering/sorting. |</span>
+<span id="cb11-358"><a href="#cb11-358" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df.to_csv("file.csv", index=False)`</span> | Save DataFrame as a CSV file. |</span>
+<span id="cb11-359"><a href="#cb11-359" aria-hidden="true" tabindex="-1"></a>| <span class="in">`pd.read_csv("file.csv")`</span> | Load a CSV file into a DataFrame. |</span>
+<span id="cb11-360"><a href="#cb11-360" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-361"><a href="#cb11-361" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb11-362"><a href="#cb11-362" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-363"><a href="#cb11-363" aria-hidden="true" tabindex="-1"></a><span class="fu">### Handy Python + pandas Patterns</span></span>
+<span id="cb11-364"><a href="#cb11-364" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-365"><a href="#cb11-365" aria-hidden="true" tabindex="-1"></a>| Command | Description |</span>
+<span id="cb11-366"><a href="#cb11-366" aria-hidden="true" tabindex="-1"></a>|----------|-------------|</span>
+<span id="cb11-367"><a href="#cb11-367" aria-hidden="true" tabindex="-1"></a>| <span class="in">`len(df)`</span> | Number of rows. |</span>
+<span id="cb11-368"><a href="#cb11-368" aria-hidden="true" tabindex="-1"></a>| <span class="in">`len(set(df["col"]))`</span> | Number of unique items (pure Python). |</span>
+<span id="cb11-369"><a href="#cb11-369" aria-hidden="true" tabindex="-1"></a>| <span class="in">`(df["col"] == "x").sum()`</span> | Count rows where condition is True. |</span>
+<span id="cb11-370"><a href="#cb11-370" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df["num_col"].between(10, 20)`</span> | Filter rows with values in a range. |</span>
+<span id="cb11-371"><a href="#cb11-371" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-372"><a href="#cb11-372" aria-hidden="true" tabindex="-1"></a>---</span>
+</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

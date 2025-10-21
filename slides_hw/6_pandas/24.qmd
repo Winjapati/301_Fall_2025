@@ -16,6 +16,11 @@ jupyter: python3
 editor: source
 ---
 
+<!-- FOR NEXT TIME: -->
+
+<!-- - section after review activity too dull -->
+<!-- - final activity modified to give students the values of vowel features immeiately, since it took too long in class  -->
+
 # Review
 
 -   What did you learn last time?
@@ -179,20 +184,25 @@ int(df["speakers_millions"].sum())
 
 ## Activity: English Vowels
 
-- Copy the below code, and complete the values for "height", "backness", "tense", and "roundedness"
+- The below code includes values for "height", "backness", "tense", and "roundedness" of the English vowel system.
 ``` python
 import pandas as pd
 
 eng_vowels = pd.DataFrame({
     "symbol": ["i", "ɪ", "e", "ɛ", "æ", "u", "ʊ", "o", "ɔ", "ɑ", "ʌ", "ə"],
-    "height": [], #choose from "high", "mid", and "low"
-    "backness": [], # choose from "front", "back", and "central"
-    "tense":   [], #choose from True or False
-    "rounded": [], #choose from True or False
+    "height": ["high", "high", "mid", "mid", "low", "high", "high", "mid", "mid", "low", "mid", "mid"],
+    "backness": ["front", "front", "front", "front", "front",
+                 "back", "back", "back", "back", "back",
+                 "central", "central"],
+    "tense":   [True, False, True, False, False,
+                True, False, True, False, False,
+                False, False],
+    "rounded": [False, False, False, False, False,
+                True, True, True, True, False,
+                False, False]
 })
-
-eng_vowels
 ```
+
 
 ## Activity: English Vowels
 

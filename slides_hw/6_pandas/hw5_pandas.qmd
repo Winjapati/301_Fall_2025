@@ -1,5 +1,0 @@
----
-title: "hw5_pandas"
-format: html
----
-

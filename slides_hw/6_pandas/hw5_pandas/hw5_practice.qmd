@@ -1,0 +1,47 @@
+---
+title: "hw5_practice"
+format: html
+---
+
+```{python}
+from pyconcepticon import Concepticon
+
+concepticon = Concepticon('/path/to/concepticon-data')  # local clone of repo
+concepts = concepticon.conceptlists['Swadesh-1952-200']  # Example list
+print(len(concepts.concepts))
+```
+
+```{python}
+import pandas as pd
+
+df = pd.read_csv("https://github.com/phoible/dev/blob/master/data/phoible.csv?raw=true")
+
+print(len(df))
+
+df.info()
+df.columns
+df.describe(include='all').T
+```
+
+
+
+```{python}
+df["LanguageName"].nunique()
+```
+
+
+```{python}
+inv_counts = df["LanguageName"].value_counts()
+english = df[df["SegmentClass"] == "vowel"]
+inv_counts.head(10)
+english
+```
+
+
+```{python}
+import pandas as pd
+tones = df[df["Tone"] == True].groupby("LanguageName")["Tone"].count().sort_values(ascending=False)
+tones.head(10)
+
+```
+
