@@ -15,27 +15,27 @@ execute:
 fontsize: 12pt
 ---
 
-> **Goal:** Practice loading a real linguistic dataset (PHOIBLE) into pandas, inspecting structure, filtering, grouping, adding derived columns, and exporting a CSV for later use.
+> **Goal:** Practice loading a real linguistic dataset ([PHOIBLE](https://phoible.org/)) into pandas, inspecting structure, filtering, grouping, adding derived columns, and exporting a `.csv` for later use.
 
 > **Instructions:** Fill out this `.qmd` file and submit as `hw5_lastname_firstname.qmd` to Canvas.
 
 > **Tip:** I've compiled a fairly large appendix of pandas methods at the end of this document. Look through it if you're stuck about how to proceed in the homework.
 
-## Step 0 — Setup & Load
+## Step 0 — Setup, Load, and Clean
 
-Load up the csv using the below code. Note that you can download the .csv file, save it locally, and load it that way, or load it directly from the website `.csv` file.
+Load up the `.csv` using the below code. Note that you can download the `.csv` file, save it locally, and load it that way, or load it directly from the website.
 
-```{python}
+``` python
 import pandas as pd
 
 url = "https://github.com/phoible/dev/blob/master/data/phoible.csv?raw=true"
-df = pd.read_csv(url)
+df = pd.read_csv(url, low_memory=False)
 df.head()
 ```
 
-You're also going to run the below code block that will replace all "+" values with `True`, and "-" with `False`.
+You're also going to run the below code block that will replace all "+" values with `True`, and "-" with `False`. After cleaning, feature columns like `tone`, `nasal`, and `continuant` should be booleans.
 
-```{python}
+``` python
 
 import pandas as pd
 import numpy as np
@@ -66,47 +66,33 @@ def plus_any_to_bool(x):
     return any('+' in tok for tok in re.split(r'[,\s]+', s) if tok != "")
 
 df[feature_cols] = df[feature_cols].applymap(plus_any_to_bool).astype("boolean")
+
+# Confirm that it works: feature columns should now be True/False (nullable boolean)
+df[["tone","nasal","continuant","delayedRelease"]].dtypes
+df[["tone","nasal","continuant","delayedRelease"]].head(3)
 ```
 
-
-
-## Step 1 — Inspect the DataFrame, Clean the Data
+## Step 1 — Inspect the DataFrame
 
 In an executable cell, write code that identifies:
 
-1) How many **rows** and **columns** are in the dataset; 
-2) **Column names**; 
-3) The type of **index** the `df` has created, if any
+1)  How many **rows** and **columns** are in the dataset;
+2)  **Column names**;
+3)  The type of **index** the `df` has created, if any
 
 ## Step 2 — Basic Exploration
 
 In an executable cell, write code that completes each of the below tasks and shows the relevant output only (i.e, avoid printing the whole df).
 
-1) How many **distinct languages** are represented?  
-2) Which **language** has the **largest inventory**? (To figure this out you need to filter out unique phonemes, and sort the values in descending order)  
-3) Display only rows where **SegmentClass** is `"vowel"`.  
-4) What’s the most common **Manner** of articulation? You'll be examining the frequency of sounds in the following list:
+1)  How many **distinct languages** are represented?\
+2)  Which **language** has the **largest inventory**? (hint: group by `LanguageName` and count unique `Phoneme`, then sort descending.)”
+3)  Display only rows where **SegmentClass** is `"vowel"`.
+4)  How many **unique languages with tones** are listed in PHOIBLE? (hint: group by `LanguageName` and use `.any()` on tone to flag languages that have at least one tone segment)
+5)  What is the most common **manner** of articulation (stops, fricatives, etc.)? PHOIBLE doesn't encode manner using these terms; rather, it encodes manner via boolean features. We'll use these within a `dict` to create more well known natural classes.
 
-Note: there is not one single **manner** column, rather the columns listed here:
-
-**IDENTIFY CLASSES**
-
-
-
-```python
-manner_features = ["nasal", "trill", "tap", "approximant", "continuant", "lateral"]
-```
-
-5) How many **languages with tones** are listed in Phoible?
-
-```{python}
-# 2.4 Your code
-
-
-df.columns
-## identifying natural classes
+``` python
 # Traditional natural classes using PHOIBLE boolean features
-classes = {
+nat_classes = {
     "stop": (df["continuant"] == False) & (df["delayedRelease"] == False),
     "affricate": (df["continuant"] == False) & (df["delayedRelease"] == True),
     "fricative": (df["continuant"] == True) & (df["delayedRelease"] == True),
@@ -116,171 +102,76 @@ classes = {
     "tap": df["tap"] == True,
     "vowel": (df["approximant"] == True) & (df["syllabic"] == True),
 }
-
-# Example: count how many phonemes per class
-for name, mask in classes.items():
-    print(f"{name:10s} → {mask.sum():>6} segments")
-##
-
-df.groupby("LanguageName")["continuant"].mean()
-
 ```
 
-```{python}
+## Step 3 — Derived Columns
 
+Build a new `df`, that contains **at least two** new columns for the Phoible `df`. You may select from the below ideas, or come up with your own.
 
-```
-
-## Step 3 — Derived Columns (add at least TWO)
-
-Create **at least two** helpful columns. Example ideas (pick any two or more):
-
-- `IsVowel` — True if `SegmentClass` is `"vowel"`.  
-- `HasDiacritic` — True if `Phoneme` contains common diacritics (e.g., `ː ʰ ʷ ʼ ̃`).  
-- `PhonemeLength` — character length of the `Phoneme` string.
-
-::: {.callout-hint}
-Useful tools: `.str.contains(...)`, `.astype(str).apply(len)`, boolean expressions.
-:::
-
-```{python}
-# Create your derived columns here
-```
-
-```{python}
-# Preview your new columns (first ~10 rows)
-```
+-   `IsVowel` — True if `SegmentClass` is `"vowel"`.\
+-   `HasDiacritic` — True if `Phoneme` contains common diacritics (e.g., `ː ʰ ʷ ʼ ̃`).\
+-   `PhonemeLength` — character length of the `Phoneme` string.
 
 ## Step 4 — Focus on One Language
 
-Pick one language (e.g., **Ancient Greek**, **English**, **Yoruba**, **Quechua**). Within an executable cell, write code that
+Pick one language (e.g., **Ancient Greek**, **English**, **Yoruba**, **Quechua**). Within an executable cell, write code that:
 
-1) Performs the following tasks:
+a)  Filters the DataFrame to only that language.\
+b)  Identifies how many **total segments** are in the language.
+c)  Identifies how many **vowels vs. consonants** are in the language.\
+d)  Identifies the most frequent **places** and **manners** of articulation in your language. You should use the above `nat_classes` dictionary, as well as the following `dict`:
 
-a) Filter the DataFrame to only that language.  
-b) How many **total segments**?  
-c) How many **vowels vs. consonants**?  
-d) What are the most frequent **Places** or **Manners** of articulation?
-
-2) **Exports** your filtered DataFrame as `phoible_output.csv`.
-
-```{python}
-# 4.x Your code here
+``` python
+places = {
+    "bilabial": (df["labial"] == True) & (df["labiodental"] == False),
+    "labiodental": (df["labiodental"] == True),
+    "dental": (df["coronal"] == True) & (df["anterior"] == True) & (df["distributed"] == False),
+    "alveolar": (df["coronal"] == True) & (df["anterior"] == True) & (df["distributed"] == True),
+    "postalveolar": (df["coronal"] == True) & (df["anterior"] == False) & (df["distributed"] == True),
+    "retroflex": (df["coronal"] == True) & (df["anterior"] == False) & (df["distributed"] == False),
+    "palatal": (df["dorsal"] == True) & (df["high"] == True) & (df["front"] == True),
+    "velar": (df["dorsal"] == True) & (df["back"] == True) & (df["high"] == False),
+    "uvular": (df["dorsal"] == True) & (df["back"] == True) & (df["low"] == True),
+    "pharyngeal": (df["retractedTongueRoot"] == True),  # heuristic proxy
+    "glottal": ((df["spreadGlottis"] == True) | (df["constrictedGlottis"] == True)) &
+               (df["SegmentClass"].astype(str).str.lower() != "vowel")
+}
 ```
 
-```{python}
-# Export
-```
+e)  **Exports** your filtered DataFrame as `phoible_output.csv`.
 
 ## Step 5 — Short Reflection (3–5 sentences)
 
-- What patterns did you notice in your language’s inventory?  
-- Any surprises in vowels/consonants/tones?  
-- How might PHOIBLE connect to your project’s goals?
+-   What patterns did you notice in your language’s inventory?\
+-   Were there any surprises in your investigation?\
+-   How might PHOIBLE connect to your project’s goals, if at all?
 
 *(Write here in markdown.)*
 
----
+## Grading (100 points total)
 
----
-
-## Grading (20 pts)
-
-| Component | Points |
-|---|---:|
-| Load dataset successfully | 2 |
-| Inspect & describe dataset | 3 |
-| Complete main exploration tasks | 7 |
-| Add & display ≥2 derived columns | 4 |
-| Language-focused analysis & export | 2 |
-| Reflection | 2 |
-
-<!-- ## Appendix: Quick `pd` Reference -->
-
-<!-- ### Inspecting your `df` -->
-
-<!-- | Command                      | Purpose                                                    | -->
-<!-- | ---------------------------- | ---------------------------------------------------------- | -->
-<!-- | `df.head()`                  | Show the first 5 rows of the DataFrame.                    | -->
-<!-- | `df.tail()`                  | Show the last 5 rows.                                      | -->
-<!-- | `df.shape`                   | Returns a tuple of (rows, columns).                        | -->
-<!-- | `df.info()`                  | Overview of column names, data types, and non-null counts. | -->
-<!-- | `df.columns`                 | Lists all column names.                                    | -->
-<!-- | `df.describe()`              | Summary stats (works for numeric columns).                 | -->
-<!-- | `df.describe(include='all')` | Summary of all columns, including text.                    | -->
-
-<!-- ### Selecting Data -->
-
-<!-- | Command                | Purpose                                    | -->
-<!-- | ---------------------- | ------------------------------------------ | -->
-<!-- | `df["ColumnName"]`     | Select a single column (returns a Series). | -->
-<!-- | `df[["Col1", "Col2"]]` | Select multiple columns.                   | -->
-<!-- | `df.loc[row_index]`    | Access a row by its label.                 | -->
-<!-- | `df.iloc[row_index]`   | Access a row by its position.              | -->
-
-<!-- ### Filtering & Boolean Logic -->
-
-<!-- | Command                                         | Purpose                                 |                          | -->
-<!-- | ----------------------------------------------- | --------------------------------------- | ------------------------ | -->
-<!-- | `df[df["col"] == "value"]`                      | Filter rows that match a value.         |                          | -->
-<!-- | `df[df["col"] != "value"]`                      | Filter rows that *don’t* match a value. |                          | -->
-<!-- | `df[(df["col1"] == "x") & (df["col2"] == "y")]` | Combine multiple conditions (AND).      |                          | -->
-<!-- | `df[(df["col1"] == "x")                         | (df["col2"] == "y")]`                   | Combine conditions (OR). | -->
-
-<!-- ### Summaries & Counts -->
-
-<!-- | Command                                 | Purpose                                                 | -->
-<!-- | --------------------------------------- | ------------------------------------------------------- | -->
-<!-- | `df["col"].value_counts()`              | Counts how many times each unique value occurs.         | -->
-<!-- | `df["col"].unique()`                    | Lists all unique values.                                | -->
-<!-- | `df["col"].nunique()`                   | Counts the number of unique values.                     | -->
-<!-- | `df.groupby("col").count()`             | Groups rows by one column and counts within each group. | -->
-<!-- | `df.groupby("col")["other_col"].mean()` | Groups and takes the mean of another column.            | -->
-<!-- | `df["bool_col"].sum()` | count of `True` (since `True==1`, `False==0`) | -->
-<!-- - `df["num_col"].sum()` / `.mean()` / `.median()` / `.min()` / `.max()` / `.std()` -->
-<!-- - `df.groupby("col").size()` — group counts -->
-<!-- - `df.groupby("col")["num_col"].agg(["count","mean","min","max"])` -->
-<!-- - `df.idxmax()` / `df["col"].idxmax()` — index position of the maximum -->
-
-
-<!-- ### Derived Columns & String Methods -->
-
-<!-- | Command                             | Purpose                                                 | -->
-<!-- | ----------------------------------- | ------------------------------------------------------- | -->
-<!-- | `df["new"] = df["old"].apply(len)`  | Apply a Python function (like `len`) to a column.       | -->
-<!-- | `df["col"].str.contains("pattern")` | True/False depending on whether a regex pattern occurs. | -->
-<!-- | `df["col"].astype(str)`             | Ensure all values are treated as strings.               | -->
-
-
-<!-- ### Sorting & Exporting -->
-
-<!-- | Command                                  | Purpose                       | -->
-<!-- | ---------------------------------------- | ----------------------------- | -->
-<!-- | `df.sort_values("col")`                  | Sort by a column (ascending). | -->
-<!-- | `df.sort_values("col", ascending=False)` | Sort descending.              | -->
-<!-- | `df.to_csv("filename.csv", index=False)` | Save to a CSV file.           | -->
-<!-- | `pd.read_csv("filename.csv")`            | Load a CSV file.              | -->
-
-<!-- ### Common Helpers -->
-
-<!-- | Command                   | Purpose                               | -->
-<!-- | ------------------------- | ------------------------------------- | -->
-<!-- | `len(df)`                 | Number of rows in the DataFrame.      | -->
-<!-- | `len(df["col"].unique())` | Number of unique entries in a column. | -->
-<!-- | `df.isna().sum()`         | Count missing values per column.      | -->
-<!-- | `df.dtypes`               | Show data types of all columns.       | -->
+| Component                   |  Points |
+|-----------------------------|--------:|
+| Step 0 — Setup & Cleaning   |      10 |
+| Step 1 — Inspection         |      10 |
+| Step 2 — Exploration        |      25 |
+| Step 3 — Derived Columns    |      10 |
+| Step 4 — Language Analysis  |      25 |
+| Step 5 — Reflection         |      10 |
+| Code Quality & Presentation |      10 |
+| **Total**                   | **100** |
 
 ## Appendix — Quick `pd` Reference
 
-Use this appendix as a quick guide to common pandas operations.  
+Use this appendix as a quick guide to common pandas operations.\
 It’s not exhaustive, but includes everything you’ll need for HW6 and future assignments.
 
----
+------------------------------------------------------------------------
 
 ### Inspecting Your DataFrame
 
 | Command | Description |
-|----------|--------------|
+|------------------------------|------------------------------------------|
 | `df.head()` / `df.tail()` | Show the first / last 5 rows. |
 | `df.shape` | Returns `(rows, columns)`. |
 | `df.info()` | Displays column names, types, and non-null counts. |
@@ -289,12 +180,12 @@ It’s not exhaustive, but includes everything you’ll need for HW6 and future 
 | `df.isna().sum()` / `df.notna().sum()` | Count missing or non-missing values. |
 | `df.dtypes` | Displays the data type of each column. |
 
----
+------------------------------------------------------------------------
 
 ### Selecting & Filtering Rows
 
 | Command | Description |
-|----------|-------------|
+|-------------------------------|----------------------------------------|
 | `df["col"]` | Select one column (returns a Series). |
 | `df[["col1","col2"]]` | Select multiple columns. |
 | `df[df["col"] == "value"]` | Filter rows where the condition is true. |
@@ -303,28 +194,28 @@ It’s not exhaustive, but includes everything you’ll need for HW6 and future 
 | `df.query("SegmentClass == 'vowel' and LanguageName == 'English'")` | Alternate syntax for filtering with queries. |
 | `df.drop_duplicates(subset=["col"])` | Remove duplicate rows based on one column. |
 
----
+------------------------------------------------------------------------
 
 ### Summaries & Aggregations
 
 | Command | Description |
-|----------|-------------|
+|-------------------------------|----------------------------------------|
 | `df["col"].value_counts()` | Frequency of unique values. |
 | `df["col"].unique()` | List of all unique values. |
 | `df["col"].nunique()` | Number of unique values. |
 | `df["num_col"].sum()` | Sum of numeric values in a column. |
 | `df["num_col"].mean()` / `.median()` / `.min()` / `.max()` / `.std()` | Basic statistics for numeric columns. |
-| `df["bool_col"]).sum()` | Count of `True` values (since `True`=1). |
+| `df["bool_col"].sum()` | Count of `True` values (since `True`=1). |
 | `df.groupby("col").size()` | Count rows per group. |
 | `df.groupby("col")["num_col"].agg(["count","mean","min","max"])` | Multiple summary stats by group. |
 | `df.idxmax()` / `df["col"].idxmax()` | Index position of the maximum value. |
 
----
+------------------------------------------------------------------------
 
 ### String Operations & Derived Columns
 
 | Command | Description |
-|----------|-------------|
+|-------------------------------|----------------------------------------|
 | `df["col"].astype(str)` | Convert column to strings. |
 | `df["col"].str.contains("pattern", case=False, na=False)` | True/False if pattern appears in each string. |
 | `df["col"].str.len()` | Length of each string. |
@@ -333,27 +224,27 @@ It’s not exhaustive, but includes everything you’ll need for HW6 and future 
 | `df["new"] = df["old"].apply(func)` | Apply a Python function to each value. |
 | `pd.to_numeric(df["col"], errors="coerce")` | Convert strings to numbers (invalids → NaN). |
 
----
+------------------------------------------------------------------------
 
 ### Sorting, Indexing, and Exporting
 
 | Command | Description |
-|----------|-------------|
+|-------------------------------|----------------------------------------|
 | `df.sort_values(["col1","col2"], ascending=[True, False])` | Sort by one or more columns. |
 | `df.sort_index()` | Sort by index labels. |
 | `df.reset_index(drop=True)` | Reset index after filtering/sorting. |
 | `df.to_csv("file.csv", index=False)` | Save DataFrame as a CSV file. |
 | `pd.read_csv("file.csv")` | Load a CSV file into a DataFrame. |
 
----
+------------------------------------------------------------------------
 
 ### Handy Python + pandas Patterns
 
-| Command | Description |
-|----------|-------------|
-| `len(df)` | Number of rows. |
-| `len(set(df["col"]))` | Number of unique items (pure Python). |
-| `(df["col"] == "x").sum()` | Count rows where condition is True. |
-| `df["num_col"].between(10, 20)` | Filter rows with values in a range. |
+| Command                         | Description                           |
+|---------------------------------|---------------------------------------|
+| `len(df)`                       | Number of rows.                       |
+| `len(set(df["col"]))`           | Number of unique items (pure Python). |
+| `(df["col"] == "x").sum()`      | Count rows where condition is True.   |
+| `df["num_col"].between(10, 20)` | Filter rows with values in a range.   |
 
----
+------------------------------------------------------------------------
