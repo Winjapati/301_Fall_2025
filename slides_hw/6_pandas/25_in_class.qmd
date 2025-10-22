@@ -283,9 +283,6 @@ sound_df = pd.DataFrame({
     "m": [18, 12, 17],
     "n": [22, 20, 19],
 })
-
-variable = sound_df["s"].add(sound_df["z"])
-variable
 ```
 
 
@@ -298,7 +295,7 @@ variable
 
 total_c = sound_df["s"].add(sound_df["z"]).add(sound_df["t"]).add(sound_df["k"]).add(sound_df["m"]).add(sound_df["n"])
 
-total_c_2
+total_c
 
 ```
 
@@ -309,6 +306,18 @@ total_c_2
 
 ```{python}
 
+import pandas as pd
+
+sound_df = pd.DataFrame({
+    "s": [35, 28, 40],
+    "z": [20, 25, 18],
+    "t": [50, 40, 53],
+    "k": [42, 35, 48],
+    "m": [18, 12, 17],
+    "n": [22, 20, 19],
+})
+
 sounds_total = sound_df.sum(axis=0)
-sounds_total
+answer = int(sounds_total["s"] + sounds_total["z"])
+print(answer)
 ```

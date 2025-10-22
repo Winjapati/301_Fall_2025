@@ -171,7 +171,7 @@ It’s not exhaustive, but includes everything you’ll need for HW6 and future 
 ### Inspecting Your DataFrame
 
 | Command | Description |
-|------------------------------|------------------------------------------|
+|----|----|
 | `df.head()` / `df.tail()` | Show the first / last 5 rows. |
 | `df.shape` | Returns `(rows, columns)`. |
 | `df.info()` | Displays column names, types, and non-null counts. |
@@ -185,7 +185,7 @@ It’s not exhaustive, but includes everything you’ll need for HW6 and future 
 ### Selecting & Filtering Rows
 
 | Command | Description |
-|-------------------------------|----------------------------------------|
+|----|----|
 | `df["col"]` | Select one column (returns a Series). |
 | `df[["col1","col2"]]` | Select multiple columns. |
 | `df[df["col"] == "value"]` | Filter rows where the condition is true. |
@@ -199,7 +199,7 @@ It’s not exhaustive, but includes everything you’ll need for HW6 and future 
 ### Summaries & Aggregations
 
 | Command | Description |
-|-------------------------------|----------------------------------------|
+|----|----|
 | `df["col"].value_counts()` | Frequency of unique values. |
 | `df["col"].unique()` | List of all unique values. |
 | `df["col"].nunique()` | Number of unique values. |
@@ -215,7 +215,7 @@ It’s not exhaustive, but includes everything you’ll need for HW6 and future 
 ### String Operations & Derived Columns
 
 | Command | Description |
-|-------------------------------|----------------------------------------|
+|----|----|
 | `df["col"].astype(str)` | Convert column to strings. |
 | `df["col"].str.contains("pattern", case=False, na=False)` | True/False if pattern appears in each string. |
 | `df["col"].str.len()` | Length of each string. |
@@ -229,7 +229,7 @@ It’s not exhaustive, but includes everything you’ll need for HW6 and future 
 ### Sorting, Indexing, and Exporting
 
 | Command | Description |
-|-------------------------------|----------------------------------------|
+|----|----|
 | `df.sort_values(["col1","col2"], ascending=[True, False])` | Sort by one or more columns. |
 | `df.sort_index()` | Sort by index labels. |
 | `df.reset_index(drop=True)` | Reset index after filtering/sorting. |

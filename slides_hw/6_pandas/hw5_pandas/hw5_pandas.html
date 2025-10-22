@@ -309,8 +309,8 @@ It’s not exhaustive, but includes everything you’ll need for HW6 and future 
 <h3 class="anchored" data-anchor-id="inspecting-your-dataframe">Inspecting Your DataFrame</h3>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 41%">
-<col style="width: 58%">
+<col style="width: 50%">
+<col style="width: 50%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -355,8 +355,8 @@ It’s not exhaustive, but includes everything you’ll need for HW6 and future 
 <h3 class="anchored" data-anchor-id="selecting-filtering-rows">Selecting &amp; Filtering Rows</h3>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 43%">
-<col style="width: 56%">
+<col style="width: 50%">
+<col style="width: 50%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -401,8 +401,8 @@ It’s not exhaustive, but includes everything you’ll need for HW6 and future 
 <h3 class="anchored" data-anchor-id="summaries-aggregations">Summaries &amp; Aggregations</h3>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 43%">
-<col style="width: 56%">
+<col style="width: 50%">
+<col style="width: 50%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -455,8 +455,8 @@ It’s not exhaustive, but includes everything you’ll need for HW6 and future 
 <h3 class="anchored" data-anchor-id="string-operations-derived-columns">String Operations &amp; Derived Columns</h3>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 43%">
-<col style="width: 56%">
+<col style="width: 50%">
+<col style="width: 50%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -501,8 +501,8 @@ It’s not exhaustive, but includes everything you’ll need for HW6 and future 
 <h3 class="anchored" data-anchor-id="sorting-indexing-and-exporting">Sorting, Indexing, and Exporting</h3>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 43%">
-<col style="width: 56%">
+<col style="width: 50%">
+<col style="width: 50%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1219,7 +1219,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb5-171"><a href="#cb5-171" aria-hidden="true" tabindex="-1"></a><span class="fu">### Inspecting Your DataFrame</span></span>
 <span id="cb5-172"><a href="#cb5-172" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-173"><a href="#cb5-173" aria-hidden="true" tabindex="-1"></a>| Command | Description |</span>
-<span id="cb5-174"><a href="#cb5-174" aria-hidden="true" tabindex="-1"></a>|------------------------------|------------------------------------------|</span>
+<span id="cb5-174"><a href="#cb5-174" aria-hidden="true" tabindex="-1"></a>|----|----|</span>
 <span id="cb5-175"><a href="#cb5-175" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df.head()`</span> / <span class="in">`df.tail()`</span> | Show the first / last 5 rows. |</span>
 <span id="cb5-176"><a href="#cb5-176" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df.shape`</span> | Returns <span class="in">`(rows, columns)`</span>. |</span>
 <span id="cb5-177"><a href="#cb5-177" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df.info()`</span> | Displays column names, types, and non-null counts. |</span>
@@ -1233,7 +1233,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb5-185"><a href="#cb5-185" aria-hidden="true" tabindex="-1"></a><span class="fu">### Selecting &amp; Filtering Rows</span></span>
 <span id="cb5-186"><a href="#cb5-186" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-187"><a href="#cb5-187" aria-hidden="true" tabindex="-1"></a>| Command | Description |</span>
-<span id="cb5-188"><a href="#cb5-188" aria-hidden="true" tabindex="-1"></a>|-------------------------------|----------------------------------------|</span>
+<span id="cb5-188"><a href="#cb5-188" aria-hidden="true" tabindex="-1"></a>|----|----|</span>
 <span id="cb5-189"><a href="#cb5-189" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df["col"]`</span> | Select one column (returns a Series). |</span>
 <span id="cb5-190"><a href="#cb5-190" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df[["col1","col2"]]`</span> | Select multiple columns. |</span>
 <span id="cb5-191"><a href="#cb5-191" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df[df["col"] == "value"]`</span> | Filter rows where the condition is true. |</span>
@@ -1247,7 +1247,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb5-199"><a href="#cb5-199" aria-hidden="true" tabindex="-1"></a><span class="fu">### Summaries &amp; Aggregations</span></span>
 <span id="cb5-200"><a href="#cb5-200" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-201"><a href="#cb5-201" aria-hidden="true" tabindex="-1"></a>| Command | Description |</span>
-<span id="cb5-202"><a href="#cb5-202" aria-hidden="true" tabindex="-1"></a>|-------------------------------|----------------------------------------|</span>
+<span id="cb5-202"><a href="#cb5-202" aria-hidden="true" tabindex="-1"></a>|----|----|</span>
 <span id="cb5-203"><a href="#cb5-203" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df["col"].value_counts()`</span> | Frequency of unique values. |</span>
 <span id="cb5-204"><a href="#cb5-204" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df["col"].unique()`</span> | List of all unique values. |</span>
 <span id="cb5-205"><a href="#cb5-205" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df["col"].nunique()`</span> | Number of unique values. |</span>
@@ -1263,7 +1263,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb5-215"><a href="#cb5-215" aria-hidden="true" tabindex="-1"></a><span class="fu">### String Operations &amp; Derived Columns</span></span>
 <span id="cb5-216"><a href="#cb5-216" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-217"><a href="#cb5-217" aria-hidden="true" tabindex="-1"></a>| Command | Description |</span>
-<span id="cb5-218"><a href="#cb5-218" aria-hidden="true" tabindex="-1"></a>|-------------------------------|----------------------------------------|</span>
+<span id="cb5-218"><a href="#cb5-218" aria-hidden="true" tabindex="-1"></a>|----|----|</span>
 <span id="cb5-219"><a href="#cb5-219" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df["col"].astype(str)`</span> | Convert column to strings. |</span>
 <span id="cb5-220"><a href="#cb5-220" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df["col"].str.contains("pattern", case=False, na=False)`</span> | True/False if pattern appears in each string. |</span>
 <span id="cb5-221"><a href="#cb5-221" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df["col"].str.len()`</span> | Length of each string. |</span>
@@ -1277,7 +1277,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb5-229"><a href="#cb5-229" aria-hidden="true" tabindex="-1"></a><span class="fu">### Sorting, Indexing, and Exporting</span></span>
 <span id="cb5-230"><a href="#cb5-230" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-231"><a href="#cb5-231" aria-hidden="true" tabindex="-1"></a>| Command | Description |</span>
-<span id="cb5-232"><a href="#cb5-232" aria-hidden="true" tabindex="-1"></a>|-------------------------------|----------------------------------------|</span>
+<span id="cb5-232"><a href="#cb5-232" aria-hidden="true" tabindex="-1"></a>|----|----|</span>
 <span id="cb5-233"><a href="#cb5-233" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df.sort_values(["col1","col2"], ascending=[True, False])`</span> | Sort by one or more columns. |</span>
 <span id="cb5-234"><a href="#cb5-234" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df.sort_index()`</span> | Sort by index labels. |</span>
 <span id="cb5-235"><a href="#cb5-235" aria-hidden="true" tabindex="-1"></a>| <span class="in">`df.reset_index(drop=True)`</span> | Reset index after filtering/sorting. |</span>

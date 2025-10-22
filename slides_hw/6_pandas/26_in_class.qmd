@@ -1,0 +1,241 @@
+---
+title: "26_in_class"
+format: html
+---
+
+```{python}
+import pandas as pd
+
+stops = {
+    "Language": ["English", "Spanish", "Hindi"],
+    "Nasals": [3, 3, 4],
+    "Oral Stops": [6, 6, 5]
+}
+
+df = pd.DataFrame(stops).set_index("Language")
+
+df.sum()
+total = df["Nasals"].add(df["Oral Stops"])
+total
+```
+
+
+
+
+
+
+
+
+
+```{python}
+import pandas as pd
+
+# Create the data
+data = {
+    "Consonant": ["p", "b", "t", "d", "k", "g", "s", "z", "m", "n", "l", "r", "w", "j", "h"],
+    "Place": ["bilabial", "bilabial", "alveolar", "alveolar", "velar", "velar",
+              "alveolar", "alveolar", "bilabial", "alveolar", "alveolar", "alveolar",
+              "labial-velar", "palatal", "glottal"],
+    "Manner": ["stop", "stop", "stop", "stop", "stop", "stop",
+               "fricative", "fricative", "nasal", "nasal", "lateral", "trill",
+               "glide", "glide", "fricative"],
+    "Voicing": ["voiceless", "voiced", "voiceless", "voiced", "voiceless", "voiced",
+                "voiceless", "voiced", "voiced", "voiced", "voiced", "voiced",
+                "voiced", "voiced", "voiceless"]
+}
+
+# Create DataFrame
+df = pd.DataFrame(data)
+
+# Show DataFrame
+print(df)
+
+# Save to CSV
+df.to_csv("conlang_c.csv", index=False)
+```
+
+
+
+
+
+```{python}
+stops = {
+    "Language": ["English", "Spanish", "Hindi"],
+    "Nasals": [3, 3, 4],
+    "Oral Stops": [6, 6, 5]
+}
+
+df = pd.DataFrame(stops).set_index("Language")
+
+df.to_csv("stops.csv", index=True)
+```
+
+
+
+
+```{python}
+import openpyxl
+import pandas as pd
+
+data = {
+    "Consonant": ["p", "b", "t", "d", "k", "g", "s", "z", "m", "n", "l", "r", "w", "j", "h"],
+    "Place": ["bilabial", "bilabial", "alveolar", "alveolar", "velar", "velar",
+              "alveolar", "alveolar", "bilabial", "alveolar", "alveolar", "alveolar",
+              "labial-velar", "palatal", "glottal"],
+    "Manner": ["stop", "stop", "stop", "stop", "stop", "stop",
+               "fricative", "fricative", "nasal", "nasal", "lateral", "trill",
+               "glide", "glide", "fricative"],
+    "Voicing": ["voiceless", "voiced", "voiceless", "voiced", "voiceless", "voiced",
+                "voiceless", "voiced", "voiced", "voiced", "voiced", "voiced",
+                "voiced", "voiced", "voiceless"]
+}
+
+# Create DataFrame
+df = pd.DataFrame(data)
+
+df.to_excel("conlang_c.xlsx", index=False)
+```
+
+
+
+```{python}
+stops_csv_df = pd.read_csv("conlang_c.csv")
+stops_csv_df.head()
+
+print("\n-------------------------------------\n")
+
+stops_excel_df = pd.read_excel("conlang_c.xlsx")
+stops_excel_df.head()
+```
+
+
+```{python}
+ref_df = pd.DataFrame({
+    "Language": ["Latin","Greek","Sanskrit","Gothic","OCS","Oscan"],
+    "Family":   ["Italic","Hellenic","Indic","Germanic","Slavic","Italic"],
+    "Reflexes": [8,10,12,4,3,5]
+})
+int(ref_df["Reflexes"].sum())
+```
+
+```{python}
+ref_df.groupby("Family")["Reflexes"].sum()
+```
+```{python}
+ref_df.groupby("Family").agg(
+    total=("Reflexes","sum"),
+    mean=("Reflexes","mean"),
+    n=("Reflexes","count")
+)
+```
+
+
+```{python}
+```python
+import pandas as pd
+
+df = pd.DataFrame({
+    "Language": ["English","German","Dutch","Spanish","Italian","French","Greek","Hindi","Bengali"],
+    "Family":   ["Germanic","Germanic","Germanic","Romance","Romance","Romance","Hellenic","Indic","Indic"],
+    "Consonants": [24, 25, 20, 17, 23, 22, 25, 33, 29],
+    "Vowels": [20, 16, 13, 5, 7, 15, 7, 11, 7]
+})
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Activity:
+
+```{python}
+import pandas as pd
+
+df = pd.DataFrame({
+    "Language": ["English","German","Dutch","Spanish","Italian","French","Greek","Hindi","Bengali"],
+    "Family":   ["Germanic","Germanic","Germanic","Romance","Romance","Romance","Hellenic","Indic","Indic"],
+    "Consonants": [24, 25, 20, 17, 23, 22, 25, 33, 29],
+    "Vowels": [20, 16, 13, 5, 7, 15, 7, 11, 7]
+})
+
+#1. Find the average number of consonants and vowels per family:
+
+df.groupby("Family").agg(
+    total_C=("Consonants","sum"),
+    total_V=("Vowels", "sum"),
+    avg_C=("Consonants","mean"),
+    avg_V=("Vowels", "mean"),
+    n=("Language","count")
+)
+```
+
+
+
+
+
+
+
+
+
+
+```{python}
+import matplotlib.pyplot as plt
+
+counts = ref_df.groupby("Family")["Reflexes"].sum()
+ax = counts.plot(kind="bar", title="Reflex Counts by Family")
+ax.set_xlabel("Family")
+ax.set_ylabel("Total Reflexes")
+
+plt.tight_layout()   # optional, avoids label cutoff
+plt.show()           # displays the plot
+```
+
+
+
+
+
+
+
+
+
+```{python}
+stops_csv_df = pd.read_csv("conlang_c.csv")
+stops_csv_df.head()
+
+stop_counts = stops_csv_df.groupby("Place").value_counts(df["Manner" == "stop"])
+stop_counts
+```
+
+```{python}
+
+import matplotlib.pyplot as plt
+
+stops_csv_df = pd.read_csv("conlang_c.csv")
+stop_counts = stops_csv_df["Place"].value_counts()
+stop_counts
+
+ax = stop_counts.plot(kind="bar", title="Consonant Counts by Place of Articulation")
+ax.set_xlabel("Place")
+ax.set_ylabel("Number of Consonants")
+
+plt.tight_layout()   # optional, avoids label cutoff
+plt.show()           # displays the plot
+
+```
+
+
+
+
+
+

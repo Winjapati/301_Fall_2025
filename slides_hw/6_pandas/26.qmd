@@ -33,9 +33,11 @@ editor: source
 
 ## Review Activity
 
--   Import the following data as a `.DataFrame()`
+-   Import the following data as a `.DataFrame()`, setting the "Language" Series as the index.
 
 ```python
+import pandas as pd
+
 stops = {
     "Language": ["English", "Spanish", "Hindi"],
     "Nasals": [3, 3, 4],
@@ -89,6 +91,9 @@ df.to_csv("conlang_c.csv", index=False)
 - You can also write Excel files, but you have to `pip install openpyxl` first.
 
 ```python
+import openpyxl
+import pandas as pd
+
 data = {
     "Consonant": ["p", "b", "t", "d", "k", "g", "s", "z", "m", "n", "l", "r", "w", "j", "h"],
     "Place": ["bilabial", "bilabial", "alveolar", "alveolar", "velar", "velar",
@@ -115,7 +120,6 @@ df.to_excel("conlang_c.xlsx", index=False)
 ## Reading `.csv` and `.xlsx`
 
 ```python
-{python}
 stops_csv_df = pd.read_csv("conlang_c.csv")
 stops_csv_df.head()
 
@@ -153,7 +157,16 @@ ref_df = pd.DataFrame({
 
 ## Grouping & Aggregation
 
-- We can use `.sum()` to add some `.Series()` together
+- We've already used `.sum()` 
+- This adds all of the values of a Series together
+
+```python
+int(ref_df["Reflexes"].sum())
+```
+
+## Grouping & Aggregation
+- We can also use `.sum()` to add `.Series()` together by a certain property
+- Use the method `.groupby()`
 
 ```python
 ref_df.groupby("Family")["Reflexes"].sum()
@@ -164,7 +177,7 @@ ref_df.groupby("Family")["Reflexes"].sum()
 - The method `.agg` **aggregates** -- it collects different types of mathematical operations:
   - `.sum()` -- total reflexes per family
   - `.mean()` -- average reflexes per family
-  - `count` -- number of languges in that family.
+  - `count` -- number of languages in that family.
 
 ```python
 ref_df.groupby("Family").agg(
@@ -174,6 +187,34 @@ ref_df.groupby("Family").agg(
 )
 ```
 
+## Activity: Aggregation
+
+- Copy the following code:
+
+```python
+import pandas as pd
+
+df = pd.DataFrame({
+    "Language": ["English","German","Dutch","Spanish","Italian","French","Greek","Hindi","Bengali"],
+    "Family":   ["Germanic","Germanic","Germanic","Romance","Romance","Romance","Hellenic","Indic","Indic"],
+    "Consonants": [24, 25, 20, 17, 23, 22, 25, 33, 29],
+    "Vowels": [20, 16, 13, 5, 7, 15, 7, 11, 7]
+})
+```
+
+## Activity:
+
+Using `.agg()`, calculate:
+
+1. Find the average number of consonants and vowels per family:
+2. Find the total number of consonants and vowels per family.
+3. The number of languages in each family.
+
+- Hint:
+  - Use `.groupby("Family")`
+  - Narrow your `df` to just `[["Consonants","Vowels"]]`
+
+
 # Our First Visualization
 
 ## Install one more library
@@ -181,13 +222,13 @@ ref_df.groupby("Family").agg(
 PC: 
 
 ```python
-pip install matplotlib
+pip install matplotlib  # python -m pip install matplotlib
 ```
 
 Mac:
 
 ```python
-pip3 install matplotlib
+pip3 install matplotlib # python3 -m pip3 install matplotlib
 ```
 
 ## Creating our First Visualization
@@ -206,15 +247,22 @@ plt.show()           # displays the plot
 
 ## Activity: Visualization
 
-- For this activity you will:
-  - Import `conlang_c.csv` as a `df`
-  - Create a bar shart that shows the number of consonants by place of articulation
-    - For this, you'll use the `.value_counts` method
-  - Make the x axis "Place" and the y axis "Number of Consonants"
+- Copy the following code, which will import `conlang_c.csv` and will count the number of stops by place of articulation.
 
 ```python
-stop_counts = df["Place"].value_counts()
+import matplotlib.pyplot as plt
+
+stops_csv_df = pd.read_csv("conlang_c.csv")
+stop_counts = stops_csv_df["Place"].value_counts()
+stop_counts
 ```
+
+## Activity: Visualization
+
+- Use `matplotlib.pyplot` to create a bar chart that shows the number of Cs by place of articulation.
+  - x axis == "Place" 
+  - y axis == "Number of Consonants"
+
 
 
 # Appendix — Reference Guide for `pd`
