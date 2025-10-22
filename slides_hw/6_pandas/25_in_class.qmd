@@ -1,0 +1,314 @@
+---
+title: "25_in_class"
+format: html
+---
+
+
+```{python}
+import pandas as pd
+
+name = "Bob, Susie, Jimbo"
+prof = "teacher, doctor, lawyer"
+age = "45, 63, 119"
+
+name_split = name.split(", ")
+prof_split = prof.split(", ")
+age_split = age.split(", ")
+
+recap_df = pd.DataFrame([prof_split, age_split], columns=name_split)
+print(recap_df)
+```
+```{python}
+import pandas as pd
+
+line1 = "English German Spanish French"
+line2 = "dog Hund perro chien"
+line3 = "cat Katze gato chat"
+line4 = "house Haus casa maison"
+
+line1_split = line1.split()
+line2_split = line2.split()
+line3_split = line3.split()
+line4_split = line4.split()
+
+lines_df = pd.DataFrame([line2_split, line3_split, line4_split], columns = line1_split)
+lines_df
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{python}
+import pandas as pd
+
+name = "Bob, Susie, Jimbo"
+prof = "teacher, doctor, lawyer"
+age = "45, 63, 119"
+
+name_split = name.split(",")
+prof_split = prof.split(",")
+age_split = age.split(",")
+
+recap_df = pd.DataFrame([prof_split, age_split], columns=name_split)
+print(recap_df)
+```
+
+
+# Activity Answers
+
+## Review Activity
+
+``` {python}
+import pandas as pd
+
+line1 = "English German Spanish French"
+line2 = "dog Hund perro chien"
+line3 = "cat Katze gato chat"
+line4 = "house Haus casa maison"
+
+langs = line1.split()
+word1 = line2.split()
+word2 = line3.split()
+word3 = line4.split()
+
+df = pd.DataFrame([word1, word2, word3], columns=langs)
+print(df)
+```
+
+```{python}
+import pandas as pd
+
+df = pd.DataFrame({
+    "language": ["Latin", "Greek", "Sanskrit", "Finnish"],
+    "family":   ["Indo-European", "Indo-European", "Indo-European", "Uralic"],
+    "speakers_millions": [0, 0, 0, 6],
+    "location": ["Italy", "Greece", "India", "Finland"]
+})
+
+df
+```
+
+
+```{python}
+df["is_extinct"] = [True, True, True, False]
+df
+```
+
+
+```{python}
+# Drop (returns a new DF unless inplace=True)
+df_no_family = df.drop(columns=["family"])
+df_no_family
+```
+
+
+
+```{python}
+# Drop (returns a new DF unless inplace=True) 
+df_no_latin = df.drop([0])
+df_no_latin
+```
+
+```{python}
+df = df.rename(columns={"speakers_millions": "speakers_M"})
+df
+```
+
+
+```{python}
+df_reset_no_latin = df_no_latin.reset_index()
+x = df_reset_no_latin.drop(columns=["index"])
+x
+```
+```{python}
+df = df.rename(columns={"speakers_millions": "speakers_M"})
+df
+```
+
+
+```{python}
+df_ind_drop = df.reset_index(drop=True)
+df_ind_drop
+```
+
+
+```{python}
+df_set = df.set_index("language")
+df_set
+```
+
+```{python}
+import pandas as pd
+
+name = "Bob, Susie, Jimbo"
+prof = "teacher, doctor, lawyer"
+age = "45, 63, 119"
+
+name_split = name.split(",")
+prof_split = prof.split(",")
+age_split = age.split(",")
+
+recap_df = pd.DataFrame([prof_split, age_split], columns=name_split)
+
+
+```
+
+
+
+
+
+
+
+
+
+
+## Activity: Change Index of the pd df they built for review activity
+
+```{python}
+import pandas as pd
+
+name = "Bob, Susie, Jimbo"
+prof = "teacher, doctor, lawyer"
+age = "45, 63, 119"
+
+name_split = name.split(",")
+prof_split = prof.split(",")
+age_split = age.split(",")
+
+recap_df = pd.DataFrame([prof_split, age_split], columns=name_split)
+
+recap_mod_0 = recap_df.drop([0])
+recap_mod_0_1 = recap_mod_0.reset_index() # drop first row, then resetting the index
+# recap_mod_0 = recap_df.drop(columns=["index"])
+recap_mod_1 = recap_df.reset_index(drop=True) # Leave the df intact, but drop the index altogether
+recap_mod_2 = recap_df.set_index("Bob") # convert the Bob column into the index.
+
+recap_mod_0_1
+print("\n ---------------- \n")
+recap_mod_1
+print("\n ---------------- \n")
+recap_mod_2
+
+```
+
+
+
+
+```{python}
+import pandas as pd
+
+df = pd.DataFrame({
+    "language": ["Latin", "Greek", "Sanskrit", "Finnish"],
+    "family":   ["Indo-European", "Indo-European", "Indo-European", "Uralic"],
+    "speakers_M": [0, 0, 0, 6],
+    "location": ["Italy", "Greece", "India", "Finland"]
+})
+
+df.sort_values(by="location", ascending=True)
+```
+
+```{python}
+df.sort_index() # by index
+```
+
+```{python}
+reflexes_verb = pd.Series(
+    {"Latin": 8, "Greek": 10, "Sanskrit": 12, "Old English": 6}
+)
+reflexes_noun = pd.Series(
+    {"Latin": 5, "Greek": 7, "Gothic": 4, "Old Church Slavonic": 3}
+)
+
+combined = pd.DataFrame({"verb": reflexes_verb, "noun": reflexes_noun})
+combined
+```
+
+```{python}
+combined_filled = combined.fillna(0)
+combined_filled
+```
+
+```{python}
+combined_dropped = combined.dropna()
+combined_dropped
+```
+
+```{python}
+total = reflexes_verb.add(reflexes_noun, fill_value=0)
+total.sort_values(ascending=False)
+```
+
+```{python}
+reflexes_verb = pd.Series(
+    {"Latin": 8, "Greek": 10, "Sanskrit": 12, "Old English": 6}
+)
+reflexes_noun = pd.Series(
+    {"Latin": 5, "Greek": 7, "Gothic": 4, "Old Church Slavonic": 3}
+)
+combined = pd.DataFrame({"verb": reflexes_verb, "noun": reflexes_noun})
+combined
+
+column_totals = combined.sum(axis=0)
+print(column_totals)
+```
+
+
+
+
+## Activity: Counting Sounds, Part 1
+
+```{python}
+import pandas as pd
+
+sound_df = pd.DataFrame({
+    "s": [35, 28, 40],
+    "z": [20, 25, 18],
+    "t": [50, 40, 53],
+    "k": [42, 35, 48],
+    "m": [18, 12, 17],
+    "n": [22, 20, 19],
+})
+
+variable = sound_df["s"].add(sound_df["z"])
+variable
+```
+
+
+
+
+
+
+
+```{python}
+
+total_c = sound_df["s"].add(sound_df["z"]).add(sound_df["t"]).add(sound_df["k"]).add(sound_df["m"]).add(sound_df["n"])
+
+total_c_2
+
+```
+
+
+
+
+## Activity: Counting Sounds, Part 2
+
+```{python}
+
+sounds_total = sound_df.sum(axis=0)
+sounds_total
+```

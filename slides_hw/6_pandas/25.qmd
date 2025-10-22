@@ -50,7 +50,7 @@ age_split = age.split(",")
 ```python
 import pandas as pd
 
-recap_df = pd.DataFrame([prof.split, age.split], columns=name_split)
+recap_df = pd.DataFrame([prof_split, age_split], columns=name_split)
 print(recap_df)
 ```
 
