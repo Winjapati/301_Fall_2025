@@ -210,20 +210,16 @@ plt.show()           # displays the plot
 
 
 ```{python}
-stops_csv_df = pd.read_csv("conlang_c.csv")
-stops_csv_df.head()
+con_c_df = pd.read_csv("conlang_c.csv")
+stops_df = con_c_df[(con_c_df["Manner"] == "stop")]
 
-stop_counts = stops_csv_df.groupby("Place").value_counts(df["Manner" == "stop"])
+stop_counts = stops_df["Place"].value_counts().sort_index()
 stop_counts
 ```
 
 ```{python}
 
 import matplotlib.pyplot as plt
-
-stops_csv_df = pd.read_csv("conlang_c.csv")
-stop_counts = stops_csv_df["Place"].value_counts()
-stop_counts
 
 ax = stop_counts.plot(kind="bar", title="Consonant Counts by Place of Articulation")
 ax.set_xlabel("Place")

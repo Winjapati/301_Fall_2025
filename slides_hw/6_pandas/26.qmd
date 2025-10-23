@@ -252,8 +252,10 @@ plt.show()           # displays the plot
 ```python
 import matplotlib.pyplot as plt
 
-stops_csv_df = pd.read_csv("conlang_c.csv")
-stop_counts = stops_csv_df["Place"].value_counts()
+con_c_df = pd.read_csv("conlang_c.csv")
+stops_df = con_c_df[(con_c_df["Manner"] == "stop")]
+
+stop_counts = stops_df["Place"].value_counts().sort_index()
 stop_counts
 ```
 
@@ -262,7 +264,6 @@ stop_counts
 - Use `matplotlib.pyplot` to create a bar chart that shows the number of Cs by place of articulation.
   - x axis == "Place" 
   - y axis == "Number of Consonants"
-
 
 
 # Appendix — Reference Guide for `pd`
