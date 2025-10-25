@@ -1,0 +1,76 @@
+Day 1 : review, moving between types
+
+- Review: strings → lists → dicts → DataFrames
+- Mini-activity: create a phoneme inventory DataFrame from scratch
+- Focus on converting between types (list(), dict(), pd.DataFrame())
+
+Day 2 : nested dicts, data summaries
+
+- Practice nested dicts and data summaries
+- Build a small typological dataset
+- Grouping, counting, and basic descriptive stats (.groupby(), .mean())
+
+Day 3 : dirty data to df
+
+- “End-to-End” task: from raw data → cleaned → summarized table
+e.g. two language inventories or two text samples
+- Prepares them to transition from structured data → textual data
+
+Day 4 : lemmatization and normalization
+
+- tokenization review
+- tokens vs. lemmas
+- installing and beginning spaCy
+- creating lists of lemmas
+
+Day 5 : frequency coutns
+
+- when to use Counter, when to use .value_counts()
+- make frequency dictionary, convert to df
+- compare frequencies of lemmas vs. raw tokens
+
+Day 6 : filtering & comparison
+
+- stopword filtering, topn analysis, comparison of two corpora
+- Zipf's law, frequency patterns
+
+Day 7 : writing simple functions
+
+- overview of functions
+- write small utilities for counting, cleaning, filtering
+
+Day 8 : functions for analysis
+
+- write functions that take a text and return:
+  - number of words
+  - top 10 lemmas
+  - unique word ratio
+- emphasize reuse and modular design
+
+Day 9 : integrated analyzer
+
+- full function pipeline:
+  - input: txt file
+  - process: clean --> tokenize --> lemmatize --> count
+  - output: frequency df
+- students prepare functions for visualization
+
+Day 10 : visualization
+
+- review bar charts
+- use pd/matplotlib to visualize lemma frequencies
+- histogram, pie, line examples
+- labeling, titles, sorting aesthetics
+
+Day 11 : in-class activity
+
+- "text analyzer for linguists"
+- students:
+  - load a text
+  - lemmatize and count
+  - visualize top 10 lemmas
+  - identify patterns
+  - export results as graphic and csv
+
+
+

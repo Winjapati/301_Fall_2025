@@ -1,0 +1,24 @@
+---
+title: "practice"
+format: html
+---
+
+```{python}
+import urllib.request
+
+link = "https://hammondm.github.io/"
+f = urllib.request.urlopen(link)
+myfile = f.read()
+
+print(myfile.decode('UTF-8'))
+```
+
+```{python}
+def myfunction(word):
+	print(f'This is a {word}.')
+	print("That's all it does")
+	
+
+myfunction("burp")
+```
+
