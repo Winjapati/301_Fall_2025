@@ -175,13 +175,13 @@ ref_df.groupby("Family")["Reflexes"].sum()
 ## Grouping & Aggregation
 
 - The method `.agg` **aggregates** -- it collects different types of mathematical operations:
-  - `.sum()` -- total reflexes per family
-  - `.mean()` -- average reflexes per family
+  - `sum` -- total reflexes per family
+  - `mean` -- average reflexes per family
   - `count` -- number of languages in that family.
 
 ```python
 ref_df.groupby("Family").agg(
-    total=("Reflexes","sum"),
+    total=("Reflexes", "sum"),
     mean=("Reflexes","mean"),
     n=("Reflexes","count")
 )
@@ -266,32 +266,32 @@ stop_counts
   - y axis == "Number of Consonants"
 
 
-# Appendix — Reference Guide for `pd`
+<!-- # Appendix — Reference Guide for `pd` -->
 
-## Selection Cheatsheet
+<!-- ## Selection Cheatsheet -->
 
-- **Columns:** `df["col"]`, `df[["col1","col2"]]`
-- **Rows (position):** `df.iloc[0]`, `df.iloc[1:3]`
-- **Rows (label):** `df.loc["a"]`, `df.loc["a":"c"]`
-- **Cell:** `df.loc["a","col"]` or `df.iloc[0, 1]`
-- **Filter:** `df[df["col"] == value]`, `df[(cond1) & (cond2)]`
+<!-- - **Columns:** `df["col"]`, `df[["col1","col2"]]` -->
+<!-- - **Rows (position):** `df.iloc[0]`, `df.iloc[1:3]` -->
+<!-- - **Rows (label):** `df.loc["a"]`, `df.loc["a":"c"]` -->
+<!-- - **Cell:** `df.loc["a","col"]` or `df.iloc[0, 1]` -->
+<!-- - **Filter:** `df[df["col"] == value]`, `df[(cond1) & (cond2)]` -->
 
-## Common Operations
+<!-- ## Common Operations -->
 
-```python
-df.rename(columns={"old":"new"})
-df.drop(columns=["col"])
-df.set_index("col")
-df.reset_index(drop=True)
-df.sort_values(by="col", ascending=False)
-df.isna().sum()
-df.fillna(0)
-```
+<!-- ```python -->
+<!-- df.rename(columns={"old":"new"}) -->
+<!-- df.drop(columns=["col"]) -->
+<!-- df.set_index("col") -->
+<!-- df.reset_index(drop=True) -->
+<!-- df.sort_values(by="col", ascending=False) -->
+<!-- df.isna().sum() -->
+<!-- df.fillna(0) -->
+<!-- ``` -->
 
-## Alignment & Combining
+<!-- ## Alignment & Combining -->
 
-```python
-s1.add(s2, fill_value=0)
-pd.concat([df1, df2], axis=0, ignore_index=True)  # vertical
-pd.concat([s1, s2], axis=1)                       # side-by-side
-```
+<!-- ```python -->
+<!-- s1.add(s2, fill_value=0) -->
+<!-- pd.concat([df1, df2], axis=0, ignore_index=True)  # vertical -->
+<!-- pd.concat([s1, s2], axis=1)                       # side-by-side -->
+<!-- ``` -->

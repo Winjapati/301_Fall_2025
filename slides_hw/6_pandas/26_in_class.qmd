@@ -3,6 +3,35 @@ title: "26_in_class"
 format: html
 ---
 
+
+```{python}
+import pandas as pd
+
+stops = {
+    "Language": ["English", "Spanish", "Hindi"],
+    "Nasals": [3, 3, 4],
+    "Oral Stops": [6, 6, 5]
+}
+
+stops_df = pd.DataFrame(stops)
+
+total = stops_df["Nasals"].add(stops_df["Oral Stops"])
+# Save to CSV
+stops_df.to_csv("stops.csv", index=True)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 ```{python}
 import pandas as pd
 
@@ -20,6 +49,69 @@ total
 ```
 
 
+
+```{python}
+import pandas as pd
+
+# Create the data
+data = {
+    "Consonant": ["p", "b", "t", "d", "k", "g", "s", "z", "m", "n", "l", "r", "w", "j", "h"],
+    "Place": ["bilabial", "bilabial", "alveolar", "alveolar", "velar", "velar",
+              "alveolar", "alveolar", "bilabial", "alveolar", "alveolar", "alveolar",
+              "labial-velar", "palatal", "glottal"],
+    "Manner": ["stop", "stop", "stop", "stop", "stop", "stop",
+               "fricative", "fricative", "nasal", "nasal", "lateral", "trill",
+               "glide", "glide", "fricative"],
+    "Voicing": ["voiceless", "voiced", "voiceless", "voiced", "voiceless", "voiced",
+                "voiceless", "voiced", "voiced", "voiced", "voiced", "voiced",
+                "voiced", "voiced", "voiceless"]
+}
+
+# Create DataFrame
+df = pd.DataFrame(data)
+
+# Show DataFrame
+print(df)
+
+# Save to CSV
+df.to_csv("conlang_c.csv", index=True)
+```
+
+```{python}
+import openpyxl
+import pandas as pd
+
+data = {
+    "Consonant": ["p", "b", "t", "d", "k", "g", "s", "z", "m", "n", "l", "r", "w", "j", "h"],
+    "Place": ["bilabial", "bilabial", "alveolar", "alveolar", "velar", "velar",
+              "alveolar", "alveolar", "bilabial", "alveolar", "alveolar", "alveolar",
+              "labial-velar", "palatal", "glottal"],
+    "Manner": ["stop", "stop", "stop", "stop", "stop", "stop",
+               "fricative", "fricative", "nasal", "nasal", "lateral", "trill",
+               "glide", "glide", "fricative"],
+    "Voicing": ["voiceless", "voiced", "voiceless", "voiced", "voiceless", "voiced",
+                "voiceless", "voiced", "voiced", "voiced", "voiced", "voiced",
+                "voiced", "voiced", "voiceless"]
+}
+
+# Create DataFrame
+df = pd.DataFrame(data)
+
+df.to_excel("conlang_c.xlsx", index=False)
+```
+
+
+
+
+```{python}
+stops_csv_df = pd.read_csv("conlang_c.csv")
+stops_csv_df.head()
+
+print("\n-------------------------------------\n")
+
+stops_excel_df = pd.read_excel("conlang_c.xlsx")
+stops_excel_df.head()
+```
 
 
 
@@ -121,6 +213,9 @@ int(ref_df["Reflexes"].sum())
 ```{python}
 ref_df.groupby("Family")["Reflexes"].sum()
 ```
+
+
+
 ```{python}
 ref_df.groupby("Family").agg(
     total=("Reflexes","sum"),
@@ -128,6 +223,32 @@ ref_df.groupby("Family").agg(
     n=("Reflexes","count")
 )
 ```
+
+```{python}
+import pandas as pd
+
+df = pd.DataFrame({
+    "Language": ["English","German","Dutch","Spanish","Italian","French","Greek","Hindi","Bengali"],
+    "Family":   ["Germanic","Germanic","Germanic","Romance","Romance","Romance","Hellenic","Indic","Indic"],
+    "Consonants": [24, 25, 20, 17, 23, 22, 25, 33, 29],
+    "Vowels": [20, 16, 13, 5, 7, 15, 7, 11, 7]
+})
+
+
+df.groupby("Family").agg(
+    total_C =("Consonants","sum"), 
+    total_V =("Vowels","sum"),
+    mean_C =("Consonants","mean"),
+    mean_V =("Vowels","mean"), 
+    n=("Language","count")
+)
+
+```
+
+
+
+
+
 
 
 ```{python}
@@ -201,15 +322,9 @@ plt.tight_layout()   # optional, avoids label cutoff
 plt.show()           # displays the plot
 ```
 
-
-
-
-
-
-
-
-
 ```{python}
+import matplotlib.pyplot as plt
+
 con_c_df = pd.read_csv("conlang_c.csv")
 stops_df = con_c_df[(con_c_df["Manner"] == "stop")]
 
@@ -217,9 +332,25 @@ stop_counts = stops_df["Place"].value_counts().sort_index()
 stop_counts
 ```
 
+
+
+
+
+
+
+
+```{python}
+stop_counts
+```
+
 ```{python}
 
 import matplotlib.pyplot as plt
+
+con_c_df = pd.read_csv("conlang_c.csv")
+stops_df = con_c_df[(con_c_df["Manner"] == "stop")]
+
+stop_counts = stops_df["Place"].value_counts().sort_index()
 
 ax = stop_counts.plot(kind="bar", title="Consonant Counts by Place of Articulation")
 ax.set_xlabel("Place")
