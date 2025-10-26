@@ -1,0 +1,20 @@
+---
+title: "27_in_class"
+format: html
+---
+
+```{python}
+import pandas as pd
+
+consonant =  ["p", "b", "t", "d", "k", "g", "s", "z", "m", "n", "l", "r", "w", "j", "h"]
+place = ["bilabial", "bilabial", "alveolar", "alveolar", "velar", "velar", "alveolar", "alveolar", "bilabial", "alveolar", "alveolar", "alveolar", "labial-velar", "palatal", "glottal"]
+manner = ["stop", "stop", "stop", "stop", "stop", "stop", "fricative", "fricative", "nasal", "nasal", "lateral", "trill", "glide", "glide", "fricative"]
+voice = ["voiceless", "voiced", "voiceless", "voiced", "voiceless", "voiced", "voiceless", "voiced", "voiced", "voiced", "voiced", "voiced", "voiced", "voiced", "voiceless"]
+
+c_dict = {}
+
+for i in range(len(consonant)):
+  c_dict[consonant[i]] = [place[i], manner[i], voice[i]]
+  
+df = pd.DataFrame(c_dict)
+```
