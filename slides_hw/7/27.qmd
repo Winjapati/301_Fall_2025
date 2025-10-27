@@ -185,9 +185,45 @@ voice = ["voiceless", "voiced", "voiceless", "voiced", "voiceless", "voiced", "v
 
 # Nested Strings, Lists, and Dicts
 
+## Nesting
+
+- Earlier, we saw that we can embed multiple loops into a script
+
+```python
+list1 = ["a", "b", "c", "d"]
+list2 = [0, 1, 2, 3]
+
+new_dict = {}
+
+for i in list1:
+  for j in list2:
+    new_dict[i] = j
+
+print(new_dict)
+```
+
 ## Nested Strings
 
-- We Can
+- We Can use this practice to loop within elements of a list:
+
+```{python}
+list = ["eeny", "meeny", "miney", "mo"]
+
+for i in list:
+  for c in i:
+    print(c)
+```
+
+## Nested Strings
+
+- You could use this for 
+
+```{python}
+text = ["Mātr̥", "devānām", "abhavat"]
+for w in text:
+    clean = "".join([c.lower() for c in w if c.isalpha()])
+    print(clean)
+```
 
 ## Nested Lists
 
