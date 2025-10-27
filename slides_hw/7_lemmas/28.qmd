@@ -22,9 +22,9 @@ editor: source
 
 ## Recap from Last Time
 
-- Lists []
-- Dictionaries {key: value}
-- pd.DataFrame 
+- Lists `["a", "b", "c"]`
+- Dictionaries `{key: value}`
+- `pd.DataFrame` 
 
 ## Recap from Last Time
 
@@ -50,7 +50,31 @@ for sentence in sentences:
     print(w)
 ```
 
+## Recap from Last Time
+
+```python
+list1 = ["a", "b", "c", "d"]
+list2 = [0, 1, 2, 3]
+list3 = ["alpha", "beta", "gamma", "delta"]
+list4 = ["fee", "fie", "fo", "fum"]
+
+
+list2dict = {i: [j, k, l] for i, j, k, l in zip(list1, list2, list3, list4)}
+
+list2dict
+```
+
 ## Review Activity
+
+- Copy the below lists.
+- Add a fourth list called `length`, whose items contain the length of each word in `words`.
+- Then, convert to a dictionary using the `zip()` function, with the keys = `words`.
+
+```python
+words = ["zombie", "ghoul", "ghost", "vampire"]
+begins_with_g = [False, True, True, False]
+rhymes_with_most = [False, False, True, False]
+```
 
 # Nested Dictionaries
 
@@ -58,29 +82,47 @@ for sentence in sentences:
 
 - A nested `dict` is just a dictionary inside of another dictionary
 
+```python
 outer = {
     "key1": {"inner_key1": "value1", "inner_key2": "value2"},
     "key2": {"inner_key1": "value3", "inner_key2": "value4"}
 }
+```
 
 ## When to Use Nested Dictionaries
 
-- Whenever one piece of data naturally contains multiple sub-parts
+- You should use nested dictionaries only when they make sense -- whenever one piece of data naturally contains multiple sub-parts
 
-```{python}
+```python
 students = {
     "Alice": {"quiz": 9, "homework": 10, "final": 8},
     "Ben": {"quiz": 7, "homework": 9, "final": 10}
 }
 ```
 
+
+## When to Use Nested Dictionaries
+
+- What could this look like within a linguistic data set?
+
+```python
+consonants = {
+    "p": {"voice": False, "place": "bilabial", "manner": "stop"},
+    "t": {"voice": False, "place": "alveolar", "manner": "stop"},
+    "k": {"voice": False, "place": "velar", "manner": "stop"}
+}
+```
+
 ## Accessing Nested Items
 
 ```python
-
 list = ["eeny", "meeny", "miney", "mo"]
 list[0][0]
+```
 
+## Accessing Nested Items
+
+```python
 sentences = [
     ["the", "cat", "sleeps"],
     ["the", "dog", "runs"],
@@ -88,6 +130,8 @@ sentences = [
 ]
 sentences[0][0]
 ```
+
+- What would `sentences[0][0][0]` give us?
 
 ## Accessing Nested Items
 
@@ -100,37 +144,80 @@ students = {
 students["Alice"]["quiz"]
 ```
 
-## Converting Nested `dict`s to `pd.DataFrame`
+## Converting to `pd.DataFrame`
 
-```{python}
-students = {
-    "Alice": {"quiz": 9, "homework": 10, "final": 8},
-    "Ben": {"quiz": 7, "homework": 9, "final": 10}
-}
-
-rows = []
-for outer_k, inner_d in students.items():
-    row = {"name": outer_k}
-    row.update(inner_d)
-    rows.append(row)
-
-df = pd.DataFrame(rows)
-df
-
-```
-
-
-## Review Activity
-
--   xxxxx
+- What happens when we convert a nested `dict` to a `pd.DataFrame`?
 
 ```python
 import pandas as pd
+consonants = {
+    "p": {"voice": False, "place": "bilabial", "manner": "stop"},
+    "t": {"voice": False, "place": "alveolar", "manner": "stop"},
+    "k": {"voice": False, "place": "velar", "manner": "stop"}
+}
+df = pd.DataFrame(consonants)
+df
+```
 
-stops = {
-    "Language": ["English", "Spanish", "Hindi"],
-    "Nasals": [3, 3, 4],
-    "Oral Stops": [6, 6, 5]
+## Converting Nested `dict`s to `pd.DataFrame`
+
+- By default, when you pass a nested dict like that to `pd.DataFrame`
+- Pandas interprets the outer keys ("p", "t", "k") as columns, and the inner keys ("voice", "place", "manner") as row labels (the index)
+
+## Converting Nested `dict`s to `pd.DataFrame`
+
+- So we need to flip the table around, making the phonemes the index (or a column unto themselves)
+
+  - This is what the `.T` method does -- it swaps the rows and columns of a table
+
+```python
+import pandas as pd
+consonants = {
+    "p": {"voice": False, "place": "bilabial", "manner": "stop"},
+    "t": {"voice": False, "place": "alveolar", "manner": "stop"},
+    "k": {"voice": False, "place": "velar", "manner": "stop"}
+}
+
+df = pd.DataFrame(consonants).T.reset_index(names="phoneme")
+df
+```
+
+## `dict` Activity
+
+- Copy the lists on the next slide. Using a `for` loop and the `zip()` function, create a dictionary  with the `phonemes` as keys. 
+
+```python
+new_dict = {}
+for i, j, k, l in zip(list1,list2,list3,list4):
+  new_dict[i] = {
+    "key1": j,
+    "key2": k,
+    "key3": l
 }
 ```
+- Then, using the `.T` method, convert it into a `pd.DataFrame`.
+
+## `dict` Activity
+
+```python
+phonemes = ["p", "b", "t", "d", "k", "g"]
+voicing  = [False, True, False, True, False, True]
+place    = ["bilabial", "bilabial", "alveolar", "alveolar", "velar", "velar"]
+manner   = ["stop"] * 6
+```
+
+
+<!-- ## Review Activity -->
+
+<!-- -   xxxxx -->
+
+<!-- ```python -->
+<!-- import pandas as pd -->
+
+<!-- stops = { -->
+<!--     "Language": ["English", "Spanish", "Hindi"], -->
+<!--     "Nasals": [3, 3, 4], -->
+<!--     "Oral Stops": [6, 6, 5] -->
+<!-- } -->
+<!-- ``` -->
 

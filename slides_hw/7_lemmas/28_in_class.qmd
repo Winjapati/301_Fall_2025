@@ -2,6 +2,38 @@
 title: "28_in_class"
 format: html
 ---
+```{python}
+words = ["zombie", "ghoul", "ghost", "vampire"]
+begins_with_g = [False, True, True, False]
+rhymes_with_most = [False, False, True, False]
+
+length = [len(w) for w in words]
+
+halloween = {i: [j, k, l] for i, j, k, l in zip(words,begins_with_g,rhymes_with_most,length)}
+
+halloween
+```
+
+```{python}
+phonemes = ["p", "b", "t", "d", "k", "g"]
+voicing  = [False, True, False, True, False, True]
+place    = ["bilabial", "bilabial", "alveolar", "alveolar", "velar", "velar"]
+manner   = ["stop"] * 6
+
+c_dict = {}
+for i, j, k, l in zip(phonemes,voicing,place,manner):
+  c_dict[i] = {
+    "voice": j,
+    "place": k,
+    "manner": l
+}
+c_dict
+df = pd.DataFrame(c_dict).T.reset_index(names="phonemes")
+df
+```
+
+
+
 
 ```{python}
 import re
