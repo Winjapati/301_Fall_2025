@@ -206,7 +206,7 @@ print(new_dict)
 
 - We Can use this practice to loop within elements of a list:
 
-```{python}
+```python
 list = ["eeny", "meeny", "miney", "mo"]
 
 for i in list:
@@ -218,13 +218,45 @@ for i in list:
 
 - You could use this for 
 
-```{python}
-text = ["Mātr̥", "devānām", "abhavat"]
-for w in text:
-    clean = "".join([c.lower() for c in w if c.isalpha()])
-    print(clean)
+```python
+words = ["eeny", "meeny", "miney", "mo"]
+words_dict = {}
+
+for w in words:
+    vowels = 0               # temporary variable counter
+    for c in w:              
+        if c in "aeiou":     # check if the letter is a vowel
+            vowels += 1      # increment the counter
+    print(w, ":", vowels, "vowels")
+    words_dict[w] = vowels
+    
+print(words_dict)
 ```
 
 ## Nested Lists
+
+```python
+sentences = [
+    ["the", "cat", "sleeps"],
+    ["the", "dog", "runs"],
+    ["the", "bird", "flies"]
+]
+
+for sentence in sentences:
+  for w in sentence:
+    print(i)
+```
+
+## Nested Lists: Activity
+
+- Copy the following list(s), and (1) print each syllable on its own line and (2) count the total number of syllables
+
+```python
+words = [
+    ["lin", "guis", "tics"],
+    ["pho", "no", "lo", "gy"],
+    ["mor", "pho", "lo", "gy"]
+]
+```
 
 ## Nested Dicts
