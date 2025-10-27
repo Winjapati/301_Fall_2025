@@ -348,6 +348,7 @@ stop_counts
 import matplotlib.pyplot as plt
 
 con_c_df = pd.read_csv("conlang_c.csv")
+
 stops_df = con_c_df[(con_c_df["Manner"] == "stop")]
 
 stop_counts = stops_df["Place"].value_counts().sort_index()
