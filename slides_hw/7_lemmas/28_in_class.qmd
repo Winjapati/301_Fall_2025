@@ -1,0 +1,24 @@
+---
+title: "28_in_class"
+format: html
+---
+
+```{python}
+import re
+
+with open("usher.txt", "r", encoding="utf-8") as f:
+  poe = f.read()
+
+usher = re.split(r"[\s\W]+", poe)
+usher = [word.lower() for word in usher_words if word]
+
+counter = 0
+
+for i in usher:
+  if i == "usher":
+    counter += 1
+
+print(f"There are {counter} instances of the word 'usher' in this book.")
+
+```
+

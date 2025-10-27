@@ -1,6 +1,6 @@
 ---
 title: "Computation for Linguists"
-subtitle: "Lists, Dicts, DataFrames"
+subtitle: "Dict Review & Nesting"
 date: "October 29, 2025"
 author: "Dr. Andrew M. Byrd"
 format:
@@ -63,24 +63,20 @@ len(jfk_words)
 4. If it was, we increased its value by 1.
 5. If it wasn't, we added it, making its value equal to 1.
 
+## Review Activity
+
+- Following the instructions on the previous slide, try to create a dictionary that counts how many words there are in the JFK speech.
+
 ## Counting words in JFK
 
-```python
-word_counts = {}
-
-for wd in jfk_words:
-    if wd in word_counts:              
-        word_counts[wd] += 1
-    else:                              
-        word_counts[wd] = 1
-sort_wds = sorted(word_counts.items(), key=lambda x: x[1], reverse=True)
-```
+- To match words with word counts, we created a `dict`:
+  - `dict` = `key : value`
 
 # Lists to Dictionaries to DataFrames
 
 ## Lists to Dictionaries
 
-- We moved from a 1D list to a 2D dictionary
+- In the `jfk` example, we moved from a string to a 1D list to a 2D dictionary
 - How might we combine two lists to make a dictionary?
 
 
@@ -95,6 +91,19 @@ new_dict = {}
 for i in list1:
   for j in list2:
     new_dict[i] = j
+
+print(new_dict)
+```
+
+## Lists to Dictionaries: Dict Comprehension
+
+- `zip()` takes two or more iterables (like lists) and pairs up their elements by index
+
+```python
+list1 = ["a", "b", "c", "d"]
+list2 = [0, 1, 2, 3]
+
+new_dict = {i: j for i, j in zip(list1, list2)}
 
 print(new_dict)
 ```
@@ -132,14 +141,7 @@ df
 ```
 ## Converting multiple lists to dictionaries
 
-- `range()` objects behave like lists that you can loop through
-
-```python
-for i in range(5):
-  print(i)
-```
-
-- This allows us to get the correct index of one list to line up with a series of other lists.
+- Remember `zip()` from a couple minutes ago?
 
 
 ## Converting multiple lists to dictionaries
@@ -149,11 +151,9 @@ list1 = ["a", "b", "c", "d"]
 list2 = [0, 1, 2, 3]
 list3 = ["alpha", "beta", "gamma", "delta"]
 list4 = ["fee", "fie", "fo", "fum"]
-list2dict = {}
 
 
-for i in range(len(list1)):
-  list2dict[list1[i]] = [list2[i], list3[i], list4[i]]
+list2dict = {i: [j, k, l] for i, j, k, l in zip(list1, list2, list3, list4)}
 
 list2dict
 ```
@@ -204,7 +204,7 @@ print(new_dict)
 
 ## Nested Strings
 
-- We Can use this practice to loop within elements of a list:
+- We can run multiple loops to access subelements of a list:
 
 ```python
 list = ["eeny", "meeny", "miney", "mo"]
@@ -244,7 +244,7 @@ sentences = [
 
 for sentence in sentences:
   for w in sentence:
-    print(i)
+    print(w)
 ```
 
 ## Nested Lists: Activity
@@ -258,5 +258,3 @@ words = [
     ["mor", "pho", "lo", "gy"]
 ]
 ```
-
-## Nested Dicts

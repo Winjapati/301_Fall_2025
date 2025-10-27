@@ -3,6 +3,38 @@ title: "27_in_class"
 format: html
 ---
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{python}
+word_counts = {}
+
+for wd in jfk_words:
+    if wd in word_counts:              
+        word_counts[wd] += 1
+    else:                              
+        word_counts[wd] = 1
+sort_wds = sorted(word_counts.items(), key=lambda x: x[1], reverse=True)
+```
+
+
+
+
+
 ```{python}
 import pandas as pd
 
@@ -11,10 +43,30 @@ place = ["bilabial", "bilabial", "alveolar", "alveolar", "velar", "velar", "alve
 manner = ["stop", "stop", "stop", "stop", "stop", "stop", "fricative", "fricative", "nasal", "nasal", "lateral", "trill", "glide", "glide", "fricative"]
 voice = ["voiceless", "voiced", "voiceless", "voiced", "voiceless", "voiced", "voiceless", "voiced", "voiced", "voiced", "voiced", "voiced", "voiced", "voiced", "voiceless"]
 
-c_dict = {}
+c_dict = {i: [j, k, l] for i, j, k, l in zip(consonant, place, manner, voice)}
 
-for i in range(len(consonant)):
-  c_dict[consonant[i]] = [place[i], manner[i], voice[i]]
-  
 df = pd.DataFrame(c_dict)
+
+df.to_csv("consonants.csv", index=False)
 ```
+
+
+
+
+
+```{python}
+words = [
+    ["lin", "guis", "tics"],
+    ["pho", "no", "lo", "gy"],
+    ["mor", "pho", "lo", "gy"]
+]
+
+s_count = 0
+
+for w in words:
+  for s in w:
+    s_count += 1
+    print(f"{s} is syllable number {s_count}.")
+
+```
+

@@ -1,0 +1,136 @@
+---
+title: "Computation for Linguists"
+subtitle: "Nested Dicts"
+date: "October 31, 2025"
+author: "Dr. Andrew M. Byrd"
+format:
+  revealjs:
+    css: header_shrink.css
+    theme: beige
+    slide-number: true
+    center: true
+    toc: true
+    toc-title: "Plan for the Day"
+    toc-depth: 1
+jupyter: python3
+editor: source
+---
+
+# Review
+
+-   What did you learn last time?
+
+## Recap from Last Time
+
+- Lists []
+- Dictionaries {key: value}
+- pd.DataFrame 
+
+## Recap from Last Time
+
+```python
+list = ["eeny", "meeny", "miney", "mo"]
+
+for i in list:
+  for c in i:
+    print(c)
+```
+
+## Recap from Last Time
+
+```python
+sentences = [
+    ["the", "cat", "sleeps"],
+    ["the", "dog", "runs"],
+    ["the", "bird", "flies"]
+]
+
+for sentence in sentences:
+  for w in sentence:
+    print(w)
+```
+
+## Review Activity
+
+# Nested Dictionaries
+
+## Nested Dictionaries
+
+- A nested `dict` is just a dictionary inside of another dictionary
+
+outer = {
+    "key1": {"inner_key1": "value1", "inner_key2": "value2"},
+    "key2": {"inner_key1": "value3", "inner_key2": "value4"}
+}
+
+## When to Use Nested Dictionaries
+
+- Whenever one piece of data naturally contains multiple sub-parts
+
+```{python}
+students = {
+    "Alice": {"quiz": 9, "homework": 10, "final": 8},
+    "Ben": {"quiz": 7, "homework": 9, "final": 10}
+}
+```
+
+## Accessing Nested Items
+
+```python
+
+list = ["eeny", "meeny", "miney", "mo"]
+list[0][0]
+
+sentences = [
+    ["the", "cat", "sleeps"],
+    ["the", "dog", "runs"],
+    ["the", "bird", "flies"]
+]
+sentences[0][0]
+```
+
+## Accessing Nested Items
+
+```python
+students = {
+    "Alice": {"quiz": 9, "homework": 10, "final": 8},
+    "Ben": {"quiz": 7, "homework": 9, "final": 10}
+}
+
+students["Alice"]["quiz"]
+```
+
+## Converting Nested `dict`s to `pd.DataFrame`
+
+```{python}
+students = {
+    "Alice": {"quiz": 9, "homework": 10, "final": 8},
+    "Ben": {"quiz": 7, "homework": 9, "final": 10}
+}
+
+rows = []
+for outer_k, inner_d in students.items():
+    row = {"name": outer_k}
+    row.update(inner_d)
+    rows.append(row)
+
+df = pd.DataFrame(rows)
+df
+
+```
+
+
+## Review Activity
+
+-   xxxxx
+
+```python
+import pandas as pd
+
+stops = {
+    "Language": ["English", "Spanish", "Hindi"],
+    "Nasals": [3, 3, 4],
+    "Oral Stops": [6, 6, 5]
+}
+```
+

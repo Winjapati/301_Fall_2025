@@ -394,7 +394,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Computation for Linguists</h1>
-  <p class="subtitle">Lists, Dicts, DataFrames</p>
+  <p class="subtitle">Dict Review &amp; Nesting</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -467,16 +467,20 @@ Dr.&nbsp;Andrew M. Byrd
 <li>If it wasn’t, we added it, making its value equal to 1.</li>
 </ol>
 </section>
+<section id="review-activity-1" class="slide level2 center">
+<h2>Review Activity</h2>
+<ul>
+<li>Following the instructions on the previous slide, try to create a dictionary that counts how many words there are in the JFK speech.</li>
+</ul>
+</section>
 <section id="counting-words-in-jfk-3" class="slide level2 center">
 <h2>Counting words in JFK</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a>word_counts <span class="op">=</span> {}</span>
-<span id="cb4-2"><a href=""></a></span>
-<span id="cb4-3"><a href=""></a><span class="cf">for</span> wd <span class="kw">in</span> jfk_words:</span>
-<span id="cb4-4"><a href=""></a>    <span class="cf">if</span> wd <span class="kw">in</span> word_counts:              </span>
-<span id="cb4-5"><a href=""></a>        word_counts[wd] <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb4-6"><a href=""></a>    <span class="cf">else</span>:                              </span>
-<span id="cb4-7"><a href=""></a>        word_counts[wd] <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb4-8"><a href=""></a>sort_wds <span class="op">=</span> <span class="bu">sorted</span>(word_counts.items(), key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>], reverse<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>To match words with word counts, we created a <code>dict</code>:
+<ul>
+<li><code>dict</code> = <code>key : value</code></li>
+</ul></li>
+</ul>
 </section></section>
 <section>
 <section id="lists-to-dictionaries-to-dataframes" class="title-slide slide level1 center">
@@ -486,22 +490,34 @@ Dr.&nbsp;Andrew M. Byrd
 <section id="lists-to-dictionaries" class="slide level2 center">
 <h2>Lists to Dictionaries</h2>
 <ul>
-<li>We moved from a 1D list to a 2D dictionary</li>
+<li>In the <code>jfk</code> example, we moved from a string to a 1D list to a 2D dictionary</li>
 <li>How might we combine two lists to make a dictionary?</li>
 </ul>
 </section>
 <section id="lists-to-dictionaries-1" class="slide level2 center">
 <h2>Lists to Dictionaries</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a>list1 <span class="op">=</span> [<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span>]</span>
+<span id="cb4-2"><a href=""></a>list2 <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb4-3"><a href=""></a></span>
+<span id="cb4-4"><a href=""></a>new_dict <span class="op">=</span> {}</span>
+<span id="cb4-5"><a href=""></a></span>
+<span id="cb4-6"><a href=""></a><span class="cf">for</span> i <span class="kw">in</span> list1:</span>
+<span id="cb4-7"><a href=""></a>  <span class="cf">for</span> j <span class="kw">in</span> list2:</span>
+<span id="cb4-8"><a href=""></a>    new_dict[i] <span class="op">=</span> j</span>
+<span id="cb4-9"><a href=""></a></span>
+<span id="cb4-10"><a href=""></a><span class="bu">print</span>(new_dict)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="lists-to-dictionaries-dict-comprehension" class="slide level2 center">
+<h2>Lists to Dictionaries: Dict Comprehension</h2>
+<ul>
+<li><code>zip()</code> takes two or more iterables (like lists) and pairs up their elements by index</li>
+</ul>
 <div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a>list1 <span class="op">=</span> [<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span>]</span>
 <span id="cb5-2"><a href=""></a>list2 <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
 <span id="cb5-3"><a href=""></a></span>
-<span id="cb5-4"><a href=""></a>new_dict <span class="op">=</span> {}</span>
+<span id="cb5-4"><a href=""></a>new_dict <span class="op">=</span> {i: j <span class="cf">for</span> i, j <span class="kw">in</span> <span class="bu">zip</span>(list1, list2)}</span>
 <span id="cb5-5"><a href=""></a></span>
-<span id="cb5-6"><a href=""></a><span class="cf">for</span> i <span class="kw">in</span> list1:</span>
-<span id="cb5-7"><a href=""></a>  <span class="cf">for</span> j <span class="kw">in</span> list2:</span>
-<span id="cb5-8"><a href=""></a>    new_dict[i] <span class="op">=</span> j</span>
-<span id="cb5-9"><a href=""></a></span>
-<span id="cb5-10"><a href=""></a><span class="bu">print</span>(new_dict)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-6"><a href=""></a><span class="bu">print</span>(new_dict)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="to-dataframe" class="slide level2 center">
 <h2>to DataFrame</h2>
@@ -536,44 +552,37 @@ Dr.&nbsp;Andrew M. Byrd
 <section id="converting-multiple-lists-to-dictionaries" class="slide level2 center">
 <h2>Converting multiple lists to dictionaries</h2>
 <ul>
-<li><code>range()</code> objects behave like lists that you can loop through</li>
-</ul>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href=""></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):</span>
-<span id="cb8-2"><a href=""></a>  <span class="bu">print</span>(i)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li>This allows us to get the correct index of one list to line up with a series of other lists.</li>
+<li>Remember <code>zip()</code> from a couple minutes ago?</li>
 </ul>
 </section>
 <section id="converting-multiple-lists-to-dictionaries-1" class="slide level2 center">
 <h2>Converting multiple lists to dictionaries</h2>
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href=""></a>list1 <span class="op">=</span> [<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span>]</span>
-<span id="cb9-2"><a href=""></a>list2 <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
-<span id="cb9-3"><a href=""></a>list3 <span class="op">=</span> [<span class="st">"alpha"</span>, <span class="st">"beta"</span>, <span class="st">"gamma"</span>, <span class="st">"delta"</span>]</span>
-<span id="cb9-4"><a href=""></a>list4 <span class="op">=</span> [<span class="st">"fee"</span>, <span class="st">"fie"</span>, <span class="st">"fo"</span>, <span class="st">"fum"</span>]</span>
-<span id="cb9-5"><a href=""></a>list2dict <span class="op">=</span> {}</span>
-<span id="cb9-6"><a href=""></a></span>
-<span id="cb9-7"><a href=""></a></span>
-<span id="cb9-8"><a href=""></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(list1)):</span>
-<span id="cb9-9"><a href=""></a>  list2dict[list1[i]] <span class="op">=</span> [list2[i], list3[i], list4[i]]</span>
-<span id="cb9-10"><a href=""></a></span>
-<span id="cb9-11"><a href=""></a>list2dict</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href=""></a>list1 <span class="op">=</span> [<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span>]</span>
+<span id="cb8-2"><a href=""></a>list2 <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb8-3"><a href=""></a>list3 <span class="op">=</span> [<span class="st">"alpha"</span>, <span class="st">"beta"</span>, <span class="st">"gamma"</span>, <span class="st">"delta"</span>]</span>
+<span id="cb8-4"><a href=""></a>list4 <span class="op">=</span> [<span class="st">"fee"</span>, <span class="st">"fie"</span>, <span class="st">"fo"</span>, <span class="st">"fum"</span>]</span>
+<span id="cb8-5"><a href=""></a></span>
+<span id="cb8-6"><a href=""></a></span>
+<span id="cb8-7"><a href=""></a>list2dict <span class="op">=</span> {i: [j, k, l] <span class="cf">for</span> i, j, k, l <span class="kw">in</span> <span class="bu">zip</span>(list1, list2, list3, list4)}</span>
+<span id="cb8-8"><a href=""></a></span>
+<span id="cb8-9"><a href=""></a>list2dict</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="to-dataframe-1" class="slide level2 center">
 <h2>to DataFrame</h2>
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb10-2"><a href=""></a></span>
-<span id="cb10-3"><a href=""></a>df2 <span class="op">=</span> pd.DataFrame(list2dict)</span>
-<span id="cb10-4"><a href=""></a>df2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb9-2"><a href=""></a></span>
+<span id="cb9-3"><a href=""></a>df2 <span class="op">=</span> pd.DataFrame(list2dict)</span>
+<span id="cb9-4"><a href=""></a>df2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="activity" class="slide level2 center">
 <h2>Activity:</h2>
 <ol type="1">
 <li>Copy the below lists:</li>
 </ol>
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a>consonant <span class="op">=</span>  [<span class="st">"p"</span>, <span class="st">"b"</span>, <span class="st">"t"</span>, <span class="st">"d"</span>, <span class="st">"k"</span>, <span class="st">"g"</span>, <span class="st">"s"</span>, <span class="st">"z"</span>, <span class="st">"m"</span>, <span class="st">"n"</span>, <span class="st">"l"</span>, <span class="st">"r"</span>, <span class="st">"w"</span>, <span class="st">"j"</span>, <span class="st">"h"</span>]</span>
-<span id="cb11-2"><a href=""></a>place <span class="op">=</span> [<span class="st">"bilabial"</span>, <span class="st">"bilabial"</span>, <span class="st">"alveolar"</span>, <span class="st">"alveolar"</span>, <span class="st">"velar"</span>, <span class="st">"velar"</span>, <span class="st">"alveolar"</span>, <span class="st">"alveolar"</span>, <span class="st">"bilabial"</span>, <span class="st">"alveolar"</span>, <span class="st">"alveolar"</span>, <span class="st">"alveolar"</span>, <span class="st">"labial-velar"</span>, <span class="st">"palatal"</span>, <span class="st">"glottal"</span>]</span>
-<span id="cb11-3"><a href=""></a>manner <span class="op">=</span> [<span class="st">"stop"</span>, <span class="st">"stop"</span>, <span class="st">"stop"</span>, <span class="st">"stop"</span>, <span class="st">"stop"</span>, <span class="st">"stop"</span>, <span class="st">"fricative"</span>, <span class="st">"fricative"</span>, <span class="st">"nasal"</span>, <span class="st">"nasal"</span>, <span class="st">"lateral"</span>, <span class="st">"trill"</span>, <span class="st">"glide"</span>, <span class="st">"glide"</span>, <span class="st">"fricative"</span>]</span>
-<span id="cb11-4"><a href=""></a>voice <span class="op">=</span> [<span class="st">"voiceless"</span>, <span class="st">"voiced"</span>, <span class="st">"voiceless"</span>, <span class="st">"voiced"</span>, <span class="st">"voiceless"</span>, <span class="st">"voiced"</span>, <span class="st">"voiceless"</span>, <span class="st">"voiced"</span>, <span class="st">"voiced"</span>, <span class="st">"voiced"</span>, <span class="st">"voiced"</span>, <span class="st">"voiced"</span>, <span class="st">"voiced"</span>, <span class="st">"voiced"</span>, <span class="st">"voiceless"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a>consonant <span class="op">=</span>  [<span class="st">"p"</span>, <span class="st">"b"</span>, <span class="st">"t"</span>, <span class="st">"d"</span>, <span class="st">"k"</span>, <span class="st">"g"</span>, <span class="st">"s"</span>, <span class="st">"z"</span>, <span class="st">"m"</span>, <span class="st">"n"</span>, <span class="st">"l"</span>, <span class="st">"r"</span>, <span class="st">"w"</span>, <span class="st">"j"</span>, <span class="st">"h"</span>]</span>
+<span id="cb10-2"><a href=""></a>place <span class="op">=</span> [<span class="st">"bilabial"</span>, <span class="st">"bilabial"</span>, <span class="st">"alveolar"</span>, <span class="st">"alveolar"</span>, <span class="st">"velar"</span>, <span class="st">"velar"</span>, <span class="st">"alveolar"</span>, <span class="st">"alveolar"</span>, <span class="st">"bilabial"</span>, <span class="st">"alveolar"</span>, <span class="st">"alveolar"</span>, <span class="st">"alveolar"</span>, <span class="st">"labial-velar"</span>, <span class="st">"palatal"</span>, <span class="st">"glottal"</span>]</span>
+<span id="cb10-3"><a href=""></a>manner <span class="op">=</span> [<span class="st">"stop"</span>, <span class="st">"stop"</span>, <span class="st">"stop"</span>, <span class="st">"stop"</span>, <span class="st">"stop"</span>, <span class="st">"stop"</span>, <span class="st">"fricative"</span>, <span class="st">"fricative"</span>, <span class="st">"nasal"</span>, <span class="st">"nasal"</span>, <span class="st">"lateral"</span>, <span class="st">"trill"</span>, <span class="st">"glide"</span>, <span class="st">"glide"</span>, <span class="st">"fricative"</span>]</span>
+<span id="cb10-4"><a href=""></a>voice <span class="op">=</span> [<span class="st">"voiceless"</span>, <span class="st">"voiced"</span>, <span class="st">"voiceless"</span>, <span class="st">"voiced"</span>, <span class="st">"voiceless"</span>, <span class="st">"voiced"</span>, <span class="st">"voiceless"</span>, <span class="st">"voiced"</span>, <span class="st">"voiced"</span>, <span class="st">"voiced"</span>, <span class="st">"voiced"</span>, <span class="st">"voiced"</span>, <span class="st">"voiced"</span>, <span class="st">"voiced"</span>, <span class="st">"voiceless"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol start="2" type="1">
 <li>Convert these lists into a dictionary, with the “consonant” serving as the key.</li>
 <li>Next, convert the dictionary as a <code>pd.DataFrame</code>.</li>
@@ -590,71 +599,68 @@ Dr.&nbsp;Andrew M. Byrd
 <ul>
 <li>Earlier, we saw that we can embed multiple loops into a script</li>
 </ul>
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href=""></a>list1 <span class="op">=</span> [<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span>]</span>
-<span id="cb12-2"><a href=""></a>list2 <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
-<span id="cb12-3"><a href=""></a></span>
-<span id="cb12-4"><a href=""></a>new_dict <span class="op">=</span> {}</span>
-<span id="cb12-5"><a href=""></a></span>
-<span id="cb12-6"><a href=""></a><span class="cf">for</span> i <span class="kw">in</span> list1:</span>
-<span id="cb12-7"><a href=""></a>  <span class="cf">for</span> j <span class="kw">in</span> list2:</span>
-<span id="cb12-8"><a href=""></a>    new_dict[i] <span class="op">=</span> j</span>
-<span id="cb12-9"><a href=""></a></span>
-<span id="cb12-10"><a href=""></a><span class="bu">print</span>(new_dict)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a>list1 <span class="op">=</span> [<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span>]</span>
+<span id="cb11-2"><a href=""></a>list2 <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb11-3"><a href=""></a></span>
+<span id="cb11-4"><a href=""></a>new_dict <span class="op">=</span> {}</span>
+<span id="cb11-5"><a href=""></a></span>
+<span id="cb11-6"><a href=""></a><span class="cf">for</span> i <span class="kw">in</span> list1:</span>
+<span id="cb11-7"><a href=""></a>  <span class="cf">for</span> j <span class="kw">in</span> list2:</span>
+<span id="cb11-8"><a href=""></a>    new_dict[i] <span class="op">=</span> j</span>
+<span id="cb11-9"><a href=""></a></span>
+<span id="cb11-10"><a href=""></a><span class="bu">print</span>(new_dict)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="nested-strings" class="slide level2 center">
 <h2>Nested Strings</h2>
 <ul>
-<li>We Can use this practice to loop within elements of a list:</li>
+<li>We can run multiple loops to access subelements of a list:</li>
 </ul>
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href=""></a><span class="bu">list</span> <span class="op">=</span> [<span class="st">"eeny"</span>, <span class="st">"meeny"</span>, <span class="st">"miney"</span>, <span class="st">"mo"</span>]</span>
-<span id="cb13-2"><a href=""></a></span>
-<span id="cb13-3"><a href=""></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">list</span>:</span>
-<span id="cb13-4"><a href=""></a>  <span class="cf">for</span> c <span class="kw">in</span> i:</span>
-<span id="cb13-5"><a href=""></a>    <span class="bu">print</span>(c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href=""></a><span class="bu">list</span> <span class="op">=</span> [<span class="st">"eeny"</span>, <span class="st">"meeny"</span>, <span class="st">"miney"</span>, <span class="st">"mo"</span>]</span>
+<span id="cb12-2"><a href=""></a></span>
+<span id="cb12-3"><a href=""></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">list</span>:</span>
+<span id="cb12-4"><a href=""></a>  <span class="cf">for</span> c <span class="kw">in</span> i:</span>
+<span id="cb12-5"><a href=""></a>    <span class="bu">print</span>(c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="nested-strings-1" class="slide level2 center">
 <h2>Nested Strings</h2>
 <ul>
 <li>You could use this for</li>
 </ul>
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href=""></a>words <span class="op">=</span> [<span class="st">"eeny"</span>, <span class="st">"meeny"</span>, <span class="st">"miney"</span>, <span class="st">"mo"</span>]</span>
-<span id="cb14-2"><a href=""></a>words_dict <span class="op">=</span> {}</span>
-<span id="cb14-3"><a href=""></a></span>
-<span id="cb14-4"><a href=""></a><span class="cf">for</span> w <span class="kw">in</span> words:</span>
-<span id="cb14-5"><a href=""></a>    vowels <span class="op">=</span> <span class="dv">0</span>               <span class="co"># temporary variable counter</span></span>
-<span id="cb14-6"><a href=""></a>    <span class="cf">for</span> c <span class="kw">in</span> w:              </span>
-<span id="cb14-7"><a href=""></a>        <span class="cf">if</span> c <span class="kw">in</span> <span class="st">"aeiou"</span>:     <span class="co"># check if the letter is a vowel</span></span>
-<span id="cb14-8"><a href=""></a>            vowels <span class="op">+=</span> <span class="dv">1</span>      <span class="co"># increment the counter</span></span>
-<span id="cb14-9"><a href=""></a>    <span class="bu">print</span>(w, <span class="st">":"</span>, vowels, <span class="st">"vowels"</span>)</span>
-<span id="cb14-10"><a href=""></a>    words_dict[w] <span class="op">=</span> vowels</span>
-<span id="cb14-11"><a href=""></a>    </span>
-<span id="cb14-12"><a href=""></a><span class="bu">print</span>(words_dict)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href=""></a>words <span class="op">=</span> [<span class="st">"eeny"</span>, <span class="st">"meeny"</span>, <span class="st">"miney"</span>, <span class="st">"mo"</span>]</span>
+<span id="cb13-2"><a href=""></a>words_dict <span class="op">=</span> {}</span>
+<span id="cb13-3"><a href=""></a></span>
+<span id="cb13-4"><a href=""></a><span class="cf">for</span> w <span class="kw">in</span> words:</span>
+<span id="cb13-5"><a href=""></a>    vowels <span class="op">=</span> <span class="dv">0</span>               <span class="co"># temporary variable counter</span></span>
+<span id="cb13-6"><a href=""></a>    <span class="cf">for</span> c <span class="kw">in</span> w:              </span>
+<span id="cb13-7"><a href=""></a>        <span class="cf">if</span> c <span class="kw">in</span> <span class="st">"aeiou"</span>:     <span class="co"># check if the letter is a vowel</span></span>
+<span id="cb13-8"><a href=""></a>            vowels <span class="op">+=</span> <span class="dv">1</span>      <span class="co"># increment the counter</span></span>
+<span id="cb13-9"><a href=""></a>    <span class="bu">print</span>(w, <span class="st">":"</span>, vowels, <span class="st">"vowels"</span>)</span>
+<span id="cb13-10"><a href=""></a>    words_dict[w] <span class="op">=</span> vowels</span>
+<span id="cb13-11"><a href=""></a>    </span>
+<span id="cb13-12"><a href=""></a><span class="bu">print</span>(words_dict)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="nested-lists" class="slide level2 center">
 <h2>Nested Lists</h2>
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href=""></a>sentences <span class="op">=</span> [</span>
-<span id="cb15-2"><a href=""></a>    [<span class="st">"the"</span>, <span class="st">"cat"</span>, <span class="st">"sleeps"</span>],</span>
-<span id="cb15-3"><a href=""></a>    [<span class="st">"the"</span>, <span class="st">"dog"</span>, <span class="st">"runs"</span>],</span>
-<span id="cb15-4"><a href=""></a>    [<span class="st">"the"</span>, <span class="st">"bird"</span>, <span class="st">"flies"</span>]</span>
-<span id="cb15-5"><a href=""></a>]</span>
-<span id="cb15-6"><a href=""></a></span>
-<span id="cb15-7"><a href=""></a><span class="cf">for</span> sentence <span class="kw">in</span> sentences:</span>
-<span id="cb15-8"><a href=""></a>  <span class="cf">for</span> w <span class="kw">in</span> sentence:</span>
-<span id="cb15-9"><a href=""></a>    <span class="bu">print</span>(i)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href=""></a>sentences <span class="op">=</span> [</span>
+<span id="cb14-2"><a href=""></a>    [<span class="st">"the"</span>, <span class="st">"cat"</span>, <span class="st">"sleeps"</span>],</span>
+<span id="cb14-3"><a href=""></a>    [<span class="st">"the"</span>, <span class="st">"dog"</span>, <span class="st">"runs"</span>],</span>
+<span id="cb14-4"><a href=""></a>    [<span class="st">"the"</span>, <span class="st">"bird"</span>, <span class="st">"flies"</span>]</span>
+<span id="cb14-5"><a href=""></a>]</span>
+<span id="cb14-6"><a href=""></a></span>
+<span id="cb14-7"><a href=""></a><span class="cf">for</span> sentence <span class="kw">in</span> sentences:</span>
+<span id="cb14-8"><a href=""></a>  <span class="cf">for</span> w <span class="kw">in</span> sentence:</span>
+<span id="cb14-9"><a href=""></a>    <span class="bu">print</span>(w)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="nested-lists-activity" class="slide level2 center">
 <h2>Nested Lists: Activity</h2>
 <ul>
 <li>Copy the following list(s), and (1) print each syllable on its own line and (2) count the total number of syllables</li>
 </ul>
-<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href=""></a>words <span class="op">=</span> [</span>
-<span id="cb16-2"><a href=""></a>    [<span class="st">"lin"</span>, <span class="st">"guis"</span>, <span class="st">"tics"</span>],</span>
-<span id="cb16-3"><a href=""></a>    [<span class="st">"pho"</span>, <span class="st">"no"</span>, <span class="st">"lo"</span>, <span class="st">"gy"</span>],</span>
-<span id="cb16-4"><a href=""></a>    [<span class="st">"mor"</span>, <span class="st">"pho"</span>, <span class="st">"lo"</span>, <span class="st">"gy"</span>]</span>
-<span id="cb16-5"><a href=""></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="nested-dicts" class="slide level2 center">
-<h2>Nested Dicts</h2>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href=""></a>words <span class="op">=</span> [</span>
+<span id="cb15-2"><a href=""></a>    [<span class="st">"lin"</span>, <span class="st">"guis"</span>, <span class="st">"tics"</span>],</span>
+<span id="cb15-3"><a href=""></a>    [<span class="st">"pho"</span>, <span class="st">"no"</span>, <span class="st">"lo"</span>, <span class="st">"gy"</span>],</span>
+<span id="cb15-4"><a href=""></a>    [<span class="st">"mor"</span>, <span class="st">"pho"</span>, <span class="st">"lo"</span>, <span class="st">"gy"</span>]</span>
+<span id="cb15-5"><a href=""></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
