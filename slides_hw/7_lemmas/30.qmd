@@ -1,0 +1,266 @@
+---
+title: "Computation for Linguists"
+subtitle: "Lemmatization & SpaCy"
+date: "November 5, 2025"
+author: "Dr. Andrew M. Byrd"
+format:
+  revealjs:
+    css: header_shrink.css
+    theme: beige
+    slide-number: true
+    center: true
+    toc: true
+    toc-title: "Plan for the Day"
+    toc-depth: 1
+jupyter: python3
+editor: source
+---
+
+# Review
+
+-   What did you learn last time?
+
+## Recap from Last Time
+
+- Lists `["a", "b", "c"]`
+- Dictionaries `{key: value}`
+- `pd.DataFrame` 
+
+## Recap from Last Time
+
+```python
+list = ["eeny", "meeny", "miney", "mo"]
+
+for i in list:
+  for c in i:
+    print(c)
+```
+
+## Recap from Last Time
+
+```python
+sentences = [
+    ["the", "cat", "sleeps"],
+    ["the", "dog", "runs"],
+    ["the", "bird", "flies"]
+]
+
+for sentence in sentences:
+  for w in sentence:
+    print(w)
+```
+
+## Recap from Last Time
+
+```python
+list1 = ["a", "b", "c", "d"]
+list2 = [0, 1, 2, 3]
+list3 = ["alpha", "beta", "gamma", "delta"]
+list4 = ["fee", "fie", "fo", "fum"]
+
+
+list2dict = {i: [j, k, l] for i, j, k, l in zip(list1, list2, list3, list4)}
+
+list2dict
+```
+
+## Review Activity
+
+- Copy the below lists.
+- Add a fourth list called `length`, whose items contain the length of each word in `words`.
+- Then, convert to a dictionary using the `zip()` function, with the keys = `words`.
+
+```python
+words = ["zombie", "ghoul", "ghost", "vampire"]
+begins_with_g = [False, True, True, False]
+rhymes_with_most = [False, False, True, False]
+```
+
+
+
+
+# Plan for the Day
+
+1. Review: NLTK & WordNet
+2. What is a lemma?
+3. Lemmatization with **spaCy**
+4. Filtering and analyzing parts of speech
+5. ✏️ In-class activity — Lemmatize and compare
+6. Preview: Multilingual NLP
+
+---
+
+# Review: NLTK & WordNet
+
+✅ **NLTK** — a toolkit for text processing in Python
+✅ **WordNet** — a lexical database of English meanings
+
+> NLTK can query WordNet directly, giving us access to definitions,
+> synonyms, antonyms, and hierarchical relations among words.
+
+---
+
+# Accessing WordNet in NLTK
+
+```{python}
+from nltk.corpus import wordnet as wn
+
+# All senses of "run"
+synsets = wn.synsets("run")
+print(f"Number of senses for 'run': {len(synsets)}")
+print(synsets[:5])
+```
+
+---
+
+# Inspecting a Synset
+
+```{python}
+s = wn.synsets("run")[0]
+print("Name:", s.name())
+print("Definition:", s.definition())
+print("Examples:", s.examples())
+```
+
+---
+
+# Semantic Relations in WordNet
+
+```{python}
+s = wn.synsets("dog")[0]
+
+print("Definition:", s.definition())
+print("Hypernyms (broader):", s.hypernyms())
+print("Hyponyms (narrower):", s.hyponyms())
+print("Meronyms (parts):", s.part_meronyms())
+```
+
+---
+
+# Discussion 💬
+
+* How does WordNet organize meaning?
+* What’s the difference between a **synset** and a **lemma**?
+* Why do NLP systems need both lexical data (like WordNet) *and* text processing tools (like spaCy)?
+
+---
+
+# What is a Lemma?
+
+> **Lemma** = the *base form* of a word
+> (the form you’d find as a dictionary headword)
+
+| Word    | Lemma | POS  |
+| ------- | ----- | ---- |
+| running | run   | VERB |
+| ran     | run   | VERB |
+| mice    | mouse | NOUN |
+| better  | good  | ADJ  |
+
+---
+
+# Why Lemmatize?
+
+* To treat **morphological variants** as the *same* word
+* To improve search accuracy (e.g., *run*, *ran*, *running* → *run*)
+* To normalize data for counting, clustering, or semantic analysis
+* Essential for cross-linguistic comparison
+
+---
+
+# Lemmatization with spaCy
+
+```{python}
+import spacy
+nlp = spacy.load("en_core_web_sm")
+
+doc = nlp("The children ran quickly to their houses.")
+
+for token in doc:
+    print(token.text, "→", token.lemma_, token.pos_)
+```
+
+---
+
+# Compare Tokenization and Lemmatization
+
+```{python}
+text = "Students were running, reading, and writing all day."
+doc = nlp(text)
+
+tokens = [t.text for t in doc]
+lemmas = [t.lemma_ for t in doc]
+
+list(zip(tokens, lemmas))
+```
+
+---
+
+# Filtering by Part of Speech
+
+```{python}
+nouns = [t.lemma_ for t in doc if t.pos_ == "NOUN"]
+verbs = [t.lemma_ for t in doc if t.pos_ == "VERB"]
+
+print("Nouns:", nouns)
+print("Verbs:", verbs)
+```
+
+---
+
+# Creating a Lemma Frequency Table
+
+```{python}
+import pandas as pd
+from collections import Counter
+
+lemmas = [t.lemma_.lower() for t in doc if t.is_alpha]
+freq = Counter(lemmas)
+
+df = pd.DataFrame(freq.items(), columns=["lemma", "count"]).sort_values("count", ascending=False)
+df.head()
+```
+
+---
+
+# Visualizing Lemma Counts
+
+```{python}
+import matplotlib.pyplot as plt
+
+top10 = df.head(10)
+plt.bar(top10["lemma"], top10["count"])
+plt.title("Top 10 Lemmas in the Text")
+plt.xlabel("Lemma")
+plt.ylabel("Count")
+plt.show()
+```
+
+---
+
+# ✏️ In-Class Activity — “Lemma Frequency Analysis”
+
+1. Copy a short paragraph of English text (≈ 80 words).
+2. Process it with spaCy to extract **tokens**, **lemmas**, and **POS tags**.
+3. Create a DataFrame of lemma + frequency.
+4. Compare your top lemmas with those from the raw tokens.
+
+> 💬 How does lemmatization change the frequency counts?
+> Which verbs or nouns merge under a single lemma?
+
+---
+
+# Discussion 💬
+
+* What linguistic knowledge does spaCy rely on for lemmatization?
+* When might WordNet be more useful than spaCy, and vice versa?
+* How could you combine both in a project (e.g., linking lemmas to their WordNet synsets)?
+
+---
+
+# Next Time ➡️
+
+🌍 **Multilingual NLP** — applying tokenization and lemmatization
+to other languages (Spanish, French, German, etc.)
+
+> Each group will analyze one language and compare results.

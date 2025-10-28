@@ -1,33 +1,20 @@
-Day 1 : review, moving between types
+Day 1 : review, nesting
 
-- Review: strings → lists → dicts → DataFrames
-- Mini-activity: create a phoneme inventory DataFrame from scratch
-- Focus on converting between types (list(), dict(), pd.DataFrame())
+Day 2 : nested dicts
 
-Day 2 : nested dicts, data summaries
+Day 3 : tokenization, nltk, wordnet
 
-- Practice nested dicts and data summaries
-- Build a small typological dataset
-- Grouping, counting, and basic descriptive stats (.groupby(), .mean())
+Day 4 : spacy
 
-Day 3 : dirty data to df
+Day 5: spacy in other languages
 
-- “End-to-End” task: from raw data → cleaned → summarized table
-e.g. two language inventories or two text samples
-- Prepares them to transition from structured data → textual data
 
-Day 4 : lemmatization and normalization
 
-- tokenization review
-- tokens vs. lemmas
-- installing and beginning spaCy
-- creating lists of lemmas
 
-Day 5 : frequency coutns
 
-- when to use Counter, when to use .value_counts()
-- make frequency dictionary, convert to df
-- compare frequencies of lemmas vs. raw tokens
+
+
+
 
 Day 6 : filtering & comparison
 

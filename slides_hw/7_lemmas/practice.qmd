@@ -22,3 +22,27 @@ def myfunction(word):
 myfunction("burp")
 ```
 
+```{python}
+import nltk
+from nltk.tokenize import word_tokenize, sent_tokenize
+text = "Dr. Byrd's students can't wait to analyze PIE roots!"
+word_tokenize(text)
+sent_tokenize(text)
+```
+
+```{python}
+import pandas as pd
+freq = nltk.FreqDist(word_tokenize(text.lower()))
+df = pd.DataFrame(freq.items(), columns=["word", "count"]).sort_values("count", ascending=False)
+df
+```
+
+```{python}
+import spacy
+nlp = spacy.load("en_core_web_sm")
+doc = nlp("The children ran quickly to their houses.")
+for token in doc:
+    print(token.text, token.lemma_, token.pos_)
+
+```
+

@@ -1,0 +1,239 @@
+---
+title: "Computation for Linguists"
+subtitle: "SpaCy: Other Languages"
+date: "November 7, 2025"
+author: "Dr. Andrew M. Byrd"
+format:
+  revealjs:
+    css: header_shrink.css
+    theme: beige
+    slide-number: true
+    center: true
+    toc: true
+    toc-title: "Plan for the Day"
+    toc-depth: 1
+jupyter: python3
+editor: source
+---
+
+# Review
+
+-   What did you learn last time?
+
+## Recap from Last Time
+
+- Lists `["a", "b", "c"]`
+- Dictionaries `{key: value}`
+- `pd.DataFrame` 
+
+## Recap from Last Time
+
+```python
+list = ["eeny", "meeny", "miney", "mo"]
+
+for i in list:
+  for c in i:
+    print(c)
+```
+
+## Recap from Last Time
+
+```python
+sentences = [
+    ["the", "cat", "sleeps"],
+    ["the", "dog", "runs"],
+    ["the", "bird", "flies"]
+]
+
+for sentence in sentences:
+  for w in sentence:
+    print(w)
+```
+
+## Recap from Last Time
+
+```python
+list1 = ["a", "b", "c", "d"]
+list2 = [0, 1, 2, 3]
+list3 = ["alpha", "beta", "gamma", "delta"]
+list4 = ["fee", "fie", "fo", "fum"]
+
+
+list2dict = {i: [j, k, l] for i, j, k, l in zip(list1, list2, list3, list4)}
+
+list2dict
+```
+
+## Review Activity
+
+- Copy the below lists.
+- Add a fourth list called `length`, whose items contain the length of each word in `words`.
+- Then, convert to a dictionary using the `zip()` function, with the keys = `words`.
+
+```python
+words = ["zombie", "ghoul", "ghost", "vampire"]
+begins_with_g = [False, True, True, False]
+rhymes_with_most = [False, False, True, False]
+```
+
+---
+
+title: "Day 3 — Multilingual NLP"
+subtitle: "Tokenization & Lemmatization Across Languages"
+author: "Dr. Andrew M. Byrd"
+format:
+revealjs:
+toc: true
+toc-title: "Plan for the Day"
+theme: simple
+slide-number: true
+code-line-numbers: false
+jupyter: python3
+execute:
+warning: false
+message: false
+--------------
+
+# Plan for the Day
+
+1. Review: English lemmatization with **spaCy**
+2. Multilingual language models
+3. Comparing tokenization across languages
+4. Lemmatization in French, Spanish, and German
+5. ✏️ In-class activity — Cross-linguistic comparison
+6. Wrap-up discussion
+
+---
+
+# Review: English Lemmatization
+
+```{python}
+import spacy
+nlp_en = spacy.load("en_core_web_sm")
+
+doc = nlp_en("The children ran quickly to their houses.")
+for token in doc:
+    print(token.text, token.lemma_, token.pos_)
+```
+
+---
+
+# spaCy Multilingual Models
+
+> spaCy provides language-specific pipelines trained for each language.
+
+| Language | Model Name        | Example                                |
+| -------- | ----------------- | -------------------------------------- |
+| English  | `en_core_web_sm`  | "The students studied hard."           |
+| French   | `fr_core_news_sm` | "Les étudiants ont étudié dur."        |
+| Spanish  | `es_core_news_sm` | "Los estudiantes estudiaron mucho."    |
+| German   | `de_core_news_sm` | "Die Studenten haben fleißig gelernt." |
+
+To download a model (only once):
+
+```bash
+python -m spacy download fr_core_news_sm
+python -m spacy download es_core_news_sm
+python -m spacy download de_core_news_sm
+```
+
+---
+
+# Tokenization in Multiple Languages
+
+```{python}
+import spacy
+
+nlp_fr = spacy.load("fr_core_news_sm")
+nlp_es = spacy.load("es_core_news_sm")
+nlp_de = spacy.load("de_core_news_sm")
+
+text_fr = "Les étudiants ont analysé les racines proto-indo-européennes."
+text_es = "Los estudiantes analizaron las raíces protoindoeuropeas."
+text_de = "Die Studenten analysierten die indogermanischen Wurzeln."
+
+for lang, nlp, text in [("French", nlp_fr, text_fr), ("Spanish", nlp_es, text_es), ("German", nlp_de, text_de)]:
+    doc = nlp(text)
+    print(f"\n {lang} Tokens:")
+    print([t.text for t in doc])
+```
+
+---
+
+# Lemmatization Across Languages
+
+```{python}
+for lang, nlp, text in [("French", nlp_fr, text_fr), ("Spanish", nlp_es, text_es), ("German", nlp_de, text_de)]:
+    doc = nlp(text)
+    print(f"\n {lang} Lemmas:")
+    for token in doc:
+        print(token.text, "→", token.lemma_, token.pos_)
+```
+
+---
+
+# Creating Cross-Language DataFrames
+
+```{python}
+import pandas as pd
+
+def lemma_table(nlp, text, language):
+    doc = nlp(text)
+    data = [(t.text, t.lemma_, t.pos_) for t in doc if t.is_alpha]
+    return pd.DataFrame(data, columns=["word", "lemma", "pos"]).assign(language=language)
+
+df_all = pd.concat([
+    lemma_table(nlp_fr, text_fr, "French"),
+    lemma_table(nlp_es, text_es, "Spanish"),
+    lemma_table(nlp_de, text_de, "German")
+])
+
+df_all
+```
+
+---
+
+# ✏️ In-Class Activity — Cross-Linguistic Comparison
+
+**Goal:** Compare how tokenization and lemmatization differ across languages.
+
+**Instructions:**
+
+1. Form groups of 2–3 students. Each group chooses one language (French, Spanish, or German).
+2. Run the spaCy model for your language and extract **tokens**, **lemmas**, and **POS tags**.
+3. Count how many **unique lemmas** appear in your text.
+4. Share results — how do the totals differ across languages, and why?
+
+**Hints:**
+
+* Does your language mark **gender**, **number**, or **tense** differently?
+* How does that affect lemmatization?
+
+---
+
+# Example Comparison Table
+
+| Language | Tokens | Unique Lemmas | Example Lemma Variation      |
+| -------- | ------ | ------------- | ---------------------------- |
+| English  | 10     | 8             | *ran → run*                  |
+| French   | 12     | 9             | *étudiés → étudier*          |
+| Spanish  | 11     | 8             | *analizaron → analizar*      |
+| German   | 13     | 9             | *analysierten → analysieren* |
+
+---
+
+# Discussion 💬
+
+* Which languages were easiest for spaCy to lemmatize correctly?
+* What kinds of morphological information are preserved or lost?
+* Why do some languages have more unique lemmas than others?
+
+---
+
+# Wrap-Up
+
+✅ Tokenization and lemmatization vary across languages
+✅ spaCy provides pre-trained pipelines for many languages
+✅ Lemmatization accuracy depends on morphological complexity
+
+> Next: Using NLP tools for **semantic similarity** and **word embeddings**.

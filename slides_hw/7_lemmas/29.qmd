@@ -1,0 +1,293 @@
+---
+title: "Computation for Linguists"
+subtitle: "NLTK"
+date: "November 3, 2025"
+author: "Dr. Andrew M. Byrd"
+format:
+  revealjs:
+    css: header_shrink.css
+    theme: beige
+    slide-number: true
+    center: true
+    toc: true
+    toc-title: "Plan for the Day"
+    toc-depth: 1
+jupyter: python3
+editor: source
+---
+
+# Review
+
+-   What did you learn last time?
+
+## Recap from Last Time
+
+```python
+list = ["eeny", "meeny", "miney", "mo"]
+
+for i in list:
+  for c in i:
+    print(c)
+```
+
+## Recap from Last Time
+
+```python
+sentences = [
+    ["the", "cat", "sleeps"],
+    ["the", "dog", "runs"],
+    ["the", "bird", "flies"]
+]
+
+for sentence in sentences:
+  for w in sentence:
+    print(w)
+```
+
+## Recap from Last Time
+
+```python
+consonants = {
+    "p": {"voice": False, "place": "bilabial", "manner": "stop"},
+    "t": {"voice": False, "place": "alveolar", "manner": "stop"},
+    "k": {"voice": False, "place": "velar", "manner": "stop"}
+}
+```
+
+## Recap from Last Time
+```python
+import pandas as pd
+consonants = {
+    "p": {"voice": False, "place": "bilabial", "manner": "stop"},
+    "t": {"voice": False, "place": "alveolar", "manner": "stop"},
+    "k": {"voice": False, "place": "velar", "manner": "stop"}
+}
+
+df = pd.DataFrame(consonants).T.reset_index(names="phoneme")
+df
+```
+
+
+## Review Activity
+
+- Copy the list below. Using a `for` loop and the `zip()` function, create a dictionary  with the `words` as keys. Then, using the `.T` method, convert it into a `pd.DataFrame`.
+
+```python
+words   = ["students", "run", "ran", "roots", "languages"]
+pos_tags = ["NOUN", "VERB", "VERB", "NOUN", "NOUN"]
+lemmas  = ["student", "run", "run", "root", "language"]
+freqs   = [5, 3, 2, 4, 6]
+```
+
+# NLTK
+
+## NLTK
+
+- NLTK (Natural Language Toolkit) is a Python library — a framework that provides tools for:
+  - Tokenization
+  - Lemmatization & stemming
+  - POS tagging
+  - Parsing
+  - Access to corpora (like Brown, Gutenberg, etc.)
+  - Interfaces to lexical databases (like WordNet)
+
+## NLTK and WordNet
+
+- **NLTK** is a *toolkit* for working with language.  
+- **WordNet** is a *lexical database* that NLTK connects to.
+
+---
+
+# What is WordNet?
+
+- Developed at Princeton University  
+- Organizes English words into **synsets** (sets of cognitive synonyms)  
+- Captures relationships among words:
+  - **Synonyms:** *good ↔ nice*  
+  - **Antonyms:** *hot ↔ cold*  
+  - **Hypernyms:** *dog → animal*  
+  - **Hyponyms:** *dog → poodle*  
+  - **Meronyms:** *car → wheel*
+
+---
+
+# Exploring WordNet in NLTK
+
+```{python}
+from nltk.corpus import wordnet as wn
+
+# Find synsets for a word
+wn.synsets("run")
+
+# Look at the first sense
+
+s = wn.synsets("run")[0]
+print("Lemma names:", s.lemma_names())
+print("Definition:", s.definition())
+print("Examples:", s.examples())
+s = wn.synsets("dog")[0]
+print("Hypernyms:", s.hypernyms())
+print("Hyponyms:", s.hyponyms())
+print("Part Meronyms:", s.part_meronyms())
+
+```
+
+# Tokens, Types, Lemmas
+
+## What is Tokenization?
+
+**Tokenization** = breaking text into meaningful units (tokens).  
+
+
+## What is Tokenization?
+- Tokens can be *words*, *punctuation*, *numbers*, or even *subwords*.  
+- Linguists care because **boundaries** aren't always obvious:
+  - “Dr. Byrd’s” → ?  
+  - “can’t” → ?  
+  - “U.S.” → ?  
+
+---
+
+## Simple Tokenization (Strings Only)
+
+```{python}
+text = "Dr. Byrd's students can't wait to analyze PIE roots!"
+tokens_basic = text.split()
+tokens_basic
+```
+
+## `dict` Activity
+
+## Slightly better: use regex to remove punctuation
+
+```{python}
+
+```
+
+
+import re
+tokens_clean = re.findall(r"\b\w+'\w+|\w+\b", text)
+tokens_clean
+
+
+---
+
+## Tokenization Comparison
+
+Let's see how different methods handle punctuation, contractions, and abbreviations.
+
+```{python}
+import re
+from nltk.tokenize import word_tokenize
+
+text = "Dr. Byrd's students can't wait to analyze PIE roots!"
+
+print(" .split():")
+print(text.split())
+
+print("\n re.split():")
+print(re.split(r"\W+", text))
+
+print("\n nltk.word_tokenize():")
+print(word_tokenize(text))
+```
+## Tokenization Comparison
+
+| Method                     | Strengths                                               | Weaknesses                                                        |
+| :------------------------- | :------------------------------------------------------ | :---------------------------------------------------------------- |
+| **`.split()`**             | Very fast, built-in                                     | Breaks on whitespace only — punctuation & contractions mishandled |
+| **`re.split()`**           | Customizable patterns                                   | Requires writing regex; can over/under-split                      |
+| **`nltk.word_tokenize()`** | Linguistically aware; handles punctuation, contractions | Slower; needs `nltk` installed                                    |
+
+
+
+## Sentence Tokenization 
+
+```{python}
+import nltk
+from nltk.tokenize import sent_tokenize
+
+text2 = """President Pitzer, Mr. Vice President, Governor Connally,
+ladies and gentlemen: I am delighted to be here today. We meet in an hour of change and challenge."""
+sent_tokenize(text2)
+```
+
+
+
+
+## Word Tokenization (NLTK)
+
+```{python}
+from nltk.tokenize import word_tokenize
+
+tokens = word_tokenize(text)
+tokens
+```
+
+
+
+## Frequency Distributions
+
+```{python}
+import pandas as pd
+from nltk import FreqDist
+
+freq = FreqDist(word.lower() for word in tokens)
+df = pd.DataFrame(freq.items(), columns=["word", "count"]).sort_values("count", ascending=False)
+df.head(10)
+```
+
+
+
+## Filter Stopwords
+
+
+```{python}
+from nltk.corpus import stopwords
+nltk.download('stopwords')
+
+
+stops = set(stopwords.words('english'))
+print(stops)
+##filtered = [w for w in tokens if w.lower() not in stops and w.isalpha()]
+
+#FreqDist(filtered).most_common(10)
+```
+
+
+
+##Visualizing Word Counts
+
+```{python}
+import matplotlib.pyplot as plt
+
+top10 = df.head(10)
+plt.bar(top10["word"], top10["count"])
+plt.title("Top 10 Words in Text")
+plt.xlabel("Word")
+plt.ylabel("Count")
+plt.show()
+
+```
+
+
+## Activity
+
+```{python}
+words   = ["students", "run", "ran", "roots", "languages"]
+pos_tags = ["NOUN", "VERB", "VERB", "NOUN", "NOUN"]
+lemmas  = ["student", "run", "run", "root", "language"]
+freqs   = [5, 3, 2, 4, 6]
+
+word_info = {}
+for w, pos, lemma, freq in zip(words, pos_tags, lemmas, freqs):
+  word_info[w] = {"POS": pos, "Lemma": lemma, "Frequency": freq}
+
+df_words = pd.DataFrame(word_info).T
+df_words
+
+```
+
+
+
+

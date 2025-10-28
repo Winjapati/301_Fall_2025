@@ -1,0 +1,22 @@
+---
+title: "29_in_class"
+format: html
+---
+
+```{python}
+words   = ["students", "run", "ran", "roots", "languages"]
+pos_tags = ["NOUN", "VERB", "VERB", "NOUN", "NOUN"]
+lemmas  = ["student", "run", "run", "root", "language"]
+freqs   = [5, 3, 2, 4, 6]
+
+new_dict = {}
+for i, j, k, l in zip(words,pos_tags,lemmas,freqs):
+  new_dict[i] = {
+    "pos_tags": j,
+    "lemmas": k,
+    "freqs": l
+}
+
+df = pd.DataFrame(new_dict).T.reset_index(names="words")
+df
+```
