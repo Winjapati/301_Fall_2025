@@ -3,20 +3,33 @@ title: "27_in_class"
 format: html
 ---
 
+```{python}
+jfk = "This year’s space budget is three times what it was in January 1961, and it is greater than the space budget of the previous eight years combined. That budget now stands at $5,400,000 a year — a staggering sum, though somewhat less than we pay for cigarettes and cigars every year. Space expenditures will soon rise some more, from 40 cents per person per week to more than 50 cents a week for every man, woman and child in the United States, for we have given this program a high national priority — even though I realize that this is in some measure an act of faith and vision, for we do not now know what benefits await us. But if I were to say, my fellow citizens, that we shall send to the moon, 240,000 miles away from the control station in Houston, a giant rocket more than 300 feet tall, the length of this football field, made of new metal alloys, some of which have not yet been invented, capable of standing heat and stresses several times more than have ever been experienced, fitted together with a precision better than the finest watch, carrying all the equipment needed for propulsion, guidance, control, communications, food and survival, on an untried mission, to an unknown celestial body, and then return it safely to Earth, re-entering the atmosphere at speeds of over 25,000 miles per hour, causing heat about half that of the temperature of the sun — almost as hot as it is here today — and do all this, and do it right, and do it first before this decade is out — then we must be bold. I’m the one who is doing all the work, so we just want you to stay cool for a minute. [laughter] However, I think we’re going to do it, and I think that we must pay what needs to be paid. I don’t think we ought to waste any money, but I think we ought to do the job. And this will be done in the decade of the sixties. It may be done while some of you are still here at school at this college and university. It will be done during the term of office of some of the people who sit here on this platform. But it will be done. And it will be done before the end of this decade. I am delighted that this university is playing a part in putting a man on the moon as part of a great national effort of the United States of America. Many years ago, the great British explorer George Mallory, who was to die on Mount Everest, was asked why did he want to climb it? He said, “Because it is there.” Well, space is there, and we’re going to climb it, and the moon and the planets are there, and new hopes for knowledge and peace are there. And, therefore, as we set sail we ask God’s blessing on the most hazardous and dangerous and greatest adventure on which man has ever embarked. Thank you."
+```
+
+```{python}
+import re
+
+jfk_words = re.split(r"[\s\W]+", jfk)
+jfk_words = [word for word in jfk_words if word]
+```
+
+```{python}
+len(jfk_words)
+```
+
+```{python}
+# We created an empty dictionary
+# We looped through our list
+# In each turn of the loop, we looked inside the dictionary to see if the current word was there.
+# If it was, we increased its value by 1.
+# If it wasn’t, we added it, making its value equal to 1.
 
 
 
 
 
-
-
-
-
-
-
-
-
-
+```
 
 
 
@@ -30,6 +43,95 @@ for wd in jfk_words:
         word_counts[wd] = 1
 sort_wds = sorted(word_counts.items(), key=lambda x: x[1], reverse=True)
 ```
+
+
+
+```{python}
+list1 = ["a", "b", "c", "d"]
+list2 = [0, 1, 2, 3]
+
+new_dict = {}
+
+for i in list1:
+  for j in list2:
+    new_dict[i] = j
+
+print(new_dict)
+```
+
+
+```{python}
+list1 = ["a", "b", "c", "d"]
+list2 = [0, 1, 2, 3]
+
+new_dict = {i: j for i, j in zip(list1, list2)}
+
+print(new_dict)
+```
+
+```{python}
+import pandas as pd
+
+df = pd.DataFrame(new_dict)
+df
+```
+
+
+
+```{python}
+import pandas as pd
+
+list1 = ["a", "b", "c", "d"]
+list2 = [0, 1, 2, 3]
+
+new_dict = {}
+
+for i in list1:
+  for j in list2:
+    new_dict[i] = j
+
+df = pd.DataFrame(new_dict)
+df
+```
+
+
+
+```{python}
+list1 = ["a", "b", "c", "d"]
+list2 = [0, 1, 2, 3]
+list3 = ["alpha", "beta", "gamma", "delta"]
+list4 = ["fee", "fie", "fo", "fum"]
+
+
+list2dict = {i: [j, k, l] for i, j, k, l in zip(list1, list2, list3, list4)}
+
+list2dict
+```
+
+
+
+```{python}
+import pandas as pd
+
+df2 = pd.DataFrame(list2dict)
+df2
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -49,6 +151,67 @@ df = pd.DataFrame(c_dict)
 
 df.to_csv("consonants.csv", index=False)
 ```
+
+
+
+```{python}
+list1 = ["a", "b", "c", "d"]
+list2 = [0, 1, 2, 3]
+
+new_dict = {}
+
+for i in list1:
+  for j in list2:
+    new_dict[i] = j
+
+print(new_dict)
+```
+
+
+
+```{python}
+list = ["eeny", "meeny", "miney", "mo"]
+
+for i in list:
+  for c in i:
+    print(c)
+```
+
+
+```{python}
+words = ["eeny", "meeny", "miney", "mo"]
+words_dict = {}
+
+for w in words:
+    vowels = 0               # temporary variable counter
+    for c in w:              
+        if c in "aeiou":     # check if the letter is a vowel
+            vowels += 1      # increment the counter
+    print(w, ":", vowels, "vowels")
+    words_dict[w] = vowels
+    
+print(words_dict)
+```
+
+
+```{python}
+sentences = [
+    ["the", "cat", "sleeps"],
+    ["the", "dog", "runs"],
+    ["the", "bird", "flies"]
+]
+
+for sentence in sentences:
+  for w in sentence:
+    print(w)
+```
+
+
+
+
+
+
+
 
 
 
