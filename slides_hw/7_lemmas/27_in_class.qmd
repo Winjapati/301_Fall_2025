@@ -52,7 +52,7 @@ list2 = [0, 1, 2, 3]
 
 new_dict = {}
 
-for i in list1:
+for i in list1: 
   for j in list2:
     new_dict[i] = j
 
