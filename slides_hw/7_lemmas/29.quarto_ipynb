@@ -1,0 +1,621 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Computation for Linguists\"\n",
+        "subtitle: \"NLTK\"\n",
+        "date: \"November 3, 2025\"\n",
+        "author: \"Dr. Andrew M. Byrd\"\n",
+        "format:\n",
+        "  revealjs:\n",
+        "    css: header_shrink.css\n",
+        "    theme: beige\n",
+        "    slide-number: true\n",
+        "    center: true\n",
+        "    toc: true\n",
+        "    toc-title: \"Plan for the Day\"\n",
+        "    toc-depth: 1\n",
+        "jupyter: python3\n",
+        "editor: source\n",
+        "---\n",
+        "\n",
+        "# Review\n",
+        "\n",
+        "-   What did you learn last time?\n",
+        "\n",
+        "## Recap from Last Time\n",
+        "\n",
+        "```python\n",
+        "list = [\"eeny\", \"meeny\", \"miney\", \"mo\"]\n",
+        "list[0][0]\n",
+        "```\n",
+        "\n",
+        "## Recap from Last Time\n",
+        "\n",
+        "```python\n",
+        "sentences = [\n",
+        "    [\"the\", \"cat\", \"sleeps\"],\n",
+        "    [\"the\", \"dog\", \"runs\"],\n",
+        "    [\"the\", \"bird\", \"flies\"]\n",
+        "]\n",
+        "sentences[0][0]\n",
+        "```\n",
+        "## Recap from Last Time\n",
+        "\n",
+        "```python\n",
+        "consonants = {\n",
+        "    \"p\": {\"voice\": False, \"place\": \"bilabial\", \"manner\": \"stop\"},\n",
+        "    \"t\": {\"voice\": False, \"place\": \"alveolar\", \"manner\": \"stop\"},\n",
+        "    \"k\": {\"voice\": False, \"place\": \"velar\", \"manner\": \"stop\"}\n",
+        "}\n",
+        "```\n",
+        "## Recap from Last Time\n",
+        "\n",
+        "```python\n",
+        "students = {\n",
+        "    \"Alice\": {\"quiz\": 9, \"homework\": 10, \"final\": 8},\n",
+        "    \"Ben\": {\"quiz\": 7, \"homework\": 9, \"final\": 10}\n",
+        "}\n",
+        "\n",
+        "students[\"Alice\"][\"quiz\"]\n",
+        "```\n",
+        "\n",
+        "## Recap from Last Time\n",
+        "\n",
+        "```python\n",
+        "import pandas as pd\n",
+        "consonants = {\n",
+        "    \"p\": {\"voice\": False, \"place\": \"bilabial\", \"manner\": \"stop\"},\n",
+        "    \"t\": {\"voice\": False, \"place\": \"alveolar\", \"manner\": \"stop\"},\n",
+        "    \"k\": {\"voice\": False, \"place\": \"velar\", \"manner\": \"stop\"}\n",
+        "}\n",
+        "\n",
+        "df = pd.DataFrame(consonants).T.reset_index(names=\"phoneme\")\n",
+        "df\n",
+        "```\n",
+        "\n",
+        "\n",
+        "## Review Activity\n",
+        "\n",
+        "- Copy the list below. Using a `for` loop and the `zip()` function, create a dictionary  with the `words` as keys. Then, using the `.T` method, convert it into a `pd.DataFrame`.\n",
+        "\n",
+        "```python\n",
+        "words   = [\"students\", \"run\", \"ran\", \"roots\", \"languages\"]\n",
+        "pos_tags = [\"NOUN\", \"VERB\", \"VERB\", \"NOUN\", \"NOUN\"]\n",
+        "lemmas  = [\"student\", \"run\", \"run\", \"root\", \"language\"]\n",
+        "freqs   = [5, 3, 2, 4, 6]\n",
+        "```\n",
+        "\n",
+        "# NLTK\n",
+        "\n",
+        "## NLTK\n",
+        "\n",
+        "- NLTK (Natural Language Toolkit) is a Python library — a framework that provides tools for:\n",
+        "  - Tokenization (separates words)\n",
+        "  - Lemmatization & stemming (identifies words by stem/root)\n",
+        "  - POS tagging \n",
+        "  \n",
+        "## NLTK\n",
+        "- Provides tools for:\n",
+        "  - Parsing (identifies sentence structure)\n",
+        "  - Access to corpora (like Brown, Gutenberg, etc.)\n",
+        "  - Interfaces to lexical databases (like WordNet)\n",
+        "\n",
+        "## Installing NLTK\n",
+        "\n",
+        "```python\n",
+        "python -m pip install nltk\n",
+        "# or\n",
+        "python3 -m pip install nltk\n",
+        "# or \n",
+        "py -m pip install nltk\n",
+        "```\n",
+        "\n",
+        "## Setting NLTK up\n",
+        "\n",
+        "```python\n",
+        "\n",
+        "import nltk\n",
+        "nltk.download('punkt')  # Example: Download the Punkt tokenizer models\n",
+        "nltk.download('averaged_perceptron_tagger') # Example: Download the POS tagger\n",
+        "nltk.download('stopwords') # Example: Download the English stopwords list\n",
+        "nltk.download('wordnet') # Download WordNet\n",
+        "```\n",
+        "\n",
+        "# Tokens, Types, Lemmas\n",
+        "\n",
+        "## What is Tokenization?\n",
+        "\n",
+        "**Tokenization** = breaking text into meaningful units (tokens).  \n",
+        "\n",
+        "## What is Tokenization?\n",
+        "- Tokens can be *words*, *punctuation*, *numbers*, or even *subwords*.  \n",
+        "- How words are tokenized is important, as boundaries aren't always obvious:\n",
+        "  - “Dr. Byrd’s” → ?  \n",
+        "  - “can’t” → ?  \n",
+        "  - “U.S.” → ?  \n",
+        "\n",
+        "## Simple Tokenization (Strings Only)\n",
+        "\n",
+        "- We've learned about `.split()`\n",
+        "\n",
+        "```python\n",
+        "text = \"Dr. Byrd's students can't wait to analyze PIE roots!\"\n",
+        "tokens_basic = text.split()\n",
+        "tokens_basic\n",
+        "```\n",
+        "\n",
+        "## Slightly better: use regex to remove punctuation\n",
+        "\n",
+        "- And we've learned about `re.split()`\n",
+        "\n",
+        "```python\n",
+        "text = \"Dr. Byrd's students can't wait to analyze PIE roots!\"\n",
+        "import re\n",
+        "tokens_clean = re.split(r\"[\\s\\W]+\", text)\n",
+        "tokens_clean\n",
+        "```\n",
+        "## Even better: using NLTK\n",
+        "\n",
+        "- You can also split things up using NLTK, which *\"knows\"* some linguistic structure already\n",
+        "\n",
+        "## Tokenization Comparison\n",
+        "\n",
+        "Let's see how different methods handle punctuation, contractions, and abbreviations.\n",
+        "\n",
+        "```python\n",
+        "import re\n",
+        "from nltk.tokenize import word_tokenize\n",
+        "\n",
+        "text = \"Dr. Byrd's students can't wait to analyze PIE roots!\"\n",
+        "\n",
+        "print(word_tokenize(text))\n",
+        "```\n",
+        "## Tokenization Comparison\n",
+        "\n",
+        "| Method                     | Strengths                                               | Weaknesses                                                        |\n",
+        "| :------------------------- | :------------------------------------------------------ | :---------------------------------------------------------------- |\n",
+        "| **`.split()`**             | Very fast, built-in                                     | Breaks on whitespace (or \",\", etc.) only |\n",
+        "| **`re.split()`**           | Customizable                                   | regex = hard; can misparse                      |\n",
+        "| **`nltk.word_tokenize()`** | Linguistically aware | Slower; needs `nltk` installed                                    |\n",
+        "\n",
+        "## Sentence Tokenization \n",
+        "\n",
+        "```python\n",
+        "import nltk\n",
+        "from nltk.tokenize import sent_tokenize\n",
+        "\n",
+        "text2 = \"\"\"President Pitzer, Mr. Vice President, Governor Connally, ladies and gentlemen: I am delighted to be here today. We meet in an hour of change and challenge.\"\"\"\n",
+        "word_tokenize(text2)[0:10]\n",
+        "print(\"\\n --------------------- \\n\")\n",
+        "sent_tokenize(text2)[0:1]\n",
+        "```\n",
+        "## Tokenization Activity\n",
+        "\n",
+        "```python\n",
+        "from nltk.tokenize import word_tokenize\n",
+        "\n",
+        "tokens = word_tokenize(text)\n",
+        "tokens\n",
+        "```\n",
+        "\n",
+        "# WordNet\n",
+        "\n",
+        "## NLTK and WordNet\n",
+        "\n",
+        "- Inside **NLTK** you can connect to **WordNet**, which is a *lexical database* \n",
+        "- Developed at Princeton University  \n",
+        "- Organizes English words into **synsets** (sets of cognitive synonyms)  \n",
+        "\n",
+        "---\n",
+        "\n",
+        "## WordNet\n",
+        "\n",
+        "- Captures relationships among words:\n",
+        "  - **Synonyms:** *good ↔ nice*  \n",
+        "  - **Antonyms:** *hot ↔ cold*  \n",
+        "  - **Hypernyms:** *dog → animal*  \n",
+        "  - **Hyponyms:** *dog → poodle*  \n",
+        "  - **Meronyms:** *car → wheel*\n",
+        "  - **Entailments:** *snore → sleep* \n",
+        "\n",
+        "## Synsets\n",
+        "\n",
+        "- Check all of the synsets with `wn.synsets(*word*)`"
+      ],
+      "id": "97bd2093"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "from nltk.corpus import wordnet as wn\n",
+        "\n",
+        "wn.synsets('dog')"
+      ],
+      "id": "f2b3f01d",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Synsets\n",
+        "\n",
+        "- You can print up its definition with `.definition()`"
+      ],
+      "id": "ea31697e"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "from nltk.corpus import wordnet as wn\n",
+        "\n",
+        "for s in wn.synsets('dog'):\n",
+        "  print(f\"{s}: {s.definition()}\")"
+      ],
+      "id": "586fee4d",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Synsets\n",
+        "\n",
+        "- Examples with `.examples()`"
+      ],
+      "id": "ec31aee6"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "from nltk.corpus import wordnet as wn\n",
+        "\n",
+        "for s in wn.synsets('dog'):\n",
+        "  print(f\"{s}: {s.examples()}\")"
+      ],
+      "id": "cd5e230f",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Synsets\n",
+        "\n",
+        "- And lemmas with `.lemmas()`"
+      ],
+      "id": "5e11d53e"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "from nltk.corpus import wordnet as wn\n",
+        "\n",
+        "for s in wn.synsets('dog'):\n",
+        "  print(f\"{s}: {s.lemmas()}\")"
+      ],
+      "id": "f74892fe",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Synonyms & Antonyms"
+      ],
+      "id": "1b08fbb3"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "lemmas = s.lemmas()\n",
+        "synonyms = [l.name() for l in lemmas]\n",
+        "print(synonyms)\n",
+        "\n",
+        "antonyms = []\n",
+        "for l in lemmas:\n",
+        "    if l.antonyms():\n",
+        "        antonyms.append(l.antonyms()[0].name())\n",
+        "print(antonyms)"
+      ],
+      "id": "c4a3faa9",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Hypernyms & Hyponyms"
+      ],
+      "id": "ad4068ec"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print(s.hypernyms())  # more general (e.g., Synset('canine.n.02'))\n",
+        "print(s.hyponyms())   # more specific (e.g., Synset('lapdog.n.01'))"
+      ],
+      "id": "4bdd2b98",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print(s.part_meronyms())   # ['tail', 'paw']\n",
+        "print(s.part_holonyms())   # ['pack', 'kennel']"
+      ],
+      "id": "953d9a08",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Exploring WordNet in NLTK"
+      ],
+      "id": "32e807dd"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "from nltk.corpus import wordnet as wn\n",
+        "\n",
+        "# Find synsets for a word\n",
+        "wn.synsets(\"run\")\n",
+        "\n",
+        "# Look at the first sense\n",
+        "s = wn.synsets(\"run\")[0]\n",
+        "print(\"Lemma names:\", s.lemma_names())\n",
+        "print(\"Definition:\", s.definition())\n",
+        "print(\"Examples:\", s.examples())"
+      ],
+      "id": "d602c2cc",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "from nltk.corpus import wordnet as wn\n",
+        "\n",
+        "s = wn.synsets(\"dog\")[0]\n",
+        "print(\"Hypernyms:\", s.hypernyms())\n",
+        "print(\"Hyponyms:\", s.hyponyms())\n",
+        "print(\"Part Meronyms:\", s.part_meronyms())"
+      ],
+      "id": "7ae5405e",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Semantic Similarity"
+      ],
+      "id": "47f73c55"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "dog = wn.synset('dog.n.01')\n",
+        "cat = wn.synset('cat.n.01')\n",
+        "\n",
+        "similarity = dog.path_similarity(cat)\n",
+        "print(similarity)  # closer to 1.0 = more similar\n",
+        "\n",
+        "dog.wup_similarity(cat)    # Wu–Palmer similarity\n",
+        "dog.lch_similarity(cat)    # Leacock–Chodorow similarity"
+      ],
+      "id": "dc3e4fc7",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "def all_hyponyms(synset):\n",
+        "    hypos = set()\n",
+        "    for h in synset.hyponyms():\n",
+        "        hypos.add(h)\n",
+        "        hypos |= all_hyponyms(h)\n",
+        "    return hypos\n",
+        "\n",
+        "dog = wn.synset('dog.n.01')\n",
+        "all_hypos = all_hyponyms(dog)\n",
+        "print(all_hypos)"
+      ],
+      "id": "4c03d9e6",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "# Lemmatization"
+      ],
+      "id": "0d4777ad"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "    from nltk.stem import WordNetLemmatizer\n",
+        "    from nltk.corpus import wordnet\n",
+        "\n",
+        "    # Download necessary NLTK data if not already downloaded\n",
+        "    # nltk.download('wordnet')\n",
+        "    # nltk.download('omw-1.4') # Open Multilingual WordNet, often needed with WordNet\n",
+        "\n",
+        "    lemmatizer = WordNetLemmatizer()\n",
+        "\n",
+        "    # Lemmatizing with default POS (noun)\n",
+        "    word1 = \"dogs\"\n",
+        "    lemma1 = lemmatizer.lemmatize(word1)\n",
+        "    print(f\"'{word1}' (default POS) -> '{lemma1}'\")\n",
+        "\n",
+        "    # Lemmatizing with specified POS (verb)\n",
+        "    word2 = \"running\"\n",
+        "    lemma2 = lemmatizer.lemmatize(word2, pos='v')\n",
+        "    print(f\"'{word2}' (verb) -> '{lemma2}'\")\n",
+        "\n",
+        "    # Lemmatizing with specified POS (adjective)\n",
+        "    word3 = \"better\"\n",
+        "    lemma3 = lemmatizer.lemmatize(word3, pos='a')\n",
+        "    print(f\"'{word3}' (adjective) -> '{lemma3}'\")\n",
+        "\n",
+        "    # Example where POS matters\n",
+        "    word4 = \"leaves\"\n",
+        "    lemma4_n = lemmatizer.lemmatize(word4, pos='n') # Noun\n",
+        "    lemma4_v = lemmatizer.lemmatize(word4, pos='v') # Verb\n",
+        "    print(f\"'{word4}' (noun) -> '{lemma4_n}'\")\n",
+        "    print(f\"'{word4}' (verb) -> '{lemma4_v}'\")"
+      ],
+      "id": "fb691e39",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "# Parsing\n",
+        "\n",
+        "```\n",
+        "\n",
+        "\n",
+        "## Frequency Distributions"
+      ],
+      "id": "adf9de15"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "import pandas as pd\n",
+        "from nltk import FreqDist\n",
+        "\n",
+        "freq = FreqDist(word.lower() for word in tokens)\n",
+        "df = pd.DataFrame(freq.items(), columns=[\"word\", \"count\"]).sort_values(\"count\", ascending=False)\n",
+        "df.head(10)"
+      ],
+      "id": "8191ae20",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Filter Stopwords\n"
+      ],
+      "id": "18a1bbca"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "from nltk.corpus import stopwords\n",
+        "nltk.download('stopwords')\n",
+        "\n",
+        "\n",
+        "stops = set(stopwords.words('english'))\n",
+        "print(stops)\n",
+        "##filtered = [w for w in tokens if w.lower() not in stops and w.isalpha()]\n",
+        "\n",
+        "#FreqDist(filtered).most_common(10)"
+      ],
+      "id": "c419d365",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "##Visualizing Word Counts"
+      ],
+      "id": "266c1ec1"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "import matplotlib.pyplot as plt\n",
+        "\n",
+        "top10 = df.head(10)\n",
+        "plt.bar(top10[\"word\"], top10[\"count\"])\n",
+        "plt.title(\"Top 10 Words in Text\")\n",
+        "plt.xlabel(\"Word\")\n",
+        "plt.ylabel(\"Count\")\n",
+        "plt.show()"
+      ],
+      "id": "eacdc671",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Activity"
+      ],
+      "id": "873e1431"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "import pandas as pd\n",
+        "\n",
+        "words   = [\"students\", \"run\", \"ran\", \"roots\", \"languages\"]\n",
+        "pos_tags = [\"NOUN\", \"VERB\", \"VERB\", \"NOUN\", \"NOUN\"]\n",
+        "lemmas  = [\"student\", \"run\", \"run\", \"root\", \"language\"]\n",
+        "freqs   = [5, 3, 2, 4, 6]\n",
+        "\n",
+        "word_info = {}\n",
+        "for w, pos, lemma, freq in zip(words, pos_tags, lemmas, freqs):\n",
+        "  word_info[w] = {\"POS\": pos, \"Lemma\": lemma, \"Frequency\": freq}\n",
+        "\n",
+        "df_words = pd.DataFrame(word_info).T\n",
+        "df_words"
+      ],
+      "id": "eac969d7",
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "C:\\Users\\amby222\\.virtualenvs\\r-reticulate\\share\\jupyter\\kernels\\python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

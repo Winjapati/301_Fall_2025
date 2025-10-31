@@ -24,10 +24,7 @@ editor: source
 
 ```python
 list = ["eeny", "meeny", "miney", "mo"]
-
-for i in list:
-  for c in i:
-    print(c)
+list[0][0]
 ```
 
 ## Recap from Last Time
@@ -38,12 +35,8 @@ sentences = [
     ["the", "dog", "runs"],
     ["the", "bird", "flies"]
 ]
-
-for sentence in sentences:
-  for w in sentence:
-    print(w)
+sentences[0][0]
 ```
-
 ## Recap from Last Time
 
 ```python
@@ -53,8 +46,19 @@ consonants = {
     "k": {"voice": False, "place": "velar", "manner": "stop"}
 }
 ```
+## Recap from Last Time
+
+```python
+students = {
+    "Alice": {"quiz": 9, "homework": 10, "final": 8},
+    "Ben": {"quiz": 7, "homework": 9, "final": 10}
+}
+
+students["Alice"]["quiz"]
+```
 
 ## Recap from Last Time
+
 ```python
 import pandas as pd
 consonants = {
@@ -84,52 +88,35 @@ freqs   = [5, 3, 2, 4, 6]
 ## NLTK
 
 - NLTK (Natural Language Toolkit) is a Python library — a framework that provides tools for:
-  - Tokenization
-  - Lemmatization & stemming
-  - POS tagging
-  - Parsing
+  - Tokenization (separates words)
+  - Lemmatization & stemming (identifies words by stem/root)
+  - POS tagging 
+  
+## NLTK
+- Provides tools for:
+  - Parsing (identifies sentence structure)
   - Access to corpora (like Brown, Gutenberg, etc.)
   - Interfaces to lexical databases (like WordNet)
 
-## NLTK and WordNet
+## Installing NLTK
 
-- **NLTK** is a *toolkit* for working with language.  
-- **WordNet** is a *lexical database* that NLTK connects to.
+```python
+python -m pip install nltk
+# or
+python3 -m pip install nltk
+# or 
+py -m pip install nltk
+```
 
----
+## Setting NLTK up
 
-# What is WordNet?
+```python
 
-- Developed at Princeton University  
-- Organizes English words into **synsets** (sets of cognitive synonyms)  
-- Captures relationships among words:
-  - **Synonyms:** *good ↔ nice*  
-  - **Antonyms:** *hot ↔ cold*  
-  - **Hypernyms:** *dog → animal*  
-  - **Hyponyms:** *dog → poodle*  
-  - **Meronyms:** *car → wheel*
-
----
-
-# Exploring WordNet in NLTK
-
-```{python}
-from nltk.corpus import wordnet as wn
-
-# Find synsets for a word
-wn.synsets("run")
-
-# Look at the first sense
-
-s = wn.synsets("run")[0]
-print("Lemma names:", s.lemma_names())
-print("Definition:", s.definition())
-print("Examples:", s.examples())
-s = wn.synsets("dog")[0]
-print("Hypernyms:", s.hypernyms())
-print("Hyponyms:", s.hyponyms())
-print("Part Meronyms:", s.part_meronyms())
-
+import nltk
+nltk.download('punkt')  # Example: Download the Punkt tokenizer models
+nltk.download('averaged_perceptron_tagger') # Example: Download the POS tagger
+nltk.download('stopwords') # Example: Download the English stopwords list
+nltk.download('wordnet') # Download WordNet
 ```
 
 # Tokens, Types, Lemmas
@@ -138,92 +125,265 @@ print("Part Meronyms:", s.part_meronyms())
 
 **Tokenization** = breaking text into meaningful units (tokens).  
 
-
 ## What is Tokenization?
 - Tokens can be *words*, *punctuation*, *numbers*, or even *subwords*.  
-- Linguists care because **boundaries** aren't always obvious:
+- How words are tokenized is important, as boundaries aren't always obvious:
   - “Dr. Byrd’s” → ?  
   - “can’t” → ?  
   - “U.S.” → ?  
 
----
-
 ## Simple Tokenization (Strings Only)
 
-```{python}
+- We've learned about `.split()`
+
+```python
 text = "Dr. Byrd's students can't wait to analyze PIE roots!"
 tokens_basic = text.split()
 tokens_basic
 ```
 
-## `dict` Activity
-
 ## Slightly better: use regex to remove punctuation
 
-```{python}
+- And we've learned about `re.split()`
 
-```
-
-
+```python
+text = "Dr. Byrd's students can't wait to analyze PIE roots!"
 import re
-tokens_clean = re.findall(r"\b\w+'\w+|\w+\b", text)
+tokens_clean = re.split(r"[\s\W]+", text)
 tokens_clean
+```
+## Even better: using NLTK
 
-
----
+- You can also split things up using NLTK, which *"knows"* some linguistic structure already
 
 ## Tokenization Comparison
 
 Let's see how different methods handle punctuation, contractions, and abbreviations.
 
-```{python}
+```python
 import re
 from nltk.tokenize import word_tokenize
 
 text = "Dr. Byrd's students can't wait to analyze PIE roots!"
 
-print(" .split():")
-print(text.split())
-
-print("\n re.split():")
-print(re.split(r"\W+", text))
-
-print("\n nltk.word_tokenize():")
 print(word_tokenize(text))
 ```
 ## Tokenization Comparison
 
 | Method                     | Strengths                                               | Weaknesses                                                        |
 | :------------------------- | :------------------------------------------------------ | :---------------------------------------------------------------- |
-| **`.split()`**             | Very fast, built-in                                     | Breaks on whitespace only — punctuation & contractions mishandled |
-| **`re.split()`**           | Customizable patterns                                   | Requires writing regex; can over/under-split                      |
-| **`nltk.word_tokenize()`** | Linguistically aware; handles punctuation, contractions | Slower; needs `nltk` installed                                    |
-
-
+| **`.split()`**             | Very fast, built-in                                     | Breaks on whitespace (or ",", etc.) only |
+| **`re.split()`**           | Customizable                                   | regex = hard; can misparse                      |
+| **`nltk.word_tokenize()`** | Linguistically aware | Slower; needs `nltk` installed                                    |
 
 ## Sentence Tokenization 
 
-```{python}
+```python
 import nltk
 from nltk.tokenize import sent_tokenize
 
-text2 = """President Pitzer, Mr. Vice President, Governor Connally,
-ladies and gentlemen: I am delighted to be here today. We meet in an hour of change and challenge."""
-sent_tokenize(text2)
+text2 = """President Pitzer, Mr. Vice President, Governor Connally, ladies and gentlemen: I am delighted to be here today. We meet in an hour of change and challenge."""
+word_tokenize(text2)[0:10]
+print("\n --------------------- \n")
+sent_tokenize(text2)[0:1]
 ```
+## Tokenization Activity
 
-
-
-
-## Word Tokenization (NLTK)
-
-```{python}
+```python
 from nltk.tokenize import word_tokenize
 
 tokens = word_tokenize(text)
 tokens
 ```
 
+# WordNet
+
+## NLTK and WordNet
+
+- Inside **NLTK** you can connect to **WordNet**, which is a *lexical database* 
+- Developed at Princeton University  
+- Organizes English words into **synsets** (sets of cognitive synonyms)  
+
+---
+
+## WordNet
+
+- Captures relationships among words:
+  - **Synonyms:** *good ↔ nice*  
+  - **Antonyms:** *hot ↔ cold*  
+  - **Hypernyms:** *dog → animal*  
+  - **Hyponyms:** *dog → poodle*  
+  - **Meronyms:** *car → wheel*
+  - **Entailments:** *snore → sleep* 
+
+## Synsets
+
+- Check all of the synsets with `wn.synsets(*word*)`
+
+```{python}
+from nltk.corpus import wordnet as wn
+
+wn.synsets('dog')
+```
+
+## Synsets
+
+- You can print up its definition with `.definition()`
+
+```{python}
+from nltk.corpus import wordnet as wn
+
+for s in wn.synsets('dog'):
+  print(f"{s}: {s.definition()}")
+```
+
+
+## Synsets
+
+- Examples with `.examples()`
+
+```{python}
+from nltk.corpus import wordnet as wn
+
+for s in wn.synsets('dog'):
+  print(f"{s}: {s.examples()}")
+```
+
+## Synsets
+
+- And lemmas with `.lemmas()`
+
+```{python}
+from nltk.corpus import wordnet as wn
+
+for s in wn.synsets('dog'):
+  print(f"{s}: {s.lemmas()}")
+```
+
+## Synonyms & Antonyms
+
+```{python}
+lemmas = s.lemmas()
+synonyms = [l.name() for l in lemmas]
+print(synonyms)
+
+antonyms = []
+for l in lemmas:
+    if l.antonyms():
+        antonyms.append(l.antonyms()[0].name())
+print(antonyms)
+```
+## Hypernyms & Hyponyms
+
+```{python}
+print(s.hypernyms())  # more general (e.g., Synset('canine.n.02'))
+print(s.hyponyms())   # more specific (e.g., Synset('lapdog.n.01'))
+
+```
+
+
+
+```{python}
+print(s.part_meronyms())   # ['tail', 'paw']
+print(s.part_holonyms())   # ['pack', 'kennel']
+
+```
+
+
+
+
+## Exploring WordNet in NLTK
+
+```{python}
+from nltk.corpus import wordnet as wn
+
+# Find synsets for a word
+wn.synsets("run")
+
+# Look at the first sense
+s = wn.synsets("run")[0]
+print("Lemma names:", s.lemma_names())
+print("Definition:", s.definition())
+print("Examples:", s.examples())
+```
+
+```{python}
+from nltk.corpus import wordnet as wn
+
+s = wn.synsets("dog")[0]
+print("Hypernyms:", s.hypernyms())
+print("Hyponyms:", s.hyponyms())
+print("Part Meronyms:", s.part_meronyms())
+```
+
+
+## Semantic Similarity
+
+```{python}
+dog = wn.synset('dog.n.01')
+cat = wn.synset('cat.n.01')
+
+similarity = dog.path_similarity(cat)
+print(similarity)  # closer to 1.0 = more similar
+
+dog.wup_similarity(cat)    # Wu–Palmer similarity
+dog.lch_similarity(cat)    # Leacock–Chodorow similarity
+```
+
+
+```{python}
+def all_hyponyms(synset):
+    hypos = set()
+    for h in synset.hyponyms():
+        hypos.add(h)
+        hypos |= all_hyponyms(h)
+    return hypos
+
+dog = wn.synset('dog.n.01')
+all_hypos = all_hyponyms(dog)
+print(all_hypos)
+```
+
+
+
+# Lemmatization
+
+```{python}
+    from nltk.stem import WordNetLemmatizer
+    from nltk.corpus import wordnet
+
+    # Download necessary NLTK data if not already downloaded
+    # nltk.download('wordnet')
+    # nltk.download('omw-1.4') # Open Multilingual WordNet, often needed with WordNet
+
+    lemmatizer = WordNetLemmatizer()
+
+    # Lemmatizing with default POS (noun)
+    word1 = "dogs"
+    lemma1 = lemmatizer.lemmatize(word1)
+    print(f"'{word1}' (default POS) -> '{lemma1}'")
+
+    # Lemmatizing with specified POS (verb)
+    word2 = "running"
+    lemma2 = lemmatizer.lemmatize(word2, pos='v')
+    print(f"'{word2}' (verb) -> '{lemma2}'")
+
+    # Lemmatizing with specified POS (adjective)
+    word3 = "better"
+    lemma3 = lemmatizer.lemmatize(word3, pos='a')
+    print(f"'{word3}' (adjective) -> '{lemma3}'")
+
+    # Example where POS matters
+    word4 = "leaves"
+    lemma4_n = lemmatizer.lemmatize(word4, pos='n') # Noun
+    lemma4_v = lemmatizer.lemmatize(word4, pos='v') # Verb
+    print(f"'{word4}' (noun) -> '{lemma4_n}'")
+    print(f"'{word4}' (verb) -> '{lemma4_v}'")
+```
+  
+# Parsing
+
+```
 
 
 ## Frequency Distributions
@@ -274,6 +434,8 @@ plt.show()
 ## Activity
 
 ```{python}
+import pandas as pd
+
 words   = ["students", "run", "ran", "roots", "languages"]
 pos_tags = ["NOUN", "VERB", "VERB", "NOUN", "NOUN"]
 lemmas  = ["student", "run", "run", "root", "language"]
