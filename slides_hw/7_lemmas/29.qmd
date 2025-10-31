@@ -344,6 +344,69 @@ all_hypos = all_hyponyms(dog)
 print(all_hypos)
 ```
 
+```{python}
+from nltk.corpus import wordnet as wn
+
+# Get synsets for the word 'car'
+car_synsets = wn.synsets('car')
+# Example synset: Synset('car.n.01')
+
+# Accessing attributes of a specific synset
+car_synset = car_synsets[0]
+print(car_synset.definition())
+print(car_synset.examples())
+print(car_synset.hypernyms()) # Get more general concepts
+print(car_synset.hyponyms())  # Get more specific concepts
+```
+
+
+------- TEXT TO SEMANTIC SIMILARITY ---------
+
+```{python}
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
+from nltk.corpus import wordnet
+
+nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('averaged_perceptron_tagger_eng')
+
+text = "The dogs are running near the river banks."
+tokens = [w.lower() for w in word_tokenize(text) if w.isalpha()]
+tokens = [w for w in tokens if w not in stopwords.words('english')]
+tokens
+
+lemmatizer = WordNetLemmatizer()
+
+def get_pos(word):
+    tag = nltk.pos_tag([word])[0][1][0].upper()
+    tag_dict = {"J": wordnet.ADJ, "N": wordnet.NOUN, "V": wordnet.VERB, "R": wordnet.ADV}
+    return tag_dict.get(tag, wordnet.NOUN)
+
+lemmas = [lemmatizer.lemmatize(w, get_pos(w)) for w in tokens]
+lemmas
+
+```
+
+```{python}
+synsets = [wn.synsets(l) for l in lemmas]
+synsets
+
+```
+
+```{python}
+from itertools import combinations
+
+pairs = list(combinations([wn.synset('dog.n.01'), wn.synset('cat.n.01'), wn.synset('bank.n.09')], 2))
+for a, b in pairs:
+    print(a.name(), b.name(), a.wup_similarity(b))
+
+```
+
+
+---------
 
 
 # Lemmatization
