@@ -11,7 +11,9 @@ jfk = "This year’s space budget is three times what it was in January 1961, an
 import re
 
 jfk_words = re.split(r"[\s\W]+", jfk)
-jfk_words = [word for word in jfk_words if word]
+jfk_words = [word.lower() for word in jfk_words if word]
+
+jfk_words[:50]
 ```
 
 ```{python}
@@ -25,8 +27,15 @@ len(jfk_words)
 # If it was, we increased its value by 1.
 # If it wasn’t, we added it, making its value equal to 1.
 
+jfk_unique = {}
 
+for word in jfk_words:
+  if word in jfk_unique:
+    jfk_unique[word] += 1
+  else:
+    jfk_unique[word] = 1
 
+jfk_unique
 
 
 ```
@@ -42,6 +51,7 @@ for wd in jfk_words:
     else:                              
         word_counts[wd] = 1
 sort_wds = sorted(word_counts.items(), key=lambda x: x[1], reverse=True)
+sort_wds
 ```
 
 
@@ -86,9 +96,7 @@ list2 = [0, 1, 2, 3]
 
 new_dict = {}
 
-for i in list1:
-  for j in list2:
-    new_dict[i] = j
+new_dict = {i: [j] for i, j in zip(list1, list2)}
 
 df = pd.DataFrame(new_dict)
 df
@@ -119,6 +127,29 @@ df2
 
 
 
+```{python}
+import pandas as pd
+
+consonant =  ["p", "b", "t", "d", "k", "g", "s", "z", "m", "n", "l", "r", "w", "j", "h"]
+place = ["bilabial", "bilabial", "alveolar", "alveolar", "velar", "velar", "alveolar", "alveolar", "bilabial", "alveolar", "alveolar", "alveolar", "labial-velar", "palatal", "glottal"]
+manner = ["stop", "stop", "stop", "stop", "stop", "stop", "fricative", "fricative", "nasal", "nasal", "lateral", "trill", "glide", "glide", "fricative"]
+voice = ["voiceless", "voiced", "voiceless", "voiced", "voiceless", "voiced", "voiceless", "voiced", "voiced", "voiced", "voiced", "voiced", "voiced", "voiced", "voiceless"]
+
+# Convert these lists into a dictionary, with the “consonant” serving as the key.
+
+l2d = {i: [j, k, l] for i, j, k, l in zip(consonant, place, manner, voice)}
+
+# Next, convert the dictionary as a pd.DataFrame.
+
+l2d_df = pd.DataFrame(l2d)
+l2d_df
+
+# Finally, export the pd.DataFrame using df.to_csv("filename.csv", index=False)
+
+l2d_df.to_csv("l2d_csv.csv", index=False)
+
+
+```
 
 
 
@@ -209,6 +240,23 @@ for sentence in sentences:
 
 
 
+```{python}
+words = [
+    ["lin", "guis", "tics"],
+    ["pho", "no", "lo", "gy"],
+    ["mor", "pho", "lo", "gy"]
+]
+
+syl_count = 0
+
+for word in words:
+  for syl in word:
+    print(syl)
+    syl_count += 1
+
+print(syl_count)
+
+```
 
 
 

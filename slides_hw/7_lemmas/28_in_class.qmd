@@ -2,6 +2,48 @@
 title: "28_in_class"
 format: html
 ---
+
+
+```{python}
+words = ["zombie", "ghoul", "ghost", "vampire"]
+begins_with_g = [False, True, True, False]
+rhymes_with_most = [False, False, True, False]
+
+# Add a fourth list called length, whose items contain the length of each word in words.
+
+length = []
+
+for x in words:
+  length.append(len(x))
+
+# Then, convert to a dictionary using the zip() function, with the keys = words.
+
+l2d_words = {i: [j, k, l] for i, j, k, l in zip(words, begins_with_g, rhymes_with_most, length)}
+
+l2d_words
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ```{python}
 words = ["zombie", "ghoul", "ghost", "vampire"]
 begins_with_g = [False, True, True, False]
@@ -13,6 +55,98 @@ halloween = {i: [j, k, l] for i, j, k, l in zip(words,begins_with_g,rhymes_with_
 
 halloween
 ```
+
+
+
+
+```{python}
+import pandas as pd
+consonants = {
+    "p": {"voice": False, "place": "bilabial", "manner": "stop"},
+    "t": {"voice": False, "place": "alveolar", "manner": "stop"},
+    "k": {"voice": False, "place": "velar", "manner": "stop"}
+}
+df = pd.DataFrame(consonants)
+df
+```
+
+
+
+```{python}
+import pandas as pd
+consonants = {
+    "p": {"voice": False, "place": "bilabial", "manner": "stop"},
+    "t": {"voice": False, "place": "alveolar", "manner": "stop"},
+    "k": {"voice": False, "place": "velar", "manner": "stop"}
+}
+
+df = pd.DataFrame(consonants).T.reset_index(names="phoneme")
+df
+```
+
+
+
+
+
+
+
+```{python}
+import pandas as pd
+consonants = {
+    "p": {"voice": False, "place": "bilabial", "manner": "stop"},
+    "t": {"voice": False, "place": "alveolar", "manner": "stop"},
+    "k": {"voice": False, "place": "velar", "manner": "stop"}
+}
+df = pd.DataFrame(consonants)
+df
+```
+
+
+
+
+
+
+
+
+
+
+
+```{python}
+phonemes = ["p", "b", "t", "d", "k", "g"]
+voicing  = [False, True, False, True, False, True]
+place    = ["bilabial", "bilabial", "alveolar", "alveolar", "velar", "velar"]
+manner   = ["stop"] * 6
+
+#Copy the lists on the next slide. 
+
+# Using a for loop and the zip() function, create a dictionary with the phonemes as keys.
+
+new_dict = {}
+for i, j, k, l in zip(phonemes,voicing,place,manner):
+  new_dict[i] = {
+    "voice": j,
+    "place": k,
+    "manner": l
+}
+
+df = pd.DataFrame(new_dict).T.reset_index(names="phonemes")
+df
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ```{python}
 phonemes = ["p", "b", "t", "d", "k", "g"]
@@ -35,22 +169,22 @@ df
 
 
 
-```{python}
-import re
 
-with open("usher.txt", "r", encoding="utf-8") as f:
-  poe = f.read()
 
-usher = re.split(r"[\s\W]+", poe)
-usher = [word.lower() for word in usher_words if word]
 
-counter = 0
 
-for i in usher:
-  if i == "usher":
-    counter += 1
 
-print(f"There are {counter} instances of the word 'usher' in this book.")
 
-```
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -16,6 +16,9 @@ jupyter: python3
 editor: source
 ---
 
+<!-- NOTE TO SELF: CLASS TOO SHORT, LAST ACTIVITY DIDN'T TAKE LONG -->
+
+
 # Review
 
 -   What did you learn last time?
