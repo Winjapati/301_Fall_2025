@@ -16,6 +16,66 @@ jupyter: python3
 editor: source
 ---
 
+<!-- NOTE:  the nested for loop of two lists to create a dictionary DOES NOT WORK properly.  (the only key value is the last key of the second list)  Use zip() or teach about range() to get the index: -->
+
+
+<!-- ``` -->
+<!-- keys = ['name', 'age', 'city'] -->
+<!-- values = ['Alice', 30, 'New York'] -->
+
+<!-- my_dict = {} -->
+
+<!-- for i in range(len(keys)): -->
+<!--     my_dict[keys[i]] = values[i] -->
+
+<!-- print(my_dict) -->
+<!-- ``` -->
+
+<!-- Hey folks, -->
+
+<!-- Earlier today, I showed you this slide: -->
+
+<!-- list1 = ["a", "b", "c", "d"] -->
+<!-- list2 = [0, 1, 2, 3] -->
+
+<!-- new_dict = {} -->
+
+<!-- for i in list1: -->
+<!--   for j in list2: -->
+<!--     new_dict[i] = j -->
+
+<!-- print(new_dict) -->
+
+<!-- The *intention* had been to get a new dictionary of the shape {"a": 0, "b":1, "c":2, "d":3}. As we saw, however, it just gives you {"a": 3, "b":3, "c":3, "d":3}. -->
+
+<!-- Why? Well, for each i in list1, the inner loop runs through all of list2, overwriting each value until the final one. So, for i = "a", we get: -->
+
+<!-- "a" : 0 -->
+<!-- "a" : 1 -->
+<!-- "a" : 2 -->
+<!-- "a" : 3 -->
+
+
+<!-- Hence, {"a" : 3}.  It does that for each item in list1. -->
+
+<!-- So how to do it properly?  There are basically two ways. -->
+
+<!-- 1. By and large, the best solution is what I showed you second today - to use zip() to line up the indices of items in each list.  -->
+
+<!-- new_dict = {i: j for i, j in zip(list1, list2)} -->
+
+
+<!-- 2. You can also use the range() function.  Range() generates a sequence of numbers based on the argument you provide it. So range(5) would produce: 0, 1, 2, 3, 4.  If its argument is len(list1), that that gives us range(4), providing 4 indices (0, 1, 2, 3). -->
+
+<!-- new_dict = {} -->
+<!-- for i in range(len(list1)): -->
+<!--     new_dict[list1[i]] = list2[i] -->
+
+
+
+
+
+
 # Review
 
 -   What did you learn last time?
