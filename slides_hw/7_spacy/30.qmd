@@ -1,6 +1,6 @@
 ---
 title: "Computation for Linguists"
-subtitle: "Lemmatization & SpaCy"
+subtitle: "SpaCy & Semantic Mappings"
 date: "November 5, 2025"
 author: "Dr. Andrew M. Byrd"
 format:
@@ -22,69 +22,95 @@ editor: source
 
 ## Recap from Last Time
 
-- Lists `["a", "b", "c"]`
-- Dictionaries `{key: value}`
-- `pd.DataFrame` 
+``` python
+import spacy
+nlp = spacy.load("en_core_web_sm")
 
-## Recap from Last Time
+text = "Dr. Byrd's students can't wait to analyze PIE roots!"
 
-```python
-list = ["eeny", "meeny", "miney", "mo"]
-
-for i in list:
-  for c in i:
-    print(c)
+doc = nlp(text)
+[t.text for t in doc]
 ```
 
 ## Recap from Last Time
 
-```python
-sentences = [
-    ["the", "cat", "sleeps"],
-    ["the", "dog", "runs"],
-    ["the", "bird", "flies"]
-]
+``` python
+import spacy
+import pandas as pd
 
-for sentence in sentences:
-  for w in sentence:
-    print(w)
+# Load English model
+nlp = spacy.load("en_core_web_sm")
+
+text = "Dr. Byrd's students can't wait to analyze PIE roots!"
+doc = nlp(text)
+
+# Create list of dicts, one per token
+data = []
+for t in doc:
+    data.append({
+        "text": t.text,
+        "lemma": t.lemma_,
+        "POS": t.pos_,
+        "tag": t.tag_,
+        "stop": t.is_stop,
+        "is_punct": t.is_punct
+    })
+
+# Make DataFrame
+df = pd.DataFrame(data)
+print(df)
 ```
 
 ## Recap from Last Time
 
-```python
-list1 = ["a", "b", "c", "d"]
-list2 = [0, 1, 2, 3]
-list3 = ["alpha", "beta", "gamma", "delta"]
-list4 = ["fee", "fie", "fo", "fum"]
+``` python
+import spacy
 
+content_lemmas = [t.lemma_.lower() for t in doc
+                  if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
+```
 
-list2dict = {i: [j, k, l] for i, j, k, l in zip(list1, list2, list3, list4)}
+## Recap from Last Time
 
-list2dict
+``` python
+from collections import Counter
+import pandas as pd
+
+freq = Counter(content_lemmas)
+df_freq = (pd.DataFrame(freq.items(), columns=["lemma", "count"])
+           .sort_values("count", ascending=False))
+df_freq.head(10)
+```
+
+## Recap from Last Time
+
+``` python
+import matplotlib.pyplot as plt
+
+top10 = df_freq.head(10)
+plt.figure()
+plt.bar(top10["lemma"], top10["count"])
+plt.title("Top 10 Content Lemmas")
+plt.xlabel("Lemma")
+plt.ylabel("Count")
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
 ```
 
 ## Review Activity
 
-- Copy the below lists.
-- Add a fourth list called `length`, whose items contain the length of each word in `words`.
-- Then, convert to a dictionary using the `zip()` function, with the keys = `words`.
+-   Copy the below string, and after filtering out stopwords and non-words, identify the top 10 most frequent words.
 
-```python
-words = ["zombie", "ghoul", "ghost", "vampire"]
-begins_with_g = [False, True, True, False]
-rhymes_with_most = [False, False, True, False]
+``` python
+getty = "Four score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal.Now we are engaged in a great civil war, testing whether that nation, or any nation so conceived and so dedicated, can long endure. We are met on a great battle-field of that war. We have come to dedicate a portion of that field, as a final resting place for those who here gave their lives that that nation might live. It is altogether fitting and proper that we should do this.But, in a larger sense, we can not dedicate—we can not consecrate—we can not hallow—this ground. The brave men, living and dead, who struggled here, have consecrated it, far above our poor power to add or detract. The world will little note, nor long remember what we say here, but it can never forget what they did here. It is for us the living, rather, to be dedicated here to the unfinished work which they who fought here have thus far so nobly advanced. It is rather for us to be here dedicated to the great task remaining before us—that from these honored dead we take increased devotion to that cause for which they gave the last full measure of devotion—that we here highly resolve that these dead shall not have died in vain—that this nation, under God, shall have a new birth of freedom—and that government of the people, by the people, for the people, shall not perish from the earth."
 ```
 
-
-
-
-
-# WED — spaCy II: Sentences, Dependencies, Patterns
+# Using spaCy for Syntactic Processing
 
 ## Sentence Segmentation
 
-```python
+``` python
 text2 = ("President Pitzer, Mr. Vice President, Governor Connally, ladies and "
          "gentlemen: I am delighted to be here today. "
          "We meet in an hour of change and challenge.")
@@ -94,23 +120,50 @@ doc2 = nlp(text2)
 
 ## Dependency Parse (head, relation)
 
-```python
+-   [Full Glossary of spaCy abbreviations](https://github.com/explosion/spaCy/blob/master/spacy/glossary.py)
+
+``` python
 doc = nlp("The quick brown fox jumps over the lazy dog.")
 [(t.text, t.dep_, t.head.text) for t in doc]
 ```
 
 ## Visualize Dependencies (displaCy)
 
-```python
+``` python
+
+import spacy
 from spacy import displacy
-doc = nlp("Dr. Byrd's students can't wait to analyze PIE roots!")
-# In Jupyter this renders inline:
-displacy.render(doc, style="dep", jupyter=True)
+
+nlp = spacy.load("en_core_web_sm")
+doc = nlp("The quick brown fox jumps over the lazy dog.")
+
+svg = displacy.render(doc, style="dep")  # returns SVG/HTML markup
+with open("syntax_tree.svg", "w", encoding="utf-8") as f:
+    f.write(svg)
+
 ```
+
+## Visualize Dependencies (displaCy)
+
+![](syntax_tree.svg)
+
+
+## Activity: Dependencies
+
+- Visualize the following sentence using `displaCy`
+
+``` python
+doc  = "This spaCy library is too dang powerful."
+```
+
+## Visualize Dependencies (displaCy)
+
+![](activity_2_syntax_tree.svg)
+
 
 ## Extracting Verbs + Direct Objects
 
-```python
+```{python}
 doc = nlp("We considered the options and chose the best proposal.")
 pairs = []
 for tok in doc:
@@ -123,7 +176,7 @@ pairs
 
 ## Rule-Based Matching (verbs of violence, e.g.)
 
-```python
+``` python
 from spacy.matcher import PhraseMatcher
 violent_verbs = ["punch", "kick", "attack", "strike", "hit", "assault"]
 patterns = [nlp.make_doc(v) for v in violent_verbs]
@@ -133,46 +186,104 @@ matcher.add("VIOLENCE", patterns)
 [(doc[s:e].text, doc[s:e].lemma_) for _, s, e in matcher(doc)]
 ```
 
-## Wed — In-Class Activity
+## Activity: Dependency Parsing
 
-- Write a tiny extractor that prints **(verb, direct-object)** pairs from your paragraph.
-- Optional: also capture the subject (`nsubj`).
-- Share: *Which verbs take which objects? Any interesting alternations?*
+-   Write a tiny extractor that prints **(verb, direct-object)** pairs from your paragraph.
+-   Optional: also capture the subject (`nsubj`).
+-   Share: *Which verbs take which objects? Any interesting alternations?*
 
----
+# WordNet
 
+## Why WordNet (for linguists)?
 
+-   **Synsets** (sense inventories) feel familiar from semantics.
+-   Clear relations: **hypernym/hyponym**, **meronym/holonym**, **antonym**.
+-   Great for building *semantic fields* (e.g., motion verbs).
 
+## Install minimal NLTK bits
 
+``` python
+# In a terminal (or one-time in a notebook):
+# pip install nltk
+```
 
+``` python
+import nltk
+nltk.download("wordnet")     # synsets & relations
+nltk.download("omw-1.4")     # multilingual index; often needed for definitions/examples
+```
 
+## First Look at Synsets
 
+``` python
+from nltk.corpus import wordnet as wn
+wn.synsets("dog")  # list of senses across POS
+```
 
+## Definitions & Examples
 
+``` python
+for s in wn.synsets("dog"):
+    print(s.name(), "→", s.definition(), "|", s.examples())
+```
 
+## Hypernyms & Hyponyms
 
+``` python
+dog = wn.synset("dog.n.01")
+dog.hypernyms(), dog.hyponyms()[:5]
+```
 
+## Synonyms & Antonyms (lemmas)
+
+``` python
+s = wn.synset("good.a.01")
+synonyms = [l.name() for l in s.lemmas()]
+antonyms = [l.antonyms()[0].name() for l in s.lemmas() if l.antonyms()]
+synonyms, antonyms
+```
+
+## Simple Semantic Similarity
+
+> **Note:** This is **taxonomy-based**, not vectors. Values are rough but intuitive.
+
+``` python
+dog = wn.synset("dog.n.01")
+cat = wn.synset("cat.n.01")
+animal = wn.synset("animal.n.01")
+print("dog ~ cat (path):", dog.path_similarity(cat))
+print("dog ~ animal (path):", dog.path_similarity(animal))
+print("Wu-Palmer dog~cat:", dog.wup_similarity(cat))
+```
+
+## Build a Mini Semantic Field (verbs of speech)
+
+``` python
+seed = "say"
+field = set()
+for s in wn.synsets(seed, pos=wn.VERB):
+    field.update({h.name().split(".")[0] for h in s.hyponyms()})
+sorted(list(field))[:25]
+```
 
 # Plan for the Day
 
-1. Review: NLTK & WordNet
-2. What is a lemma?
-3. Lemmatization with **spaCy**
-4. Filtering and analyzing parts of speech
-5. ✏️ In-class activity — Lemmatize and compare
-6. Preview: Multilingual NLP
+1.  Review: NLTK & WordNet
+2.  What is a lemma?
+3.  Lemmatization with **spaCy**
+4.  Filtering and analyzing parts of speech
+5.  ✏️ In-class activity — Lemmatize and compare
+6.  Preview: Multilingual NLP
 
----
+------------------------------------------------------------------------
 
 # Review: NLTK & WordNet
 
-✅ **NLTK** — a toolkit for text processing in Python
-✅ **WordNet** — a lexical database of English meanings
+✅ **NLTK** — a toolkit for text processing in Python ✅ **WordNet** — a lexical database of English meanings
 
-> NLTK can query WordNet directly, giving us access to definitions,
-> synonyms, antonyms, and hierarchical relations among words.
+> NLTK can query WordNet directly, giving us access to definitions, synonyms, antonyms, and hierarchical relations among words.
 
----
+------------------------------------------------------------------------
 
 # Accessing WordNet in NLTK
 
@@ -185,7 +296,7 @@ print(f"Number of senses for 'run': {len(synsets)}")
 print(synsets[:5])
 ```
 
----
+------------------------------------------------------------------------
 
 # Inspecting a Synset
 
@@ -196,7 +307,7 @@ print("Definition:", s.definition())
 print("Examples:", s.examples())
 ```
 
----
+------------------------------------------------------------------------
 
 # Semantic Relations in WordNet
 
@@ -209,38 +320,37 @@ print("Hyponyms (narrower):", s.hyponyms())
 print("Meronyms (parts):", s.part_meronyms())
 ```
 
----
+------------------------------------------------------------------------
 
 # Discussion 💬
 
-* How does WordNet organize meaning?
-* What’s the difference between a **synset** and a **lemma**?
-* Why do NLP systems need both lexical data (like WordNet) *and* text processing tools (like spaCy)?
+-   How does WordNet organize meaning?
+-   What’s the difference between a **synset** and a **lemma**?
+-   Why do NLP systems need both lexical data (like WordNet) *and* text processing tools (like spaCy)?
 
----
+------------------------------------------------------------------------
 
 # What is a Lemma?
 
-> **Lemma** = the *base form* of a word
-> (the form you’d find as a dictionary headword)
+> **Lemma** = the *base form* of a word (the form you’d find as a dictionary headword)
 
 | Word    | Lemma | POS  |
-| ------- | ----- | ---- |
+|---------|-------|------|
 | running | run   | VERB |
 | ran     | run   | VERB |
 | mice    | mouse | NOUN |
 | better  | good  | ADJ  |
 
----
+------------------------------------------------------------------------
 
 # Why Lemmatize?
 
-* To treat **morphological variants** as the *same* word
-* To improve search accuracy (e.g., *run*, *ran*, *running* → *run*)
-* To normalize data for counting, clustering, or semantic analysis
-* Essential for cross-linguistic comparison
+-   To treat **morphological variants** as the *same* word
+-   To improve search accuracy (e.g., *run*, *ran*, *running* → *run*)
+-   To normalize data for counting, clustering, or semantic analysis
+-   Essential for cross-linguistic comparison
 
----
+------------------------------------------------------------------------
 
 # Lemmatization with spaCy
 
@@ -254,7 +364,7 @@ for token in doc:
     print(token.text, "→", token.lemma_, token.pos_)
 ```
 
----
+------------------------------------------------------------------------
 
 # Compare Tokenization and Lemmatization
 
@@ -268,7 +378,7 @@ lemmas = [t.lemma_ for t in doc]
 list(zip(tokens, lemmas))
 ```
 
----
+------------------------------------------------------------------------
 
 # Filtering by Part of Speech
 
@@ -280,7 +390,7 @@ print("Nouns:", nouns)
 print("Verbs:", verbs)
 ```
 
----
+------------------------------------------------------------------------
 
 # Creating a Lemma Frequency Table
 
@@ -295,7 +405,7 @@ df = pd.DataFrame(freq.items(), columns=["lemma", "count"]).sort_values("count",
 df.head()
 ```
 
----
+------------------------------------------------------------------------
 
 # Visualizing Lemma Counts
 
@@ -310,31 +420,29 @@ plt.ylabel("Count")
 plt.show()
 ```
 
----
+------------------------------------------------------------------------
 
 # ✏️ In-Class Activity — “Lemma Frequency Analysis”
 
-1. Copy a short paragraph of English text (≈ 80 words).
-2. Process it with spaCy to extract **tokens**, **lemmas**, and **POS tags**.
-3. Create a DataFrame of lemma + frequency.
-4. Compare your top lemmas with those from the raw tokens.
+1.  Copy a short paragraph of English text (≈ 80 words).
+2.  Process it with spaCy to extract **tokens**, **lemmas**, and **POS tags**.
+3.  Create a DataFrame of lemma + frequency.
+4.  Compare your top lemmas with those from the raw tokens.
 
-> 💬 How does lemmatization change the frequency counts?
-> Which verbs or nouns merge under a single lemma?
+> 💬 How does lemmatization change the frequency counts? Which verbs or nouns merge under a single lemma?
 
----
+------------------------------------------------------------------------
 
 # Discussion 💬
 
-* What linguistic knowledge does spaCy rely on for lemmatization?
-* When might WordNet be more useful than spaCy, and vice versa?
-* How could you combine both in a project (e.g., linking lemmas to their WordNet synsets)?
+-   What linguistic knowledge does spaCy rely on for lemmatization?
+-   When might WordNet be more useful than spaCy, and vice versa?
+-   How could you combine both in a project (e.g., linking lemmas to their WordNet synsets)?
 
----
+------------------------------------------------------------------------
 
 # Next Time ➡️
 
-🌍 **Multilingual NLP** — applying tokenization and lemmatization
-to other languages (Spanish, French, German, etc.)
+🌍 **Multilingual NLP** — applying tokenization and lemmatization to other languages (Spanish, French, German, etc.)
 
 > Each group will analyze one language and compare results.

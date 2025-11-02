@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="29_files/libs/clipboard/clipboard.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="29_files/libs/clipboard/clipboard.min.js"></script>
 <script src="29_files/libs/quarto-html/tabby.min.js"></script>
 <script src="29_files/libs/quarto-html/popper.min.js"></script>
 <script src="29_files/libs/quarto-html/tippy.umd.min.js"></script>
@@ -387,6 +387,9 @@
       margin-right: 0; 
     }
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+  
+  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -411,6 +414,15 @@ Dr.&nbsp;Andrew M. Byrd
 <ul>
 <li><a href="#/review" id="/toc-review">Review</a></li>
 <li><a href="#/spacy" id="/toc-spacy">spaCy</a></li>
+<li><a href="#/lemmas" id="/toc-lemmas">Lemmas</a></li>
+<li><a href="#/what-is-a-lemma" id="/toc-what-is-a-lemma">What is a Lemma?</a></li>
+<li><a href="#/why-lemmatize" id="/toc-why-lemmatize">Why Lemmatize?</a></li>
+<li><a href="#/lemmatization-with-spacy" id="/toc-lemmatization-with-spacy">Lemmatization with spaCy</a></li>
+<li><a href="#/compare-tokenization-and-lemmatization" id="/toc-compare-tokenization-and-lemmatization">Compare Tokenization and Lemmatization</a></li>
+<li><a href="#/filtering-by-part-of-speech" id="/toc-filtering-by-part-of-speech">Filtering by Part of Speech</a></li>
+<li><a href="#/creating-a-lemma-frequency-table" id="/toc-creating-a-lemma-frequency-table">Creating a Lemma Frequency Table</a></li>
+<li><a href="#/visualizing-lemma-counts" id="/toc-visualizing-lemma-counts">Visualizing Lemma Counts</a></li>
+<li><a href="#/in-class-activity-lemma-frequency-analysis" id="/toc-in-class-activity-lemma-frequency-analysis">✏️ In-Class Activity — “Lemma Frequency Analysis”</a></li>
 <li><a href="#/stopwords-frequencies" id="/toc-stopwords-frequencies">Stopwords &amp; Frequencies</a></li>
 </ul>
 </nav>
@@ -536,10 +548,12 @@ Dr.&nbsp;Andrew M. Byrd
 <ul>
 <li>And we’ve learned about <code>re.split()</code></li>
 </ul>
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a>text <span class="op">=</span> <span class="st">"Dr. Byrd's students can't wait to analyze PIE roots!"</span></span>
-<span id="cb10-2"><a href=""></a><span class="im">import</span> re</span>
-<span id="cb10-3"><a href=""></a>tokens_clean <span class="op">=</span> re.split(<span class="vs">r"[\s\W]+"</span>, text)</span>
-<span id="cb10-4"><a href=""></a>tokens_clean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a><span class="im">import</span> re</span>
+<span id="cb10-2"><a href=""></a></span>
+<span id="cb10-3"><a href=""></a>text <span class="op">=</span> <span class="st">"Dr. Byrd's students can't wait to analyze PIE roots!"</span></span>
+<span id="cb10-4"><a href=""></a></span>
+<span id="cb10-5"><a href=""></a>tokens_clean <span class="op">=</span> re.split(<span class="vs">r"[\s\W]+"</span>, text)</span>
+<span id="cb10-6"><a href=""></a>tokens_clean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="even-better-using-spacy" class="slide level2 center">
 <h2>Even better: using spaCy</h2>
@@ -549,10 +563,13 @@ Dr.&nbsp;Andrew M. Byrd
 </section>
 <section id="tokenization-string-vs.-regex-vs.-spacy" class="slide level2 center">
 <h2>Tokenization: string vs.&nbsp;regex vs.&nbsp;spaCy</h2>
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a>text <span class="op">=</span> <span class="st">"Dr. Byrd's students can't wait to analyze PIE roots!"</span></span>
-<span id="cb11-2"><a href=""></a></span>
-<span id="cb11-3"><a href=""></a>doc <span class="op">=</span> nlp(text)</span>
-<span id="cb11-4"><a href=""></a>[t.text <span class="cf">for</span> t <span class="kw">in</span> doc]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a><span class="im">import</span> spacy</span>
+<span id="cb11-2"><a href=""></a>nlp <span class="op">=</span> spacy.load(<span class="st">"en_core_web_sm"</span>)</span>
+<span id="cb11-3"><a href=""></a></span>
+<span id="cb11-4"><a href=""></a>text <span class="op">=</span> <span class="st">"Dr. Byrd's students can't wait to analyze PIE roots!"</span></span>
+<span id="cb11-5"><a href=""></a></span>
+<span id="cb11-6"><a href=""></a>doc <span class="op">=</span> nlp(text)</span>
+<span id="cb11-7"><a href=""></a>[t.text <span class="cf">for</span> t <span class="kw">in</span> doc]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="token-attributes" class="slide level2 center">
 <h2>Token Attributes</h2>
@@ -606,9 +623,210 @@ Dr.&nbsp;Andrew M. Byrd
 <section id="spacy-activity" class="slide level2 center">
 <h2>spaCy Activity</h2>
 <ul>
-<li>Copy the below <code>jfk</code> list, and then analyze its attributes.</li>
+<li>Copy the below <code>jfk</code> string, and then analyze its attributes using <code>spaCy</code>.</li>
 </ul>
 <div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href=""></a>jfk <span class="op">=</span> <span class="st">"This year’s space budget is three times what it was in January 1961, and it is greater than the space budget of the previous eight years combined. That budget now stands at $5,400,000 a year — a staggering sum, though somewhat less than we pay for cigarettes and cigars every year. Space expenditures will soon rise some more, from 40 cents per person per week to more than 50 cents a week for every man, woman and child in the United States, for we have given this program a high national priority — even though I realize that this is in some measure an act of faith and vision, for we do not now know what benefits await us. But if I were to say, my fellow citizens, that we shall send to the moon, 240,000 miles away from the control station in Houston, a giant rocket more than 300 feet tall, the length of this football field, made of new metal alloys, some of which have not yet been invented, capable of standing heat and stresses several times more than have ever been experienced, fitted together with a precision better than the finest watch, carrying all the equipment needed for propulsion, guidance, control, communications, food and survival, on an untried mission, to an unknown celestial body, and then return it safely to Earth, re-entering the atmosphere at speeds of over 25,000 miles per hour, causing heat about half that of the temperature of the sun — almost as hot as it is here today — and do all this, and do it right, and do it first before this decade is out — then we must be bold. I’m the one who is doing all the work, so we just want you to stay cool for a minute. [laughter] However, I think we’re going to do it, and I think that we must pay what needs to be paid. I don’t think we ought to waste any money, but I think we ought to do the job. And this will be done in the decade of the sixties. It may be done while some of you are still here at school at this college and university. It will be done during the term of office of some of the people who sit here on this platform. But it will be done. And it will be done before the end of this decade. I am delighted that this university is playing a part in putting a man on the moon as part of a great national effort of the United States of America. Many years ago, the great British explorer George Mallory, who was to die on Mount Everest, was asked why did he want to climb it? He said, “Because it is there.” Well, space is there, and we’re going to climb it, and the moon and the planets are there, and new hopes for knowledge and peace are there. And, therefore, as we set sail we ask God’s blessing on the most hazardous and dangerous and greatest adventure on which man has ever embarked. Thank you."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section></section>
+<section id="lemmas" class="title-slide slide level1 center">
+<h1>Lemmas</h1>
+
+</section>
+
+<section>
+<section id="what-is-a-lemma" class="title-slide slide level1 center">
+<h1>What is a Lemma?</h1>
+<blockquote>
+<p><strong>Lemma</strong> = the <em>base form</em> of a word (the form you’d find as a dictionary headword)</p>
+</blockquote>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Word</th>
+<th>Lemma</th>
+<th>POS</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>running</td>
+<td>run</td>
+<td>VERB</td>
+</tr>
+<tr class="even">
+<td>ran</td>
+<td>run</td>
+<td>VERB</td>
+</tr>
+<tr class="odd">
+<td>mice</td>
+<td>mouse</td>
+<td>NOUN</td>
+</tr>
+<tr class="even">
+<td>better</td>
+<td>good</td>
+<td>ADJ</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="slide level2 center">
+
+</section></section>
+<section>
+<section id="why-lemmatize" class="title-slide slide level1 center">
+<h1>Why Lemmatize?</h1>
+<ul>
+<li>To treat <strong>morphological variants</strong> as the <em>same</em> word</li>
+<li>To improve search accuracy (e.g., <em>run</em>, <em>ran</em>, <em>running</em> → <em>run</em>)</li>
+<li>To normalize data for counting, clustering, or semantic analysis</li>
+<li>Essential for cross-linguistic comparison</li>
+</ul>
+</section>
+<section class="slide level2 center">
+
+</section></section>
+<section>
+<section id="lemmatization-with-spacy" class="title-slide slide level1 center">
+<h1>Lemmatization with spaCy</h1>
+<div id="63dd123c" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-stdout">
+<pre><code>The → the DET
+children → child NOUN
+ran → run VERB
+quickly → quickly ADV
+to → to ADP
+their → their PRON
+houses → house NOUN
+. → . PUNCT</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2 center">
+
+</section></section>
+<section>
+<section id="compare-tokenization-and-lemmatization" class="title-slide slide level1 center">
+<h1>Compare Tokenization and Lemmatization</h1>
+<div id="a8c8c9bc" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>[('Students', 'student'),
+ ('were', 'be'),
+ ('running', 'run'),
+ (',', ','),
+ ('reading', 'read'),
+ (',', ','),
+ ('and', 'and'),
+ ('writing', 'write'),
+ ('all', 'all'),
+ ('day', 'day'),
+ ('.', '.')]</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2 center">
+
+</section></section>
+<section>
+<section id="filtering-by-part-of-speech" class="title-slide slide level1 center">
+<h1>Filtering by Part of Speech</h1>
+<div id="b65f8ef0" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-stdout">
+<pre><code>Nouns: ['student', 'day']
+Verbs: ['run', 'read', 'write']</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2 center">
+
+</section></section>
+<section>
+<section id="creating-a-lemma-frequency-table" class="title-slide slide level1 center">
+<h1>Creating a Lemma Frequency Table</h1>
+<div id="84c2264d" class="cell" data-execution_count="4">
+<div class="cell-output cell-output-display" data-execution_count="9">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+<table class="dataframe caption-top" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header" style="text-align: right;">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">lemma</th>
+<th data-quarto-table-cell-role="th">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>student</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>be</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>run</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>read</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>and</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2 center">
+
+</section></section>
+<section>
+<section id="visualizing-lemma-counts" class="title-slide slide level1 center">
+<h1>Visualizing Lemma Counts</h1>
+
+<img data-src="29_files/figure-revealjs/cell-6-output-1.png" class="r-stretch"></section>
+<section class="slide level2 center">
+
+</section></section>
+<section>
+<section id="in-class-activity-lemma-frequency-analysis" class="title-slide slide level1 center">
+<h1>✏️ In-Class Activity — “Lemma Frequency Analysis”</h1>
+<ol type="1">
+<li>Copy a short paragraph of English text (≈ 80 words).</li>
+<li>Process it with spaCy to extract <strong>tokens</strong>, <strong>lemmas</strong>, and <strong>POS tags</strong>.</li>
+<li>Create a DataFrame of lemma + frequency.</li>
+<li>Compare your top lemmas with those from the raw tokens.</li>
+</ol>
+<blockquote>
+<p>💬 How does lemmatization change the frequency counts? Which verbs or nouns merge under a single lemma?</p>
+</blockquote>
+</section>
+<section class="slide level2 center">
+
 </section></section>
 <section>
 <section id="stopwords-frequencies" class="title-slide slide level1 center">
@@ -624,34 +842,34 @@ Dr.&nbsp;Andrew M. Byrd
 </section>
 <section id="filtering-out-items" class="slide level2 center">
 <h2>Filtering Out Items</h2>
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href=""></a><span class="im">import</span> spacy</span>
-<span id="cb14-2"><a href=""></a></span>
-<span id="cb14-3"><a href=""></a>content_lemmas <span class="op">=</span> [t.lemma_.lower() <span class="cf">for</span> t <span class="kw">in</span> doc</span>
-<span id="cb14-4"><a href=""></a>                  <span class="cf">if</span> <span class="kw">not</span> (t.is_stop <span class="kw">or</span> t.is_punct <span class="kw">or</span> t.is_space <span class="kw">or</span> t.like_num)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href=""></a><span class="im">import</span> spacy</span>
+<span id="cb17-2"><a href=""></a></span>
+<span id="cb17-3"><a href=""></a>content_lemmas <span class="op">=</span> [t.lemma_.lower() <span class="cf">for</span> t <span class="kw">in</span> doc</span>
+<span id="cb17-4"><a href=""></a>                  <span class="cf">if</span> <span class="kw">not</span> (t.is_stop <span class="kw">or</span> t.is_punct <span class="kw">or</span> t.is_space <span class="kw">or</span> t.like_num)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="stopwords-frequency-table" class="slide level2 center">
 <h2>Stopwords &amp; Frequency Table</h2>
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href=""></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
-<span id="cb15-2"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb15-3"><a href=""></a></span>
-<span id="cb15-4"><a href=""></a>freq <span class="op">=</span> Counter(content_lemmas)</span>
-<span id="cb15-5"><a href=""></a>df_freq <span class="op">=</span> (pd.DataFrame(freq.items(), columns<span class="op">=</span>[<span class="st">"lemma"</span>, <span class="st">"count"</span>])</span>
-<span id="cb15-6"><a href=""></a>           .sort_values(<span class="st">"count"</span>, ascending<span class="op">=</span><span class="va">False</span>))</span>
-<span id="cb15-7"><a href=""></a>df_freq.head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href=""></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
+<span id="cb18-2"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb18-3"><a href=""></a></span>
+<span id="cb18-4"><a href=""></a>freq <span class="op">=</span> Counter(content_lemmas)</span>
+<span id="cb18-5"><a href=""></a>df_freq <span class="op">=</span> (pd.DataFrame(freq.items(), columns<span class="op">=</span>[<span class="st">"lemma"</span>, <span class="st">"count"</span>])</span>
+<span id="cb18-6"><a href=""></a>           .sort_values(<span class="st">"count"</span>, ascending<span class="op">=</span><span class="va">False</span>))</span>
+<span id="cb18-7"><a href=""></a>df_freq.head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="visualize-top-words" class="slide level2 center">
 <h2>Visualize Top Words</h2>
-<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb16-2"><a href=""></a></span>
-<span id="cb16-3"><a href=""></a>top10 <span class="op">=</span> df_freq.head(<span class="dv">10</span>)</span>
-<span id="cb16-4"><a href=""></a>plt.figure()</span>
-<span id="cb16-5"><a href=""></a>plt.bar(top10[<span class="st">"lemma"</span>], top10[<span class="st">"count"</span>])</span>
-<span id="cb16-6"><a href=""></a>plt.title(<span class="st">"Top 10 Content Lemmas"</span>)</span>
-<span id="cb16-7"><a href=""></a>plt.xlabel(<span class="st">"Lemma"</span>)</span>
-<span id="cb16-8"><a href=""></a>plt.ylabel(<span class="st">"Count"</span>)</span>
-<span id="cb16-9"><a href=""></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
-<span id="cb16-10"><a href=""></a>plt.tight_layout()</span>
-<span id="cb16-11"><a href=""></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb19-2"><a href=""></a></span>
+<span id="cb19-3"><a href=""></a>top10 <span class="op">=</span> df_freq.head(<span class="dv">10</span>)</span>
+<span id="cb19-4"><a href=""></a>plt.figure()</span>
+<span id="cb19-5"><a href=""></a>plt.bar(top10[<span class="st">"lemma"</span>], top10[<span class="st">"count"</span>])</span>
+<span id="cb19-6"><a href=""></a>plt.title(<span class="st">"Top 10 Content Lemmas"</span>)</span>
+<span id="cb19-7"><a href=""></a>plt.xlabel(<span class="st">"Lemma"</span>)</span>
+<span id="cb19-8"><a href=""></a>plt.ylabel(<span class="st">"Count"</span>)</span>
+<span id="cb19-9"><a href=""></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb19-10"><a href=""></a>plt.tight_layout()</span>
+<span id="cb19-11"><a href=""></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="activity-alice-in-wonderland" class="slide level2 center">
 <h2>Activity: Alice in Wonderland</h2>

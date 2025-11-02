@@ -142,8 +142,10 @@ tokens_basic
 -   And we've learned about `re.split()`
 
 ``` python
-text = "Dr. Byrd's students can't wait to analyze PIE roots!"
 import re
+
+text = "Dr. Byrd's students can't wait to analyze PIE roots!"
+
 tokens_clean = re.split(r"[\s\W]+", text)
 tokens_clean
 ```
@@ -155,6 +157,9 @@ tokens_clean
 ## Tokenization: string vs. regex vs. spaCy
 
 ``` python
+import spacy
+nlp = spacy.load("en_core_web_sm")
+
 text = "Dr. Byrd's students can't wait to analyze PIE roots!"
 
 doc = nlp(text)
@@ -210,11 +215,117 @@ print(df)
 
 ## spaCy Activity
 
-- Copy the below `jfk` list, and then analyze its attributes.
+- Copy the below `jfk` string, and then analyze its attributes using `spaCy`.
 
 ``` python
 jfk = "This year’s space budget is three times what it was in January 1961, and it is greater than the space budget of the previous eight years combined. That budget now stands at $5,400,000 a year — a staggering sum, though somewhat less than we pay for cigarettes and cigars every year. Space expenditures will soon rise some more, from 40 cents per person per week to more than 50 cents a week for every man, woman and child in the United States, for we have given this program a high national priority — even though I realize that this is in some measure an act of faith and vision, for we do not now know what benefits await us. But if I were to say, my fellow citizens, that we shall send to the moon, 240,000 miles away from the control station in Houston, a giant rocket more than 300 feet tall, the length of this football field, made of new metal alloys, some of which have not yet been invented, capable of standing heat and stresses several times more than have ever been experienced, fitted together with a precision better than the finest watch, carrying all the equipment needed for propulsion, guidance, control, communications, food and survival, on an untried mission, to an unknown celestial body, and then return it safely to Earth, re-entering the atmosphere at speeds of over 25,000 miles per hour, causing heat about half that of the temperature of the sun — almost as hot as it is here today — and do all this, and do it right, and do it first before this decade is out — then we must be bold. I’m the one who is doing all the work, so we just want you to stay cool for a minute. [laughter] However, I think we’re going to do it, and I think that we must pay what needs to be paid. I don’t think we ought to waste any money, but I think we ought to do the job. And this will be done in the decade of the sixties. It may be done while some of you are still here at school at this college and university. It will be done during the term of office of some of the people who sit here on this platform. But it will be done. And it will be done before the end of this decade. I am delighted that this university is playing a part in putting a man on the moon as part of a great national effort of the United States of America. Many years ago, the great British explorer George Mallory, who was to die on Mount Everest, was asked why did he want to climb it? He said, “Because it is there.” Well, space is there, and we’re going to climb it, and the moon and the planets are there, and new hopes for knowledge and peace are there. And, therefore, as we set sail we ask God’s blessing on the most hazardous and dangerous and greatest adventure on which man has ever embarked. Thank you."
 ```
+
+# Lemmas
+
+# What is a Lemma?
+
+> **Lemma** = the *base form* of a word (the form you’d find as a dictionary headword)
+
+| Word    | Lemma | POS  |
+|---------|-------|------|
+| running | run   | VERB |
+| ran     | run   | VERB |
+| mice    | mouse | NOUN |
+| better  | good  | ADJ  |
+
+------------------------------------------------------------------------
+
+# Why Lemmatize?
+
+-   To treat **morphological variants** as the *same* word
+-   To improve search accuracy (e.g., *run*, *ran*, *running* → *run*)
+-   To normalize data for counting, clustering, or semantic analysis
+-   Essential for cross-linguistic comparison
+
+------------------------------------------------------------------------
+
+# Lemmatization with spaCy
+
+```{python}
+import spacy
+nlp = spacy.load("en_core_web_sm")
+
+doc = nlp("The children ran quickly to their houses.")
+
+for token in doc:
+    print(token.text, "→", token.lemma_, token.pos_)
+```
+
+------------------------------------------------------------------------
+
+# Compare Tokenization and Lemmatization
+
+```{python}
+text = "Students were running, reading, and writing all day."
+doc = nlp(text)
+
+tokens = [t.text for t in doc]
+lemmas = [t.lemma_ for t in doc]
+
+list(zip(tokens, lemmas))
+```
+
+------------------------------------------------------------------------
+
+# Filtering by Part of Speech
+
+```{python}
+nouns = [t.lemma_ for t in doc if t.pos_ == "NOUN"]
+verbs = [t.lemma_ for t in doc if t.pos_ == "VERB"]
+
+print("Nouns:", nouns)
+print("Verbs:", verbs)
+```
+
+------------------------------------------------------------------------
+
+# Creating a Lemma Frequency Table
+
+```{python}
+import pandas as pd
+from collections import Counter
+
+lemmas = [t.lemma_.lower() for t in doc if t.is_alpha]
+freq = Counter(lemmas)
+
+df = pd.DataFrame(freq.items(), columns=["lemma", "count"]).sort_values("count", ascending=False)
+df.head()
+```
+
+------------------------------------------------------------------------
+
+# Visualizing Lemma Counts
+
+```{python}
+import matplotlib.pyplot as plt
+
+top10 = df.head(10)
+plt.bar(top10["lemma"], top10["count"])
+plt.title("Top 10 Lemmas in the Text")
+plt.xlabel("Lemma")
+plt.ylabel("Count")
+plt.show()
+```
+
+------------------------------------------------------------------------
+
+# ✏️ In-Class Activity — “Lemma Frequency Analysis”
+
+1.  Copy a short paragraph of English text (≈ 80 words).
+2.  Process it with spaCy to extract **tokens**, **lemmas**, and **POS tags**.
+3.  Create a DataFrame of lemma + frequency.
+4.  Compare your top lemmas with those from the raw tokens.
+
+> 💬 How does lemmatization change the frequency counts? Which verbs or nouns merge under a single lemma?
+
+------------------------------------------------------------------------
+
 
 # Stopwords & Frequencies
 
