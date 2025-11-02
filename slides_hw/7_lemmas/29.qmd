@@ -1,6 +1,6 @@
 ---
 title: "Computation for Linguists"
-subtitle: "NLTK"
+subtitle: "spaCy"
 date: "November 3, 2025"
 author: "Dr. Andrew M. Byrd"
 format:
@@ -83,43 +83,36 @@ lemmas  = ["student", "run", "run", "root", "language"]
 freqs   = [5, 3, 2, 4, 6]
 ```
 
-# NLTK
+# spaCy
 
-## NLTK
-
-- NLTK (Natural Language Toolkit) is a Python library — a framework that provides tools for:
-  - Tokenization (separates words)
-  - Lemmatization & stemming (identifies words by stem/root)
-  - POS tagging 
-  
-## NLTK
-- Provides tools for:
-  - Parsing (identifies sentence structure)
-  - Access to corpora (like Brown, Gutenberg, etc.)
-  - Interfaces to lexical databases (like WordNet)
-
-## Installing NLTK
+## Install & Load spaCy
 
 ```python
-python -m pip install nltk
-# or
-python3 -m pip install nltk
-# or 
-py -m pip install nltk
+# In a terminal, once per machine:
+# pip install spacy
+# python -m spacy download en_core_web_sm
 ```
 
-## Setting NLTK up
-
-```python
-
-import nltk
-nltk.download('punkt')  # Example: Download the Punkt tokenizer models
-nltk.download('averaged_perceptron_tagger') # Example: Download the POS tagger
-nltk.download('stopwords') # Example: Download the English stopwords list
-nltk.download('wordnet') # Download WordNet
+```{python}
+import spacy
+nlp = spacy.load("en_core_web_sm")
 ```
 
-# Tokens, Types, Lemmas
+## What is spaCy?
+
+spaCy is an industrial-strength NLP library for Python that provides:
+
+- Tokenization
+- Part-of-speech tagging
+- Lemmatization
+
+## What is spaCy?
+
+spaCy provides:
+
+- Dependency parsing
+- Named Entity Recognition (NER)
+- Built-in stopword list and rule-based matchers
 
 ## What is Tokenization?
 
@@ -152,346 +145,83 @@ import re
 tokens_clean = re.split(r"[\s\W]+", text)
 tokens_clean
 ```
-## Even better: using NLTK
 
-- You can also split things up using NLTK, which *"knows"* some linguistic structure already
+## Even better: using spaCy
 
-## Tokenization Comparison
+- You can also split things up using spaCy, which *"knows"* some linguistic structure already
 
-Let's see how different methods handle punctuation, contractions, and abbreviations.
 
-```python
-import re
-from nltk.tokenize import word_tokenize
+## Tokenization: string vs. regex vs. spaCy
 
+```{python}
 text = "Dr. Byrd's students can't wait to analyze PIE roots!"
 
-print(word_tokenize(text))
-```
-## Tokenization Comparison
-
-| Method                     | Strengths                                               | Weaknesses                                                        |
-| :------------------------- | :------------------------------------------------------ | :---------------------------------------------------------------- |
-| **`.split()`**             | Very fast, built-in                                     | Breaks on whitespace (or ",", etc.) only |
-| **`re.split()`**           | Customizable                                   | regex = hard; can misparse                      |
-| **`nltk.word_tokenize()`** | Linguistically aware | Slower; needs `nltk` installed                                    |
-
-## Sentence Tokenization 
-
-```python
-import nltk
-from nltk.tokenize import sent_tokenize
-
-text2 = """President Pitzer, Mr. Vice President, Governor Connally, ladies and gentlemen: I am delighted to be here today. We meet in an hour of change and challenge."""
-word_tokenize(text2)[0:10]
-print("\n --------------------- \n")
-sent_tokenize(text2)[0:1]
-```
-## Tokenization Activity
-
-```python
-from nltk.tokenize import word_tokenize
-
-tokens = word_tokenize(text)
-tokens
+doc = nlp(text)
+[t.text for t in doc]
 ```
 
-# WordNet
-
-## NLTK and WordNet
-
-- Inside **NLTK** you can connect to **WordNet**, which is a *lexical database* 
-- Developed at Princeton University  
-- Organizes English words into **synsets** (sets of cognitive synonyms)  
-
----
-
-## WordNet
-
-- Captures relationships among words:
-  - **Synonyms:** *good ↔ nice*  
-  - **Antonyms:** *hot ↔ cold*  
-  - **Hypernyms:** *dog → animal*  
-  - **Hyponyms:** *dog → poodle*  
-  - **Meronyms:** *car → wheel*
-  - **Entailments:** *snore → sleep* 
-
-## Synsets
-
-- Check all of the synsets with `wn.synsets(*word*)`
-
-```{python}
-from nltk.corpus import wordnet as wn
-
-wn.synsets('dog')
-```
-
-## Synsets
-
-- You can print up its definition with `.definition()`
-
-```{python}
-from nltk.corpus import wordnet as wn
-
-for s in wn.synsets('dog'):
-  print(f"{s}: {s.definition()}")
-```
-
-
-## Synsets
-
-- Examples with `.examples()`
-
-```{python}
-from nltk.corpus import wordnet as wn
-
-for s in wn.synsets('dog'):
-  print(f"{s}: {s.examples()}")
-```
-
-## Synsets
-
-- And lemmas with `.lemmas()`
-
-```{python}
-from nltk.corpus import wordnet as wn
-
-for s in wn.synsets('dog'):
-  print(f"{s}: {s.lemmas()}")
-```
-
-## Synonyms & Antonyms
-
-```{python}
-lemmas = s.lemmas()
-synonyms = [l.name() for l in lemmas]
-print(synonyms)
-
-antonyms = []
-for l in lemmas:
-    if l.antonyms():
-        antonyms.append(l.antonyms()[0].name())
-print(antonyms)
-```
-## Hypernyms & Hyponyms
-
-```{python}
-print(s.hypernyms())  # more general (e.g., Synset('canine.n.02'))
-print(s.hyponyms())   # more specific (e.g., Synset('lapdog.n.01'))
-
-```
-
-
-
-```{python}
-print(s.part_meronyms())   # ['tail', 'paw']
-print(s.part_holonyms())   # ['pack', 'kennel']
-
-```
-
-
-
-
-## Exploring WordNet in NLTK
-
-```{python}
-from nltk.corpus import wordnet as wn
-
-# Find synsets for a word
-wn.synsets("run")
-
-# Look at the first sense
-s = wn.synsets("run")[0]
-print("Lemma names:", s.lemma_names())
-print("Definition:", s.definition())
-print("Examples:", s.examples())
-```
-
-```{python}
-from nltk.corpus import wordnet as wn
-
-s = wn.synsets("dog")[0]
-print("Hypernyms:", s.hypernyms())
-print("Hyponyms:", s.hyponyms())
-print("Part Meronyms:", s.part_meronyms())
-```
-
-
-## Semantic Similarity
-
-```{python}
-dog = wn.synset('dog.n.01')
-cat = wn.synset('cat.n.01')
-
-similarity = dog.path_similarity(cat)
-print(similarity)  # closer to 1.0 = more similar
-
-dog.wup_similarity(cat)    # Wu–Palmer similarity
-dog.lch_similarity(cat)    # Leacock–Chodorow similarity
-```
-
-
-```{python}
-def all_hyponyms(synset):
-    hypos = set()
-    for h in synset.hyponyms():
-        hypos.add(h)
-        hypos |= all_hyponyms(h)
-    return hypos
-
-dog = wn.synset('dog.n.01')
-all_hypos = all_hyponyms(dog)
-print(all_hypos)
-```
-
-```{python}
-from nltk.corpus import wordnet as wn
-
-# Get synsets for the word 'car'
-car_synsets = wn.synsets('car')
-# Example synset: Synset('car.n.01')
-
-# Accessing attributes of a specific synset
-car_synset = car_synsets[0]
-print(car_synset.definition())
-print(car_synset.examples())
-print(car_synset.hypernyms()) # Get more general concepts
-print(car_synset.hyponyms())  # Get more specific concepts
-```
-
-
-------- TEXT TO SEMANTIC SIMILARITY ---------
-
-```{python}
-import nltk
-from nltk.tokenize import word_tokenize
-from nltk.corpus import stopwords
-from nltk.stem import WordNetLemmatizer
-from nltk.corpus import wordnet
-
-nltk.download('punkt')
-nltk.download('stopwords')
-nltk.download('averaged_perceptron_tagger_eng')
-
-text = "The dogs are running near the river banks."
-tokens = [w.lower() for w in word_tokenize(text) if w.isalpha()]
-tokens = [w for w in tokens if w not in stopwords.words('english')]
-tokens
-
-lemmatizer = WordNetLemmatizer()
-
-def get_pos(word):
-    tag = nltk.pos_tag([word])[0][1][0].upper()
-    tag_dict = {"J": wordnet.ADJ, "N": wordnet.NOUN, "V": wordnet.VERB, "R": wordnet.ADV}
-    return tag_dict.get(tag, wordnet.NOUN)
-
-lemmas = [lemmatizer.lemmatize(w, get_pos(w)) for w in tokens]
-lemmas
-
-```
-
-```{python}
-synsets = [wn.synsets(l) for l in lemmas]
-synsets
-
-```
-
-```{python}
-from itertools import combinations
-
-pairs = list(combinations([wn.synset('dog.n.01'), wn.synset('cat.n.01'), wn.synset('bank.n.09')], 2))
-for a, b in pairs:
-    print(a.name(), b.name(), a.wup_similarity(b))
-
-```
-
-
----------
-
-
-# Lemmatization
-
-```{python}
-    from nltk.stem import WordNetLemmatizer
-    from nltk.corpus import wordnet
-
-    # Download necessary NLTK data if not already downloaded
-    # nltk.download('wordnet')
-    # nltk.download('omw-1.4') # Open Multilingual WordNet, often needed with WordNet
-
-    lemmatizer = WordNetLemmatizer()
-
-    # Lemmatizing with default POS (noun)
-    word1 = "dogs"
-    lemma1 = lemmatizer.lemmatize(word1)
-    print(f"'{word1}' (default POS) -> '{lemma1}'")
-
-    # Lemmatizing with specified POS (verb)
-    word2 = "running"
-    lemma2 = lemmatizer.lemmatize(word2, pos='v')
-    print(f"'{word2}' (verb) -> '{lemma2}'")
-
-    # Lemmatizing with specified POS (adjective)
-    word3 = "better"
-    lemma3 = lemmatizer.lemmatize(word3, pos='a')
-    print(f"'{word3}' (adjective) -> '{lemma3}'")
-
-    # Example where POS matters
-    word4 = "leaves"
-    lemma4_n = lemmatizer.lemmatize(word4, pos='n') # Noun
-    lemma4_v = lemmatizer.lemmatize(word4, pos='v') # Verb
-    print(f"'{word4}' (noun) -> '{lemma4_n}'")
-    print(f"'{word4}' (verb) -> '{lemma4_v}'")
-```
-  
-# Parsing
-
-```
-
-
-## Frequency Distributions
+## Token Attributes
 
 ```{python}
 import pandas as pd
-from nltk import FreqDist
 
-freq = FreqDist(word.lower() for word in tokens)
-df = pd.DataFrame(freq.items(), columns=["word", "count"]).sort_values("count", ascending=False)
-df.head(10)
+tok_dict = {}
+for t in doc:
+  tok_dict[t] = [
+    {"text" : t.text}, 
+    {"lemma": t.lemma_}, 
+    {"POS" : t.pos_}, 
+    {"tag" : t.tag_}, 
+    {"stop" : t.is_stop}, 
+    {"is_punct": t.is_punct}]
+# df = pd.DataFrame(tok_dict)
+# df
+tok_dict
 ```
 
+## Stopwords & Frequency Table
 
+```python
+from collections import Counter
+import pandas as pd
 
-## Filter Stopwords
-
-
-```{python}
-from nltk.corpus import stopwords
-nltk.download('stopwords')
-
-
-stops = set(stopwords.words('english'))
-print(stops)
-##filtered = [w for w in tokens if w.lower() not in stops and w.isalpha()]
-
-#FreqDist(filtered).most_common(10)
+content_lemmas = [t.lemma_.lower() for t in doc
+                  if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
+freq = Counter(content_lemmas)
+df_freq = (pd.DataFrame(freq.items(), columns=["lemma", "count"])
+           .sort_values("count", ascending=False))
+df_freq.head(10)
 ```
 
+## Visualize Top Words
 
-
-##Visualizing Word Counts
-
-```{python}
+```python
 import matplotlib.pyplot as plt
 
-top10 = df.head(10)
-plt.bar(top10["word"], top10["count"])
-plt.title("Top 10 Words in Text")
-plt.xlabel("Word")
+top10 = df_freq.head(10)
+plt.figure()
+plt.bar(top10["lemma"], top10["count"])
+plt.title("Top 10 Content Lemmas")
+plt.xlabel("Lemma")
 plt.ylabel("Count")
+plt.xticks(rotation=45)
+plt.tight_layout()
 plt.show()
-
 ```
+
+## Mon — In-Class Activity
+
+1. Choose a short paragraph (3–5 sentences).
+2. Build a frequency table of **lemmas** excluding stopwords.
+3. Plot the top 10.
+4. Compare with a neighbor: *Do lemmas change interpretation vs raw tokens?*
+
+
+
+
+
+
+
 
 
 ## Activity

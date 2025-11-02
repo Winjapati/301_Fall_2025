@@ -79,6 +79,80 @@ rhymes_with_most = [False, False, True, False]
 
 
 
+
+# WED — spaCy II: Sentences, Dependencies, Patterns
+
+## Sentence Segmentation
+
+```python
+text2 = ("President Pitzer, Mr. Vice President, Governor Connally, ladies and "
+         "gentlemen: I am delighted to be here today. "
+         "We meet in an hour of change and challenge.")
+doc2 = nlp(text2)
+[s.text for s in doc2.sents]
+```
+
+## Dependency Parse (head, relation)
+
+```python
+doc = nlp("The quick brown fox jumps over the lazy dog.")
+[(t.text, t.dep_, t.head.text) for t in doc]
+```
+
+## Visualize Dependencies (displaCy)
+
+```python
+from spacy import displacy
+doc = nlp("Dr. Byrd's students can't wait to analyze PIE roots!")
+# In Jupyter this renders inline:
+displacy.render(doc, style="dep", jupyter=True)
+```
+
+## Extracting Verbs + Direct Objects
+
+```python
+doc = nlp("We considered the options and chose the best proposal.")
+pairs = []
+for tok in doc:
+    if tok.pos_ == "VERB":
+        dobj = [c for c in tok.children if c.dep_ == "dobj"]
+        if dobj:
+            pairs.append((tok.lemma_, dobj[0].text))
+pairs
+```
+
+## Rule-Based Matching (verbs of violence, e.g.)
+
+```python
+from spacy.matcher import PhraseMatcher
+violent_verbs = ["punch", "kick", "attack", "strike", "hit", "assault"]
+patterns = [nlp.make_doc(v) for v in violent_verbs]
+matcher = PhraseMatcher(nlp.vocab, attr="LEMMA")
+doc = nlp("They punched, kicked, and attacked the intruder before fleeing.")
+matcher.add("VIOLENCE", patterns)
+[(doc[s:e].text, doc[s:e].lemma_) for _, s, e in matcher(doc)]
+```
+
+## Wed — In-Class Activity
+
+- Write a tiny extractor that prints **(verb, direct-object)** pairs from your paragraph.
+- Optional: also capture the subject (`nsubj`).
+- Share: *Which verbs take which objects? Any interesting alternations?*
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Plan for the Day
 
 1. Review: NLTK & WordNet

@@ -78,21 +78,135 @@ rhymes_with_most = [False, False, True, False]
 
 ---
 
-title: "Day 3 — Multilingual NLP"
-subtitle: "Tokenization & Lemmatization Across Languages"
-author: "Dr. Andrew M. Byrd"
-format:
-revealjs:
-toc: true
-toc-title: "Plan for the Day"
-theme: simple
-slide-number: true
-code-line-numbers: false
-jupyter: python3
-execute:
-warning: false
-message: false
---------------
+
+
+
+# FRI — WordNet & Meaning (via NLTK)
+
+## Why WordNet (for linguists)?
+
+- **Synsets** (sense inventories) feel familiar from semantics.
+- Clear relations: **hypernym/hyponym**, **meronym/holonym**, **antonym**.
+- Great for building *semantic fields* (e.g., motion verbs).
+
+## Install minimal NLTK bits
+
+```python
+# In a terminal (or one-time in a notebook):
+# pip install nltk
+```
+
+```python
+import nltk
+nltk.download("wordnet")     # synsets & relations
+nltk.download("omw-1.4")     # multilingual index; often needed for definitions/examples
+```
+
+## First Look at Synsets
+
+```python
+from nltk.corpus import wordnet as wn
+wn.synsets("dog")  # list of senses across POS
+```
+
+## Definitions & Examples
+
+```python
+for s in wn.synsets("dog"):
+    print(s.name(), "→", s.definition(), "|", s.examples())
+```
+
+## Hypernyms & Hyponyms
+
+```python
+dog = wn.synset("dog.n.01")
+dog.hypernyms(), dog.hyponyms()[:5]
+```
+
+## Synonyms & Antonyms (lemmas)
+
+```python
+s = wn.synset("good.a.01")
+synonyms = [l.name() for l in s.lemmas()]
+antonyms = [l.antonyms()[0].name() for l in s.lemmas() if l.antonyms()]
+synonyms, antonyms
+```
+
+## Simple Semantic Similarity
+
+> **Note:** This is **taxonomy-based**, not vectors. Values are rough but intuitive.
+
+```python
+dog = wn.synset("dog.n.01")
+cat = wn.synset("cat.n.01")
+animal = wn.synset("animal.n.01")
+print("dog ~ cat (path):", dog.path_similarity(cat))
+print("dog ~ animal (path):", dog.path_similarity(animal))
+print("Wu-Palmer dog~cat:", dog.wup_similarity(cat))
+```
+
+## Build a Mini Semantic Field (verbs of speech)
+
+```python
+seed = "say"
+field = set()
+for s in wn.synsets(seed, pos=wn.VERB):
+    field.update({h.name().split(".")[0] for h in s.hyponyms()})
+sorted(list(field))[:25]
+```
+
+## Fri — In-Class Activity (Pairs)
+
+1. Pick a **target word** (noun or verb).
+2. List:
+   - its first 3 synsets + definitions,
+   - 3 hypernyms and 3 hyponyms for the primary sense,
+   - 5 synonyms (lemmas) and any antonyms.
+3. Discuss: where does WordNet disagree with your intuition? Any missing senses?
+
+---
+
+# Capstone Exercise (10–15 min)
+
+- Put it together on a fresh paragraph of your choice:
+  1. **spaCy:** tokenize → filter → lemma frequency table → plot top 10.
+  2. **spaCy:** extract **(verb, object)** pairs.
+  3. **WordNet:** pick 2–3 top verbs or nouns; print synsets and hypernyms.
+- Submit a brief reflection: *Which tool felt more interpretable? For what tasks?*
+
+---
+
+# Appendix
+
+## Exporting Tables
+
+```python
+# Example: save your frequency table
+df_freq.to_csv("freq_table.csv", index=False)
+```
+
+## Helpful Reminders
+
+- Use **lemmas** for frequency (groups inflected forms).
+- Remove **stopwords** & **punctuation** for content words.
+- WordNet similarity is **structural**, not distributional.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Plan for the Day
 
