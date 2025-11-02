@@ -33,62 +33,7 @@ editor: source
    - 5 synonyms (lemmas) and any antonyms.
 3. Discuss: where does WordNet disagree with your intuition? Any missing senses?
 
----
-
-# Capstone Exercise (10–15 min)
-
-- Put it together on a fresh paragraph of your choice:
-  1. **spaCy:** tokenize → filter → lemma frequency table → plot top 10.
-  2. **spaCy:** extract **(verb, object)** pairs.
-  3. **WordNet:** pick 2–3 top verbs or nouns; print synsets and hypernyms.
-- Submit a brief reflection: *Which tool felt more interpretable? For what tasks?*
-
----
-
-# Appendix
-
-## Exporting Tables
-
-```python
-# Example: save your frequency table
-df_freq.to_csv("freq_table.csv", index=False)
-```
-
-## Helpful Reminders
-
-- Use **lemmas** for frequency (groups inflected forms).
-- Remove **stopwords** & **punctuation** for content words.
-- WordNet similarity is **structural**, not distributional.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Plan for the Day
-
-1. Review: English lemmatization with **spaCy**
-2. Multilingual language models
-3. Comparing tokenization across languages
-4. Lemmatization in French, Spanish, and German
-5. ✏️ In-class activity — Cross-linguistic comparison
-6. Wrap-up discussion
-
----
-
-# Review: English Lemmatization
+## Review: English Lemmatization
 
 ```{python}
 import spacy
@@ -220,3 +165,15 @@ df_all
 ✅ Lemmatization accuracy depends on morphological complexity
 
 > Next: Using NLP tools for **semantic similarity** and **word embeddings**.
+
+
+
+
+# Capstone Exercise (10–15 min)
+
+- Put it together on a fresh paragraph of your choice:
+  1. **spaCy:** tokenize → filter → lemma frequency table → plot top 10.
+  2. **spaCy:** extract **(verb, object)** pairs.
+  3. **WordNet:** pick 2–3 top verbs or nouns; print synsets and hypernyms.
+- Submit a brief reflection: *Which tool felt more interpretable? For what tasks?*
+

@@ -407,3 +407,340 @@ plt.ylabel("Count")
 plt.show()
 
 ```
+
+
+
+
+
+
+
+
+<!-- # Download an English wordnet into wn’s local DB (one time) -->
+<!-- import wn -->
+<!-- wn.download('oewn:2021')   # Open English WordNet 2021 -->
+<!-- # (alternatives: 'ewn:2020', 'omw-en:1.4') -->
+```
+
+
+
+
+``` {python}
+import spacy
+from spacy_wordnet.wordnet_annotator import WordnetAnnotator
+
+nlp = spacy.load("en_core_web_sm")
+nlp.add_pipe("spacy_wordnet", after="tagger", config={"lang": "en"})
+
+doc = nlp("The dog chased the cat.")
+for tok in doc:
+    if tok.pos_ in ("NOUN","VERB","ADJ","ADV"):
+        syns = tok._.wordnet.synsets()
+        lemmas = tok._.wordnet.lemmas()
+        hypers = tok._.wordnet.hypernyms()
+        print(tok.text, [s.definition() for s in syns[:1]])
+```
+
+
+```{python}
+economy_domains = ['finance', 'banking']
+enriched_sentence = []
+sentence = nlp('I want to withdraw 5,000 euros')
+
+# For each token in the sentence
+for token in sentence:
+    # We get those synsets within the desired domains
+    synsets = token._.wordnet.wordnet_synsets_for_domain(economy_domains)
+    if not synsets:
+        enriched_sentence.append(token.text)
+    else:
+        lemmas_for_synset = [lemma for s in synsets for lemma in s.lemma_names()]
+        # If we found a synset in the economy domains
+        # we get the variants and add them to the enriched sentence
+        enriched_sentence.append('({})'.format('|'.join(set(lemmas_for_synset))))
+
+# Let's see our enriched sentence
+print(' '.join(enriched_sentence))
+# >> I (need|want|require) to (draw|withdraw|draw_off|take_out) 5,000 euros
+```
+
+
+
+```{python}
+import wn
+
+# list all synsets for 'dog' (English noun)
+wn.synsets('dog', pos='n', lang='en')
+```
+
+```{python}
+import wn
+for s in wn.synsets('dog', pos='n', lang='en'):
+    print(f"{s}: {s.lemmas()}")     # list of lemma strings
+```
+
+
+
+
+```{python}
+import wn
+
+# pick an adjective sense like 'good' to find antonyms more easily
+s = wn.synsets('good', pos='a', lang='en')[0]
+synonyms = s.lemmas()  # lemma strings
+# antonyms live on *senses* (word-in-synset); collect across them:
+ants = []
+for sense in s.senses():                # Sense objects
+    for ant in sense.antonyms():        # antonym Senses
+        ants.extend(ant.synset().lemmas())
+synonyms, sorted(set(ants))
+
+```
+
+
+```{python}
+import wn
+s = wn.synsets('dog', pos='n', lang='en')[0]
+print(s.hypernyms())     # more general
+print(s.hyponyms()[:10]) # more specific (slice for brevity)
+print(s.part_meronyms()) # parts (e.g., tail, paw)
+print(s.part_holonyms()) # wholes (e.g., pack, kennel)
+
+```
+
+
+```{python}
+import wn
+wn.synsets("run", lang='en')
+
+s = wn.synsets("run", pos='v', lang='en')[0]
+print("Lemma names:", s.lemmas())
+print("Definitions:", s.definitions())   # list
+print("Examples:",   s.examples())       # list
+
+```
+
+
+
+```{python}
+import wn
+s = wn.synsets("dog", pos='n', lang='en')[0]
+print("Hypernyms:", s.hypernyms())
+print("Hyponyms:", s.hyponyms())
+print("Part Meronyms:", s.part_meronyms())
+
+```
+
+
+
+```{python}
+import wn
+from wn.similarity import path, wup, lch
+import wn.taxonomy as tax
+
+dog = wn.synsets('dog', pos='n', lang='en')[0]
+cat = wn.synsets('cat', pos='n', lang='en')[0]
+
+print("path(dog,cat) =", path(dog, cat))  # 0..1 (higher=more similar)
+print("wup(dog,cat)  =", wup(dog, cat))   # Wu–Palmer
+
+# LCH needs taxonomy depth:
+n_depth = tax.taxonomy_depth(wn.Wordnet('oewn:2021'), 'n')
+print("lch(dog,cat)  =", lch(dog, cat, n_depth))
+
+```
+
+```{python}
+# All hyponyms (recursive)
+def all_hyponyms(synset):
+    hypos = set()
+    for h in synset.hyponyms():
+        hypos.add(h)
+        hypos |= all_hyponyms(h)
+    return hypos
+
+dog = wn.synsets('dog', pos='n', lang='en')[0]
+all_hypos = all_hyponyms(dog)
+len(all_hypos), list(sorted(all_hypos))[:10]
+
+```
+
+
+```{python}
+# Car example
+car_synsets = wn.synsets('car', pos='n', lang='en')
+car = car_synsets[0]
+print(car.definitions()[0])
+print(car.examples())
+print(car.hypernyms())
+print(car.hyponyms()[:10])
+
+```
+
+
+
+
+
+
+```{python}
+import spacy, wn
+nlp = spacy.load("en_core_web_sm")
+
+text = "The dogs are running near the river banks."
+doc = nlp(text)
+
+# Filter to content lemmas
+content = [t for t in doc if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
+lemmas  = [t.lemma_.lower() for t in content]
+
+lemmas
+```
+
+
+
+```{python}
+# Map spaCy UPOS to wn POS for better lookups
+def spacy_pos_to_wn_pos(pos):
+    return {'NOUN':'n','VERB':'v','ADJ':'a','ADV':'r'}.get(pos, None)
+
+lemma_pos = [(t.lemma_.lower(), spacy_pos_to_wn_pos(t.pos_)) for t in content]
+lemma_pos
+
+```
+
+```{python}
+# Get synsets per lemma (restrict by POS when available)
+synsets = []
+for lemma, pos in lemma_pos:
+    synsets.append(wn.synsets(lemma, pos=pos, lang='en') if pos else wn.synsets(lemma, lang='en'))
+synsets
+
+```
+
+```{python}
+# Similarity among hand-picked senses (Wu–Palmer)
+from wn.similarity import wup
+
+targets = [wn.synsets('dog', pos='n', lang='en')[0],
+           wn.synsets('cat', pos='n', lang='en')[0],
+           wn.synsets('bank', pos='n', lang='en')[8]]   # e.g., 'financial institution' vs. 'river bank'
+for i in range(len(targets)):
+    for j in range(i+1, len(targets)):
+        a, b = targets[i], targets[j]
+        print(a.id, b.id, wup(a, b))
+
+```
+
+
+## Why WordNet (for linguists)?
+
+-   **Synsets** (sense inventories) feel familiar from semantics.
+-   Clear relations: **hypernym/hyponym**, **meronym/holonym**, **antonym**.
+-   Great for building *semantic fields* (e.g., motion verbs).
+
+
+## First Look at Synsets
+
+``` python
+from nltk.corpus import wordnet as wn
+wn.synsets("dog")  # list of senses across POS
+```
+
+## Definitions & Examples
+
+``` python
+for s in wn.synsets("dog"):
+    print(s.name(), "→", s.definition(), "|", s.examples())
+```
+
+## Hypernyms & Hyponyms
+
+``` python
+dog = wn.synset("dog.n.01")
+dog.hypernyms(), dog.hyponyms()[:5]
+```
+
+## Synonyms & Antonyms (lemmas)
+
+``` python
+s = wn.synset("good.a.01")
+synonyms = [l.name() for l in s.lemmas()]
+antonyms = [l.antonyms()[0].name() for l in s.lemmas() if l.antonyms()]
+synonyms, antonyms
+```
+
+## Simple Semantic Similarity
+
+> **Note:** This is **taxonomy-based**, not vectors. Values are rough but intuitive.
+
+``` python
+dog = wn.synset("dog.n.01")
+cat = wn.synset("cat.n.01")
+animal = wn.synset("animal.n.01")
+print("dog ~ cat (path):", dog.path_similarity(cat))
+print("dog ~ animal (path):", dog.path_similarity(animal))
+print("Wu-Palmer dog~cat:", dog.wup_similarity(cat))
+```
+
+## Build a Mini Semantic Field (verbs of speech)
+
+``` python
+seed = "say"
+field = set()
+for s in wn.synsets(seed, pos=wn.VERB):
+    field.update({h.name().split(".")[0] for h in s.hyponyms()})
+sorted(list(field))[:25]
+```
+
+
+# All senses of "run"
+synsets = wn.synsets("run")
+print(f"Number of senses for 'run': {len(synsets)}")
+print(synsets[:5])
+```
+
+------------------------------------------------------------------------
+
+# Inspecting a Synset
+
+```{python}
+s = wn.synsets("run")[0]
+print("Name:", s.name())
+print("Definition:", s.definition())
+print("Examples:", s.examples())
+```
+
+------------------------------------------------------------------------
+
+# Semantic Relations in WordNet
+
+```{python}
+s = wn.synsets("dog")[0]
+
+print("Definition:", s.definition())
+print("Hypernyms (broader):", s.hypernyms())
+print("Hyponyms (narrower):", s.hyponyms())
+print("Meronyms (parts):", s.part_meronyms())
+```
+
+------------------------------------------------------------------------
+
+# Discussion 💬
+
+-   How does WordNet organize meaning?
+-   What’s the difference between a **synset** and a **lemma**?
+-   Why do NLP systems need both lexical data (like WordNet) *and* text processing tools (like spaCy)?
+
+
+# Discussion 💬
+
+-   What linguistic knowledge does spaCy rely on for lemmatization?
+-   When might WordNet be more useful than spaCy, and vice versa?
+-   How could you combine both in a project (e.g., linking lemmas to their WordNet synsets)?
+
+------------------------------------------------------------------------
+
+# Next Time ➡️
+
+🌍 **Multilingual NLP** — applying tokenization and lemmatization to other languages (Spanish, French, German, etc.)
+
+> Each group will analyze one language and compare results.
