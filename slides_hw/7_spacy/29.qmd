@@ -22,14 +22,14 @@ editor: source
 
 ## Recap from Last Time
 
-```python
+``` python
 list = ["eeny", "meeny", "miney", "mo"]
 list[0][0]
 ```
 
 ## Recap from Last Time
 
-```python
+``` python
 sentences = [
     ["the", "cat", "sleeps"],
     ["the", "dog", "runs"],
@@ -37,18 +37,20 @@ sentences = [
 ]
 sentences[0][0]
 ```
+
 ## Recap from Last Time
 
-```python
+``` python
 consonants = {
     "p": {"voice": False, "place": "bilabial", "manner": "stop"},
     "t": {"voice": False, "place": "alveolar", "manner": "stop"},
     "k": {"voice": False, "place": "velar", "manner": "stop"}
 }
 ```
+
 ## Recap from Last Time
 
-```python
+``` python
 students = {
     "Alice": {"quiz": 9, "homework": 10, "final": 8},
     "Ben": {"quiz": 7, "homework": 9, "final": 10}
@@ -59,7 +61,7 @@ students["Alice"]["quiz"]
 
 ## Recap from Last Time
 
-```python
+``` python
 import pandas as pd
 consonants = {
     "p": {"voice": False, "place": "bilabial", "manner": "stop"},
@@ -71,12 +73,11 @@ df = pd.DataFrame(consonants).T.reset_index(names="phoneme")
 df
 ```
 
-
 ## Review Activity
 
-- Copy the list below. Using a `for` loop and the `zip()` function, create a dictionary  with the `words` as keys. Then, using the `.T` method, convert it into a `pd.DataFrame`.
+-   Copy the list below. Using a `for` loop and the `zip()` function, create a dictionary with the `words` as keys. Then, using the `.T` method, convert it into a `pd.DataFrame`.
 
-```python
+``` python
 words   = ["students", "run", "ran", "roots", "languages"]
 pos_tags = ["NOUN", "VERB", "VERB", "NOUN", "NOUN"]
 lemmas  = ["student", "run", "run", "root", "language"]
@@ -87,13 +88,13 @@ freqs   = [5, 3, 2, 4, 6]
 
 ## Install & Load spaCy
 
-```python
+``` python
 # In a terminal, once per machine:
 # pip install spacy
 # python -m spacy download en_core_web_sm
 ```
 
-```{python}
+``` python
 import spacy
 nlp = spacy.load("en_core_web_sm")
 ```
@@ -102,34 +103,35 @@ nlp = spacy.load("en_core_web_sm")
 
 spaCy is an industrial-strength NLP library for Python that provides:
 
-- Tokenization
-- Part-of-speech tagging
-- Lemmatization
+-   Tokenization
+-   Part-of-speech tagging
+-   Lemmatization
 
 ## What is spaCy?
 
 spaCy provides:
 
-- Dependency parsing
-- Named Entity Recognition (NER)
-- Built-in stopword list and rule-based matchers
+-   Dependency parsing
+-   Named Entity Recognition (NER)
+-   Built-in stopword list and rule-based matchers
 
 ## What is Tokenization?
 
-**Tokenization** = breaking text into meaningful units (tokens).  
+**Tokenization** = breaking text into meaningful units (tokens).
 
 ## What is Tokenization?
-- Tokens can be *words*, *punctuation*, *numbers*, or even *subwords*.  
-- How words are tokenized is important, as boundaries aren't always obvious:
-  - “Dr. Byrd’s” → ?  
-  - “can’t” → ?  
-  - “U.S.” → ?  
+
+-   Tokens can be *words*, *punctuation*, *numbers*, or even *subwords*.
+-   How words are tokenized is important, as boundaries aren't always obvious:
+    -   “Dr. Byrd’s” → ?
+    -   “can’t” → ?
+    -   “U.S.” → ?
 
 ## Simple Tokenization (Strings Only)
 
-- We've learned about `.split()`
+-   We've learned about `.split()`
 
-```python
+``` python
 text = "Dr. Byrd's students can't wait to analyze PIE roots!"
 tokens_basic = text.split()
 tokens_basic
@@ -137,9 +139,9 @@ tokens_basic
 
 ## Slightly better: use regex to remove punctuation
 
-- And we've learned about `re.split()`
+-   And we've learned about `re.split()`
 
-```python
+``` python
 text = "Dr. Byrd's students can't wait to analyze PIE roots!"
 import re
 tokens_clean = re.split(r"[\s\W]+", text)
@@ -148,12 +150,11 @@ tokens_clean
 
 ## Even better: using spaCy
 
-- You can also split things up using spaCy, which *"knows"* some linguistic structure already
-
+-   You can also split things up using spaCy, which *"knows"* some linguistic structure already
 
 ## Tokenization: string vs. regex vs. spaCy
 
-```{python}
+``` python
 text = "Dr. Byrd's students can't wait to analyze PIE roots!"
 
 doc = nlp(text)
@@ -162,31 +163,82 @@ doc = nlp(text)
 
 ## Token Attributes
 
-```{python}
+-   text – raw token string
+-   lemma\_ – base form (great for type–token counts, lexeme stats).
+-   pos\_ – Universal POS tag (quick, language-agnostic part of speech).
+-   tag\_ – Fine-grained POS (useful for English-specific distinctions).
+
+## Token Attributes
+
+-   is_stop – filter function words for clearer frequency analyses.
+-   is_punct / is_space – cleaning before counts.
+-   like_num / like_url / like_email – quick heuristics for data cleaning.
+-   is_alpha – keep only alphabetic tokens for many corpus tasks.
+
+## Token Attributes
+
+``` python
+import spacy
 import pandas as pd
 
-tok_dict = {}
+# Load English model
+nlp = spacy.load("en_core_web_sm")
+
+text = "Dr. Byrd's students can't wait to analyze PIE roots!"
+doc = nlp(text)
+
+# Create list of dicts, one per token
+data = []
 for t in doc:
-  tok_dict[t] = [
-    {"text" : t.text}, 
-    {"lemma": t.lemma_}, 
-    {"POS" : t.pos_}, 
-    {"tag" : t.tag_}, 
-    {"stop" : t.is_stop}, 
-    {"is_punct": t.is_punct}]
-# df = pd.DataFrame(tok_dict)
-# df
-tok_dict
+    data.append({
+        "text": t.text,
+        "lemma": t.lemma_,
+        "POS": t.pos_,
+        "tag": t.tag_,
+        "stop": t.is_stop,
+        "is_punct": t.is_punct
+    })
+
+# Make DataFrame
+df = pd.DataFrame(data)
+print(df)
+```
+
+## Penn Treebank POS Tags
+
+[Penn Treebank Project Tags](https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html)
+
+## spaCy Activity
+
+- Copy the below `jfk` list, and then analyze its attributes.
+
+``` python
+jfk = "This year’s space budget is three times what it was in January 1961, and it is greater than the space budget of the previous eight years combined. That budget now stands at $5,400,000 a year — a staggering sum, though somewhat less than we pay for cigarettes and cigars every year. Space expenditures will soon rise some more, from 40 cents per person per week to more than 50 cents a week for every man, woman and child in the United States, for we have given this program a high national priority — even though I realize that this is in some measure an act of faith and vision, for we do not now know what benefits await us. But if I were to say, my fellow citizens, that we shall send to the moon, 240,000 miles away from the control station in Houston, a giant rocket more than 300 feet tall, the length of this football field, made of new metal alloys, some of which have not yet been invented, capable of standing heat and stresses several times more than have ever been experienced, fitted together with a precision better than the finest watch, carrying all the equipment needed for propulsion, guidance, control, communications, food and survival, on an untried mission, to an unknown celestial body, and then return it safely to Earth, re-entering the atmosphere at speeds of over 25,000 miles per hour, causing heat about half that of the temperature of the sun — almost as hot as it is here today — and do all this, and do it right, and do it first before this decade is out — then we must be bold. I’m the one who is doing all the work, so we just want you to stay cool for a minute. [laughter] However, I think we’re going to do it, and I think that we must pay what needs to be paid. I don’t think we ought to waste any money, but I think we ought to do the job. And this will be done in the decade of the sixties. It may be done while some of you are still here at school at this college and university. It will be done during the term of office of some of the people who sit here on this platform. But it will be done. And it will be done before the end of this decade. I am delighted that this university is playing a part in putting a man on the moon as part of a great national effort of the United States of America. Many years ago, the great British explorer George Mallory, who was to die on Mount Everest, was asked why did he want to climb it? He said, “Because it is there.” Well, space is there, and we’re going to climb it, and the moon and the planets are there, and new hopes for knowledge and peace are there. And, therefore, as we set sail we ask God’s blessing on the most hazardous and dangerous and greatest adventure on which man has ever embarked. Thank you."
+```
+
+# Stopwords & Frequencies
+
+## Stopwords
+
+- Stopwords are function words that you can filter out of your analysis
+- As we saw earlier, we can do so using `.is_stop`
+
+## Filtering Out Items
+
+
+``` python
+import spacy
+
+content_lemmas = [t.lemma_.lower() for t in doc
+                  if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
 ```
 
 ## Stopwords & Frequency Table
 
-```python
+``` python
 from collections import Counter
 import pandas as pd
 
-content_lemmas = [t.lemma_.lower() for t in doc
-                  if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
 freq = Counter(content_lemmas)
 df_freq = (pd.DataFrame(freq.items(), columns=["lemma", "count"])
            .sort_values("count", ascending=False))
@@ -195,7 +247,7 @@ df_freq.head(10)
 
 ## Visualize Top Words
 
-```python
+``` python
 import matplotlib.pyplot as plt
 
 top10 = df_freq.head(10)
@@ -209,39 +261,12 @@ plt.tight_layout()
 plt.show()
 ```
 
-## Mon — In-Class Activity
+## Activity: Alice in Wonderland
 
-1. Choose a short paragraph (3–5 sentences).
-2. Build a frequency table of **lemmas** excluding stopwords.
-3. Plot the top 10.
-4. Compare with a neighbor: *Do lemmas change interpretation vs raw tokens?*
-
-
-
-
-
-
-
-
-
-## Activity
-
-```{python}
-import pandas as pd
-
-words   = ["students", "run", "ran", "roots", "languages"]
-pos_tags = ["NOUN", "VERB", "VERB", "NOUN", "NOUN"]
-lemmas  = ["student", "run", "run", "root", "language"]
-freqs   = [5, 3, 2, 4, 6]
-
-word_info = {}
-for w, pos, lemma, freq in zip(words, pos_tags, lemmas, freqs):
-  word_info[w] = {"POS": pos, "Lemma": lemma, "Frequency": freq}
-
-df_words = pd.DataFrame(word_info).T
-df_words
-
-```
+1. For this activity, you'll be using `alice.txt`. Make sure it's in the same folder as this `.qmd` file.
+2. Filter out stopwords, punctuation, whitespace, and "like numbers". 
+3. Build a `pd.DataFrame`, and count how many times each word occurs in the story.
+4. Plot the top 20.
 
 
 
