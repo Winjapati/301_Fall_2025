@@ -130,7 +130,6 @@ doc = nlp("The quick brown fox jumps over the lazy dog.")
 ## Visualize Dependencies (displaCy)
 
 ``` python
-
 import spacy
 from spacy import displacy
 
@@ -140,13 +139,11 @@ doc = nlp("The quick brown fox jumps over the lazy dog.")
 svg = displacy.render(doc, style="dep")  # returns SVG/HTML markup
 with open("syntax_tree.svg", "w", encoding="utf-8") as f:
     f.write(svg)
-
 ```
 
 ## Visualize Dependencies (displaCy)
 
 ![](syntax_tree.svg)
-
 
 ## Activity: Dependencies
 
@@ -163,7 +160,14 @@ doc  = "This spaCy library is too dang powerful."
 
 ## Extracting Verbs + Direct Objects
 
-```{python}
+- We can also identify specific syntactic relations within our sentences, such as all nouns that are direct objects.
+  - by using the `.children` attribute, we identify all immediate syntactic dependents of a token
+
+```python
+import spacy
+
+nlp = spacy.load("en_core_web_sm")
+
 doc = nlp("We considered the options and chose the best proposal.")
 pairs = []
 for tok in doc:
@@ -176,23 +180,272 @@ pairs
 
 ## Rule-Based Matching (verbs of violence, e.g.)
 
-``` python
+- And we can also filter out for specific groups of words that we define beforehand
+
+``` {python}
+import spacy
 from spacy.matcher import PhraseMatcher
+
+nlp = spacy.load("en_core_web_sm")
+
 violent_verbs = ["punch", "kick", "attack", "strike", "hit", "assault"]
-patterns = [nlp.make_doc(v) for v in violent_verbs]
+patterns = [nlp(v) for v in violent_verbs]
 matcher = PhraseMatcher(nlp.vocab, attr="LEMMA")
 doc = nlp("They punched, kicked, and attacked the intruder before fleeing.")
 matcher.add("VIOLENCE", patterns)
 [(doc[s:e].text, doc[s:e].lemma_) for _, s, e in matcher(doc)]
 ```
 
-## Activity: Dependency Parsing
+# Semantic Analysis Using WordNet
 
--   Write a tiny extractor that prints **(verb, direct-object)** pairs from your paragraph.
--   Optional: also capture the subject (`nsubj`).
--   Share: *Which verbs take which objects? Any interesting alternations?*
+## Semantic Analysis
 
-# WordNet
+- In the previous code block we predefined `violent_verbs`
+- But what if we were able to access a library that already contained all of these?
+
+## WordNet
+
+- We can connect to **WordNet**, which is a *lexical database*
+  - Developed at Princeton University  
+  - Organizes English words into **synsets** (sets of cognitive synonyms)  
+
+## WordNet
+
+- Captures relationships among words:
+  - **Synonyms:** *good ↔ nice*  
+  - **Antonyms:** *hot ↔ cold*  
+  - **Hypernyms:** *dog → animal*  
+  - **Hyponyms:** *dog → poodle*  
+  - **Meronyms:** *car → wheel*
+  - **Entailments:** *snore → sleep* 
+
+## Setting up WordNet
+
+``` bash
+# Installing spacy-wordnet
+pip install spacy spacy-wordnet nltk
+
+# Installing NLTK wordnet data
+python -m nltk.downloader wordnet
+python -m nltk.downloader omw
+
+# Downloading English spaCy model
+python -m spacy download en_core_web_sm
+```
+
+<!-- # Download an English wordnet into wn’s local DB (one time) -->
+<!-- import wn -->
+<!-- wn.download('oewn:2021')   # Open English WordNet 2021 -->
+<!-- # (alternatives: 'ewn:2020', 'omw-en:1.4') -->
+```
+
+
+```{python}
+import spacy
+from spacy_wordnet.wordnet_annotator import WordnetAnnotator
+
+nlp = spacy.load("en_core_web_sm")
+nlp.add_pipe("spacy_wordnet", after="tagger", config={"lang": "en"})
+
+doc = nlp("The dog chased the cat.")
+for tok in doc:
+    if tok.pos_ in ("NOUN","VERB","ADJ","ADV"):
+        syns = tok._.wordnet.synsets()
+        lemmas = tok._.wordnet.lemmas()
+        hypers = tok._.wordnet.hypernyms()
+        print(tok.text, [s.definition() for s in syns[:1]])
+```
+
+
+```{python}
+economy_domains = ['finance', 'banking']
+enriched_sentence = []
+sentence = nlp('I want to withdraw 5,000 euros')
+
+# For each token in the sentence
+for token in sentence:
+    # We get those synsets within the desired domains
+    synsets = token._.wordnet.wordnet_synsets_for_domain(economy_domains)
+    if not synsets:
+        enriched_sentence.append(token.text)
+    else:
+        lemmas_for_synset = [lemma for s in synsets for lemma in s.lemma_names()]
+        # If we found a synset in the economy domains
+        # we get the variants and add them to the enriched sentence
+        enriched_sentence.append('({})'.format('|'.join(set(lemmas_for_synset))))
+
+# Let's see our enriched sentence
+print(' '.join(enriched_sentence))
+# >> I (need|want|require) to (draw|withdraw|draw_off|take_out) 5,000 euros
+```
+
+
+
+```{python}
+import wn
+
+# list all synsets for 'dog' (English noun)
+wn.synsets('dog', pos='n', lang='en')
+```
+
+```{python}
+import wn
+for s in wn.synsets('dog', pos='n', lang='en'):
+    print(f"{s}: {s.lemmas()}")     # list of lemma strings
+```
+
+
+
+
+```{python}
+import wn
+
+# pick an adjective sense like 'good' to find antonyms more easily
+s = wn.synsets('good', pos='a', lang='en')[0]
+synonyms = s.lemmas()  # lemma strings
+# antonyms live on *senses* (word-in-synset); collect across them:
+ants = []
+for sense in s.senses():                # Sense objects
+    for ant in sense.antonyms():        # antonym Senses
+        ants.extend(ant.synset().lemmas())
+synonyms, sorted(set(ants))
+
+```
+
+
+```{python}
+import wn
+s = wn.synsets('dog', pos='n', lang='en')[0]
+print(s.hypernyms())     # more general
+print(s.hyponyms()[:10]) # more specific (slice for brevity)
+print(s.part_meronyms()) # parts (e.g., tail, paw)
+print(s.part_holonyms()) # wholes (e.g., pack, kennel)
+
+```
+
+
+```{python}
+import wn
+wn.synsets("run", lang='en')
+
+s = wn.synsets("run", pos='v', lang='en')[0]
+print("Lemma names:", s.lemmas())
+print("Definitions:", s.definitions())   # list
+print("Examples:",   s.examples())       # list
+
+```
+
+
+
+```{python}
+import wn
+s = wn.synsets("dog", pos='n', lang='en')[0]
+print("Hypernyms:", s.hypernyms())
+print("Hyponyms:", s.hyponyms())
+print("Part Meronyms:", s.part_meronyms())
+
+```
+
+
+
+```{python}
+import wn
+from wn.similarity import path, wup, lch
+import wn.taxonomy as tax
+
+dog = wn.synsets('dog', pos='n', lang='en')[0]
+cat = wn.synsets('cat', pos='n', lang='en')[0]
+
+print("path(dog,cat) =", path(dog, cat))  # 0..1 (higher=more similar)
+print("wup(dog,cat)  =", wup(dog, cat))   # Wu–Palmer
+
+# LCH needs taxonomy depth:
+n_depth = tax.taxonomy_depth(wn.Wordnet('oewn:2021'), 'n')
+print("lch(dog,cat)  =", lch(dog, cat, n_depth))
+
+```
+
+```{python}
+# All hyponyms (recursive)
+def all_hyponyms(synset):
+    hypos = set()
+    for h in synset.hyponyms():
+        hypos.add(h)
+        hypos |= all_hyponyms(h)
+    return hypos
+
+dog = wn.synsets('dog', pos='n', lang='en')[0]
+all_hypos = all_hyponyms(dog)
+len(all_hypos), list(sorted(all_hypos))[:10]
+
+```
+
+
+```{python}
+# Car example
+car_synsets = wn.synsets('car', pos='n', lang='en')
+car = car_synsets[0]
+print(car.definitions()[0])
+print(car.examples())
+print(car.hypernyms())
+print(car.hyponyms()[:10])
+
+```
+
+
+
+
+
+
+```{python}
+import spacy, wn
+nlp = spacy.load("en_core_web_sm")
+
+text = "The dogs are running near the river banks."
+doc = nlp(text)
+
+# Filter to content lemmas
+content = [t for t in doc if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
+lemmas  = [t.lemma_.lower() for t in content]
+
+lemmas
+```
+
+
+
+```{python}
+# Map spaCy UPOS to wn POS for better lookups
+def spacy_pos_to_wn_pos(pos):
+    return {'NOUN':'n','VERB':'v','ADJ':'a','ADV':'r'}.get(pos, None)
+
+lemma_pos = [(t.lemma_.lower(), spacy_pos_to_wn_pos(t.pos_)) for t in content]
+lemma_pos
+
+```
+
+```{python}
+# Get synsets per lemma (restrict by POS when available)
+synsets = []
+for lemma, pos in lemma_pos:
+    synsets.append(wn.synsets(lemma, pos=pos, lang='en') if pos else wn.synsets(lemma, lang='en'))
+synsets
+
+```
+
+```{python}
+# Similarity among hand-picked senses (Wu–Palmer)
+from wn.similarity import wup
+
+targets = [wn.synsets('dog', pos='n', lang='en')[0],
+           wn.synsets('cat', pos='n', lang='en')[0],
+           wn.synsets('bank', pos='n', lang='en')[8]]   # e.g., 'financial institution' vs. 'river bank'
+for i in range(len(targets)):
+    for j in range(i+1, len(targets)):
+        a, b = targets[i], targets[j]
+        print(a.id, b.id, wup(a, b))
+
+```
+
 
 ## Why WordNet (for linguists)?
 
@@ -200,18 +453,6 @@ matcher.add("VIOLENCE", patterns)
 -   Clear relations: **hypernym/hyponym**, **meronym/holonym**, **antonym**.
 -   Great for building *semantic fields* (e.g., motion verbs).
 
-## Install minimal NLTK bits
-
-``` python
-# In a terminal (or one-time in a notebook):
-# pip install nltk
-```
-
-``` python
-import nltk
-nltk.download("wordnet")     # synsets & relations
-nltk.download("omw-1.4")     # multilingual index; often needed for definitions/examples
-```
 
 ## First Look at Synsets
 
@@ -266,29 +507,6 @@ for s in wn.synsets(seed, pos=wn.VERB):
 sorted(list(field))[:25]
 ```
 
-# Plan for the Day
-
-1.  Review: NLTK & WordNet
-2.  What is a lemma?
-3.  Lemmatization with **spaCy**
-4.  Filtering and analyzing parts of speech
-5.  ✏️ In-class activity — Lemmatize and compare
-6.  Preview: Multilingual NLP
-
-------------------------------------------------------------------------
-
-# Review: NLTK & WordNet
-
-✅ **NLTK** — a toolkit for text processing in Python ✅ **WordNet** — a lexical database of English meanings
-
-> NLTK can query WordNet directly, giving us access to definitions, synonyms, antonyms, and hierarchical relations among words.
-
-------------------------------------------------------------------------
-
-# Accessing WordNet in NLTK
-
-```{python}
-from nltk.corpus import wordnet as wn
 
 # All senses of "run"
 synsets = wn.synsets("run")
@@ -328,110 +546,6 @@ print("Meronyms (parts):", s.part_meronyms())
 -   What’s the difference between a **synset** and a **lemma**?
 -   Why do NLP systems need both lexical data (like WordNet) *and* text processing tools (like spaCy)?
 
-------------------------------------------------------------------------
-
-# What is a Lemma?
-
-> **Lemma** = the *base form* of a word (the form you’d find as a dictionary headword)
-
-| Word    | Lemma | POS  |
-|---------|-------|------|
-| running | run   | VERB |
-| ran     | run   | VERB |
-| mice    | mouse | NOUN |
-| better  | good  | ADJ  |
-
-------------------------------------------------------------------------
-
-# Why Lemmatize?
-
--   To treat **morphological variants** as the *same* word
--   To improve search accuracy (e.g., *run*, *ran*, *running* → *run*)
--   To normalize data for counting, clustering, or semantic analysis
--   Essential for cross-linguistic comparison
-
-------------------------------------------------------------------------
-
-# Lemmatization with spaCy
-
-```{python}
-import spacy
-nlp = spacy.load("en_core_web_sm")
-
-doc = nlp("The children ran quickly to their houses.")
-
-for token in doc:
-    print(token.text, "→", token.lemma_, token.pos_)
-```
-
-------------------------------------------------------------------------
-
-# Compare Tokenization and Lemmatization
-
-```{python}
-text = "Students were running, reading, and writing all day."
-doc = nlp(text)
-
-tokens = [t.text for t in doc]
-lemmas = [t.lemma_ for t in doc]
-
-list(zip(tokens, lemmas))
-```
-
-------------------------------------------------------------------------
-
-# Filtering by Part of Speech
-
-```{python}
-nouns = [t.lemma_ for t in doc if t.pos_ == "NOUN"]
-verbs = [t.lemma_ for t in doc if t.pos_ == "VERB"]
-
-print("Nouns:", nouns)
-print("Verbs:", verbs)
-```
-
-------------------------------------------------------------------------
-
-# Creating a Lemma Frequency Table
-
-```{python}
-import pandas as pd
-from collections import Counter
-
-lemmas = [t.lemma_.lower() for t in doc if t.is_alpha]
-freq = Counter(lemmas)
-
-df = pd.DataFrame(freq.items(), columns=["lemma", "count"]).sort_values("count", ascending=False)
-df.head()
-```
-
-------------------------------------------------------------------------
-
-# Visualizing Lemma Counts
-
-```{python}
-import matplotlib.pyplot as plt
-
-top10 = df.head(10)
-plt.bar(top10["lemma"], top10["count"])
-plt.title("Top 10 Lemmas in the Text")
-plt.xlabel("Lemma")
-plt.ylabel("Count")
-plt.show()
-```
-
-------------------------------------------------------------------------
-
-# ✏️ In-Class Activity — “Lemma Frequency Analysis”
-
-1.  Copy a short paragraph of English text (≈ 80 words).
-2.  Process it with spaCy to extract **tokens**, **lemmas**, and **POS tags**.
-3.  Create a DataFrame of lemma + frequency.
-4.  Compare your top lemmas with those from the raw tokens.
-
-> 💬 How does lemmatization change the frequency counts? Which verbs or nouns merge under a single lemma?
-
-------------------------------------------------------------------------
 
 # Discussion 💬
 
