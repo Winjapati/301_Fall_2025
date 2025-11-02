@@ -115,9 +115,10 @@ spaCy provides:
 -   Named Entity Recognition (NER)
 -   Built-in stopword list and rule-based matchers
 
-## What is Tokenization?
+## Thus far...
 
-**Tokenization** = breaking text into meaningful units (tokens).
+- We have used **tokenization**
+  - breaking text into meaningful units (tokens).
 
 ## What is Tokenization?
 
@@ -154,7 +155,7 @@ tokens_clean
 
 -   You can also split things up using spaCy, which *"knows"* some linguistic structure already
 
-## Tokenization: string vs. regex vs. spaCy
+## Tokenization: using spaCy
 
 ``` python
 import spacy
@@ -166,21 +167,21 @@ doc = nlp(text)
 [t.text for t in doc]
 ```
 
-## Token Attributes
+## Token Attributes in spaCy
 
--   text – raw token string
--   lemma\_ – base form (great for type–token counts, lexeme stats).
--   pos\_ – Universal POS tag (quick, language-agnostic part of speech).
--   tag\_ – Fine-grained POS (useful for English-specific distinctions).
+-   `text` – raw token string
+-   `lemma_` – base form (great for type–token counts, lexeme stats).
+-   `pos_` – Universal POS tag (quick, language-agnostic part of speech).
+-   `tag_` – Fine-grained POS (useful for English-specific distinctions).
 
-## Token Attributes
+## Token Attributes in spaCy
 
--   is_stop – filter function words for clearer frequency analyses.
--   is_punct / is_space – cleaning before counts.
--   like_num / like_url / like_email – quick heuristics for data cleaning.
--   is_alpha – keep only alphabetic tokens for many corpus tasks.
+-   `is_stop` – filter function words for clearer frequency analyses.
+-   `is_punct` / `is_space` – cleaning before counts.
+-   `like_num` / `like_url` / `like_email` – quick heuristics for data cleaning.
+-   `is_alpha` – keep only alphabetic tokens for many corpus tasks.
 
-## Token Attributes
+## Token Attributes in spaCy
 
 ``` python
 import spacy
@@ -223,9 +224,9 @@ jfk = "This year’s space budget is three times what it was in January 1961, an
 
 # Lemmas
 
-# What is a Lemma?
+## Lemmas
 
-> **Lemma** = the *base form* of a word (the form you’d find as a dictionary headword)
+- lemmas are the *base form* of a word (the form you’d find as a dictionary headword)
 
 | Word    | Lemma | POS  |
 |---------|-------|------|
@@ -234,20 +235,17 @@ jfk = "This year’s space budget is three times what it was in January 1961, an
 | mice    | mouse | NOUN |
 | better  | good  | ADJ  |
 
-------------------------------------------------------------------------
 
-# Why Lemmatize?
+## Why Lemmatize?
 
--   To treat **morphological variants** as the *same* word
+-   To treat morphological variants as the *same* word
 -   To improve search accuracy (e.g., *run*, *ran*, *running* → *run*)
 -   To normalize data for counting, clustering, or semantic analysis
--   Essential for cross-linguistic comparison
+-   To conduct cross-linguistic comparison
 
-------------------------------------------------------------------------
+## Lemmatization with spaCy
 
-# Lemmatization with spaCy
-
-```{python}
+``` python
 import spacy
 nlp = spacy.load("en_core_web_sm")
 
@@ -257,11 +255,9 @@ for token in doc:
     print(token.text, "→", token.lemma_, token.pos_)
 ```
 
-------------------------------------------------------------------------
+## Tokenization vs. Lemmatization
 
-# Compare Tokenization and Lemmatization
-
-```{python}
+``` python
 text = "Students were running, reading, and writing all day."
 doc = nlp(text)
 
@@ -271,11 +267,11 @@ lemmas = [t.lemma_ for t in doc]
 list(zip(tokens, lemmas))
 ```
 
-------------------------------------------------------------------------
+## Filtering by Part of Speech
 
-# Filtering by Part of Speech
+- You can filter by POS in your analyses
 
-```{python}
+``` python
 nouns = [t.lemma_ for t in doc if t.pos_ == "NOUN"]
 verbs = [t.lemma_ for t in doc if t.pos_ == "VERB"]
 
@@ -283,29 +279,30 @@ print("Nouns:", nouns)
 print("Verbs:", verbs)
 ```
 
-------------------------------------------------------------------------
+## Creating a Lemma Frequency Table
 
-# Creating a Lemma Frequency Table
+- We can import the "Counter" class from the module "collections" to easily identify counts
+  - it creates a dictionary from the inputted list
 
-```{python}
+```python
 import pandas as pd
 from collections import Counter
 
-lemmas = [t.lemma_.lower() for t in doc if t.is_alpha]
+text = "Students were running, reading, and writing all day."
+sentence = nlp(text)
+
+lemmas = [t.lemma_.lower() for t in sentence if t.is_alpha]
 freq = Counter(lemmas)
 
-df = pd.DataFrame(freq.items(), columns=["lemma", "count"]).sort_values("count", ascending=False)
-df.head()
+sentence_df = pd.DataFrame(freq.items(), columns=["lemma", "count"]).sort_values("count", ascending=False)
+sentence_df.head()
 ```
+## Visualizing Lemma Counts
 
-------------------------------------------------------------------------
-
-# Visualizing Lemma Counts
-
-```{python}
+```python
 import matplotlib.pyplot as plt
 
-top10 = df.head(10)
+top10 = sentence_df.head(10)
 plt.bar(top10["lemma"], top10["count"])
 plt.title("Top 10 Lemmas in the Text")
 plt.xlabel("Lemma")
@@ -313,25 +310,12 @@ plt.ylabel("Count")
 plt.show()
 ```
 
-------------------------------------------------------------------------
-
-# ✏️ In-Class Activity — “Lemma Frequency Analysis”
-
-1.  Copy a short paragraph of English text (≈ 80 words).
-2.  Process it with spaCy to extract **tokens**, **lemmas**, and **POS tags**.
-3.  Create a DataFrame of lemma + frequency.
-4.  Compare your top lemmas with those from the raw tokens.
-
-> 💬 How does lemmatization change the frequency counts? Which verbs or nouns merge under a single lemma?
-
-------------------------------------------------------------------------
-
-
-# Stopwords & Frequencies
+# Stopwords
 
 ## Stopwords
 
 - Stopwords are function words that you can filter out of your analysis
+  - Why would we want to get rid of stopwords when we do research?
 - As we saw earlier, we can do so using `.is_stop`
 
 ## Filtering Out Items
