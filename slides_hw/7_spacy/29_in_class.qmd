@@ -21,6 +21,69 @@ df = pd.DataFrame(new_dict).T.reset_index(names="words")
 df
 ```
 
+
+```{python}
+text = "Dr. Byrd's students can't wait to analyze PIE roots!"
+tokens_basic = text.split()
+tokens_basic
+```
+
+
+```{python}
+import re
+
+text = "Dr. Byrd's students can't wait to analyze PIE roots!"
+
+tokens_clean = re.split(r"[\s\W]+", text)
+tokens_clean
+```
+
+
+
+```{python}
+import spacy
+nlp = spacy.load("en_core_web_sm")
+
+text = "Dr. Byrd's students can't wait to analyze PIE roots!"
+
+doc = nlp(text)
+[t.text for t in doc]
+```
+
+
+```{python}
+import spacy
+import pandas as pd
+
+# Load English model
+nlp = spacy.load("en_core_web_sm")
+
+text = "Dr. Byrd's students can't wait to analyze PIE roots!"
+doc = nlp(text)
+
+# Create list of dicts, one per token
+data = []
+for t in doc:
+    data.append({
+        "text": t.text,
+        "lemma": t.lemma_,
+        "POS": t.pos_,
+        "tag": t.tag_,
+        "stop": t.is_stop,
+        "is_punct": t.is_punct
+    })
+
+# Make DataFrame
+df = pd.DataFrame(data)
+print(df)
+```
+
+
+
+
+
+
+
 ```{python}
 import spacy
 import pandas as pd
@@ -47,6 +110,56 @@ for t in doc:
 # Make DataFrame
 df = pd.DataFrame(data)
 print(df)
+```
+
+```{python}
+import spacy
+nlp = spacy.load("en_core_web_sm")
+
+doc = nlp("The children ran quickly to their houses.")
+
+for token in doc:
+    print(token.text, "→", token.lemma_, token.pos_)
+```
+```{python}
+text = "Students were running, reading, and writing all day."
+doc = nlp(text)
+
+tokens = [t.text for t in doc]
+lemmas = [t.lemma_ for t in doc]
+
+list(zip(tokens, lemmas))
+```
+```{python}
+nouns = [t.lemma_ for t in doc if t.pos_ == "NOUN"]
+verbs = [t.lemma_ for t in doc if t.pos_ == "VERB"]
+
+print("Nouns:", nouns)
+print("Verbs:", verbs)
+```
+
+```{python}
+import pandas as pd
+from collections import Counter
+
+text = "Students were running, reading, and writing all day."
+sentence = nlp(text)
+
+lemmas = [t.lemma_.lower() for t in sentence if t.is_alpha]
+freq = Counter(lemmas)
+
+sentence_df = pd.DataFrame(freq.items(), columns=["lemma", "count"]).sort_values("count", ascending=False)
+sentence_df.head()
+```
+```{python}
+import matplotlib.pyplot as plt
+
+top = sentence_df.head(10)
+plt.bar(top10["lemma"], top["count"])
+plt.title("Top 10 Lemmas in the Text")
+plt.xlabel("Lemma")
+plt.ylabel("Count")
+plt.show()
 ```
 
 
