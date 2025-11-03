@@ -4,6 +4,8 @@ format: html
 ---
 
 ```{python}
+import pandas as pd 
+
 words   = ["students", "run", "ran", "roots", "languages"]
 pos_tags = ["NOUN", "VERB", "VERB", "NOUN", "NOUN"]
 lemmas  = ["student", "run", "run", "root", "language"]
