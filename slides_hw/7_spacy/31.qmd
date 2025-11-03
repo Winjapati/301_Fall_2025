@@ -25,6 +25,497 @@ editor: source
 
 ## Review Activity
 
+-   Copy the below string, and after filtering out stopwords and non-words, identify the top 10 most frequent words.
+
+``` python
+getty = "Four score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal.Now we are engaged in a great civil war, testing whether that nation, or any nation so conceived and so dedicated, can long endure. We are met on a great battle-field of that war. We have come to dedicate a portion of that field, as a final resting place for those who here gave their lives that that nation might live. It is altogether fitting and proper that we should do this.But, in a larger sense, we can not dedicate—we can not consecrate—we can not hallow—this ground. The brave men, living and dead, who struggled here, have consecrated it, far above our poor power to add or detract. The world will little note, nor long remember what we say here, but it can never forget what they did here. It is for us the living, rather, to be dedicated here to the unfinished work which they who fought here have thus far so nobly advanced. It is rather for us to be here dedicated to the great task remaining before us—that from these honored dead we take increased devotion to that cause for which they gave the last full measure of devotion—that we here highly resolve that these dead shall not have died in vain—that this nation, under God, shall have a new birth of freedom—and that government of the people, by the people, for the people, shall not perish from the earth."
+```
+
+
+# Wordnet-onyms
+
+## WordNet
+
+- WordNet can do more than find synonyms!
+- We can identify:
+
+1. antonyms
+2. hypernyms
+3. hyponyms
+4. and more!
+
+## Finding Antonyms
+
+``` {python}
+def get_antonyms(word):  # this is also a function
+    antonyms = set() # Use a set to avoid duplicates
+    for syn in wn.synsets(word):
+        for lemma in syn.lemmas():
+            if lemma.antonyms():
+                # The antonyms() method returns a list, so we take the first one
+                # and get its name.
+                antonyms.add(lemma.antonyms()[0].name())
+    return list(antonyms)
+
+print(get_antonyms("slow"))
+``` 
+- Let's try some other words to run in our `get_antonyms()` function.
+
+## Finding Hypernyms & Hyponyms
+
+- A **hypernym** encompasses its **hyponym**
+  - animal > mammal > canine > dog, etc.
+
+```{python}
+import spacy
+from nltk.corpus import wordnet as wn
+
+word = 'dog'
+doc = nlp(word)
+token = doc[0]
+
+word_synsets = token._.wn.synsets()
+
+for synset in word_synsets:
+    # Get the names of the hypernyms
+    hypernym_names = [hyp.name() for hyp in synset.hypernyms()]
+    # Get the names of the hyponyms
+    hyponym_names = [hyp.name() for hyp in synset.hyponyms()]
+
+    print(f"\n  Sense: {synset.name()}")
+    print(f"    Hypernyms (broader terms): {hypernym_names}")
+    print(f"    Hyponyms (specific examples): {hyponym_names}")
+```
+
+## Grabbing types
+
+```{python}
+tok = nlp("dog")[0]
+noun_syns = [s for s in tok._.wordnet.synsets() if s.pos() == "n"]
+# [d.definition() for d in noun_syns[:3]]
+
+s = noun_syns[0]                      # pick a sense
+
+synonyms  = [l.name() for l in s.lemmas()]
+hypernyms = s.hypernyms()
+hyponyms  = s.hyponyms()
+synonyms[:10], hypernyms[:3], hyponyms[:5]
+
+```
+
+## Hypernyms, etc.
+
+```{python}
+tok = nlp("dog")[0]
+s = [ss for ss in tok._.wordnet.synsets() if ss.pos() == 'n'][0]
+
+print("Hypernyms:", s.hypernyms())
+print("Hyponyms:", s.hyponyms()[:10])
+print("Part meronyms:", s.part_meronyms())
+print("Part holonyms:", s.part_holonyms())
+```
+## Exploring Words in WordNet
+
+```{python}
+tok = nlp("Run away with the ball.")[0]
+syns = tok._.wordnet.synsets()
+
+s = [ss for ss in syns if ss.pos() == 'v'][0]
+print("Lemma names:", [l.name() for l in s.lemmas()])
+print("Definition:",  s.definition())
+print("Examples:",    s.examples())
+```
+
+
+## Semantic Similarity
+
+```{python}
+dog = nlp("dog")[0]._.wordnet.synsets()[0]
+cat = nlp("smell")[0]._.wordnet.synsets()[0]
+
+print("wup:",  dog.wup_similarity(cat))   # Wu–Palmer similarity
+```
+## Text --> tokens --> WordNet synsets
+
+```{python}
+text = "The dogs are running near the river banks."
+doc = nlp(text)
+
+# Keep content words; use lemmas for lookup
+content = [t for t in doc if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
+for t in content:
+    syns = t._.wordnet.synsets()            # uses t.lemma_ + POS under the hood
+    print(f"{t.text:>10}  {t.lemma_:>10}  POS={t.pos_:<4}  senses={len(syns)}")
+
+```
+
+
+## Returning to our Verbs of Violence
+
+``` python
+# 0) Imports
+import spacy
+from spacy.matcher import PhraseMatcher
+from nltk.corpus import wordnet as wn
+
+# 1) spaCy pipeline
+nlp = spacy.load("en_core_web_sm")
+
+# 2) WordNet helpers (via NLTK) – tiny & focused
+def verb_senses(word):
+    return wn.synsets(word, pos='v')  # verb synsets only
+
+def all_verb_hyponyms(root):
+    """Collect all (recursive) hyponyms for a verb synset (troponyms in WN terms)."""
+    seen, stack = set(), [root]
+    while stack:
+        cur = stack.pop()
+        if cur in seen:
+            continue
+        seen.add(cur)
+        # For verbs, .hyponyms() are the troponyms
+        stack.extend(cur.hyponyms())
+    return {s for s in seen if s.pos() == 'v'}
+
+def lemmas_from_synsets(synsets, keep_multiword=False):
+    out = set()
+    for s in synsets:
+        for lem in s.lemmas():
+            name = lem.name().lower()
+            if not keep_multiword and "_" in name:
+                continue
+            out.add(name.replace("_", " "))
+    return out
+
+# 3) Build a violence lexicon from WordNet using a few intuitive seeds
+seed_verbs = ["attack", "assault", "hit", "strike", "punch", "kick", "stab", "shoot", "beat"]
+base_synsets = []
+for w in seed_verbs:
+    ss = verb_senses(w)
+    if ss:
+        # take the most “central” sense by picking the one with most hyponyms
+        ss_scored = sorted(ss, key=lambda s: len(s.hyponyms()), reverse=True)
+        base_synsets.append(ss_scored[0])
+
+# expand via hyponyms (troponyms)
+expanded = set()
+for s in base_synsets:
+    expanded |= all_verb_hyponyms(s)
+
+# collect lemmas (single-token by default)
+violent_verb_lemmas = sorted(lemmas_from_synsets(expanded, keep_multiword=False) | set(seed_verbs))
+print(f"{len(violent_verb_lemmas)} violent verb lemmas (sample):", violent_verb_lemmas[:25])
+
+# 4) spaCy PhraseMatcher by lemma — IMPORTANT: run full pipeline on patterns
+matcher = PhraseMatcher(nlp.vocab, attr="LEMMA")
+patterns = list(nlp.pipe(violent_verb_lemmas))  # not make_doc: we need lemmas
+matcher.add("VIOLENCE", patterns)
+```
+
+## An automated list of words
+
+```python
+"assail
+assault
+atom-bomb
+atomise
+atomize
+attack
+backbite
+backhand
+bait
+bastinado
+bat
+batter
+bayonet
+beak
+beat
+beef
+beetle
+beleaguer
+bellyache
+bemoan
+beset
+besiege
+best
+better
+bewail
+birdie
+bitch
+blast
+bleat
+blindside
+blitz
+blockade
+bogey
+bomb
+bombard
+bounce
+break
+buffet
+bulldog
+bunker
+bunt
+bust
+butt
+cannon
+cannonade
+carom
+carry
+charge
+cheat
+checkmate
+chicane
+chip
+chop
+chouse
+circumvent
+clap
+clobber
+clout
+coldcock
+complain
+connect
+counterattack
+counterstrike
+crab
+cream
+croak
+croquet
+crump
+crush
+cuff
+dab
+deck
+declaim
+deplore
+desecrate
+dishonor
+dishonour
+dive-bomb
+double
+down
+dribble
+drive
+drub
+dump
+dunk
+eagle
+ebb
+eliminate
+exceed
+firebomb
+floor
+fly
+foul
+full
+gang-rape
+gas
+glide-bomb
+gnarl
+gripe
+grizzle
+grouch
+ground
+grouse
+grumble
+hammer
+headbutt
+heel
+hen-peck
+hew
+hit
+hole
+holler
+hook
+hydrogen-bomb
+immobilise
+immobilize
+infest
+invade
+inveigh
+jab
+jockey
+jump
+kick
+kill
+knap
+knife
+knock
+knuckle
+kvetch
+lament
+lash
+lick
+loft
+master
+mate
+molest
+murmur
+mutter
+nag
+nuke
+occupy
+out-herod
+outbrave
+outcry
+outdo
+outdraw
+outfight
+outflank
+outfox
+outgeneral
+outgo
+outgrow
+outmaneuver
+outmanoeuvre
+outmarch
+outmatch
+outpace
+outperform
+outplay
+outpoint
+outrage
+outrange
+outroar
+outsail
+outscore
+outsell
+outshine
+outshout
+outsmart
+outstrip
+outwear
+outweigh
+outwit
+overcome
+overmaster
+overpower
+overreach
+overrun
+overwhelm
+paste
+pat
+pattern-bomb
+peck
+pelt
+pepper
+percuss
+pick
+pip
+pitch
+plain
+play
+plug
+poniard
+pop
+profane
+protest
+pull
+punch
+putt
+quetch
+racket
+raid
+rail
+rap
+rape
+ravish
+reassail
+repine
+report
+retaliate
+rout
+rush
+savage
+sclaff
+scold
+scoop
+screw
+set
+shaft
+shame
+shank
+shell
+shoot
+sic
+sideswipe
+single
+skip-bomb
+slam-dunk
+slap
+sledge
+sledgehammer
+slice
+smash
+snag
+snap
+snick
+spread-eagle
+spreadeagle
+spur
+squawk
+stab
+steamroll
+steamroller
+storm
+strafe
+strike
+stroke
+subdue
+submarine
+surmount
+surpass
+surprise
+surround
+tap
+teargas
+thrash
+thresh
+tip
+toe
+top
+torpedo
+triple
+trounce
+trump
+undercut
+upstage
+urticate
+vanquish
+violate
+volley
+whang
+whine
+whip
+whomp
+worst
+yammer
+yawp
+zap"
+```
+
+## Rule-Based Matching (verbs of violence, e.g.)
+
+- Convert the string on the previous slide into a list:
+- Then return to the code from before. Add a couple additional violent verbs to the VP to see if the list is comprehensive enough.
+
+``` python
+import spacy
+from spacy.matcher import PhraseMatcher
+
+nlp = spacy.load("en_core_web_sm")
+
+patterns = [nlp(v) for v in violent_verb_lemmas]
+matcher = PhraseMatcher(nlp.vocab, attr="LEMMA")
+doc = nlp("They punched, kicked, and attacked the intruder before fleeing.")
+matcher.add("VIOLENCE", patterns)
+[(doc[s:e].text, doc[s:e].lemma_) for _, s, e in matcher(doc)]
+```
+
+
+
+
 
 1. Pick a **target word** (noun or verb).
 2. List:

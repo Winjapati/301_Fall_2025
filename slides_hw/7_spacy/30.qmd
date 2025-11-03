@@ -98,22 +98,25 @@ plt.tight_layout()
 plt.show()
 ```
 
-## Review Activity
+## Activity: Alice in Wonderland
 
--   Copy the below string, and after filtering out stopwords and non-words, identify the top 10 most frequent words.
-
-``` python
-getty = "Four score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal.Now we are engaged in a great civil war, testing whether that nation, or any nation so conceived and so dedicated, can long endure. We are met on a great battle-field of that war. We have come to dedicate a portion of that field, as a final resting place for those who here gave their lives that that nation might live. It is altogether fitting and proper that we should do this.But, in a larger sense, we can not dedicate—we can not consecrate—we can not hallow—this ground. The brave men, living and dead, who struggled here, have consecrated it, far above our poor power to add or detract. The world will little note, nor long remember what we say here, but it can never forget what they did here. It is for us the living, rather, to be dedicated here to the unfinished work which they who fought here have thus far so nobly advanced. It is rather for us to be here dedicated to the great task remaining before us—that from these honored dead we take increased devotion to that cause for which they gave the last full measure of devotion—that we here highly resolve that these dead shall not have died in vain—that this nation, under God, shall have a new birth of freedom—and that government of the people, by the people, for the people, shall not perish from the earth."
-```
+1. For this activity, you'll be using `alice.txt`. Make sure it's in the same folder as this `.qmd` file.
+2. Filter out stopwords, punctuation, whitespace, and "like numbers". 
+3. Build a `pd.DataFrame`, and count how many times each word occurs in the story.
+4. Plot the top 20.
 
 # Using spaCy for Syntactic Processing
 
 ## Sentence Segmentation
 
 ``` python
-text2 = ("President Pitzer, Mr. Vice President, Governor Connally, ladies and "
-         "gentlemen: I am delighted to be here today. "
-         "We meet in an hour of change and challenge.")
+import spacy 
+import pandas as pd
+
+# Load English model
+nlp = spacy.load("en_core_web_sm")
+
+text2 = "President Pitzer, Mr. Vice President, Governor Connally, ladies and gentlemen: I am delighted to be here today. We meet in an hour of change and challenge."
 doc2 = nlp(text2)
 [s.text for s in doc2.sents]
 ```
@@ -177,38 +180,80 @@ for tok in doc:
             pairs.append((tok.lemma_, dobj[0].text))
 pairs
 ```
-
 ## Rule-Based Matching (verbs of violence, e.g.)
 
 - And we can also filter out for specific groups of words that we define beforehand
 
 ```python
 import spacy
-from spacy.matcher import PhraseMatcher
 
 nlp = spacy.load("en_core_web_sm")
 
-violent_verbs = ["punch", "kick", "attack", "strike", "hit", "assault"]
-patterns = [nlp(v) for v in violent_verbs]
-matcher = PhraseMatcher(nlp.vocab, attr="LEMMA")
+# Step 1: Our manual list of violent verbs
+verbs_of_violence = ["attack", "hit", "kick", "strike", "punch", "assault", "kill", "hurt"]
+
+# Step 2: Process a sentence
 doc = nlp("They punched, kicked, and attacked the intruder before fleeing.")
-matcher.add("VIOLENCE", patterns)
-[(doc[s:e].text, doc[s:e].lemma_) for _, s, e in matcher(doc)]
+
+# Step 3: Find any tokens whose lemma is in our list
+matches = [(t.text, t.lemma_) for t in doc if t.lemma_ in verbs_of_violence]
+
+print(matches)
 ```
 
-# Semantic Analysis Using WordNet
+## Activity:
+
+- Copy the following list and sentence.  Then print tokens & lemmas of those words found in the sentence that are direct objects or objects of prepositions.
+
+```python
+dog_words = ["dog", "hound", "terrier", "poodle", "retriever", "shepherd", "beagle", "collie"]
+sentence = "The man and his terrier saw a poodle, beagle, and a collie with a retriever as his buddy."
+
+``` {python}
+import spacy
+nlp = spacy.load("en_core_web_sm")
+
+# Step 1: Define your semantic group
+dog_words = ["dog", "hound", "terrier", "poodle", "retriever", "shepherd", "beagle", "collie"]
+
+# Step 2: Sample text
+text = "The farmer owned three dogs: a beagle, a shepherd, and a terrier, but the poodle ran away with a collie."
+
+# Step 3: Tokenize and lemmatize only words that match our semantic group
+doc = nlp(text)
+
+objects = []
+
+for tok in doc:
+    if tok.pos_ == "VERB":
+        dobj = [c for c in tok.children if c.dep_ == "dobj"]
+        if dobj:
+            objects.append(dobj[0].text)
+    if tok.pos_ == "ADP":
+        pobj = [c for c in tok.children if c.dep_ == "dobj"]
+        if dobj:
+            objects.append(pobj[0].text)
+
+objects
+
+```
+
+
+# WordNet
 
 ## Semantic Analysis
 
 - In the previous code block we predefined `violent_verbs`
 - But what if we were able to access a library that already contained all of these?
+  - Or perhaps all possible word groups?
 
 ## WordNet
 
 - We can connect to **WordNet**, which is a *lexical database*
   - Developed at Princeton University  
   - Organizes English words into **synsets** (sets of cognitive synonyms)  
-- **Note**: WordNet is no longer being developed, but the database and tools are still available
+- **Note**: WordNet is no longer being developed, but the database and tools are still available to use
+  - also **note**: WordNet is much more easily accessed using a different NLP library **NLTK**
 
 ## WordNet
 
@@ -224,14 +269,13 @@ matcher.add("VIOLENCE", patterns)
 
 ``` bash
 # Installing spacy-wordnet
-pip install spacy spacy-wordnet nltk
+python -m pip install spacy spacy-wordnet nltk
 
 # Installing NLTK wordnet data
 python -m nltk.downloader wordnet omw
 
-# Downloading English spaCy model
+# Downloading English spaCy model (you should already have this)
 python -m spacy download en_core_web_sm
-
 ```
 
 ## Initialize spaCy + WordNet bridge
@@ -270,11 +314,12 @@ for i in synsets:
 
 ``` python
 doc = nlp("The dog chased the cat.")
-tok = doc[1]
+tok = doc[2]
 
 for s in tok._.wordnet.synsets():
     print(s, "→", s.definition())
 ```
+- Let's change the index to [2] & [4] to see what it gives us.
 
 ## Examples
 
@@ -297,7 +342,7 @@ for s in tok._.wordnet.synsets():
 ## Filter synsets by POS
 
 - And we can filter synsets by POS:
-  - "n" = nouns;"v" = verbs; "a" = adjectives; "r" = adverbs
+  - "N" = nouns;"V" = verbs; "A" = adjectives; "R" = adverbs
 
 ``` python
 import spacy
@@ -335,475 +380,12 @@ for token in doc:
             print(f"  - {s.definition()}  [examples: {s.examples()}]")
 ```
 
+## Activity: WordNet Practice
 
-## Finding Antonyms
+Using previous code as a model:
 
-``` python
-def get_antonyms(word):  # this is also a function
-    antonyms = set() # Use a set to avoid duplicates
-    for syn in wn.synsets(word):
-        for lemma in syn.lemmas():
-            if lemma.antonyms():
-                # The antonyms() method returns a list, so we take the first one
-                # and get its name.
-                antonyms.add(lemma.antonyms()[0].name())
-    return list(antonyms)
+1. Load up spaCy & the English language model;
+2. Create a sentence on your own to analyze (or use "The duck saw the bat near the bank.");
+3. For each word in the sentence, print up the token, lemma, POS, definition, and example.
 
-print(get_antonyms("slow"))
-``` 
-
-- Let's try some other words to run in our `get_antonyms()` function.
-
-## Finding Hypernyms & Hyponyms
-
-- A **hypernym** encompasses its **hyponym**
-  - animal > mammal > canine > dog, etc.
-
-```{python}
-import spacy
-from nltk.corpus import wordnet as wn
-
-word = 'dog'
-doc = nlp(word)
-token = doc[0]
-
-word_synsets = token._.wn.synsets()
-
-for synset in word_synsets:
-    # Get the names of the hypernyms
-    hypernym_names = [hyp.name() for hyp in synset.hypernyms()]
-    # Get the names of the hyponyms
-    hyponym_names = [hyp.name() for hyp in synset.hyponyms()]
-
-    print(f"\n  Sense: {synset.name()}")
-    print(f"    Hypernyms (broader terms): {hypernym_names}")
-    print(f"    Hyponyms (specific examples): {hyponym_names}")
-```
-
-
-## Grabbing types
-
-```{python}
-tok = nlp("dog")[0]
-noun_syns = [s for s in tok._.wordnet.synsets() if s.pos() == "n"]
-# [d.definition() for d in noun_syns[:3]]
-
-s = noun_syns[0]                      # pick a sense
-
-synonyms  = [l.name() for l in s.lemmas()]
-hypernyms = s.hypernyms()
-hyponyms  = s.hyponyms()
-synonyms[:10], hypernyms[:3], hyponyms[:5]
-
-```
-
-## Hypernyms, etc.
-
-```{python}
-tok = nlp("dog")[0]
-s = [ss for ss in tok._.wordnet.synsets() if ss.pos() == 'n'][0]
-
-print("Hypernyms:", s.hypernyms())
-print("Hyponyms:", s.hyponyms()[:10])
-print("Part meronyms:", s.part_meronyms())
-print("Part holonyms:", s.part_holonyms())
-```
-## Exploring Words in WordNet
-
-```{python}
-tok = nlp("Run away with the ball.")[0]
-syns = tok._.wordnet.synsets()
-
-s = [ss for ss in syns if ss.pos() == 'v'][0]
-print("Lemma names:", [l.name() for l in s.lemmas()])
-print("Definition:",  s.definition())
-print("Examples:",    s.examples())
-```
-
-
-## Semantic Similarity
-
-```{python}
-dog = nlp("dog")[0]._.wordnet.synsets()[0]
-cat = nlp("smell")[0]._.wordnet.synsets()[0]
-
-print("wup:",  dog.wup_similarity(cat))   # Wu–Palmer similarity
-```
-## Text --> tokens --> WordNet synsets
-
-```{python}
-text = "The dogs are running near the river banks."
-doc = nlp(text)
-
-# Keep content words; use lemmas for lookup
-content = [t for t in doc if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
-for t in content:
-    syns = t._.wordnet.synsets()            # uses t.lemma_ + POS under the hood
-    print(f"{t.text:>10}  {t.lemma_:>10}  POS={t.pos_:<4}  senses={len(syns)}")
-
-```
-
-
-## Returning to our Verbs of Violence
-
-``` python
-# 0) Imports
-import spacy
-from spacy.matcher import PhraseMatcher
-from nltk.corpus import wordnet as wn
-
-# 1) spaCy pipeline
-nlp = spacy.load("en_core_web_sm")
-
-# 2) WordNet helpers (via NLTK) – tiny & focused
-def verb_senses(word):
-    return wn.synsets(word, pos='v')  # verb synsets only
-
-def all_verb_hyponyms(root):
-    """Collect all (recursive) hyponyms for a verb synset (troponyms in WN terms)."""
-    seen, stack = set(), [root]
-    while stack:
-        cur = stack.pop()
-        if cur in seen:
-            continue
-        seen.add(cur)
-        # For verbs, .hyponyms() are the troponyms
-        stack.extend(cur.hyponyms())
-    return {s for s in seen if s.pos() == 'v'}
-
-def lemmas_from_synsets(synsets, keep_multiword=False):
-    out = set()
-    for s in synsets:
-        for lem in s.lemmas():
-            name = lem.name().lower()
-            if not keep_multiword and "_" in name:
-                continue
-            out.add(name.replace("_", " "))
-    return out
-
-# 3) Build a violence lexicon from WordNet using a few intuitive seeds
-seed_verbs = ["attack", "assault", "hit", "strike", "punch", "kick", "stab", "shoot", "beat"]
-base_synsets = []
-for w in seed_verbs:
-    ss = verb_senses(w)
-    if ss:
-        # take the most “central” sense by picking the one with most hyponyms
-        ss_scored = sorted(ss, key=lambda s: len(s.hyponyms()), reverse=True)
-        base_synsets.append(ss_scored[0])
-
-# expand via hyponyms (troponyms)
-expanded = set()
-for s in base_synsets:
-    expanded |= all_verb_hyponyms(s)
-
-# collect lemmas (single-token by default)
-violent_verb_lemmas = sorted(lemmas_from_synsets(expanded, keep_multiword=False) | set(seed_verbs))
-print(f"{len(violent_verb_lemmas)} violent verb lemmas (sample):", violent_verb_lemmas[:25])
-
-# 4) spaCy PhraseMatcher by lemma — IMPORTANT: run full pipeline on patterns
-matcher = PhraseMatcher(nlp.vocab, attr="LEMMA")
-patterns = list(nlp.pipe(violent_verb_lemmas))  # not make_doc: we need lemmas
-matcher.add("VIOLENCE", patterns)
-```
-
-## An automated list of words
-
-```python
-"assail
-assault
-atom-bomb
-atomise
-atomize
-attack
-backbite
-backhand
-bait
-bastinado
-bat
-batter
-bayonet
-beak
-beat
-beef
-beetle
-beleaguer
-bellyache
-bemoan
-beset
-besiege
-best
-better
-bewail
-birdie
-bitch
-blast
-bleat
-blindside
-blitz
-blockade
-bogey
-bomb
-bombard
-bounce
-break
-buffet
-bulldog
-bunker
-bunt
-bust
-butt
-cannon
-cannonade
-carom
-carry
-charge
-cheat
-checkmate
-chicane
-chip
-chop
-chouse
-circumvent
-clap
-clobber
-clout
-coldcock
-complain
-connect
-counterattack
-counterstrike
-crab
-cream
-croak
-croquet
-crump
-crush
-cuff
-dab
-deck
-declaim
-deplore
-desecrate
-dishonor
-dishonour
-dive-bomb
-double
-down
-dribble
-drive
-drub
-dump
-dunk
-eagle
-ebb
-eliminate
-exceed
-firebomb
-floor
-fly
-foul
-full
-gang-rape
-gas
-glide-bomb
-gnarl
-gripe
-grizzle
-grouch
-ground
-grouse
-grumble
-hammer
-headbutt
-heel
-hen-peck
-hew
-hit
-hole
-holler
-hook
-hydrogen-bomb
-immobilise
-immobilize
-infest
-invade
-inveigh
-jab
-jockey
-jump
-kick
-kill
-knap
-knife
-knock
-knuckle
-kvetch
-lament
-lash
-lick
-loft
-master
-mate
-molest
-murmur
-mutter
-nag
-nuke
-occupy
-out-herod
-outbrave
-outcry
-outdo
-outdraw
-outfight
-outflank
-outfox
-outgeneral
-outgo
-outgrow
-outmaneuver
-outmanoeuvre
-outmarch
-outmatch
-outpace
-outperform
-outplay
-outpoint
-outrage
-outrange
-outroar
-outsail
-outscore
-outsell
-outshine
-outshout
-outsmart
-outstrip
-outwear
-outweigh
-outwit
-overcome
-overmaster
-overpower
-overreach
-overrun
-overwhelm
-paste
-pat
-pattern-bomb
-peck
-pelt
-pepper
-percuss
-pick
-pip
-pitch
-plain
-play
-plug
-poniard
-pop
-profane
-protest
-pull
-punch
-putt
-quetch
-racket
-raid
-rail
-rap
-rape
-ravish
-reassail
-repine
-report
-retaliate
-rout
-rush
-savage
-sclaff
-scold
-scoop
-screw
-set
-shaft
-shame
-shank
-shell
-shoot
-sic
-sideswipe
-single
-skip-bomb
-slam-dunk
-slap
-sledge
-sledgehammer
-slice
-smash
-snag
-snap
-snick
-spread-eagle
-spreadeagle
-spur
-squawk
-stab
-steamroll
-steamroller
-storm
-strafe
-strike
-stroke
-subdue
-submarine
-surmount
-surpass
-surprise
-surround
-tap
-teargas
-thrash
-thresh
-tip
-toe
-top
-torpedo
-triple
-trounce
-trump
-undercut
-upstage
-urticate
-vanquish
-violate
-volley
-whang
-whine
-whip
-whomp
-worst
-yammer
-yawp
-zap"
-```
-
-## Rule-Based Matching (verbs of violence, e.g.)
-
-- Convert the string on the previous slide into a list:
-- Then return to the code from before. Add a couple additional violent verbs to the VP to see if the list is comprehensive enough.
-
-``` python
-import spacy
-from spacy.matcher import PhraseMatcher
-
-nlp = spacy.load("en_core_web_sm")
-
-patterns = [nlp(v) for v in violent_verb_lemmas]
-matcher = PhraseMatcher(nlp.vocab, attr="LEMMA")
-doc = nlp("They punched, kicked, and attacked the intruder before fleeing.")
-matcher.add("VIOLENCE", patterns)
-[(doc[s:e].text, doc[s:e].lemma_) for _, s, e in matcher(doc)]
-```
 

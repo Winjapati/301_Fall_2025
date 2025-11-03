@@ -4,45 +4,6 @@ format: html
 ---
 
 
-
-
-```{python}
-import pandas as pd
-
-words   = ["students", "run", "ran", "roots", "languages"]
-pos_tags = ["NOUN", "VERB", "VERB", "NOUN", "NOUN"]
-lemmas  = ["student", "run", "run", "root", "language"]
-freqs   = [5, 3, 2, 4, 6]
-
-new_dict = {}
-for i, j, k, l in zip(words,pos_tags,lemmas,freqs):
-  new_dict[i] = {
-    "POS": j,
-    "lemmas": k,
-    "freqs": l
-}
-
-df = pd.DataFrame(new_dict).T.reset_index(names="words")
-df
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ```{python}
 import pandas as pd 
 
@@ -79,7 +40,6 @@ text = "Dr. Byrd's students can't wait to analyze PIE roots!"
 tokens_clean = re.split(r"[\s\W]+", text)
 tokens_clean
 ```
-
 
 
 ```{python}
@@ -119,39 +79,6 @@ for t in doc:
 df = pd.DataFrame(data)
 print(df)
 ```
-
-
-
-```{python}
-import spacy
-import pandas as pd
-
-# Load English model
-nlp = spacy.load("en_core_web_sm")
-
-jfk = "This year’s space budget is three times what it was in January 1961, and it is greater than the space budget of the previous eight years combined. That budget now stands at $5,400,000 a year — a staggering sum, though somewhat less than we pay for cigarettes and cigars every year. Space expenditures will soon rise some more, from 40 cents per person per week to more than 50 cents a week for every man, woman and child in the United States, for we have given this program a high national priority — even though I realize that this is in some measure an act of faith and vision, for we do not now know what benefits await us. But if I were to say, my fellow citizens, that we shall send to the moon, 240,000 miles away from the control station in Houston, a giant rocket more than 300 feet tall, the length of this football field, made of new metal alloys, some of which have not yet been invented, capable of standing heat and stresses several times more than have ever been experienced, fitted together with a precision better than the finest watch, carrying all the equipment needed for propulsion, guidance, control, communications, food and survival, on an untried mission, to an unknown celestial body, and then return it safely to Earth, re-entering the atmosphere at speeds of over 25,000 miles per hour, causing heat about half that of the temperature of the sun — almost as hot as it is here today — and do all this, and do it right, and do it first before this decade is out — then we must be bold. I’m the one who is doing all the work, so we just want you to stay cool for a minute. [laughter] However, I think we’re going to do it, and I think that we must pay what needs to be paid. I don’t think we ought to waste any money, but I think we ought to do the job. And this will be done in the decade of the sixties. It may be done while some of you are still here at school at this college and university. It will be done during the term of office of some of the people who sit here on this platform. But it will be done. And it will be done before the end of this decade. I am delighted that this university is playing a part in putting a man on the moon as part of a great national effort of the United States of America. Many years ago, the great British explorer George Mallory, who was to die on Mount Everest, was asked why did he want to climb it? He said, “Because it is there.” Well, space is there, and we’re going to climb it, and the moon and the planets are there, and new hopes for knowledge and peace are there. And, therefore, as we set sail we ask God’s blessing on the most hazardous and dangerous and greatest adventure on which man has ever embarked. Thank you."
-
-doc = nlp(jfk)
-
-# Create list of dicts, one per token
-data = []
-for t in doc:
-    data.append({
-        "text": t.text,
-        "lemma": t.lemma_,
-        "POS": t.pos_,
-        "tag": t.tag_,
-        "stop": t.is_stop,
-        "is_punct": t.is_punct
-    })
-
-# Make DataFrame
-df = pd.DataFrame(data)
-print(df)
-
-```
-
-
 
 
 ```{python}
