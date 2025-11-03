@@ -201,15 +201,35 @@ matches = [(t.text, t.lemma_) for t in doc if t.lemma_ in verbs_of_violence]
 print(matches)
 ```
 
-## Activity:
+## Activity Together: Narrowing Down Words by Function & Semantic Class
 
-- Copy the following list and sentence.  Then print tokens & lemmas of those words found in the sentence that are direct objects or objects of prepositions.
+- Let's copy the following list and sentence.  
 
 ```python
+# Semantic Group
 dog_words = ["dog", "hound", "terrier", "poodle", "retriever", "shepherd", "beagle", "collie"]
-sentence = "The man and his terrier saw a poodle, beagle, and a collie with a retriever as his buddy."
 
-``` {python}
+# Text
+sentence = "The man and his terrier saw a poodle, beagle, and a collie with a retriever as his buddy."
+```
+
+## Activity Together
+
+How might we narrow down these words by function & semantic class?
+
+1. Process the text using `nlp()`
+2. Define a list: `obj_dep = ["dobj", "pobj", "obj"]`  
+3. Run a for loop and append any words that are in `obj_deps` to a list `objects`
+4. Run a list comprehension defining `matches`, as we did above:
+
+```python
+matches = [(t.text, t.lemma_) for t in objects if t.lemma_.lower() in dog_words]
+```
+
+## Activity Together
+
+
+```python
 import spacy
 nlp = spacy.load("en_core_web_sm")
 
@@ -217,33 +237,31 @@ nlp = spacy.load("en_core_web_sm")
 dog_words = ["dog", "hound", "terrier", "poodle", "retriever", "shepherd", "beagle", "collie"]
 
 # Step 2: Sample text
-text = "The farmer owned three dogs: a beagle, a shepherd, and a terrier, but the poodle ran away with a collie."
+text = "The farmer owned three terriers, but the poodle ran away with a collie."
 
-# Step 3: Tokenize and lemmatize only words that match our semantic group
+# Step 3: Process the text
 doc = nlp(text)
 
+# Step 4: Collect all nouns that are objects of verbs or prepositions
+
+obj_deps = ["dobj", "pobj", "obj"]
 objects = []
 
 for tok in doc:
-    if tok.pos_ == "VERB":
-        dobj = [c for c in tok.children if c.dep_ == "dobj"]
-        if dobj:
-            objects.append(dobj[0].text)
-    if tok.pos_ == "ADP":
-        pobj = [c for c in tok.children if c.dep_ == "dobj"]
-        if dobj:
-            objects.append(pobj[0].text)
+    if tok.dep_ in obj_deps:
+        objects.append(tok)
 
-objects
+# Step 5: Keep only those whose lemma is in our semantic group
+matches = [(t.text, t.lemma_) for t in objects if t.lemma_.lower() in dog_words]
 
+print(matches)
 ```
-
 
 # WordNet
 
 ## Semantic Analysis
 
-- In the previous code block we predefined `violent_verbs`
+- In the previous code block we predefined `verbs_of_violence` and `dog_words`
 - But what if we were able to access a library that already contained all of these?
   - Or perhaps all possible word groups?
 
@@ -252,6 +270,9 @@ objects
 - We can connect to **WordNet**, which is a *lexical database*
   - Developed at Princeton University  
   - Organizes English words into **synsets** (sets of cognitive synonyms)  
+
+## WordNet
+
 - **Note**: WordNet is no longer being developed, but the database and tools are still available to use
   - also **note**: WordNet is much more easily accessed using a different NLP library **NLTK**
 
