@@ -1,0 +1,220 @@
+---
+title: "HW 6 — Words and Meanings with spaCy & WordNet"
+subtitle: "LIN 301: Computation for Linguists"
+author: "Dr. Andrew M. Byrd"
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    code-tools: true
+jupyter: python3
+execute:
+  freeze: auto
+  warning: false
+  message: false
+fontsize: 12pt
+---
+
+## 🧠 Overview
+
+In this assignment, you’ll combine **spaCy** and **WordNet** to explore how computers represent **word meaning**.  
+You’ll tokenize and lemmatize text, examine how WordNet structures semantic relations, and test similarity across words and semantic fields.
+
+By the end, you should be able to:
+
+- Use `spaCy` to process and analyze text.
+- Access WordNet synsets, definitions, hypernyms, and hyponyms.
+- Compute semantic similarity between words.
+- Reflect linguistically on semantic grouping and hierarchy.
+
+---
+
+## 🪶 Setup
+
+```python
+import spacy
+from nltk.corpus import wordnet as wn
+import pandas as pd
+import itertools
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Load spaCy model
+nlp = spacy.load("en_core_web_sm")
+```
+
+---
+
+## Part 1 — Tokenizing & Lemmatizing Text
+
+Choose a short passage (3–5 sentences) from a news article, poem, or Wikipedia entry.
+
+```python
+text = "Replace this string with your own passage."
+doc = nlp(text)
+
+lemmas = [t.lemma_.lower() for t in doc
+           if t.is_alpha and not t.is_stop]
+
+df = (pd.DataFrame(pd.Series(lemmas).value_counts())
+        .reset_index()
+        .rename(columns={'index':'lemma',0:'count'}))
+df.head(10)
+```
+
+**➡ Task**
+1. Show the 10 most frequent content lemmas.  
+2. Add a column for each lemma’s part of speech (`t.pos_`).  
+3. Create a bar chart of lemma frequencies (Matplotlib or Pandas).
+
+---
+
+## Part 2 — Exploring Meaning with WordNet
+
+Pick the **five most frequent lemmas** from Part 1.
+
+For each lemma:
+
+```python
+word = "example"  # change this
+for syn in wn.synsets(word):
+    print(syn.name(), "-", syn.definition())
+    print("  Example:", syn.examples())
+    print("  Hypernyms:", [h.name() for h in syn.hypernyms()])
+    print("  Hyponyms:", [h.name() for h in syn.hyponyms()])
+    print()
+```
+
+**➡ Task**
+- Record definitions and examples.
+- Choose the *most likely* sense in context.
+- Explain your reasoning briefly in a comment or short note.
+
+---
+
+## Part 3 — Semantic Similarity
+
+Select **5 pairs of words** (from your text or elsewhere).  
+Compute similarity scores with both WordNet and spaCy.
+
+```python
+pairs = [("dog","cat"),("run","walk"),("happy","sad")]
+
+results = []
+for w1, w2 in pairs:
+    syn1 = wn.synsets(w1)[0]
+    syn2 = wn.synsets(w2)[0]
+    results.append({
+        "word1": w1,
+        "word2": w2,
+        "path_similarity": syn1.path_similarity(syn2),
+        "wup_similarity": syn1.wup_similarity(syn2)
+    })
+
+pd.DataFrame(results)
+```
+
+**Optional comparison with spaCy:**
+
+```python
+for w1, w2 in pairs:
+    tok1, tok2 = nlp(w1)[0], nlp(w2)[0]
+    print(f"{w1}-{w2}:", tok1.similarity(tok2))
+```
+
+**➡ Task**
+- Which pairs are most similar?  
+- Do spaCy and WordNet agree? Why or why not?
+
+---
+
+## Part 4 — Building a Semantic Field  
+### “Verbs of Violence” (or another field of your choice)
+
+**Step 1. Define your field.**
+
+Write 1–2 sentences defining the category.  
+> e.g., “Verbs of violence describe intentional actions causing physical harm.”
+
+**Step 2. Create your word list.**
+
+At least 10 words (e.g., *hit, strike, attack, fight, stab*).
+
+```python
+violence_words = ["hit","strike","attack","fight","kill","punch","shoot","stab","murder","slap"]
+```
+
+**Step 3. Retrieve synsets and definitions.**
+
+```python
+records = []
+for w in violence_words:
+    syns = wn.synsets(w, pos="v")
+    if syns:
+        s = syns[0]  # most frequent sense
+        records.append({
+            "word": w,
+            "synset": s.name(),
+            "definition": s.definition(),
+            "hypernym": [h.name() for h in s.hypernyms()],
+            "hyponyms": [h.name() for h in s.hyponyms()[:3]]
+        })
+pd.DataFrame(records)
+```
+
+**Step 4. Compute intra-field similarity.**
+
+```python
+pairs = list(itertools.combinations(violence_words, 2))
+sims = []
+for w1, w2 in pairs:
+    s1s, s2s = wn.synsets(w1, pos="v"), wn.synsets(w2, pos="v")
+    if s1s and s2s:
+        sim = s1s[0].wup_similarity(s2s[0])
+        sims.append({"w1": w1, "w2": w2, "wup_similarity": sim})
+
+df_sim = pd.DataFrame(sims)
+pivot = df_sim.pivot(index="w1", columns="w2", values="wup_similarity")
+sns.heatmap(pivot, annot=True, cmap="Blues")
+plt.title("Semantic Similarity: Verbs of Violence")
+plt.show()
+```
+
+**Step 5. Evaluate coverage.**
+
+Answer in a short paragraph:
+- Does WordNet group your words meaningfully?
+- Are any verbs missing, redundant, or misclassified?
+- What does this show about WordNet’s organization?
+
+---
+
+## Part 5 — Reflection (≈ 150–200 words)
+
+In a Markdown cell or `.pdf` reflection, discuss:
+1. What surprised you about how WordNet structures meanings?  
+2. How do spaCy’s and WordNet’s similarity judgments differ?  
+3. How could these tools help linguists studying semantic change, lexical fields, or metaphor?
+
+---
+
+## 💾 Submission
+
+Submit:
+1. Your `.qmd` or `.ipynb` file with all code and outputs.  
+2. A short reflection (`.md` or `.pdf`).  
+3. Include your name at the top of the file.
+
+Deadline: **see Canvas**
+
+---
+
+## 🧩 Optional Challenge (Extra Credit)
+
+Compute the **Lowest Common Subsumer (LCS)** depth for one pair of synsets and verify the Wu–Palmer similarity formula:
+
+\[
+wup\_similarity(s_1, s_2) = \frac{2 \times depth(LCS)}{depth(s_1) + depth(s_2)}
+\]
+
+Use your “verbs of violence” data to illustrate.
