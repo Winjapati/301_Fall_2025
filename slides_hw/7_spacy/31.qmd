@@ -22,15 +22,25 @@ editor: source
 
 ## Recap from Last Time
 
+``` {python}
+import spacy
+from spacy_wordnet.wordnet_annotator import WordnetAnnotator
+
+nlp = spacy.load("en_core_web_sm")
+# Attach the WordNet annotator; it will use the NLTK WordNet data you downloaded
+nlp.add_pipe("spacy_wordnet", after="tagger")
+```
+
 
 ## Review Activity
 
--   Copy the below string, and after filtering out stopwords and non-words, identify the top 10 most frequent words.
+- Copy the below string, and after filtering out stopwords and non-words, identify the top 10 most frequent words.
+
+- In addition, copy the first sentence, filter out stopwords and non-words, and parse them by meaning using WordNet.
 
 ``` python
 getty = "Four score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal.Now we are engaged in a great civil war, testing whether that nation, or any nation so conceived and so dedicated, can long endure. We are met on a great battle-field of that war. We have come to dedicate a portion of that field, as a final resting place for those who here gave their lives that that nation might live. It is altogether fitting and proper that we should do this.But, in a larger sense, we can not dedicate—we can not consecrate—we can not hallow—this ground. The brave men, living and dead, who struggled here, have consecrated it, far above our poor power to add or detract. The world will little note, nor long remember what we say here, but it can never forget what they did here. It is for us the living, rather, to be dedicated here to the unfinished work which they who fought here have thus far so nobly advanced. It is rather for us to be here dedicated to the great task remaining before us—that from these honored dead we take increased devotion to that cause for which they gave the last full measure of devotion—that we here highly resolve that these dead shall not have died in vain—that this nation, under God, shall have a new birth of freedom—and that government of the people, by the people, for the people, shall not perish from the earth."
 ```
-
 
 # Wordnet-onyms
 
@@ -47,17 +57,17 @@ getty = "Four score and seven years ago our fathers brought forth on this contin
 ## Finding Antonyms
 
 ``` {python}
-def get_antonyms(word):  # this is also a function
-    antonyms = set() # Use a set to avoid duplicates
+import spacy
+
+def get_antonyms(word): # this is also a function
+    antonyms = set() # A set is like a list, but prevents duplicates
     for syn in wn.synsets(word):
-        for lemma in syn.lemmas():
-            if lemma.antonyms():
-                # The antonyms() method returns a list, so we take the first one
-                # and get its name.
-                antonyms.add(lemma.antonyms()[0].name())
+        for lemma in syn.lemmas():  # analyzes each lemma associated with the token
+            for ant in lemma.antonyms():
+                antonyms.add(ant.name())
     return list(antonyms)
 
-print(get_antonyms("slow"))
+get_antonyms("slow")
 ``` 
 - Let's try some other words to run in our `get_antonyms()` function.
 
@@ -68,52 +78,102 @@ print(get_antonyms("slow"))
 
 ```{python}
 import spacy
+from spacy.tokens import Token
 from nltk.corpus import wordnet as wn
 
-word = 'dog'
-doc = nlp(word)
+nlp = spacy.load("en_core_web_sm")
+
+# Register a getter-based extension
+def get_synsets(token):
+    # You can filter by POS if you want, e.g., pos=wn.NOUN for nouns
+    return wn.synsets(token.lemma_.lower())
+
+Token.set_extension("synsets", getter=get_synsets, force=True)
+
+doc = nlp("dog")
 token = doc[0]
 
-word_synsets = token._.wn.synsets()
-
+word_synsets = token._.synsets  # now this works
 for synset in word_synsets:
-    # Get the names of the hypernyms
-    hypernym_names = [hyp.name() for hyp in synset.hypernyms()]
-    # Get the names of the hyponyms
-    hyponym_names = [hyp.name() for hyp in synset.hyponyms()]
-
-    print(f"\n  Sense: {synset.name()}")
-    print(f"    Hypernyms (broader terms): {hypernym_names}")
-    print(f"    Hyponyms (specific examples): {hyponym_names}")
+    hypernym_names = [h.name() for h in synset.hypernyms()]
+    hyponym_names  = [h.name() for h in synset.hyponyms()]
+    print(f"\nSense: {synset.name()}")
+    print(f"  Hypernyms: {hypernym_names}")
+    print(f"  Hyponyms:  {hyponym_names}")
 ```
 
-## Grabbing types
+## Part Meronyms & Holonyms
+
+- We can also extend this script to meronyms & holonyms
+  - **Meronyms:** *car → wheel*
+  - **Holonyms:** *wheel → car*
 
 ```{python}
-tok = nlp("dog")[0]
-noun_syns = [s for s in tok._.wordnet.synsets() if s.pos() == "n"]
-# [d.definition() for d in noun_syns[:3]]
+import spacy
+from spacy.tokens import Token
+from nltk.corpus import wordnet as wn
 
-s = noun_syns[0]                      # pick a sense
+# Creating a function to "get" synsets
+def get_synsets(token):
+    # You can filter by POS if you want, e.g., pos=wn.NOUN for nouns
+    return wn.synsets(token.lemma_.lower())
 
-synonyms  = [l.name() for l in s.lemmas()]
-hypernyms = s.hypernyms()
-hyponyms  = s.hyponyms()
-synonyms[:10], hypernyms[:3], hyponyms[:5]
+Token.set_extension("synsets", getter=get_synsets, force=True)
 
+doc = nlp("jump")
+token = doc[0]
+
+word_synsets = token._.synsets  # now this works
+for synset in word_synsets:
+    hypernym_names = [h.name() for h in synset.hypernyms()]
+    hyponym_names  = [h.name() for h in synset.hyponyms()]
+    mero_names = [h.name() for h in synset.part_meronyms()]
+    holo_names = [h.name() for h in synset.part_holonyms()]
+    print(f"\nSense: {synset.name()}")
+    print(f"  Hypernyms: {hypernym_names}")
+    print(f"  Hyponyms:  {hyponym_names}")
+    print(f"  Part Meronyms: {mero_names}")
+    print(f"  Part Holonyms:  {holo_names}")
 ```
+## Entailments
 
-## Hypernyms, etc.
+- And entailments: 
+  - **Entailments:** *snore → sleep* 
 
 ```{python}
-tok = nlp("dog")[0]
-s = [ss for ss in tok._.wordnet.synsets() if ss.pos() == 'n'][0]
+import spacy
+from spacy.tokens import Token
+from nltk.corpus import wordnet as wn
 
-print("Hypernyms:", s.hypernyms())
-print("Hyponyms:", s.hyponyms()[:10])
-print("Part meronyms:", s.part_meronyms())
-print("Part holonyms:", s.part_holonyms())
+# Creating a function to "get" synsets
+def get_synsets(token):
+    # You can filter by POS if you want, e.g., pos=wn.NOUN for nouns
+    return wn.synsets(token.lemma_.lower())
+
+Token.set_extension("synsets", getter=get_synsets, force=True)
+
+doc = nlp("dog")
+token = doc[0]
+
+word_synsets = token._.synsets  # now this works
+for synset in word_synsets:
+    hypernym_names = [h.name() for h in synset.hypernyms()]
+    hyponym_names  = [h.name() for h in synset.hyponyms()]
+    mero_names = [h.name() for h in synset.part_meronyms()]
+    holo_names = [h.name() for h in synset.part_holonyms()]
+    ent_names = [h.name() for h in synset.entailments()]
+    print(f"\nSense: {synset.name()}")
+    print(f"  Hypernyms: {hypernym_names}")
+    print(f"  Hyponyms:  {hyponym_names}")
+    print(f"  Part Meronyms: {mero_names}")
+    print(f"  Part Holonyms:  {holo_names}")
+    print(f"  Entailments:  {ent_names}")
 ```
+
+## Activity: 
+
+- Copy the above code and analyze (1) a noun, (2) a verb, and (3) an adjective.
+
 ## Exploring Words in WordNet
 
 ```{python}
@@ -131,9 +191,9 @@ print("Examples:",    s.examples())
 
 ```{python}
 dog = nlp("dog")[0]._.wordnet.synsets()[0]
-cat = nlp("smell")[0]._.wordnet.synsets()[0]
+comparison = nlp("cat")[0]._.wordnet.synsets()[0]
 
-print("wup:",  dog.wup_similarity(cat))   # Wu–Palmer similarity
+print("wup:",  dog.wup_similarity(comparison))   # Wu–Palmer similarity
 ```
 ## Text --> tokens --> WordNet synsets
 
