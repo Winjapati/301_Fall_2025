@@ -22,7 +22,137 @@ editor: source
 
 ## Recap from Last Time
 
-``` {python}
+``` python
+import spacy
+nlp = spacy.load("en_core_web_sm")
+
+text = "Dr. Byrd's students can't wait to analyze PIE roots!"
+
+doc = nlp(text)
+[t.text for t in doc]
+```
+
+## Recap from Last Time
+
+``` python
+import spacy
+import pandas as pd
+
+# Load English model
+nlp = spacy.load("en_core_web_sm")
+
+text = "Dr. Byrd's students can't wait to analyze PIE roots!"
+doc = nlp(text)
+
+# Create list of dicts, one per token
+data = []
+for t in doc:
+    data.append({
+        "text": t.text,
+        "lemma": t.lemma_,
+        "POS": t.pos_,
+        "tag": t.tag_,
+        "stop": t.is_stop,
+        "is_punct": t.is_punct
+    })
+
+# Make DataFrame
+df = pd.DataFrame(data)
+print(df)
+```
+
+## Recap from Last Time
+
+``` python
+import spacy
+
+content_lemmas = [t.lemma_.lower() for t in doc
+                  if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
+```
+
+## Recap from Last Time
+
+``` python
+from collections import Counter
+import pandas as pd
+
+freq = Counter(content_lemmas)
+df_freq = (pd.DataFrame(freq.items(), columns=["lemma", "count"])
+           .sort_values("count", ascending=False))
+df_freq.head(10)
+```
+
+## Recap from Last Time
+
+``` python
+import matplotlib.pyplot as plt
+
+top10 = df_freq.head(10)
+plt.figure()
+plt.bar(top10["lemma"], top10["count"])
+plt.title("Top 10 Content Lemmas")
+plt.xlabel("Lemma")
+plt.ylabel("Count")
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+```
+
+## Recap from Last Time
+
+``` python
+import spacy 
+import pandas as pd
+
+# Load English model
+nlp = spacy.load("en_core_web_sm")
+
+text2 = "President Pitzer, Mr. Vice President, Governor Connally, ladies and gentlemen: I am delighted to be here today. We meet in an hour of change and challenge."
+doc2 = nlp(text2)
+[s.text for s in doc2.sents]
+```
+
+## Recap from Last Time
+
+``` python
+import spacy
+from nltk.corpus import wordnet as wn
+from nltk.corpus.reader.wordnet import NOUN, VERB, ADJ, ADV
+
+# Load spaCy
+nlp = spacy.load("en_core_web_sm")
+
+# Sentence with both noun and verb "bear"
+text = "The bears bear their burdens bravely."
+doc = nlp(text)
+
+# Map spaCy POS tags to WordNet POS tags -- this is a **function**, we'll get to these soon
+def get_wordnet_pos(spacy_pos):
+    if spacy_pos.startswith("N"):
+        return NOUN
+    elif spacy_pos.startswith("V"):
+        return VERB
+    elif spacy_pos.startswith("J"):
+        return ADJ
+    elif spacy_pos.startswith("R"):
+        return ADV
+    return None
+
+# Loop through tokens and look up WordNet entries
+for token in doc:
+    wn_pos = get_wordnet_pos(token.tag_)
+    lemma = token.lemma_.lower()
+
+    if wn_pos and not token.is_stop and not token.is_punct:
+        synsets = wn.synsets(lemma, pos=wn_pos)
+        print(f"\n{token.text.upper()} ({token.pos_}) → lemma: {lemma}")
+        for s in synsets[:3]:  # show just the first 3 senses
+            print(f"  - {s.definition()}  [examples: {s.examples()}]")
+```
+
+## Recap from Last Time
+
+``` python
 import spacy
 from spacy_wordnet.wordnet_annotator import WordnetAnnotator
 
@@ -31,12 +161,15 @@ nlp = spacy.load("en_core_web_sm")
 nlp.add_pipe("spacy_wordnet", after="tagger")
 ```
 
-
 ## Review Activity
 
-- Copy the below string, and after filtering out stopwords and non-words, identify the top 10 most frequent words.
+-   Copy the below string, and after filtering out stopwords and non-words
 
-- In addition, copy the first sentence, filter out stopwords and non-words, and parse them by meaning using WordNet.
+    -   identify the top 10 most frequent words.
+
+    -   select the first sentence using spaCy's attitude `.sents`
+
+    -   parse each word by meaning using WordNet.
 
 ``` python
 getty = "Four score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal.Now we are engaged in a great civil war, testing whether that nation, or any nation so conceived and so dedicated, can long endure. We are met on a great battle-field of that war. We have come to dedicate a portion of that field, as a final resting place for those who here gave their lives that that nation might live. It is altogether fitting and proper that we should do this.But, in a larger sense, we can not dedicate—we can not consecrate—we can not hallow—this ground. The brave men, living and dead, who struggled here, have consecrated it, far above our poor power to add or detract. The world will little note, nor long remember what we say here, but it can never forget what they did here. It is for us the living, rather, to be dedicated here to the unfinished work which they who fought here have thus far so nobly advanced. It is rather for us to be here dedicated to the great task remaining before us—that from these honored dead we take increased devotion to that cause for which they gave the last full measure of devotion—that we here highly resolve that these dead shall not have died in vain—that this nation, under God, shall have a new birth of freedom—and that government of the people, by the people, for the people, shall not perish from the earth."
@@ -44,21 +177,23 @@ getty = "Four score and seven years ago our fathers brought forth on this contin
 
 # Wordnet-onyms
 
-## WordNet
+## WordNet is More than Synsets
 
-- WordNet can do more than find synonyms!
-- We can identify:
+1.  antonyms
 
-1. antonyms
-2. hypernyms
-3. hyponyms
-4. and more!
+2.  hypernyms
+
+3.  hyponyms
+
+4.  meronyms
+
+5.  holonyms
+
+6.  entailments
 
 ## Finding Antonyms
 
-``` {python}
-import spacy
-
+``` python
 def get_antonyms(word): # this is also a function
     antonyms = set() # A set is like a list, but prevents duplicates
     for syn in wn.synsets(word):
@@ -68,15 +203,16 @@ def get_antonyms(word): # this is also a function
     return list(antonyms)
 
 get_antonyms("slow")
-``` 
-- Let's try some other words to run in our `get_antonyms()` function.
+```
+
+-   Let's try some other words to run in our `get_antonyms()` function.
 
 ## Finding Hypernyms & Hyponyms
 
-- A **hypernym** encompasses its **hyponym**
-  - animal > mammal > canine > dog, etc.
+-   A **hypernym** encompasses its **hyponym**
+    -   animal \> mammal \> canine \> dog, etc.
 
-```{python}
+``` python
 import spacy
 from spacy.tokens import Token
 from nltk.corpus import wordnet as wn
@@ -104,11 +240,11 @@ for synset in word_synsets:
 
 ## Part Meronyms & Holonyms
 
-- We can also extend this script to meronyms & holonyms
-  - **Meronyms:** *car → wheel*
-  - **Holonyms:** *wheel → car*
+-   We can also extend this script to meronyms & holonyms
+    -   **Meronyms:** *car → wheel*
+    -   **Holonyms:** *wheel → car*
 
-```{python}
+``` python
 import spacy
 from spacy.tokens import Token
 from nltk.corpus import wordnet as wn
@@ -120,7 +256,7 @@ def get_synsets(token):
 
 Token.set_extension("synsets", getter=get_synsets, force=True)
 
-doc = nlp("jump")
+doc = nlp("dog")
 token = doc[0]
 
 word_synsets = token._.synsets  # now this works
@@ -135,12 +271,13 @@ for synset in word_synsets:
     print(f"  Part Meronyms: {mero_names}")
     print(f"  Part Holonyms:  {holo_names}")
 ```
+
 ## Entailments
 
-- And entailments: 
-  - **Entailments:** *snore → sleep* 
+-   And entailments:
+    -   **Entailments:** *snore → sleep*
 
-```{python}
+``` python
 import spacy
 from spacy.tokens import Token
 from nltk.corpus import wordnet as wn
@@ -170,64 +307,127 @@ for synset in word_synsets:
     print(f"  Entailments:  {ent_names}")
 ```
 
-## Activity: 
+## Activity:
 
-- Copy the above code and analyze (1) a noun, (2) a verb, and (3) an adjective.
+-   Copy the above code and analyze (1) a noun, (2) a verb, and (3) an adjective of your choice.
 
-## Exploring Words in WordNet
 
-```{python}
-tok = nlp("Run away with the ball.")[0]
-syns = tok._.wordnet.synsets()
+# Similarity Scores
 
-s = [ss for ss in syns if ss.pos() == 'v'][0]
-print("Lemma names:", [l.name() for l in s.lemmas()])
-print("Definition:",  s.definition())
-print("Examples:",    s.examples())
-```
+## Wu–Palmer (WUP) Similarity
+
+- **Goal:** measure how *semantically close* two WordNet concepts (synsets) are.  
+- **Idea:** the more specific their **common ancestor**, the more similar they are.
+
+## Wu–Palmer (WUP) Similarity
+
+**Key Terms**
+
+- **LCS (Lowest Common Subsumer):** the most specific shared ancestor in WordNet’s hierarchy.  
+- **Depth:** how far a synset is from the root (the more specific, the deeper).
+
+$wup\_similarity(s_1, s_2) = \frac{2 \times depth(LCS)}{depth(s_1) + depth(s_2)}$
+
+
+## Wu–Palmer (WUP) Similarity
+
+- Let's compare two synsets `dog.n.01` and `cat.n.01`; these are s$_1$, s$_2$, respectively
+- Remember **LCS (Lowest Common Subsumer)** is the most specific shared ancestor in WordNet’s hierarchy
+- And **depth** determines how deep that entity is within the WordNet hierarchy
+
+$wup\_similarity(s_1, s_2) = \frac{2 \times depth(LCS)}{depth(s_1) + depth(s_2)}$
 
 
 ## Semantic Similarity
 
-```{python}
+``` python
 dog = nlp("dog")[0]._.wordnet.synsets()[0]
 comparison = nlp("cat")[0]._.wordnet.synsets()[0]
 
 print("wup:",  dog.wup_similarity(comparison))   # Wu–Palmer similarity
 ```
-## Text --> tokens --> WordNet synsets
 
-```{python}
-text = "The dogs are running near the river banks."
-doc = nlp(text)
+## Wu–Palmer (WUP) Similarity
 
-# Keep content words; use lemmas for lookup
-content = [t for t in doc if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
-for t in content:
-    syns = t._.wordnet.synsets()            # uses t.lemma_ + POS under the hood
-    print(f"{t.text:>10}  {t.lemma_:>10}  POS={t.pos_:<4}  senses={len(syns)}")
+**Interpretation**
 
+- Values range from **0 → 1**
+  - `1.0` → identical meaning  
+  - `0.0` → completely unrelated
+
+
+## Wu–Palmer (WUP) Similarity
+
+```csharp
+entity.n.01
+ └── physical_entity.n.01
+      └── object.n.01
+           └── whole.n.02
+                └── living_thing.n.01
+                     └── organism.n.01
+                          └── animal.n.01
+                               └── chordate.n.01
+                                    └── vertebrate.n.01
+                                         └── mammal.n.01
+                                              └── carnivore.n.01
+                                                   └── feline.n.01
+                                                        └── cat.n.01
 ```
 
+## Wu–Palmer (WUP) Similarity
 
-## Returning to our Verbs of Violence
+```csharp
+entity.n.01
+ └── physical_entity.n.01
+      └── object.n.01
+           └── whole.n.02
+                └── living_thing.n.01
+                     └── organism.n.01
+                          └── animal.n.01
+                               └── chordate.n.01
+                                    └── vertebrate.n.01
+                                         └── mammal.n.01
+                                              └── carnivore.n.01
+                                                   └── feline.n.01
+                                                        └── cat.n.01
+```
+
+## Wu–Palmer (WUP) Similarity
+
+
+<p>
+$wup\_similarity(dog, cat) = \frac{2 \times 7}{8 + 8} = \frac{14}{16} = 0.875$
+</p>
+
+## Activity: 
+
+- Compute the WUP Similarity of:
+  - two nouns
+  - two verbs
+  - two adjectives
+  - two words that aren't the same part of speech
+
+# Returning to our Verbs of Violence
+
+## Returning to our verbs of violence
 
 ``` python
-# 0) Imports
 import spacy
 from spacy.matcher import PhraseMatcher
 from nltk.corpus import wordnet as wn
 
-# 1) spaCy pipeline
 nlp = spacy.load("en_core_web_sm")
 
-# 2) WordNet helpers (via NLTK) – tiny & focused
+# WordNet helpers (via NLTK) – returns only verb synsets
 def verb_senses(word):
     return wn.synsets(word, pos='v')  # verb synsets only
 
+# Collects all (recursive) hyponyms for a verb synset (troponyms in WN terms).
+# This function recursively collects all *hyponyms* (a.k.a. “troponyms” for verbs)
+# of a given synset. A hyponym is a more *specific* instance of an action.
+# Example: the verb “attack.v.01” has hyponyms like “bomb.v.01”, “invade.v.01”, etc.
 def all_verb_hyponyms(root):
-    """Collect all (recursive) hyponyms for a verb synset (troponyms in WN terms)."""
-    seen, stack = set(), [root]
+      seen, stack = set(), [root]
     while stack:
         cur = stack.pop()
         if cur in seen:
@@ -237,6 +437,9 @@ def all_verb_hyponyms(root):
         stack.extend(cur.hyponyms())
     return {s for s in seen if s.pos() == 'v'}
 
+# This function extracts lemma names (the “canonical” word forms)
+# from a set of synsets, e.g. 'strike.v.01' → ['strike', 'hit', 'smite', ...].
+# Optionally filters out multiword expressions like "shoot_down".
 def lemmas_from_synsets(synsets, keep_multiword=False):
     out = set()
     for s in synsets:
@@ -247,7 +450,7 @@ def lemmas_from_synsets(synsets, keep_multiword=False):
             out.add(name.replace("_", " "))
     return out
 
-# 3) Build a violence lexicon from WordNet using a few intuitive seeds
+# Build a violence lexicon from WordNet using a few intuitive seeds
 seed_verbs = ["attack", "assault", "hit", "strike", "punch", "kick", "stab", "shoot", "beat"]
 base_synsets = []
 for w in seed_verbs:
@@ -274,291 +477,14 @@ matcher.add("VIOLENCE", patterns)
 
 ## An automated list of words
 
-```python
-"assail
-assault
-atom-bomb
-atomise
-atomize
-attack
-backbite
-backhand
-bait
-bastinado
-bat
-batter
-bayonet
-beak
-beat
-beef
-beetle
-beleaguer
-bellyache
-bemoan
-beset
-besiege
-best
-better
-bewail
-birdie
-bitch
-blast
-bleat
-blindside
-blitz
-blockade
-bogey
-bomb
-bombard
-bounce
-break
-buffet
-bulldog
-bunker
-bunt
-bust
-butt
-cannon
-cannonade
-carom
-carry
-charge
-cheat
-checkmate
-chicane
-chip
-chop
-chouse
-circumvent
-clap
-clobber
-clout
-coldcock
-complain
-connect
-counterattack
-counterstrike
-crab
-cream
-croak
-croquet
-crump
-crush
-cuff
-dab
-deck
-declaim
-deplore
-desecrate
-dishonor
-dishonour
-dive-bomb
-double
-down
-dribble
-drive
-drub
-dump
-dunk
-eagle
-ebb
-eliminate
-exceed
-firebomb
-floor
-fly
-foul
-full
-gang-rape
-gas
-glide-bomb
-gnarl
-gripe
-grizzle
-grouch
-ground
-grouse
-grumble
-hammer
-headbutt
-heel
-hen-peck
-hew
-hit
-hole
-holler
-hook
-hydrogen-bomb
-immobilise
-immobilize
-infest
-invade
-inveigh
-jab
-jockey
-jump
-kick
-kill
-knap
-knife
-knock
-knuckle
-kvetch
-lament
-lash
-lick
-loft
-master
-mate
-molest
-murmur
-mutter
-nag
-nuke
-occupy
-out-herod
-outbrave
-outcry
-outdo
-outdraw
-outfight
-outflank
-outfox
-outgeneral
-outgo
-outgrow
-outmaneuver
-outmanoeuvre
-outmarch
-outmatch
-outpace
-outperform
-outplay
-outpoint
-outrage
-outrange
-outroar
-outsail
-outscore
-outsell
-outshine
-outshout
-outsmart
-outstrip
-outwear
-outweigh
-outwit
-overcome
-overmaster
-overpower
-overreach
-overrun
-overwhelm
-paste
-pat
-pattern-bomb
-peck
-pelt
-pepper
-percuss
-pick
-pip
-pitch
-plain
-play
-plug
-poniard
-pop
-profane
-protest
-pull
-punch
-putt
-quetch
-racket
-raid
-rail
-rap
-rape
-ravish
-reassail
-repine
-report
-retaliate
-rout
-rush
-savage
-sclaff
-scold
-scoop
-screw
-set
-shaft
-shame
-shank
-shell
-shoot
-sic
-sideswipe
-single
-skip-bomb
-slam-dunk
-slap
-sledge
-sledgehammer
-slice
-smash
-snag
-snap
-snick
-spread-eagle
-spreadeagle
-spur
-squawk
-stab
-steamroll
-steamroller
-storm
-strafe
-strike
-stroke
-subdue
-submarine
-surmount
-surpass
-surprise
-surround
-tap
-teargas
-thrash
-thresh
-tip
-toe
-top
-torpedo
-triple
-trounce
-trump
-undercut
-upstage
-urticate
-vanquish
-violate
-volley
-whang
-whine
-whip
-whomp
-worst
-yammer
-yawp
-zap"
+``` python
+violent_vs = ['assail', 'assault', 'atom-bomb', 'atomise', 'atomize', 'attack', 'backbite', 'backhand', 'bait', 'bastinado', 'bat', 'batter', 'bayonet', 'beak', 'beat', 'beef', 'beetle', 'beleaguer', 'bellyache', 'bemoan', 'beset', 'besiege', 'best', 'better', 'bewail', 'birdie', 'bitch', 'blast', 'bleat', 'blindside', 'blitz', 'blockade', 'bogey', 'bomb', 'bombard', 'bounce', 'break', 'buffet', 'bulldog', 'bunker', 'bunt', 'bust', 'butt', 'cannon', 'cannonade', 'carom', 'carry', 'charge', 'cheat', 'checkmate', 'chicane', 'chip', 'chop', 'chouse', 'circumvent', 'clap', 'clobber', 'clout', 'coldcock', 'complain', 'connect', 'counterattack', 'counterstrike', 'crab', 'cream', 'croak', 'croquet', 'crump', 'crush', 'cuff', 'dab', 'deck', 'declaim', 'deplore', 'desecrate', 'dishonor', 'dishonour', 'dive-bomb', 'double', 'down', 'dribble', 'drive', 'drub', 'dump', 'dunk', 'eagle', 'ebb', 'eliminate', 'exceed', 'firebomb', 'floor', 'fly', 'foul', 'full', 'gang-rape', 'gas', 'glide-bomb', 'gnarl', 'gripe', 'grizzle', 'grouch', 'ground', 'grouse', 'grumble', 'hammer', 'headbutt', 'heel', 'hen-peck', 'hew', 'hit', 'hole', 'holler', 'hook', 'hydrogen-bomb', 'immobilise', 'immobilize', 'infest', 'invade', 'inveigh', 'jab', 'jockey', 'jump', 'kick', 'kill', 'knap', 'knife', 'knock', 'knuckle', 'kvetch', 'lament', 'lash', 'lick', 'loft', 'master', 'mate', 'molest', 'murmur', 'mutter', 'nag', 'nuke', 'occupy', 'out-herod', 'outbrave', 'outcry', 'outdo', 'outdraw', 'outfight', 'outflank', 'outfox', 'outgeneral', 'outgo', 'outgrow', 'outmaneuver', 'outmanoeuvre', 'outmarch', 'outmatch', 'outpace', 'outperform', 'outplay', 'outpoint', 'outrage', 'outrange', 'outroar', 'outsail', 'outscore', 'outsell', 'outshine', 'outshout', 'outsmart', 'outstrip', 'outwear', 'outweigh', 'outwit', 'overcome', 'overmaster', 'overpower', 'overreach', 'overrun', 'overwhelm', 'paste', 'pat', 'pattern-bomb', 'peck', 'pelt', 'pepper', 'percuss', 'pick', 'pip', 'pitch', 'plain', 'play', 'plug', 'poniard', 'pop', 'profane', 'protest', 'pull', 'punch', 'putt', 'quetch', 'racket', 'raid', 'rail', 'rap', 'rape', 'ravish', 'reassail', 'repine', 'report', 'retaliate', 'rout', 'rush', 'savage', 'sclaff', 'scold', 'scoop', 'screw', 'set', 'shaft', 'shame', 'shank', 'shell', 'shoot', 'sic', 'sideswipe', 'single', 'skip-bomb', 'slam-dunk', 'slap', 'sledge', 'sledgehammer', 'slice', 'smash', 'snag', 'snap', 'snick', 'spread-eagle', 'spreadeagle', 'spur', 'squawk', 'stab', 'steamroll', 'steamroller', 'storm', 'strafe', 'strike', 'stroke', 'subdue', 'submarine', 'surmount', 'surpass', 'surprise', 'surround', 'tap', 'teargas', 'thrash', 'thresh', 'tip', 'toe', 'top', 'torpedo', 'triple', 'trounce', 'trump', 'undercut', 'upstage', 'urticate', 'vanquish', 'violate', 'volley', 'whang', 'whine', 'whip', 'whomp', 'worst', 'yammer', 'yawp', 'zap']
 ```
 
 ## Rule-Based Matching (verbs of violence, e.g.)
 
-- Convert the string on the previous slide into a list:
-- Then return to the code from before. Add a couple additional violent verbs to the VP to see if the list is comprehensive enough.
+-   Convert the string on the previous slide into a list:
+-   Then return to the code from before. Add a couple additional violent verbs to the VP to see if the list is comprehensive enough.
 
 ``` python
 import spacy
@@ -572,159 +498,3 @@ doc = nlp("They punched, kicked, and attacked the intruder before fleeing.")
 matcher.add("VIOLENCE", patterns)
 [(doc[s:e].text, doc[s:e].lemma_) for _, s, e in matcher(doc)]
 ```
-
-
-
-
-
-1. Pick a **target word** (noun or verb).
-2. List:
-   - its first 3 synsets + definitions,
-   - 3 hypernyms and 3 hyponyms for the primary sense,
-   - 5 synonyms (lemmas) and any antonyms.
-3. Discuss: where does WordNet disagree with your intuition? Any missing senses?
-
-## Review: English Lemmatization
-
-```{python}
-import spacy
-nlp_en = spacy.load("en_core_web_sm")
-
-doc = nlp_en("The children ran quickly to their houses.")
-for token in doc:
-    print(token.text, token.lemma_, token.pos_)
-```
-
----
-
-# spaCy Multilingual Models
-
-> spaCy provides language-specific pipelines trained for each language.
-
-| Language | Model Name        | Example                                |
-| -------- | ----------------- | -------------------------------------- |
-| English  | `en_core_web_sm`  | "The students studied hard."           |
-| French   | `fr_core_news_sm` | "Les étudiants ont étudié dur."        |
-| Spanish  | `es_core_news_sm` | "Los estudiantes estudiaron mucho."    |
-| German   | `de_core_news_sm` | "Die Studenten haben fleißig gelernt." |
-
-To download a model (only once):
-
-```bash
-python -m spacy download fr_core_news_sm
-python -m spacy download es_core_news_sm
-python -m spacy download de_core_news_sm
-```
-
----
-
-# Tokenization in Multiple Languages
-
-```{python}
-import spacy
-
-nlp_fr = spacy.load("fr_core_news_sm")
-nlp_es = spacy.load("es_core_news_sm")
-nlp_de = spacy.load("de_core_news_sm")
-
-text_fr = "Les étudiants ont analysé les racines proto-indo-européennes."
-text_es = "Los estudiantes analizaron las raíces protoindoeuropeas."
-text_de = "Die Studenten analysierten die indogermanischen Wurzeln."
-
-for lang, nlp, text in [("French", nlp_fr, text_fr), ("Spanish", nlp_es, text_es), ("German", nlp_de, text_de)]:
-    doc = nlp(text)
-    print(f"\n {lang} Tokens:")
-    print([t.text for t in doc])
-```
-
----
-
-# Lemmatization Across Languages
-
-```{python}
-for lang, nlp, text in [("French", nlp_fr, text_fr), ("Spanish", nlp_es, text_es), ("German", nlp_de, text_de)]:
-    doc = nlp(text)
-    print(f"\n {lang} Lemmas:")
-    for token in doc:
-        print(token.text, "→", token.lemma_, token.pos_)
-```
-
----
-
-# Creating Cross-Language DataFrames
-
-```{python}
-import pandas as pd
-
-def lemma_table(nlp, text, language):
-    doc = nlp(text)
-    data = [(t.text, t.lemma_, t.pos_) for t in doc if t.is_alpha]
-    return pd.DataFrame(data, columns=["word", "lemma", "pos"]).assign(language=language)
-
-df_all = pd.concat([
-    lemma_table(nlp_fr, text_fr, "French"),
-    lemma_table(nlp_es, text_es, "Spanish"),
-    lemma_table(nlp_de, text_de, "German")
-])
-
-df_all
-```
-
----
-
-# ✏️ In-Class Activity — Cross-Linguistic Comparison
-
-**Goal:** Compare how tokenization and lemmatization differ across languages.
-
-**Instructions:**
-
-1. Form groups of 2–3 students. Each group chooses one language (French, Spanish, or German).
-2. Run the spaCy model for your language and extract **tokens**, **lemmas**, and **POS tags**.
-3. Count how many **unique lemmas** appear in your text.
-4. Share results — how do the totals differ across languages, and why?
-
-**Hints:**
-
-* Does your language mark **gender**, **number**, or **tense** differently?
-* How does that affect lemmatization?
-
----
-
-# Example Comparison Table
-
-| Language | Tokens | Unique Lemmas | Example Lemma Variation      |
-| -------- | ------ | ------------- | ---------------------------- |
-| English  | 10     | 8             | *ran → run*                  |
-| French   | 12     | 9             | *étudiés → étudier*          |
-| Spanish  | 11     | 8             | *analizaron → analizar*      |
-| German   | 13     | 9             | *analysierten → analysieren* |
-
----
-
-# Discussion 💬
-
-* Which languages were easiest for spaCy to lemmatize correctly?
-* What kinds of morphological information are preserved or lost?
-* Why do some languages have more unique lemmas than others?
-
----
-
-# Wrap-Up
-
-✅ Tokenization and lemmatization vary across languages
-✅ spaCy provides pre-trained pipelines for many languages
-✅ Lemmatization accuracy depends on morphological complexity
-
-> Next: Using NLP tools for **semantic similarity** and **word embeddings**.
-
-
-
-
-# Capstone Exercise (10–15 min)
-
-- Put it together on a fresh paragraph of your choice:
-  1. **spaCy:** tokenize → filter → lemma frequency table → plot top 10.
-  2. **spaCy:** extract **(verb, object)** pairs.
-  3. **WordNet:** pick 2–3 top verbs or nouns; print synsets and hypernyms.
-- Submit a brief reflection: *Which tool felt more interpretable? For what tasks?*
-

@@ -3,18 +3,6 @@ title: "31_in_class"
 format: html
 ---
 
-## Initialize
-
-```{python}
-import spacy
-from spacy_wordnet.wordnet_annotator import WordnetAnnotator
-
-nlp = spacy.load("en_core_web_sm")
-# Attach the WordNet annotator; it will use the NLTK WordNet data you downloaded
-nlp.add_pipe("spacy_wordnet", after="tagger")
-```
-
-
 ## Review Activity
 
 ```{python}
@@ -22,9 +10,13 @@ import spacy
 from collections import Counter
 import pandas as pd
 import matplotlib.pyplot as plt
+from nltk.corpus import wordnet as wn
+from nltk.corpus.reader.wordnet import NOUN, VERB, ADJ, ADV
 
 # Load English model
 nlp = spacy.load("en_core_web_sm")
+
+## Part 1
 
 # string
 getty_str = "Four score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal.Now we are engaged in a great civil war, testing whether that nation, or any nation so conceived and so dedicated, can long endure. We are met on a great battle-field of that war. We have come to dedicate a portion of that field, as a final resting place for those who here gave their lives that that nation might live. It is altogether fitting and proper that we should do this.But, in a larger sense, we can not dedicate—we can not consecrate—we can not hallow—this ground. The brave men, living and dead, who struggled here, have consecrated it, far above our poor power to add or detract. The world will little note, nor long remember what we say here, but it can never forget what they did here. It is for us the living, rather, to be dedicated here to the unfinished work which they who fought here have thus far so nobly advanced. It is rather for us to be here dedicated to the great task remaining before us—that from these honored dead we take increased devotion to that cause for which they gave the last full measure of devotion—that we here highly resolve that these dead shall not have died in vain—that this nation, under God, shall have a new birth of freedom—and that government of the people, by the people, for the people, shall not perish from the earth."
@@ -53,4 +45,263 @@ plt.xticks(rotation=45)
 plt.tight_layout()
 plt.show()
 
+## Part 2
+
+getty_sent = [s.text for s in getty.sents]
+getty_one = getty_sent[0]
+
+print(getty_one)
+
+## Part 3
+
+doc = nlp(getty_one)
+
+# Map spaCy POS tags to WordNet POS tags -- this is a **function**, we'll get to these soon
+def get_wordnet_pos(spacy_pos):
+    if spacy_pos.startswith("N"):
+        return NOUN
+    elif spacy_pos.startswith("V"):
+        return VERB
+    elif spacy_pos.startswith("J"):
+        return ADJ
+    elif spacy_pos.startswith("R"):
+        return ADV
+    return None
+
+# Loop through tokens and look up WordNet entries
+for token in doc:
+    wn_pos = get_wordnet_pos(token.tag_)
+    lemma = token.lemma_.lower()
+
+    if wn_pos and not token.is_stop and not token.is_punct:
+        synsets = wn.synsets(lemma, pos=wn_pos)
+        print(f"\n{token.text.upper()} ({token.pos_}) → lemma: {lemma}")
+        for s in synsets[:3]:  # show just the first 3 senses
+            print(f"  - {s.definition()}  [examples: {s.examples()}]")
+
 ```
+
+
+
+
+
+
+
+```{python}
+def get_antonyms(word): # this is also a function
+    antonyms = set() # A set is like a list, but prevents duplicates
+    for syn in wn.synsets(word):
+        for lemma in syn.lemmas():  # analyzes each lemma associated with the token
+            for ant in lemma.antonyms():
+                antonyms.add(ant.name())
+    return list(antonyms)
+
+get_antonyms("slow")
+```
+
+
+```{python}
+from spacy.tokens import Token
+
+nlp = spacy.load("en_core_web_sm")
+
+# Register a getter-based extension
+def get_synsets(token):
+    # You can filter by POS if you want, e.g., pos=wn.NOUN for nouns
+    return wn.synsets(token.lemma_.lower())
+
+Token.set_extension("synsets", getter=get_synsets, force=True)
+
+doc = nlp("dog")
+token = doc[0]
+
+word_synsets = token._.synsets  # now this works
+for synset in word_synsets:
+    hypernym_names = [h.name() for h in synset.hypernyms()]
+    hyponym_names  = [h.name() for h in synset.hyponyms()]
+    print(f"\nSense: {synset.name()}")
+    print(f"  Hypernyms: {hypernym_names}")
+    print(f"  Hyponyms:  {hyponym_names}")
+```
+
+
+
+```{python}
+import spacy
+from spacy.tokens import Token
+from nltk.corpus import wordnet as wn
+
+# Creating a function to "get" synsets
+def get_synsets(token):
+    # You can filter by POS if you want, e.g., pos=wn.NOUN for nouns
+    return wn.synsets(token.lemma_.lower())
+
+Token.set_extension("synsets", getter=get_synsets, force=True)
+
+doc = nlp("dog")
+token = doc[0]
+
+word_synsets = token._.synsets  # now this works
+for synset in word_synsets:
+    hypernym_names = [h.name() for h in synset.hypernyms()]
+    hyponym_names  = [h.name() for h in synset.hyponyms()]
+    mero_names = [h.name() for h in synset.part_meronyms()]
+    holo_names = [h.name() for h in synset.part_holonyms()]
+    print(f"\nSense: {synset.name()}")
+    print(f"  Hypernyms: {hypernym_names}")
+    print(f"  Hyponyms:  {hyponym_names}")
+    print(f"  Part Meronyms: {mero_names}")
+    print(f"  Part Holonyms:  {holo_names}")
+```
+
+
+```{python}
+import spacy
+from spacy.tokens import Token
+from nltk.corpus import wordnet as wn
+
+# Creating a function to "get" synsets
+def get_synsets(token):
+    # You can filter by POS if you want, e.g., pos=wn.NOUN for nouns
+    return wn.synsets(token.lemma_.lower())
+
+Token.set_extension("synsets", getter=get_synsets, force=True)
+
+doc = nlp("dog")
+token = doc[0]
+
+word_synsets = token._.synsets  # now this works
+for synset in word_synsets:
+    hypernym_names = [h.name() for h in synset.hypernyms()]
+    hyponym_names  = [h.name() for h in synset.hyponyms()]
+    mero_names = [h.name() for h in synset.part_meronyms()]
+    holo_names = [h.name() for h in synset.part_holonyms()]
+    ent_names = [h.name() for h in synset.entailments()]
+    print(f"\nSense: {synset.name()}")
+    print(f"  Hypernyms: {hypernym_names}")
+    print(f"  Hyponyms:  {hyponym_names}")
+    print(f"  Part Meronyms: {mero_names}")
+    print(f"  Part Holonyms:  {holo_names}")
+    print(f"  Entailments:  {ent_names}")
+```
+
+
+
+
+
+```{python}
+import spacy
+from spacy_wordnet.wordnet_annotator import WordnetAnnotator
+
+# Load the English model
+nlp = spacy.load("en_core_web_sm")
+
+# Add the WordNet component
+nlp.add_pipe("spacy_wordnet", after="tagger")
+
+# Set WordNet language (important)
+nlp.get_pipe("spacy_wordnet").lang = 'eng'
+
+tok = nlp("Run away with the ball.")[0]
+syns = tok._.wordnet.synsets()
+
+s = [ss for ss in syns if ss.pos() == 'v'][0]
+print("Lemma names:", [l.name() for l in s.lemmas()])
+print("Definition:",  s.definition())
+print("Examples:",    s.examples())
+```
+
+```{python}
+dog = nlp("dog")[0]._.wordnet.synsets()[0]
+comparison = nlp("cat")[0]._.wordnet.synsets()[0]
+
+print("wup:",  dog.wup_similarity(comparison))   # Wu–Palmer similarity
+```
+```{python}
+# 0) Imports
+import spacy
+from spacy.matcher import PhraseMatcher
+from nltk.corpus import wordnet as wn
+
+# 1) spaCy pipeline
+nlp = spacy.load("en_core_web_sm")
+
+# 2) WordNet helpers (via NLTK) – tiny & focused
+def verb_senses(word):
+    return wn.synsets(word, pos='v')  # verb synsets only
+
+def all_verb_hyponyms(root):
+    """Collect all (recursive) hyponyms for a verb synset (troponyms in WN terms)."""
+    seen, stack = set(), [root]
+    while stack:
+        cur = stack.pop()
+        if cur in seen:
+            continue
+        seen.add(cur)
+        # For verbs, .hyponyms() are the troponyms
+        stack.extend(cur.hyponyms())
+    return {s for s in seen if s.pos() == 'v'}
+
+def lemmas_from_synsets(synsets, keep_multiword=False):
+    out = set()
+    for s in synsets:
+        for lem in s.lemmas():
+            name = lem.name().lower()
+            if not keep_multiword and "_" in name:
+                continue
+            out.add(name.replace("_", " "))
+    return out
+
+# 3) Build a violence lexicon from WordNet using a few intuitive seeds
+seed_verbs = ["attack", "assault", "hit", "strike", "punch", "kick", "stab", "shoot", "beat"]
+base_synsets = []
+for w in seed_verbs:
+    ss = verb_senses(w)
+    if ss:
+        # take the most “central” sense by picking the one with most hyponyms
+        ss_scored = sorted(ss, key=lambda s: len(s.hyponyms()), reverse=True)
+        base_synsets.append(ss_scored[0])
+
+# expand via hyponyms (troponyms)
+expanded = set()
+for s in base_synsets:
+    expanded |= all_verb_hyponyms(s)
+
+# collect lemmas (single-token by default)
+violent_verb_lemmas = sorted(lemmas_from_synsets(expanded, keep_multiword=False) | set(seed_verbs))
+print(f"{len(violent_verb_lemmas)} violent verb lemmas (sample):", violent_verb_lemmas[:25])
+
+# 4) spaCy PhraseMatcher by lemma — IMPORTANT: run full pipeline on patterns
+matcher = PhraseMatcher(nlp.vocab, attr="LEMMA")
+patterns = list(nlp.pipe(violent_verb_lemmas))  # not make_doc: we need lemmas
+matcher.add("VIOLENCE", patterns)
+```
+
+
+```{python}
+# Read file
+with open("violent_vs.txt", "r", encoding="utf-8") as f:
+    # Read all lines, strip whitespace, and filter out empty ones
+    words = [line.strip() for line in f if line.strip()]
+
+# Join all words into a single comma-separated string
+string = " ".join(words)
+
+violent_vs = string.split()
+print(violent_vs[:20])
+```
+
+
+```{python}
+import spacy
+from spacy.matcher import PhraseMatcher
+
+nlp = spacy.load("en_core_web_sm")
+
+patterns = [nlp(v) for v in violent_verb_lemmas]
+matcher = PhraseMatcher(nlp.vocab, attr="LEMMA")
+doc = nlp("They punched, kicked, and attacked the intruder before fleeing.")
+matcher.add("VIOLENCE", patterns)
+[(doc[s:e].text, doc[s:e].lemma_) for _, s, e in matcher(doc)]
+```
+
