@@ -1,6 +1,6 @@
 ---
 title: "Computation for Linguists"
-subtitle: "SpaCy: Other Languages"
+subtitle: "spaCy & WordNet"
 date: "November 7, 2025"
 author: "Dr. Andrew M. Byrd"
 format:
