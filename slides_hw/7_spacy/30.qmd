@@ -210,7 +210,7 @@ print(matches)
 dog_words = ["dog", "hound", "terrier", "poodle", "retriever", "shepherd", "beagle", "collie"]
 
 # Text
-sentence = "The man and his terrier saw a poodle, beagle, and a collie with a retriever as his buddy."
+text = "The farmer owned three terriers, but the poodle ran away with a collie."
 ```
 
 ## Activity Together
