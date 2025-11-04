@@ -42,55 +42,41 @@ plt.tight_layout()
 plt.show()
 ```
 
-
-
-## Review Activity
+## Sentence Segmentation 
 
 ```{python}
-import spacy
-from collections import Counter
+import spacy 
 import pandas as pd
-import matplotlib.pyplot as plt
 
 # Load English model
 nlp = spacy.load("en_core_web_sm")
 
-# string
-getty_str = "Four score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal.Now we are engaged in a great civil war, testing whether that nation, or any nation so conceived and so dedicated, can long endure. We are met on a great battle-field of that war. We have come to dedicate a portion of that field, as a final resting place for those who here gave their lives that that nation might live. It is altogether fitting and proper that we should do this.But, in a larger sense, we can not dedicate—we can not consecrate—we can not hallow—this ground. The brave men, living and dead, who struggled here, have consecrated it, far above our poor power to add or detract. The world will little note, nor long remember what we say here, but it can never forget what they did here. It is for us the living, rather, to be dedicated here to the unfinished work which they who fought here have thus far so nobly advanced. It is rather for us to be here dedicated to the great task remaining before us—that from these honored dead we take increased devotion to that cause for which they gave the last full measure of devotion—that we here highly resolve that these dead shall not have died in vain—that this nation, under God, shall have a new birth of freedom—and that government of the people, by the people, for the people, shall not perish from the earth."
+text2 = "President Pitzer, Mr. Vice President, Governor Connally, ladies and gentlemen: I am delighted to be here today. We meet in an hour of change and challenge."
+doc2 = nlp(text2)
+[s.text for s in doc2.sents]
+```
 
-getty = nlp(getty_str)
-
-print(getty[0:100])
-# eliminates stopwords, etc.
-content_getty = [t.lemma_.lower() for t in getty
-                  if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
-
-# creates a dictionary with frequency counts
-getty_freq = Counter(content_getty)
-getty_df_freq = (pd.DataFrame(getty_freq.items(), columns=["lemma", "count"])
-           .sort_values("count", ascending=False))
-getty_df_freq.head(10)
-
-# plot it out
-top10 = getty_df_freq.head(10)
-plt.figure()
-plt.bar(top10["lemma"], top10["count"])
-plt.title("Top 10 Content Lemmas")
-plt.xlabel("Lemma")
-plt.ylabel("Count")
-plt.xticks(rotation=45)
-plt.tight_layout()
-plt.show()
-
+```{python}
+doc = nlp("The quick brown fox jumps over the lazy dog.")
+[(t.text, t.dep_, t.head.text) for t in doc]
 ```
 
 
+## DisplaCy
+
+```{python}
+import spacy
+from spacy import displacy
+
+nlp = spacy.load("en_core_web_sm")
+doc = nlp("The quick brown fox jumps over the lazy dog.")
+
+svg = displacy.render(doc, style="dep")  # returns SVG/HTML markup
+with open("syntax_tree.svg", "w", encoding="utf-8") as f:
+    f.write(svg)
+```
 
 
-
-
-
-## 
 
 ```{python}
 
@@ -106,7 +92,170 @@ with open("activity_2_syntax_tree.svg", "w", encoding="utf-8") as f:
 ```
 
 
+```{python}
+import spacy
+
+nlp = spacy.load("en_core_web_sm")
+
+doc = nlp("We considered the options and chose the best proposal.")
+pairs = []
+for tok in doc:
+    if tok.pos_ == "VERB":
+        dobj = [c for c in tok.children if c.dep_ == "dobj"]
+        if dobj:
+            pairs.append((tok.lemma_, dobj[0].text))
+pairs
+```
+```{python}
+import spacy
+
+nlp = spacy.load("en_core_web_sm")
+
+# Step 1: Our manual list of violent verbs
+verbs_of_violence = ["attack", "hit", "kick", "strike", "punch", "assault", "kill", "hurt"]
+
+# Step 2: Process a sentence
+doc = nlp("They punched, kicked, and attacked the intruder before fleeing.")
+
+# Step 3: Find any tokens whose lemma is in our list
+matches = [(t.text, t.lemma_) for t in doc if t.lemma_ in verbs_of_violence]
+
+print(matches)
+```
 
 
 
-## 
+## Activity Together
+
+```{python}
+import spacy
+nlp = spacy.load("en_core_web_sm")
+
+# Step 1: Define your semantic group
+dog_words = ["dog", "hound", "terrier", "poodle", "retriever", "shepherd", "beagle", "collie"]
+
+# Step 2: Sample text
+text = "The farmer owned three terriers, but the poodle ran away with a collie."
+
+# Step 3: Process the text
+doc = nlp(text)
+
+# Step 4: Collect all nouns that are objects of verbs or prepositions
+
+obj_deps = ["dobj", "pobj", "obj"]
+objects = []
+
+for tok in doc:
+    if tok.dep_ in obj_deps:
+        objects.append(tok)
+
+# Step 5: Keep only those whose lemma is in our semantic group
+matches = [(t.text, t.lemma_) for t in objects if t.lemma_.lower() in dog_words]
+
+print(matches)
+```
+
+
+## WordNet
+
+```{python}
+import spacy
+from spacy_wordnet.wordnet_annotator import WordnetAnnotator
+
+nlp = spacy.load("en_core_web_sm")
+# Attach the WordNet annotator; it will use the NLTK WordNet data you downloaded
+nlp.add_pipe("spacy_wordnet", after="tagger")
+```
+```{python}
+doc = nlp("The dog chased the cat.")
+tok = doc[1]
+
+synsets = tok._.wordnet.synsets()   # list of NLTK-style Synset objects
+
+print(f"These are the different meanings the word '{tok}' has:")
+count = 0
+
+for i in synsets:
+  print(f"{count}: ", i)
+  count += 1
+```
+```{python}
+doc = nlp("The dog chased the cat.")
+tok = doc[1]
+
+for s in tok._.wordnet.synsets():
+    print(s, "→", s.definition())
+```
+
+
+```{python}
+for s in tok._.wordnet.synsets():
+    print(s, "→", s.examples())
+```
+
+```{python}
+for s in tok._.wordnet.synsets():
+    print(s, "→", [l.name() for l in s.lemmas()])
+```
+```{python}
+import spacy
+from nltk.corpus import wordnet as wn
+from nltk.corpus.reader.wordnet import NOUN, VERB, ADJ, ADV
+
+# Load spaCy
+nlp = spacy.load("en_core_web_sm")
+
+# Sentence with both noun and verb "bear"
+text = "The bears bear their burdens bravely."
+doc = nlp(text)
+
+# Map spaCy POS tags to WordNet POS tags -- this is a **function**, we'll get to these soon
+def get_wordnet_pos(spacy_pos):
+    if spacy_pos.startswith("N"):
+        return NOUN
+    elif spacy_pos.startswith("V"):
+        return VERB
+    elif spacy_pos.startswith("J"):
+        return ADJ
+    elif spacy_pos.startswith("R"):
+        return ADV
+    return None
+
+# Loop through tokens and look up WordNet entries
+for token in doc:
+    wn_pos = get_wordnet_pos(token.tag_)
+    lemma = token.lemma_.lower()
+
+    if wn_pos and not token.is_stop and not token.is_punct:
+        synsets = wn.synsets(lemma, pos=wn_pos)
+        print(f"\n{token.text.upper()} ({token.pos_}) → lemma: {lemma}")
+        for s in synsets[:3]:  # show just the first 3 senses
+            print(f"  - {s.definition()}  [examples: {s.examples()}]")
+```
+
+
+
+```{python}
+import spacy
+from nltk.corpus import wordnet as wn
+from nltk.corpus.reader.wordnet import NOUN, VERB, ADJ, ADV
+
+# Load spaCy
+nlp = spacy.load("en_core_web_sm")
+
+# Sentence with both noun and verb "bear"
+text = "The duck saw the bat near the bank."
+doc = nlp(text)
+
+# Loop through tokens and look up WordNet entries
+for token in doc:
+    wn_pos = get_wordnet_pos(token.tag_)
+    lemma = token.lemma_.lower()
+
+    if wn_pos and not token.is_stop and not token.is_punct:
+        synsets = wn.synsets(lemma, pos=wn_pos)
+        print(f"\n{token.text.upper()} ({token.pos_}) → lemma: {lemma}")
+        for s in synsets[:3]:  # show just the first 3 senses
+            print(f"  - {s.definition()}  [examples: {s.examples()}]")
+```
+
