@@ -76,8 +76,6 @@ with open("syntax_tree.svg", "w", encoding="utf-8") as f:
     f.write(svg)
 ```
 
-
-
 ```{python}
 
 import spacy
@@ -106,6 +104,10 @@ for tok in doc:
             pairs.append((tok.lemma_, dobj[0].text))
 pairs
 ```
+
+
+
+
 ```{python}
 import spacy
 
@@ -122,8 +124,6 @@ matches = [(t.text, t.lemma_) for t in doc if t.lemma_ in verbs_of_violence]
 
 print(matches)
 ```
-
-
 
 ## Activity Together
 
@@ -156,7 +156,7 @@ print(matches)
 ```
 
 
-## WordNet
+## Initialize
 
 ```{python}
 import spacy
@@ -166,9 +166,14 @@ nlp = spacy.load("en_core_web_sm")
 # Attach the WordNet annotator; it will use the NLTK WordNet data you downloaded
 nlp.add_pipe("spacy_wordnet", after="tagger")
 ```
+
+
+
+
+
 ```{python}
 doc = nlp("The dog chased the cat.")
-tok = doc[1]
+tok = doc[2]
 
 synsets = tok._.wordnet.synsets()   # list of NLTK-style Synset objects
 
@@ -179,6 +184,9 @@ for i in synsets:
   print(f"{count}: ", i)
   count += 1
 ```
+
+
+
 ```{python}
 doc = nlp("The dog chased the cat.")
 tok = doc[1]
@@ -197,6 +205,9 @@ for s in tok._.wordnet.synsets():
 for s in tok._.wordnet.synsets():
     print(s, "→", [l.name() for l in s.lemmas()])
 ```
+
+
+
 ```{python}
 import spacy
 from nltk.corpus import wordnet as wn
@@ -232,6 +243,46 @@ for token in doc:
         for s in synsets[:3]:  # show just the first 3 senses
             print(f"  - {s.definition()}  [examples: {s.examples()}]")
 ```
+
+
+
+
+```{python}
+import spacy
+from nltk.corpus import wordnet as wn
+from nltk.corpus.reader.wordnet import NOUN, VERB, ADJ, ADV
+
+# Load spaCy
+nlp = spacy.load("en_core_web_sm")
+
+# Sentence with both noun and verb "bear"
+text = "The duck saw the bat near the bank."
+doc = nlp(text)
+
+# Map spaCy POS tags to WordNet POS tags -- this is a **function**, we'll get to these soon
+def get_wordnet_pos(spacy_pos):
+    if spacy_pos.startswith("N"):
+        return NOUN
+    elif spacy_pos.startswith("V"):
+        return VERB
+    elif spacy_pos.startswith("J"):
+        return ADJ
+    elif spacy_pos.startswith("R"):
+        return ADV
+    return None
+
+# Loop through tokens and look up WordNet entries
+for token in doc:
+    wn_pos = get_wordnet_pos(token.tag_)
+    lemma = token.lemma_.lower()
+
+    if wn_pos and not token.is_stop and not token.is_punct:
+        synsets = wn.synsets(lemma, pos=wn_pos)
+        print(f"\n{token.text.upper()} ({token.pos_}) → lemma: {lemma}")
+        for s in synsets[:3]:  # show just the first 3 senses
+            print(f"  - {s.definition()}  [examples: {s.examples()}]")
+```
+
 
 
 

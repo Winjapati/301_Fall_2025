@@ -1,0 +1,118 @@
+---
+title: "Computation for Linguists"
+subtitle: "Other Visualizations"
+date: "November 17, 2025"
+author: "Dr. Andrew M. Byrd"
+format:
+  revealjs:
+    css: header_shrink.css
+    theme: beige
+    slide-number: true
+    center: true
+    toc: true
+    toc-title: "Plan for the Day"
+    toc-depth: 1
+jupyter: python3
+editor: source
+---
+
+# Day 4 — Visualizations Beyond Bar Graphs
+
+## Goals
+- Use **pie**, **line**, **scatter**, and a **word cloud**
+- Tie visualization choice to linguistic questions
+- Integrate with `pandas` outputs
+
+### Pie Chart
+Great for **composition** (e.g., POS proportions, character shares).
+
+*(We already wrote `pie_top_k` on Day 2.)*
+
+### Line Plot
+Good for **ordered** data (token rank vs frequency; time-series if timestamps are present).
+
+```{python}
+# Reuse rank-frequency from Day 2; line with markers already demonstrated.
+```
+
+### Scatter Plot
+Great for comparing **two features** per item (e.g., frequency vs length).
+
+```{python}
+def scatter_len_vs_freq(tokens, title="Length vs Frequency"):
+    c = Counter(tokens)
+    df = pd.DataFrame([{"token": k, "freq": v, "length": len(k)} for k,v in c.items()])
+    plt.figure()
+    plt.scatter(df["length"], df["freq"])
+    plt.xlabel("Token length")
+    plt.ylabel("Frequency")
+    plt.title(title)
+    plt.tight_layout()
+    plt.show()
+
+scatter_len_vs_freq(lem_en, "English: Length vs Frequency")
+```
+
+### Word Cloud (Fun Finale)
+Useful as a **qualitative** summary of frequent items.
+
+```{python}
+from wordcloud import WordCloud
+
+def wordcloud_from_tokens(tokens, title="Word Cloud"):
+    c = Counter(tokens)
+    wc = WordCloud(width=800, height=400, background_color="white")
+    wc = wc.generate_from_frequencies(c)
+    plt.figure()
+    plt.imshow(wc, interpolation="bilinear")
+    plt.axis("off")
+    plt.title(title)
+    plt.show()
+
+wordcloud_from_tokens(lem_es, "Spanish Word Cloud")
+```
+
+---
+
+## Choosing the Right Chart
+
+- **Bar (horizontal)**: rankable categories; easy comparison
+- **Pie**: proportion snapshots (few categories)
+- **Line**: order matters (rank, time)
+- **Scatter**: relationship between two numeric features
+- **Word cloud**: quick qualitative gist
+
+---
+
+## Day 4 — Activity 1 (Review)
+**Task:** For any one language from Days 1–2:
+- Build a **line plot** of rank vs frequency.
+- Add 2–3 sentences interpreting the slope.
+
+---
+
+## Day 4 — Mid-Point Practice
+**Task:** Create a **scatter plot**: token length (x) vs frequency (y) for **two languages** on separate plots.  
+- 2–3 sentences comparing the distributions.
+
+---
+
+## Day 4 — Final Encompassing Activity
+**Task:** Pick any one text (English or non-English). Produce **two** visualizations that each reveal *different* aspects:
+1) **Pie** of character or POS proportions (top 8 + other)
+2) **Scatter** of length vs frequency **or** a **word cloud**  
+Then write a short caption for each, explaining the insight.
+
+---
+
+# Wrap-Up
+
+- You can now:
+  - Work with multilingual text (Latin & non-Latin scripts)
+  - Normalize Unicode safely
+  - Write and compose **functions** for NLP tasks
+  - Choose appropriate **visualizations** beyond bar charts
+
+- **Optional extension (not graded here):** apply this pipeline to your project data.
+
+---

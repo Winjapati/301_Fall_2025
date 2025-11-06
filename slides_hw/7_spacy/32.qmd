@@ -1,12 +1,30 @@
+---
+title: "Computation for Linguists"
+subtitle: "Working with non-English data"
+date: "November 10, 2025"
+author: "Dr. Andrew M. Byrd"
+format:
+  revealjs:
+    css: header_shrink.css
+    theme: beige
+    slide-number: true
+    center: true
+    toc: true
+    toc-title: "Plan for the Day"
+    toc-depth: 1
+jupyter: python3
+editor: source
+---
 
-1. Pick a **target word** (noun or verb).
-2. List:
-   - its first 3 synsets + definitions,
-   - 3 hypernyms and 3 hyponyms for the primary sense,
-   - 5 synonyms (lemmas) and any antonyms.
-3. Discuss: where does WordNet disagree with your intuition? Any missing senses?
+# Review
 
-## Review: English Lemmatization
+-   What did you learn last time?
+
+## Recap from Last Time
+
+---
+
+## Recap from Last Time
 
 ```{python}
 import spacy
@@ -16,6 +34,176 @@ doc = nlp_en("The children ran quickly to their houses.")
 for token in doc:
     print(token.text, token.lemma_, token.pos_)
 ```
+
+
+# Analyzing languages that aren't English
+
+## Setup (once per machine)
+
+```{python}
+# If running locally, ensure these are installed (uncomment if needed)
+# %pip install spacy pandas matplotlib wordcloud unidecode
+
+import pandas as pd
+import matplotlib.pyplot as plt
+from collections import Counter
+from unidecode import unidecode
+import unicodedata as ud
+```
+
+::: callout-note
+#### spaCy models
+For multilingual experiments, small models are fine to illustrate tokenization & POS:
+- `python -m spacy download es_core_news_sm`
+- `python -m spacy download de_core_news_sm`
+- `python -m spacy download fr_core_news_sm`
+- `python -m spacy download el_core_news_sm` (Greek)
+- `python -m spacy download xx_sent_ud_sm` (multilingual sentence segmenter)
+
+If a model isn’t available, we’ll still demonstrate Unicode handling and basic tokenization.
+:::
+
+---
+
+# Day 1 — Non-English (Latin Script)
+
+## Goals
+- Load UTF-8 text safely
+- Tokenize + (optionally) lemmatize with spaCy for Spanish/German/French
+- Compare lemma frequencies across languages
+
+## UTF-8 vs ASCII (Quick Review)
+
+```{python}
+sample_text = "¡Hola! ¿Cómo estás? Voilà l’été. Grüße aus Köln."
+encoded = sample_text.encode("utf-8")
+decoded = encoded.decode("utf-8")
+decoded
+```
+
+- **If things look garbled:** specify `encoding="utf-8"` when reading files.
+
+```{python}
+# Example: reading a file with explicit encoding
+# with open("spanish_paragraph.txt", "r", encoding="utf-8") as f:
+#     es_text = f.read()
+es_text = "El perro corre rápidamente por el jardín. Los perros son animales fieles."
+de_text = "Der Hund läuft schnell durch den Garten. Hunde sind treue Tiere."
+en_text = "The dog runs quickly through the garden. Dogs are loyal animals."
+```
+
+## Tokenization & Lemmatization
+
+```{python}
+import spacy
+
+try:
+    nlp_es = spacy.load("es_core_news_sm")
+except:
+    nlp_es = spacy.blank("es")  # fallback tokenizer if model missing
+
+try:
+    nlp_de = spacy.load("de_core_news_sm")
+except:
+    nlp_de = spacy.blank("de")
+
+try:
+    nlp_en = spacy.load("en_core_web_sm")
+except:
+    nlp_en = spacy.blank("en")
+
+doc_es = nlp_es(es_text)
+doc_de = nlp_de(de_text)
+doc_en = nlp_en(en_text)
+
+def content_lemmas(doc):
+    # if no lemma (blank model), use lowercased text
+    return [
+        (t.lemma_.lower() if t.lemma_ else t.text.lower())
+        for t in doc
+        if t.is_alpha and not t.is_stop
+    ]
+
+lem_es = content_lemmas(doc_es)
+lem_de = content_lemmas(doc_de)
+lem_en = content_lemmas(doc_en)
+
+lem_es, lem_de, lem_en
+```
+
+## Simple Frequency Comparisons
+
+```{python}
+import pandas as pd
+from collections import Counter
+
+def freq_df(lemmas, lang):
+    c = Counter(lemmas)
+    df = (pd.DataFrame(c.items(), columns=["lemma", "count"])
+          .sort_values("count", ascending=False)
+          .reset_index(drop=True))
+    df["lang"] = lang
+    return df
+
+df_es = freq_df(lem_es, "es")
+df_de = freq_df(lem_de, "de")
+df_en = freq_df(lem_en, "en")
+pd.concat([df_es, df_de, df_en], ignore_index=True)
+```
+
+---
+
+## Day 1 — Activity 1 (Review)
+**Task:** Using the three texts above, produce the **top 5 lemmas** per language in one table.
+
+*Hints:*
+- Use the `freq_df` function.
+- Concatenate the three DataFrames.
+- Sort within groups or filter by top N.
+
+---
+
+## Day 1 — Mid-Point Practice
+**Task:** Add an **English translation** for the Spanish or German text (use the provided `en_text` or write your own).  
+Compute **overlap** in *content lemmas* between the non-English text and the English translation.  
+- Report: size of overlap, examples of shared lemmas (after translation).
+
+*Stretch:* normalize accents with `unidecode` and compare again.
+
+```{python}
+def overlap(a, b):
+    return set(a).intersection(set(b))
+
+# Example: overlap between Spanish content lemmas and English content lemmas
+overlap_es_en = overlap(lem_es, lem_en)
+sorted(list(overlap_es_en))[:10]
+```
+
+---
+
+## Day 1 — Final Encompassing Activity
+**Task:** Choose **one Latin-script language** (Spanish/German/French).  
+1) Tokenize + lemmatize a short paragraph.  
+2) Compute lemma frequencies.  
+3) **Visualize** the top 10 lemmas using a **horizontal bar chart** (we’ll move beyond bars tomorrow, but start here).
+
+```{python}
+
+import matplotlib.pyplot as plt
+
+def plot_top_k(df, k=10, title="Top Lemmas"):
+    top = df.sort_values("count", ascending=False).head(k)
+    plt.figure()
+    plt.barh(top["lemma"], top["count"])
+    plt.title(title)
+    plt.gca().invert_yaxis()
+    plt.tight_layout()
+    plt.show()
+
+plot_top_k(df_es, k=10, title="Spanish: Top 10 Lemmas")
+```
+
+
 
 ---
 
@@ -120,33 +308,4 @@ df_all
 | French   | 12     | 9             | *étudiés → étudier*          |
 | Spanish  | 11     | 8             | *analizaron → analizar*      |
 | German   | 13     | 9             | *analysierten → analysieren* |
-
----
-
-# Discussion 💬
-
-* Which languages were easiest for spaCy to lemmatize correctly?
-* What kinds of morphological information are preserved or lost?
-* Why do some languages have more unique lemmas than others?
-
----
-
-# Wrap-Up
-
-✅ Tokenization and lemmatization vary across languages
-✅ spaCy provides pre-trained pipelines for many languages
-✅ Lemmatization accuracy depends on morphological complexity
-
-> Next: Using NLP tools for **semantic similarity** and **word embeddings**.
-
-
-
-
-# Capstone Exercise (10–15 min)
-
-- Put it together on a fresh paragraph of your choice:
-  1. **spaCy:** tokenize → filter → lemma frequency table → plot top 10.
-  2. **spaCy:** extract **(verb, object)** pairs.
-  3. **WordNet:** pick 2–3 top verbs or nouns; print synsets and hypernyms.
-- Submit a brief reflection: *Which tool felt more interpretable? For what tasks?*
 

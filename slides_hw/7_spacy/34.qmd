@@ -1,0 +1,102 @@
+---
+title: "Computation for Linguists"
+subtitle: "Writing Functions"
+date: "November 14, 2025"
+author: "Dr. Andrew M. Byrd"
+format:
+  revealjs:
+    css: header_shrink.css
+    theme: beige
+    slide-number: true
+    center: true
+    toc: true
+    toc-title: "Plan for the Day"
+    toc-depth: 1
+jupyter: python3
+editor: source
+---
+
+# Day 3 — Functions (Reusable Code)
+
+## Goals
+- Understand `def`, parameters, return values
+- Encapsulate common NLP steps as functions
+- Compose functions for robust pipelines
+
+## Why Functions?
+
+- Avoid repetition
+- Make code readable/testable
+- Add optional arguments for flexibility
+
+```{python}
+def get_tokens(doc, *, alpha_only=True, lowercase=True, drop_stops=True):
+    out = []
+    for t in doc:
+        if alpha_only and not t.is_alpha:
+            continue
+        if drop_stops and t.is_stop:
+            continue
+        out.append(t.lemma_.lower() if lowercase and t.lemma_ else (t.text.lower() if lowercase else t.text))
+    return out
+
+def get_freq_df(tokens, label=None):
+    c = Counter(tokens)
+    df = pd.DataFrame(c.items(), columns=["item", "count"]).sort_values("count", ascending=False)
+    if label:
+        df["label"] = label
+    return df.reset_index(drop=True)
+```
+
+### Composing Functions
+
+```{python}
+def analyze_text(text, nlp, label=None, alpha_only=True, lowercase=True, drop_stops=True):
+    doc = nlp(text)
+    toks = get_tokens(doc, alpha_only=alpha_only, lowercase=lowercase, drop_stops=drop_stops)
+    return get_freq_df(toks, label=label)
+
+analyze_text(es_text, nlp_es, label="es").head(10)
+```
+
+---
+
+## Day 3 — Activity 1 (Review)
+**Task:** Write a function `top_k(df, k=10)` that returns just the top-k rows by `count`.  
+- Test it on `analyze_text(es_text, ...)`.
+
+---
+
+## Day 3 — Mid-Point Practice
+**Task:** Write `compare_texts(text1, nlp1, text2, nlp2)` that:
+- Returns a DataFrame with columns: `item`, `count_1`, `count_2`, and `diff = count_1 - count_2` for overlapping tokens only (inner join).  
+- Sort by absolute `diff` descending.
+
+*Hints:* use `get_tokens` → `Counter` → merge/join on keys.
+
+---
+
+## Day 3 — Final Encompassing Activity
+**Task:** Build a **mini multilingual pipeline**:
+1) `analyze_text` for **two languages** (choose any).
+2) Compute **overlap** and **Jaccard similarity** of their token sets.
+3) Package the steps into a function `compare_languages(text_a, nlp_a, text_b, nlp_b)` that **prints**:
+   - Top 5 items in each
+   - Overlap size & Jaccard
+
+```{python}
+def jaccard(a, b):
+    A, B = set(a), set(b)
+    return len(A & B) / len(A | B) if (A|B) else 0.0
+
+def compare_languages(text_a, nlp_a, text_b, nlp_b):
+    doc_a, doc_b = nlp_a(text_a), nlp_b(text_b)
+    toks_a = get_tokens(doc_a)
+    toks_b = get_tokens(doc_b)
+    print("Top-5 A:", Counter(toks_a).most_common(5))
+    print("Top-5 B:", Counter(toks_b).most_common(5))
+    print("Overlap size:", len(set(toks_a) & set(toks_b)))
+    print("Jaccard:", round(jaccard(toks_a, toks_b), 4))
+
+compare_languages(es_text, nlp_es, de_text, nlp_de)
+```

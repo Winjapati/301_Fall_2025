@@ -1,0 +1,144 @@
+---
+title: "Computation for Linguists"
+subtitle: "Working with non-English data"
+date: "November 12, 2025"
+author: "Dr. Andrew M. Byrd"
+format:
+  revealjs:
+    css: header_shrink.css
+    theme: beige
+    slide-number: true
+    center: true
+    toc: true
+    toc-title: "Plan for the Day"
+    toc-depth: 1
+jupyter: python3
+editor: source
+---
+
+# Day 2 — Non-Latin Scripts
+
+## Goals
+- Handle Unicode reliably (NFC/NFD)
+- Basic tokenization with non-Latin scripts
+- Optional transliteration for readability/analysis
+
+## Unicode Normalization
+
+```{python}
+s = "καρδία"  # Greek "heart"
+s_nfd = ud.normalize("NFD", s)
+s_nfc = ud.normalize("NFC", s)
+
+len(s), len(s_nfd), len(s_nfc), s == s_nfc
+```
+
+- Use **NFC** for consistent storage/processing.
+- `unidecode` gives ASCII approximations (useful but lossy).
+
+```{python}
+print("Original:", s)
+print("ASCII-ish (unidecode):", unidecode(s))
+```
+
+## Non-Latin Examples (Greek, Russian, Devanagari)
+
+```{python}
+el_text = "Ο σκύλος τρέχει γρήγορα στον κήπο. Οι σκύλοι είναι πιστά ζώα."
+ru_text = "Собака быстро бегает по саду. Собаки — верные животные."
+hi_text = "कुत्ता बगीचे में तेजी से दौड़ता है। कुत्ते वफादार जानवर होते हैं।"
+```
+
+### Tokenization (with or without models)
+
+```{python}
+try:
+    nlp_el = spacy.load("el_core_news_sm")
+except:
+    nlp_el = spacy.blank("el")
+
+nlp_ru = spacy.blank("ru")  # tokenizer demo
+nlp_hi = spacy.blank("hi")
+
+doc_el = nlp_el(el_text)
+doc_ru = nlp_ru(ru_text)
+doc_hi = nlp_hi(hi_text)
+
+tokens_el = [t.text for t in doc_el if t.is_alpha]
+tokens_ru = [t.text for t in doc_ru if t.is_alpha]
+tokens_hi = [t.text for t in doc_hi if t.is_alpha]
+
+tokens_el[:10], tokens_ru[:10], tokens_hi[:10]
+```
+
+> If lemmatization isn’t available, we can still analyze **token frequencies** or **character frequencies**.
+
+## Character Frequency (Script-Level)
+
+```{python}
+import pandas as pd
+
+def char_freq(s):
+    chars = [c for c in s if c.strip()]
+    c = Counter(chars)
+    return pd.DataFrame(c.items(), columns=["char", "count"]).sort_values("count", ascending=False)
+
+df_chars_el = char_freq(el_text)
+df_chars_el.head(12)
+```
+
+---
+
+## Day 2 — Activity 1 (Review)
+**Task:** Normalize the **Greek** text to NFC and compute **character frequencies**.  
+- Report top 10 characters.  
+- Compare results **with** vs **without** normalization.
+
+---
+
+## Day 2 — Mid-Point Practice
+**Task:** Choose either **Russian** or **Hindi** text above.  
+- Tokenize into words.  
+- Compute word-type counts (unique tokens).  
+- Create a **line plot** of token **rank** (x-axis) vs **frequency** (y-axis) — a rough Zipf-ish curve.
+
+```{python}
+def rank_freq_plot(tokens, title="Rank-Frequency Plot"):
+    c = Counter(tokens)
+    counts = sorted(c.values(), reverse=True)
+    plt.figure()
+    plt.plot(range(1, len(counts)+1), counts, marker="o")
+    plt.title(title)
+    plt.xlabel("Rank")
+    plt.ylabel("Frequency")
+    plt.tight_layout()
+    plt.show()
+
+rank_freq_plot(tokens_ru, "Russian: Rank-Frequency")
+```
+
+---
+
+## Day 2 — Final Encompassing Activity
+**Task:** For **one non-Latin** text (Greek/Russian/Hindi):
+1) Normalize (NFC).  
+2) Compute both **token** and **character** frequency tables.  
+3) Visualize **character frequencies** with a **pie chart** showing the top 8 characters + “other”.
+
+```{python}
+def pie_top_k(df, k=8, title="Character Proportions"):
+    top = df.sort_values("count", ascending=False)
+    head = top.head(k)
+    other = pd.DataFrame([{"char": "other", "count": top["count"].iloc[k:].sum()}])
+    final = pd.concat([head, other], ignore_index=True)
+
+    plt.figure()
+    plt.pie(final["count"], labels=final["char"], autopct="%1.1f%%", startangle=90)
+    plt.title(title)
+    plt.tight_layout()
+    plt.show()
+
+pie_top_k(df_chars_el, k=8, title="Greek: Character Proportions")
+```
+
+---
