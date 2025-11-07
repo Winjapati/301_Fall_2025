@@ -3,6 +3,105 @@ title: "31_in_class"
 format: html
 ---
 
+
+
+
+
+```{python}
+import spacy
+from collections import Counter
+import pandas as pd
+import matplotlib.pyplot as plt
+from nltk.corpus import wordnet as wn
+from nltk.corpus.reader.wordnet import NOUN, VERB, ADJ, ADV
+
+
+# load model
+nlp = spacy.load("en_core_web_sm")
+
+getty = "Four score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal.Now we are engaged in a great civil war, testing whether that nation, or any nation so conceived and so dedicated, can long endure. We are met on a great battle-field of that war. We have come to dedicate a portion of that field, as a final resting place for those who here gave their lives that that nation might live. It is altogether fitting and proper that we should do this.But, in a larger sense, we can not dedicate—we can not consecrate—we can not hallow—this ground. The brave men, living and dead, who struggled here, have consecrated it, far above our poor power to add or detract. The world will little note, nor long remember what we say here, but it can never forget what they did here. It is for us the living, rather, to be dedicated here to the unfinished work which they who fought here have thus far so nobly advanced. It is rather for us to be here dedicated to the great task remaining before us—that from these honored dead we take increased devotion to that cause for which they gave the last full measure of devotion—that we here highly resolve that these dead shall not have died in vain—that this nation, under God, shall have a new birth of freedom—and that government of the people, by the people, for the people, shall not perish from the earth."
+
+
+doc = nlp(getty)
+
+content_lemmas = [t.lemma_.lower() for t in doc
+                  if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
+
+freq = Counter(content_lemmas)
+df_freq = (pd.DataFrame(freq.items(), columns=["lemma", "count"])
+           .sort_values("count", ascending=False))
+df_freq.head(10)
+
+
+top10 = df_freq.head(10)
+plt.figure()
+plt.bar(top10["lemma"], top10["count"])
+plt.title("Top 10 Content Lemmas")
+plt.xlabel("Lemma")
+plt.ylabel("Count")
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
+
+#select the first sentence using spaCy’s attribute .sents
+
+sents = [s.text for s in doc.sents]
+first_sent = sents[0]
+print(first_sent)
+
+#parse each word by meaning using WordNet.
+
+# doc = nlp(text)
+
+first_sent_doc = nlp(first_sent)
+
+# Map spaCy POS tags to WordNet POS tags -- this is a **function**, we'll get to these soon
+def get_wordnet_pos(spacy_pos):
+    if spacy_pos.startswith("N"):
+        return NOUN
+    elif spacy_pos.startswith("V"):
+        return VERB
+    elif spacy_pos.startswith("J"):
+        return ADJ
+    elif spacy_pos.startswith("R"):
+        return ADV
+    return None
+
+# Loop through tokens and look up WordNet entries
+for token in first_sent_doc:
+    wn_pos = get_wordnet_pos(token.tag_)
+    lemma = token.lemma_.lower()
+
+    if wn_pos and not token.is_stop and not token.is_punct:
+        synsets = wn.synsets(lemma, pos=wn_pos)
+        print(f"\n{token.text.upper()} ({token.pos_}) → lemma: {lemma}")
+        for s in synsets[:3]:  # show just the first 3 senses
+            print(f"  - {s.definition()}  [examples: {s.examples()}]")
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Review Activity
 
 ```{python}
@@ -96,7 +195,7 @@ def get_antonyms(word): # this is also a function
                 antonyms.add(ant.name())
     return list(antonyms)
 
-get_antonyms("slow")
+get_antonyms("bear")
 ```
 
 
@@ -167,7 +266,7 @@ def get_synsets(token):
 
 Token.set_extension("synsets", getter=get_synsets, force=True)
 
-doc = nlp("dog")
+doc = nlp("big")
 token = doc[0]
 
 word_synsets = token._.synsets  # now this works
@@ -217,6 +316,10 @@ comparison = nlp("cat")[0]._.wordnet.synsets()[0]
 
 print("wup:",  dog.wup_similarity(comparison))   # Wu–Palmer similarity
 ```
+
+
+
+
 ```{python}
 # 0) Imports
 import spacy
@@ -290,6 +393,12 @@ string = " ".join(words)
 violent_vs = string.split()
 print(violent_vs[:20])
 ```
+
+```{python}
+violent_vs = ['assail', 'assault', 'atom-bomb', 'atomise', 'atomize', 'attack', 'backbite', 'backhand', 'bait', 'bastinado', 'bat', 'batter', 'bayonet', 'beak', 'beat', 'beef', 'beetle', 'beleaguer', 'bellyache', 'bemoan', 'beset', 'besiege', 'best', 'better', 'bewail', 'birdie', 'bitch', 'blast', 'bleat', 'blindside', 'blitz', 'blockade', 'bogey', 'bomb', 'bombard', 'bounce', 'break', 'buffet', 'bulldog', 'bunker', 'bunt', 'bust', 'butt', 'cannon', 'cannonade', 'carom', 'carry', 'charge', 'cheat', 'checkmate', 'chicane', 'chip', 'chop', 'chouse', 'circumvent', 'clap', 'clobber', 'clout', 'coldcock', 'complain', 'connect', 'counterattack', 'counterstrike', 'crab', 'cream', 'croak', 'croquet', 'crump', 'crush', 'cuff', 'dab', 'deck', 'declaim', 'deplore', 'desecrate', 'dishonor', 'dishonour', 'dive-bomb', 'double', 'down', 'dribble', 'drive', 'drub', 'dump', 'dunk', 'eagle', 'ebb', 'eliminate', 'exceed', 'firebomb', 'floor', 'fly', 'foul', 'full', 'gang-rape', 'gas', 'glide-bomb', 'gnarl', 'gripe', 'grizzle', 'grouch', 'ground', 'grouse', 'grumble', 'hammer', 'headbutt', 'heel', 'hen-peck', 'hew', 'hit', 'hole', 'holler', 'hook', 'hydrogen-bomb', 'immobilise', 'immobilize', 'infest', 'invade', 'inveigh', 'jab', 'jockey', 'jump', 'kick', 'kill', 'knap', 'knife', 'knock', 'knuckle', 'kvetch', 'lament', 'lash', 'lick', 'loft', 'master', 'mate', 'molest', 'murmur', 'mutter', 'nag', 'nuke', 'occupy', 'out-herod', 'outbrave', 'outcry', 'outdo', 'outdraw', 'outfight', 'outflank', 'outfox', 'outgeneral', 'outgo', 'outgrow', 'outmaneuver', 'outmanoeuvre', 'outmarch', 'outmatch', 'outpace', 'outperform', 'outplay', 'outpoint', 'outrage', 'outrange', 'outroar', 'outsail', 'outscore', 'outsell', 'outshine', 'outshout', 'outsmart', 'outstrip', 'outwear', 'outweigh', 'outwit', 'overcome', 'overmaster', 'overpower', 'overreach', 'overrun', 'overwhelm', 'paste', 'pat', 'pattern-bomb', 'peck', 'pelt', 'pepper', 'percuss', 'pick', 'pip', 'pitch', 'plain', 'play', 'plug', 'poniard', 'pop', 'profane', 'protest', 'pull', 'punch', 'putt', 'quetch', 'racket', 'raid', 'rail', 'rap', 'rape', 'ravish', 'reassail', 'repine', 'report', 'retaliate', 'rout', 'rush', 'savage', 'sclaff', 'scold', 'scoop', 'screw', 'set', 'shaft', 'shame', 'shank', 'shell', 'shoot', 'sic', 'sideswipe', 'single', 'skip-bomb', 'slam-dunk', 'slap', 'sledge', 'sledgehammer', 'slice', 'smash', 'snag', 'snap', 'snick', 'spread-eagle', 'spreadeagle', 'spur', 'squawk', 'stab', 'steamroll', 'steamroller', 'storm', 'strafe', 'strike', 'stroke', 'subdue', 'submarine', 'surmount', 'surpass', 'surprise', 'surround', 'tap', 'teargas', 'thrash', 'thresh', 'tip', 'toe', 'top', 'torpedo', 'triple', 'trounce', 'trump', 'undercut', 'upstage', 'urticate', 'vanquish', 'violate', 'volley', 'whang', 'whine', 'whip', 'whomp', 'worst', 'yammer', 'yawp', 'zap']
+```
+
+
 
 
 ```{python}
