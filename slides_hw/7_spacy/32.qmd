@@ -22,10 +22,6 @@ editor: source
 
 ## Recap from Last Time
 
----
-
-## Recap from Last Time
-
 ```{python}
 import spacy
 nlp_en = spacy.load("en_core_web_sm")
@@ -35,181 +31,148 @@ for token in doc:
     print(token.text, token.lemma_, token.pos_)
 ```
 
+## Recap from Last Time
 
-# Analyzing languages that aren't English
-
-## Setup (once per machine)
-
-```{python}
-# If running locally, ensure these are installed (uncomment if needed)
-# %pip install spacy pandas matplotlib wordcloud unidecode
-
-import pandas as pd
-import matplotlib.pyplot as plt
-from collections import Counter
-from unidecode import unidecode
-import unicodedata as ud
-```
-
-::: callout-note
-#### spaCy models
-For multilingual experiments, small models are fine to illustrate tokenization & POS:
-- `python -m spacy download es_core_news_sm`
-- `python -m spacy download de_core_news_sm`
-- `python -m spacy download fr_core_news_sm`
-- `python -m spacy download el_core_news_sm` (Greek)
-- `python -m spacy download xx_sent_ud_sm` (multilingual sentence segmenter)
-
-If a model isn’t available, we’ll still demonstrate Unicode handling and basic tokenization.
-:::
-
----
-
-# Day 1 — Non-English (Latin Script)
-
-## Goals
-- Load UTF-8 text safely
-- Tokenize + (optionally) lemmatize with spaCy for Spanish/German/French
-- Compare lemma frequencies across languages
-
-## UTF-8 vs ASCII (Quick Review)
-
-```{python}
-sample_text = "¡Hola! ¿Cómo estás? Voilà l’été. Grüße aus Köln."
-encoded = sample_text.encode("utf-8")
-decoded = encoded.decode("utf-8")
-decoded
-```
-
-- **If things look garbled:** specify `encoding="utf-8"` when reading files.
-
-```{python}
-# Example: reading a file with explicit encoding
-# with open("spanish_paragraph.txt", "r", encoding="utf-8") as f:
-#     es_text = f.read()
-es_text = "El perro corre rápidamente por el jardín. Los perros son animales fieles."
-de_text = "Der Hund läuft schnell durch den Garten. Hunde sind treue Tiere."
-en_text = "The dog runs quickly through the garden. Dogs are loyal animals."
-```
-
-## Tokenization & Lemmatization
-
-```{python}
+``` python
 import spacy
+from nltk.corpus import wordnet as wn
+from nltk.corpus.reader.wordnet import NOUN, VERB, ADJ, ADV
 
-try:
-    nlp_es = spacy.load("es_core_news_sm")
-except:
-    nlp_es = spacy.blank("es")  # fallback tokenizer if model missing
+# Load spaCy
+nlp = spacy.load("en_core_web_sm")
 
-try:
-    nlp_de = spacy.load("de_core_news_sm")
-except:
-    nlp_de = spacy.blank("de")
+# Sentence with both noun and verb "bear"
+text = "The bears bear their burdens bravely."
+doc = nlp(text)
 
-try:
-    nlp_en = spacy.load("en_core_web_sm")
-except:
-    nlp_en = spacy.blank("en")
+# Map spaCy POS tags to WordNet POS tags -- this is a **function**, we'll get to these soon
+def get_wordnet_pos(spacy_pos):
+    if spacy_pos.startswith("N"):
+        return NOUN
+    elif spacy_pos.startswith("V"):
+        return VERB
+    elif spacy_pos.startswith("J"):
+        return ADJ
+    elif spacy_pos.startswith("R"):
+        return ADV
+    return None
 
-doc_es = nlp_es(es_text)
-doc_de = nlp_de(de_text)
-doc_en = nlp_en(en_text)
+# Loop through tokens and look up WordNet entries
+for token in doc:
+    wn_pos = get_wordnet_pos(token.tag_)
+    lemma = token.lemma_.lower()
 
-def content_lemmas(doc):
-    # if no lemma (blank model), use lowercased text
-    return [
-        (t.lemma_.lower() if t.lemma_ else t.text.lower())
-        for t in doc
-        if t.is_alpha and not t.is_stop
-    ]
-
-lem_es = content_lemmas(doc_es)
-lem_de = content_lemmas(doc_de)
-lem_en = content_lemmas(doc_en)
-
-lem_es, lem_de, lem_en
+    if wn_pos and not token.is_stop and not token.is_punct:
+        synsets = wn.synsets(lemma, pos=wn_pos)
+        print(f"\n{token.text.upper()} ({token.pos_}) → lemma: {lemma}")
+        for s in synsets[:3]:  # show just the first 3 senses
+            print(f"  - {s.definition()}  [examples: {s.examples()}]")
 ```
 
-## Simple Frequency Comparisons
+## Semantic Similarity
 
-```{python}
-import pandas as pd
-from collections import Counter
+``` python
+dog = nlp("dog")[0]._.wordnet.synsets()[0]
+comparison = nlp("cat")[0]._.wordnet.synsets()[0]
 
-def freq_df(lemmas, lang):
-    c = Counter(lemmas)
-    df = (pd.DataFrame(c.items(), columns=["lemma", "count"])
-          .sort_values("count", ascending=False)
-          .reset_index(drop=True))
-    df["lang"] = lang
-    return df
-
-df_es = freq_df(lem_es, "es")
-df_de = freq_df(lem_de, "de")
-df_en = freq_df(lem_en, "en")
-pd.concat([df_es, df_de, df_en], ignore_index=True)
+print("wup:",  dog.wup_similarity(comparison))   # Wu–Palmer similarity
 ```
 
----
+## Returning to our verbs of violence
 
-## Day 1 — Activity 1 (Review)
-**Task:** Using the three texts above, produce the **top 5 lemmas** per language in one table.
+``` python
+import spacy
+from spacy.matcher import PhraseMatcher
+from nltk.corpus import wordnet as wn
 
-*Hints:*
-- Use the `freq_df` function.
-- Concatenate the three DataFrames.
-- Sort within groups or filter by top N.
+nlp = spacy.load("en_core_web_sm")
 
----
+# WordNet helpers (via NLTK) – returns only verb synsets
+def verb_senses(word):
+    return wn.synsets(word, pos='v')  # verb synsets only
 
-## Day 1 — Mid-Point Practice
-**Task:** Add an **English translation** for the Spanish or German text (use the provided `en_text` or write your own).  
-Compute **overlap** in *content lemmas* between the non-English text and the English translation.  
-- Report: size of overlap, examples of shared lemmas (after translation).
+# Collects all (recursive) hyponyms for a verb synset (troponyms in WN terms).
+# This function recursively collects all *hyponyms* (a.k.a. “troponyms” for verbs)
+# of a given synset. A hyponym is a more *specific* instance of an action.
+# Example: the verb “attack.v.01” has hyponyms like “bomb.v.01”, “invade.v.01”, etc.
+def all_verb_hyponyms(root):
+      seen, stack = set(), [root]
+    while stack:
+        cur = stack.pop()
+        if cur in seen:
+            continue
+        seen.add(cur)
+        # For verbs, .hyponyms() are the troponyms
+        stack.extend(cur.hyponyms())
+    return {s for s in seen if s.pos() == 'v'}
 
-*Stretch:* normalize accents with `unidecode` and compare again.
+# This function extracts lemma names (the “canonical” word forms)
+# from a set of synsets, e.g. 'strike.v.01' → ['strike', 'hit', 'smite', ...].
+# Optionally filters out multiword expressions like "shoot_down".
+def lemmas_from_synsets(synsets, keep_multiword=False):
+    out = set()
+    for s in synsets:
+        for lem in s.lemmas():
+            name = lem.name().lower()
+            if not keep_multiword and "_" in name:
+                continue
+            out.add(name.replace("_", " "))
+    return out
 
-```{python}
-def overlap(a, b):
-    return set(a).intersection(set(b))
+# Build a violence lexicon from WordNet using a few intuitive seeds
+seed_verbs = ["attack", "assault", "hit", "strike", "punch", "kick", "stab", "shoot", "beat"]
+base_synsets = []
+for w in seed_verbs:
+    ss = verb_senses(w)
+    if ss:
+        # take the most “central” sense by picking the one with most hyponyms
+        ss_scored = sorted(ss, key=lambda s: len(s.hyponyms()), reverse=True)
+        base_synsets.append(ss_scored[0])
 
-# Example: overlap between Spanish content lemmas and English content lemmas
-overlap_es_en = overlap(lem_es, lem_en)
-sorted(list(overlap_es_en))[:10]
+# expand via hyponyms (troponyms)
+expanded = set()
+for s in base_synsets:
+    expanded |= all_verb_hyponyms(s)
+
+# collect lemmas (single-token by default)
+violent_verb_lemmas = sorted(lemmas_from_synsets(expanded, keep_multiword=False) | set(seed_verbs))
+print(f"{len(violent_verb_lemmas)} violent verb lemmas (sample):", violent_verb_lemmas[:25])
+
+# 4) spaCy PhraseMatcher by lemma — IMPORTANT: run full pipeline on patterns
+matcher = PhraseMatcher(nlp.vocab, attr="LEMMA")
+patterns = list(nlp.pipe(violent_verb_lemmas))  # not make_doc: we need lemmas
+matcher.add("VIOLENCE", patterns)
+```
+## An automated list of words
+
+``` python
+violent_vs = ['assail', 'assault', 'atom-bomb', 'atomise', 'atomize', 'attack', 'backbite', 'backhand', 'bait', 'bastinado', 'bat', 'batter', 'bayonet', 'beak', 'beat', 'beef', 'beetle', 'beleaguer', 'bellyache', 'bemoan', 'beset', 'besiege', 'best', 'better', 'bewail', 'birdie', 'bitch', 'blast', 'bleat', 'blindside', 'blitz', 'blockade', 'bogey', 'bomb', 'bombard', 'bounce', 'break', 'buffet', 'bulldog', 'bunker', 'bunt', 'bust', 'butt', 'cannon', 'cannonade', 'carom', 'carry', 'charge', 'cheat', 'checkmate', 'chicane', 'chip', 'chop', 'chouse', 'circumvent', 'clap', 'clobber', 'clout', 'coldcock', 'complain', 'connect', 'counterattack', 'counterstrike', 'crab', 'cream', 'croak', 'croquet', 'crump', 'crush', 'cuff', 'dab', 'deck', 'declaim', 'deplore', 'desecrate', 'dishonor', 'dishonour', 'dive-bomb', 'double', 'down', 'dribble', 'drive', 'drub', 'dump', 'dunk', 'eagle', 'ebb', 'eliminate', 'exceed', 'firebomb', 'floor', 'fly', 'foul', 'full', 'gang-rape', 'gas', 'glide-bomb', 'gnarl', 'gripe', 'grizzle', 'grouch', 'ground', 'grouse', 'grumble', 'hammer', 'headbutt', 'heel', 'hen-peck', 'hew', 'hit', 'hole', 'holler', 'hook', 'hydrogen-bomb', 'immobilise', 'immobilize', 'infest', 'invade', 'inveigh', 'jab', 'jockey', 'jump', 'kick', 'kill', 'knap', 'knife', 'knock', 'knuckle', 'kvetch', 'lament', 'lash', 'lick', 'loft', 'master', 'mate', 'molest', 'murmur', 'mutter', 'nag', 'nuke', 'occupy', 'out-herod', 'outbrave', 'outcry', 'outdo', 'outdraw', 'outfight', 'outflank', 'outfox', 'outgeneral', 'outgo', 'outgrow', 'outmaneuver', 'outmanoeuvre', 'outmarch', 'outmatch', 'outpace', 'outperform', 'outplay', 'outpoint', 'outrage', 'outrange', 'outroar', 'outsail', 'outscore', 'outsell', 'outshine', 'outshout', 'outsmart', 'outstrip', 'outwear', 'outweigh', 'outwit', 'overcome', 'overmaster', 'overpower', 'overreach', 'overrun', 'overwhelm', 'paste', 'pat', 'pattern-bomb', 'peck', 'pelt', 'pepper', 'percuss', 'pick', 'pip', 'pitch', 'plain', 'play', 'plug', 'poniard', 'pop', 'profane', 'protest', 'pull', 'punch', 'putt', 'quetch', 'racket', 'raid', 'rail', 'rap', 'rape', 'ravish', 'reassail', 'repine', 'report', 'retaliate', 'rout', 'rush', 'savage', 'sclaff', 'scold', 'scoop', 'screw', 'set', 'shaft', 'shame', 'shank', 'shell', 'shoot', 'sic', 'sideswipe', 'single', 'skip-bomb', 'slam-dunk', 'slap', 'sledge', 'sledgehammer', 'slice', 'smash', 'snag', 'snap', 'snick', 'spread-eagle', 'spreadeagle', 'spur', 'squawk', 'stab', 'steamroll', 'steamroller', 'storm', 'strafe', 'strike', 'stroke', 'subdue', 'submarine', 'surmount', 'surpass', 'surprise', 'surround', 'tap', 'teargas', 'thrash', 'thresh', 'tip', 'toe', 'top', 'torpedo', 'triple', 'trounce', 'trump', 'undercut', 'upstage', 'urticate', 'vanquish', 'violate', 'volley', 'whang', 'whine', 'whip', 'whomp', 'worst', 'yammer', 'yawp', 'zap']
 ```
 
----
+## Rule-Based Matching (verbs of violence, e.g.)
 
-## Day 1 — Final Encompassing Activity
-**Task:** Choose **one Latin-script language** (Spanish/German/French).  
-1) Tokenize + lemmatize a short paragraph.  
-2) Compute lemma frequencies.  
-3) **Visualize** the top 10 lemmas using a **horizontal bar chart** (we’ll move beyond bars tomorrow, but start here).
+-   Convert the string on the previous slide into a list:
+-   Then return to the code from before. Add a couple additional violent verbs to the VP to see if the list is comprehensive enough.
 
-```{python}
+``` python
+import spacy
+from spacy.matcher import PhraseMatcher
 
-import matplotlib.pyplot as plt
+nlp = spacy.load("en_core_web_sm")
 
-def plot_top_k(df, k=10, title="Top Lemmas"):
-    top = df.sort_values("count", ascending=False).head(k)
-    plt.figure()
-    plt.barh(top["lemma"], top["count"])
-    plt.title(title)
-    plt.gca().invert_yaxis()
-    plt.tight_layout()
-    plt.show()
+# Insert code here to create a list called "violent_verb_lemmas"
 
-plot_top_k(df_es, k=10, title="Spanish: Top 10 Lemmas")
+patterns = [nlp(v) for v in violent_verb_lemmas]
+matcher = PhraseMatcher(nlp.vocab, attr="LEMMA")
+doc = nlp("They punched, kicked, and attacked the intruder before fleeing.")
+matcher.add("VIOLENCE", patterns)
+[(doc[s:e].text, doc[s:e].lemma_) for _, s, e in matcher(doc)]
 ```
+# Working with Other Languages
 
+## spaCy Multilingual Models
 
-
----
-
-# spaCy Multilingual Models
-
-> spaCy provides language-specific pipelines trained for each language.
+spaCy provides language-specific pipelines trained for each language.
 
 | Language | Model Name        | Example                                |
 | -------- | ----------------- | -------------------------------------- |
@@ -218,50 +181,57 @@ plot_top_k(df_es, k=10, title="Spanish: Top 10 Lemmas")
 | Spanish  | `es_core_news_sm` | "Los estudiantes estudiaron mucho."    |
 | German   | `de_core_news_sm` | "Die Studenten haben fleißig gelernt." |
 
-To download a model (only once):
+## Download additional spaCy models
+
+- Let's download spaCy models for Spanish, German, and French
 
 ```bash
-python -m spacy download fr_core_news_sm
 python -m spacy download es_core_news_sm
 python -m spacy download de_core_news_sm
+python -m spacy download fr_core_news_sm
 ```
 
----
-
-# Tokenization in Multiple Languages
+## Tokenization in Multiple Languages
 
 ```{python}
 import spacy
 
+nlp_en = spacy.load("en_core_web_sm")
 nlp_fr = spacy.load("fr_core_news_sm")
 nlp_es = spacy.load("es_core_news_sm")
 nlp_de = spacy.load("de_core_news_sm")
 
+text_en = "The students have analyzed Proto-Indo-European roots."
 text_fr = "Les étudiants ont analysé les racines proto-indo-européennes."
 text_es = "Los estudiantes analizaron las raíces protoindoeuropeas."
 text_de = "Die Studenten analysierten die indogermanischen Wurzeln."
 
-for lang, nlp, text in [("French", nlp_fr, text_fr), ("Spanish", nlp_es, text_es), ("German", nlp_de, text_de)]:
+for lang, nlp, text in [("English", nlp_en, text_en), ("French", nlp_fr, text_fr), ("Spanish", nlp_es, text_es), ("German", nlp_de, text_de)]:
     doc = nlp(text)
     print(f"\n {lang} Tokens:")
     print([t.text for t in doc])
 ```
+## Activity: Tokenization
 
----
+- Write a new sentence in English.
+- Translate that sentence into French, Spanish, and German (you may use Google Translate)
+- Tokenize that sentence in all 4 languages.
 
-# Lemmatization Across Languages
+## Lemmatization and POS Across Languages
 
 ```{python}
-for lang, nlp, text in [("French", nlp_fr, text_fr), ("Spanish", nlp_es, text_es), ("German", nlp_de, text_de)]:
+for lang, nlp, text in [("English", nlp_en, text_en), ("French", nlp_fr, text_fr), ("Spanish", nlp_es, text_es), ("German", nlp_de, text_de)]:
     doc = nlp(text)
     print(f"\n {lang} Lemmas:")
     for token in doc:
         print(token.text, "→", token.lemma_, token.pos_)
 ```
 
----
+## Activity: Lemmatization
 
-# Creating Cross-Language DataFrames
+- Lemmatize and identify POS for your newly created sentence in English, French, Spanish, and German.
+
+## Creating Cross-Language DataFrames
 
 ```{python}
 import pandas as pd
@@ -272,6 +242,7 @@ def lemma_table(nlp, text, language):
     return pd.DataFrame(data, columns=["word", "lemma", "pos"]).assign(language=language)
 
 df_all = pd.concat([
+    lemma_table(nlp_en, text_en, "English"),
     lemma_table(nlp_fr, text_fr, "French"),
     lemma_table(nlp_es, text_es, "Spanish"),
     lemma_table(nlp_de, text_de, "German")
@@ -279,33 +250,111 @@ df_all = pd.concat([
 
 df_all
 ```
+## Activity: Pandas
 
----
+- Create a `df` for your sentence, as done above.
 
-# ✏️ In-Class Activity — Cross-Linguistic Comparison
+## Simple Frequency Comparisons
 
-**Goal:** Compare how tokenization and lemmatization differ across languages.
+```{python}
+# Build frequency tables **from the DataFrame created above** (no manual lists required)
+# 1) Lemma frequency per language
 
-**Instructions:**
+# Normalize lemmas to lowercase to avoid case-split counts
+freq_lemmas = (
+    df_all.assign(lemma=df_all["lemma"].str.lower())
+          .groupby(["language", "lemma"], as_index=False)
+          .agg(count=("lemma", "size"))
+          .sort_values(["language", "count"], ascending=[True, False])
+)
 
-1. Form groups of 2–3 students. Each group chooses one language (French, Spanish, or German).
-2. Run the spaCy model for your language and extract **tokens**, **lemmas**, and **POS tags**.
-3. Count how many **unique lemmas** appear in your text.
-4. Share results — how do the totals differ across languages, and why?
+# 2) POS frequency per language (optional extension)
+freq_pos = (
+    df_all.groupby(["language", "pos"], as_index=False)
+          .agg(count=("pos", "size"))
+          .sort_values(["language", "count"], ascending=[True, False])
+)
 
-**Hints:**
+# 3) Pivot to compare the same lemma across languages
+lemma_compare = (
+    freq_lemmas.pivot(index="lemma", columns="language", values="count")
+               .fillna(0)
+               .astype(int)
+)
 
-* Does your language mark **gender**, **number**, or **tense** differently?
-* How does that affect lemmatization?
+# Helpful: add a TOTAL column and sort by it
+lemma_compare["TOTAL"] = lemma_compare.sum(axis=1)
+lemma_compare = lemma_compare.sort_values("TOTAL", ascending=False)
 
----
+# Show a quick glance
+freq_lemmas.head(10), freq_pos.head(10), lemma_compare.head(10)
+```{python}
+# Build frequency tables **from the DataFrame created above** (no manual lists required)
+# 1) Lemma frequency per language
 
-# Example Comparison Table
+# Normalize lemmas to lowercase to avoid case-split counts
+freq_lemmas = (
+    df_all.assign(lemma=df_all["lemma"].str.lower())
+          .groupby(["language", "lemma"], as_index=False)
+          .size()
+          .rename(columns={"size": "count"})
+          .sort_values(["language", "count"], ascending=[True, False])
+)
 
-| Language | Tokens | Unique Lemmas | Example Lemma Variation      |
-| -------- | ------ | ------------- | ---------------------------- |
-| English  | 10     | 8             | *ran → run*                  |
-| French   | 12     | 9             | *étudiés → étudier*          |
-| Spanish  | 11     | 8             | *analizaron → analizar*      |
-| German   | 13     | 9             | *analysierten → analysieren* |
+# 2) POS frequency per language (optional extension)
+freq_pos = (
+    df_all.groupby(["language", "pos"], as_index=False)
+          .size()
+          .rename(columns={"size": "count"})
+          .sort_values(["language", "count"], ascending=[True, False])
+)
+
+# 3) Quick pivot to compare the same lemma across languages (fill missing with 0)
+lemma_compare = (
+    freq_lemmas.pivot(index="lemma", columns="language", values="count")
+               .fillna(0)
+               .astype(int)
+               .sort_values(by=list(lemma_compare.columns) if 'lemma_compare' in globals() else None, ascending=False)
+)
+
+freq_lemmas.head(10), freq_pos.head(10), lemma_compare.head(10)
+```
+
+> **Tip:** If you want to compare **types vs. tokens** per language, use:
+>
+> ```python
+> totals = df_all.groupby("language", as_index=False).agg(tokens=("word", "size"), types=("lemma", pd.Series.nunique))
+> totals
+> ```
+
+## displaCy
+
+- Let's render a depend
+
+## displaCy activity
+
+## WordNet in Other Languages
+
+- WordNet itself is English-centric, but **Open Multilingual Wordnet (OMW)** links many languages to the Princeton WordNet synsets. Try:
+
+```{python}
+from nltk.corpus import wordnet as wn
+# List languages available via OMW (IDs)
+sorted(wn.langs())[:20]
+```
+
+## Looking up lemmas by code
+
+```{python}
+# Example: Spanish lemmas linked to the English synset for 'dog.n.01'
+ss = wn.synset('dog.n.01')
+[lem.name() for lem in ss.lemmas(lang='spa')]
+```
+
+
+## WordNet in French, German, Spanish
+
+
+
+## WordNet activity
 
