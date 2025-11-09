@@ -42,16 +42,16 @@ editor: source
 - In the past, when we had to run the same task across multiple objects, we often just copy and pasted our code
 ```python
 book_path = "austen/pride_and_prejudice.txt"
-book_file = open(book_path, mode = 'r')
-book_lines = book_file.readlines()
-clean_lines = [line.rstrip().lower() for line in book_lines]
-pride_and_prejudice = [w for w in clean_lines if w]
-
+with open(book_path, mode="r", encoding="utf-8") as book_file:
+  book_lines = book_file.readlines()
+clean_lines = [line.strip().lower() for line in book_lines]
+pride_and_prejudice = [word for line in clean_lines for word in line.split() if word]
+    
 book_path = "austen/sense_and_sensibility.txt"
-book_file = open(book_path, mode = 'r')
-book_lines = book_file.readlines()
-clean_lines = [line.rstrip().lower() for line in book_lines]
-sense_and_sensibility = [w for w in clean_lines if w]
+with open(book_path, mode="r", encoding="utf-8") as book_file:
+  book_lines = book_file.readlines()
+clean_lines = [line.strip().lower() for line in book_lines]
+sense_and_sensibility = [word for line in clean_lines for word in line.split() if word]
 ```
 - Wouldn't it be great if we could only do this once?
 
@@ -275,10 +275,13 @@ Our script needs to:
 
 ```python
 def read_book(path):
-  book_file = open(path, mode = 'r')
-  book_lines = book_file.readlines()
-  clean_lines = [line.rstrip().lower() for line in book_lines]
-  return([w for w in clean_lines if w])
+    with open(path, mode="r", encoding="utf-8") as book_file:
+        book_lines = book_file.readlines()
+    clean_lines = [line.strip().lower() for line in book_lines]
+    
+    # Split each line into words and flatten the list
+    words = [word for line in clean_lines for word in line.split() if word]
+    return words
 
 alice = read_book("alice.txt")
 print(alice[:200])

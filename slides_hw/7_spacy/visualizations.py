@@ -7,6 +7,26 @@ try:
 except ImportError:
     WordCloud = None
 
+def bar(tokens, k=10, title="Top Words (Bar Chart)"):
+    """
+    Draws a simple bar chart of the k most frequent tokens.
+    """
+    if not tokens:
+        print("No data.")
+        return
+    
+    c = Counter(tokens)
+    top_k = c.most_common(k)
+    words, freqs = zip(*top_k)
+    
+    plt.figure(figsize=(8, 4))
+    plt.bar(words, freqs)
+    plt.title(title)
+    plt.xlabel("Word")
+    plt.ylabel("Frequency")
+    plt.xticks(rotation=45, ha="right")
+    plt.tight_layout()
+    plt.show()
 
 def freq_df(tokens, normalize=False):
     """

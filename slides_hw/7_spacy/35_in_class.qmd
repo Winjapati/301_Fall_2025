@@ -1,89 +1,43 @@
 ---
-title: "Computation for Linguists"
-subtitle: "Other Visualizations"
-date: "November 17, 2025"
-author: "Dr. Andrew M. Byrd"
-format:
-  revealjs:
-    css: header_shrink.css
-    theme: beige
-    slide-number: true
-    center: true
-    toc: true
-    toc-title: "Plan for the Day"
-    toc-depth: 1
-jupyter: python3
-editor: source
+title: "35_in_class"
+format: html
 ---
 
-# Review
-
--   What did you learn last time?
-
-## Recap from Last Time
-
-- Functions how do they work?
-
-```python
-def function_name(arg)
-  code
-  return(output)
-
-function_name(arg)
-```
-
-## Recap from Last Time
-
-```python
-def read_book(path):
-    with open(path, mode="r", encoding="utf-8") as book_file:
-        book_lines = book_file.readlines()
-    clean_lines = [line.strip().lower() for line in book_lines]
-    
-    # Split each line into words and flatten the list
-    words = [word for line in clean_lines for word in line.split() if word]
-    return words
-```
 
 
 ## Activity: Together
 
-- Let's write a function together that inserts the infix "-izz-" immediately a vowel in the word, if that vowel is preceded by a consonant
-  - andrew --> andrizzew
-  - bob --> bizzob
-  - kentucky --> kizzentizzucky
 
-# Using Python to Make Graphics
+```{python}
+def snoop(word):
+  vowels = "aeiou"
+  
+  snooped = ""
+  
+  for c in word:
+    if c == word[0]:
+      snooped += c
+    elif c not in vowels:
+      snooped += c
+    elif c in vowels:
+      snooped += "izz" + c
+  
+  return(snooped)
 
-
-## Choosing the Right Chart
-
-- **Bar (horizontal)**: rankable categories; easy comparison
-- **Pie**: proportion snapshots (few categories)
-- **Line**: order matters (rank, time)
-- **Scatter**: relationship between two numeric features
-- **Word cloud**: quick qualitative gist
+snoop("kentucky")
+```
 
 ## Bar Charts
 
-```python
+```{python}
 from collections import Counter
 alice = read_book("alice.txt")
 ```
 
-## Bar Chart
-
-- Let's write a function that will:
-  - Load up a list of words
-  - Count them
-  - Create a bar chart of a predefined number of forms
-  - Add a title that the user supplies
 
 ## Bar Chart
 
-- Run this code, then experiment by deleting arguments when you run the function
-
-```python
+```{python}
 import matplotlib.pyplot as plt
 from collections import Counter
 
@@ -111,15 +65,11 @@ def bar(tokens, k=10, title="Top Words (Bar Chart)"):
 bar(alice, k=10, title="Top Words in Alice")
 ```
 
-## Pie Charts
-
-- Great for **composition**
-  - POS proportions
-  - Character shares - how the total text is divided among letters
 
 ## Pie Charts
 
-```python
+```{python}
+
 def pie(text, k=8, title="Character Shares (Pie Chart)", cmap_name="Set3", ignore_spaces=True):
     """
     Accepts either a string or a list of characters/words.
@@ -160,15 +110,13 @@ def pie(text, k=8, title="Character Shares (Pie Chart)", cmap_name="Set3", ignor
 
 ## Pie Charts
 
-```python
+```{python}
 pie(alice, k = 5)
 ```
 
 ## Line Charts
 
-- Good for **ordered** data, especially looking at the frequency of a large number of items
-
-```python
+```{python}
 import matplotlib.pyplot as plt
 from collections import Counter
 
@@ -201,13 +149,13 @@ def line(tokens, title="Line Chart: Rank vs Frequency", logy=False, marker="o"):
 ```
 
 ## Line Charts 
-```python
+```{python}
 # Regular scale
 line(alice, title="Rank vs Frequency (Regular)")
 ```
 
 ## Line Charts
-```python
+```{python}
 # Log scale (shows Zipf-like pattern clearly)
 line(alice, title="Rank vs Frequency (Log Scale)", logy=True)
 ```
@@ -217,7 +165,7 @@ line(alice, title="Rank vs Frequency (Log Scale)", logy=True)
 - Great for comparing **two features** per item (e.g., frequency vs length)
 - Our function here compares word length vs. frequency
 
-```python
+```{python}
 import matplotlib.pyplot as plt
 from collections import Counter
 import pandas as pd
@@ -256,13 +204,13 @@ def scatter(tokens, title="Scatter Plot: Length vs Frequency", logy=False):
 
 ## Scatter Plots
 
-```python
+```{python}
 scatter(alice, title="Word Length vs Frequency (Normal Scale)")
 ```
 
 ## Scatter Plots
 
-```python
+```{python}
 # Same plot with log-scaled y-axis
 scatter(alice, title="Word Length vs Frequency (Log Scale)", logy=True)
 ```
@@ -270,7 +218,7 @@ scatter(alice, title="Word Length vs Frequency (Log Scale)", logy=True)
 
 - Provides a nice visual to emphasize the most frequent tokens
 
-```python
+```{python}
 from collections import Counter
 import matplotlib.pyplot as plt
 
@@ -306,11 +254,14 @@ def wordcloud_plot(tokens, title="Word Cloud", width=800, height=400, background
 
 ## Word Clouds
 
-```python
+```{python}
 words = ["cat", "dog", "cat", "fish", "dog", "cat", "mouse", "mouse", "mouse"]
 wordcloud_plot(alice, title="Animal Word Cloud")
 ```
 
 # Final Activity
 
-## xxxxxxxxx
+## Final Activity
+
+- Load up a new book from the Gutenberg Project from past activities
+- Sketch out bar charts, pie charts, line charts, scatter plots, and word clouds using this data. 
