@@ -1,4 +1,9 @@
 ---
+title: "32_in_class"
+format: html
+---
+
+---
 title: "Computation for Linguists"
 subtitle: "Working with non-English data"
 date: "November 10, 2025"
@@ -22,7 +27,7 @@ editor: source
 
 ## Recap from Last Time
 
-```python
+```{python}
 import spacy
 nlp_en = spacy.load("en_core_web_sm")
 
@@ -193,7 +198,7 @@ python -m spacy download fr_core_news_sm
 
 ## Tokenization in Multiple Languages
 
-```python
+```{python}
 import spacy
 
 nlp_en = spacy.load("en_core_web_sm")
@@ -219,7 +224,7 @@ for lang, nlp, text in [("English", nlp_en, text_en), ("French", nlp_fr, text_fr
 
 ## Lemmatization and POS Across Languages
 
-```python
+```{python}
 for lang, nlp, text in [("English", nlp_en, text_en), ("French", nlp_fr, text_fr), ("Spanish", nlp_es, text_es), ("German", nlp_de, text_de)]:
     doc = nlp(text)
     print(f"\n {lang} Lemmas:")
@@ -233,7 +238,7 @@ for lang, nlp, text in [("English", nlp_en, text_en), ("French", nlp_fr, text_fr
 
 ## Creating Cross-Language DataFrames
 
-```python
+```{python}
 import pandas as pd
 
 def lemma_table(nlp, text, language):
@@ -259,7 +264,7 @@ df_all
 - Let's use our `Counter` function to compare how common certain words are.
 - Before we begin, let's load up two texts in English & Spanish.
 
-```python
+```{python}
 text_en = "Whereas recognition of the inherent dignity and of the equal and inalienable rights of all members of the human family is the foundation of freedom, justice and peace in the world, the peoples of the United Nations have reaffirmed their faith in fundamental human rights and in the dignity and worth of the human person. They have resolved to promote social progress and better standards of life in larger freedom."
 
 text_es = "Considerando que el reconocimiento de la dignidad intrínseca y de los derechos iguales e inalienables de todos los miembros de la familia humana constituye la base de la libertad, la justicia y la paz en el mundo, los pueblos de las Naciones Unidas han reafirmado su fe en los derechos humanos fundamentales y en la dignidad y el valor de la persona humana. Han decidido promover el progreso social y elevar el nivel de vida dentro de una libertad más amplia."
@@ -268,7 +273,7 @@ text_es = "Considerando que el reconocimiento de la dignidad intrínseca y de lo
 
 ## Frequency Comparisons
 
-```python
+```{python}
 from collections import Counter
 import spacy
 
@@ -302,13 +307,13 @@ def_det_stats(nlp_es, text_es, "Spanish", include_contractions=False)
 
 - Copy the below texts and calculate how many determiners are in German & French.
 
-```python
+```{python}
 text_fr = "Considérant que la reconnaissance de la dignité inhérente et des droits égaux et inaliénables de tous les membres de la famille humaine constitue le fondement de la liberté, de la justice et de la paix dans le monde, les peuples des Nations Unies ont réaffirmé leur foi dans les droits fondamentaux de l’homme, dans la dignité et la valeur de la personne humaine. Ils se sont engagés à favoriser le progrès social et à élever le niveau de vie dans une liberté plus grande."
 
 text_de = "Da die Anerkennung der angeborenen Würde und der gleichen und unveräußerlichen Rechte aller Mitglieder der menschlichen Familie die Grundlage der Freiheit, der Gerechtigkeit und des Friedens in der Welt bildet, haben die Völker der Vereinten Nationen ihren Glauben an die grundlegenden Menschenrechte sowie an die Würde und den Wert der menschlichen Person erneut bekräftigt. Sie haben beschlossen, sozialen Fortschritt zu fördern und den Lebensstandard in größerer Freiheit zu erhöhen."
 ```
 
-```python
+```{python}
 nlp_fr = spacy.load("fr_core_news_sm")
 nlp_de = spacy.load("de_core_news_sm")
 
@@ -320,9 +325,8 @@ def_det_stats(nlp_de, text_de, "German", include_contractions=False)
 
 - WordNet itself is English-centric, but **Open Multilingual Wordnet (OMW)** links many languages to the Princeton WordNet synsets. 
 - Try:
-  - Note: `qcn` == Simplified Chinese
-  
-```python
+
+```{python}
 # pip install pycountry
 import pycountry
 from nltk.corpus import wordnet as wn
@@ -337,9 +341,11 @@ for code in codes:
         print(f"{code} → (not found)")
 ```
 
+- (qcn == Simplified Chinese)
+
 ## Looking up lemmas by code
 
-```python
+```{python}
 # Example: Spanish lemmas linked to the English synset for 'dog.n.01'
 ss = wn.synset('dog.n.01')
 [lem.name() for lem in ss.lemmas(lang='spa')]
@@ -349,10 +355,9 @@ ss = wn.synset('dog.n.01')
 
 - Using the 3-letter ISO code and the above code, look up the words meaning `dog` (`n.01`) in French
 
-```python
+```{python}
 # Example: Spanish lemmas linked to the English synset for 'dog.n.01'
 ss = wn.synset('dog.n.01')
 [lem.name() for lem in ss.lemmas(lang='fra')]
 ```
 - Wait, where's German?
-

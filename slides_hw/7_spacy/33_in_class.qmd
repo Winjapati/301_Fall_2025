@@ -1,39 +1,11 @@
 ---
-title: "Computation for Linguists"
-subtitle: "Working with non-English data"
-date: "November 12, 2025"
-author: "Dr. Andrew M. Byrd"
-format:
-  revealjs:
-    css: header_shrink.css
-    theme: beige
-    slide-number: true
-    center: true
-    toc: true
-    toc-title: "Plan for the Day"
-    toc-depth: 1
-jupyter: python3
-editor: source
+title: "33_in_class"
+format: html
 ---
 
-# Review
-
--   What did you learn last time?
-
 ## Recap from Last Time
 
-spaCy provides language-specific pipelines trained for each language.
-
-| Language | Model Name        | Example                                |
-| -------- | ----------------- | -------------------------------------- |
-| English  | `en_core_web_sm`  | "The students studied hard."           |
-| French   | `fr_core_news_sm` | "Les étudiants ont étudié dur."        |
-| Spanish  | `es_core_news_sm` | "Los estudiantes estudiaron mucho."    |
-| German   | `de_core_news_sm` | "Die Studenten haben fleißig gelernt." |
-
-## Recap from Last Time
-
-```python
+```{python}
 import spacy
 
 nlp_en = spacy.load("en_core_web_sm")
@@ -54,7 +26,7 @@ for lang, nlp, text in [("English", nlp_en, text_en), ("French", nlp_fr, text_fr
 
 ## Recap from Last Time
 
-```python
+```{python}
 for lang, nlp, text in [("English", nlp_en, text_en), ("French", nlp_fr, text_fr), ("Spanish", nlp_es, text_es), ("German", nlp_de, text_de)]:
     doc = nlp(text)
     print(f"\n {lang} Lemmas:")
@@ -64,10 +36,7 @@ for lang, nlp, text in [("English", nlp_en, text_en), ("French", nlp_fr, text_fr
 
 ## Recap from Last Time
 
-- Let's use our `Counter` function to compare how common certain words are.
-- Before we begin, let's load up two texts in English & Spanish.
-
-```python
+```{python}
 text_en = "Whereas recognition of the inherent dignity and of the equal and inalienable rights of all members of the human family is the foundation of freedom, justice and peace in the world, the peoples of the United Nations have reaffirmed their faith in fundamental human rights and in the dignity and worth of the human person. They have resolved to promote social progress and better standards of life in larger freedom."
 
 text_es = "Considerando que el reconocimiento de la dignidad intrínseca y de los derechos iguales e inalienables de todos los miembros de la familia humana constituye la base de la libertad, la justicia y la paz en el mundo, los pueblos de las Naciones Unidas han reafirmado su fe en los derechos humanos fundamentales y en la dignidad y el valor de la persona humana. Han decidido promover el progreso social y elevar el nivel de vida dentro de una libertad más amplia."
@@ -75,7 +44,7 @@ text_es = "Considerando que el reconocimiento de la dignidad intrínseca y de lo
 
 ## Recap from Last Time
 
-```python
+```{python}
 from collections import Counter
 import spacy
 
@@ -103,29 +72,33 @@ prep_stats(nlp_es, text_es, "Spanish")
 ```
 ## Review Activity
 
-- Copy the below texts and calculate how many prepositions are in German & French.
-
-```python
+```{python}
 text_fr = "Considérant que la reconnaissance de la dignité inhérente et des droits égaux et inaliénables de tous les membres de la famille humaine constitue le fondement de la liberté, de la justice et de la paix dans le monde, les peuples des Nations Unies ont réaffirmé leur foi dans les droits fondamentaux de l’homme, dans la dignité et la valeur de la personne humaine. Ils se sont engagés à favoriser le progrès social et à élever le niveau de vie dans une liberté plus grande."
 
 text_de = "Da die Anerkennung der angeborenen Würde und der gleichen und unveräußerlichen Rechte aller Mitglieder der menschlichen Familie die Grundlage der Freiheit, der Gerechtigkeit und des Friedens in der Welt bildet, haben die Völker der Vereinten Nationen ihren Glauben an die grundlegenden Menschenrechte sowie an die Würde und den Wert der menschlichen Person erneut bekräftigt. Sie haben beschlossen, sozialen Fortschritt zu fördern und den Lebensstandard in größerer Freiheit zu erhöhen."
 ```
 
-# Analyzing Languages with Non-Latin Scripts
+## Review Activity
 
-## Non-Latin Examples (Greek, Chinese, Japanese)
+```{python}
+nlp_fr = spacy.load("fr_core_news_sm")
+nlp_de = spacy.load("de_core_news_sm")
 
-```python
+prep_stats(nlp_fr, text_fr, "French")
+prep_stats(nlp_de, text_de, "German")
+```
+
+## Non-Latin Examples (Greek, Chinese, Thai)
+
+```{python}
 el_text = "Ο σκύλος τρέχει γρήγορα στον κήπο. Οι σκύλοι είναι πιστά ζώα."
 zh_text = "狗在花园里跑得很快。狗是忠诚的动物。"
 ja_text = "犬は庭で速く走ります。犬は忠実な動物です。"
 ```
 
-- Each line means something like: “The dog runs quickly in the garden. Dogs are loyal animals.”
-
 ## Tokenizing
 
-```python
+```{python}
 import spacy
 
 nlp_el = spacy.load("el_core_news_sm")
@@ -144,7 +117,7 @@ for lang, nlp, text in [
 
 ## Lemmatizing
 
-```python
+```{python}
 import spacy
 
 nlp_el = spacy.load("el_core_news_sm")
@@ -164,20 +137,15 @@ for lang, nlp, text in [
 
 ## Activity: Tokenize & Lemmatize
 
-- Copy the below sentences, and create lemmatized lists for each language. 
-
-```python
+```{python}
 cat_el = "Η γάτα κοιμάται στον καναπέ."
 cat_zh = "猫在沙发上睡觉。"
 cat_ja = "猫はソファで寝ます。"
 ```
 
-# Transcribing Languages
-
 ## Transcribing Greek
 
-```python
-# pip install Unidecode
+```{python}
 from unidecode import unidecode
 
 el_text = "Ο σκύλος τρέχει γρήγορα στον κήπο. Οι σκύλοι είναι πιστά ζώα."
@@ -186,8 +154,7 @@ print(unidecode(el_text))
 
 ## Transcribing Chinese
 
-```python
-# pip install pypinyin
+```{python}
 from pypinyin import pinyin, Style
 
 zh_text = "狗在花园里跑得很快。狗是忠诚的动物。"
@@ -197,8 +164,7 @@ print(" ".join([syll[0] for syll in pinyin_list]))
 
 ## Transcribing Japanese
 
-```python
-# pip install pykakasi
+```{python}
 import pykakasi
 
 text = "犬は庭で速く走ります。犬は忠実な動物です。"
@@ -209,14 +175,9 @@ romaji = " ".join([item['hepburn'] for item in result])
 print(romaji)
 ```
 
-# Using WordNet
-
 ## WordNet in Other Languages
 
-- Last time: **Open Multilingual Wordnet (OMW)** links many languages to the Princeton WordNet synsets. 
-- Re-run this code and identify the ISO codes for Modern Greek, Mandarin Chinese, and Japanese
-
-```python
+```{python}
 import pycountry
 from nltk.corpus import wordnet as wn
 # List languages available via OMW (IDs)
@@ -234,7 +195,7 @@ for code in codes:
 
 - Let's modify this script to look up the word for 'dog' in our three languages
 
-```python
+```{python}
 ss = wn.synset('dog.n.01')
 [lem.name() for lem in ss.lemmas(lang='spa')]
 ```
@@ -243,4 +204,46 @@ ss = wn.synset('dog.n.01')
 
 - Look up the lemmas in WordNet linked to the basic English synset for `cat`
 - Then, transcribe each word into Latin characters.
+
+```{python}
+from unidecode import unidecode
+from pypinyin import pinyin, Style
+import pykakasi
+
+# Cat synsets stored as variables for each lang
+ss = wn.synset('cat.n.01')
+cat_ell = [lem.name() for lem in ss.lemmas(lang='ell')]
+
+ss = wn.synset('cat.n.01')
+cat_cmn = [lem.name() for lem in ss.lemmas(lang='cmn')]
+
+ss = wn.synset('cat.n.01')
+cat_jpn = [lem.name() for lem in ss.lemmas(lang='jpn')]
+
+# confirming it works
+print(cat_ell, cat_cmn, cat_jpn)
+
+# creating a list comprehension to store the transcribed greek words
+lat_cat_ell = [unidecode(i) for i in cat_ell]
+print("Greek: ", lat_cat_ell)
+
+# printing the Chinese word
+pinyin_list = pinyin(cat_cmn, style=Style.TONE3)
+print("Chinese: ", " ".join([syll[0] for syll in pinyin_list]))
+
+# creating a list comprehension 
+kks = pykakasi.kakasi()
+lat_cat_jpn = [kks.convert(i) for i in cat_jpn]
+print("Japanese: ", lat_cat_jpn)
+
+# narrowing it down to 'hepburn'
+hep_list = []
+
+for i in lat_cat_jpn:      # going down a level
+    for j in i:            # j is a single dict
+        if 'hepburn' in j: # check key exists
+            hep_list.append(j['hepburn'])
+print(hep_list)
+```
+
 
