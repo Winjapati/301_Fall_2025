@@ -3,8 +3,6 @@ title: "35_in_class"
 format: html
 ---
 
-
-
 ## Activity: Together
 
 
@@ -264,4 +262,24 @@ wordcloud_plot(alice, title="Animal Word Cloud")
 ## Final Activity
 
 - Load up a new book from the Gutenberg Project from past activities
-- Sketch out bar charts, pie charts, line charts, scatter plots, and word clouds using this data. 
+- Sketch out bar charts, pie charts, line charts, scatter plots, and word clouds using this data.
+
+```{python}
+usher = read_book("usher.txt")
+
+#bar chart
+bar(usher, k=10, title="Top Words in the Fall of the House of Usher")
+#pie chart
+pie(usher, k = 5)
+# Regular scale
+line(usher, title="Rank vs Frequency (Regular)")
+# Log scale (shows Zipf-like pattern clearly)
+line(usher, title="Rank vs Frequency (Log Scale)", logy=True)
+# Scatter plot
+scatter(usher, title="Word Length vs Frequency (Normal Scale)")
+# Same plot with log-scaled y-axis
+scatter(usher, title="Word Length vs Frequency (Log Scale)", logy=True)
+# Word Cloud
+wordcloud_plot(usher, title="Fall of the House of Usher Word Cloud")
+```
+

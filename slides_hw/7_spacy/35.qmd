@@ -307,10 +307,12 @@ def wordcloud_plot(tokens, title="Word Cloud", width=800, height=400, background
 ## Word Clouds
 
 ```python
-words = ["cat", "dog", "cat", "fish", "dog", "cat", "mouse", "mouse", "mouse"]
-wordcloud_plot(alice, title="Animal Word Cloud")
+wordcloud_plot(alice, title="Alice in Wonderland Word Cloud")
 ```
 
 # Final Activity
 
-## xxxxxxxxx
+## Final Activity
+
+- Load up a new book from the Gutenberg Project from past activities
+- Sketch out bar charts, pie charts, line charts, scatter plots, and word clouds using this data.
