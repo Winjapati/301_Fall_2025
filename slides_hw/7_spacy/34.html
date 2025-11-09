@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="33_files/libs/clipboard/clipboard.min.js"></script>
-<script src="33_files/libs/quarto-html/tabby.min.js"></script>
-<script src="33_files/libs/quarto-html/popper.min.js"></script>
-<script src="33_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="33_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="33_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="33_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="33_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="34_files/libs/clipboard/clipboard.min.js"></script>
+<script src="34_files/libs/quarto-html/tabby.min.js"></script>
+<script src="34_files/libs/quarto-html/popper.min.js"></script>
+<script src="34_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="34_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="34_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="34_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="34_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Dr.&nbsp;Andrew M. Byrd">
-  <meta name="dcterms.date" content="2025-11-12">
+  <meta name="dcterms.date" content="2025-11-14">
   <title>Computation for Linguists</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="33_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="33_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="34_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="34_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -96,12 +96,12 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="33_files/libs/revealjs/dist/theme/quarto.css">
+  <link rel="stylesheet" href="34_files/libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="header_shrink.css">
-  <link href="33_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="33_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="33_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="33_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link href="34_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="34_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="34_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="34_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -394,7 +394,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Computation for Linguists</h1>
-  <p class="subtitle">Working with non-English data</p>
+  <p class="subtitle">Writing Functions</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -404,15 +404,15 @@ Dr.&nbsp;Andrew M. Byrd
 </div>
 </div>
 
-  <p class="date">2025-11-12</p>
+  <p class="date">2025-11-14</p>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Plan for the Day</h2>
 <ul>
 <li><a href="#/review" id="/toc-review">Review</a></li>
-<li><a href="#/analyzing-languages-with-non-latin-scripts" id="/toc-analyzing-languages-with-non-latin-scripts">Analyzing Languages with Non-Latin Scripts</a></li>
-<li><a href="#/transcribing-languages" id="/toc-transcribing-languages">Transcribing Languages</a></li>
-<li><a href="#/using-wordnet" id="/toc-using-wordnet">Using WordNet</a></li>
+<li><a href="#/functions" id="/toc-functions">Functions</a></li>
+<li><a href="#/writing-functions" id="/toc-writing-functions">Writing Functions</a></li>
+<li><a href="#/final-activity" id="/toc-final-activity">Final Activity</a></li>
 </ul>
 </nav>
 </section>
@@ -425,244 +425,329 @@ Dr.&nbsp;Andrew M. Byrd
 </section>
 <section id="recap-from-last-time" class="slide level2 center">
 <h2>Recap from Last Time</h2>
-<p>spaCy provides language-specific pipelines trained for each language.</p>
-<table class="caption-top">
-<colgroup>
-<col style="width: 12%">
-<col style="width: 26%">
-<col style="width: 60%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Language</th>
-<th>Model Name</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>English</td>
-<td><code>en_core_web_sm</code></td>
-<td>“The students studied hard.”</td>
-</tr>
-<tr class="even">
-<td>French</td>
-<td><code>fr_core_news_sm</code></td>
-<td>“Les étudiants ont étudié dur.”</td>
-</tr>
-<tr class="odd">
-<td>Spanish</td>
-<td><code>es_core_news_sm</code></td>
-<td>“Los estudiantes estudiaron mucho.”</td>
-</tr>
-<tr class="even">
-<td>German</td>
-<td><code>de_core_news_sm</code></td>
-<td>“Die Studenten haben fleißig gelernt.”</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="recap-from-last-time-1" class="slide level2 center">
-<h2>Recap from Last Time</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="im">import</span> spacy</span>
-<span id="cb1-2"><a href=""></a></span>
-<span id="cb1-3"><a href=""></a>nlp_en <span class="op">=</span> spacy.load(<span class="st">"en_core_web_sm"</span>)</span>
-<span id="cb1-4"><a href=""></a>nlp_fr <span class="op">=</span> spacy.load(<span class="st">"fr_core_news_sm"</span>)</span>
-<span id="cb1-5"><a href=""></a>nlp_es <span class="op">=</span> spacy.load(<span class="st">"es_core_news_sm"</span>)</span>
-<span id="cb1-6"><a href=""></a>nlp_de <span class="op">=</span> spacy.load(<span class="st">"de_core_news_sm"</span>)</span>
-<span id="cb1-7"><a href=""></a></span>
-<span id="cb1-8"><a href=""></a>text_en <span class="op">=</span> <span class="st">"The students have analyzed Proto-Indo-European roots."</span></span>
-<span id="cb1-9"><a href=""></a>text_fr <span class="op">=</span> <span class="st">"Les étudiants ont analysé les racines proto-indo-européennes."</span></span>
-<span id="cb1-10"><a href=""></a>text_es <span class="op">=</span> <span class="st">"Los estudiantes analizaron las raíces protoindoeuropeas."</span></span>
-<span id="cb1-11"><a href=""></a>text_de <span class="op">=</span> <span class="st">"Die Studenten analysierten die indogermanischen Wurzeln."</span></span>
-<span id="cb1-12"><a href=""></a></span>
-<span id="cb1-13"><a href=""></a><span class="cf">for</span> lang, nlp, text <span class="kw">in</span> [(<span class="st">"English"</span>, nlp_en, text_en), (<span class="st">"French"</span>, nlp_fr, text_fr), (<span class="st">"Spanish"</span>, nlp_es, text_es), (<span class="st">"German"</span>, nlp_de, text_de)]:</span>
-<span id="cb1-14"><a href=""></a>    doc <span class="op">=</span> nlp(text)</span>
-<span id="cb1-15"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss"> </span><span class="sc">{</span>lang<span class="sc">}</span><span class="ss"> Tokens:"</span>)</span>
-<span id="cb1-16"><a href=""></a>    <span class="bu">print</span>([t.text <span class="cf">for</span> t <span class="kw">in</span> doc])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="recap-from-last-time-2" class="slide level2 center">
-<h2>Recap from Last Time</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a><span class="cf">for</span> lang, nlp, text <span class="kw">in</span> [(<span class="st">"English"</span>, nlp_en, text_en), (<span class="st">"French"</span>, nlp_fr, text_fr), (<span class="st">"Spanish"</span>, nlp_es, text_es), (<span class="st">"German"</span>, nlp_de, text_de)]:</span>
-<span id="cb2-2"><a href=""></a>    doc <span class="op">=</span> nlp(text)</span>
-<span id="cb2-3"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss"> </span><span class="sc">{</span>lang<span class="sc">}</span><span class="ss"> Lemmas:"</span>)</span>
-<span id="cb2-4"><a href=""></a>    <span class="cf">for</span> token <span class="kw">in</span> doc:</span>
-<span id="cb2-5"><a href=""></a>        <span class="bu">print</span>(token.text, <span class="st">"→"</span>, token.lemma_, token.pos_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="recap-from-last-time-3" class="slide level2 center">
-<h2>Recap from Last Time</h2>
 <ul>
-<li>Let’s use our <code>Counter</code> function to compare how common certain words are.</li>
-<li>Before we begin, let’s load up two texts in English &amp; Spanish.</li>
+<li>spaCy</li>
+<li>WordNet</li>
+<li>analyzing non-English languages</li>
+<li>transcribing to Latin</li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a>text_en <span class="op">=</span> <span class="st">"Whereas recognition of the inherent dignity and of the equal and inalienable rights of all members of the human family is the foundation of freedom, justice and peace in the world, the peoples of the United Nations have reaffirmed their faith in fundamental human rights and in the dignity and worth of the human person. They have resolved to promote social progress and better standards of life in larger freedom."</span></span>
-<span id="cb3-2"><a href=""></a></span>
-<span id="cb3-3"><a href=""></a>text_es <span class="op">=</span> <span class="st">"Considerando que el reconocimiento de la dignidad intrínseca y de los derechos iguales e inalienables de todos los miembros de la familia humana constituye la base de la libertad, la justicia y la paz en el mundo, los pueblos de las Naciones Unidas han reafirmado su fe en los derechos humanos fundamentales y en la dignidad y el valor de la persona humana. Han decidido promover el progreso social y elevar el nivel de vida dentro de una libertad más amplia."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="recap-from-last-time-4" class="slide level2 center">
-<h2>Recap from Last Time</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
-<span id="cb4-2"><a href=""></a><span class="im">import</span> spacy</span>
-<span id="cb4-3"><a href=""></a></span>
-<span id="cb4-4"><a href=""></a>nlp_en <span class="op">=</span> spacy.load(<span class="st">"en_core_web_sm"</span>)</span>
-<span id="cb4-5"><a href=""></a>nlp_es <span class="op">=</span> spacy.load(<span class="st">"es_core_news_sm"</span>)</span>
-<span id="cb4-6"><a href=""></a></span>
-<span id="cb4-7"><a href=""></a><span class="kw">def</span> is_preposition(tok):</span>
-<span id="cb4-8"><a href=""></a>  <span class="co"># True for tokens that are prepositions or postpositions</span></span>
-<span id="cb4-9"><a href=""></a>  <span class="cf">return</span> tok.pos_ <span class="op">==</span> <span class="st">"ADP"</span></span>
-<span id="cb4-10"><a href=""></a></span>
-<span id="cb4-11"><a href=""></a><span class="kw">def</span> prep_stats(nlp, text, lang_label):</span>
-<span id="cb4-12"><a href=""></a>  doc <span class="op">=</span> nlp(text)</span>
-<span id="cb4-13"><a href=""></a>  <span class="co"># word-like tokens only for the denominator</span></span>
-<span id="cb4-14"><a href=""></a>  word_tokens <span class="op">=</span> [t <span class="cf">for</span> t <span class="kw">in</span> doc <span class="cf">if</span> t.is_alpha]</span>
-<span id="cb4-15"><a href=""></a>  total <span class="op">=</span> <span class="bu">len</span>(word_tokens)</span>
-<span id="cb4-16"><a href=""></a>  preps <span class="op">=</span> [t.text <span class="cf">for</span> t <span class="kw">in</span> doc <span class="cf">if</span> is_preposition(t)]</span>
-<span id="cb4-17"><a href=""></a>  n <span class="op">=</span> <span class="bu">len</span>(preps)</span>
-<span id="cb4-18"><a href=""></a>  rate <span class="op">=</span> (n <span class="op">/</span> total) <span class="cf">if</span> total <span class="cf">else</span> <span class="fl">0.0</span></span>
-<span id="cb4-19"><a href=""></a>  <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>lang_label<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>n<span class="sc">}</span><span class="ss"> prepositions / </span><span class="sc">{</span>total<span class="sc">}</span><span class="ss"> word tokens (</span><span class="sc">{</span>rate<span class="sc">:.2%}</span><span class="ss">)"</span>)</span>
-<span id="cb4-20"><a href=""></a>  <span class="bu">print</span>(<span class="st">"Top forms:"</span>, Counter(w.lower() <span class="cf">for</span> w <span class="kw">in</span> preps).most_common())</span>
-<span id="cb4-21"><a href=""></a></span>
-<span id="cb4-22"><a href=""></a><span class="co"># Run on English and Spanish samples</span></span>
-<span id="cb4-23"><a href=""></a>prep_stats(nlp_en, text_en, <span class="st">"English"</span>)</span>
-<span id="cb4-24"><a href=""></a>prep_stats(nlp_es, text_es, <span class="st">"Spanish"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="review-activity" class="slide level2 center">
-<h2>Review Activity</h2>
-<ul>
-<li>Copy the below texts and calculate how many prepositions are in German &amp; French.</li>
-</ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a>text_fr <span class="op">=</span> <span class="st">"Considérant que la reconnaissance de la dignité inhérente et des droits égaux et inaliénables de tous les membres de la famille humaine constitue le fondement de la liberté, de la justice et de la paix dans le monde, les peuples des Nations Unies ont réaffirmé leur foi dans les droits fondamentaux de l’homme, dans la dignité et la valeur de la personne humaine. Ils se sont engagés à favoriser le progrès social et à élever le niveau de vie dans une liberté plus grande."</span></span>
-<span id="cb5-2"><a href=""></a></span>
-<span id="cb5-3"><a href=""></a>text_de <span class="op">=</span> <span class="st">"Da die Anerkennung der angeborenen Würde und der gleichen und unveräußerlichen Rechte aller Mitglieder der menschlichen Familie die Grundlage der Freiheit, der Gerechtigkeit und des Friedens in der Welt bildet, haben die Völker der Vereinten Nationen ihren Glauben an die grundlegenden Menschenrechte sowie an die Würde und den Wert der menschlichen Person erneut bekräftigt. Sie haben beschlossen, sozialen Fortschritt zu fördern und den Lebensstandard in größerer Freiheit zu erhöhen."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section></section>
 <section>
-<section id="analyzing-languages-with-non-latin-scripts" class="title-slide slide level1 center">
-<h1>Analyzing Languages with Non-Latin Scripts</h1>
+<section id="functions" class="title-slide slide level1 center">
+<h1>Functions</h1>
 
 </section>
-<section id="non-latin-examples-greek-chinese-japanese" class="slide level2 center">
-<h2>Non-Latin Examples (Greek, Chinese, Japanese)</h2>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a>el_text <span class="op">=</span> <span class="st">"Ο σκύλος τρέχει γρήγορα στον κήπο. Οι σκύλοι είναι πιστά ζώα."</span></span>
-<span id="cb6-2"><a href=""></a>zh_text <span class="op">=</span> <span class="st">"狗在花园里跑得很快。狗是忠诚的动物。"</span></span>
-<span id="cb6-3"><a href=""></a>ja_text <span class="op">=</span> <span class="st">"犬は庭で速く走ります。犬は忠実な動物です。"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="what-are-functions" class="slide level2 center">
+<h2>What are functions?</h2>
 <ul>
-<li>Each line means something like: “The dog runs quickly in the garden. Dogs are loyal animals.”</li>
+<li>These are all types of <strong>functions</strong></li>
+<li>Functions are:
+<ul>
+<li>blocks of code that run only when <em>called</em></li>
+<li>return data as a result</li>
+<li>make your code simpler by allowing you to avoid code repetition</li>
+</ul></li>
 </ul>
 </section>
-<section id="tokenizing" class="slide level2 center">
-<h2>Tokenizing</h2>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a><span class="im">import</span> spacy</span>
-<span id="cb7-2"><a href=""></a></span>
-<span id="cb7-3"><a href=""></a>nlp_el <span class="op">=</span> spacy.load(<span class="st">"el_core_news_sm"</span>)</span>
-<span id="cb7-4"><a href=""></a>nlp_zh <span class="op">=</span> spacy.load(<span class="st">"zh_core_web_sm"</span>)</span>
-<span id="cb7-5"><a href=""></a>nlp_ja <span class="op">=</span> spacy.load(<span class="st">"ja_core_news_sm"</span>)</span>
-<span id="cb7-6"><a href=""></a></span>
-<span id="cb7-7"><a href=""></a><span class="cf">for</span> lang, nlp, text <span class="kw">in</span> [</span>
-<span id="cb7-8"><a href=""></a>    (<span class="st">"Greek"</span>, nlp_el, el_text),</span>
-<span id="cb7-9"><a href=""></a>    (<span class="st">"Chinese"</span>, nlp_zh, zh_text),</span>
-<span id="cb7-10"><a href=""></a>    (<span class="st">"Japanese"</span>, nlp_ja, ja_text)</span>
-<span id="cb7-11"><a href=""></a>]:</span>
-<span id="cb7-12"><a href=""></a>    doc <span class="op">=</span> nlp(text)</span>
-<span id="cb7-13"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="sc">{</span>lang<span class="sc">}</span><span class="ss"> tokens:"</span>)</span>
-<span id="cb7-14"><a href=""></a>    <span class="bu">print</span>([t.text <span class="cf">for</span> t <span class="kw">in</span> doc])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="lemmatizing" class="slide level2 center">
-<h2>Lemmatizing</h2>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href=""></a><span class="im">import</span> spacy</span>
-<span id="cb8-2"><a href=""></a></span>
-<span id="cb8-3"><a href=""></a>nlp_el <span class="op">=</span> spacy.load(<span class="st">"el_core_news_sm"</span>)</span>
-<span id="cb8-4"><a href=""></a>nlp_zh <span class="op">=</span> spacy.load(<span class="st">"zh_core_web_sm"</span>)</span>
-<span id="cb8-5"><a href=""></a>nlp_ja <span class="op">=</span> spacy.load(<span class="st">"ja_core_news_sm"</span>)</span>
-<span id="cb8-6"><a href=""></a></span>
-<span id="cb8-7"><a href=""></a><span class="cf">for</span> lang, nlp, text <span class="kw">in</span> [</span>
-<span id="cb8-8"><a href=""></a>    (<span class="st">"Greek"</span>, nlp_el, el_text),</span>
-<span id="cb8-9"><a href=""></a>    (<span class="st">"Chinese"</span>, nlp_zh, zh_text),</span>
-<span id="cb8-10"><a href=""></a>    (<span class="st">"Japanese"</span>, nlp_ja, ja_text)</span>
-<span id="cb8-11"><a href=""></a>]:</span>
-<span id="cb8-12"><a href=""></a>    doc <span class="op">=</span> nlp(text)</span>
-<span id="cb8-13"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="sc">{</span>lang<span class="sc">}</span><span class="ss"> lemmas:"</span>)</span>
-<span id="cb8-14"><a href=""></a>    <span class="bu">print</span>([t.lemma_ <span class="cf">for</span> t <span class="kw">in</span> doc])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="activity-tokenize-lemmatize" class="slide level2 center">
-<h2>Activity: Tokenize &amp; Lemmatize</h2>
+<section id="avoiding-repetition" class="slide level2 center">
+<h2>Avoiding repetition</h2>
 <ul>
-<li>Copy the below sentences, and create lemmatized lists for each language.</li>
+<li>In the past, when we had to run the same task across multiple objects, we often just copy and pasted our code</li>
 </ul>
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href=""></a>cat_el <span class="op">=</span> <span class="st">"Η γάτα κοιμάται στον καναπέ."</span></span>
-<span id="cb9-2"><a href=""></a>cat_zh <span class="op">=</span> <span class="st">"猫在沙发上睡觉。"</span></span>
-<span id="cb9-3"><a href=""></a>cat_ja <span class="op">=</span> <span class="st">"猫はソファで寝ます。"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a>book_path <span class="op">=</span> <span class="st">"austen/pride_and_prejudice.txt"</span></span>
+<span id="cb1-2"><a href=""></a>book_file <span class="op">=</span> <span class="bu">open</span>(book_path, mode <span class="op">=</span> <span class="st">'r'</span>)</span>
+<span id="cb1-3"><a href=""></a>book_lines <span class="op">=</span> book_file.readlines()</span>
+<span id="cb1-4"><a href=""></a>clean_lines <span class="op">=</span> [line.rstrip().lower() <span class="cf">for</span> line <span class="kw">in</span> book_lines]</span>
+<span id="cb1-5"><a href=""></a>pride_and_prejudice <span class="op">=</span> [w <span class="cf">for</span> w <span class="kw">in</span> clean_lines <span class="cf">if</span> w]</span>
+<span id="cb1-6"><a href=""></a></span>
+<span id="cb1-7"><a href=""></a>book_path <span class="op">=</span> <span class="st">"austen/sense_and_sensibility.txt"</span></span>
+<span id="cb1-8"><a href=""></a>book_file <span class="op">=</span> <span class="bu">open</span>(book_path, mode <span class="op">=</span> <span class="st">'r'</span>)</span>
+<span id="cb1-9"><a href=""></a>book_lines <span class="op">=</span> book_file.readlines()</span>
+<span id="cb1-10"><a href=""></a>clean_lines <span class="op">=</span> [line.rstrip().lower() <span class="cf">for</span> line <span class="kw">in</span> book_lines]</span>
+<span id="cb1-11"><a href=""></a>sense_and_sensibility <span class="op">=</span> [w <span class="cf">for</span> w <span class="kw">in</span> clean_lines <span class="cf">if</span> w]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Wouldn’t it be great if we could only do this once?</li>
+</ul>
+</section>
+<section id="weve-seen-functions-before" class="slide level2 center">
+<h2>We’ve Seen Functions Before</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
+<span id="cb2-2"><a href=""></a><span class="im">import</span> spacy</span>
+<span id="cb2-3"><a href=""></a></span>
+<span id="cb2-4"><a href=""></a>nlp_en <span class="op">=</span> spacy.load(<span class="st">"en_core_web_sm"</span>)</span>
+<span id="cb2-5"><a href=""></a>nlp_es <span class="op">=</span> spacy.load(<span class="st">"es_core_news_sm"</span>)</span>
+<span id="cb2-6"><a href=""></a></span>
+<span id="cb2-7"><a href=""></a><span class="kw">def</span> is_preposition(tok):</span>
+<span id="cb2-8"><a href=""></a>  <span class="co"># True for tokens that are prepositions or postpositions</span></span>
+<span id="cb2-9"><a href=""></a>  <span class="cf">return</span> tok.pos_ <span class="op">==</span> <span class="st">"ADP"</span></span>
+<span id="cb2-10"><a href=""></a></span>
+<span id="cb2-11"><a href=""></a><span class="kw">def</span> prep_stats(nlp, text, lang_label):</span>
+<span id="cb2-12"><a href=""></a>  doc <span class="op">=</span> nlp(text)</span>
+<span id="cb2-13"><a href=""></a>  <span class="co"># word-like tokens only for the denominator</span></span>
+<span id="cb2-14"><a href=""></a>  word_tokens <span class="op">=</span> [t <span class="cf">for</span> t <span class="kw">in</span> doc <span class="cf">if</span> t.is_alpha]</span>
+<span id="cb2-15"><a href=""></a>  total <span class="op">=</span> <span class="bu">len</span>(word_tokens)</span>
+<span id="cb2-16"><a href=""></a>  preps <span class="op">=</span> [t.text <span class="cf">for</span> t <span class="kw">in</span> doc <span class="cf">if</span> is_preposition(t)]</span>
+<span id="cb2-17"><a href=""></a>  n <span class="op">=</span> <span class="bu">len</span>(preps)</span>
+<span id="cb2-18"><a href=""></a>  rate <span class="op">=</span> (n <span class="op">/</span> total) <span class="cf">if</span> total <span class="cf">else</span> <span class="fl">0.0</span></span>
+<span id="cb2-19"><a href=""></a>  <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>lang_label<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>n<span class="sc">}</span><span class="ss"> prepositions / </span><span class="sc">{</span>total<span class="sc">}</span><span class="ss"> word tokens (</span><span class="sc">{</span>rate<span class="sc">:.2%}</span><span class="ss">)"</span>)</span>
+<span id="cb2-20"><a href=""></a>  <span class="bu">print</span>(<span class="st">"Top forms:"</span>, Counter(w.lower() <span class="cf">for</span> w <span class="kw">in</span> preps).most_common())</span>
+<span id="cb2-21"><a href=""></a></span>
+<span id="cb2-22"><a href=""></a><span class="co"># Run on English and Spanish samples</span></span>
+<span id="cb2-23"><a href=""></a>prep_stats(nlp_en, text_en, <span class="st">"English"</span>)</span>
+<span id="cb2-24"><a href=""></a>prep_stats(nlp_es, text_es, <span class="st">"Spanish"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="and-here" class="slide level2 center">
+<h2>And Here</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="im">import</span> spacy</span>
+<span id="cb3-2"><a href=""></a><span class="im">from</span> spacy.matcher <span class="im">import</span> PhraseMatcher</span>
+<span id="cb3-3"><a href=""></a><span class="im">from</span> nltk.corpus <span class="im">import</span> wordnet <span class="im">as</span> wn</span>
+<span id="cb3-4"><a href=""></a></span>
+<span id="cb3-5"><a href=""></a>nlp <span class="op">=</span> spacy.load(<span class="st">"en_core_web_sm"</span>)</span>
+<span id="cb3-6"><a href=""></a></span>
+<span id="cb3-7"><a href=""></a><span class="co"># WordNet helpers (via NLTK) – returns only verb synsets</span></span>
+<span id="cb3-8"><a href=""></a><span class="kw">def</span> verb_senses(word):</span>
+<span id="cb3-9"><a href=""></a>    <span class="cf">return</span> wn.synsets(word, pos<span class="op">=</span><span class="st">'v'</span>)  <span class="co"># verb synsets only</span></span>
+<span id="cb3-10"><a href=""></a></span>
+<span id="cb3-11"><a href=""></a><span class="co"># Collects all (recursive) hyponyms for a verb synset (troponyms in WN terms).</span></span>
+<span id="cb3-12"><a href=""></a><span class="co"># This function recursively collects all *hyponyms* (a.k.a. “troponyms” for verbs)</span></span>
+<span id="cb3-13"><a href=""></a><span class="co"># of a given synset. A hyponym is a more *specific* instance of an action.</span></span>
+<span id="cb3-14"><a href=""></a><span class="co"># Example: the verb “attack.v.01” has hyponyms like “bomb.v.01”, “invade.v.01”, etc.</span></span>
+<span id="cb3-15"><a href=""></a><span class="kw">def</span> all_verb_hyponyms(root):</span>
+<span id="cb3-16"><a href=""></a>      seen, stack <span class="op">=</span> <span class="bu">set</span>(), [root]</span>
+<span id="cb3-17"><a href=""></a>    <span class="cf">while</span> stack:</span>
+<span id="cb3-18"><a href=""></a>        cur <span class="op">=</span> stack.pop()</span>
+<span id="cb3-19"><a href=""></a>        <span class="cf">if</span> cur <span class="kw">in</span> seen:</span>
+<span id="cb3-20"><a href=""></a>            <span class="cf">continue</span></span>
+<span id="cb3-21"><a href=""></a>        seen.add(cur)</span>
+<span id="cb3-22"><a href=""></a>        <span class="co"># For verbs, .hyponyms() are the troponyms</span></span>
+<span id="cb3-23"><a href=""></a>        stack.extend(cur.hyponyms())</span>
+<span id="cb3-24"><a href=""></a>    <span class="cf">return</span> {s <span class="cf">for</span> s <span class="kw">in</span> seen <span class="cf">if</span> s.pos() <span class="op">==</span> <span class="st">'v'</span>}</span>
+<span id="cb3-25"><a href=""></a></span>
+<span id="cb3-26"><a href=""></a><span class="co"># This function extracts lemma names (the “canonical” word forms)</span></span>
+<span id="cb3-27"><a href=""></a><span class="co"># from a set of synsets, e.g. 'strike.v.01' → ['strike', 'hit', 'smite', ...].</span></span>
+<span id="cb3-28"><a href=""></a><span class="co"># Optionally filters out multiword expressions like "shoot_down".</span></span>
+<span id="cb3-29"><a href=""></a><span class="kw">def</span> lemmas_from_synsets(synsets, keep_multiword<span class="op">=</span><span class="va">False</span>):</span>
+<span id="cb3-30"><a href=""></a>    out <span class="op">=</span> <span class="bu">set</span>()</span>
+<span id="cb3-31"><a href=""></a>    <span class="cf">for</span> s <span class="kw">in</span> synsets:</span>
+<span id="cb3-32"><a href=""></a>        <span class="cf">for</span> lem <span class="kw">in</span> s.lemmas():</span>
+<span id="cb3-33"><a href=""></a>            name <span class="op">=</span> lem.name().lower()</span>
+<span id="cb3-34"><a href=""></a>            <span class="cf">if</span> <span class="kw">not</span> keep_multiword <span class="kw">and</span> <span class="st">"_"</span> <span class="kw">in</span> name:</span>
+<span id="cb3-35"><a href=""></a>                <span class="cf">continue</span></span>
+<span id="cb3-36"><a href=""></a>            out.add(name.replace(<span class="st">"_"</span>, <span class="st">" "</span>))</span>
+<span id="cb3-37"><a href=""></a>    <span class="cf">return</span> out</span>
+<span id="cb3-38"><a href=""></a></span>
+<span id="cb3-39"><a href=""></a><span class="co"># Build a violence lexicon from WordNet using a few intuitive seeds</span></span>
+<span id="cb3-40"><a href=""></a>seed_verbs <span class="op">=</span> [<span class="st">"attack"</span>, <span class="st">"assault"</span>, <span class="st">"hit"</span>, <span class="st">"strike"</span>, <span class="st">"punch"</span>, <span class="st">"kick"</span>, <span class="st">"stab"</span>, <span class="st">"shoot"</span>, <span class="st">"beat"</span>]</span>
+<span id="cb3-41"><a href=""></a>base_synsets <span class="op">=</span> []</span>
+<span id="cb3-42"><a href=""></a><span class="cf">for</span> w <span class="kw">in</span> seed_verbs:</span>
+<span id="cb3-43"><a href=""></a>    ss <span class="op">=</span> verb_senses(w)</span>
+<span id="cb3-44"><a href=""></a>    <span class="cf">if</span> ss:</span>
+<span id="cb3-45"><a href=""></a>        <span class="co"># take the most “central” sense by picking the one with most hyponyms</span></span>
+<span id="cb3-46"><a href=""></a>        ss_scored <span class="op">=</span> <span class="bu">sorted</span>(ss, key<span class="op">=</span><span class="kw">lambda</span> s: <span class="bu">len</span>(s.hyponyms()), reverse<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-47"><a href=""></a>        base_synsets.append(ss_scored[<span class="dv">0</span>])</span>
+<span id="cb3-48"><a href=""></a></span>
+<span id="cb3-49"><a href=""></a><span class="co"># expand via hyponyms (troponyms)</span></span>
+<span id="cb3-50"><a href=""></a>expanded <span class="op">=</span> <span class="bu">set</span>()</span>
+<span id="cb3-51"><a href=""></a><span class="cf">for</span> s <span class="kw">in</span> base_synsets:</span>
+<span id="cb3-52"><a href=""></a>    expanded <span class="op">|=</span> all_verb_hyponyms(s)</span>
+<span id="cb3-53"><a href=""></a></span>
+<span id="cb3-54"><a href=""></a><span class="co"># collect lemmas (single-token by default)</span></span>
+<span id="cb3-55"><a href=""></a>violent_verb_lemmas <span class="op">=</span> <span class="bu">sorted</span>(lemmas_from_synsets(expanded, keep_multiword<span class="op">=</span><span class="va">False</span>) <span class="op">|</span> <span class="bu">set</span>(seed_verbs))</span>
+<span id="cb3-56"><a href=""></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="bu">len</span>(violent_verb_lemmas)<span class="sc">}</span><span class="ss"> violent verb lemmas (sample):"</span>, violent_verb_lemmas[:<span class="dv">25</span>])</span>
+<span id="cb3-57"><a href=""></a></span>
+<span id="cb3-58"><a href=""></a><span class="co"># 4) spaCy PhraseMatcher by lemma — IMPORTANT: run full pipeline on patterns</span></span>
+<span id="cb3-59"><a href=""></a>matcher <span class="op">=</span> PhraseMatcher(nlp.vocab, attr<span class="op">=</span><span class="st">"LEMMA"</span>)</span>
+<span id="cb3-60"><a href=""></a>patterns <span class="op">=</span> <span class="bu">list</span>(nlp.pipe(violent_verb_lemmas))  <span class="co"># not make_doc: we need lemmas</span></span>
+<span id="cb3-61"><a href=""></a>matcher.add(<span class="st">"VIOLENCE"</span>, patterns)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section></section>
 <section>
-<section id="transcribing-languages" class="title-slide slide level1 center">
-<h1>Transcribing Languages</h1>
+<section id="writing-functions" class="title-slide slide level1 center">
+<h1>Writing Functions</h1>
 
 </section>
-<section id="transcribing-greek" class="slide level2 center">
-<h2>Transcribing Greek</h2>
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a><span class="co"># pip install Unidecode</span></span>
-<span id="cb10-2"><a href=""></a><span class="im">from</span> unidecode <span class="im">import</span> unidecode</span>
-<span id="cb10-3"><a href=""></a></span>
-<span id="cb10-4"><a href=""></a>el_text <span class="op">=</span> <span class="st">"Ο σκύλος τρέχει γρήγορα στον κήπο. Οι σκύλοι είναι πιστά ζώα."</span></span>
-<span id="cb10-5"><a href=""></a><span class="bu">print</span>(unidecode(el_text))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="writing-functions-1" class="slide level2 center">
+<h2>Writing Functions</h2>
+<ul>
+<li>Let’s write a simple function</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a><span class="kw">def</span> plus_two(number):</span>
+<span id="cb4-2"><a href=""></a>    <span class="co">'''</span></span>
+<span id="cb4-3"><a href=""></a><span class="co">    This function adds 2 to the input.</span></span>
+<span id="cb4-4"><a href=""></a><span class="co">    '''</span></span>
+<span id="cb4-5"><a href=""></a>    output <span class="op">=</span> number <span class="op">+</span> <span class="dv">2</span></span>
+<span id="cb4-6"><a href=""></a>    <span class="cf">return</span>(output)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>How does a function work?
+<ul>
+<li>What is <code>return()</code>?</li>
+</ul></li>
+</ul>
 </section>
-<section id="transcribing-chinese" class="slide level2 center">
-<h2>Transcribing Chinese</h2>
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a><span class="co"># pip install pypinyin</span></span>
-<span id="cb11-2"><a href=""></a><span class="im">from</span> pypinyin <span class="im">import</span> pinyin, Style</span>
-<span id="cb11-3"><a href=""></a></span>
-<span id="cb11-4"><a href=""></a>zh_text <span class="op">=</span> <span class="st">"狗在花园里跑得很快。狗是忠诚的动物。"</span></span>
-<span id="cb11-5"><a href=""></a>pinyin_list <span class="op">=</span> pinyin(zh_text, style<span class="op">=</span>Style.TONE3)</span>
-<span id="cb11-6"><a href=""></a><span class="bu">print</span>(<span class="st">" "</span>.join([syll[<span class="dv">0</span>] <span class="cf">for</span> syll <span class="kw">in</span> pinyin_list]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="loading-your-function" class="slide level2 center">
+<h2>Loading Your Function</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a>plus_two(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="transcribing-japanese" class="slide level2 center">
-<h2>Transcribing Japanese</h2>
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href=""></a><span class="co"># pip install pykakasi</span></span>
-<span id="cb12-2"><a href=""></a><span class="im">import</span> pykakasi</span>
-<span id="cb12-3"><a href=""></a></span>
-<span id="cb12-4"><a href=""></a>text <span class="op">=</span> <span class="st">"犬は庭で速く走ります。犬は忠実な動物です。"</span></span>
-<span id="cb12-5"><a href=""></a></span>
-<span id="cb12-6"><a href=""></a>kks <span class="op">=</span> pykakasi.kakasi()</span>
-<span id="cb12-7"><a href=""></a>result <span class="op">=</span> kks.convert(text)</span>
-<span id="cb12-8"><a href=""></a>romaji <span class="op">=</span> <span class="st">" "</span>.join([item[<span class="st">'hepburn'</span>] <span class="cf">for</span> item <span class="kw">in</span> result])</span>
-<span id="cb12-9"><a href=""></a><span class="bu">print</span>(romaji)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="writing-a-more-complex-function" class="slide level2 center">
+<h2>Writing a more complex function</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a><span class="kw">def</span> add_and_mult(a, b):</span>
+<span id="cb6-2"><a href=""></a>    <span class="co">'''</span></span>
+<span id="cb6-3"><a href=""></a><span class="co">    This function adds a to b,</span></span>
+<span id="cb6-4"><a href=""></a><span class="co">    and multiplies a and b.</span></span>
+<span id="cb6-5"><a href=""></a><span class="co">    '''</span></span>
+<span id="cb6-6"><a href=""></a>    add <span class="op">=</span> a <span class="op">+</span> b</span>
+<span id="cb6-7"><a href=""></a>    mult <span class="op">=</span> a <span class="op">*</span> b</span>
+<span id="cb6-8"><a href=""></a>    <span class="cf">return</span>(add, mult)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="loading-our-function" class="slide level2 center">
+<h2>Loading Our Function</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a>add_and_mult(<span class="dv">4</span>, <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="not-just-math" class="slide level2 center">
+<h2>Not just math</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href=""></a><span class="kw">def</span> initialize(full_name):</span>
+<span id="cb8-2"><a href=""></a>    <span class="co">'''</span></span>
+<span id="cb8-3"><a href=""></a><span class="co">    Return the person's initials.</span></span>
+<span id="cb8-4"><a href=""></a><span class="co">    '''</span></span>
+<span id="cb8-5"><a href=""></a>    name_parts <span class="op">=</span> full_name.split(<span class="st">" "</span>)</span>
+<span id="cb8-6"><a href=""></a>    initial_list <span class="op">=</span> [name[<span class="dv">0</span>]<span class="op">+</span><span class="st">"."</span> <span class="cf">for</span> name <span class="kw">in</span> name_parts]</span>
+<span id="cb8-7"><a href=""></a></span>
+<span id="cb8-8"><a href=""></a>    output <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb8-9"><a href=""></a>    <span class="cf">for</span> initial <span class="kw">in</span> initial_list:</span>
+<span id="cb8-10"><a href=""></a>        output <span class="op">=</span> output <span class="op">+</span> initial</span>
+<span id="cb8-11"><a href=""></a></span>
+<span id="cb8-12"><a href=""></a>    <span class="cf">return</span>(output)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="running-our-function" class="slide level2 center">
+<h2>Running our Function</h2>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href=""></a>initialize(<span class="st">"Louisa May Alcott"</span>)</span>
+<span id="cb9-2"><a href=""></a><span class="co"># 'L.M.A.'</span></span>
+<span id="cb9-3"><a href=""></a></span>
+<span id="cb9-4"><a href=""></a>initialize(<span class="st">"Edgar Allan Poe"</span>)</span>
+<span id="cb9-5"><a href=""></a><span class="co"># 'E.A.P.'</span></span>
+<span id="cb9-6"><a href=""></a></span>
+<span id="cb9-7"><a href=""></a>initialize(<span class="st">"Jane Austen"</span>)</span>
+<span id="cb9-8"><a href=""></a><span class="co"># 'J.A.'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="we-can-put-it-in-a-separate-.py-script" class="slide level2 center">
+<h2>We can put it in a separate <code>.py</code> script</h2>
+<ul>
+<li>Let’s copy this code and put it in a separate script called <code>initialize.py</code></li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a><span class="im">from</span> initializer <span class="im">import</span> initialize</span>
+<span id="cb10-2"><a href=""></a></span>
+<span id="cb10-3"><a href=""></a>initialize(<span class="st">"Louisa May Alcott"</span>)</span>
+<span id="cb10-4"><a href=""></a><span class="co"># 'L.M.A.'</span></span>
+<span id="cb10-5"><a href=""></a></span>
+<span id="cb10-6"><a href=""></a>initialize(<span class="st">"Edgar Allan Poe"</span>)</span>
+<span id="cb10-7"><a href=""></a><span class="co"># 'E.A.P.'</span></span>
+<span id="cb10-8"><a href=""></a></span>
+<span id="cb10-9"><a href=""></a>initialize(<span class="st">"Jane Austen"</span>)</span>
+<span id="cb10-10"><a href=""></a><span class="co"># 'J.A.'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="writing-an-read-book-function" class="slide level2 center">
+<h2>Writing an “Read Book” Function</h2>
+<ul>
+<li>Earlier, we saw duplicated code, how might we simplify this into a single function?</li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a>book_path <span class="op">=</span> <span class="st">"austen/pride_and_prejudice.txt"</span></span>
+<span id="cb11-2"><a href=""></a>book_file <span class="op">=</span> <span class="bu">open</span>(book_path, mode <span class="op">=</span> <span class="st">'r'</span>)</span>
+<span id="cb11-3"><a href=""></a>book_lines <span class="op">=</span> book_file.readlines()</span>
+<span id="cb11-4"><a href=""></a>clean_lines <span class="op">=</span> [line.rstrip().lower() <span class="cf">for</span> line <span class="kw">in</span> book_lines]</span>
+<span id="cb11-5"><a href=""></a>pride_and_prejudice <span class="op">=</span> [w <span class="cf">for</span> w <span class="kw">in</span> clean_lines <span class="cf">if</span> w]</span>
+<span id="cb11-6"><a href=""></a></span>
+<span id="cb11-7"><a href=""></a>book_path <span class="op">=</span> <span class="st">"austen/sense_and_sensibility.txt"</span></span>
+<span id="cb11-8"><a href=""></a>book_file <span class="op">=</span> <span class="bu">open</span>(book_path, mode <span class="op">=</span> <span class="st">'r'</span>)</span>
+<span id="cb11-9"><a href=""></a>book_lines <span class="op">=</span> book_file.readlines()</span>
+<span id="cb11-10"><a href=""></a>clean_lines <span class="op">=</span> [line.rstrip().lower() <span class="cf">for</span> line <span class="kw">in</span> book_lines]</span>
+<span id="cb11-11"><a href=""></a>sense_and_sensibility <span class="op">=</span> [w <span class="cf">for</span> w <span class="kw">in</span> clean_lines <span class="cf">if</span> w]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="writing-an-read-book-function-1" class="slide level2 center">
+<h2>Writing an “Read Book” Function</h2>
+<p>Our script needs to:</p>
+<ul>
+<li>load a path that connects to a text file</li>
+<li>open the file</li>
+<li>read in all of the lines, then</li>
+<li>remove all of the newlines and convert everything to lower case, then</li>
+<li>filter out all of the empty lines, then</li>
+<li>assign the end result to a variable.</li>
+</ul>
+</section>
+<section id="activity-write-a-function" class="slide level2 center">
+<h2>Activity: Write a Function</h2>
+<ul>
+<li>Write a function that loads up a file</li>
+<li>Assign that function’s output (return()!) to a variable name</li>
+<li>Confirm that your function works by loading up a file we’ve analyzed before (like <code>alice.txt</code>)</li>
+</ul>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href=""></a><span class="kw">def</span> read_book(path):</span>
+<span id="cb12-2"><a href=""></a>  book_file <span class="op">=</span> <span class="bu">open</span>(path, mode <span class="op">=</span> <span class="st">'r'</span>)</span>
+<span id="cb12-3"><a href=""></a>  book_lines <span class="op">=</span> book_file.readlines()</span>
+<span id="cb12-4"><a href=""></a>  clean_lines <span class="op">=</span> [line.rstrip().lower() <span class="cf">for</span> line <span class="kw">in</span> book_lines]</span>
+<span id="cb12-5"><a href=""></a>  <span class="cf">return</span>([w <span class="cf">for</span> w <span class="kw">in</span> clean_lines <span class="cf">if</span> w])</span>
+<span id="cb12-6"><a href=""></a></span>
+<span id="cb12-7"><a href=""></a>alice <span class="op">=</span> read_book(<span class="st">"alice.txt"</span>)</span>
+<span id="cb12-8"><a href=""></a><span class="bu">print</span>(alice[:<span class="dv">200</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section></section>
 <section>
-<section id="using-wordnet" class="title-slide slide level1 center">
-<h1>Using WordNet</h1>
+<section id="final-activity" class="title-slide slide level1 center">
+<h1>Final Activity</h1>
 
 </section>
-<section id="wordnet-in-other-languages" class="slide level2 center">
-<h2>WordNet in Other Languages</h2>
-<ul>
-<li>Last time: <strong>Open Multilingual Wordnet (OMW)</strong> links many languages to the Princeton WordNet synsets.</li>
-<li>Re-run this code and identify the ISO codes for Modern Greek, Mandarin Chinese, and Japanese</li>
-</ul>
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href=""></a><span class="im">import</span> pycountry</span>
-<span id="cb13-2"><a href=""></a><span class="im">from</span> nltk.corpus <span class="im">import</span> wordnet <span class="im">as</span> wn</span>
-<span id="cb13-3"><a href=""></a><span class="co"># List languages available via OMW (IDs)</span></span>
-<span id="cb13-4"><a href=""></a>codes <span class="op">=</span> <span class="bu">sorted</span>(wn.langs())</span>
-<span id="cb13-5"><a href=""></a></span>
-<span id="cb13-6"><a href=""></a><span class="cf">for</span> code <span class="kw">in</span> codes:</span>
-<span id="cb13-7"><a href=""></a>    lang <span class="op">=</span> pycountry.languages.get(alpha_3<span class="op">=</span>code)</span>
-<span id="cb13-8"><a href=""></a>    <span class="cf">if</span> lang:</span>
-<span id="cb13-9"><a href=""></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>code<span class="sc">}</span><span class="ss"> → </span><span class="sc">{</span>lang<span class="sc">.</span>name<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb13-10"><a href=""></a>    <span class="cf">else</span>:</span>
-<span id="cb13-11"><a href=""></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>code<span class="sc">}</span><span class="ss"> → (not found)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="final-activity-review" class="slide level2 center">
+<h2>Final Activity: Review</h2>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href=""></a><span class="im">import</span> spacy</span>
+<span id="cb13-2"><a href=""></a></span>
+<span id="cb13-3"><a href=""></a>content_lemmas <span class="op">=</span> [t.lemma_.lower() <span class="cf">for</span> t <span class="kw">in</span> doc</span>
+<span id="cb13-4"><a href=""></a>                  <span class="cf">if</span> <span class="kw">not</span> (t.is_stop <span class="kw">or</span> t.is_punct <span class="kw">or</span> t.is_space <span class="kw">or</span> t.like_num)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="looking-up-lemmas-by-code" class="slide level2 center">
-<h2>Looking up lemmas by code</h2>
-<ul>
-<li>Let’s modify this script to look up the word for ‘dog’ in our three languages</li>
-</ul>
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href=""></a>ss <span class="op">=</span> wn.synset(<span class="st">'dog.n.01'</span>)</span>
-<span id="cb14-2"><a href=""></a>[lem.name() <span class="cf">for</span> lem <span class="kw">in</span> ss.lemmas(lang<span class="op">=</span><span class="st">'spa'</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="final-activity-review-1" class="slide level2 center">
+<h2>Final Activity: Review</h2>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href=""></a><span class="im">import</span> spacy</span>
+<span id="cb14-2"><a href=""></a><span class="im">from</span> nltk.corpus <span class="im">import</span> wordnet <span class="im">as</span> wn</span>
+<span id="cb14-3"><a href=""></a><span class="im">from</span> nltk.corpus.reader.wordnet <span class="im">import</span> NOUN, VERB, ADJ, ADV</span>
+<span id="cb14-4"><a href=""></a></span>
+<span id="cb14-5"><a href=""></a><span class="co"># Load spaCy</span></span>
+<span id="cb14-6"><a href=""></a>nlp <span class="op">=</span> spacy.load(<span class="st">"en_core_web_sm"</span>)</span>
+<span id="cb14-7"><a href=""></a></span>
+<span id="cb14-8"><a href=""></a><span class="co"># Sentence with both noun and verb "bear"</span></span>
+<span id="cb14-9"><a href=""></a>text <span class="op">=</span> <span class="st">"The bears bear their burdens bravely."</span></span>
+<span id="cb14-10"><a href=""></a>doc <span class="op">=</span> nlp(text)</span>
+<span id="cb14-11"><a href=""></a></span>
+<span id="cb14-12"><a href=""></a><span class="co"># Map spaCy POS tags to WordNet POS tags -- this is a **function**, we'll get to these soon</span></span>
+<span id="cb14-13"><a href=""></a><span class="kw">def</span> get_wordnet_pos(spacy_pos):</span>
+<span id="cb14-14"><a href=""></a>    <span class="cf">if</span> spacy_pos.startswith(<span class="st">"N"</span>):</span>
+<span id="cb14-15"><a href=""></a>        <span class="cf">return</span> NOUN</span>
+<span id="cb14-16"><a href=""></a>    <span class="cf">elif</span> spacy_pos.startswith(<span class="st">"V"</span>):</span>
+<span id="cb14-17"><a href=""></a>        <span class="cf">return</span> VERB</span>
+<span id="cb14-18"><a href=""></a>    <span class="cf">elif</span> spacy_pos.startswith(<span class="st">"J"</span>):</span>
+<span id="cb14-19"><a href=""></a>        <span class="cf">return</span> ADJ</span>
+<span id="cb14-20"><a href=""></a>    <span class="cf">elif</span> spacy_pos.startswith(<span class="st">"R"</span>):</span>
+<span id="cb14-21"><a href=""></a>        <span class="cf">return</span> ADV</span>
+<span id="cb14-22"><a href=""></a>    <span class="cf">return</span> <span class="va">None</span></span>
+<span id="cb14-23"><a href=""></a></span>
+<span id="cb14-24"><a href=""></a><span class="co"># Loop through tokens and look up WordNet entries</span></span>
+<span id="cb14-25"><a href=""></a><span class="cf">for</span> token <span class="kw">in</span> doc:</span>
+<span id="cb14-26"><a href=""></a>    wn_pos <span class="op">=</span> get_wordnet_pos(token.tag_)</span>
+<span id="cb14-27"><a href=""></a>    lemma <span class="op">=</span> token.lemma_.lower()</span>
+<span id="cb14-28"><a href=""></a></span>
+<span id="cb14-29"><a href=""></a>    <span class="cf">if</span> wn_pos <span class="kw">and</span> <span class="kw">not</span> token.is_stop <span class="kw">and</span> <span class="kw">not</span> token.is_punct:</span>
+<span id="cb14-30"><a href=""></a>        synsets <span class="op">=</span> wn.synsets(lemma, pos<span class="op">=</span>wn_pos)</span>
+<span id="cb14-31"><a href=""></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="sc">{</span>token<span class="sc">.</span>text<span class="sc">.</span>upper()<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span>token<span class="sc">.</span>pos_<span class="sc">}</span><span class="ss">) → lemma: </span><span class="sc">{</span>lemma<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb14-32"><a href=""></a>        <span class="cf">for</span> s <span class="kw">in</span> synsets[:<span class="dv">3</span>]:  <span class="co"># show just the first 3 senses</span></span>
+<span id="cb14-33"><a href=""></a>            <span class="bu">print</span>(<span class="ss">f"  - </span><span class="sc">{</span>s<span class="sc">.</span>definition()<span class="sc">}</span><span class="ss">  [examples: </span><span class="sc">{</span>s<span class="sc">.</span>examples()<span class="sc">}</span><span class="ss">]"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="activity" class="slide level2 center">
-<h2>Activity</h2>
+<section id="final-activity-1" class="slide level2 center">
+<h2>Final Activity</h2>
 <ul>
-<li>Look up the lemmas in WordNet linked to the basic English synset for <code>cat</code></li>
-<li>Then, transcribe each word into Latin characters.</li>
+<li>In this function (called <code>nlp_it</code>) we are going to:
+<ul>
+<li>Take in a English string as an argument</li>
+<li>Process that string using nlp()</li>
+<li>Eliminate stopwords, punctuation, etc.</li>
+<li>Then process each lemma using WordNet, printing up the synset, definition, and examples</li>
+<li>Note: you will note need to <code>return()</code> anything here</li>
+</ul></li>
 </ul>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
@@ -674,19 +759,19 @@ Dr.&nbsp;Andrew M. Byrd
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="33_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="34_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="33_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="33_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="33_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="33_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="33_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="34_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="34_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="34_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="34_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="34_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="33_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="33_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="33_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="33_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="34_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="34_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="34_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="34_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>

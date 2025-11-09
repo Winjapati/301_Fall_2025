@@ -16,6 +16,77 @@ jupyter: python3
 editor: source
 ---
 
+# Review
+
+-   What did you learn last time?
+
+## Recap from Last Time
+
+- Functions how do they work?
+
+```python
+
+def function_name(arg)
+  code
+  return(output)
+
+function_name(arg)
+```
+
+
+## Activity: Together
+
+- Let's write a function together that inserts the infix "-izz-" immediately a vowel in the word, if that vowel is preceded by a consonant
+  - andrew --> andrizzew
+  - bob --> bizzob
+  - kentucky --> kizzentizzucky
+
+```{python}
+def snoop(word):
+  vowels = "aeiou"
+  
+  snooped = ""
+  
+  for c in word:
+    if c == word[0]:
+      snooped += c
+    elif c not in vowels:
+      snooped += c
+    elif c in vowels:
+      snooped += "izz" + c
+  
+  return(snooped)
+
+snoop("kentucky")
+```
+
+
+# Other Graphics
+
+
+
+```{python}
+from visualizations import *
+
+example_tokens = ["the","dog","barked","the","dog","ran","dog","ran","quickly","the","cat"]
+
+# Pie
+_ = pie(example_tokens, k=5, title="POS/Category Pie (Example)")
+
+# Line (rank–frequency)
+_ = line(example_tokens, title="Rank–Frequency (Example)", logy=True)
+
+# Scatter (length vs freq)
+_ = scatter(example_tokens, title="Length vs Frequency (Example)", logy=False)
+
+# Word cloud
+_ = wordcloud(example_tokens, title="Example Word Cloud")
+
+```
+
+
+
+
 # Day 4 — Visualizations Beyond Bar Graphs
 
 ## Goals

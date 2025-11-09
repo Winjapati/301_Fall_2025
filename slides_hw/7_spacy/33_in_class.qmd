@@ -138,9 +138,32 @@ for lang, nlp, text in [
 ## Activity: Tokenize & Lemmatize
 
 ```{python}
+import spacy
+
+nlp_el = spacy.load("el_core_news_sm")
+nlp_zh = spacy.load("zh_core_web_sm")
+nlp_ja = spacy.load("ja_core_news_sm")
+
 cat_el = "Η γάτα κοιμάται στον καναπέ."
 cat_zh = "猫在沙发上睡觉。"
 cat_ja = "猫はソファで寝ます。"
+
+
+for lang, nlp, text in [
+    ("Chinese", nlp_zh, cat_zh)
+    ]:
+    doc = nlp(text)
+    print(f"\n{lang} lemmas:")
+    print([t.text for t in doc])
+
+for lang, nlp, text in [
+    ("Greek", nlp_el, cat_el),
+    ("Japanese", nlp_ja, cat_ja)
+]:
+    doc = nlp(text)
+    print(f"\n{lang} lemmas:")
+    print([t.lemma_ for t in doc])
+
 ```
 
 ## Transcribing Greek

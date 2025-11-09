@@ -157,7 +157,7 @@ for lang, nlp, text in [
     ("Japanese", nlp_ja, ja_text)
 ]:
     doc = nlp(text)
-    print(f"\n{lang} tokens:")
+    print(f"\n{lang} lemmas:")
     print([t.lemma_ for t in doc])
 ```
 

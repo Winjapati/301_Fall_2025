@@ -1,4 +1,9 @@
 ---
+title: "34_in_class"
+format: html
+---
+
+---
 title: "Computation for Linguists"
 subtitle: "Writing Functions"
 date: "November 14, 2025"
@@ -155,7 +160,7 @@ matcher.add("VIOLENCE", patterns)
 
 - Let's write a simple function
 
-```python
+```{python}
 def plus_two(number):
     '''
     This function adds 2 to the input.
@@ -164,17 +169,16 @@ def plus_two(number):
     return(output)
 ```
 
-- How does a function work? 
-  - What is `return()`?
+- How does a function work? What is `return()`?
 
 ## Loading Your Function
 
-```python
+```{python}
 plus_two(1)
 ```
 ## Writing a more complex function
 
-```python
+```{python}
 def add_and_mult(a, b):
     '''
     This function adds a to b,
@@ -187,12 +191,12 @@ def add_and_mult(a, b):
 
 ## Loading Our Function
 
-```python
+```{python}
 add_and_mult(4, 6)
 ```
 ## Not just math
 
-```python
+```{python}
 def initialize(full_name):
     '''
     Return the person's initials.
@@ -210,7 +214,7 @@ def initialize(full_name):
 
 ## Running our Function
 
-```python
+```{python}
 initialize("Louisa May Alcott")
 # 'L.M.A.'
 
@@ -225,7 +229,7 @@ initialize("Jane Austen")
 
 - Let's copy this code and put it in a separate script called `initialize.py`
 
-```python
+```{python}
 from initializer import initialize
 
 initialize("Louisa May Alcott")
@@ -242,7 +246,7 @@ initialize("Jane Austen")
 
 - Earlier, we saw duplicated code, how might we simplify this into a single function?
 
-```python
+```{python}
 book_path = "austen/pride_and_prejudice.txt"
 book_file = open(book_path, mode = 'r')
 book_lines = book_file.readlines()
@@ -259,7 +263,6 @@ sense_and_sensibility = [w for w in clean_lines if w]
 ## Writing an "Read Book" Function
 
 Our script needs to:
-
 - load a path that connects to a text file
 - open the file
 - read in all of the lines, then
@@ -269,11 +272,11 @@ Our script needs to:
 
 ## Activity: Write a Function
 
-- Write a function that loads up a file 
+- Write a Function that loads up a file 
 - Assign that function's output (return()!) to a variable name
 - Confirm that your function works by loading up a file we've analyzed before (like `alice.txt`)
 
-```python
+```{python}
 def read_book(path):
   book_file = open(path, mode = 'r')
   book_lines = book_file.readlines()
@@ -284,64 +287,53 @@ alice = read_book("alice.txt")
 print(alice[:200])
 ```
 
-# Final Activity
-
-## Final Activity: Review
-
-```python
-import spacy
-
-content_lemmas = [t.lemma_.lower() for t in doc
-                  if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
-```
-
-
-## Final Activity: Review
-
-```python
-import spacy
-from nltk.corpus import wordnet as wn
-from nltk.corpus.reader.wordnet import NOUN, VERB, ADJ, ADV
-
-# Load spaCy
-nlp = spacy.load("en_core_web_sm")
-
-# Sentence with both noun and verb "bear"
-text = "The bears bear their burdens bravely."
-doc = nlp(text)
-
-# Map spaCy POS tags to WordNet POS tags -- this is a **function**, we'll get to these soon
-def get_wordnet_pos(spacy_pos):
-    if spacy_pos.startswith("N"):
-        return NOUN
-    elif spacy_pos.startswith("V"):
-        return VERB
-    elif spacy_pos.startswith("J"):
-        return ADJ
-    elif spacy_pos.startswith("R"):
-        return ADV
-    return None
-
-# Loop through tokens and look up WordNet entries
-for token in doc:
-    wn_pos = get_wordnet_pos(token.tag_)
-    lemma = token.lemma_.lower()
-
-    if wn_pos and not token.is_stop and not token.is_punct:
-        synsets = wn.synsets(lemma, pos=wn_pos)
-        print(f"\n{token.text.upper()} ({token.pos_}) → lemma: {lemma}")
-        for s in synsets[:3]:  # show just the first 3 senses
-            print(f"  - {s.definition()}  [examples: {s.examples()}]")
-```
-
-
 ## Final Activity
 
-- In this function (called `nlp_it`) we are going to:
-  - Take in a English string as an argument
-  - Process that string using nlp()
-  - Eliminate stopwords, punctuation, etc.
-  - Then process each lemma using WordNet, printing up the synset, definition, and examples
-  - Note: you will note need to `return()` anything here
+```{python}
+import spacy
+from nltk.corpus import wordnet as wn
 
+def get_wordnet_pos(spacy_pos):
+    """
+    Map spaCy POS tags to WordNet POS tags.
+    """
+    if spacy_pos.startswith('N'):
+        return wn.NOUN
+    elif spacy_pos.startswith('V'):
+        return wn.VERB
+    elif spacy_pos.startswith('J'):
+        return wn.ADJ
+    elif spacy_pos.startswith('R'):
+        return wn.ADV
+    else:
+        return None
+
+def nlp_it(text):
+    """
+    Process a string using spaCy; eliminate stopwords, etc.;
+    then look up each lemma in WordNet for synsets, definitions, and examples.
+    """
+    # 0) Load spaCy model
+    nlp = spacy.load("en_core_web_sm")
+
+    # 1) Process text
+    doc = nlp(text)
+
+    # 2) Filter stopwords, punctuation, etc.
+    content = [t for t in doc if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
+
+    # 3) For each token, fetch its WordNet entries
+    for token in doc:
+        wn_pos = get_wordnet_pos(token.tag_)
+        lemma = token.lemma_.lower()
+    
+        if wn_pos and not token.is_stop and not token.is_punct:
+            synsets = wn.synsets(lemma, pos=wn_pos)
+            print(f"\n{token.text.upper()} ({token.pos_}) → lemma: {lemma}")
+            for s in synsets[:3]:  # show just the first 3 senses
+                print(f"  - {s.definition()}  [examples: {s.examples()}]")
+
+text = "I said a bird, bird, bird, bird is the word."
+nlp_it(text)
+```
 
