@@ -1,0 +1,221 @@
+---
+title: "HW 7 — *Alice* Across Languages"
+subtitle: "Final Group Project"
+author: "Dr. Andrew M. Byrd"
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    code-tools: true
+    fontsize: 12pt
+execute:
+  freeze: auto
+  warning: false
+  message: false
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+# Overview
+
+- This is your **final group project** and **final homework** for *LIN 301: Computation for
+Linguists*.\
+- You will apply everything you’ve learned in this class — text cleaning, tokenization,
+frequency analysis, syntax, semantics, visualization, and collaboration
+— to analyze *Alice’s Adventures in Wonderland* across **multiple
+languages**.
+
+------------------------------------------------------------------------
+
+# Group Setup and GitHub Repository
+
+You’ll be working in groups with a maximum of **4** students.
+
+| Group Size | Languages Analyzed |
+|-----------------|------------------------------------------------------|
+| 1 student | 2 languages total — English + any one: French, Spanish, Finnish, Italian |
+| 2 students | 3 languages total — English + any two: French, Spanish, Finnish, Italian |
+| 3 students | 4 languages total — English + any three: French, Spanish, Finnish, Italian |
+| 4 students | 5 languages total — English, French, Spanish, Finnish, Italian |
+
+Each group must create a **shared GitHub repository** for the project.\
+Your repo should be named something like: `alice-multilingual-group`
+
+### Repository Requirements
+
+1.  **Create the repo**
+    -   One member creates the repo on GitHub.
+    -   Add all teammates as collaborators (Settings → Collaborators).
+    -   Clone it locally through RStudio:\
+        `File → New Project → Version Control → Git`.
+2.  **Folder structure**
+
+::: callout-note
+#### Repository structure
+```text
+alice-multilingual-group/
+├── data/             # text files (raw and cleaned)
+├── figures/          # visualizations
+├── HW7_alice.qmd # main Quarto notebook
+├── README.md         # project summary and setup notes
+└── requirements.txt  # Python packages needed to run the notebook
+```
+:::
+
+3.  **README contents**
+
+-   Group member names and roles
+-   Languages analyzed
+-   Instructions to reproduce results
+-   Dependencies or model names (`en_core_web_sm`, `fr_core_news_sm`,
+    etc.)
+
+4.  **Collaboration**
+
+-   Everyone commits code regularly (not just one person).
+-   Commit messages should describe what changed.
+-   In fairness of those students who do not use LLMs, please avoid the use of these as a tool. You may copy code that we've used previously in the class or write your own.
+
+------------------------------------------------------------------------
+
+# Downloading Files
+
+You may download the following files from the below websites (using `curl` or python code).
+
+-   **English** - https://www.gutenberg.org/cache/epub/11/pg11.txt
+-   **French** - https://www.gutenberg.org/cache/epub/55456/pg55456.txt
+-   **Finnish** - https://www.gutenberg.org/cache/epub/46569/pg46569.txt
+-   **Italian** - https://www.gutenberg.org/cache/epub/28371/pg28371.txt
+-   **Spanish** -
+    https://github.com/andergd/separadorSilabas/blob/master/Carroll%2C%20Lewis%20-%20Alicia%20En%20El%20Pa%C3%ADs%20De%20Las%20Maravillas.txt
+
+------------------------------------------------------------------------
+
+# Core Components
+
+Each group’s notebook must include **four major sections**. You should assign roles to each member of your group for maximal fairness.
+
+------------------------------------------------------------------------
+
+## 1. Text Cleaning & Setup
+
+Manually remove headers and footers. Then, load and clean all language files and tokenize using the appropriate spaCy pipeline for each language.
+
+Compute and compare basic corpus stats:
+
+-   total tokens
+-   unique lemmas
+-   lexical diversity (type-token ratio), which measures how *varied*
+    the vocabulary is
+-   number of sentences
+
+Summarize these metrics in a small comparative table.
+
+------------------------------------------------------------------------
+
+## 2. Frequency & Collocations
+
+Lemma Frequency:
+
+-   Top 20 content lemmas per language (exclude stopwords and
+    punctuation).
+-   Visualize results in a word cloud for each language. Label each
+    visualization clearly.
+
+Discuss any major differences you see between languages, if you find any. 
+
+(Optional) You may also include a single bar chart comparing top lemmas across languages for a more quantitative view.
+
+------------------------------------------------------------------------
+
+## 3. Syntax Patterns
+
+Use spaCy’s dependency parser to explore syntax.
+
+Tasks:
+
+-   Extract verbs where the name *Alice* is the **subject** (`nsubj`) or
+    **object** (`dobj`).\
+    - Count and rank the most frequent verbs across languages, sorting the values with the most frequent first.\
+    - Create a table summarizing the top five verbs in each language.\
+-   Find adjectives modifying the name *Alice*.\
+    - Count and rank the most frequent adjectives across languages, sorting the values with the most frequent first.\
+    - Create a table summarizing the top adjectives.
+
+Discuss what your findings perhaps reveals about the language in question or the translation.
+
+------------------------------------------------------------------------
+
+## 4. Semantics & WordNet
+
+Dive into meaning and concept structure.
+
+Tasks:
+
+-   Choose **10 shared lemmas** (5 nouns, 5 verbs).
+-   For each language, retrieve WordNet synsets, glosses, and hypernyms.
+-   For **one** pair of nouns and **one** pair of verbs, compute similarity scores (e.g., Wu–Palmer) within each language.
+  - Visualize semantic similarity within two scatter plots (one for nouns, one for verbs), which will show how similar or distinct the chosen word pairs are within and across languages.
+
+Note: if WordNet coverage is limited for one of your chosen languages,
+describe what you attempted and how you adapted (e.g., using English
+synsets for comparison).
+
+------------------------------------------------------------------------
+
+## Note: Visualization & Interpretation
+
+Present your findings clearly and creatively.
+
+-   Include figure captions and axis labels.
+-   Make sure all visuals are generated in the qmd (no pasted images).
+-   Each figure should directly support a linguistic observation.
+
+Include at least one meaningful visualization per major section.\
+
+At the end, your final section should interpret the results linguistically:
+
+- What do the frequency and syntax patterns suggest?\
+- Are some translations more literal, others more interpretive?\
+- How do semantic networks differ across languages?
+
+------------------------------------------------------------------------
+
+# Deliverables
+
+Your **GitHub repo** must contain:
+
+1.  `HW7_alice.qmd` — main notebook (runs end-to-end)
+2.  `README.md` — repo overview and group info
+3.  `/data/` and `/figures/` folders with organized files
+
+-   All text files must be saved as UTF-8 encoded `.txt`.
+-   All visuals should be exported as `.png` or `.svg` into `/figures/`.
+
+4.  Regular commits by all members
+
+------------------------------------------------------------------------
+
+# Grading Rubric
+
+| Category | Weight | Description |
+|-------------------------|-------------------|----------------------------|
+| **Original, working code** | 25% | Student-written code that runs cleanly from a clone of the repo. |
+| **Repository organization & version control** | 20% | Clear folder structure, README, regular commits from all members. |
+| **Data processing & analysis** | 25% | Proper text cleaning, tokenization, syntax, and semantic work. |
+| **Visualizations & interpretation** | 20% | Clear, interpretable visuals and thoughtful linguistic discussion. |
+| **Collaboration & communication** | 10% | Evidence of shared work; consistent tone and structure across sections. |
+
+------------------------------------------------------------------------
+
+# Submission
+
+-   Make sure your repo is public and all code executes without errors.
+    -   Submit the **GitHub repo URL** on Canvas by the due date.
+-   Only one group member needs to submit the link, but all names must
+    appear in the README.
+-   Late submissions will lose points for collaboration and
+    reproducibility.
+
+------------------------------------------------------------------------

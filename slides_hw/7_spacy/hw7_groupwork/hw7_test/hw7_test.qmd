@@ -1,0 +1,500 @@
+---
+title: "HW 7 — Alice Across Languages (Instructor Reference)"
+subtitle: "Example end-to-end solution"
+author: "Dr. Andrew M. Byrd (reference)"
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    code-tools: true
+    df-print: paged
+execute:
+  freeze: auto
+  warning: false
+  message: false
+---
+
+
+
+```{python}
+# Core libs
+
+import os, re
+from pathlib import Path
+from collections import Counter, defaultdict
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+# NLP
+
+import spacy
+from spacy.lang.en import English
+from spacy.tokens import Doc
+
+# WordNet / OMW (multi-language)
+
+import nltk
+from nltk.corpus import wordnet as wn
+```
+
+```{python}
+# Paths
+
+ROOT = Path(".").resolve()
+DATA = ROOT / "data"
+RAW  = DATA / "raw"
+CLEAN = DATA / "clean"
+FIGS = ROOT / "figures"
+
+for p in [DATA, RAW, CLEAN, FIGS]:
+  p.mkdir(parents=True, exist_ok=True)
+```
+
+# Languages
+
+```{python}
+# Languages to include for a 4-person group (English + 4 non-English)
+
+LANGS = ["en","fr","es","fi","it"]  # for a 3-person group, drop one non-English
+
+# spaCy pipelines (small models to keep runtime reasonable)
+
+MODEL_BY_LANG = {
+"en": "en_core_web_sm",
+"fr": "fr_core_news_sm",
+"es": "es_core_news_sm",
+"fi": "fi_core_news_sm",
+"it": "it_core_news_sm",
+}
+
+# Alice's name per language (for dependency queries)
+
+ALICE_BY_LANG = {
+"en": "alice",
+"fr": "alice",
+"es": "alicia",
+"fi": "liisa",
+"it": "alice",
+}
+
+# Load pipelines
+
+nlp = {}
+for lang in LANGS:
+  nlp[lang] = spacy.load(MODEL_BY_LANG[lang])
+```
+
+
+
+# Text Cleaning & Setup
+
+
+```{python}
+def read_text(path: Path) -> str:
+with path.open("r", encoding="utf-8", errors="ignore") as f:
+return f.read()
+
+HEADER_FOOTER_RE = re.compile(r"(?s).*?START OF (?:THE|THIS) PROJECT GUTENBERG.*?\n|(?s)\n.*?END OF (?:THE|THIS) PROJECT GUTENBERG.*", re.IGNORECASE)
+
+def strip_gutenberg_headers(text: str) -> str:
+# Remove standard Gutenberg header/footer if present
+txt = HEADER_FOOTER_RE.sub("", text)
+return txt.strip()
+
+def normalize_whitespace(text: str) -> str:
+return re.sub(r"[ \t]+", " ", re.sub(r"\r\n?", "\n", text)).strip()
+
+def clean_text(text: str) -> str:
+return normalize_whitespace(strip_gutenberg_headers(text))
+
+# Load -> Clean -> Save
+
+files = {
+"en": RAW / "alice_en.txt",
+"fr": RAW / "alice_fr.txt",
+"es": RAW / "alice_es.txt",
+"fi": RAW / "alice_fi.txt",
+"it": RAW / "alice_it.txt",
+}
+
+cleaned_paths = {}
+for lang, path in files.items():
+  if not path.exists():
+# Instructor note: keep this assert for grading; students should download themselves.
+    raise FileNotFoundError(f"Missing raw file: {path}")
+  
+  cleaned = clean_text(read_text(path))
+  outp = CLEAN / f"alice_{lang}_clean.txt"
+  outp.write_text(cleaned, encoding="utf-8")
+  cleaned_paths[lang] = outp
+```
+
+
+Tokenization, Lemmatization, Basic Stats
+
+```{python}
+def doc_from_text(lang: str, text: str) -> Doc:
+return nlp[lang](text)
+
+def content_tokens(doc: Doc):
+# keep alpha words; students can choose lemma vs form; we use lemmas
+  for t in doc:
+    if t.is_alpha and not (t.is_stop or t.is_space or t.is_punct):
+      yield t
+
+def ttr(lemmas):
+  lemmas = list(lemmas)
+  if not lemmas:
+    return 0.0
+  return len(set(lemmas)) / len(lemmas)
+
+def corpus_stats(lang: str, text: str, max_chars=400_000):
+# Optional truncation for speed during development
+  text = text[:max_chars]
+  d = doc_from_text(lang, text)
+  toks = list(content_tokens(d))
+  lemmas = [t.lemma_.lower() for t in toks]
+  stats = {
+  "language": lang,
+  "tokens": len(lemmas),
+  "types": len(set(lemmas)),
+  "ttr": ttr(lemmas),
+  "sentences": sum(1 for _ in d.sents)
+  }
+  return stats, d, lemmas
+
+stats_rows = []
+docs = {}
+lemmas_by_lang = {}
+
+for lang, p in cleaned_paths.items():
+  if lang not in LANGS:
+    continue
+
+text = p.read_text(encoding="utf-8")
+stats, d, lemmas = corpus_stats(lang, text)
+stats_rows.append(stats)
+docs[lang] = d
+lemmas_by_lang[lang] = def adjectives_modifying_name(doc: Doc, name_lemma: str):
+mods = []
+for t in doc:
+# language-agnostic but naive: look for a token whose lemma matches name
+if t.lemma_.lower() == name_lemma and t.pos_ in {"PROPN","NOUN"}:
+for ch in t.children:
+if ch.dep_ == "amod":
+mods.append(ch.lemma_.lower())
+return Counter(mods)
+
+def verbs_with_name_as(doc: Doc, name_lemma: str, dep_labels=("nsubj","dobj")):
+verbs = []
+for t in doc:
+if t.lemma_.lower() == name_lemma and t.pos_ in {"PROPN","NOUN"}:
+head = t.head
+if head.pos_ == "VERB" and t.dep_ in dep_labels:
+verbs.append(head.lemma_.lower())
+return Counter(verbs)
+
+alice_colloc = {}
+for lang in LANGS:
+name = ALICE_BY_LANG[lang]
+d = docs[lang]
+amods = adjectives_modifying_name(d, name)
+v_subj = verbs_with_name_as(d, name, dep_labels=("nsubj",))
+v_obj  = verbs_with_name_as(d, name, dep_labels=("dobj",))
+alice_colloc[lang] = {
+"amod": pd.DataFrame(amods.most_common(20), columns=["lemma","count"]),
+"verbs_alice_subject": pd.DataFrame(v_subj.most_common(20), columns=["lemma","count"]),
+"verbs_alice_object": pd.DataFrame(v_obj.most_common(20), columns=["lemma","count"]),
+}
+
+alice_colloc["en"]["verbs_alice_subject"].head(10)
+
+
+df_stats = pd.DataFrame(stats_rows).sort_values("language")
+df_stats
+```
+
+
+Frequency, Collocations
+
+```{python}
+def top_lemmas(lemmas, k=20):
+cnt = Counter(lemmas)
+return pd.DataFrame(cnt.most_common(k), columns=["lemma","count"])
+
+freq_tables = {lang: top_lemmas(lemmas_by_lang[lang], 20) for lang in LANGS}
+freq_tables["en"].head()
+```
+
+```{python}
+# Simple bar chart for frequency (example for English)
+
+def plot_freq(df, lang, outpath=None):
+plt.figure(figsize=(8,5))
+df = df.iloc[::-1]  # reverse for horizontal bars ascending
+plt.barh(df["lemma"], df["count"])
+plt.title(f"Top 20 Lemmas — {lang.upper()}")
+plt.xlabel("Count"); plt.ylabel("Lemma")
+plt.tight_layout()
+if outpath: plt.savefig(outpath, dpi=150)
+plt.show()
+
+for lang in LANGS:
+plot_freq(freq_tables[lang], lang, FIGS / f"freq_top20_{lang}.png")
+```
+
+Alice - 
+
+```{python}
+def adjectives_modifying_name(doc: Doc, name_lemma: str):
+mods = []
+for t in doc:
+# language-agnostic but naive: look for a token whose lemma matches name
+if t.lemma_.lower() == name_lemma and t.pos_ in {"PROPN","NOUN"}:
+for ch in t.children:
+if ch.dep_ == "amod":
+mods.append(ch.lemma_.lower())
+return Counter(mods)
+
+def verbs_with_name_as(doc: Doc, name_lemma: str, dep_labels=("nsubj","dobj")):
+verbs = []
+for t in doc:
+if t.lemma_.lower() == name_lemma and t.pos_ in {"PROPN","NOUN"}:
+head = t.head
+if head.pos_ == "VERB" and t.dep_ in dep_labels:
+verbs.append(head.lemma_.lower())
+return Counter(verbs)
+
+alice_colloc = {}
+for lang in LANGS:
+name = ALICE_BY_LANG[lang]
+d = docs[lang]
+amods = adjectives_modifying_name(d, name)
+v_subj = verbs_with_name_as(d, name, dep_labels=("nsubj",))
+v_obj  = verbs_with_name_as(d, name, dep_labels=("dobj",))
+alice_colloc[lang] = {
+"amod": pd.DataFrame(amods.most_common(20), columns=["lemma","count"]),
+"verbs_alice_subject": pd.DataFrame(v_subj.most_common(20), columns=["lemma","count"]),
+"verbs_alice_object": pd.DataFrame(v_obj.most_common(20), columns=["lemma","count"]),
+}
+
+alice_colloc["en"]["verbs_alice_subject"].head(10)
+```
+
+Syntax
+
+```{python}
+def top_verbs_summary(alice_colloc_dict, role_key):
+rows=[]
+for lang in LANGS:
+df = alice_colloc_dict[lang][role_key].copy()
+df["language"]=lang
+rows.append(df)
+out = pd.concat(rows, ignore_index=True)
+# keep top 10 per language
+out = out.sort_values(["language","count"], ascending=[True, False]).groupby("language").head(10)
+return out
+
+top_subj = top_verbs_summary(alice_colloc, "verbs_alice_subject")
+top_obj  = top_verbs_summary(alice_colloc, "verbs_alice_object")
+
+top_subj.head(12)
+```
+
+Visualizations
+
+```{python}
+# Quick visualization: count of 'subject vs object' totals (agentivity proxy)
+
+role_counts = []
+for lang in LANGS:
+subj_total = alice_colloc[lang]["verbs_alice_subject"]["count"].sum()
+obj_total  = alice_colloc[lang]["verbs_alice_object"]["count"].sum()
+role_counts.append({"language":lang, "alice_as_subject":subj_total, "alice_as_object":obj_total})
+
+df_roles = pd.DataFrame(role_counts)
+df_roles
+```
+
+```{python}
+plt.figure(figsize=(6,5))
+x = np.arange(len(df_roles))
+width=0.35
+plt.bar(x - width/2, df_roles["alice_as_subject"], width, label="Alice as subject")
+plt.bar(x + width/2, df_roles["alice_as_object"], width, label="Alice as object")
+plt.xticks(x, df_roles["language"].str.upper())
+plt.title("Alice's Grammatical Role by Language")
+plt.ylabel("Counts (approx.)")
+plt.legend()
+plt.tight_layout()
+plt.savefig(FIGS / "alice_roles_by_lang.png", dpi=150)
+plt.show()
+
+```
+
+Wordnet
+
+```{python}
+# Shared lemmas (surface forms per language may differ; we query by language)
+
+SHARED_NOUNS = {
+"en": ["queen","rabbit","cat","dream","tea"],
+"fr": ["reine","lapin","chat","rêve","thé"],
+"es": ["reina","conejo","gato","sueño","té"],
+"fi": ["kuningatar","kani","kissa","uni","tee"],
+"it": ["regina","coniglio","gatto","sogno","tè"],
+}
+
+SHARED_VERBS = {
+"en": ["run","grow","shrink","cry","smile"],
+"fr": ["courir","grandir","rétrécir","pleurer","sourire"],
+"es": ["correr","crecer","encoger","llorar","sonreír"],
+"fi": ["juosta","kasvaa","kutistua","itkeä","hymyillä"],
+"it": ["correre","crescere","rimpicciolirsi","piangere","sorridere"],
+}
+
+# Language codes for NLTK/OMW
+
+OMW_LANG = {"en":"eng","fr":"fra","es":"spa","fi":"fin","it":"ita"}
+
+def first_synset_omw(word, lang_code):
+# Return first synset as a simple heuristic
+try:
+syns = wn.synsets(word, lang=lang_code)
+return syns[0] if syns else None
+except Exception:
+return None
+
+def synset_info(s):
+if not s: return {"offset": None, "name": None, "pos": None, "gloss": None, "lemma_names": []}
+return {
+"offset": s.offset(),
+"name": s.name(),
+"pos": s.pos(),
+"gloss": s.definition(),
+"lemma_names": s.lemma_names(),
+}
+
+def table_for_set(words_by_lang):
+rows=[]
+for lang, words in words_by_lang.items():
+lcode = OMW_LANG[lang]
+for w in words:
+s = first_synset_omw(w, lcode)
+info = synset_info(s)
+info.update({"language":lang, "word":w})
+rows.append(info)
+return pd.DataFrame(rows)
+
+df_nouns = table_for_set(SHARED_NOUNS)
+df_verbs = table_for_set(SHARED_VERBS)
+
+df_nouns.head(10)
+
+```
+
+
+Cross-lingual summary
+
+```{python}
+def wup(a, b):
+if not a or not b: return np.nan
+try:
+return a.wup_similarity(b)
+except Exception:
+return np.nan
+
+def similarity_matrix(words_by_lang, target_pos="n"):  # 'n' for nouns, 'v' for verbs
+# Build list of (lang, word, synset) triplets filtered by POS
+entries=[]
+for lang, words in words_by_lang.items():
+lcode = OMW_LANG[lang]
+for w in words:
+syns = [s for s in wn.synsets(w, lang=lcode) if s.pos()==target_pos]
+s = syns[0] if syns else None
+entries.append((lang, w, s))
+# Compute WUP within the set, but only crossing *English* equivalents if needed
+# For simplicity: compute pairwise WUP across all entries
+idx = [(lang,w) for (lang,w,_) in entries]
+M = pd.DataFrame(index=idx, columns=idx, dtype=float)
+for i,(L1, w1, s1) in enumerate(entries):
+for j,(L2, w2, s2) in enumerate(entries):
+M.iloc[i,j] = wup(s1, s2)
+return M
+
+M_nouns = similarity_matrix(SHARED_NOUNS, target_pos="n")
+M_verbs = similarity_matrix(SHARED_VERBS, target_pos="v")
+
+M_nouns.round(3).head(8)
+
+```
+
+
+Scatter
+
+```{python}
+# Quick scatter via PCA-like trick (not sklearn, just 2D projection by top-2 components)
+
+def quick_2d_projection(M: pd.DataFrame):
+# fill NaNs with column means (rough)
+X = M.fillna(M.mean()).values
+# center
+Xc = X - X.mean(0, keepdims=True)
+# SVD
+U,S,Vt = np.linalg.svd(Xc, full_matrices=False)
+coords = U[:, :2] * S[:2]
+df = pd.DataFrame(coords, columns=["x","y"], index=M.index)
+return df.reset_index().rename(columns={"level_0":"lang","level_1":"word"})
+
+proj_n = quick_2d_projection(M_nouns)
+proj_v = quick_2d_projection(M_verbs)
+
+def plot_scatter(df, title, outpng):
+plt.figure(figsize=(6,5))
+for lang in df["lang"].unique():
+sub = df[df["lang"]==lang]
+plt.scatter(sub["x"], sub["y"], label=lang.upper(), s=40)
+for _,row in sub.iterrows():
+plt.text(row["x"]+0.01, row["y"]+0.01, f"{row['word']} ({row['lang']})", fontsize=8)
+plt.title(title)
+plt.tight_layout()
+plt.savefig(outpng, dpi=150)
+plt.show()
+
+plot_scatter(proj_n, "Semantic Similarity (Nouns, WUP-based 2D)", FIGS / "sem_scatter_nouns.png")
+plot_scatter(proj_v, "Semantic Similarity (Verbs, WUP-based 2D)", FIGS / "sem_scatter_verbs.png")
+
+```
+
+
+Top 10 verbs
+
+```{python}
+# Top 10 verbs with Alice as subject across languages (for appendix)
+
+def top_k(df, k=10):
+return (df.sort_values(["language","count"], ascending=[True,False])
+.groupby("language").head(k))
+
+appendix_subj = top_k(top_subj, 10)
+appendix_obj  = top_k(top_obj, 10)
+
+appendix_subj.head(20)
+
+appendix_obj.head(20)
+```
+
+```{python}
+df_stats.to_csv(DATA / "stats_overview.csv", index=False)
+for lang in LANGS:
+freq_tables[lang].to_csv(DATA / f"freq_top20_{lang}.csv", index=False)
+
+top_subj.to_csv(DATA / "alice_verbs_as_subject.csv", index=False)
+top_obj.to_csv(DATA / "alice_verbs_as_object.csv", index=False)
+df_nouns.to_csv(DATA / "wordnet_nouns_first_synset.csv", index=False)
+df_verbs.to_csv(DATA / "wordnet_verbs_first_synset.csv", index=False)
+
+```
+

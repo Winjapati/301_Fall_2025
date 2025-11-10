@@ -1,0 +1,133 @@
+---
+title: "Project Component 3 — Preliminary Analysis"
+subtitle: "LIN 301: Computation for Linguists"
+author: "Dr. Andrew M. Byrd"
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    code-tools: true
+    fontsize: 12pt
+execute:
+  freeze: auto
+  warning: false
+  message: false
+editor:
+  markdown:
+    wrap: 72
+---
+
+# Overview
+
+Now that you’ve collected and cleaned your data, it’s time to do some
+**actual analysis**. This component is **preliminary**, meaning you’ll
+get feedback before your final presentation.
+
+Your job here is to use **Python** to analyze patterns or trends in your
+dataset using what you’ve learned so far — including **pandas**,
+**WordNet**, and **spaCy** (as appropriate to your data).
+
+# Goal
+
+Use your cleaned `.csv` file from Component 2 to:
+
+-   Load and explore your data;
+-   Perform at least two types of quantitative or linguistic analysis;
+-   Summarize and visualize your findings in a clear and interpretable
+    way;
+-   Explain what you found and what you think it means.
+
+# Deliverables
+
+-   `last_name_first_name_component3.qmd`
+-   `last_name_first_name_component3.csv` *(if new columns or results
+    are saved)*
+-   Optional: any figures you generate (e.g., in a `/figures` subfolder)
+
+# Instructions
+
+## 1. Set Up
+
+-   Work inside your existing `course_project` folder.
+-   Load your cleaned CSV from Component 2 using `pd.read_csv()`.
+-   Confirm that your data appears as expected.
+
+## 2. Plan Your Analysis
+
+Before diving into the code, write a short paragraph (3–5 sentences)
+outlining:
+
+-   What you want to learn from your data;
+
+-   Which questions or hypotheses you hope to explore;
+
+-   What results or trends you *expect* to find.
+
+This short plan will help guide your coding decisions and make your
+later interpretation clearer.
+
+## 3. Analyze Your Data
+
+Perform at least **two** different analyses. Your exact methods will
+depend on your dataset, but here are some examples:
+
+| Type of Data | Possible Analyses |
+|---------------------------------|---------------------------------------|
+| Word lists | Frequency counts, word length averages, vowel/consonant ratios |
+| Text corpora | POS distribution, named entity frequency, most common lemmas |
+| Multilingual data | WordNet synonym comparison, translation alignment, semantic similarity |
+| Survey/numeric data | Summary statistics, group comparisons, correlations |
+
+You might also:
+
+-   Create a new column (e.g., word frequency, token length, POS tag,
+    sentiment score);
+
+-   Filter or group your data (e.g., by language, part of speech, or
+    category);
+
+-   Compute descriptive statistics with `df.describe()` or
+    `df.value_counts()`.
+
+## 4. Visualize
+
+Include **at least one visualization** using either:
+
+-   `matplotlib` or `pandas.plot()`, or
+
+-   any other tool you prefer (e.g., WordCloud, bar chart, histogram,
+    etc.).
+
+Be sure your plot is **labeled and readable** — axis labels, title, etc.
+
+## 5. Interpret
+
+Write a **short paragraph (4–6 sentences)** in your `.qmd` explaining:
+
+-   What questions you asked of your data;
+
+-   What methods or functions you used to answer them;
+
+-   What your analysis revealed (summary of key results);
+
+-   How you might extend or refine this analysis for your final project.
+
+## 6. Save and Verify
+
+-   If you created any new columns or computed results, save them as a
+    new `.csv`.
+
+-   Confirm your plots render properly in HTML.
+
+-   Upload all required files to Canvas.
+
+# Grading Rubric (25 points total)
+
+|  |  |  |
+|----|----|----|
+| Category | Description | Points |
+| **Data Setup** | Properly loads and references Component 2 dataset; data verified and clean | **5** |
+| **Analysis Plan** | Clear and thoughtful description of goals, questions, and expected results | **5** |
+| **Analysis** | At least two clear, valid analyses with appropriate use of Python functions (`pandas`, `spaCy`, `WordNet`, etc.) | **5** |
+| **Visualization** | At least one clear, labeled, and interpretable chart or graphic | **5** |
+| **Interpretation** | 4–6 sentences explaining questions, methods, and findings; thoughtful reflection | **5** |
