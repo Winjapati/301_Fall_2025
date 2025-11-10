@@ -95,7 +95,7 @@ nlp = spacy.load("en_core_web_sm")
 
 patterns = [nlp(v) for v in violent_vs]
 matcher = PhraseMatcher(nlp.vocab, attr="LEMMA")
-doc = nlp("They punched, kicked, and attacked the intruder before fleeing.")
+doc = nlp("They smacked, slapped, punched, kicked, and attacked the intruder before fleeing.")
 matcher.add("VIOLENCE", patterns)
 [(doc[s:e].text, doc[s:e].lemma_) for _, s, e in matcher(doc)]
 ```
@@ -142,6 +142,27 @@ for lang, nlp, text in [("English", nlp_en, text_en), ("French", nlp_fr, text_fr
     print(f"\n {lang} Tokens:")
     print([t.text for t in doc])
 ```
+```{python}
+import spacy
+
+nlp_en = spacy.load("en_core_web_sm")
+nlp_fr = spacy.load("fr_core_news_sm")
+nlp_es = spacy.load("es_core_news_sm")
+nlp_de = spacy.load("de_core_news_sm")
+
+fox_en = "The quick brown fox jumped over the lazy dog."
+fox_fr = "Le rapide renard brun sauta par-dessus le chien paresseux."
+fox_es = "El veloz zorro marrón saltó sobre el perro perezoso."
+fox_de = "Der flinke braune Fuchs sprang über den faulen Hund."
+
+for lang, nlp, text in [("English", nlp_en, fox_en), ("French", nlp_fr, fox_fr), ("Spanish", nlp_es, fox_es), ("German", nlp_de, fox_de)]:
+    doc = nlp(text)
+    print(f"\n {lang} Tokens:")
+    print([t.text for t in doc])
+```
+
+
+
 ## Activity: Tokenization
 
 - Write a new sentence in English.
@@ -161,6 +182,15 @@ for lang, nlp, text in [("English", nlp_en, text_en), ("French", nlp_fr, text_fr
 ## Activity: Lemmatization
 
 - Lemmatize and identify POS for your newly created sentence in English, French, Spanish, and German.
+
+```{python}
+for lang, nlp, text in [("English", nlp_en, fox_en), ("French", nlp_fr, fox_fr), ("Spanish", nlp_es, fox_es), ("German", nlp_de, fox_de)]:
+    doc = nlp(text)
+    print(f"\n {lang} Lemmas:")
+    for token in doc:
+        print(token.text, "→", token.lemma_, token.pos_)
+```
+
 
 ## Creating Cross-Language DataFrames
 
@@ -184,6 +214,26 @@ df_all
 ## Activity: Pandas
 
 - Create a `df` for your sentence, as done above.
+
+## Creating Cross-Language DataFrames
+
+```{python}
+import pandas as pd
+
+def lemma_table(nlp, text, language):
+    doc = nlp(text)
+    data = [(t.text, t.lemma_, t.pos_) for t in doc if t.is_alpha]
+    return pd.DataFrame(data, columns=["word", "lemma", "pos"]).assign(language=language)
+
+df_all = pd.concat([
+    lemma_table(nlp_en, fox_en, "English"),
+    lemma_table(nlp_fr, fox_fr, "French"),
+    lemma_table(nlp_es, fox_es, "Spanish"),
+    lemma_table(nlp_de, fox_de, "German")
+])
+
+df_all
+```
 
 ## Frequency Comparisons Across Languages
 
@@ -274,7 +324,7 @@ for code in codes:
 ```{python}
 # Example: Spanish lemmas linked to the English synset for 'dog.n.01'
 ss = wn.synset('dog.n.01')
-[lem.name() for lem in ss.lemmas(lang='spa')]
+[lem.name() for lem in ss.lemmas(lang='fra')]
 ```
 
 ## Activity
