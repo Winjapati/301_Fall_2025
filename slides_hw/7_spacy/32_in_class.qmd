@@ -38,7 +38,7 @@ for token in doc:
 
 ## Recap from Last Time
 
-``` python
+``` {python}
 import spacy
 from nltk.corpus import wordnet as wn
 from nltk.corpus.reader.wordnet import NOUN, VERB, ADJ, ADV
@@ -74,83 +74,9 @@ for token in doc:
             print(f"  - {s.definition()}  [examples: {s.examples()}]")
 ```
 
-## Semantic Similarity
-
-``` python
-dog = nlp("dog")[0]._.wordnet.synsets()[0]
-comparison = nlp("cat")[0]._.wordnet.synsets()[0]
-
-print("wup:",  dog.wup_similarity(comparison))   # Wu–Palmer similarity
-```
-
-## Returning to our verbs of violence
-
-``` python
-import spacy
-from spacy.matcher import PhraseMatcher
-from nltk.corpus import wordnet as wn
-
-nlp = spacy.load("en_core_web_sm")
-
-# WordNet helpers (via NLTK) – returns only verb synsets
-def verb_senses(word):
-    return wn.synsets(word, pos='v')  # verb synsets only
-
-# Collects all (recursive) hyponyms for a verb synset (troponyms in WN terms).
-# This function recursively collects all *hyponyms* (a.k.a. “troponyms” for verbs)
-# of a given synset. A hyponym is a more *specific* instance of an action.
-# Example: the verb “attack.v.01” has hyponyms like “bomb.v.01”, “invade.v.01”, etc.
-def all_verb_hyponyms(root):
-      seen, stack = set(), [root]
-    while stack:
-        cur = stack.pop()
-        if cur in seen:
-            continue
-        seen.add(cur)
-        # For verbs, .hyponyms() are the troponyms
-        stack.extend(cur.hyponyms())
-    return {s for s in seen if s.pos() == 'v'}
-
-# This function extracts lemma names (the “canonical” word forms)
-# from a set of synsets, e.g. 'strike.v.01' → ['strike', 'hit', 'smite', ...].
-# Optionally filters out multiword expressions like "shoot_down".
-def lemmas_from_synsets(synsets, keep_multiword=False):
-    out = set()
-    for s in synsets:
-        for lem in s.lemmas():
-            name = lem.name().lower()
-            if not keep_multiword and "_" in name:
-                continue
-            out.add(name.replace("_", " "))
-    return out
-
-# Build a violence lexicon from WordNet using a few intuitive seeds
-seed_verbs = ["attack", "assault", "hit", "strike", "punch", "kick", "stab", "shoot", "beat"]
-base_synsets = []
-for w in seed_verbs:
-    ss = verb_senses(w)
-    if ss:
-        # take the most “central” sense by picking the one with most hyponyms
-        ss_scored = sorted(ss, key=lambda s: len(s.hyponyms()), reverse=True)
-        base_synsets.append(ss_scored[0])
-
-# expand via hyponyms (troponyms)
-expanded = set()
-for s in base_synsets:
-    expanded |= all_verb_hyponyms(s)
-
-# collect lemmas (single-token by default)
-violent_verb_lemmas = sorted(lemmas_from_synsets(expanded, keep_multiword=False) | set(seed_verbs))
-print(f"{len(violent_verb_lemmas)} violent verb lemmas (sample):", violent_verb_lemmas[:25])
-
-# 4) spaCy PhraseMatcher by lemma — IMPORTANT: run full pipeline on patterns
-matcher = PhraseMatcher(nlp.vocab, attr="LEMMA")
-patterns = list(nlp.pipe(violent_verb_lemmas))  # not make_doc: we need lemmas
-matcher.add("VIOLENCE", patterns)
-```
 ## An automated list of words
 
-``` python
+``` {python}
 violent_vs = ['assail', 'assault', 'atom-bomb', 'atomise', 'atomize', 'attack', 'backbite', 'backhand', 'bait', 'bastinado', 'bat', 'batter', 'bayonet', 'beak', 'beat', 'beef', 'beetle', 'beleaguer', 'bellyache', 'bemoan', 'beset', 'besiege', 'best', 'better', 'bewail', 'birdie', 'bitch', 'blast', 'bleat', 'blindside', 'blitz', 'blockade', 'bogey', 'bomb', 'bombard', 'bounce', 'break', 'buffet', 'bulldog', 'bunker', 'bunt', 'bust', 'butt', 'cannon', 'cannonade', 'carom', 'carry', 'charge', 'cheat', 'checkmate', 'chicane', 'chip', 'chop', 'chouse', 'circumvent', 'clap', 'clobber', 'clout', 'coldcock', 'complain', 'connect', 'counterattack', 'counterstrike', 'crab', 'cream', 'croak', 'croquet', 'crump', 'crush', 'cuff', 'dab', 'deck', 'declaim', 'deplore', 'desecrate', 'dishonor', 'dishonour', 'dive-bomb', 'double', 'down', 'dribble', 'drive', 'drub', 'dump', 'dunk', 'eagle', 'ebb', 'eliminate', 'exceed', 'firebomb', 'floor', 'fly', 'foul', 'full', 'gang-rape', 'gas', 'glide-bomb', 'gnarl', 'gripe', 'grizzle', 'grouch', 'ground', 'grouse', 'grumble', 'hammer', 'headbutt', 'heel', 'hen-peck', 'hew', 'hit', 'hole', 'holler', 'hook', 'hydrogen-bomb', 'immobilise', 'immobilize', 'infest', 'invade', 'inveigh', 'jab', 'jockey', 'jump', 'kick', 'kill', 'knap', 'knife', 'knock', 'knuckle', 'kvetch', 'lament', 'lash', 'lick', 'loft', 'master', 'mate', 'molest', 'murmur', 'mutter', 'nag', 'nuke', 'occupy', 'out-herod', 'outbrave', 'outcry', 'outdo', 'outdraw', 'outfight', 'outflank', 'outfox', 'outgeneral', 'outgo', 'outgrow', 'outmaneuver', 'outmanoeuvre', 'outmarch', 'outmatch', 'outpace', 'outperform', 'outplay', 'outpoint', 'outrage', 'outrange', 'outroar', 'outsail', 'outscore', 'outsell', 'outshine', 'outshout', 'outsmart', 'outstrip', 'outwear', 'outweigh', 'outwit', 'overcome', 'overmaster', 'overpower', 'overreach', 'overrun', 'overwhelm', 'paste', 'pat', 'pattern-bomb', 'peck', 'pelt', 'pepper', 'percuss', 'pick', 'pip', 'pitch', 'plain', 'play', 'plug', 'poniard', 'pop', 'profane', 'protest', 'pull', 'punch', 'putt', 'quetch', 'racket', 'raid', 'rail', 'rap', 'rape', 'ravish', 'reassail', 'repine', 'report', 'retaliate', 'rout', 'rush', 'savage', 'sclaff', 'scold', 'scoop', 'screw', 'set', 'shaft', 'shame', 'shank', 'shell', 'shoot', 'sic', 'sideswipe', 'single', 'skip-bomb', 'slam-dunk', 'slap', 'sledge', 'sledgehammer', 'slice', 'smash', 'snag', 'snap', 'snick', 'spread-eagle', 'spreadeagle', 'spur', 'squawk', 'stab', 'steamroll', 'steamroller', 'storm', 'strafe', 'strike', 'stroke', 'subdue', 'submarine', 'surmount', 'surpass', 'surprise', 'surround', 'tap', 'teargas', 'thrash', 'thresh', 'tip', 'toe', 'top', 'torpedo', 'triple', 'trounce', 'trump', 'undercut', 'upstage', 'urticate', 'vanquish', 'violate', 'volley', 'whang', 'whine', 'whip', 'whomp', 'worst', 'yammer', 'yawp', 'zap']
 ```
 
@@ -159,15 +85,15 @@ violent_vs = ['assail', 'assault', 'atom-bomb', 'atomise', 'atomize', 'attack', 
 -   Convert the string on the previous slide into a list:
 -   Then return to the code from before. Add a couple additional violent verbs to the VP to see if the list is comprehensive enough.
 
-``` python
+``` {python}
 import spacy
 from spacy.matcher import PhraseMatcher
+from nltk.corpus import wordnet as wn
+from nltk.corpus.reader.wordnet import NOUN, VERB, ADJ, ADV
 
 nlp = spacy.load("en_core_web_sm")
 
-# Insert code here to create a list called "violent_verb_lemmas"
-
-patterns = [nlp(v) for v in violent_verb_lemmas]
+patterns = [nlp(v) for v in violent_vs]
 matcher = PhraseMatcher(nlp.vocab, attr="LEMMA")
 doc = nlp("They punched, kicked, and attacked the intruder before fleeing.")
 matcher.add("VIOLENCE", patterns)
