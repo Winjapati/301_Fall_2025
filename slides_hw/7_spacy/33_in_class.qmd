@@ -133,6 +133,34 @@ for lang, nlp, text in [
     print(f"\n{lang} tokens:")
     print([t.lemma_ for t in doc])
 ```
+## Activity: in class
+
+```{python}
+import spacy
+
+cat_el = "Η γάτα κοιμάται στον καναπέ."
+cat_zh = "猫在沙发上睡觉。"
+cat_ja = "猫はソファで寝ます。"
+
+nlp_el = spacy.load("el_core_news_sm")
+nlp_zh = spacy.load("zh_core_web_sm")
+nlp_ja = spacy.load("ja_core_news_sm")
+
+for lang, nlp, text in [
+    ("Chinese", nlp_zh, cat_zh)
+]:
+    doc = nlp(text)
+    print(f"\n{lang} lemmas:")
+    print([t.text for t in doc])
+
+for lang, nlp, text in [
+    ("Greek", nlp_el, cat_el),
+    ("Japanese", nlp_ja, cat_ja)
+]:
+    doc = nlp(text)
+    print(f"\n{lang} lemmas:")
+    print([t.lemma_ for t in doc])
+```
 
 
 ## Activity: Tokenize & Lemmatize
@@ -223,6 +251,15 @@ ss = wn.synset('dog.n.01')
 [lem.name() for lem in ss.lemmas(lang='spa')]
 ```
 
+## Activity, in class
+
+```{python}
+ss = wn.synset('cat.n.01')
+[lem.name() for lem in ss.lemmas(lang='spa')]
+
+```
+
+
 ## Activity
 
 - Look up the lemmas in WordNet linked to the basic English synset for `cat`
@@ -237,10 +274,10 @@ import pykakasi
 ss = wn.synset('cat.n.01')
 cat_ell = [lem.name() for lem in ss.lemmas(lang='ell')]
 
-ss = wn.synset('cat.n.01')
+# ss = wn.synset('cat.n.01')
 cat_cmn = [lem.name() for lem in ss.lemmas(lang='cmn')]
 
-ss = wn.synset('cat.n.01')
+# ss = wn.synset('cat.n.01')
 cat_jpn = [lem.name() for lem in ss.lemmas(lang='jpn')]
 
 # confirming it works
