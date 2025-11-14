@@ -256,7 +256,6 @@ ss = wn.synset('dog.n.01')
 ```{python}
 ss = wn.synset('cat.n.01')
 [lem.name() for lem in ss.lemmas(lang='spa')]
-
 ```
 
 
