@@ -47,18 +47,18 @@ add_and_mult(4, 6)
 ## Not just math
 
 ```{python}
-def initialize(full_name):
+#def initialize(full_name):
     '''
     Return the person's initials.
     '''
-    name_parts = full_name.split(" ")
-    initial_list = [name[0]+"." for name in name_parts]
+#    name_parts = full_name.split(" ")
+#    initial_list = [name[0]+"." for name in name_parts]
 
-    output = ""
-    for initial in initial_list:
-        output = output + initial
+#    output = ""
+#    for initial in initial_list:
+#        output += initial
 
-    return(output)
+#    return(output)
 ```
 
 
@@ -91,6 +91,26 @@ initialize("Edgar Allan Poe")
 initialize("Jane Austen")
 # 'J.A.'
 ```
+
+```{python}
+def read_book(book):
+  book_file = open(book, mode = 'r')
+  book_lines = book_file.readlines()
+  clean_lines = [line.rstrip().lower() for line in book_lines]
+  output = [w for w in clean_lines if w]
+  return(output)
+
+
+pride = "austen/pride_and_prejudice.txt"
+sense = "austen/sense_and_sensibility.txt"
+
+read_book(pride)
+read_book(sense)
+
+```
+
+
+
 
 ## Writing an "Read Book" Function
 
@@ -140,6 +160,7 @@ alice = read_book("alice.txt")
 print(alice[:200])
 ```
 
+
 ## Final Activity
 
 ```{python}
@@ -186,7 +207,7 @@ def nlp_it(text):
             for s in synsets[:3]:  # show just the first 3 senses
                 print(f"  - {s.definition()}  [examples: {s.examples()}]")
 
-text = "I said a bird, bird, bird, bird is the word."
+text = "I'm a pretty princess."
 nlp_it(text)
 ```
 
