@@ -31,11 +31,9 @@ editor: source
 
 ## What are functions?
 
-- These are all types of **functions**
-- Functions are:
-  - blocks of code that run only when *called*
-  - return data as a result
-  - make your code simpler by allowing you to avoid code repetition
+- blocks of code that run only when *called*
+- return data as a result
+- make your code simpler by allowing you to avoid code repetition
   
 ## Avoiding repetition
 
