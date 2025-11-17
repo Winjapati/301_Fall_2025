@@ -3,6 +3,65 @@ title: "35_in_class"
 format: html
 ---
 
+
+
+
+## Activity
+
+```{python}
+# Let’s write a function together that inserts the infix “-izz-” immediately a vowel in the word, if that vowel is preceded by a consonant
+# andrew –> andrizzew
+# bob –> bizzob
+# kentucky –> kizzentizzucky
+
+def izz_infix(word):
+  
+  # define vowels
+  # if not for consonants
+  #for loop go through characters
+  # need to return affixed word
+  # logic function to locate only cases of consonants before vowels
+  # c[-1]
+  # index each c in word w/ index = 
+  
+  vowels = ["a", "e", "i", "o", "u"]
+  #consonants = []
+  
+  for c in word:
+    if word[0] in vowels:
+      pass
+    else:
+      print(c)
+    # 
+    # if c in vowels and :
+    #   
+    # else:
+    #   pass
+
+izz_infix("ello")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Activity: Together
 
 
@@ -119,7 +178,7 @@ def pie(text, k=8, title="Character Shares (Pie Chart)", cmap_name="Set3", ignor
 ## Pie Charts
 
 ```{python}
-pie(alice, k = 5)
+pie(alice, k = 10)
 ```
 
 ## Line Charts
