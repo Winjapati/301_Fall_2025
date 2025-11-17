@@ -11,6 +11,7 @@ def snoop(word):
   vowels = "aeiou"
   
   snooped = ""
+  # izz_bool = False
   
   for c in word:
     if c == word[0]:
@@ -19,7 +20,15 @@ def snoop(word):
       snooped += c
     elif c in vowels:
       snooped += "izz" + c
-  
+      
+# Code modification for when you only want one -izz-
+    # elif c in vowels and izz_bool == False:
+    #   # print(f"{c} is a vowel.")
+    #   snooped += "izz" + c
+    #   izz_bool = True
+    # else:
+    #   snooped += c
+      
   return(snooped)
 
 snoop("kentucky")
@@ -29,6 +38,7 @@ snoop("kentucky")
 
 ```{python}
 from collections import Counter
+from read_bk_function import read_book
 alice = read_book("alice.txt")
 ```
 
@@ -253,8 +263,7 @@ def wordcloud_plot(tokens, title="Word Cloud", width=800, height=400, background
 ## Word Clouds
 
 ```{python}
-words = ["cat", "dog", "cat", "fish", "dog", "cat", "mouse", "mouse", "mouse"]
-wordcloud_plot(alice, title="Animal Word Cloud")
+wordcloud_plot(alice, title="Alice Word Cloud")
 ```
 
 # Final Activity
