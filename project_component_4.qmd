@@ -1,0 +1,101 @@
+---
+title: "Final Project Presentation Instructions"
+format: html
+toc: true
+toc-depth: 2
+---
+
+# Schedule & Timing
+
+- Presentations will take place over the last two class days.
+- **Talk length:** 7 minutes of presenting + 1 minute for questions.
+- Be prepared to present on either day in case we need to shift the schedule.
+
+# Project Website (Instead of Slides)
+
+Instead of a slide deck, you will build a small **project website** and present it to the class.  
+This site will be hosted on your **GitHub Pages** site (`username.github.io`).
+
+## Basic Requirements
+
+- Your project must be presented as a **website** (HTML/CSS; Quarto optional).
+- The site must be publicly accessible at your GitHub Pages URL.
+- The project must contain at least **three clearly separated sections**:
+  - **Dataset**
+  - **Methods**
+  - **Results & Interpretation**
+
+## Suggested Structure
+
+You can structure this as multiple pages or as a single page with good navigation.
+
+### 1. Home / Overview
+
+- Project title and your name.
+- Short summary of your research question or goal.
+- Outline of the site (what’s on each page/section).
+
+### 2. Dataset
+
+- Which text(s) you chose and why.
+- Language(s), source(s), and approximate size (words, chapters, sections).
+- How you cleaned the data (tokenization, normalization, encoding issues).
+- Any problems you ran into and how you handled them.
+
+### 3. Methods
+
+- What you did in Python, in plain language.
+- Examples: token and type counts, TTR, frequency lists, POS tagging, lemmatization, dependencies.
+- spaCy or WordNet analyses you used.
+- Any custom function(s) you wrote and what they were for.
+- You can include small code snippets, but focus on what the code *does*.
+- Discuss any outside help that you received, such as from an LLM, Stack Overflow, or a friend.
+
+### 4. Results & Interpretation
+
+- At least **one visualization** embedded in the page.
+- Key numerical results (counts, ratios, patterns, comparisons).
+- Clear explanation of what the results **mean**, not just what they are.
+- Discussion of why you think these patterns appear:
+  - language properties  
+  - translation choices  
+  - stylistic differences  
+- Short “What I’d do next” section.
+
+# Presenting Your Website
+
+- During your 7-minute talk, you will **navigate your website** on the screen.
+- Use it to guide your story:
+  - Overview → Dataset → Methods → Results & Interpretation.
+- Don't read the site word-for-word!
+
+# Design Expectations
+
+- The site does **not** need to be fancy, but it must be:
+  - Readable (good contrast, clear font sizes).
+  - Organized (headings, sections).
+  - Easy to navigate (links or a simple nav bar).
+- Basic CSS is encouraged.
+- You should avoid huge walls of text.
+
+# Delivery Expectations
+
+- Stay within the time limit: 7 minutes + 2 minutes for questions.
+- Speak clearly and at a normal pace.
+- Assume your audience knows the course tools but not your project.
+- Focus on reasoning, not just procedure.
+
+# What Will Be Graded
+
+- **Clarity:** How clearly you explain your project and guide us through the site.
+- **Technical understanding:** You understand what your code and metrics do.
+- **Quality of analysis:** Thoughtfulness of results and interpretation.
+- **Website quality:** Readability, organization, navigation, design.
+- **Professionalism:** Timing, preparation, and delivery.
+
+# What to Submit
+
+- Before talks are held (final week of class), submit to Canvas: 
+  - a link to your **live GitHub Pages project site**  
+  (e.g., `https://username.github.io/project-name/`).
+  - a link to your **GitHub repository** containing all project files.
