@@ -1,0 +1,184 @@
+
+---
+title: "Final Day: LIN 301"
+subtitle: "Thinking about Career Readiness, the Final Project, Course Evals"
+author: "Dr. Andrew M. Byrd"
+format:
+  revealjs:
+    theme: beige
+    slide-number: true
+    center: true
+    toc: true
+    toc-depth: 1
+    css: header_shrink.css
+execute:
+  freeze: auto
+---
+
+# Overview
+
+## Today
+
+# Final Project Presentations
+
+# NACE Competencies
+
+- In **LIN 301 — Computation for Linguists**, students don't just learn Python.  
+- They develop a full suite of **NACE career readiness competencies**, from technical fluency to communication, teamwork, and problem-solving.
+
+## NACE Competencies  
+1. Career & Self-Development  
+
+Taking initiative in shaping your own growth — seeking feedback, expanding skills, and building a professional network.
+
+## NACE Competencies  
+2. Communication  
+
+Exchanging information clearly and effectively through writing, speaking, presenting, and active listening.
+
+## NACE Competencies  
+3. Critical Thinking  
+
+Analyzing problems, evaluating evidence, and making sound decisions using logic and reasoning.
+
+## NACE Competencies  
+4. Equity & Inclusion  
+
+Engaging respectfully with diverse people and perspectives, and contributing to inclusive, equitable practices.
+
+## NACE Competencies  
+5. Leadership  
+
+Motivating and guiding others, managing projects, making decisions, and fostering a positive team environment.
+
+## NACE Competencies  
+6. Professionalism  
+
+Demonstrating reliability, integrity, work ethic, accountability, and the ability to meet expectations consistently.
+
+## NACE Competencies  
+7. Teamwork  
+
+Working effectively with others toward shared goals, managing conflict, giving and receiving feedback, and supporting group success.
+
+## NACE Competencies  
+8. Technology  
+
+Using digital tools and technologies efficiently, responsibly, and adaptively across different work contexts.
+
+
+# NACE Competencies: Overview
+
+### How students advanced:
+- Built and maintained a **GitHub Pages portfolio**.
+- Developed **workflow habits**: version control, reproducibility, environment setup.
+- Solved real technical issues: Python installs, spaCy errors, RStudio/reticulate quirks.
+- Learned to **seek help strategically** (documentation, debugging, peers).
+
+**Level of advancement:** **High**
+
+---
+
+# 2. Communication
+
+### How students advanced:
+- Wrote clear, reproducible **Quarto notebooks**.
+- Commented code and explained results.
+- Created public-facing **HTML pages**.
+- Gave a final presentation explaining methods and results.
+
+**Level of advancement:** **Medium–High**
+
+---
+
+# 3. Critical Thinking
+
+### How students advanced:
+- Debugged broken code and environment conflicts.
+- Designed research questions for their project.
+- Interpreted spaCy/WordNet outputs and visualizations.
+- Evaluated model errors, tokenization issues, Unicode normalization.
+
+**Level of advancement:** **Extremely High**
+
+---
+
+# 4. Equity & Inclusion
+
+### How students advanced:
+- Worked with multilingual datasets.
+- Saw how NLP tools perform differently across languages.
+- Discussed bias and limitations in training data.
+
+**Level of advancement:** **Low–Medium**
+
+---
+
+# 5. Leadership
+
+### How students advanced:
+- Managed tasks within the **group final project**.
+- Delegated roles: data cleaning, analysis, visualization, README authoring.
+- Practiced informal project leadership.
+
+**Level of advancement:** **Medium**
+
+---
+
+# 6. Professionalism
+
+### How students advanced:
+- Tracked work in GitHub repos.
+- Met deadlines for multi-stage deliverables.
+- Maintained clean, reproducible code and file structures.
+- Practiced academic integrity and responsible data use.
+
+**Level of advancement:** **High**
+
+---
+
+# 7. Teamwork
+
+### How students advanced:
+- Collaborated on the group project using GitHub.
+- Negotiated division of labor.
+- Reviewed each other's code and resolved conflicts.
+- Practiced communication during merge requests and debugging.
+
+**Level of advancement:** **Medium**
+
+---
+
+# 8. Technology
+
+### How students advanced:
+- Git, GitHub, and version control.
+- Python, Jupyter, and Quarto.
+- pandas for data cleaning & analysis.
+- spaCy, WordNet, regex.
+- Data visualization in Python and R.
+- Unicode handling.
+- RStudio + Python integration.
+
+**Level of advancement:** **Extremely High**
+
+---
+
+# Summary
+
+LIN 301 strengthens **all eight NACE competencies**, with especially strong growth in:
+
+- **Critical Thinking**
+- **Technology**
+- **Career & Self-Development**
+- **Professionalism**
+
+Students walk away not only with coding skills, but with the mindset and tools expected in real computational work.
+
+# Course Evals
+
+## Thoughts on How this Semester Went
+
+## Ways to Improve
+
+## Feedback that I Want from You
