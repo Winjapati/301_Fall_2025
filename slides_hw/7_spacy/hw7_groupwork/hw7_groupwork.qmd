@@ -174,12 +174,6 @@ Present your findings clearly and creatively.
 
 Include at least one meaningful visualization per major section.\
 
-At the end, your final section should interpret the results linguistically:
-
-- What do the frequency and syntax patterns suggest?\
-- Are some translations more literal, others more interpretive?\
-- How do semantic networks differ across languages?
-
 ------------------------------------------------------------------------
 
 # Deliverables

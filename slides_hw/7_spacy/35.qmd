@@ -45,6 +45,7 @@ def read_book(path):
     return words
 ```
 
+<!-- We spent about 25 minutes on this activity, and it was too hard for the students. Aim for an activity of similar length (the visualization stuff doesn't take too long), but simplify for students to do it on their own. -->
 
 ## Activity: Together
 
