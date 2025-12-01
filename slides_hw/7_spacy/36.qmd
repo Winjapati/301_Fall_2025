@@ -15,16 +15,15 @@ execute:
   freeze: auto
 ---
 
-# Overview
-
-## Today
-
 # Final Project Presentations
 
-# NACE Competencies
+# LIN 301 & Career Readiness
 
-- In **LIN 301 — Computation for Linguists**, students don't just learn Python.  
-- They develop a full suite of **NACE career readiness competencies**, from technical fluency to communication, teamwork, and problem-solving.
+## NACE Competencies
+
+- **National Association of Colleges & Employers**
+- Helps educators & students understand the job market - skills, salaries, majors
+- Has come up with 8 "competencies" -- skills that students should have when entering the job market
 
 ## NACE Competencies  
 1. Career & Self-Development  
@@ -69,102 +68,8 @@ Using digital tools and technologies efficiently, responsibly, and adaptively ac
 
 # NACE Competencies: Overview
 
-### How students advanced:
-- Built and maintained a **GitHub Pages portfolio**.
-- Developed **workflow habits**: version control, reproducibility, environment setup.
-- Solved real technical issues: Python installs, spaCy errors, RStudio/reticulate quirks.
-- Learned to **seek help strategically** (documentation, debugging, peers).
 
-**Level of advancement:** **High**
-
----
-
-# 2. Communication
-
-### How students advanced:
-- Wrote clear, reproducible **Quarto notebooks**.
-- Commented code and explained results.
-- Created public-facing **HTML pages**.
-- Gave a final presentation explaining methods and results.
-
-**Level of advancement:** **Medium–High**
-
----
-
-# 3. Critical Thinking
-
-### How students advanced:
-- Debugged broken code and environment conflicts.
-- Designed research questions for their project.
-- Interpreted spaCy/WordNet outputs and visualizations.
-- Evaluated model errors, tokenization issues, Unicode normalization.
-
-**Level of advancement:** **Extremely High**
-
----
-
-# 4. Equity & Inclusion
-
-### How students advanced:
-- Worked with multilingual datasets.
-- Saw how NLP tools perform differently across languages.
-- Discussed bias and limitations in training data.
-
-**Level of advancement:** **Low–Medium**
-
----
-
-# 5. Leadership
-
-### How students advanced:
-- Managed tasks within the **group final project**.
-- Delegated roles: data cleaning, analysis, visualization, README authoring.
-- Practiced informal project leadership.
-
-**Level of advancement:** **Medium**
-
----
-
-# 6. Professionalism
-
-### How students advanced:
-- Tracked work in GitHub repos.
-- Met deadlines for multi-stage deliverables.
-- Maintained clean, reproducible code and file structures.
-- Practiced academic integrity and responsible data use.
-
-**Level of advancement:** **High**
-
----
-
-# 7. Teamwork
-
-### How students advanced:
-- Collaborated on the group project using GitHub.
-- Negotiated division of labor.
-- Reviewed each other's code and resolved conflicts.
-- Practiced communication during merge requests and debugging.
-
-**Level of advancement:** **Medium**
-
----
-
-# 8. Technology
-
-### How students advanced:
-- Git, GitHub, and version control.
-- Python, Jupyter, and Quarto.
-- pandas for data cleaning & analysis.
-- spaCy, WordNet, regex.
-- Data visualization in Python and R.
-- Unicode handling.
-- RStudio + Python integration.
-
-**Level of advancement:** **Extremely High**
-
----
-
-# Summary
+## Overview
 
 LIN 301 strengthens **all eight NACE competencies**, with especially strong growth in:
 
@@ -173,12 +78,108 @@ LIN 301 strengthens **all eight NACE competencies**, with especially strong grow
 - **Career & Self-Development**
 - **Professionalism**
 
-Students walk away not only with coding skills, but with the mindset and tools expected in real computational work.
+
+## 1. Career & Self Development
+
+You: 
+
+- Built and maintained a **GitHub Pages portfolio**.
+- Developed **workflow habits**: version control, reproducibility, environment setup.
+- Solved real technical issues: Python installs, spaCy errors, RStudio/reticulate quirks.
+- Learned to **seek help strategically** (documentation, debugging, peers).
+
+
+## 2. Communication
+
+You: 
+
+- Wrote clear, reproducible **Quarto notebooks**.
+- Commented code and explained results.
+- Created public-facing **HTML pages**.
+- Will give a final presentation explaining methods and results.
+
+
+## 3. Critical Thinking
+
+You: 
+
+- Debugged broken code and environment conflicts.
+- Designed research questions for your project.
+- Interpreted spaCy/WordNet outputs and visualizations.
+- Evaluated model errors, tokenization issues, Unicode normalization.
+
+
+## 4. Equity & Inclusion
+
+You: 
+
+- Worked with multilingual datasets.
+- Saw how NLP tools perform differently across languages.
+- Observed bias and limitations in certain models (such as spaCy).
+
+## 5. Leadership
+
+You: 
+
+- Managed tasks within the **group final project**.
+- Delegated roles: data cleaning, analysis, visualization, README authoring.
+- Practiced informal project leadership.
+
+
+## 6. Professionalism
+
+You: 
+
+- Tracked work in GitHub repos.
+- Met deadlines for multi-stage deliverables.
+- Maintained clean, reproducible code and file structures.
+- Practiced academic integrity and responsible data use.
+
+
+## 7. Teamwork
+
+You: 
+
+- Collaborated on the group project using GitHub.
+- Negotiated division of labor.
+- Reviewed each other's code and resolved conflicts.
+- Practiced communication during merge requests and debugging.
+
+## 8. Technology
+
+- Git, GitHub, and version control.
+- LaTeX, HTML, Python, and Quarto.
+- pandas for data cleaning & analysis.
+- spaCy, WordNet, regex.
+- data visualization
+- Unicode handling.
+- RStudio + Python integration.
 
 # Course Evals
 
 ## Thoughts on How this Semester Went
 
-## Ways to Improve
+- First time teaching this!  Was definitely a challenge.
+
+## Things that I'll Try Again
+
+- GitHub + GitHub Pages
+- Python: same amount of skills
+- Group Homework -- perhaps expand?
+- Class Projects
+  - but needs models!
+
+## Things that I'll Probably Change
+
+- RStudio --> ?
+- LaTeX --> Python --> HTML
+  - Add an Extra Week for Python
+- Less Time with Minutiae, More Time Problem Solving
+- Spread Assignments Out Better
 
 ## Feedback that I Want from You
+
+- Vibe Coding!
+- In your feedback, focus on:
+  - one thing you really liked about this course
+  - one thing you thing should be improved
