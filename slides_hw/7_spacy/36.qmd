@@ -15,6 +15,8 @@ execute:
   freeze: auto
 ---
 
+<!-- FOR NEXT TIME:  the Nace stuff was super boring.  If you're doing this, focus on three skills or so, have groups identify precisely what they can say they've gained to employers. -->
+
 # Final Project Presentations
 
 # LIN 301 & Career Readiness
